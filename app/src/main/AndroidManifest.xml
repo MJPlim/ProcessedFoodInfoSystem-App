@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.KATI_app">
-        <activity android:name=".MainActivity">
+        <activity android:name=".domain.user.signOut.WithdrawalActivity"></activity>
+        <activity android:name=".domain.user.signOut.TempActivity" />
+        <activity android:name=".domain.user.register.RegisterActivity" />
+        <activity android:name=".domain.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
