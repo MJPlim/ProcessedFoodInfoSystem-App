@@ -34,7 +34,6 @@ public class LoginHomeFragment extends Fragment {
     // View
     private EditText idText, pwText;
     private Button loginButton, idFindButton, pwFindButton, accountCreateButton;
-    private View loginTrueDialog, loginFalseDialog;
 
     /**
      * System Callback
@@ -67,7 +66,6 @@ public class LoginHomeFragment extends Fragment {
          * 로그인 버튼 클릭
          * */
         this.loginButton.setOnClickListener(v -> {
-                Toast.makeText(getContext(), "로그인버튼 클릭됨", Toast.LENGTH_SHORT).show();
                 String ID = idText.getText().toString();
                 String PW = pwText.getText().toString();
 
@@ -78,14 +76,14 @@ public class LoginHomeFragment extends Fragment {
                 /*
                 * 서버 URL 오면 아래거 쓸 것..Maybe?
                 * */
-
                 dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    dlg.show();
-                    startActivity(new Intent(getContext(), MainActivity.class));
+                    Intent intent = new Intent(getContext(), MainActivity.class);
+                    startActivity(intent);
                 }
             });
+               dlg.show();
 
 
               /*  Response.Listener<String> responseListener = new Response.Listener<String>() {
