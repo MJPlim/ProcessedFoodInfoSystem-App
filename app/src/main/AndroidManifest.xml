@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.plim.kati_app">
+    package="com.plim.kati_app"
+    >
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -11,6 +13,8 @@
         android:theme="@style/Theme.KATI_app">
         <activity android:name=".domain.user.signOut.WithdrawalActivity"></activity>
         <activity android:name=".domain.user.signOut.TempActivity" />
+        <activity android:name=".domain.user.login.LoginActivity" />
+
         <activity android:name=".domain.user.register.RegisterActivity" />
         <activity android:name=".domain.MainActivity">
             <intent-filter>

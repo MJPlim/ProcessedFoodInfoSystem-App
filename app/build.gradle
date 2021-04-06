@@ -29,6 +29,8 @@ android {
 }
 
 dependencies {
+    implementation 'com.android.volley:volley:1.1.0'
+
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     def nav_version = "2.3.3"
 
