@@ -172,6 +172,7 @@ public class FoodSearchActivity extends AppCompatActivity {
                 URL url = new URL(IP + parameter.toString());
                 Log.d("디버그", url.toString());
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestProperty("Authorization","토큰값.");
                 if (connection.getResponseCode() != Connection_Respond_Success) {
                     runOnUiThread(() -> {
                         loadingDialog.hide();
