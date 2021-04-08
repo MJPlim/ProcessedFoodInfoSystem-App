@@ -3,10 +3,12 @@ package com.plim.kati_app.domain.user.register;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.plim.kati_app.R;
 import com.plim.kati_app.domain.asset.AbstractFragment1;
+import com.plim.kati_app.domain.model.KatiViewModel;
 
 public class Register3Fragment extends AbstractFragment1 {
 
@@ -20,8 +22,9 @@ public class Register3Fragment extends AbstractFragment1 {
 
     @Override
     protected void buttonClicked() {
-        Bundle bundle = new Bundle();
-        bundle.putString("userName", this.editText.getText().toString());
-        Navigation.findNavController(this.getView()).navigate(R.id.action_register3Fragment_to_registerFinishedFragment, bundle);
+        KatiViewModel katiViewModel = new ViewModelProvider(this.requireActivity()).get(KatiViewModel.class);
+        katiViewModel.setHeader(this.editText.getText().toString());
+
+        Navigation.findNavController(this.getView()).navigate(R.id.action_register3Fragment_to_registerFinishedFragment);
     }
 }
