@@ -12,7 +12,7 @@ import com.plim.kati_app.domain.user.login.LoginActivity;
 import com.plim.kati_app.domain.user.register.RegisterActivity;
 import com.plim.kati_app.domain.user.signOut.TempActivity;
 
-public class MainActivity extends AppCompatActivity { // a
+public class MainActivity extends AppCompatActivity { // a test
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
