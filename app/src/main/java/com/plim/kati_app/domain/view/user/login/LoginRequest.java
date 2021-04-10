@@ -1,29 +1,28 @@
 package com.plim.kati_app.domain.view.user.login;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Response;
-import com.android.volley.toolbox.StringRequest;
+import androidx.annotation.NonNull;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-public class LoginRequest extends StringRequest {
-    /*
-    * 서버 URL
-    */
-    final static private String URL = "http://";
-    private Map<String, String> map;
 
-    public LoginRequest(String UserEmail, String UserPwd, Response.Listener<String> listener) {
-        super(Method.POST, URL, listener, null);
+public class LoginRequest {
+    @SerializedName("email")
+    private String email;
 
-        map = new HashMap<>();
-        map.put("UserEmail", UserEmail);
-        map.put("UserPwd", UserPwd);
+    @SerializedName("password")
+    private String password;
+
+    public LoginRequest(String email, String password) {
+        this.email = email;
+        this.password = password;
     }
 
-    @Override
-    protected Map<String, String>getParams() throws AuthFailureError {
-        return map;
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }

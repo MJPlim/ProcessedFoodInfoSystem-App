@@ -2,14 +2,11 @@ package com.plim.kati_app.domain.view.search;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,11 +18,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.plim.kati_app.R;
-import com.plim.kati_app.domain.asset.KatiDialog;
 import com.plim.kati_app.domain.asset.LoadingDialog;
-import com.plim.kati_app.domain.model.FoodSearchListItem;
-import com.plim.kati_app.domain.model.KatiViewModel;
-import com.plim.kati_app.domain.view.MainActivity;
+import com.plim.kati_app.domain.view.search.dto.FoodSearchListItem;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -47,6 +41,7 @@ public class FoodSearchActivity extends AppCompatActivity {
     //static attribute
     private static final String IP = "http://13.124.55.59:8080/api/v1/food/findFood/";
     private static final int Connection_Respond_Success = 200;
+    private static final String PARAMETER_NAME_FOOD_Name = "foodName";
     private static final String PARAMETER_NAME_PAGE_NUMBER = "pageNo";
 
     private static final String JSON_NAME_PRODUCT_LICENSE_NUMBER = "lcnsNo";
@@ -69,7 +64,7 @@ public class FoodSearchActivity extends AppCompatActivity {
     private ImageButton textSearchButton, cameraSearchButton;
     private RecyclerView searchResultListRecyclerView;
 
-    private KatiViewModel katiViewModel;
+
     private Vector<FoodSearchListItem> items;
     private Map<String, String> parameterMap;
     private RecyclerAdapter listAdapter;
@@ -98,7 +93,6 @@ public class FoodSearchActivity extends AppCompatActivity {
         this.parameterMap = new HashMap<>();
 
         this.searchResultListRecyclerView = findViewById(R.id.searchFragment_foodInfoRecyclerView);
-        if(this.searchResultListRecyclerView==null)Log.d("디버그","널이다!");
         this.searchEditText = findViewById(R.id.foodSearchFieldFragment_searchEditText);
         this.searchModeSpinner = findViewById(R.id.foodSearchFieldFragment_searchModeSpinner);
         this.textSearchButton = findViewById(R.id.foodSearchFieldFragment_textSearchButton);
@@ -113,8 +107,6 @@ public class FoodSearchActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         });
-
-        this.katiViewModel = new ViewModelProvider(this).get(KatiViewModel.class);
     }
 
 
@@ -169,11 +161,6 @@ public class FoodSearchActivity extends AppCompatActivity {
             });
             StringBuilder parameter = new StringBuilder();
             try {
-
-                String token =  katiViewModel.getHeader();
-//                String token =  "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqd3QgdG9rZW4iLCJleHAiOjE2MTc4ODgzNzEsInVzZXJuYW1lIjoidGVzdDdAZ21haWwuY29tIn0.rLjOpWAp0jUTfo46Jnj6jNnE6MCCibME8eYBK66toqSLyMm2R8uX1A8xlLhXyQDk6lzj2I9j__zivwjiWCaHsw";
-
-
                 for (Map.Entry<String, String> param : parameterMap.entrySet()) {
                     if (parameter.length() != 0) parameter.append('&');
                     else parameter.append(searchMode.getMappingName() + '?');
@@ -185,24 +172,13 @@ public class FoodSearchActivity extends AppCompatActivity {
                 URL url = new URL(IP + parameter.toString());
                 Log.d("디버그", url.toString());
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestProperty("Authorization",token);
-                int responseCode =connection.getResponseCode();
-                if (responseCode != Connection_Respond_Success) {
+                connection.setRequestProperty("Authorization","토큰값.");
+                if (connection.getResponseCode() != Connection_Respond_Success) {
                     runOnUiThread(() -> {
                         loadingDialog.hide();
-                        KatiDialog dialog= new KatiDialog(getApplicationContext());
-                        dialog.setTitle("연결 실패 code"+responseCode);
-                        dialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(FoodSearchActivity.this, MainActivity.class);
-                                startActivity(intent);
-                            }
-                        });
                     });
                     throw new Exception("연결 실패 exception::" + connection.getResponseCode());
                 } else { //연결 성공
-                    katiViewModel.setHeader(connection.getHeaderField("Authorization"));
                     InputStreamReader inputStreamReader = new InputStreamReader(connection.getInputStream(), "UTF-8");
                     Stream<String> streamOfString = new BufferedReader(inputStreamReader).lines();
                     String jsonString = streamOfString.collect(Collectors.joining());
@@ -226,17 +202,12 @@ public class FoodSearchActivity extends AppCompatActivity {
 
                         listAdapter.clearItems();
                         listAdapter.addItems(items);
-                        searchResultListRecyclerView = findViewById(R.id.searchFragment_foodInfoRecyclerView);
-                        if(searchResultListRecyclerView==null)Log.d("디버그","뷰가 널임");
                         searchResultListRecyclerView.setAdapter(listAdapter);
 //                        moreButton.setVisibility(View.VISIBLE);
                         loadingDialog.hide();
                     });
                 }
-                //ddkdkdkk왜 커밋 안돼 왜야 왜야 왜야 주석추가할테닊ㅏ 제발 되어줘
             } catch (Exception e) {
-                //커밋이 지금 안되는데 이유를 모르겠네
-                Log.d("디버그","커밋테스트");
                 e.printStackTrace();
             }
 

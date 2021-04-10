@@ -1,9 +1,8 @@
 package com.plim.kati_app.domain.view.user.login;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +10,17 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.plim.kati_app.R;
-import com.plim.kati_app.domain.view.MainActivity;
+import com.plim.kati_app.domain.MainActivity;
+import com.plim.kati_app.domain.asset.KatiDialog;
+import com.plim.kati_app.domain.model.KatiViewModel;
 import com.plim.kati_app.domain.view.user.register.RegisterActivity;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginHomeFragment extends Fragment {
 
@@ -22,6 +28,7 @@ public class LoginHomeFragment extends Fragment {
     // View
     private EditText idText, pwText;
     private Button loginButton, idFindButton, pwFindButton, accountCreateButton;
+    private KatiViewModel viewModel;
 
     /**
      * System Callback
@@ -41,9 +48,7 @@ public class LoginHomeFragment extends Fragment {
         this.idFindButton = view.findViewById(R.id.loginActivity_idFindButton);
         this.pwFindButton = view.findViewById(R.id.loginActivity_pwFindButton);
         this.accountCreateButton = view.findViewById(R.id.loginActivity_accountCreateButton);
-
-
-        /*
+ /*
          * 회원가입 버튼 클릭
          */
         this.accountCreateButton.setOnClickListener(v -> {
@@ -52,74 +57,58 @@ public class LoginHomeFragment extends Fragment {
 
         /*
          * 로그인 버튼 클릭
+         * 401 -> 인증 실패
+         * 500 -> 서버 오류
+         * 200 -> 인증 성공
          * */
         this.loginButton.setOnClickListener(v -> {
-                String ID = idText.getText().toString();
-                String PW = pwText.getText().toString();
+            String email = idText.getText().toString();
+            String password = pwText.getText().toString();
 
-                AlertDialog.Builder dlg = new AlertDialog.Builder(getContext());
-                dlg.setTitle("성공적으로 로그인하였습니다.");
-                dlg.setMessage("성공적으로 로그인되었습니다.");
-
-                /*
-                * 서버 URL 오면 아래거 쓸 것..Maybe?
-                * */
-                dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+//            LoginRequest login = new LoginRequest("test@gmail.com", "1234");
+            LoginRequest login = new LoginRequest(email, password);
+            RetrofitClient retrofitClient = new RetrofitClient();
+            Call<LoginRequest> call = retrofitClient.apiService.postRetrofitData(login);
+            call.enqueue(new Callback<LoginRequest>() {
                 @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    Intent intent = new Intent(getContext(), MainActivity.class);
-                    startActivity(intent);
+                public void onResponse(Call<LoginRequest> call, Response<LoginRequest> response) {
+                    if (response.isSuccessful()) {
+                        Log.d("연결 성공적 : ", "code : " + response.code());
+                        KatiDialog katiDialog = new KatiDialog(getContext());
+                        katiDialog.setTitle("성공적으로 로그인하였습니다.");
+                        katiDialog.setMessage("성공적으로 로그인되었습니다." + response.headers().toString());
+                        katiDialog.setPositiveButton("확인",(dialog,which)->{
+                            KatiViewModel katiViewModel = new ViewModelProvider(requireActivity()).get(KatiViewModel.class);
+                            katiViewModel.setHeader(response.headers().toString());
+
+                           Intent intent = new Intent(getContext(), MainActivity.class);
+                           startActivity(intent);
+                        });
+                        katiDialog.setColor(getResources().getColor(R.color.kati_coral,getContext().getTheme()));
+                        katiDialog.showDialog();
+                    }else{
+                        Log.e("연결 비정상적 : ", "error code : " + response.code());
+                        KatiDialog katiDialog = new KatiDialog(getContext());
+                        katiDialog.setTitle("해당하는 유저가 없습니다.");
+                        katiDialog.setMessage("잘못 입력하였거나 해당하는 유저를 찾을 수 없습니다.");
+                        katiDialog.setPositiveButton("확인",(dialog,which)->{
+                            idText.setText("");
+                            pwText.setText("");
+                        });
+                        katiDialog.setColor(getResources().getColor(R.color.kati_coral,getContext().getTheme()));
+                        katiDialog.showDialog();
+
+                        return;
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<LoginRequest> call, Throwable t) {
+                    Log.e("연결실패", t.getMessage());
                 }
             });
-               dlg.show();
 
-
-              /*  Response.Listener<String> responseListener = new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            boolean success = jsonObject.getBoolean("success");
-
-                            if (success) {//로그인 성공
-                                String ID = jsonObject.getString("ID");
-                                String PW = jsonObject.getString("Password");
-                                String UserName = jsonObject.getString("UserName");
-
-                                loginTrueDialog = View.inflate(getContext(), R.layout.dialog_login_true, null);
-                                AlertDialog.Builder dlg = new AlertDialog.Builder(getContext());
-                                dlg.setTitle("성공적으로 로그인하였습니다.");
-                                dlg.setView(loginTrueDialog);
-                                dlg.show();
-
-                                Intent intent = new Intent( getContext(), MainActivity.class );
-
-                                intent.putExtra("UserEmail", ID);
-                                intent.putExtra("UserPwd", PW);
-                                intent.putExtra("UserName", UserName);
-
-                                startActivity(intent);
-
-                            } else {//로그인 실패
-                                loginFalseDialog = View.inflate(getContext(), R.layout.dialog_login_false, null);
-                                AlertDialog.Builder dlg = new AlertDialog.Builder(getContext());
-                                dlg.setTitle("해당하는 유저가 없습니다.");
-                                dlg.setView(loginFalseDialog);
-                                dlg.show();
-
-                                idText.setText("");
-                                pwText.setText("");
-                                return;
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                };*/
-               /* LoginRequest loginRequest = new LoginRequest(ID, PW, responseListener);
-                RequestQueue queue = Volley.newRequestQueue(getContext());
-                queue.add(loginRequest);*/
         });
     }
+
 }

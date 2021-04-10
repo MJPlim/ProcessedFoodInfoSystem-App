@@ -17,15 +17,10 @@
         android:usesCleartextTraffic="true">
 
 
-        <!--
-               Set to true if your app is Standalone, that is, it does not require the handheld
-               app to run.
-        -->
-
-
         <activity
             android:name=".domain.view.MainActivity"
-            android:label="mainActivity">
+            android:label="@string/title_activity_main">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,15 +30,9 @@
         <activity android:name=".domain.view.search.FoodSearchActivity" />
         <activity android:name=".domain.view.user.signOut.WithdrawalActivity" />
         <activity android:name=".domain.view.user.signOut.TempActivity" />
-        <activity android:name=".domain.view.user.login.LoginActivity" />
         <activity android:name=".domain.view.user.register.RegisterActivity" />
-        <activity android:name=".domain.view.user.logOut.LogOutActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".domain.view.user.logOut.LogOutActivity"/>
+        <activity android:name=".domain.view.user.login.LoginActivity"/>
     </application>
 
 </manifest>
