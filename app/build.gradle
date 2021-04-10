@@ -29,11 +29,17 @@ android {
 }
 
 dependencies {
+    //Retrofit - default
+        implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    //Retrofit - gson
+         implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
     implementation 'com.android.volley:volley:1.1.0'
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'org.projectlombok:lombok'
     implementation 'androidx.wear:wear:1.1.0'
+    implementation 'org.projectlombok:lombok'
     compileOnly 'com.google.android.wearable:wearable:2.8.1'
     def nav_version = "2.3.3"
 
