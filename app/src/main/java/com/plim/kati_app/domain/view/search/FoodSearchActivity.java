@@ -18,7 +18,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.plim.kati_app.R;
+import com.plim.kati_app.domain.asset.KatiDialog;
 import com.plim.kati_app.domain.asset.LoadingDialog;
+import com.plim.kati_app.domain.model.room.KatiData;
+import com.plim.kati_app.domain.model.room.KatiDatabase;
 import com.plim.kati_app.domain.view.search.dto.FoodSearchListItem;
 
 import org.json.JSONArray;
@@ -40,22 +43,26 @@ public class FoodSearchActivity extends AppCompatActivity {
 
     //static attribute
     private static final String IP = "http://13.124.55.59:8080/api/v1/food/findFood/";
-    private static final int Connection_Respond_Success = 200;
+
+    private static final String HEADER_NAME = "Authorization";
+    private static final int CONNECTION_RESPOND_SUCCESS = 200;
+
     private static final String PARAMETER_NAME_FOOD_Name = "foodName";
     private static final String PARAMETER_NAME_PAGE_NUMBER = "pageNo";
 
     private static final String JSON_NAME_PRODUCT_LICENSE_NUMBER = "lcnsNo";
-    private static final String JSON_Name_Product_Company_Name = "bsshName";
+    private static final String JSON_NAME_PRODUCT_COMPANY_NAME = "bsshName";
     private static final String JSON_NAME_PRODUCT_REPORT_NUMBER = "prdlstReportNo";
+    private static final String JSON_NAME_PRODUCT_CONFIRM_DATE = "prmsDate";
+    private static final String JSON_NAME_PRODUCT_NAME = "prdlstName";
+    private static final String JSON_NAME_PRODUCT_CATEGORY_NAME = "prdlstDCName";
+    private static final String JSON_NAME_PRODUCT_RAW_MATERIAL_NAME = "rawMaterialName";
 
-    private static final String JSON_Name_Product_CONFIRM_DATE = "prmsDate";
-    private static final String JSON_Name_Product_Name = "prdlstName";
-    private static final String JSON_Name_Product_Category_Name = "prdlstDCName";
-
-    private static final String JSON_Name_Product_RawMaterial_Name = "rawMaterialName";
 
     //working variable
     private int index = 1;
+    private boolean nextPage=false;
+
 
     //associate
     //view
@@ -65,41 +72,27 @@ public class FoodSearchActivity extends AppCompatActivity {
     private RecyclerView searchResultListRecyclerView;
 
 
+    //component
     private Vector<FoodSearchListItem> items;
     private Map<String, String> parameterMap;
     private RecyclerAdapter listAdapter;
     private LoadingDialog loadingDialog;
 
 
-    @Getter
-    public enum ESearchMode {
-        제품("foodName"), 회사("bsshName");
-        private String mappingName;
-
-        ESearchMode(String string) {
-            this.mappingName = string;
-        }
-
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_search);
 
-        //create component
-
-        this.items = new Vector<>();
-        this.parameterMap = new HashMap<>();
-
-        this.searchResultListRecyclerView = findViewById(R.id.searchFragment_foodInfoRecyclerView);
+        //view component
         this.searchEditText = findViewById(R.id.foodSearchFieldFragment_searchEditText);
         this.searchModeSpinner = findViewById(R.id.foodSearchFieldFragment_searchModeSpinner);
         this.textSearchButton = findViewById(R.id.foodSearchFieldFragment_textSearchButton);
         this.cameraSearchButton = findViewById(R.id.foodSearchFieldFragment_cameraSearchButton);
-
         this.loadingDialog = new LoadingDialog(this);
-        this.listAdapter = new RecyclerAdapter();
+
+
+        //set view
         this.textSearchButton.setOnClickListener(v -> {
             try {
                 search();
@@ -107,38 +100,50 @@ public class FoodSearchActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         });
+
+
+        //create component
+        this.items = new Vector<>();
+        this.parameterMap = new HashMap<>();
+        this.listAdapter = new RecyclerAdapter();
     }
 
 
+    /**
+     * 검색 시작 메소드. 검색어로 1페이지 검색을 한다.
+     *
+     * @throws NoSuchFieldException 검색 모드가 엉뚱함.
+     */
     public void search() throws NoSuchFieldException {
         if (this.searchEditText.length() > 0) {
 
-            SearchThread thread;
             this.items.clear();
             this.parameterMap.clear();
 
-
-            if (searchModeSpinner.getSelectedItem().toString().equals(ESearchMode.제품.toString())) {
-                thread = new SearchThread(ESearchMode.제품);
-                this.parameterMap.put(ESearchMode.제품.getMappingName(), searchEditText.getText().toString().replaceAll("[ ]", "_"));
-
-            } else if (searchModeSpinner.getSelectedItem().toString().equals(ESearchMode.회사.toString())) {
-                thread = new SearchThread(ESearchMode.회사);
-                this.parameterMap.put(ESearchMode.회사.getMappingName(), searchEditText.getText().toString().replaceAll("[ ]", "_"));
-
-            } else {
-                throw new NoSuchFieldException();
+            boolean found = false;
+            for (ESearchMode searchMode : ESearchMode.values()) {
+                Log.d("디버그",this.searchModeSpinner.getSelectedItem().toString()+"/"+searchMode.name());
+                if (this.searchModeSpinner.getSelectedItem().toString().equals(searchMode.name())) {
+                    SearchThread thread = new SearchThread(searchMode);
+                    this.parameterMap.put(searchMode.getMappingName(), searchEditText.getText().toString().replaceAll("[ ]", "_"));
+                    this.parameterMap.put(PARAMETER_NAME_PAGE_NUMBER, index + "");
+                    thread.start();
+                    found = true;
+                    break;
+                }
             }
 
-
-            this.parameterMap.put(PARAMETER_NAME_PAGE_NUMBER, index + "");
-
-
-            thread.start();
-
-            NavHostFragment navHostFragment = (NavHostFragment) this.getSupportFragmentManager().findFragmentById(R.id.nav_search_fragment);
-            NavController navController = navHostFragment.getNavController();
-            navController.navigate(R.id.action_foodSearchRecommendationFragment_to_foodSearchResultListFragment);
+            if (!found) {
+                KatiDialog katiDialog = new KatiDialog(this);
+                katiDialog.setTitle("검색 모드 선택 오류입니다.");
+                katiDialog.setPositiveButton("확인", null);
+                katiDialog.showDialog();
+                throw new NoSuchFieldException();
+            }else{
+                NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_search_fragment);
+                NavController navController = navHostFragment.getNavController();
+                navController.navigate(R.id.action_foodSearchRecommendationFragment_to_foodSearchResultListFragment);
+            }
         }
     }
 
@@ -158,6 +163,7 @@ public class FoodSearchActivity extends AppCompatActivity {
             super.run();
             runOnUiThread(() -> {
                 loadingDialog.show();
+
             });
             StringBuilder parameter = new StringBuilder();
             try {
@@ -168,17 +174,25 @@ public class FoodSearchActivity extends AppCompatActivity {
                     parameter.append("=");
                     parameter.append(param.getValue());
                 }
+
                 Log.d("파라미터", parameter.toString());
                 URL url = new URL(IP + parameter.toString());
                 Log.d("디버그", url.toString());
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestProperty("Authorization","토큰값.");
-                if (connection.getResponseCode() != Connection_Respond_Success) {
+
+                KatiDatabase database = KatiDatabase.getAppDatabase(FoodSearchActivity.this);
+
+                Log.d("확인", database.katiDataDao().getValue(HEADER_NAME));
+                connection.setRequestProperty(HEADER_NAME, database.katiDataDao().getValue(HEADER_NAME));
+                if (connection.getResponseCode() != CONNECTION_RESPOND_SUCCESS) {
                     runOnUiThread(() -> {
                         loadingDialog.hide();
                     });
                     throw new Exception("연결 실패 exception::" + connection.getResponseCode());
                 } else { //연결 성공
+
+                    database.katiDataDao().insert(new KatiData(HEADER_NAME, connection.getHeaderField(HEADER_NAME)));
+
                     InputStreamReader inputStreamReader = new InputStreamReader(connection.getInputStream(), "UTF-8");
                     Stream<String> streamOfString = new BufferedReader(inputStreamReader).lines();
                     String jsonString = streamOfString.collect(Collectors.joining());
@@ -188,22 +202,22 @@ public class FoodSearchActivity extends AppCompatActivity {
                         FoodSearchListItem item = new FoodSearchListItem();
                         JSONObject itemInfo = jsonArray.getJSONObject(i);
                         item.setProductLicenseNumber(itemInfo.getLong(JSON_NAME_PRODUCT_LICENSE_NUMBER));
-                        item.setCompanyName(itemInfo.getString(JSON_Name_Product_Company_Name));
+                        item.setCompanyName(itemInfo.getString(JSON_NAME_PRODUCT_COMPANY_NAME));
                         item.setProductReportNumber(itemInfo.getLong(JSON_NAME_PRODUCT_REPORT_NUMBER));
-                        item.setProductConfirmDate(itemInfo.getLong(JSON_Name_Product_CONFIRM_DATE));
-                        item.setProductName(itemInfo.getString(JSON_Name_Product_Name));
-                        item.setProductCategoryName(itemInfo.getString(JSON_Name_Product_Category_Name));
-                        item.setRawMaterialName(itemInfo.getString(JSON_Name_Product_RawMaterial_Name));
+                        item.setProductConfirmDate(itemInfo.getLong(JSON_NAME_PRODUCT_CONFIRM_DATE));
+                        item.setProductName(itemInfo.getString(JSON_NAME_PRODUCT_NAME));
+                        item.setProductCategoryName(itemInfo.getString(JSON_NAME_PRODUCT_CATEGORY_NAME));
+                        item.setRawMaterialName(itemInfo.getString(JSON_NAME_PRODUCT_RAW_MATERIAL_NAME));
                         items.add(item);
                     }
                     Log.d("디버그", "파싱 완료");
 
                     runOnUiThread(() -> {
+                        //네비게이션으로 이동하는 프래그먼트에 있기 때문에 findViewById가 최초나 스레드 초반에 불리면 null이 반환되는 것 같음.
+                        searchResultListRecyclerView = findViewById(R.id.searchFragment_foodInfoRecyclerView);
 
-                        listAdapter.clearItems();
-                        listAdapter.addItems(items);
+                        listAdapter.setItems(items);
                         searchResultListRecyclerView.setAdapter(listAdapter);
-//                        moreButton.setVisibility(View.VISIBLE);
                         loadingDialog.hide();
                     });
                 }
@@ -246,6 +260,23 @@ public class FoodSearchActivity extends AppCompatActivity {
 
         public void addItems(Vector<FoodSearchListItem> items) {
             this.items.addAll(items);
+        }
+
+        public void setItems(Vector<FoodSearchListItem> items) {
+            this.clearItems(); this.addItems(items);
+        }
+    }
+
+    /**
+     * 검색모드
+     */
+    @Getter
+    public enum ESearchMode {
+        제품("foodName"), 회사("bsshName");
+        private String mappingName;
+
+        ESearchMode(String string) {
+            this.mappingName = string;
         }
     }
 

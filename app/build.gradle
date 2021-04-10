@@ -14,6 +14,15 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions{
+            annotationProcessorOptions{
+                arguments +=[
+                        "room.schemaLocation":"$projectDir/schemas".toString(),
+                        "room.incremental":"true",
+                        "room.expandProjection":"true"
+                ]
+            }
+        }
     }
 
     buildTypes {
@@ -29,6 +38,18 @@ android {
 }
 
 dependencies {
+    def room_version = "2.2.6"
+    implementation 'org.projectlombok:lombok'
+    implementation 'org.projectlombok:lombok:1.18.16'
+    annotationProcessor 'org.projectlombok:lombok:1.18.16'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.16'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.16'
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+
+    implementation "android.arch.lifecycle:extensions:1.1.1"
+
     //Retrofit - default
         implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     //Retrofit - gson
@@ -40,8 +61,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.8.1'
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'org.projectlombok:lombok'
-    implementation 'androidx.wear:wear:1.1.0'
+
 
 
     def nav_version = "2.3.3"
@@ -70,9 +90,5 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-    implementation 'org.projectlombok:lombok:1.18.16'
-    annotationProcessor 'org.projectlombok:lombok:1.18.16'
 
-    testCompileOnly 'org.projectlombok:lombok:1.18.16'
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.16'
 }

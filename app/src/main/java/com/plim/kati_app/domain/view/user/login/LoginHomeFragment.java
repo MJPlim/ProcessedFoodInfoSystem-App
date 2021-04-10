@@ -1,5 +1,6 @@
 package com.plim.kati_app.domain.view.user.login;
 
+import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,16 +12,23 @@ import android.widget.EditText;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.plim.kati_app.R;
-import com.plim.kati_app.domain.MainActivity;
 import com.plim.kati_app.domain.asset.KatiDialog;
 import com.plim.kati_app.domain.model.KatiViewModel;
+import com.plim.kati_app.domain.model.room.KatiData;
+import com.plim.kati_app.domain.model.room.KatiDatabase;
+import com.plim.kati_app.domain.view.MainActivity;
 import com.plim.kati_app.domain.view.user.register.RegisterActivity;
 
+import java.util.List;
+
+import kotlin.Pair;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Header;
 
 public class LoginHomeFragment extends Fragment {
 
@@ -48,6 +56,10 @@ public class LoginHomeFragment extends Fragment {
         this.idFindButton = view.findViewById(R.id.loginActivity_idFindButton);
         this.pwFindButton = view.findViewById(R.id.loginActivity_pwFindButton);
         this.accountCreateButton = view.findViewById(R.id.loginActivity_accountCreateButton);
+
+        this.idText.setText("remember@rem.com");
+        this.pwText.setText("1234");
+
  /*
          * 회원가입 버튼 클릭
          */
@@ -78,8 +90,35 @@ public class LoginHomeFragment extends Fragment {
                         katiDialog.setTitle("성공적으로 로그인하였습니다.");
                         katiDialog.setMessage("성공적으로 로그인되었습니다." + response.headers().toString());
                         katiDialog.setPositiveButton("확인",(dialog,which)->{
-                            KatiViewModel katiViewModel = new ViewModelProvider(requireActivity()).get(KatiViewModel.class);
-                            katiViewModel.setHeader(response.headers().toString());
+
+//                            KatiViewModel katiViewmodel= ViewModelProviders.of(requireActivity()).get(KatiViewModel.class);
+//                            KatiViewModel katiViewModel= ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication()).create(KatiViewModel.class);
+//                            katiViewModel.setToken("ddd");
+
+
+                            KatiDatabase database = KatiDatabase.getAppDatabase(getContext());
+                            if(database==null)Log.d("경고","디비가 없음??");
+
+                            for(Pair<? extends String, ? extends String> map:response.headers()){
+                                if(map.getFirst().equals("Authorization")){
+Thread thread = new Thread(
+        new Runnable() {
+            @Override
+            public void run() {
+                database.katiDataDao().insert(new KatiData("Authorization",map.getSecond()));
+                Log.d("디버그s",database.katiDataDao().getValue("Authorization")+'엥');
+            }
+        }
+);
+thread.start();
+
+//                                    katiViewModel.setToken(map.getSecond());
+//                                    Log.d("디버그",map.getSecond());
+                                }
+                            }
+//                            Log.d("디버그",katiViewModel.getToken()+"ㅇㅇ");
+
+
 
                            Intent intent = new Intent(getContext(), MainActivity.class);
                            startActivity(intent);

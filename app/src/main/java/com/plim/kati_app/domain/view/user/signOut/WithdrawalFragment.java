@@ -13,8 +13,8 @@ public class WithdrawalFragment extends AbstractFragment1 {
 
     @Override
     protected void initializeView() {
-        KatiViewModel katiViewModel = new ViewModelProvider(this.getActivity()).get(KatiViewModel.class);
-        String userName =  katiViewModel.getHeader();
+        KatiViewModel katiViewModel= new ViewModelProvider.AndroidViewModelFactory(this.getActivity().getApplication()).create(KatiViewModel.class);;
+        String userName =  katiViewModel.getToken();
         this.mainTextView.setText("그동안 고마웠어요, "+userName+"님!");
         this.subTextView.setText("성공적으로 탈퇴하였습니다");
         this.editText.setVisibility(View.INVISIBLE);
