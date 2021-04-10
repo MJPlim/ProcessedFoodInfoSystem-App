@@ -7,4 +7,14 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!--  우리 테마 색 여따 느쇼  -->
+    <!--  나는 로그인 디자인에서 색 추출했는데, 다 똑같은지는 모르니까 한번씩 확인 바람요 -->
+    <color name="kati_red">#ED2F3B</color>
+    <color name="kati_orange">#F56048</color>
+    <color name="kati_light_orange">#FE9B5A</color>
+    <color name="kati_yellow">#FACE89</color>
+    <color name="kati_green">#3A8082</color>
+    <color name="kati_light_green">#FBBBB1</color>
+    <color name="kati_coral">#FBBBB1</color>
 </resources>

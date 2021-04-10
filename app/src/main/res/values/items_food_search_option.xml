@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="foodSearchActivity_foodSearchOption">
+        <item>제품</item>
+        <item>회사</item>
+    </string-array>
+
+
+
+
+
+
+
+
+</resources>

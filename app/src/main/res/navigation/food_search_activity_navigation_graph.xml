@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/food_search_activity_navigation_graph"
+    app:startDestination="@id/foodSearchRecommendationFragment">
+
+    <fragment
+        android:id="@+id/foodSearchRecommendationFragment"
+        android:name="com.plim.kati_app.domain.food.search.fragment.FoodSearchRecommendationFragment"
+        tools:layout="@layout/fragment_food_search_recommendation"
+        android:label="fragment_food_search_recommendation">
+        <action
+            android:id="@+id/action_foodSearchRecommendationFragment_to_foodSearchResultListFragment"
+            app:destination="@id/foodSearchResultListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/foodSearchResultListFragment"
+        android:name="com.plim.kati_app.domain.food.search.fragment.FoodSearchResultListFragment"
+        tools:layout="@layout/fragment_food_search_result_list"
+        android:label="fragment_food_search_result_list"/>
+
+</navigation>
