@@ -59,8 +59,9 @@ public class TempActivity extends AppCompatActivity {
         // THIS IS TEST! Get Data From View Model
         Password password = new Password();
         password.setPassword("asdf");
+        String token = "";
 
-        Call<WithdrawResponse> call = RestAPIClient.getApiService().withdraw(password);
+        Call<WithdrawResponse> call = RestAPIClient.getApiService().withdraw(token, password);
         call.enqueue(new Callback<WithdrawResponse>() {
             @Override
             public void onResponse(Call<WithdrawResponse> call, Response<WithdrawResponse> response) {
