@@ -61,7 +61,6 @@ public class FoodSearchActivity extends AppCompatActivity {
 
     //working variable
     private int index = 1;
-    private boolean nextPage=false;
 
 
     //associate
@@ -122,14 +121,12 @@ public class FoodSearchActivity extends AppCompatActivity {
 
             boolean found = false;
             for (ESearchMode searchMode : ESearchMode.values()) {
-                Log.d("디버그",this.searchModeSpinner.getSelectedItem().toString()+"/"+searchMode.name());
-                if (this.searchModeSpinner.getSelectedItem().toString().equals(searchMode.name())) {
+                if (this.searchModeSpinner.getSelectedItem().toString().equals(searchMode)) {
                     SearchThread thread = new SearchThread(searchMode);
                     this.parameterMap.put(searchMode.getMappingName(), searchEditText.getText().toString().replaceAll("[ ]", "_"));
                     this.parameterMap.put(PARAMETER_NAME_PAGE_NUMBER, index + "");
                     thread.start();
                     found = true;
-                    break;
                 }
             }
 
@@ -137,12 +134,7 @@ public class FoodSearchActivity extends AppCompatActivity {
                 KatiDialog katiDialog = new KatiDialog(this);
                 katiDialog.setTitle("검색 모드 선택 오류입니다.");
                 katiDialog.setPositiveButton("확인", null);
-                katiDialog.showDialog();
                 throw new NoSuchFieldException();
-            }else{
-                NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_search_fragment);
-                NavController navController = navHostFragment.getNavController();
-                navController.navigate(R.id.action_foodSearchRecommendationFragment_to_foodSearchResultListFragment);
             }
         }
     }
@@ -163,7 +155,10 @@ public class FoodSearchActivity extends AppCompatActivity {
             super.run();
             runOnUiThread(() -> {
                 loadingDialog.show();
-
+                NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_search_fragment);
+                NavController navController = navHostFragment.getNavController();
+                navController.navigate(R.id.action_foodSearchRecommendationFragment_to_foodSearchResultListFragment);
+                searchResultListRecyclerView = findViewById(R.id.searchFragment_foodInfoRecyclerView);
             });
             StringBuilder parameter = new StringBuilder();
             try {
@@ -213,10 +208,12 @@ public class FoodSearchActivity extends AppCompatActivity {
                     Log.d("디버그", "파싱 완료");
 
                     runOnUiThread(() -> {
-                        //네비게이션으로 이동하는 프래그먼트에 있기 때문에 findViewById가 최초나 스레드 초반에 불리면 null이 반환되는 것 같음.
-                        searchResultListRecyclerView = findViewById(R.id.searchFragment_foodInfoRecyclerView);
 
+                        listAdapter.clearItems();
+                        listAdapter.addItems(items);
                         listAdapter.setItems(items);
+                        //recyclerView가 널?
+                        searchResultListRecyclerView = findViewById(R.id.searchFragment_foodInfoRecyclerView);
                         searchResultListRecyclerView.setAdapter(listAdapter);
                         loadingDialog.hide();
                     });
@@ -260,10 +257,6 @@ public class FoodSearchActivity extends AppCompatActivity {
 
         public void addItems(Vector<FoodSearchListItem> items) {
             this.items.addAll(items);
-        }
-
-        public void setItems(Vector<FoodSearchListItem> items) {
-            this.clearItems(); this.addItems(items);
         }
     }
 

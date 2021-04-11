@@ -1,11 +1,10 @@
 package com.plim.kati_app.domain.view.user.login;
 
-import androidx.annotation.NonNull;
-
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import lombok.Getter;
 
+@Getter
 public class LoginRequest {
     @SerializedName("email")
     private String email;
@@ -18,11 +17,4 @@ public class LoginRequest {
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
 }
