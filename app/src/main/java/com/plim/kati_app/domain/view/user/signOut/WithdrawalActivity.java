@@ -13,6 +13,6 @@ public class WithdrawalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_withdrawal);
 
         this.getSupportFragmentManager().beginTransaction()
-                .add(R.id.withdrawalActivity_frameLayout, new WithdrawalFragment()).commit();
+                .add(R.id.withdrawalActivity_frameLayout, new Withdrawal2Fragment()).commit();
     }
 }

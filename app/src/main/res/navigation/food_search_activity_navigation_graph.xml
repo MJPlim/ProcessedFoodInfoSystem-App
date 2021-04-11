@@ -21,6 +21,10 @@
         android:name="com.plim.kati_app.domain.view.search.fragment.FoodSearchResultListFragment"
 
         tools:layout="@layout/fragment_food_search_result_list"
-        android:label="fragment_food_search_result_list"/>
+        android:label="fragment_food_search_result_list">
+        <action
+            android:id="@+id/action_foodSearchResultListFragment_to_foodSearchRecommendationFragment"
+            app:destination="@id/foodSearchRecommendationFragment" />
+    </fragment>
 
 </navigation>

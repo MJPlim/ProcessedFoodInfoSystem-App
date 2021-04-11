@@ -1,5 +1,6 @@
 package com.plim.kati_app.domain.view.user.signOut;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +19,7 @@ import com.plim.kati_app.domain.model.SignUpResponse;
 import com.plim.kati_app.domain.model.WithdrawResponse;
 import com.plim.kati_app.domain.model.room.KatiData;
 import com.plim.kati_app.domain.model.room.KatiDatabase;
+import com.plim.kati_app.domain.view.MainActivity;
 import com.plim.kati_app.tech.RestAPIClient;
 
 import org.json.JSONObject;
@@ -41,66 +43,27 @@ public class TempActivity extends AppCompatActivity {
         this.signOutButton = this.findViewById(R.id.button);
 
         // Initialize View
-        this.signOutButton.setOnClickListener(v->this.showSignOutAskDialog());
-    }
-
-    /**
-     * show Sign Out Ask Dialog
-     */
-    private void showSignOutAskDialog(){
-        KatiDialog signOutAskDialog = new KatiDialog(this);
-        signOutAskDialog.setTitle("정말 탈퇴하시겠습니까?");
-        signOutAskDialog.setMessage("회원을 탈퇴하시면 그동안 쌓여왔던 모든 자료와 데이터가 삭제됩니다.");
-        signOutAskDialog.setPositiveButton("예", (dialog, which) -> this.signOut());
-        signOutAskDialog.setNegativeButton("아니오", null);
-        signOutAskDialog.setColor(this.getResources().getColor(R.color.kati_coral, this.getTheme()));
-        signOutAskDialog.showDialog();
-    }
-
-    private void signOut() {
-        Thread thread = new Thread(() -> {
-            // THIS IS TEST! Get Data From View Model
-            Password password = new Password();
-            password.setPassword("1234");
-
-            KatiDatabase database = KatiDatabase.getAppDatabase(this);
-            String token = database.katiDataDao().getValue("Authorization");
-
-            Call<WithdrawResponse> call = RestAPIClient.getApiService2(token).withdraw(password);
-            call.enqueue(new Callback<WithdrawResponse>() {
-                @Override
-                public void onResponse(Call<WithdrawResponse> call, Response<WithdrawResponse> response) {
-                    if (!response.isSuccessful()) {
-                        Log.d("TEST123", response.code() + "");
-                        try {
-                            JSONObject jObjError = new JSONObject(response.errorBody().string());
-                            Toast.makeText(TempActivity.this, jObjError.getString("error-message"), Toast.LENGTH_LONG).show();
-                        } catch (Exception e) {
-                            Toast.makeText(TempActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    } else {
-                        Log.d("TEST123", response.code() + "Success");
-                        showSignOutCompleteDialog();
-                    }
+        this.signOutButton.setOnClickListener(v->{
+            new Thread(()->{
+                KatiDatabase database= KatiDatabase.getAppDatabase(this);
+                if(database.katiDataDao().getValue("Authorization")!=null) {
+                    Intent intent = new Intent(TempActivity.this, NewWithdrawalActivity.class);
+                    startActivity(intent);
+                }else{
+                    runOnUiThread(()->showNotLoginedDialog());
                 }
-
-                @Override
-                public void onFailure(Call<WithdrawResponse> call, Throwable t) {
-                    Log.d("회원탈퇴 실패! : 인터넷 연결을 확인해 주세요", t.getMessage());
-                }
-            });
+            }).start();
         });
-        thread.start();
     }
 
-    /**
-     * show Sign Out Complete Dialog
-     */
-    private void showSignOutCompleteDialog(){
-        KatiDialog signOutCompleteDialog = new KatiDialog(this);
-        signOutCompleteDialog.setTitle("회원 탈퇴가 완료되었습니다.");
-        signOutCompleteDialog.setPositiveButton("확인", (dialog, which) -> this.startActivity(new Intent(this, WithdrawalActivity.class)));
-        signOutCompleteDialog.setColor(this.getResources().getColor(R.color.kati_coral, this.getTheme()));
-        signOutCompleteDialog.showDialog();
+    private void showNotLoginedDialog(){
+        Log.d("dd","모임");
+        KatiDialog.simpleAlertDialog(this,
+                "로그인 된 유저가 없습니다.",
+                "로그인 된 유저가 없습니다.",
+                (dialog, which)->{
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }, getResources().getColor(R.color.kati_coral,this.getTheme())).showDialog();
     }
 }

@@ -11,4 +11,5 @@
     -->
     <string name="hello_world">Hello Square World!</string>
     <string name="title_activity_main">mainActivity</string>
+    <string name="title_activity_new_withdrawal">NewWithdrawalActivity</string>
 </resources>

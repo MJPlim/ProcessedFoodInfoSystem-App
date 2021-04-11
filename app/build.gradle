@@ -38,6 +38,8 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.wear:wear:1.1.0'
+    compileOnly 'com.google.android.wearable:wearable:2.8.1'
     def room_version = "2.2.6"
     implementation 'org.projectlombok:lombok'
     implementation 'org.projectlombok:lombok:1.18.16'

@@ -1,5 +1,6 @@
 package com.plim.kati_app.domain.view.user.register;
 
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 
 import androidx.lifecycle.ViewModelProvider;
@@ -13,6 +14,7 @@ public class Register2Fragment extends AbstractFragment1 {
 
     @Override
     protected void initializeView() {
+        this.editText.setTransformationMethod(PasswordTransformationMethod.getInstance());
         this.mainTextView.setText("비밀번호를 입력해주세요");
         this.subTextView.setVisibility(View.INVISIBLE);
         this.editText.setHint("6자리 이상, 숫자+알파벳 조합");

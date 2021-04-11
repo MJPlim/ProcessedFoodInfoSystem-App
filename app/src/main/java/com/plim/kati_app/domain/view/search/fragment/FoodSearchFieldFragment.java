@@ -1,5 +1,6 @@
 package com.plim.kati_app.domain.view.search.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -10,10 +11,12 @@ import androidx.fragment.app.FragmentResultListener;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.renderscript.ScriptGroup;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -53,19 +56,31 @@ public class FoodSearchFieldFragment extends Fragment {
         this.cameraSearchButton = view.findViewById(R.id.foodSearchFieldFragment_cameraSearchButton);
         this.textSearchButton = view.findViewById(R.id.foodSearchFieldFragment_textSearchButton);
 
+
         //set view
+        this.searchEditText.setOnFocusChangeListener((v,gainFocus)->{
+            if(gainFocus){
+                NavHostFragment navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_search_fragment);
+                NavController navController = navHostFragment.getNavController();
+                navController.navigate(R.id.action_foodSearchResultListFragment_to_foodSearchRecommendationFragment);
+            }else{
+                InputMethodManager manager= (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+                manager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY,0);
+            }
+        });
+
         this.textSearchButton.setOnClickListener((v -> {
 
-            NavHostFragment navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_search_fragment);
+                NavHostFragment navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_search_fragment);
                 NavController navController = navHostFragment.getNavController();
                 navController.navigate(R.id.action_foodSearchRecommendationFragment_to_foodSearchResultListFragment);
 
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            Log.d("디버그","버튼 눌림");
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
             Bundle result = new Bundle();
             result.putString("index",1+"");
             result.putString("mode",searchModeSpinner.getSelectedItem().toString());
@@ -75,7 +90,6 @@ public class FoodSearchFieldFragment extends Fragment {
 
 
         this.getActivity().getSupportFragmentManager().setFragmentResultListener("text", getActivity(), ((requestKey, result) -> {
-            Log.d("디버그","푸래그먼트번들 옴");
             this.searchEditText.setText(result.getString("text"));
         }));
 

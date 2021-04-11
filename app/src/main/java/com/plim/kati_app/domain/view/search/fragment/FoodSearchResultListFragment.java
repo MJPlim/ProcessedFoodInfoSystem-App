@@ -158,7 +158,7 @@ public class FoodSearchResultListFragment extends Fragment {
         this.foodInfoRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         this.foodInfoRecyclerView.setAdapter(new FoodInfoRecyclerViewAdapter(5));
         this.adFoodInfoRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        this.adFoodInfoRecyclerView.setAdapter(new FoodInfoRecyclerViewAdapter(2));
+        this.adFoodInfoRecyclerView.setAdapter(new FoodInfoRecyclerViewAdapter(1));
 
 
         this.setColor();
@@ -167,7 +167,6 @@ public class FoodSearchResultListFragment extends Fragment {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                 set(Integer.parseInt(result.getString("index")), result.getString("mode"), result.getString("text"));
-                Log.d("디버f그", "검색 시작");
             }
         });
     }
@@ -223,13 +222,15 @@ public class FoodSearchResultListFragment extends Fragment {
             RestAPI service = retrofit.create(RestAPI.class);
             Call<List<FoodSearchListItem>> listCall;
             if (foodSearchMode.equals(FoodSearchFieldFragment.ESearchMode.제품.name())) {
+                Log.d("디버그","제품이름 검색");
                 listCall = service.getFoodListByProductName(
-                        database.katiDataDao().getValue("Authorization"),
+                        database.katiDataDao().getValue(KatiDatabase.AUTHORIZATION),
                         foodSearchText,
                         foodSearchIndex + "");
             } else {
+                Log.d("디버그","회사이름 검색");
                 listCall = service.getFoodListByCompanyName(
-                        database.katiDataDao().getValue("Authorization"),
+                        database.katiDataDao().getValue(KatiDatabase.AUTHORIZATION),
                         foodSearchText,
                         foodSearchIndex + "");
             }
@@ -237,21 +238,10 @@ public class FoodSearchResultListFragment extends Fragment {
             listCall.enqueue(new Callback<List<FoodSearchListItem>>() {
                 @Override
                 public void onResponse(Call<List<FoodSearchListItem>> call, Response<List<FoodSearchListItem>> response) {
+                    Log.d("디버그","응답");
                     Vector<FoodSearchListItem> items = new Vector<>(response.body());
-                    Headers headers = response.headers();
-                    for (Pair<? extends String, ? extends String> pair : headers) {
-                        if (pair.getFirst().equals("Authorization")) {
-                            Thread thread = new Thread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    database.katiDataDao().insert(new KatiData("Authorization", pair.getSecond()));
-                                }
-                            });
-                            thread.start();
-
-                            break;
-                        }
-                    }
+                            new Thread(()->
+                                    database.katiDataDao().insert(new KatiData(KatiDatabase.AUTHORIZATION,response.headers().get(KatiDatabase.AUTHORIZATION)))).start();
                     getActivity().runOnUiThread(() -> {
                         dialog.hide();
                         recyclerAdapter.setItems(items);
