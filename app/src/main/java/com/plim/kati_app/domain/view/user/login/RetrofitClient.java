@@ -2,7 +2,7 @@ package com.plim.kati_app.domain.view.user.login;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.plim.kati_app.domain.api.ApiService;
+import com.plim.kati_app.tech.RestAPI;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -17,7 +17,7 @@ public class RetrofitClient {
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build();
 
-    ApiService apiService = retrofit.create(ApiService.class);
+    RestAPI apiService = retrofit.create(RestAPI.class);
 
 
 }

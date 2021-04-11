@@ -35,8 +35,6 @@ public class FoodSearchSortMenuFragment extends Fragment {
         this.foodSearchSortMenuRecyclerViewAdapter = new LightButtonRecyclerViewAdapter(this.values);
         this.foodSearchSortMenuRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false));
         this.foodSearchSortMenuRecyclerView.setAdapter(this.foodSearchSortMenuRecyclerViewAdapter);
-
-
     }
 
     @Override
