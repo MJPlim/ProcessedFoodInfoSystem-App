@@ -16,6 +16,8 @@ import com.plim.kati_app.domain.model.Password;
 import com.plim.kati_app.domain.model.RegisterActivityViewModel;
 import com.plim.kati_app.domain.model.SignUpResponse;
 import com.plim.kati_app.domain.model.WithdrawResponse;
+import com.plim.kati_app.domain.model.room.KatiData;
+import com.plim.kati_app.domain.model.room.KatiDatabase;
 import com.plim.kati_app.tech.RestAPIClient;
 
 import org.json.JSONObject;
@@ -56,25 +58,39 @@ public class TempActivity extends AppCompatActivity {
     }
 
     private void signOut() {
-        // THIS IS TEST! Get Data From View Model
-        Password password = new Password();
-        password.setPassword("asdf");
-        String token = "";
+        Thread thread = new Thread(() -> {
+            // THIS IS TEST! Get Data From View Model
+            Password password = new Password();
+            password.setPassword("asdf");
 
-        Call<WithdrawResponse> call = RestAPIClient.getApiService().withdraw(token, password);
-        call.enqueue(new Callback<WithdrawResponse>() {
-            @Override
-            public void onResponse(Call<WithdrawResponse> call, Response<WithdrawResponse> response) {
-                if (!response.isSuccessful()) {
-                    Log.d("TEST123", response.code()+"");
-                    try {
-                        JSONObject jObjError = new JSONObject(response.errorBody().string());
-                        Toast.makeText(TempActivity.this, jObjError.getString("error-message"), Toast.LENGTH_LONG).show();
-                    } catch (Exception e) { Toast.makeText(TempActivity.this, e.getMessage(), Toast.LENGTH_LONG).show(); }
-                } else { showSignOutCompleteDialog(); }
-            }
-            @Override public void onFailure(Call<WithdrawResponse> call, Throwable t) { Log.d("회원탈퇴 실패! : 인터넷 연결을 확인해 주세요", t.getMessage()); }
+            KatiDatabase database = KatiDatabase.getAppDatabase(this);
+            String token = database.katiDataDao().getValue("Authorization");
+
+            Call<WithdrawResponse> call = RestAPIClient.getApiService2(token).withdraw(password);
+            call.enqueue(new Callback<WithdrawResponse>() {
+                @Override
+                public void onResponse(Call<WithdrawResponse> call, Response<WithdrawResponse> response) {
+                    if (!response.isSuccessful()) {
+                        Log.d("TEST123", response.code() + "");
+                        try {
+                            JSONObject jObjError = new JSONObject(response.errorBody().string());
+                            Toast.makeText(TempActivity.this, jObjError.getString("error-message"), Toast.LENGTH_LONG).show();
+                        } catch (Exception e) {
+                            Toast.makeText(TempActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        Log.d("TEST123", response.code() + "Success");
+                        showSignOutCompleteDialog();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<WithdrawResponse> call, Throwable t) {
+                    Log.d("회원탈퇴 실패! : 인터넷 연결을 확인해 주세요", t.getMessage());
+                }
+            });
         });
+        thread.start();
     }
 
     /**
