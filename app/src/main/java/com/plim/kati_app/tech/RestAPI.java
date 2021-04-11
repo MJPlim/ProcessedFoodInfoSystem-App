@@ -16,5 +16,5 @@ public interface RestAPI {
     Call<SignUpResponse> signUp(@Body User user);
 
     @POST("withdraw")
-    Call<WithdrawResponse> withdraw(@Header("Authorization") String token, @Body Password user);
+    Call<WithdrawResponse> withdraw(@Body Password user);
 }
