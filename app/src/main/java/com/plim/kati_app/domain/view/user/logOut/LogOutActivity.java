@@ -7,6 +7,7 @@ import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.plim.kati_app.R;
+import com.plim.kati_app.domain.model.room.KatiDatabase;
 import com.plim.kati_app.domain.view.MainActivity;
 import com.plim.kati_app.domain.asset.KatiDialog;
 
@@ -30,6 +31,8 @@ public class LogOutActivity extends AppCompatActivity {
         katiDialog.setPositiveButton("확인",(dialog,which)->{
            Intent intent = new Intent(LogOutActivity.this, MainActivity.class);
            startActivity(intent);
+            KatiDatabase database = KatiDatabase.getAppDatabase(this);
+            database.katiDataDao().delete("Authorization");
         });
         katiDialog.setColor(this.getResources().getColor(R.color.kati_coral,this.getTheme()));
         katiDialog.showDialog();
