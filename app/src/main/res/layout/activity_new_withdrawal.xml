@@ -4,10 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".domain.view.user.login.LoginActivity" >
+    android:background="@color/white"
+    android:padding="@dimen/box_inset_layout_padding"
+    tools:context=".domain.view.user.signOut.NewWithdrawalActivity" >
+
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/nav_host_fragment"
+        android:id="@+id/withdrawalActivity_navHost"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -17,6 +20,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
 
         app:defaultNavHost="true"
-        app:navGraph="@navigation/login_activity_navigation_graph" />
+        app:navGraph="@navigation/withdrawal_activity_navigation_graph" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

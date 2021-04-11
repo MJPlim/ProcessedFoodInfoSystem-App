@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".domain.food.search.FoodSearchActivity">
+    tools:context=".domain.view.search.FoodSearchActivity">
+
 
     <fragment
         android:id="@+id/fragment"
@@ -15,8 +16,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout="@layout/layout_food_search_field"
-        android:name="com.plim.kati_app.domain.food.search.fragment.FoodSearchFieldFragment"
-        />
+        android:name="com.plim.kati_app.domain.view.search.fragment.FoodSearchFieldFragment"/>
+
+
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_search_fragment"

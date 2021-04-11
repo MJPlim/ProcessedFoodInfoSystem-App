@@ -7,7 +7,8 @@
 
     <fragment
         android:id="@+id/register1Fragment"
-        android:name="com.plim.kati_app.domain.user.register.Register1Fragment"
+        android:name="com.plim.kati_app.domain.view.user.register.Register1Fragment"
+
         android:label="fragment_register1"
         tools:layout="@layout/abstract_layout_1" >
         <action
@@ -16,7 +17,8 @@
     </fragment>
     <fragment
         android:id="@+id/register2Fragment"
-        android:name="com.plim.kati_app.domain.user.register.Register2Fragment"
+        android:name="com.plim.kati_app.domain.view.user.register.Register2Fragment"
+
         android:label="fragment_register2"
         tools:layout="@layout/abstract_layout_1" >
         <action
@@ -25,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/register3Fragment"
-        android:name="com.plim.kati_app.domain.user.register.Register3Fragment"
+        android:name="com.plim.kati_app.domain.view.user.register.Register3Fragment"
         android:label="fragment_register3"
         tools:layout="@layout/abstract_layout_1" >
         <action
@@ -34,7 +36,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerFinishedFragment"
-        android:name="com.plim.kati_app.domain.user.register.RegisterFinishedFragment"
+        android:name="com.plim.kati_app.domain.view.user.register.RegisterFinishedFragment"
         android:label="fragment_register_finished"
         tools:layout="@layout/abstract_layout_1" >
         <argument

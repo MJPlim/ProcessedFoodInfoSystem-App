@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.plim.kati_app">
+    package="com.plim.kati_app" >
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-
-
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -14,36 +12,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.KATI_app"
-        android:usesCleartextTraffic="true">
-
-
-        <!--
-               Set to true if your app is Standalone, that is, it does not require the handheld
-               app to run.
-        -->
-
+        android:usesCleartextTraffic="true" >
 
         <activity
-            android:name=".domain.MainActivity"
-            android:label="@string/title_activity_log_out">
+            android:name=".domain.view.MainActivity"
+            android:label="@string/title_activity_main" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".domain.food.search.FoodSearchActivity" />
-        <activity android:name=".domain.user.signOut.WithdrawalActivity" />
-        <activity android:name=".domain.user.signOut.TempActivity" />
-        <activity android:name=".domain.user.login.LoginActivity" />
-        <activity android:name=".domain.user.register.RegisterActivity" />
-        <activity android:name=".domain.user.logOut.LogOutActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".domain.view.search.FoodSearchActivity" />
+        <activity android:name=".domain.view.user.signOut.NewWithdrawalActivity" />
+        <activity android:name=".domain.view.user.signOut.WithdrawalActivity" />
+        <activity android:name=".domain.view.user.signOut.TempActivity" />
+        <activity android:name=".domain.view.user.register.RegisterActivity" />
+        <activity android:name=".domain.view.user.logOut.LogOutActivity" />
+        <activity android:name=".domain.view.user.login.LoginActivity" />
     </application>
 
 </manifest>

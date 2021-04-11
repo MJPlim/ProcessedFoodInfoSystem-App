@@ -2,14 +2,19 @@ package com.plim.kati_app.domain.asset;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.text.Layout;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.AlignmentSpan;
 import android.text.style.StyleSpan;
-
+import android.view.View;
 import androidx.annotation.ColorInt;
+import com.plim.kati_app.R;
+import static android.os.Build.VERSION_CODES.R;
+
 
 public class KatiDialog extends AlertDialog.Builder{
 
@@ -37,5 +42,14 @@ public class KatiDialog extends AlertDialog.Builder{
             dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(this.color);
         });
         dialog.show();
+    }
+
+    public static KatiDialog simpleAlertDialog(Context context, String title, String message, DialogInterface.OnClickListener listener, @ColorInt int color){
+        KatiDialog kDialog= new KatiDialog(context);
+        kDialog.setTitle(title);
+        kDialog.setMessage(message);
+        kDialog.setPositiveButton("확인",listener);
+        kDialog.setColor(color);
+        return kDialog;
     }
 }
