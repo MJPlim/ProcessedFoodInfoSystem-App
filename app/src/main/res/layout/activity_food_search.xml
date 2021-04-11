@@ -19,6 +19,7 @@
         android:name="com.plim.kati_app.domain.view.search.fragment.FoodSearchFieldFragment"/>
 
 
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_search_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"

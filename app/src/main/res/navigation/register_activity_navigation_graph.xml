@@ -8,6 +8,7 @@
     <fragment
         android:id="@+id/register1Fragment"
         android:name="com.plim.kati_app.domain.view.user.register.Register1Fragment"
+
         android:label="fragment_register1"
         tools:layout="@layout/abstract_layout_1" >
         <action
@@ -17,6 +18,7 @@
     <fragment
         android:id="@+id/register2Fragment"
         android:name="com.plim.kati_app.domain.view.user.register.Register2Fragment"
+
         android:label="fragment_register2"
         tools:layout="@layout/abstract_layout_1" >
         <action

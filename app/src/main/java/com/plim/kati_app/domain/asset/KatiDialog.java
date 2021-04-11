@@ -11,12 +11,10 @@ import android.text.SpannableString;
 import android.text.style.AlignmentSpan;
 import android.text.style.StyleSpan;
 import android.view.View;
-
 import androidx.annotation.ColorInt;
-
 import com.plim.kati_app.R;
-
 import static android.os.Build.VERSION_CODES.R;
+
 
 public class KatiDialog extends AlertDialog.Builder{
 
