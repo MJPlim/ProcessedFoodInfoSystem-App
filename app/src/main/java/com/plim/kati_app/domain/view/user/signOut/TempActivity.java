@@ -61,7 +61,7 @@ public class TempActivity extends AppCompatActivity {
         Thread thread = new Thread(() -> {
             // THIS IS TEST! Get Data From View Model
             Password password = new Password();
-            password.setPassword("asdf");
+            password.setPassword("1234");
 
             KatiDatabase database = KatiDatabase.getAppDatabase(this);
             String token = database.katiDataDao().getValue("Authorization");
