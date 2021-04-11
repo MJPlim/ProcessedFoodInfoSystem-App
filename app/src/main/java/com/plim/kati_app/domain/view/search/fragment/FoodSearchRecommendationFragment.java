@@ -1,5 +1,6 @@
 package com.plim.kati_app.domain.view.search.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,9 +9,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.plim.kati_app.R;
 import com.plim.kati_app.domain.view.search.adapter.LightButtonRecyclerViewAdapter;
@@ -29,8 +32,9 @@ public class FoodSearchRecommendationFragment extends Fragment {
     private RecyclerView rankRecyclerView;
 
     //adapter
-    private LightButtonRecyclerViewAdapter recentValueRecyclerViewAdapter;
+    private recentButtonRecyclerViewAdapter recentValueRecyclerViewAdapter;
     private RankRecyclerViewAdapter rankRecyclerViewAdapter;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,9 +56,11 @@ public class FoodSearchRecommendationFragment extends Fragment {
         this.rankRecyclerView = view.findViewById(R.id.foodSearchRecommendationFragment_rankRecyclerView);
 
         //데이터 받아오기.
-        Vector<String> val=this.getDatas();
+        Vector<String> val = this.getDatas();
+
+
         //create adapter
-        this.recentValueRecyclerViewAdapter = new LightButtonRecyclerViewAdapter(val);
+        this.recentValueRecyclerViewAdapter = new recentButtonRecyclerViewAdapter(val);
         this.rankRecyclerViewAdapter = new RankRecyclerViewAdapter(val);
 
         //set view
@@ -67,9 +73,10 @@ public class FoodSearchRecommendationFragment extends Fragment {
 
     /**
      * 서버나 로컬에서 저장된 데이터를 불러올 예정.
+     *
      * @return 데이터가 담긴 벡터.
      */
-    public Vector<String> getDatas(){
+    public Vector<String> getDatas() {
         Vector<String> val = new Vector<>();
         val.add("새우깡");
         val.add("감자깡");
@@ -80,4 +87,57 @@ public class FoodSearchRecommendationFragment extends Fragment {
         val.add("팔도비빔면");
         return val;
     }
+
+    public class recentButtonRecyclerViewAdapter extends LightButtonRecyclerViewAdapter {
+
+        public recentButtonRecyclerViewAdapter(Vector<String> values) {
+            super(values);
+        }
+
+        @NonNull
+        @Override
+        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            Context context= parent.getContext();
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View view = inflater.inflate(R.layout.item_light_button,parent,false);
+            RecentButtonRecyclerviewViewHolder viewHolder= new RecentButtonRecyclerviewViewHolder(view);
+
+            return viewHolder;
+        }
+
+
+        @Override
+        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+            String value = this.values.get(position);
+            ((RecentButtonRecyclerviewViewHolder) holder).setValueButton(value);
+        }
+
+
+        /**
+         * 뷰 홀더
+         */
+        public class RecentButtonRecyclerviewViewHolder extends RecyclerView.ViewHolder {
+            private Button valueButton;
+
+            public RecentButtonRecyclerviewViewHolder(@NonNull View itemView) {
+                super(itemView);
+                this.valueButton = itemView.findViewById(R.id.item_button);
+            }
+
+            public void setValueButton(String value) {
+                this.valueButton.setText(value);
+                View.OnClickListener listener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.d("클릭","검색어 버튼 클릭됨");
+                        Bundle text = new Bundle();
+                        text.putString("text", value);
+                        getActivity().getSupportFragmentManager().setFragmentResult("text", text);
+                    }
+                };
+                this.valueButton.setOnClickListener(listener);
+            }
+        }
+    }
+
 }

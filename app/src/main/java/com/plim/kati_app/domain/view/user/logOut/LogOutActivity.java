@@ -29,10 +29,15 @@ public class LogOutActivity extends AppCompatActivity {
         KatiDialog katiDialog = new KatiDialog(this);
         katiDialog.setTitle("성공적으로 로그아웃하였습니다.");
         katiDialog.setPositiveButton("확인",(dialog,which)->{
+            Thread thread = new Thread(()->{
+                KatiDatabase database = KatiDatabase.getAppDatabase(this);
+                database.katiDataDao().delete("Authorization");
+            });
+            thread.start();
+
            Intent intent = new Intent(LogOutActivity.this, MainActivity.class);
            startActivity(intent);
-            KatiDatabase database = KatiDatabase.getAppDatabase(this);
-            database.katiDataDao().delete("Authorization");
+
         });
         katiDialog.setColor(this.getResources().getColor(R.color.kati_coral,this.getTheme()));
         katiDialog.showDialog();

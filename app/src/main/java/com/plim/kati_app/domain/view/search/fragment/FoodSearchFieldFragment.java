@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -72,6 +73,11 @@ public class FoodSearchFieldFragment extends Fragment {
             this.getParentFragmentManager().setFragmentResult("result",result);
         }));
 
+
+        this.getActivity().getSupportFragmentManager().setFragmentResultListener("text", getActivity(), ((requestKey, result) -> {
+            Log.d("디버그","푸래그먼트번들 옴");
+            this.searchEditText.setText(result.getString("text"));
+        }));
 
     }
 

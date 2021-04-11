@@ -1,6 +1,7 @@
 package com.plim.kati_app.domain.view.user.login;
 
 import android.app.Application;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -60,7 +61,26 @@ public class LoginHomeFragment extends Fragment {
         this.idText.setText("remember@rem.com");
         this.pwText.setText("1234");
 
- /*
+        Thread thread = new Thread(() -> {
+            KatiDatabase database = KatiDatabase.getAppDatabase(this.getContext());
+//            Log.d("디버그",database.katiDataDao().getValue("Authorization"));
+            if (database.katiDataDao().getValue("Authorization")!=null) {
+                getActivity().runOnUiThread(()->{
+                    KatiDialog katiDialog = new KatiDialog(getContext());
+                    katiDialog.setTitle("이미 로그인 되어 있습니다.");
+                    katiDialog.setPositiveButton("확인", (dialog, which) -> {
+                        Intent intent = new Intent(this.getActivity(), MainActivity.class);
+                        startActivity(intent);
+                    });
+                    katiDialog.setColor(this.getResources().getColor(R.color.kati_coral, getActivity().getTheme()));
+                    katiDialog.showDialog();
+                });
+            }
+        });
+        thread.start();
+
+
+        /*
          * 회원가입 버튼 클릭
          */
         this.accountCreateButton.setOnClickListener(v -> {
@@ -89,7 +109,7 @@ public class LoginHomeFragment extends Fragment {
                         KatiDialog katiDialog = new KatiDialog(getContext());
                         katiDialog.setTitle("성공적으로 로그인하였습니다.");
                         katiDialog.setMessage("성공적으로 로그인되었습니다." + response.headers().toString());
-                        katiDialog.setPositiveButton("확인",(dialog,which)->{
+                        katiDialog.setPositiveButton("확인", (dialog, which) -> {
 
 //                            KatiViewModel katiViewmodel= ViewModelProviders.of(requireActivity()).get(KatiViewModel.class);
 //                            KatiViewModel katiViewModel= ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication()).create(KatiViewModel.class);
@@ -97,20 +117,20 @@ public class LoginHomeFragment extends Fragment {
 
 
                             KatiDatabase database = KatiDatabase.getAppDatabase(getContext());
-                            if(database==null)Log.d("경고","디비가 없음??");
+                            if (database == null) Log.d("경고", "디비가 없음??");
 
-                            for(Pair<? extends String, ? extends String> map:response.headers()){
-                                if(map.getFirst().equals("Authorization")){
-Thread thread = new Thread(
-        new Runnable() {
-            @Override
-            public void run() {
-                database.katiDataDao().insert(new KatiData("Authorization",map.getSecond()));
-                Log.d("디버그s",database.katiDataDao().getValue("Authorization")+'엥');
-            }
-        }
-);
-thread.start();
+                            for (Pair<? extends String, ? extends String> map : response.headers()) {
+                                if (map.getFirst().equals("Authorization")) {
+                                    Thread thread = new Thread(
+                                            new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    database.katiDataDao().insert(new KatiData("Authorization", map.getSecond()));
+                                                    Log.d("디버그s", database.katiDataDao().getValue("Authorization") + '엥');
+                                                }
+                                            }
+                                    );
+                                    thread.start();
 
 //                                    katiViewModel.setToken(map.getSecond());
 //                                    Log.d("디버그",map.getSecond());
@@ -119,22 +139,21 @@ thread.start();
 //                            Log.d("디버그",katiViewModel.getToken()+"ㅇㅇ");
 
 
-
-                           Intent intent = new Intent(getContext(), MainActivity.class);
-                           startActivity(intent);
+                            Intent intent = new Intent(getContext(), MainActivity.class);
+                            startActivity(intent);
                         });
-                        katiDialog.setColor(getResources().getColor(R.color.kati_coral,getContext().getTheme()));
+                        katiDialog.setColor(getResources().getColor(R.color.kati_coral, getContext().getTheme()));
                         katiDialog.showDialog();
-                    }else{
+                    } else {
                         Log.e("연결 비정상적 : ", "error code : " + response.code());
                         KatiDialog katiDialog = new KatiDialog(getContext());
                         katiDialog.setTitle("해당하는 유저가 없습니다.");
                         katiDialog.setMessage("잘못 입력하였거나 해당하는 유저를 찾을 수 없습니다.");
-                        katiDialog.setPositiveButton("확인",(dialog,which)->{
+                        katiDialog.setPositiveButton("확인", (dialog, which) -> {
                             idText.setText("");
                             pwText.setText("");
                         });
-                        katiDialog.setColor(getResources().getColor(R.color.kati_coral,getContext().getTheme()));
+                        katiDialog.setColor(getResources().getColor(R.color.kati_coral, getContext().getTheme()));
                         katiDialog.showDialog();
 
                         return;

@@ -2,6 +2,7 @@ package com.plim.kati_app.domain.view.search.adapter;
 
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +53,7 @@ public class LightButtonRecyclerViewAdapter extends RecyclerView.Adapter {
      * 뷰 홀더
      */
     private class ButtonRecyclerviewViewHolder extends RecyclerView.ViewHolder{
-        private Button valueButton;
+        protected Button valueButton;
 
         public ButtonRecyclerviewViewHolder(@NonNull View itemView) {
             super(itemView);
