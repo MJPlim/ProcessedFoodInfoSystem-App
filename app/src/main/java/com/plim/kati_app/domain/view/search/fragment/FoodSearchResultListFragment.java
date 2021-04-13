@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.tabs.TabLayout;
+import com.plim.kati_app.Constant;
 import com.plim.kati_app.R;
 import com.plim.kati_app.domain.asset.BlankFragment;
 import com.plim.kati_app.domain.asset.KatiDialog;
@@ -217,7 +218,7 @@ public class FoodSearchResultListFragment extends Fragment {
 
             Retrofit retrofit = new Retrofit.Builder()
                     .addConverterFactory(GsonConverterFactory.create())
-                    .baseUrl("http://13.124.55.59:8080/")
+                    .baseUrl(Constant.URL)
                     .build();
             RestAPI service = retrofit.create(RestAPI.class);
             Call<List<FoodSearchListItem>> listCall;

@@ -21,6 +21,7 @@ import com.plim.kati_app.domain.model.KatiViewModel;
 import com.plim.kati_app.domain.model.room.KatiData;
 import com.plim.kati_app.domain.model.room.KatiDatabase;
 import com.plim.kati_app.domain.view.MainActivity;
+import com.plim.kati_app.domain.view.user.findPW.FindPasswordActivity;
 import com.plim.kati_app.domain.view.user.register.RegisterActivity;
 
 import java.util.List;
@@ -60,6 +61,8 @@ public class LoginHomeFragment extends Fragment {
         //디버그 시 입력 귀찮아서 미리 입력해놓는 코드. 주석 해놓을 것.
 //        this.idText.setText("remember@rem.com");
 //        this.pwText.setText("1234");
+
+        this.pwFindButton.setOnClickListener(v->this.startActivity(new Intent(this.getContext(), FindPasswordActivity.class)));
 
         new Thread(() -> {
             KatiDatabase database = KatiDatabase.getAppDatabase(this.getContext());

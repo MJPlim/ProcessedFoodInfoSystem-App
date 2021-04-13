@@ -2,6 +2,7 @@ package com.plim.kati_app.tech;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.plim.kati_app.Constant;
 
 import java.io.IOException;
 
@@ -13,7 +14,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RestAPIClient {
-    private static final String BASE_URL = "http://13.124.55.59:8080/";
+    private static final String BASE_URL = Constant.URL;
 
     public static RestAPI getApiService(){return RestAPIClient.getInstance().create(RestAPI.class);}
 
