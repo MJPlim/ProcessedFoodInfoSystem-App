@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.plim.kati_app.R;
 import com.plim.kati_app.domain.view.search.FoodSearchActivity;
+import com.plim.kati_app.domain.view.user.detail.DetailActivity;
 import com.plim.kati_app.domain.view.user.logOut.LogOutActivity;
 import com.plim.kati_app.domain.view.user.login.LoginActivity;
 import com.plim.kati_app.domain.view.user.register.RegisterActivity;
@@ -24,5 +25,6 @@ public class MainActivity extends AppCompatActivity { // a test
         this.findViewById(R.id.loginTest).setOnClickListener(v -> this.startActivity(new Intent(this, LoginActivity.class)));
         this.findViewById(R.id.searchTest).setOnClickListener(v -> this.startActivity(new Intent(this, FoodSearchActivity.class)));
         this.findViewById(R.id.logOutTest).setOnClickListener(v -> this.startActivity(new Intent(this, LogOutActivity.class)));
+        this.findViewById(R.id.detailTest).setOnClickListener(v -> this.startActivity(new Intent(this, DetailActivity.class)));
     }
 }

@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/detail_activity_navigation_graph.xml">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/detail_activity_navigation_graph"
+    app:startDestination="@+id/detailItemFragment">
+
+    <!-- 아이디 찾기, 비밀번호 찾기 네비게이션 추가!-->
+
+    <fragment
+        android:id="@+id/detailItemFragment"
+        android:name="com.plim.kati_app.domain.view.user.detail.DetailItemFragment"
+        android:label="fragment_detailItem"
+        tools:layout="@layout/fragment_detail_item" >
+    </fragment>
 
 </navigation>
