@@ -30,6 +30,9 @@
         <activity android:name=".domain.view.user.register.RegisterActivity" />
         <activity android:name=".domain.view.user.logOut.LogOutActivity" />
         <activity android:name=".domain.view.user.login.LoginActivity" />
+
+        <service android:name=".domain.view.AutoLoginService"
+            android:stopWithTask="false"/>
     </application>
 
 </manifest>

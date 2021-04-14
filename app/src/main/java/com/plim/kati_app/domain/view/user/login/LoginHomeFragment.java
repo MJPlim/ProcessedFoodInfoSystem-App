@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import androidx.fragment.app.Fragment;
@@ -38,6 +39,7 @@ public class LoginHomeFragment extends Fragment {
     // View
     private EditText idText, pwText;
     private Button loginButton, idFindButton, pwFindButton, accountCreateButton;
+    private CheckBox autologinCheckBox;
 
     /**
      * System Callback
@@ -57,6 +59,7 @@ public class LoginHomeFragment extends Fragment {
         this.idFindButton = view.findViewById(R.id.loginActivity_idFindButton);
         this.pwFindButton = view.findViewById(R.id.loginActivity_pwFindButton);
         this.accountCreateButton = view.findViewById(R.id.loginActivity_accountCreateButton);
+        this.autologinCheckBox=view.findViewById(R.id.loginActivity_autologinCheckBox);
 
         //디버그 시 입력 귀찮아서 미리 입력해놓는 코드. 주석 해놓을 것.
 //        this.idText.setText("remember@rem.com");
@@ -74,6 +77,10 @@ public class LoginHomeFragment extends Fragment {
             }
         }).start();
 
+        this.autologinCheckBox.setOnClickListener((v -> {
+            this.setAutoLogin();
+        }));
+
         /*
          * 회원가입 버튼 클릭
          */
@@ -88,50 +95,79 @@ public class LoginHomeFragment extends Fragment {
          * 200 -> 인증 성공
          * */
         this.loginButton.setOnClickListener(v -> {
-            String email = idText.getText().toString();
-            String password = pwText.getText().toString();
-
-            LoginRequest login = new LoginRequest(email, password);
-            RetrofitClient retrofitClient = new RetrofitClient();
-            Call<LoginRequest> call = retrofitClient.apiService.postRetrofitData(login);
-            call.enqueue(new Callback<LoginRequest>() {
-                @Override
-                public void onResponse(Call<LoginRequest> call, Response<LoginRequest> response) {
-                    if (response.isSuccessful()) {
-                        Log.d("연결 성공적 : ", "code : " + response.code());
-
-                        KatiDialog.simpleAlertDialog(
-                                getContext(),
-                                "성공적으로 로그인하였습니다.",
-                                "성공적으로 로그인되었습니다.",
-                                (dialog, which) -> {
-                                    //헤더값에서 토큰값을 꺼내서 넣기.
-                                    KatiDatabase database = KatiDatabase.getAppDatabase(getContext());
-                                    new Thread(() -> database.katiDataDao().insert(new KatiData(KatiDatabase.AUTHORIZATION, response.headers().get(KatiDatabase.AUTHORIZATION)))).start();
-                                    startMainActivity();
-                                }, getResources().getColor(R.color.kati_coral, getContext().getTheme())).showDialog();
-
-                    } else {
-                        Log.e("연결 비정상적 : ", "error code : " + response.code());
-                        KatiDialog.simpleAlertDialog(getContext(),
-                                "해당하는 유저가 없습니다.",
-                                "잘못 입력하였거나 해당하는 유저를 찾을 수 없습니다.",
-                                (dialog, which) -> {
-                                    idText.setText("");
-                                    pwText.setText("");
-                                }
-                                , getResources().getColor(R.color.kati_coral, getContext().getTheme())).showDialog();
-                        return;
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<LoginRequest> call, Throwable t) {
-                    Log.e("연결실패", t.getMessage());
-                }
-            });
-
+            new Thread(()->{
+                this.retrofitLogin();
+            }).start();
         });
+    }
+
+    /**
+     * 로그인 요청.
+     */
+    private void retrofitLogin(){
+
+        String email = idText.getText().toString();
+        String password = pwText.getText().toString();
+
+        LoginRequest login = new LoginRequest(email, password);
+        RetrofitClient retrofitClient = new RetrofitClient();
+        Call<LoginRequest> call = retrofitClient.apiService.postRetrofitData(login);
+        call.enqueue(new Callback<LoginRequest>() {
+            @Override
+            public void onResponse(Call<LoginRequest> call, Response<LoginRequest> response) {
+                if (response.isSuccessful()) {
+                    Log.d("연결 성공적 : ", "code : " + response.code());
+
+                    KatiDialog.simpleAlertDialog(
+                            getContext(),
+                            "성공적으로 로그인하였습니다.",
+                            "성공적으로 로그인되었습니다.",
+                            (dialog, which) -> {
+                                //헤더값에서 토큰값을 꺼내서 넣기.
+                                KatiDatabase database = KatiDatabase.getAppDatabase(getContext());
+                                new Thread(() -> {
+
+                                    database.katiDataDao().insert(new KatiData(KatiDatabase.AUTHORIZATION, response.headers().get(KatiDatabase.AUTHORIZATION)));
+                                    if(autologinCheckBox.isChecked()){
+                                        database.katiDataDao().insert(new KatiData(KatiDatabase.EMAIL,idText.getText().toString()));
+                                        database.katiDataDao().insert(new KatiData(KatiDatabase.PASSWORD,pwText.getText().toString()));
+                                    }
+
+                                }).start();
+                                startMainActivity();
+                            }, getResources().getColor(R.color.kati_coral, getContext().getTheme())).showDialog();
+
+                } else {
+                    Log.e("연결 비정상적 : ", "error code : " + response.code());
+                    KatiDialog.simpleAlertDialog(getContext(),
+                            "해당하는 유저가 없습니다.",
+                            "잘못 입력하였거나 해당하는 유저를 찾을 수 없습니다.",
+                            (dialog, which) -> {
+                                idText.setText("");
+                                pwText.setText("");
+                            }
+                            , getResources().getColor(R.color.kati_coral, getContext().getTheme())).showDialog();
+                    return;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginRequest> call, Throwable t) {
+                Log.e("연결실패", t.getMessage());
+            }
+        });
+    }
+
+    /**
+     * 오토로그인을 하도록 혹은 안하도록 설정값을 저장한다.
+     */
+    private void setAutoLogin() {
+        new Thread(()->{
+            KatiDatabase katiDatabase=KatiDatabase.getAppDatabase(getContext());
+            String data=this.autologinCheckBox.isChecked()?"1":"0";
+            katiDatabase.katiDataDao().insert(new KatiData(KatiDatabase.AUTO_LOGIN,data));
+            Log.d("카티 데이터 오토 로그인",data);
+        }).start();
     }
 
     /**

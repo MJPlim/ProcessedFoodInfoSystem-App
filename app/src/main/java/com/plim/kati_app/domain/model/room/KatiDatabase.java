@@ -17,6 +17,9 @@ import java.util.List;
 public abstract class KatiDatabase extends RoomDatabase {
 
     public static final String AUTHORIZATION = "Authorization";
+    public static final String AUTO_LOGIN = "AutoLogin";
+    public static final String EMAIL = "email";
+    public static final String PASSWORD = "Password";
     private static KatiDatabase INSTANCE;
 
     /**

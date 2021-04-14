@@ -18,7 +18,7 @@ public class RetrofitClient {
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build();
 
-    RestAPI apiService = retrofit.create(RestAPI.class);
+   public RestAPI apiService = retrofit.create(RestAPI.class);
 
 
 }
