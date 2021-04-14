@@ -25,14 +25,14 @@
         </activity>
         <activity android:name=".domain.view.search.FoodSearchActivity" />
         <activity android:name=".domain.view.user.signOut.NewWithdrawalActivity" />
-        <activity android:name=".domain.view.user.signOut.WithdrawalActivity" />
         <activity android:name=".domain.view.user.signOut.TempActivity" />
         <activity android:name=".domain.view.user.register.RegisterActivity" />
         <activity android:name=".domain.view.user.logOut.LogOutActivity" />
         <activity android:name=".domain.view.user.login.LoginActivity" />
-
+        <activity android:name=".domain.view.user.detail.DetailActivity"/>
         <service android:name=".domain.view.AutoLoginService"
             android:stopWithTask="false"/>
+
     </application>
 
 </manifest>
