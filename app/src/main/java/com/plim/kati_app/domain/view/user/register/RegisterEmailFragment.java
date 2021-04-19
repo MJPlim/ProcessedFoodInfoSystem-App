@@ -16,7 +16,7 @@ import com.plim.kati_app.domain.view.MainActivity;
 import com.plim.kati_app.domain.view.user.signOut.NewWithdrawalActivity;
 import com.plim.kati_app.domain.view.user.signOut.TempActivity;
 
-public class Register1Fragment extends AbstractFragment1 {
+public class RegisterEmailFragment extends AbstractFragment1 {
 
     @Override
     protected void initializeView() {

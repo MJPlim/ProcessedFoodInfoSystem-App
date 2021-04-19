@@ -10,7 +10,7 @@ import com.plim.kati_app.R;
 import com.plim.kati_app.domain.asset.AbstractFragment1;
 import com.plim.kati_app.domain.model.RegisterActivityViewModel;
 
-public class Register2Fragment extends AbstractFragment1 {
+public class RegisterPasswordFragment extends AbstractFragment1 {
 
     @Override
     protected void initializeView() {

@@ -19,7 +19,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Register3Fragment extends AbstractFragment1 {
+public class RegisterNameFragment extends AbstractFragment1 {
 
     @Override
     protected void initializeView() {
