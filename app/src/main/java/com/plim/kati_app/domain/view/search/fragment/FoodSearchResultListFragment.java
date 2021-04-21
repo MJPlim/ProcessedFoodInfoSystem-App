@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.tabs.TabLayout;
-import com.plim.kati_app.Constant;
+import com.plim.kati_app.constants.Constant;
 import com.plim.kati_app.R;
 import com.plim.kati_app.domain.asset.BlankFragment;
 import com.plim.kati_app.domain.asset.KatiDialog;
@@ -32,11 +32,8 @@ import com.plim.kati_app.tech.RestAPI;
 import java.util.List;
 import java.util.Vector;
 
-import kotlin.Pair;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
-import okhttp3.Headers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

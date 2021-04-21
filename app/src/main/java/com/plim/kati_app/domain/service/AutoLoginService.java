@@ -1,4 +1,4 @@
-package com.plim.kati_app.domain.view;
+package com.plim.kati_app.domain.service;
 
 import android.app.Service;
 import android.content.Intent;
@@ -46,7 +46,7 @@ public class AutoLoginService extends Service {
 
     private void autoLogOut() {
         new Thread(() -> {
-            Log.d("디버그", "종료 로그아웃");
+//            Log.d("디버그", "종료 로그아웃");
             KatiDatabase database = KatiDatabase.getAppDatabase(this);
             database.katiDataDao().delete(KatiDatabase.AUTHORIZATION);
         }).start();

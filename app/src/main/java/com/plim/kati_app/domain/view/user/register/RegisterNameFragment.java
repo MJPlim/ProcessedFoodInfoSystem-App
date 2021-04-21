@@ -1,7 +1,10 @@
 package com.plim.kati_app.domain.view.user.register;
 
+import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.lifecycle.ViewModelProvider;
@@ -9,6 +12,7 @@ import androidx.navigation.Navigation;
 
 import com.plim.kati_app.R;
 import com.plim.kati_app.domain.asset.AbstractFragment1;
+import com.plim.kati_app.domain.asset.LoadingDialog;
 import com.plim.kati_app.domain.model.RegisterActivityViewModel;
 import com.plim.kati_app.domain.model.SignUpResponse;
 import com.plim.kati_app.tech.RestAPIClient;
@@ -21,6 +25,14 @@ import retrofit2.Response;
 
 public class RegisterNameFragment extends AbstractFragment1 {
 
+    private LoadingDialog loadingDialog;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        this.loadingDialog= new LoadingDialog(this.getContext());
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
     @Override
     protected void initializeView() {
         this.mainTextView.setText("이름을 알려주세요");
@@ -31,6 +43,7 @@ public class RegisterNameFragment extends AbstractFragment1 {
 
     @Override
     protected void buttonClicked() {
+        this.loadingDialog.show();
         RegisterActivityViewModel registerActivityViewModel = new ViewModelProvider(this.requireActivity()).get(RegisterActivityViewModel.class);
         registerActivityViewModel.getUser().setName(this.editText.getText().toString());
 
@@ -47,7 +60,9 @@ public class RegisterNameFragment extends AbstractFragment1 {
                         JSONObject jObjError = new JSONObject(response.errorBody().string());
                         Toast.makeText(getContext(), jObjError.getString("error-message"), Toast.LENGTH_LONG).show();
                     } catch (Exception e) { Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show(); }
-                }else{ Navigation.findNavController(getView()).navigate(R.id.action_register3Fragment_to_registerFinishedFragment); }
+                }else{
+                    loadingDialog.hide();
+                    Navigation.findNavController(getView()).navigate(R.id.action_register3Fragment_to_registerFinishedFragment); }
             }
             @Override public void onFailure(Call<SignUpResponse> call, Throwable t) { Log.d("회원가입 실패! : 인터넷 연결을 확인해 주세요", t.getMessage()); }
         });

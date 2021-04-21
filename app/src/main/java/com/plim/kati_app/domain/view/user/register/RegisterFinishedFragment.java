@@ -16,7 +16,7 @@ public class RegisterFinishedFragment extends AbstractFragment1 {
     protected void initializeView() {
         RegisterActivityViewModel registerActivityViewModel = new ViewModelProvider(this.requireActivity()).get(RegisterActivityViewModel.class);
         this.mainTextView.setText("환영합니다 "+registerActivityViewModel.getUser().getName()+"님!");
-        this.subTextView.setText("이메일을 확인하시면 가입절차가 끝납니다!");
+        this.subTextView.setText("메일을 확인하면 가입 절차가 끝납니다!");
         this.editText.setVisibility(View.INVISIBLE);
         this.button.setText("확인");
     }

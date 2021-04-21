@@ -2,7 +2,7 @@ package com.plim.kati_app.domain.view.user.login;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.plim.kati_app.Constant;
+import com.plim.kati_app.constants.Constant;
 import com.plim.kati_app.tech.RestAPI;
 
 import retrofit2.Retrofit;
