@@ -11,6 +11,7 @@ import com.plim.kati_app.domain.model.room.KatiData;
 import com.plim.kati_app.domain.model.room.KatiDatabase;
 import com.plim.kati_app.domain.view.user.login.LoginRequest;
 import com.plim.kati_app.domain.view.user.login.RetrofitClient;
+import com.plim.kati_app.tech.RestAPIClient;
 
 import retrofit2.Call;
 import retrofit2.Callback;

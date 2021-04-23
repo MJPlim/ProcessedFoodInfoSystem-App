@@ -35,10 +35,10 @@ public class RegisterNameFragment extends AbstractFragment1 {
 
     @Override
     protected void initializeView() {
-        this.mainTextView.setText("이름을 알려주세요");
+        this.mainTextView.setText(getString(R.string.register_name_maintext));
         this.subTextView.setVisibility(View.INVISIBLE);
-        this.editText.setHint("당신의 닉네임을 알려주세요!");
-        this.button.setText("확인");
+        this.editText.setHint(getString(R.string.register_name_hint));
+        this.button.setText(getString(R.string.button_ok));
     }
 
     @Override

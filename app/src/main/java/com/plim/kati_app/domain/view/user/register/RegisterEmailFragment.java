@@ -20,10 +20,10 @@ public class RegisterEmailFragment extends AbstractFragment1 {
 
     @Override
     protected void initializeView() {
-        this.mainTextView.setText("이메일을 입력해주세요");
+        this.mainTextView.setText(getString(R.string.register_email_maintext));
         this.subTextView.setVisibility(View.INVISIBLE);
-        this.editText.setHint("example@plim.com");
-        this.button.setText("확인");
+        this.editText.setHint(getString(R.string.register_email_hint));
+        this.button.setText(getString(R.string.button_ok));
     }
 
     @Override
@@ -39,8 +39,8 @@ public class RegisterEmailFragment extends AbstractFragment1 {
 
     private void showNotLoginedDialog(){
         KatiDialog.simpleAlertDialog(getContext(),
-                "이미 로그인 된 상태입니다.",
-                "이미 로그인 된 상태입니다.",
+                getString(R.string.login_already_signed_dialog),
+                getString(R.string.login_already_signed_content_dialog),
                 (dialog, which)->{
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);

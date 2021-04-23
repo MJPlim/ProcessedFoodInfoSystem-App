@@ -1,7 +1,5 @@
 package com.plim.kati_app.domain.view.user.login;
 
-import android.app.Application;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,28 +11,24 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.plim.kati_app.R;
 import com.plim.kati_app.domain.asset.KatiDialog;
-import com.plim.kati_app.domain.model.KatiViewModel;
 import com.plim.kati_app.domain.model.room.KatiData;
 import com.plim.kati_app.domain.model.room.KatiDatabase;
 import com.plim.kati_app.domain.view.MainActivity;
 import com.plim.kati_app.domain.view.user.findPW.FindPasswordActivity;
 import com.plim.kati_app.domain.view.user.register.RegisterActivity;
+import com.plim.kati_app.tech.RestAPIClient;
 
-import java.util.List;
-
-import kotlin.Pair;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Header;
 
 public class LoginHomeFragment extends Fragment {
-
+    /*
+     * 로그인 버튼 클릭 시 나오는 화면
+     * */
     // Associate
     // View
     private EditText idText, pwText;
@@ -71,8 +65,8 @@ public class LoginHomeFragment extends Fragment {
             KatiDatabase database = KatiDatabase.getAppDatabase(this.getContext());
             if (database.katiDataDao().getValue(KatiDatabase.AUTHORIZATION) != null) {
                 getActivity().runOnUiThread(() ->
-                    KatiDialog.simpleAlertDialog(getContext(),"이미 로그인 되어 있습니다.","로그인 되어 있습니다.",(dialog, which) -> startMainActivity(),
-                            this.getResources().getColor(R.color.kati_coral, getActivity().getTheme())).showDialog()
+                        KatiDialog.simpleAlertDialog(getContext(),getString(R.string.login_already_signed_dialog),getString(R.string.login_already_signed_content_dialog),(dialog, which) -> startMainActivity(),
+                                this.getResources().getColor(R.color.kati_coral, getActivity().getTheme())).showDialog()
                 );
             }
         }).start();
@@ -120,8 +114,8 @@ public class LoginHomeFragment extends Fragment {
 
                     KatiDialog.simpleAlertDialog(
                             getContext(),
-                            "성공적으로 로그인하였습니다.",
-                            "성공적으로 로그인되었습니다.",
+                            getString(R.string.login_success_dialog),
+                            getString(R.string.login_success_content_dialog),
                             (dialog, which) -> {
                                 //헤더값에서 토큰값을 꺼내서 넣기.
                                 KatiDatabase database = KatiDatabase.getAppDatabase(getContext());
@@ -140,8 +134,8 @@ public class LoginHomeFragment extends Fragment {
                 } else {
                     Log.e("연결 비정상적 : ", "error code : " + response.code());
                     KatiDialog.simpleAlertDialog(getContext(),
-                            "해당하는 유저가 없습니다.",
-                            "잘못 입력하였거나 해당하는 유저를 찾을 수 없습니다.",
+                            getString(R.string.login_failed_dialog),
+                            getString(R.string.login_failed_content_dialog),
                             (dialog, which) -> {
                                 idText.setText("");
                                 pwText.setText("");

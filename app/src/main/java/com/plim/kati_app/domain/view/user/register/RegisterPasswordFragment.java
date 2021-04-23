@@ -15,10 +15,10 @@ public class RegisterPasswordFragment extends AbstractFragment1 {
     @Override
     protected void initializeView() {
         this.editText.setTransformationMethod(PasswordTransformationMethod.getInstance());
-        this.mainTextView.setText("비밀번호를 입력해주세요");
+        this.mainTextView.setText(getString(R.string.register_password_maintext));
         this.subTextView.setVisibility(View.INVISIBLE);
-        this.editText.setHint("6자리 이상, 숫자+알파벳 조합");
-        this.button.setText("확인");
+        this.editText.setHint(getString(R.string.register_password_hint));
+        this.button.setText(getString(R.string.button_ok));
     }
 
     @Override

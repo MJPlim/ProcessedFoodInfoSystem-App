@@ -5,6 +5,7 @@ import android.view.View;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import com.plim.kati_app.R;
 import com.plim.kati_app.domain.model.RegisterActivityViewModel;
 import com.plim.kati_app.domain.view.MainActivity;
 import com.plim.kati_app.domain.asset.AbstractFragment1;
@@ -15,10 +16,10 @@ public class RegisterFinishedFragment extends AbstractFragment1 {
     @Override
     protected void initializeView() {
         RegisterActivityViewModel registerActivityViewModel = new ViewModelProvider(this.requireActivity()).get(RegisterActivityViewModel.class);
-        this.mainTextView.setText("환영합니다 "+registerActivityViewModel.getUser().getName()+"님!");
-        this.subTextView.setText("메일을 확인하면 가입 절차가 끝납니다!");
+        this.mainTextView.setText(String.format("%s %s%s", getString(R.string.welcome_start), registerActivityViewModel.getUser().getName(), getString(R.string.welcome_end)));
+        this.subTextView.setText(getString(R.string.register_finish_subtext));
         this.editText.setVisibility(View.INVISIBLE);
-        this.button.setText("확인");
+        this.button.setText(getString(R.string.button_ok));
     }
 
     @Override

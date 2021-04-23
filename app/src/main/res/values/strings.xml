@@ -2,9 +2,37 @@
     <string name="app_name">KATI_app</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="id_hint">  아이디 입력</string>
-    <string name="pw_hint">  비밀번호 입력</string>
+    <string name="id_hint">아이디 입력</string>
+    <string name="pw_hint">비밀번호 입력</string>
+
+    <string name="button_ok">확인</string>
+
+    <!-- LoginHomeFragment !-->
+    <string name="login_already_signed_dialog">이미 로그인 되어 있습니다.</string>
+    <string name="login_already_signed_content_dialog">로그인 되어 있습니다.</string>
+    <string name="login_success_dialog">성공적으로 로그인하였습니다.</string>
+    <string name="login_success_content_dialog">성공적으로 로그인되었습니다.</string>
+    <string name="login_failed_dialog">해당하는 유저가 없습니다.</string>
+    <string name="login_failed_content_dialog">잘못 입력하였거나 해당하는 유저를 찾을 수 없습니다.</string>
     <string name="title_activity_log_out">LogOutActivity</string>
+
+    <!-- RegisterEmailFragment !-->
+    <string name="register_email_maintext">이메일을 입력해주세요</string>
+    <string name="register_email_hint">example@plim.com</string>
+
+    <!-- RegisterFinishedFragment !-->
+    <string name="welcome_start">환영합니다</string>
+    <string name="welcome_end">님!</string>
+    <string name="register_finish_subtext">메일을 확인하면 가입 절차가 끝납니다!</string>
+
+    <!-- RegisterNameFragment !-->
+    <string name="register_name_maintext">이름을 알려주세요</string>
+    <string name="register_name_hint">당신의 닉네임을 알려주세요!</string>
+
+    <!-- RegisterPasswordFragment !-->
+    <string name="register_password_maintext">비밀번호를 입력해주세요</string>
+    <string name="register_password_hint">6자리 이상, 숫자+알파벳 조합</string>
+
     <!--
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.
@@ -13,3 +41,5 @@
     <string name="title_activity_main">mainActivity</string>
     <string name="title_activity_new_withdrawal">NewWithdrawalActivity</string>
 </resources>
+
+
