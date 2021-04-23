@@ -26,15 +26,15 @@ public class KatiDialog extends AlertDialog.Builder{
         super(context);
     }
 
-    public void setTitle(String titleContent){
+    public void setTitle(String titleContent){ // 제목 설정
         SpannableString title = new SpannableString(titleContent);
         title.setSpan(new StyleSpan(Typeface.BOLD), 0, title.length(),0);
         title.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         this.setTitle(title);
     }
-    public void setColor(@ColorInt int color){ this.color=color; }
+    public void setColor(@ColorInt int color){ this.color=color; } // 버튼 색 설정
 
-    public void showDialog(){
+    public void showDialog(){ // 다이얼로그 보이기
         AlertDialog dialog = this.create();
         dialog.setOnShowListener(arg0 -> {
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(this.color);

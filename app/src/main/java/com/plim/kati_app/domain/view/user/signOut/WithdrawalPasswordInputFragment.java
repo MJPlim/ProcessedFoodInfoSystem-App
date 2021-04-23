@@ -1,6 +1,5 @@
 package com.plim.kati_app.domain.view.user.signOut;
 
-import android.content.Intent;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
@@ -24,24 +23,26 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Withdrawal1Fragment extends AbstractFragment1 {
+import static com.plim.kati_app.constants.Constant_park.JSONOBJECT_ERROR_MESSAGE;
+import static com.plim.kati_app.constants.Constant_park.ROOM_AUTHORIZATION_KEY;
+
+public class WithdrawalPasswordInputFragment extends AbstractFragment1 {
 
     @Override
-    protected void initializeView() {
+    protected void initializeView() { // 뷰 초기화
         this.editText.setTransformationMethod(PasswordTransformationMethod.getInstance());
-        this.mainTextView.setText("비밀번호를 입력해주세요");
+        this.mainTextView.setText(this.getStringOfId(R.string.withdrawalPasswordInputFragment_mainTextView_inputPassword));
         this.subTextView.setVisibility(View.INVISIBLE);
-        this.editText.setHint("비밀번호");
-        this.button.setText("확인");
-
+        this.editText.setHint(this.getStringOfId(R.string.withdrawalPasswordInputFragment_editText_password));
+        this.button.setText(this.getStringOfId(R.string.common_ok));
     }
 
     @Override
     protected void buttonClicked() {
         this.signOut();
-    }
+    } // 버튼 눌리면 사인 아웃 실행
 
-    private void signOut() {
+    private void signOut() { // 서버로 사인 아웃 요청
         Thread thread = new Thread(() -> {
             // THIS IS TEST! Get Data From View Model
             Password password = new Password();
@@ -55,23 +56,21 @@ public class Withdrawal1Fragment extends AbstractFragment1 {
                 @Override
                 public void onResponse(Call<WithdrawResponse> call, Response<WithdrawResponse> response) {
                     if (!response.isSuccessful()) {
-                        Log.d("TEST123", response.code() + "");
                         try {
                             JSONObject jObjError = new JSONObject(response.errorBody().string());
-                            Toast.makeText(getContext(), jObjError.getString("error-message"), Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), jObjError.getString(JSONOBJECT_ERROR_MESSAGE), Toast.LENGTH_LONG).show();
                         } catch (Exception e) {
                             Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                         }
                     } else {
-                        Log.d("TEST123", response.code() + "Success");
                         getActivity().runOnUiThread(() ->showSignOutCompleteDialog());
-                       new Thread(()-> database.katiDataDao().delete("Authorization")).start();
+                       new Thread(()-> database.katiDataDao().delete(ROOM_AUTHORIZATION_KEY)).start();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<WithdrawResponse> call, Throwable t) {
-                    Log.d("회원탈퇴 실패! : 인터넷 연결을 확인해 주세요", t.getMessage());
+                    Log.d(getStringOfId(R.string.withdrawalPasswordInputFragment_log_pleaseCheckInternet), t.getMessage());
                 }
             });
         });
@@ -83,8 +82,8 @@ public class Withdrawal1Fragment extends AbstractFragment1 {
      */
     private void showSignOutCompleteDialog() {
         KatiDialog signOutCompleteDialog = new KatiDialog(getContext());
-        signOutCompleteDialog.setTitle("회원 탈퇴가 완료되었습니다.");
-        signOutCompleteDialog.setPositiveButton("확인", (dialog, which) -> {
+        signOutCompleteDialog.setTitle(this.getStringOfId(R.string.withdrawalPasswordInputFragment_dialogTitle_completed));
+        signOutCompleteDialog.setPositiveButton(this.getStringOfId(R.string.common_ok), (dialog, which) -> {
             RegisterActivityViewModel registerActivityViewModel = new ViewModelProvider(this.requireActivity()).get(RegisterActivityViewModel.class);
             registerActivityViewModel.getUser().setPassword(this.editText.getText().toString());
             Navigation.findNavController(this.getView()).navigate(R.id.action_withdrawalActivity_withdrawalfragment1_to_withdrawalActivity_withdrawalfragment2);

@@ -28,6 +28,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.plim.kati_app.constants.Constant_park.ROOM_AUTHORIZATION_KEY;
+
 public class TempActivity extends AppCompatActivity {
 
     // Associate
@@ -46,7 +48,7 @@ public class TempActivity extends AppCompatActivity {
         this.signOutButton.setOnClickListener(v->{
             new Thread(()->{
                 KatiDatabase database= KatiDatabase.getAppDatabase(this);
-                if(database.katiDataDao().getValue("Authorization")!=null) {
+                if(database.katiDataDao().getValue(ROOM_AUTHORIZATION_KEY)!=null) {
                     Intent intent = new Intent(TempActivity.this, NewWithdrawalActivity.class);
                     startActivity(intent);
                 }else{
@@ -56,11 +58,11 @@ public class TempActivity extends AppCompatActivity {
         });
     }
 
-    private void showNotLoginedDialog(){
-        Log.d("dd","모임");
+    private void showNotLoginedDialog(){ // 로그인 안 되어 있으면 경고 띄우기
+        String noLoginUser = this.getResources().getString(R.string.tempActivity_dialog_noLoginUser);
         KatiDialog.simpleAlertDialog(this,
-                "로그인 된 유저가 없습니다.",
-                "로그인 된 유저가 없습니다.",
+                noLoginUser,
+                noLoginUser,
                 (dialog, which)->{
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);

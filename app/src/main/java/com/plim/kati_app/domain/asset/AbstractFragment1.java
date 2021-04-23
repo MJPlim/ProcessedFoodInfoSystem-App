@@ -51,4 +51,8 @@ public abstract class AbstractFragment1 extends Fragment {
      * Button Callback
      */
     protected abstract void buttonClicked();
+
+    protected String getStringOfId(int id){
+        return this.getResources().getString(id);
+    }
 }

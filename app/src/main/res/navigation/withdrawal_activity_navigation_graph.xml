@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/withdrawalActivity_withdrawalfragment1"
-        android:name="com.plim.kati_app.domain.view.user.signOut.Withdrawal1Fragment"
+        android:name="com.plim.kati_app.domain.view.user.signOut.WithdrawalPasswordInputFragment"
         android:label="fragment_withdrawal1"
         tools:layout="@layout/abstract_layout_1" >
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/withdrawalActivity_withdrawalfragment2"
-        android:name="com.plim.kati_app.domain.view.user.signOut.Withdrawal2Fragment"
+        android:name="com.plim.kati_app.domain.view.user.signOut.WithdrawalResultFragment"
         android:label="fragment_withdrawal3"
         tools:layout="@layout/abstract_layout_1" />
 
