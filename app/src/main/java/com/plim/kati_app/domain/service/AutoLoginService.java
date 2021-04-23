@@ -55,7 +55,7 @@ public class AutoLoginService extends Service {
     public void autoLogin() {
         new Thread(() -> {
             KatiDatabase database = KatiDatabase.getAppDatabase(this);
-            if (database.katiDataDao().getValue(KatiDatabase.AUTO_LOGIN).equals("0")) {
+            if (database.katiDataDao().getValue(KatiDatabase.AUTO_LOGIN)==null||database.katiDataDao().getValue(KatiDatabase.AUTO_LOGIN).equals("0")) {
                 return;
             } else if (database.katiDataDao().getValue(KatiDatabase.AUTO_LOGIN).equals("1")) {
                 Log.d("자동로그인", "시작");
