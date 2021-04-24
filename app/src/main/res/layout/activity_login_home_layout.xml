@@ -3,52 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/loginActivity_logoImage"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="126dp"
+        android:layout_height="129dp"
         android:layout_marginTop="64dp"
-        android:src="@drawable/ic_baseline_android_24"
+        android:src="@drawable/plim_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/loginActivity_kakaoButton"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="40dp"
-        android:src="@drawable/ic_baseline_android_24"
-        android:tint="#FFEB3B"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginActivity_logoImage" />
-
-    <ImageButton
-        android:id="@+id/loginActivity_googleButton"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="100dp"
-        android:src="@drawable/ic_baseline_android_24"
-        android:tint="#E83131"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginActivity_logoImage" />
 
     <EditText
         android:id="@+id/loginActivity_idText"
         android:layout_width="299dp"
         android:layout_height="48dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/textview_border"
-        android:hint="  아이디 입력"
+        android:hint="@string/id_hint"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginActivity_kakaoButton" />
+        app:layout_constraintTop_toBottomOf="@+id/loginActivity_logoImage" />
 
     <EditText
         android:id="@+id/loginActivity_pwText"
@@ -56,8 +34,9 @@
         android:layout_height="48dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/textview_border"
+        android:hint="@string/pw_hint"
         android:inputType="textPassword"
-        android:hint="  비밀번호 입력"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,7 +48,7 @@
         android:layout_height="55dp"
         android:layout_marginTop="12dp"
         android:backgroundTint="@color/kati_red"
-        android:text="로그인"
+        android:text="@string/login_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginActivity_pwText" />
@@ -78,57 +57,83 @@
         android:id="@+id/loginActivity_idSaveCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="24dp"
-        android:text="아이디 저장"
-        app:layout_constraintStart_toStartOf="@+id/loginActivity_loginButton"
+        android:layout_marginTop="10dp"
+        android:text="@string/id_auto_save_checkbox"
+        app:layout_constraintEnd_toStartOf="@+id/loginActivity_autologinCheckBox"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginActivity_loginButton" />
 
     <CheckBox
         android:id="@+id/loginActivity_autologinCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:text="자동 로그인"
-        app:layout_constraintEnd_toEndOf="@+id/loginActivity_loginButton"
+        android:layout_marginTop="10dp"
+        android:text="@string/auto_login_checkbox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/loginActivity_idSaveCheckBox"
         app:layout_constraintTop_toBottomOf="@+id/loginActivity_loginButton" />
 
     <Button
         android:id="@+id/loginActivity_idFindButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:background="#00ff0000"
-        android:text="아이디 찾기"
+        android:text="@string/find_id_button"
         android:textColor="#000000"
-        app:iconTint="#F6F0F0"
-        app:layout_constraintStart_toStartOf="@+id/loginActivity_idSaveCheckBox"
+        app:layout_constraintEnd_toStartOf="@+id/loginActivity_pwFindButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginActivity_idSaveCheckBox" />
 
     <Button
         android:id="@+id/loginActivity_pwFindButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:background="#00ff0000"
-        android:text="비밀번호 찾기"
+        android:text="@string/find_pw_button"
         android:textColor="#000000"
-        app:iconTint="#F6F0F0"
-        app:layout_constraintEnd_toEndOf="@+id/loginActivity_autologinCheckBox"
-        app:layout_constraintTop_toBottomOf="@+id/loginActivity_idSaveCheckBox" />
+        app:layout_constraintEnd_toStartOf="@+id/loginActivity_accountCreateButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/loginActivity_idFindButton"
+        app:layout_constraintTop_toTopOf="@+id/loginActivity_idFindButton" />
 
     <Button
         android:id="@+id/loginActivity_accountCreateButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
         android:background="#00ff0000"
-        android:text="회원가입"
+        android:text="@string/singup_button"
         android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/loginActivity_pwFindButton"
+        app:layout_constraintTop_toTopOf="@+id/loginActivity_pwFindButton" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/kati_coral"
+        app:layout_constraintBottom_toTopOf="@+id/textView6"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/textView6"
+        android:layout_width="221dp"
+        android:layout_height="59dp"
+        android:layout_marginBottom="60dp"
+        android:backgroundTint="@color/kati_red"
+        android:padding="15dp"
+        android:text="@string/social_login"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

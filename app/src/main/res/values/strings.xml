@@ -4,6 +4,13 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="id_hint">아이디 입력</string>
     <string name="pw_hint">비밀번호 입력</string>
+    <string name="login_button">로그인</string>
+    <string name="id_auto_save_checkbox">아이디 저장</string>
+    <string name="auto_login_checkbox">자동 로그인</string>
+    <string name="find_id_button">아이디 찾기</string>
+    <string name="find_pw_button">비밀번호 찾기</string>
+    <string name="singup_button">회원가입</string>
+    <string name="social_login">소셜 계정으로 간편 로그인</string>
 
     <string name="button_ok">확인</string>
 
