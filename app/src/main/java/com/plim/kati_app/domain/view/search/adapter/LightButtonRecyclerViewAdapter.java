@@ -15,6 +15,9 @@ import com.plim.kati_app.R;
 
 import java.util.Vector;
 
+/**
+ * 밝은 색 버튼들로 이루어진 리사이클러 뷰의 어댑터.
+ */
 public class LightButtonRecyclerViewAdapter extends RecyclerView.Adapter {
 
     protected Vector<String> values;

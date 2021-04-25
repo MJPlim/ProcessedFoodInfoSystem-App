@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.plim.kati_app.R;
 import java.util.Vector;
 
+/**
+ * 추천 랭크를 보여주는 리사이클러뷰의 어댑터.
+ */
 public class RankRecyclerViewAdapter extends RecyclerView.Adapter {
 
     private Vector<String> recentValues;

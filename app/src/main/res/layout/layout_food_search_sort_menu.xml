@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="20dp"
-        android:text="정렬"
+        android:text="@string/foodSearchResultList_sortMenu_text"
         android:textColor="@color/black"
         android:textSize="18dp" />
 

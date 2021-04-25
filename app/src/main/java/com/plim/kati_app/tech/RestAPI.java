@@ -1,6 +1,6 @@
 package com.plim.kati_app.tech;
 
-import com.plim.kati_app.domain.model.FoodSearchListItem;
+import com.plim.kati_app.domain.model.FoodResponse;
 import com.plim.kati_app.domain.model.Password;
 import com.plim.kati_app.domain.model.SignUpResponse;
 import com.plim.kati_app.domain.model.User;
@@ -28,8 +28,9 @@ public interface RestAPI {
     Call<LoginRequest> postRetrofitData(@Body LoginRequest loginRequest);
 
     @GET("/api/v1/food/findFood/foodName")
-    Call<List<FoodSearchListItem>> getFoodListByProductName(@Header("Authorization") String header, @Query("foodName") String foodName, @Query("pageNo") String pageNo);
+    Call<List<FoodResponse>> getFoodListByProductName( @Query("foodName") String foodName);
 
-    @GET("/api/v1/food/findFood/bsshName")
-    Call<List<FoodSearchListItem>> getFoodListByCompanyName(@Header("Authorization") String header, @Query("bsshName") String bsshName, @Query("pageNo") String pageNo);
+    @GET("/api/v1/food/findFood/manufacturerName")
+    Call<List<FoodResponse>> getFoodListByCompanyName( @Query("manufacturerName") String bsshName);
+
 }

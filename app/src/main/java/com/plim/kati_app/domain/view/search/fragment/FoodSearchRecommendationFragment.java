@@ -21,6 +21,8 @@ import com.plim.kati_app.domain.view.search.adapter.RankRecyclerViewAdapter;
 
 import java.util.Vector;
 
+import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_RECOMMENDATION_FRAGMENT_BUNDLE_KEY;
+
 /**
  * 검색어 입력하는 중에 하단에 보여주는 검색 추천 프래그먼트
  */
@@ -77,6 +79,7 @@ public class FoodSearchRecommendationFragment extends Fragment {
      * @return 데이터가 담긴 벡터.
      */
     public Vector<String> getDatas() {
+        //임시 실제로는 이렇게 안하고 데이터베이스같은 곳에서 불러올 것이다.
         Vector<String> val = new Vector<>();
         val.add("새우깡");
         val.add("감자깡");
@@ -129,10 +132,9 @@ public class FoodSearchRecommendationFragment extends Fragment {
                 View.OnClickListener listener = new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Log.d("클릭","검색어 버튼 클릭됨");
                         Bundle text = new Bundle();
-                        text.putString("text", value);
-                        getActivity().getSupportFragmentManager().setFragmentResult("text", text);
+                        text.putString(FOOD_SEARCH_RECOMMENDATION_FRAGMENT_BUNDLE_KEY, value);
+                        getActivity().getSupportFragmentManager().setFragmentResult(FOOD_SEARCH_RECOMMENDATION_FRAGMENT_BUNDLE_KEY, text);
                     }
                 };
                 this.valueButton.setOnClickListener(listener);

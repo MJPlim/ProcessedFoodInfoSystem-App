@@ -7,11 +7,11 @@
     tools:context=".domain.view.MainActivity">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/mainActivity_tempTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
-        android:text="각자 화면 확인 버튼"
+        android:text="@string/mainActivity_tempTitleTextView_text"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,59 +19,52 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/registerTest"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="register"
-        android:layout_margin="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        tools:layout_editor_absoluteX="-16dp" />
+
 
     <Button
-        android:id="@+id/signOutTest"
+        android:id="@+id/mainActivity_signOutTestButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="signOut"
-        app:layout_constraintTop_toBottomOf="@+id/registerTest"
+        android:text="@string/mainActivity_signOutTestButton_text"
+        app:layout_constraintTop_toBottomOf="@+id/mainActivity_tempTitleTextView"
         tools:layout_editor_absoluteX="0dp" />
 
     <Button
-        android:id="@+id/loginTest"
+        android:id="@+id/mainActivity_loginTestButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:layout_marginTop="293dp"
-        android:text="Login"
-        app:layout_constraintTop_toBottomOf="@+id/signOutTest"
+        android:text="@string/mainActivity_loginTestButton_text"
+        app:layout_constraintTop_toBottomOf="@+id/mainActivity_signOutTestButton"
         tools:layout_editor_absoluteX="-48dp" />
 
     <Button
-        android:id="@+id/searchTest"
+        android:id="@+id/mainActivity_searchTestButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="SEARCH"
-        app:layout_constraintTop_toBottomOf="@+id/loginTest"
+        android:text="@string/mainActivity_searchTestButton_text"
+        app:layout_constraintTop_toBottomOf="@+id/mainActivity_loginTestButton"
         tools:layout_editor_absoluteX="16dp" />
 
     <Button
-        android:id="@+id/logOutTest"
+        android:id="@+id/mainActivity_logOutTestButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="LOGOUT"
-        app:layout_constraintTop_toBottomOf="@+id/searchTest"
+        android:text="@string/mainActivity_logOutTestButton_text"
+        app:layout_constraintTop_toBottomOf="@+id/mainActivity_searchTestButton"
         tools:layout_editor_absoluteX="24dp" />
 
     <Button
-        android:id="@+id/detailTest"
+        android:id="@+id/mainActivity_detailTestButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="DETAIL"
-        app:layout_constraintTop_toBottomOf="@+id/logOutTest"
+        android:text="@string/mainActivity_detailTestButton_text"
+        app:layout_constraintTop_toBottomOf="@+id/mainActivity_logOutTestButton"
         tools:layout_editor_absoluteX="24dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

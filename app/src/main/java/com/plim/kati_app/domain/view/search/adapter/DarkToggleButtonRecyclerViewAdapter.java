@@ -14,6 +14,9 @@ import com.plim.kati_app.R;
 
 import java.util.Vector;
 
+/**
+ * 어두운 색의 버튼들로 이루어진 리사이클러 뷰의 뷰 어댑터.
+ */
 public class DarkToggleButtonRecyclerViewAdapter extends LightButtonRecyclerViewAdapter {
 
     public DarkToggleButtonRecyclerViewAdapter(Vector<String> values){
@@ -56,7 +59,6 @@ public class DarkToggleButtonRecyclerViewAdapter extends LightButtonRecyclerView
             this.valueButton.setText(value);
             this.valueButton.setTextOff(value);
             this.valueButton.setTextOn(value);
-//            this.valueButton.setBackgroundResource(R.drawable.color_selecter_dark_toggle_button);
         }
     }
 }

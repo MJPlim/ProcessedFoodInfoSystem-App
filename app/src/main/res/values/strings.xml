@@ -55,6 +55,34 @@
     <string name="withdrawalPasswordInputFragment_log_pleaseCheckInternet">회원탈퇴 실패! : 인터넷 연결을 확인해 주세요</string>
     <string name="withdrawalResultFragment_subTextView_withdrawalOk">성공적으로 탈퇴하였습니다</string>
     <string name="withdrawalResultFragment_mainTextView_thankYou">그동안 고마웠어요!</string>
+
+
+    <!--    mainActivity-->
+    <string name="mainActivity_tempTitleTextView_text">각자 화면 확인 버튼</string>
+    <string name="mainActivity_registerTestButton_text">register</string>
+    <string name="mainActivity_signOutTestButton_text">withdrawal</string>
+    <string name="mainActivity_loginTestButton_text">login</string>
+    <string name="mainActivity_searchTestButton_text">search</string>
+    <string name="mainActivity_logOutTestButton_text">logout</string>
+    <string name="mainActivity_detailTestButton_text">detail</string>
+
+    <!--    loadingDialog-->
+    <string name="loadingDialog_textView_text">loading</string>
+
+    <string name="foodSearchList_premiumTextView_text1">프리미엄 제품</string>
+    <string name="foodSearchList_premiumTextView_text2">AD</string>
+
+    <string name="foodSearchResultList_sortMenu_text">정렬</string>
+
+    <string name="foodSearchFieldFragment_searchEditText_text">검색어를 입력하세요</string>
+
+    <string name ="foodItem_scoreTextView_text">4.5</string>
+    <string name ="foodItem_reviewCountTextView_text">(100+)</string>
+
+    <string name="searchFragment_allergyTextView_text">알레르기 필터</string>
+
+    <string name="tempActivity_withdrawalButton_text">회원 탈퇴</string>
+
 </resources>
 
 

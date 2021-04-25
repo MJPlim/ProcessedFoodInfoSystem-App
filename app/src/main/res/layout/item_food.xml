@@ -12,11 +12,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="음식 이름"
         android:textColor="@color/black"
         android:textSize="18dp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/imageView6"
+        app:layout_constraintStart_toEndOf="@+id/foodItem_foodImageView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
@@ -25,31 +24,31 @@
         android:layout_height="15dp"
         android:layout_marginTop="4dp"
         android:layout_marginStart="8dp"
-        app:layout_constraintStart_toEndOf="@+id/imageView6"
+        app:layout_constraintStart_toEndOf="@+id/foodItem_foodImageView"
         app:layout_constraintTop_toBottomOf="@+id/foodItem_companyName"
         app:srcCompat="@drawable/ic_baseline_star_24"
         app:tint="@color/teal_200" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/foodItem_scoreTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:text="4.7"
+        android:text="@string/foodItem_scoreTextView_text"
         android:textSize="12dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView4"
         app:layout_constraintStart_toEndOf="@+id/imageView4"
         app:layout_constraintTop_toTopOf="@+id/imageView4"  />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/foodItem_reviewCountTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="(1000+)"
+        android:text="foodItem_reviewCountTextView_text"
         android:textSize="12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView3"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toTopOf="@+id/textView3"/>
+        app:layout_constraintBottom_toBottomOf="@+id/foodItem_scoreTextView"
+        app:layout_constraintStart_toEndOf="@+id/foodItem_scoreTextView"
+        app:layout_constraintTop_toTopOf="@+id/foodItem_scoreTextView"/>
 
     <TextView
         android:id="@+id/foodItem_companyName"
@@ -57,13 +56,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
-        android:text="제조사"
         android:textSize="12dp"
-        app:layout_constraintStart_toEndOf="@+id/imageView6"
+        app:layout_constraintStart_toEndOf="@+id/foodItem_foodImageView"
         app:layout_constraintTop_toBottomOf="@+id/foodItem_productName" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/foodItem_foodImageView"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:background="@drawable/food_round_rect"
@@ -88,7 +86,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/kati_yellow"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6"
+        app:layout_constraintTop_toBottomOf="@+id/foodItem_foodImageView"
         android:layout_marginTop="10dp"
         tools:layout_editor_absoluteX="0dp" />
 

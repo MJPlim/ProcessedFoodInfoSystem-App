@@ -9,6 +9,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * 데이터 베이스 내의 테이블, kati_data.
+ */
 @Entity(tableName = "kati_data")
 @AllArgsConstructor
 @Getter

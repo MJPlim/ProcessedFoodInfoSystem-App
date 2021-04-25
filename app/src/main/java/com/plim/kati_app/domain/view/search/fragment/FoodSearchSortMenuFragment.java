@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.plim.kati_app.R;
+import com.plim.kati_app.constants.Constant_yun;
 import com.plim.kati_app.domain.view.search.adapter.LightButtonRecyclerViewAdapter;
 
 import java.util.Vector;
@@ -26,12 +27,12 @@ public class FoodSearchSortMenuFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        values= new Vector<>();
-        values.add("오름차순");
-        values.add("내림차순");
-        values.add("세부");
-        
-            this.foodSearchSortMenuRecyclerView = getView().findViewById(R.id.foodSearchSortMenuFragment_categoryDetailRecyclerView);
+        values = new Vector<>();
+        for (Constant_yun.ESortMode mode : Constant_yun.ESortMode.values()) {
+            values.add(mode.name());
+        }
+
+        this.foodSearchSortMenuRecyclerView = getView().findViewById(R.id.foodSearchSortMenuFragment_categoryDetailRecyclerView);
         this.foodSearchSortMenuRecyclerViewAdapter = new LightButtonRecyclerViewAdapter(this.values);
         this.foodSearchSortMenuRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false));
         this.foodSearchSortMenuRecyclerView.setAdapter(this.foodSearchSortMenuRecyclerViewAdapter);

@@ -7,11 +7,15 @@ import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.plim.kati_app.R;
+import com.plim.kati_app.constants.Constant_yun;
 import com.plim.kati_app.domain.model.room.KatiData;
 import com.plim.kati_app.domain.model.room.KatiDatabase;
 import com.plim.kati_app.domain.view.MainActivity;
 import com.plim.kati_app.domain.asset.KatiDialog;
 
+/**
+ * 로그아웃하는 액티비티.
+ */
 public class LogOutActivity extends AppCompatActivity {
     
     @Override
@@ -32,7 +36,7 @@ public class LogOutActivity extends AppCompatActivity {
                 database.katiDataDao().delete(KatiDatabase.AUTHORIZATION);
                 database.katiDataDao().delete(KatiDatabase.EMAIL);
                 database.katiDataDao().delete(KatiDatabase.PASSWORD);
-                database.katiDataDao().insert(new KatiData(KatiDatabase.AUTO_LOGIN,"0"));
+                database.katiDataDao().insert(new KatiData(KatiDatabase.AUTO_LOGIN,KatiDatabase.FALSE));
 
                 runOnUiThread(()->showOkDialog());
             //존재하지 않으면 로그인 되어 있지 않다고 알린다.
@@ -47,7 +51,8 @@ public class LogOutActivity extends AppCompatActivity {
      * 로그인 후 확인 다이얼로그.
      */
     public void showOkDialog(){
-        KatiDialog.simpleAlertDialog(this,"성공적으로 로그아웃하였습니다.","성공적으로 로그아웃하였습니다.",(dialog,which)->{
+        KatiDialog.simpleAlertDialog(this, Constant_yun.LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_TITLE,
+                Constant_yun.LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_MESSAGE,(dialog, which)->{
             Intent intent = new Intent(LogOutActivity.this, MainActivity.class);
             startActivity(intent);
         },this.getResources().getColor(R.color.kati_coral,this.getTheme())).showDialog();
@@ -57,7 +62,8 @@ public class LogOutActivity extends AppCompatActivity {
      * 로그인 되어 있지 않음 경고 다이얼로그
      */
     public void showNoDialog(){
-        KatiDialog.simpleAlertDialog(this,"로그인 되어 있지 않습니다.","로그인 되어 있지 않습니다.",(dialog,which)->{
+        KatiDialog.simpleAlertDialog(this,Constant_yun.LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_TITLE,
+                Constant_yun.LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_MESSAGE,(dialog,which)->{
             Intent intent = new Intent(LogOutActivity.this, MainActivity.class);
             startActivity(intent);
         },this.getResources().getColor(R.color.kati_coral,this.getTheme())).showDialog();

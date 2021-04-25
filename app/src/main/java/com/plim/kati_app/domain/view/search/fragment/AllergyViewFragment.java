@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.plim.kati_app.R;
+import com.plim.kati_app.constants.Constant_yun;
 
 import java.util.Vector;
 
@@ -48,14 +50,20 @@ public class AllergyViewFragment extends Fragment {
         for (String data : data) {
             TextView button = new TextView(view.getContext());
             button.setText(data);
-            button.setHeight(80);
-            button.setWidth(150);
+            button.setHeight(Constant_yun.ALLERGY_VIEW_FRAGMENT_BUTTON_ITEM_HEIGHT);
+            button.setWidth(Constant_yun.ALLERGY_VIEW_FRAGMENT_BUTTON_ITEM_WIDTH);
             button.setGravity(TextView.TEXT_ALIGNMENT_CENTER);
             button.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             button.setBackground(ContextCompat.getDrawable(view.getContext(), R.drawable.shape_light_button));
+
+
+
             newTableRow.addView(button);
         }
-        newTableRow.setPadding(30,30,30,30);
+        newTableRow.setPadding(Constant_yun.ALLERGY_VIEW_FRAGMENT_BUTTON_PADDING,
+                Constant_yun.ALLERGY_VIEW_FRAGMENT_BUTTON_PADDING,
+                Constant_yun.ALLERGY_VIEW_FRAGMENT_BUTTON_PADDING,
+                Constant_yun.ALLERGY_VIEW_FRAGMENT_BUTTON_PADDING);
         this.allergyTableRows.add(newTableRow);
 
         for(TableRow tableRow: allergyTableRows){

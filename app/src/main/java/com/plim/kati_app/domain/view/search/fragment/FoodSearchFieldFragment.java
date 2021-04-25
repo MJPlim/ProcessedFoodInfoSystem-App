@@ -22,7 +22,15 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.plim.kati_app.R;
+import com.plim.kati_app.constants.Constant_yun;
+
 import lombok.Getter;
+
+import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_INDEX;
+import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_KEY;
+import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_MODE;
+import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_TEXT;
+import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_RECOMMENDATION_FRAGMENT_BUNDLE_KEY;
 
 
 /**
@@ -82,31 +90,20 @@ public class FoodSearchFieldFragment extends Fragment {
                 }
 
             Bundle result = new Bundle();
-            result.putString("index",1+"");
-            result.putString("mode",searchModeSpinner.getSelectedItem().toString());
-            result.putString("text",this.searchEditText.getText().toString().replaceAll("[ ]", "_"));
-            this.getParentFragmentManager().setFragmentResult("result",result);
+            result.putString(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_INDEX,1+"");
+            result.putString(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_MODE,searchModeSpinner.getSelectedItem().toString());
+            result.putString(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_TEXT,this.searchEditText.getText().toString().replaceAll("[ ]", "_"));
+            this.getParentFragmentManager().setFragmentResult(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_KEY,result);
         }));
 
 
-        this.getActivity().getSupportFragmentManager().setFragmentResultListener("text", getActivity(), ((requestKey, result) -> {
-            this.searchEditText.setText(result.getString("text"));
+        this.getActivity().getSupportFragmentManager().setFragmentResultListener(FOOD_SEARCH_RECOMMENDATION_FRAGMENT_BUNDLE_KEY, getActivity(), ((requestKey, result) -> {
+            this.searchEditText.setText(result.getString(FOOD_SEARCH_RECOMMENDATION_FRAGMENT_BUNDLE_KEY));
         }));
 
     }
 
-    /**
-     * 검색모드
-     */
-    @Getter
-    public enum ESearchMode {
-        제품("foodName"), 회사("bsshName");
-        private String mappingName;
 
-        ESearchMode(String string) {
-            this.mappingName = string;
-        }
-    }
 
 
 }

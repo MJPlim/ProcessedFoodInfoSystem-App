@@ -12,14 +12,17 @@
         android:orientation="vertical">
 
         <ProgressBar
-            android:layout_width="100sp"
-            android:layout_height="100sp"
+            android:id="@+id/loadingDialog_progressBar"
+            android:indeterminateTint="@color/kati_orange"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_gravity="center" />
 
         <TextView
+            android:id="@+id/loadingDialog_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Loading"
+            android:text="@string/loadingDialog_textView_text"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
     </LinearLayout>
 

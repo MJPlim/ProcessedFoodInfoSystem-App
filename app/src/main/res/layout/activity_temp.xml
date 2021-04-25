@@ -9,10 +9,10 @@
 
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/tempActivity_withdrawalButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="회원 탈퇴"
+        android:text="@string/tempActivity_withdrawalButton_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -10,6 +10,5 @@
         android:layout_height="35dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/shape_light_button"
-        android:text="아이템"
         android:textColor="@color/black" />
 </LinearLayout>
