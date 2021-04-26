@@ -116,16 +116,17 @@
         android:id="@+id/view2"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_marginBottom="20dp"
         android:background="@color/kati_coral"
         app:layout_constraintBottom_toTopOf="@+id/textView6"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginActivity_idFindButton" />
 
     <Button
         android:id="@+id/textView6"
         android:layout_width="221dp"
         android:layout_height="59dp"
-        android:layout_marginBottom="60dp"
         android:backgroundTint="@color/kati_red"
         android:padding="15dp"
         android:text="@string/social_login"
@@ -133,7 +134,8 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
