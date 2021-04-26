@@ -9,6 +9,7 @@ import com.plim.kati_app.domain.asset.KatiDialog;
 import com.plim.kati_app.domain.service.AutoLoginService;
 import com.plim.kati_app.domain.view.search.food.list.FoodSearchActivity;
 import com.plim.kati_app.domain.view.search.food.detail.DetailActivity;
+import com.plim.kati_app.domain.view.user.changePW.ChangePasswordActivity;
 import com.plim.kati_app.domain.view.user.logOut.LogOutActivity;
 import com.plim.kati_app.domain.view.user.login.LoginActivity;
 import com.plim.kati_app.domain.view.user.signOut.TempActivity;
@@ -27,10 +28,10 @@ public class MainActivity extends AppCompatActivity { // a test
         setContentView(R.layout.activity_main);
 
         //set view
-        this.findViewById(R.id.mainActivity_signOutTestButton).setOnClickListener(v -> this.startActivity(new Intent(this, TempActivity.class)));
+        this.findViewById(R.id.mainActivity_tempButton).setOnClickListener(v -> this.startActivity(new Intent(this, TempActivity.class)));
         this.findViewById(R.id.mainActivity_loginTestButton).setOnClickListener(v -> this.startActivity(new Intent(this, LoginActivity.class)));
         this.findViewById(R.id.mainActivity_searchTestButton).setOnClickListener(v -> this.startActivity(new Intent(this, FoodSearchActivity.class)));
-        this.findViewById(R.id.mainActivity_logOutTestButton).setOnClickListener(v -> this.startActivity(new Intent(this, LogOutActivity.class)));
+        this.findViewById(R.id.mainActivity_changePWButton).setOnClickListener(v -> this.startActivity(new Intent(this, ChangePasswordActivity.class)));
         this.findViewById(R.id.mainActivity_detailTestButton).setOnClickListener(v -> this.startActivity(new Intent(this, DetailActivity.class)));
 
         //start AutoLogin service

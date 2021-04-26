@@ -63,11 +63,12 @@
     <!--    mainActivity-->
     <string name="mainActivity_tempTitleTextView_text">각자 화면 확인 버튼</string>
     <string name="mainActivity_registerTestButton_text">register</string>
-    <string name="mainActivity_signOutTestButton_text">withdrawal</string>
+    <string name="mainActivity_tempButton_text">Temp</string>
     <string name="mainActivity_loginTestButton_text">login</string>
     <string name="mainActivity_searchTestButton_text">search</string>
     <string name="mainActivity_logOutTestButton_text">logout</string>
     <string name="mainActivity_detailTestButton_text">detail</string>
+<string name="mainActivity_changePWButton_text">changePW</string>
 
     <!--    loadingDialog-->
     <string name="loadingDialog_textView_text">loading</string>

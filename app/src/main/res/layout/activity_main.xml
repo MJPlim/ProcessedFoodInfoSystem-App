@@ -22,11 +22,11 @@
 
 
     <Button
-        android:id="@+id/mainActivity_signOutTestButton"
+        android:id="@+id/mainActivity_tempButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="@string/mainActivity_signOutTestButton_text"
+        android:text="@string/mainActivity_tempButton_text"
         app:layout_constraintTop_toBottomOf="@+id/mainActivity_tempTitleTextView"
         tools:layout_editor_absoluteX="0dp" />
 
@@ -37,7 +37,7 @@
         android:layout_margin="20dp"
         android:layout_marginTop="293dp"
         android:text="@string/mainActivity_loginTestButton_text"
-        app:layout_constraintTop_toBottomOf="@+id/mainActivity_signOutTestButton"
+        app:layout_constraintTop_toBottomOf="@+id/mainActivity_tempButton"
         tools:layout_editor_absoluteX="-48dp" />
 
     <Button
@@ -50,11 +50,11 @@
         tools:layout_editor_absoluteX="16dp" />
 
     <Button
-        android:id="@+id/mainActivity_logOutTestButton"
+        android:id="@+id/mainActivity_changePWButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="@string/mainActivity_logOutTestButton_text"
+        android:text="@string/mainActivity_changePWButton_text"
         app:layout_constraintTop_toBottomOf="@+id/mainActivity_searchTestButton"
         tools:layout_editor_absoluteX="24dp" />
 
@@ -64,7 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:text="@string/mainActivity_detailTestButton_text"
-        app:layout_constraintTop_toBottomOf="@+id/mainActivity_logOutTestButton"
+        app:layout_constraintTop_toBottomOf="@+id/mainActivity_changePWButton"
         tools:layout_editor_absoluteX="24dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
