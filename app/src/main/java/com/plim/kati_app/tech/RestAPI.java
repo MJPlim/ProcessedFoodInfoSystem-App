@@ -1,5 +1,7 @@
 package com.plim.kati_app.tech;
 
+import com.plim.kati_app.domain.model.FindPasswordRequest;
+import com.plim.kati_app.domain.model.FindPasswordResponse;
 import com.plim.kati_app.domain.model.FoodResponse;
 import com.plim.kati_app.domain.model.Password;
 import com.plim.kati_app.domain.model.SignUpResponse;
@@ -23,6 +25,10 @@ public interface RestAPI {
 
     @POST("withdraw")
     Call<WithdrawResponse> withdraw(@Body Password user);
+
+    @POST("find-password")
+    Call<FindPasswordResponse> findPassword(@Body FindPasswordRequest request);
+
 
     @POST("login")
     Call<LoginRequest> postRetrofitData(@Body LoginRequest loginRequest);

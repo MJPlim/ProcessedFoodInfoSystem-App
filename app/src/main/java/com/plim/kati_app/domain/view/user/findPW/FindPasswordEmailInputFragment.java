@@ -1,17 +1,44 @@
 package com.plim.kati_app.domain.view.user.findPW;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.navigation.Navigation;
 
 import com.plim.kati_app.R;
+import com.plim.kati_app.constants.Constant;
+import com.plim.kati_app.constants.Constant_yun;
 import com.plim.kati_app.domain.asset.AbstractFragment1;
 import com.plim.kati_app.domain.asset.KatiDialog;
+import com.plim.kati_app.domain.asset.LoadingDialog;
+import com.plim.kati_app.domain.model.FindPasswordRequest;
+import com.plim.kati_app.domain.model.FindPasswordResponse;
+import com.plim.kati_app.domain.model.FoodResponse;
+import com.plim.kati_app.domain.model.Password;
+import com.plim.kati_app.domain.model.WithdrawResponse;
 import com.plim.kati_app.domain.model.room.KatiDatabase;
 import com.plim.kati_app.domain.view.MainActivity;
+import com.plim.kati_app.tech.RestAPI;
+import com.plim.kati_app.tech.RestAPIClient;
+
+import org.json.JSONObject;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+import static com.plim.kati_app.constants.Constant_park.JSONOBJECT_ERROR_MESSAGE;
+import static com.plim.kati_app.constants.Constant_park.ROOM_AUTHORIZATION_KEY;
 
 public class FindPasswordEmailInputFragment extends AbstractFragment1 {
+
+    private LoadingDialog loadingDialog;
 
     @Override
     protected void initializeView() {
@@ -42,12 +69,45 @@ public class FindPasswordEmailInputFragment extends AbstractFragment1 {
 
     @Override
     protected void buttonClicked() {
-        this.showCompletedDialog();
-        // 서버로 요청
-        // 잘되면
-        // this.showNoUserDialog();
-        // 안되면
-        // this.showCompletedDialog();
+        if(this.loadingDialog==null)    this.loadingDialog=new LoadingDialog(this.getContext());
+        Thread thread = new Thread(() -> {
+            getActivity().runOnUiThread(()->{loadingDialog.show();});
+
+            // THIS IS TEST! Get Data From View Model
+            FindPasswordRequest request= new FindPasswordRequest();
+            request.setEmail(this.editText.getText().toString());
+
+            KatiDatabase database = KatiDatabase.getAppDatabase(getContext());
+            String token = database.katiDataDao().getValue(KatiDatabase.AUTHORIZATION);
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .baseUrl(Constant.URL)
+                    .build();
+            RestAPI service = retrofit.create(RestAPI.class);
+            Call<FindPasswordResponse> listCall=service.findPassword(request);
+            listCall.enqueue(new Callback<FindPasswordResponse>() {
+                @Override
+                public void onResponse(Call<FindPasswordResponse> call, Response<FindPasswordResponse> response) {
+                    getActivity().runOnUiThread(()->{loadingDialog.hide();});
+                    if (!response.isSuccessful()) {
+                            showNoUserDialog();
+                    } else {
+                        FindPasswordResponse result = response.body();
+                        Log.d("디버그","연결 성공"+result.getEmail());
+                        getActivity().runOnUiThread(() ->showCompletedDialog());
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<FindPasswordResponse> call, Throwable t) {
+                    getActivity().runOnUiThread(()->{loadingDialog.hide();});
+                    Log.d(getStringOfId(R.string.withdrawalPasswordInputFragment_log_pleaseCheckInternet), t.getMessage());
+
+                }
+            });
+        });
+        thread.start();
     }
 
     private void showNoUserDialog() {
