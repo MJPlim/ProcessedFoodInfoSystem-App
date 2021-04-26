@@ -1,8 +1,7 @@
-package com.plim.kati_app.domain.view.search.fragment;
+package com.plim.kati_app.domain.view.search.food.list.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +22,7 @@ import com.plim.kati_app.domain.asset.LoadingDialog;
 import com.plim.kati_app.domain.model.FoodResponse;
 import com.plim.kati_app.domain.model.room.KatiData;
 import com.plim.kati_app.domain.model.room.KatiDatabase;
-import com.plim.kati_app.domain.view.search.adapter.FoodInfoRecyclerViewAdapter;
+import com.plim.kati_app.domain.view.search.food.list.adapter.FoodInfoRecyclerViewAdapter;
 import com.plim.kati_app.tech.GlideApp;
 import com.plim.kati_app.tech.RestAPI;
 
@@ -38,6 +37,10 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_INDEX;
+import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_KEY;
+import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_MODE;
+import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_TEXT;
 import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE;
 
 /**
@@ -81,10 +84,10 @@ public class FoodSearchResultListFragment extends Fragment {
         this.adFoodInfoRecyclerView.setAdapter(new FoodInfoRecyclerViewAdapter(1));
 
 
-        this.getActivity().getSupportFragmentManager().setFragmentResultListener("result", getActivity(), new FragmentResultListener() {
+        this.getActivity().getSupportFragmentManager().setFragmentResultListener(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_KEY, getActivity(), new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                set(Integer.parseInt(result.getString("index")), result.getString("mode"), result.getString("text"));
+                set(Integer.parseInt(result.getString(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_INDEX)), result.getString(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_MODE), result.getString(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_TEXT));
             }
         });
     }
@@ -133,7 +136,6 @@ public class FoodSearchResultListFragment extends Fragment {
             listCall.enqueue(new Callback<List<FoodResponse>>() {
                 @Override
                 public void onResponse(Call<List<FoodResponse>> call, Response<List<FoodResponse>> response) {
-                    Log.d("response", response.code() + "");
                     Vector<FoodResponse> items = new Vector<>(response.body());
                     new Thread(() ->
                             database.katiDataDao().insert(new KatiData(KatiDatabase.AUTHORIZATION, response.headers().get(KatiDatabase.AUTHORIZATION)))).start();
@@ -147,7 +149,6 @@ public class FoodSearchResultListFragment extends Fragment {
 
                 @Override
                 public void onFailure(Call<List<FoodResponse>> call, Throwable t) {
-                    Log.d("failure", "실패실패");
                     getActivity().runOnUiThread(() -> {
                         dialog.hide();
                     });
@@ -186,9 +187,7 @@ public class FoodSearchResultListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-            if (items == null) Log.d("이상타", "배열이 널임");
             FoodResponse item = items.get(position);
-            if (item == null) Log.d("이상타", "아이템이 널임");
             ((RecyclerViewViewHolder) holder).setValue(item);
         }
 
@@ -226,12 +225,16 @@ public class FoodSearchResultListFragment extends Fragment {
 
             public void setValue(@NotNull FoodResponse item) {
 
+//                Log.d("이미지 주소",item.getFoodImageAddress());
                 GlideApp.with(getContext()).load(item.getFoodImageAddress()).into(imageView);
+
+
                 this.productName.setText(item.getFoodName());
                 this.companyName.setText(item.getManufacturerName());
             }
         }
     }
+
 
 
 }

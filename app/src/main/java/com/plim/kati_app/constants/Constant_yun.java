@@ -23,6 +23,16 @@ public class Constant_yun {
     public static final String LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_MESSAGE = "성공적으로 로그아웃하였습니다.";
     public static final String LOG_OUT_ACTIVITY_FAILURE_DIALOG_TITLE = "로그인 되어 있지 않습니다.";
     public static final String LOG_OUT_ACTIVITY_FAILURE_DIALOG_MESSAGE = "로그인 되어 있지 않습니다.";
+    public static final String FIND_USER_PASSWORD_DIALOG_TITLE="임시 비밀번호가 발급되었습니다.";
+    public static final String FIND_USER_PASSWORD_DIALOG_MESSAGE="메일함에서 임시 비밀번호 메일을 확인해 주세요.";
+
+    //findPasswordActivity
+    public static final String LOGINED_DIALOG_TITLE="이미 로그인 된 상태입니다.";
+    public static final String NO_USER_DIALOG_TITLE="해당하는 유저가 없습니다.";
+    public static final String NO_USER_DIALOG_MESSAGE="잘못 입력하였거나 해당하는 유저를 찾을 수 없습니다.";
+    public static final String DIALOG_CONFIRM="확인";
+    public static final String EMAIL_INPUT_MESSAGE="이메일을 입력해주세요";
+    public static final String EMAIL_INPUT_HINT="example@plim.com";
 
 
     //allergyViewFragment

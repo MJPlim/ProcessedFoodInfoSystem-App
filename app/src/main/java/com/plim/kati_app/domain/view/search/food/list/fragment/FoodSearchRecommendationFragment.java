@@ -1,4 +1,4 @@
-package com.plim.kati_app.domain.view.search.fragment;
+package com.plim.kati_app.domain.view.search.food.list.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,15 +9,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.plim.kati_app.R;
-import com.plim.kati_app.domain.view.search.adapter.LightButtonRecyclerViewAdapter;
-import com.plim.kati_app.domain.view.search.adapter.RankRecyclerViewAdapter;
+import com.plim.kati_app.domain.view.search.food.list.adapter.LightButtonRecyclerViewAdapter;
+import com.plim.kati_app.domain.view.search.food.list.adapter.RankRecyclerViewAdapter;
 
 import java.util.Vector;
 

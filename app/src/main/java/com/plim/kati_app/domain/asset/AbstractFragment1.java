@@ -25,7 +25,7 @@ public abstract class AbstractFragment1 extends Fragment {
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.abstract_layout_1, container, false);
+        return inflater.inflate(R.layout.abstract_layout, container, false);
     }
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {

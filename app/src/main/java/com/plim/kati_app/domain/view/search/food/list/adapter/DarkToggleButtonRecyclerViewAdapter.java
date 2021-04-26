@@ -1,12 +1,11 @@
-package com.plim.kati_app.domain.view.search.adapter;
+package com.plim.kati_app.domain.view.search.food.list.adapter;
 
 
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,18 +15,12 @@ import com.plim.kati_app.R;
 import java.util.Vector;
 
 /**
- * 밝은 색 버튼들로 이루어진 리사이클러 뷰의 어댑터.
+ * 어두운 색의 버튼들로 이루어진 리사이클러 뷰의 뷰 어댑터.
  */
-public class LightButtonRecyclerViewAdapter extends RecyclerView.Adapter {
+public class DarkToggleButtonRecyclerViewAdapter extends LightButtonRecyclerViewAdapter {
 
-    protected Vector<String> values;
-
-    public LightButtonRecyclerViewAdapter(Vector<String> values){
-        //create component
-        this.values= new Vector<>();
-
-        //set components
-        this.values.addAll(values);
+    public DarkToggleButtonRecyclerViewAdapter(Vector<String> values){
+        super(values);
     }
 
     @NonNull
@@ -35,16 +28,16 @@ public class LightButtonRecyclerViewAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context= parent.getContext();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.item_light_button,parent,false);
-        ButtonRecyclerviewViewHolder lightButtonRecyclerviewViewHolder= new ButtonRecyclerviewViewHolder(view);
+        View view = inflater.inflate(R.layout.item_dark_button,parent,false);
+        ToggleButtonRecyclerviewViewHolder toggleButtonRecyclerviewViewHolder = new ToggleButtonRecyclerviewViewHolder(view);
 
-        return lightButtonRecyclerviewViewHolder;
+        return toggleButtonRecyclerviewViewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         String value=this.values.get(position);
-        ((ButtonRecyclerviewViewHolder)holder).setValueButton(value);
+        ((ToggleButtonRecyclerviewViewHolder)holder).setValueButton(value);
     }
 
     @Override
@@ -55,15 +48,17 @@ public class LightButtonRecyclerViewAdapter extends RecyclerView.Adapter {
     /**
      * 뷰 홀더
      */
-    private class ButtonRecyclerviewViewHolder extends RecyclerView.ViewHolder{
-        protected Button valueButton;
+    private class ToggleButtonRecyclerviewViewHolder extends RecyclerView.ViewHolder{
+        private ToggleButton valueButton;
 
-        public ButtonRecyclerviewViewHolder(@NonNull View itemView) {
+        public ToggleButtonRecyclerviewViewHolder(@NonNull View itemView) {
             super(itemView);
             this.valueButton=itemView.findViewById(R.id.item_button);
         }
         public void setValueButton(String value){
             this.valueButton.setText(value);
+            this.valueButton.setTextOff(value);
+            this.valueButton.setTextOn(value);
         }
     }
 }

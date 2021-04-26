@@ -1,31 +1,20 @@
 package com.plim.kati_app.domain.view.user.findPW;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.navigation.Navigation;
 
 import com.plim.kati_app.R;
 import com.plim.kati_app.constants.Constant;
-import com.plim.kati_app.constants.Constant_yun;
 import com.plim.kati_app.domain.asset.AbstractFragment1;
 import com.plim.kati_app.domain.asset.KatiDialog;
 import com.plim.kati_app.domain.asset.LoadingDialog;
 import com.plim.kati_app.domain.model.FindPasswordRequest;
 import com.plim.kati_app.domain.model.FindPasswordResponse;
-import com.plim.kati_app.domain.model.FoodResponse;
-import com.plim.kati_app.domain.model.Password;
-import com.plim.kati_app.domain.model.WithdrawResponse;
 import com.plim.kati_app.domain.model.room.KatiDatabase;
 import com.plim.kati_app.domain.view.MainActivity;
 import com.plim.kati_app.tech.RestAPI;
-import com.plim.kati_app.tech.RestAPIClient;
-
-import org.json.JSONObject;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,8 +22,14 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.plim.kati_app.constants.Constant_park.JSONOBJECT_ERROR_MESSAGE;
-import static com.plim.kati_app.constants.Constant_park.ROOM_AUTHORIZATION_KEY;
+import static com.plim.kati_app.constants.Constant_yun.DIALOG_CONFIRM;
+import static com.plim.kati_app.constants.Constant_yun.EMAIL_INPUT_HINT;
+import static com.plim.kati_app.constants.Constant_yun.EMAIL_INPUT_MESSAGE;
+import static com.plim.kati_app.constants.Constant_yun.FIND_USER_PASSWORD_DIALOG_MESSAGE;
+import static com.plim.kati_app.constants.Constant_yun.FIND_USER_PASSWORD_DIALOG_TITLE;
+import static com.plim.kati_app.constants.Constant_yun.LOGINED_DIALOG_TITLE;
+import static com.plim.kati_app.constants.Constant_yun.NO_USER_DIALOG_MESSAGE;
+import static com.plim.kati_app.constants.Constant_yun.NO_USER_DIALOG_TITLE;
 
 public class FindPasswordEmailInputFragment extends AbstractFragment1 {
 
@@ -42,10 +37,10 @@ public class FindPasswordEmailInputFragment extends AbstractFragment1 {
 
     @Override
     protected void initializeView() {
-        this.mainTextView.setText("이메일을 입력해주세요");
+        this.mainTextView.setText(EMAIL_INPUT_MESSAGE);
         this.subTextView.setVisibility(View.INVISIBLE);
-        this.editText.setHint("example@plim.com");
-        this.button.setText("확인");
+        this.editText.setHint(EMAIL_INPUT_HINT);
+        this.button.setText(DIALOG_CONFIRM);
     }
 
     @Override
@@ -61,8 +56,8 @@ public class FindPasswordEmailInputFragment extends AbstractFragment1 {
 
     private void showNotLoginedDialog() {
         KatiDialog.simpleAlertDialog(getContext(),
-                "이미 로그인 된 상태입니다.",
-                "이미 로그인 된 상태입니다.",
+                LOGINED_DIALOG_TITLE,
+                LOGINED_DIALOG_TITLE,
                 (dialog, which) -> { Intent intent = new Intent(getActivity(), MainActivity.class);startActivity(intent);
                 }, getResources().getColor(R.color.kati_coral, getContext().getTheme())).showDialog();
     }
@@ -94,7 +89,7 @@ public class FindPasswordEmailInputFragment extends AbstractFragment1 {
                             showNoUserDialog();
                     } else {
                         FindPasswordResponse result = response.body();
-                        Log.d("디버그","연결 성공"+result.getEmail());
+//                        Log.d("디버그","연결 성공"+result.getEmail());
                         getActivity().runOnUiThread(() ->showCompletedDialog());
                     }
                 }
@@ -102,7 +97,7 @@ public class FindPasswordEmailInputFragment extends AbstractFragment1 {
                 @Override
                 public void onFailure(Call<FindPasswordResponse> call, Throwable t) {
                     getActivity().runOnUiThread(()->{loadingDialog.hide();});
-                    Log.d(getStringOfId(R.string.withdrawalPasswordInputFragment_log_pleaseCheckInternet), t.getMessage());
+//                    Log.d(getStringOfId(R.string.withdrawalPasswordInputFragment_log_pleaseCheckInternet), t.getMessage());
 
                 }
             });
@@ -112,18 +107,18 @@ public class FindPasswordEmailInputFragment extends AbstractFragment1 {
 
     private void showNoUserDialog() {
         KatiDialog signOutAskDialog = new KatiDialog(this.getContext());
-        signOutAskDialog.setTitle("해당하는 유저가 없습니다.");
-        signOutAskDialog.setMessage("잘못 입력하였거나 해당하는 유저를 찾을 수 없습니다.");
-        signOutAskDialog.setPositiveButton("확인", null);
+        signOutAskDialog.setTitle(NO_USER_DIALOG_TITLE);
+        signOutAskDialog.setMessage(NO_USER_DIALOG_MESSAGE);
+        signOutAskDialog.setPositiveButton(DIALOG_CONFIRM, null);
         signOutAskDialog.setColor(this.getResources().getColor(R.color.kati_coral, this.getActivity().getTheme()));
         signOutAskDialog.showDialog();
     }
 
     private void showCompletedDialog() {
         KatiDialog signOutAskDialog = new KatiDialog(this.getContext());
-        signOutAskDialog.setTitle("임시 비밀번호가 발급되었습니다.");
-        signOutAskDialog.setMessage("메일함에서 임시 비밀번호 메일을 확인해 주세요.");
-        signOutAskDialog.setPositiveButton("예", (dialog, which) -> Navigation.findNavController(this.getView()).navigate(R.id.action_findPasswordEmailInputFragment_to_findPasswordResultFragment));
+        signOutAskDialog.setTitle(FIND_USER_PASSWORD_DIALOG_TITLE);
+        signOutAskDialog.setMessage(FIND_USER_PASSWORD_DIALOG_MESSAGE);
+        signOutAskDialog.setPositiveButton(DIALOG_CONFIRM, (dialog, which) -> Navigation.findNavController(this.getView()).navigate(R.id.action_findPasswordEmailInputFragment_to_findPasswordResultFragment));
         signOutAskDialog.setColor(this.getResources().getColor(R.color.kati_coral, this.getActivity().getTheme()));
         signOutAskDialog.showDialog();
     }

@@ -1,4 +1,4 @@
-package com.plim.kati_app.domain.view.user.detail;
+package com.plim.kati_app.domain.view.search.food.detail;
 
 import android.content.Intent;
 import android.os.Bundle;

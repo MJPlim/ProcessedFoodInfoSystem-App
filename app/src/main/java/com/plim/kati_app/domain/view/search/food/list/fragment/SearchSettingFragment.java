@@ -1,4 +1,4 @@
-package com.plim.kati_app.domain.view.search.fragment;
+package com.plim.kati_app.domain.view.search.food.list.fragment;
 
 import android.os.Bundle;
 
@@ -19,8 +19,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.plim.kati_app.R;
 import com.plim.kati_app.constants.Constant_yun;
 import com.plim.kati_app.domain.asset.BlankFragment;
-import com.plim.kati_app.domain.asset.LoadingDialog;
-import com.plim.kati_app.domain.view.search.adapter.SortButtonRecyclerViewAdapter;
+import com.plim.kati_app.domain.view.search.food.list.adapter.SortButtonRecyclerViewAdapter;
 
 import java.util.Vector;
 

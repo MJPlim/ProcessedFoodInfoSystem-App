@@ -10,7 +10,7 @@
         android:name="com.plim.kati_app.domain.view.user.register.RegisterEmailFragment"
 
         android:label="fragment_register1"
-        tools:layout="@layout/abstract_layout_1" >
+        tools:layout="@layout/abstract_layout" >
         <action
             android:id="@+id/action_register1Fragment_to_register2Fragment"
             app:destination="@id/register2Fragment" />
@@ -20,7 +20,7 @@
         android:name="com.plim.kati_app.domain.view.user.register.RegisterPasswordFragment"
 
         android:label="fragment_register2"
-        tools:layout="@layout/abstract_layout_1" >
+        tools:layout="@layout/abstract_layout" >
         <action
             android:id="@+id/action_register2Fragment_to_register3Fragment"
             app:destination="@id/register3Fragment" />
@@ -29,7 +29,7 @@
         android:id="@+id/register3Fragment"
         android:name="com.plim.kati_app.domain.view.user.register.RegisterNameFragment"
         android:label="fragment_register3"
-        tools:layout="@layout/abstract_layout_1" >
+        tools:layout="@layout/abstract_layout" >
         <action
             android:id="@+id/action_register3Fragment_to_registerFinishedFragment"
             app:destination="@id/registerFinishedFragment" />
@@ -38,7 +38,7 @@
         android:id="@+id/registerFinishedFragment"
         android:name="com.plim.kati_app.domain.view.user.register.RegisterFinishedFragment"
         android:label="fragment_register_finished"
-        tools:layout="@layout/abstract_layout_1" >
+        tools:layout="@layout/abstract_layout" >
         <argument
             android:name="userName"
             app:argType="string" />

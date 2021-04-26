@@ -56,6 +56,9 @@
     <string name="withdrawalResultFragment_subTextView_withdrawalOk">성공적으로 탈퇴하였습니다</string>
     <string name="withdrawalResultFragment_mainTextView_thankYou">그동안 고마웠어요!</string>
 
+    <string name="foodItem_productName_text">아이템 이름</string>
+    <string name="foodItem_companyName_text">회사 이름</string>
+
 
     <!--    mainActivity-->
     <string name="mainActivity_tempTitleTextView_text">각자 화면 확인 버튼</string>
@@ -76,13 +79,16 @@
 
     <string name="foodSearchFieldFragment_searchEditText_text">검색어를 입력하세요</string>
 
-    <string name ="foodItem_scoreTextView_text">4.5</string>
-    <string name ="foodItem_reviewCountTextView_text">(100+)</string>
+    <string name="foodItem_scoreTextView_text">4.5</string>
+    <string name="foodItem_reviewCountTextView_text">(100+)</string>
 
     <string name="searchFragment_allergyTextView_text">알레르기 필터</string>
 
     <string name="tempActivity_withdrawalButton_text">회원 탈퇴</string>
+    <string name="tempActivity_logOutButton_text">로그아웃</string>
 
+
+    <string name="tempActivity_mapButton_text">위치 정보</string>
 </resources>
 
 

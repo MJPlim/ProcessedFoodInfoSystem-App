@@ -1,4 +1,4 @@
-package com.plim.kati_app.domain.view.search.fragment;
+package com.plim.kati_app.domain.view.search.food.list.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.plim.kati_app.R;
-import com.plim.kati_app.domain.view.search.adapter.DarkToggleButtonRecyclerViewAdapter;
+import com.plim.kati_app.domain.view.search.food.list.adapter.DarkToggleButtonRecyclerViewAdapter;
 
 import java.util.Vector;
 

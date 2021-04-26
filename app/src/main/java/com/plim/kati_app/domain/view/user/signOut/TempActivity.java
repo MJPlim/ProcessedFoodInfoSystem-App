@@ -10,14 +10,20 @@ import com.plim.kati_app.R;
 import com.plim.kati_app.domain.asset.KatiDialog;
 import com.plim.kati_app.domain.model.room.KatiDatabase;
 import com.plim.kati_app.domain.view.MainActivity;
+import com.plim.kati_app.domain.view.search.map.MapServiceActivity;
+import com.plim.kati_app.domain.view.user.logOut.LogOutActivity;
 
-import static com.plim.kati_app.constants.Constant_park.ROOM_AUTHORIZATION_KEY;
+import static com.plim.kati_app.constants.Constant_jung.ROOM_AUTHORIZATION_KEY;
 
 public class TempActivity extends AppCompatActivity {
 
     // Associate
         // View
         private Button signOutButton;
+
+        private Button logOutButton;
+
+        private Button mapButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,22 +32,36 @@ public class TempActivity extends AppCompatActivity {
 
         // Associate View
         this.signOutButton = this.findViewById(R.id.tempActivity_withdrawalButton);
+        this.logOutButton= this.findViewById(R.id.tempActivity_logOutButton);
+        this.mapButton=this.findViewById(R.id.tempActivity_mapButton);
 
         // Initialize View
         this.signOutButton.setOnClickListener(v->{
-            new Thread(()->{
-                KatiDatabase database= KatiDatabase.getAppDatabase(this);
-                if(database.katiDataDao().getValue(ROOM_AUTHORIZATION_KEY)!=null) {
-                    Intent intent = new Intent(TempActivity.this, NewWithdrawalActivity.class);
-                    startActivity(intent);
-                }else{
-                    runOnUiThread(()->showNotLoginedDialog());
-                }
-            }).start();
+           this.checkSignOut();
+        });
+
+        this.logOutButton.setOnClickListener(v->{
+            startActivity(new Intent(TempActivity.this, LogOutActivity.class));
+        });
+
+        this.mapButton.setOnClickListener(v->{
+            startActivity(new Intent(TempActivity.this, MapServiceActivity.class));
         });
     }
 
-    private void showNotLoginedDialog(){ // 로그인 안 되어 있으면 경고 띄우기
+    private void checkSignOut(){
+        new Thread(()->{
+            KatiDatabase database= KatiDatabase.getAppDatabase(this);
+            if(database.katiDataDao().getValue(ROOM_AUTHORIZATION_KEY)!=null) {
+                Intent intent = new Intent(TempActivity.this, NewWithdrawalActivity.class);
+                startActivity(intent);
+            }else{
+                runOnUiThread(()-> showNotLoginDialog());
+            }
+        }).start();
+    }
+
+    private void showNotLoginDialog(){ // 로그인 안 되어 있으면 경고 띄우기
         String noLoginUser = this.getResources().getString(R.string.tempActivity_dialog_noLoginUser);
         KatiDialog.simpleAlertDialog(this,
                 noLoginUser,

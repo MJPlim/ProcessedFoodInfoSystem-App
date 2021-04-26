@@ -13,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KATI_app"
         android:usesCleartextTraffic="true">
-        <activity android:name=".domain.view.user.findPW.FindPasswordActivity"></activity>
+        <activity android:name=".domain.view.user.changePW.ChangePasswordActivity"></activity>
+        <activity android:name=".domain.view.search.map.MapServiceActivity" />
+        <activity android:name=".domain.view.user.findPW.FindPasswordActivity" />
         <activity
             android:name=".domain.view.MainActivity"
             android:label="@string/title_activity_main">
@@ -23,16 +25,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".domain.view.search.FoodSearchActivity" />
+        <activity android:name=".domain.view.search.food.list.FoodSearchActivity" />
         <activity android:name=".domain.view.user.signOut.NewWithdrawalActivity" />
         <activity android:name=".domain.view.user.signOut.TempActivity" />
         <activity android:name=".domain.view.user.register.RegisterActivity" />
         <activity android:name=".domain.view.user.logOut.LogOutActivity" />
         <activity android:name=".domain.view.user.login.LoginActivity" />
-        <activity android:name=".domain.view.user.detail.DetailActivity"/>
-        <service android:name=".domain.service.AutoLoginService"
-            android:stopWithTask="false"/>
+        <activity android:name=".domain.view.search.food.detail.DetailActivity" />
 
+        <service
+            android:name=".domain.service.AutoLoginService"
+            android:stopWithTask="false" />
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.plim.kati_app.domain.view.search.adapter;
+package com.plim.kati_app.domain.view.search.food.list.adapter;
 
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
