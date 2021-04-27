@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.plim.kati_app.R;
+import com.plim.kati_app.domain.model.room.KatiDatabase;
+import com.plim.kati_app.domain.model.room.KatiSearchWord;
 
 import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_INDEX;
 import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_KEY;
@@ -38,12 +41,18 @@ public class FoodSearchFieldFragment extends Fragment {
     private EditText searchEditText;
     private ImageView cameraSearchButton, textSearchButton;
 
+    private boolean listFragmentOn=false;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.layout_food_search_field, container, false);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     @Override
@@ -61,32 +70,17 @@ public class FoodSearchFieldFragment extends Fragment {
         //set view
         this.searchEditText.setOnFocusChangeListener((v,gainFocus)->{
             if(gainFocus){
-                NavHostFragment navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_search_fragment);
-                NavController navController = navHostFragment.getNavController();
-                navController.navigate(R.id.action_foodSearchResultListFragment_to_foodSearchRecommendationFragment);
+                Log.d("검색필드 디버그","안");
+                this.moveFragment();
             }else{
-                InputMethodManager manager= (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
-                manager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY,0);
+                //이거 작동이 안되는거 같아서 좀 수정 필요.
+                Log.d("검색필드 디버그","밖");
+                this.hideKeyboard();
             }
         });
 
         this.textSearchButton.setOnClickListener((v -> {
-
-                NavHostFragment navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_search_fragment);
-                NavController navController = navHostFragment.getNavController();
-                navController.navigate(R.id.action_foodSearchRecommendationFragment_to_foodSearchResultListFragment);
-
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-            Bundle result = new Bundle();
-            result.putString(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_INDEX,1+"");
-            result.putString(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_MODE,searchModeSpinner.getSelectedItem().toString());
-            result.putString(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_TEXT,this.searchEditText.getText().toString().replaceAll("[ ]", "_"));
-            this.getParentFragmentManager().setFragmentResult(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_KEY,result);
+            this.searchStart();
         }));
 
 
@@ -96,7 +90,52 @@ public class FoodSearchFieldFragment extends Fragment {
 
     }
 
+    /**
+     * 검색 버튼이 눌려서 검색을 시작한다.
+     */
+    private void searchStart() {
+        NavHostFragment navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_search_fragment);
+        NavController navController = navHostFragment.getNavController();
+        navController.navigate(R.id.action_foodSearchRecommendationFragment_to_foodSearchResultListFragment);
+        this.listFragmentOn=true;
 
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        new Thread(()->{
+            KatiDatabase database = KatiDatabase.getAppDatabase(getContext());
+            database.katiSearchWordDao().insert(new KatiSearchWord(this.searchEditText.getText().toString()));
+        }).start();
+
+        Bundle result = new Bundle();
+        result.putString(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_INDEX,1+"");
+        result.putString(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_MODE,searchModeSpinner.getSelectedItem().toString());
+        result.putString(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_TEXT,this.searchEditText.getText().toString().replaceAll("[ ]", "_"));
+        this.getParentFragmentManager().setFragmentResult(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_KEY,result);
+    }
+
+    /**
+     * 키보드 이외의 곳을 터치할 때 키보드를 내린다.
+     */
+    private void hideKeyboard() {
+        InputMethodManager manager= (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        manager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY,0);
+    }
+
+    /**
+     * 만약 결과 리스트 창에 있다면, 검색 필드를 눌렀을 때 추천 창으로 이동.
+     */
+    private void moveFragment() {
+        if(listFragmentOn) {
+            NavHostFragment navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_search_fragment);
+            NavController navController = navHostFragment.getNavController();
+            navController.navigate(R.id.action_foodSearchResultListFragment_to_foodSearchRecommendationFragment);
+            this.listFragmentOn=false;
+        }
+    }
 
 
 }

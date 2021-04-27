@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentResultListener;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.plim.kati_app.constants.Constant;
 import com.plim.kati_app.R;
 import com.plim.kati_app.constants.Constant_yun;
@@ -23,12 +24,13 @@ import com.plim.kati_app.domain.model.FoodResponse;
 import com.plim.kati_app.domain.model.room.KatiData;
 import com.plim.kati_app.domain.model.room.KatiDatabase;
 import com.plim.kati_app.domain.view.search.food.list.adapter.FoodInfoRecyclerViewAdapter;
-import com.plim.kati_app.tech.GlideApp;
+//import com.plim.kati_app.tech.GlideApp;
 import com.plim.kati_app.tech.RestAPI;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Vector;
 
 import retrofit2.Call;
@@ -45,6 +47,7 @@ import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_RESULT_LIST_F
 
 /**
  * 음식 검색하여 나온 리스트와 정렬화면 프래그먼트.
+ * !이슈 여기랑 레코멘데이션이랑 왔다갔다 하다보면 Activity가 없다고 하는 일이 생긴다 왜지?
  */
 public class FoodSearchResultListFragment extends Fragment {
 
@@ -114,7 +117,7 @@ public class FoodSearchResultListFragment extends Fragment {
 
         @Override
         public void run() {
-            getActivity().runOnUiThread(() -> {
+            requireActivity().runOnUiThread(() -> {
                 dialog.show();
             });
 
@@ -226,7 +229,7 @@ public class FoodSearchResultListFragment extends Fragment {
             public void setValue(@NotNull FoodResponse item) {
 
 //                Log.d("이미지 주소",item.getFoodImageAddress());
-                GlideApp.with(getContext()).load(item.getFoodImageAddress()).into(imageView);
+                Glide.with(getContext()).load(item.getFoodImageAddress()).into(imageView);
 
 
                 this.productName.setText(item.getFoodName());

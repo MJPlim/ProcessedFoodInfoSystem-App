@@ -1,8 +1,8 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 1,
-    "identityHash": "71eb205cac425365a42baae1da6163cf",
+    "version": 2,
+    "identityHash": "618f35d9cc9dc1466da57a5a9cd5cb18",
     "entities": [
       {
         "tableName": "kati_data",
@@ -32,24 +32,18 @@
       },
       {
         "tableName": "kati_search_word",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `value` TEXT, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`value` TEXT NOT NULL, PRIMARY KEY(`value`))",
         "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
           {
             "fieldPath": "value",
             "columnName": "value",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           }
         ],
         "primaryKey": {
           "columnNames": [
-            "id"
+            "value"
           ],
           "autoGenerate": false
         },
@@ -60,7 +54,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '71eb205cac425365a42baae1da6163cf')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '618f35d9cc9dc1466da57a5a9cd5cb18')"
     ]
   }
 }

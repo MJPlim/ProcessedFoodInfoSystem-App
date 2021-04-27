@@ -6,11 +6,11 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/foodItem_scoreTextView"
+        android:id="@+id/foodSearchRecommendationFragment_recentSearchWordTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="최근 검색어"
+        android:text="@string/foodSearchRecommendationFragment_recentSearchWordTextView_text"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/foodItem_scoreTextView">
+        app:layout_constraintTop_toBottomOf="@+id/foodSearchRecommendationFragment_recentSearchWordTextView">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                tools:listitem="@layout/item_light_button"/>
+                tools:listitem="@layout/item_light_button" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
@@ -44,22 +44,32 @@
         android:id="@+id/foodSearchRecommendationFragment_view1"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/kati_yellow"
         android:layout_marginTop="30dp"
+        android:background="@color/kati_yellow"
         app:layout_constraintTop_toBottomOf="@+id/nestedScrollView" />
 
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/foodSearchRecommendationFragment_rankSearchWordTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="인기검색어"
+        android:text="@string/foodSearchRecommendationFragment_rankSearchWordTitle_text"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/foodSearchRecommendationFragment_view1" />
+
+    <TextView
+        android:id="@+id/foodSearchRecommendationFragment_deleteAllButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="28dp"
+        android:text="@string/foodSearchRecommendationFragment_deleteAllButton_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView3"
@@ -68,8 +78,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        >
+        app:layout_constraintTop_toBottomOf="@+id/foodSearchRecommendationFragment_rankSearchWordTitle">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -81,7 +90,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                tools:listitem="@layout/item_simple_rank"/>
+                tools:listitem="@layout/item_simple_rank" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

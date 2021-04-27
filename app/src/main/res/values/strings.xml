@@ -90,6 +90,9 @@
 
 
     <string name="tempActivity_mapButton_text">위치 정보</string>
+    <string name="foodSearchRecommendationFragment_deleteAllButton_text" >모두 지우기</string>
+    <string name="foodSearchRecommendationFragment_rankSearchWordTitle_text" >인기 검색어</string>
+    <string name="foodSearchRecommendationFragment_recentSearchWordTextView_text" >최근 검색어</string>
 </resources>
 
 

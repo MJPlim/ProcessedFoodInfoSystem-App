@@ -13,12 +13,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.plim.kati_app.R;
+import com.plim.kati_app.domain.model.room.KatiDatabase;
 import com.plim.kati_app.domain.view.search.food.list.adapter.LightButtonRecyclerViewAdapter;
 import com.plim.kati_app.domain.view.search.food.list.adapter.RankRecyclerViewAdapter;
 
+import java.util.List;
 import java.util.Vector;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_RECOMMENDATION_FRAGMENT_BUNDLE_KEY;
 
@@ -31,10 +35,13 @@ public class FoodSearchRecommendationFragment extends Fragment {
     //view
     private RecyclerView recentValueRecyclerView;
     private RecyclerView rankRecyclerView;
+    private TextView deleteAllButton;
 
     //adapter
     private recentButtonRecyclerViewAdapter recentValueRecyclerViewAdapter;
     private RankRecyclerViewAdapter rankRecyclerViewAdapter;
+
+    private Vector<String> recentSearchedWords;
 
 
     @Override
@@ -45,8 +52,10 @@ public class FoodSearchRecommendationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        this.recentSearchedWords = new Vector<>();
         return inflater.inflate(R.layout.fragment_food_search_recommendation, container, false);
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -55,21 +64,60 @@ public class FoodSearchRecommendationFragment extends Fragment {
         //associate view
         this.recentValueRecyclerView = view.findViewById(R.id.foodSearchRecommendationFragment_recentValuesRecyclerView);
         this.rankRecyclerView = view.findViewById(R.id.foodSearchRecommendationFragment_rankRecyclerView);
+        this.deleteAllButton = view.findViewById(R.id.foodSearchRecommendationFragment_deleteAllButton);
 
         //데이터 받아오기.
         Vector<String> val = this.getDatas();
-
+//        this.recentSearchedWords=this.loadRecentSearchedWords();
 
         //create adapter
-        this.recentValueRecyclerViewAdapter = new recentButtonRecyclerViewAdapter(val);
+//        this.recentValueRecyclerViewAdapter = new recentButtonRecyclerViewAdapter(recentSearchedWords);
         this.rankRecyclerViewAdapter = new RankRecyclerViewAdapter(val);
 
         //set view
         this.recentValueRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false));
-        this.recentValueRecyclerView.setAdapter(recentValueRecyclerViewAdapter);
+//        this.recentValueRecyclerView.setAdapter(recentValueRecyclerViewAdapter);
         this.rankRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         this.rankRecyclerView.setAdapter(rankRecyclerViewAdapter);
+        this.deleteAllButton.setOnClickListener(v -> {
+            deleteAllSearchedWords();
+        });
 
+    }
+
+    private void deleteAllSearchedWords() {
+        new Thread(() -> {
+            KatiDatabase katiDatabase = KatiDatabase.getAppDatabase(this.getContext());
+            katiDatabase.katiSearchWordDao().deleteAll();
+            loadRecentSearchedWords();
+        }).start();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        this.loadRecentSearchedWords();
+
+    }
+
+    /**
+     * 최근에 검색할 때 사용한 검색어들을 데이터베이스에서 불러오고, 리사이클러뷰에 어댑터를 설정한다.
+     *
+     * @return 검색어로 이루어진 벡터.
+     */
+    private void loadRecentSearchedWords() {
+        this.recentSearchedWords.clear();
+        new Thread(() -> {
+            KatiDatabase katiDatabase = KatiDatabase.getAppDatabase(this.getContext());
+            List<String> stringList = katiDatabase.katiSearchWordDao().getValues();
+//            for(String string:stringList) Log.d("디버그 이름",string);
+            this.recentSearchedWords.addAll(stringList);
+
+            this.recentValueRecyclerViewAdapter = new recentButtonRecyclerViewAdapter(recentSearchedWords);
+            getActivity().runOnUiThread(() -> {
+                this.recentValueRecyclerView.setAdapter(recentValueRecyclerViewAdapter);
+            });
+        }).start();
     }
 
     /**
@@ -99,10 +147,10 @@ public class FoodSearchRecommendationFragment extends Fragment {
         @NonNull
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            Context context= parent.getContext();
+            Context context = parent.getContext();
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View view = inflater.inflate(R.layout.item_light_button,parent,false);
-            RecentButtonRecyclerviewViewHolder viewHolder= new RecentButtonRecyclerviewViewHolder(view);
+            View view = inflater.inflate(R.layout.item_light_button, parent, false);
+            RecentButtonRecyclerviewViewHolder viewHolder = new RecentButtonRecyclerviewViewHolder(view);
 
             return viewHolder;
         }

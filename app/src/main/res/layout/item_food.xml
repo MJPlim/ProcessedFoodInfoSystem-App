@@ -31,7 +31,7 @@
         app:tint="@color/teal_200" />
 
     <TextView
-        android:id="@+id/foodItem_scoreTextView"
+        android:id="@+id/foodSearchRecommendationFragment_recentSearchWordTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -47,9 +47,9 @@
         android:layout_height="wrap_content"
         android:text="@string/foodItem_reviewCountTextView_text"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/foodItem_scoreTextView"
-        app:layout_constraintStart_toEndOf="@+id/foodItem_scoreTextView"
-        app:layout_constraintTop_toTopOf="@+id/foodItem_scoreTextView"/>
+        app:layout_constraintBottom_toBottomOf="@+id/foodSearchRecommendationFragment_recentSearchWordTextView"
+        app:layout_constraintStart_toEndOf="@+id/foodSearchRecommendationFragment_recentSearchWordTextView"
+        app:layout_constraintTop_toTopOf="@+id/foodSearchRecommendationFragment_recentSearchWordTextView"/>
 
     <TextView
         android:id="@+id/foodItem_companyName"
