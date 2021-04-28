@@ -17,28 +17,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedScrollView"
+
+    <TextView
+        android:id="@+id/foodSearchRecommendationFragment_emptyWordTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/foodSearchRecommendationFragment_emptyWordTextView_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/foodSearchRecommendationFragment_recentSearchWordTextView" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/foodSearchRecommendationFragment_recentValuesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/foodSearchRecommendationFragment_recentSearchWordTextView">
+        app:layout_constraintTop_toBottomOf="@+id/foodSearchRecommendationFragment_recentSearchWordTextView"
+        app:layout_constraintBottom_toTopOf="@+id/foodSearchRecommendationFragment_view1"
+        tools:listitem="@layout/item_light_button" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/foodSearchRecommendationFragment_recentValuesRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                tools:listitem="@layout/item_light_button" />
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
 
     <View
         android:id="@+id/foodSearchRecommendationFragment_view1"
@@ -46,7 +46,7 @@
         android:layout_height="1dp"
         android:layout_marginTop="30dp"
         android:background="@color/kati_yellow"
-        app:layout_constraintTop_toBottomOf="@+id/nestedScrollView" />
+        app:layout_constraintTop_toBottomOf="@+id/foodSearchRecommendationFragment_recentValuesRecyclerView" />
 
 
     <TextView

@@ -9,7 +9,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -22,7 +26,6 @@ import com.plim.kati_app.domain.view.search.food.list.adapter.RankRecyclerViewAd
 
 import java.util.List;
 import java.util.Vector;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_RECOMMENDATION_FRAGMENT_BUNDLE_KEY;
 
@@ -36,6 +39,7 @@ public class FoodSearchRecommendationFragment extends Fragment {
     private RecyclerView recentValueRecyclerView;
     private RecyclerView rankRecyclerView;
     private TextView deleteAllButton;
+    private TextView emptyWordTextView;
 
     //adapter
     private recentButtonRecyclerViewAdapter recentValueRecyclerViewAdapter;
@@ -65,18 +69,16 @@ public class FoodSearchRecommendationFragment extends Fragment {
         this.recentValueRecyclerView = view.findViewById(R.id.foodSearchRecommendationFragment_recentValuesRecyclerView);
         this.rankRecyclerView = view.findViewById(R.id.foodSearchRecommendationFragment_rankRecyclerView);
         this.deleteAllButton = view.findViewById(R.id.foodSearchRecommendationFragment_deleteAllButton);
+        this.emptyWordTextView = view.findViewById(R.id.foodSearchRecommendationFragment_emptyWordTextView);
 
         //데이터 받아오기.
         Vector<String> val = this.getDatas();
-//        this.recentSearchedWords=this.loadRecentSearchedWords();
 
         //create adapter
-//        this.recentValueRecyclerViewAdapter = new recentButtonRecyclerViewAdapter(recentSearchedWords);
         this.rankRecyclerViewAdapter = new RankRecyclerViewAdapter(val);
 
         //set view
         this.recentValueRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false));
-//        this.recentValueRecyclerView.setAdapter(recentValueRecyclerViewAdapter);
         this.rankRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         this.rankRecyclerView.setAdapter(rankRecyclerViewAdapter);
         this.deleteAllButton.setOnClickListener(v -> {
@@ -85,6 +87,9 @@ public class FoodSearchRecommendationFragment extends Fragment {
 
     }
 
+    /**
+     * 모든 검색어를 지운다.
+     */
     private void deleteAllSearchedWords() {
         new Thread(() -> {
             KatiDatabase katiDatabase = KatiDatabase.getAppDatabase(this.getContext());
@@ -97,7 +102,6 @@ public class FoodSearchRecommendationFragment extends Fragment {
     public void onResume() {
         super.onResume();
         this.loadRecentSearchedWords();
-
     }
 
     /**
@@ -108,13 +112,30 @@ public class FoodSearchRecommendationFragment extends Fragment {
     private void loadRecentSearchedWords() {
         this.recentSearchedWords.clear();
         new Thread(() -> {
+            //저장되어 있는 최근 검색어 벡터를 가져와서, 역순으로 정렬하여 넣는다.
             KatiDatabase katiDatabase = KatiDatabase.getAppDatabase(this.getContext());
             List<String> stringList = katiDatabase.katiSearchWordDao().getValues();
-//            for(String string:stringList) Log.d("디버그 이름",string);
-            this.recentSearchedWords.addAll(stringList);
+            for(int i=stringList.size()-1; i>=0;i--){
+                this.recentSearchedWords.add(stringList.get(i));
+            }
 
+            //어댑터에 새로운 벡터를 설정한다.
             this.recentValueRecyclerViewAdapter = new recentButtonRecyclerViewAdapter(recentSearchedWords);
+
+            //ui 스레드에서 돌릴 것.
             getActivity().runOnUiThread(() -> {
+                //사이즈가 0이면 모두 지우기 버튼을 숨기고, 비었다 메시지를 표시
+                if (this.recentSearchedWords.size() == 0) {
+                    this.deleteAllButton.setVisibility(View.INVISIBLE);
+                    this.emptyWordTextView.setVisibility(View.VISIBLE);
+
+                    //사이즈가 0이 아니면 모두 지우기 버튼을 표시하고, 비었다 메시지 숨김
+                } else {
+                    this.deleteAllButton.setVisibility(View.VISIBLE);
+                    this.emptyWordTextView.setVisibility(View.INVISIBLE);
+                }
+
+                //어댑터에 다 설정해준다.
                 this.recentValueRecyclerView.setAdapter(recentValueRecyclerViewAdapter);
             });
         }).start();
@@ -138,15 +159,22 @@ public class FoodSearchRecommendationFragment extends Fragment {
         return val;
     }
 
-    public class recentButtonRecyclerViewAdapter extends LightButtonRecyclerViewAdapter {
+    public class recentButtonRecyclerViewAdapter extends RecyclerView.Adapter<recentButtonRecyclerViewAdapter.RecentButtonRecyclerviewViewHolder> {
 
-        public recentButtonRecyclerViewAdapter(Vector<String> values) {
-            super(values);
+
+        public Vector<String> values;
+
+        public recentButtonRecyclerViewAdapter(Vector<String> values){
+            //create component
+            this.values= new Vector<>();
+
+            //set components
+            this.values.addAll(values);
         }
 
         @NonNull
         @Override
-        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        public recentButtonRecyclerViewAdapter.RecentButtonRecyclerviewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             Context context = parent.getContext();
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view = inflater.inflate(R.layout.item_light_button, parent, false);
@@ -157,21 +185,30 @@ public class FoodSearchRecommendationFragment extends Fragment {
 
 
         @Override
-        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-            String value = this.values.get(position);
-            ((RecentButtonRecyclerviewViewHolder) holder).setValueButton(value);
+        public void onBindViewHolder(@NonNull RecentButtonRecyclerviewViewHolder holder, int position) {
+            String value=this.values.get(position);
+            holder.setValueButton(value);
         }
+
+        @Override
+        public int getItemCount() {
+            return this.values.size();
+        }
+
+
+
 
 
         /**
          * 뷰 홀더
          */
-        public class RecentButtonRecyclerviewViewHolder extends RecyclerView.ViewHolder {
+        private class RecentButtonRecyclerviewViewHolder extends RecyclerView.ViewHolder {
             private Button valueButton;
 
             public RecentButtonRecyclerviewViewHolder(@NonNull View itemView) {
                 super(itemView);
                 this.valueButton = itemView.findViewById(R.id.item_button);
+//                itemView.setOnCreateContextMenuListener(new MyContextMenuListener());
             }
 
             public void setValueButton(String value) {
@@ -186,7 +223,29 @@ public class FoodSearchRecommendationFragment extends Fragment {
                 };
                 this.valueButton.setOnClickListener(listener);
             }
+
+
+
+//            private class MyContextMenuListener implements View.OnCreateContextMenuListener{
+//
+//                @Override
+//                public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+//                    MenuItem delete = menu.add(Menu.NONE,1001,1,"삭제");
+//                    delete.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+//                        @Override
+//                        public boolean onMenuItemClick(MenuItem item) {
+//                                Log.d("디버그","클릭 인식");
+//                                values.remove(getAdapterPosition());
+//                                notifyItemRemoved(getAdapterPosition());
+//                                notifyItemRangeChanged(getAdapterPosition(),values.size());
+//                                return true;
+//                        }
+//                    });
+//                }
+//            }
+
         }
+
     }
 
 }

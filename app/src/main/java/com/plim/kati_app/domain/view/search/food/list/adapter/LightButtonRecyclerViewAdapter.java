@@ -19,7 +19,7 @@ import java.util.Vector;
  */
 public class LightButtonRecyclerViewAdapter extends RecyclerView.Adapter {
 
-    protected Vector<String> values;
+    public Vector<String> values;
 
     public LightButtonRecyclerViewAdapter(Vector<String> values){
         //create component
