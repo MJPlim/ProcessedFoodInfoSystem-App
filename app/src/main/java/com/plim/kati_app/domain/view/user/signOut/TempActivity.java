@@ -1,6 +1,7 @@
 package com.plim.kati_app.domain.view.user.signOut;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 
@@ -10,7 +11,6 @@ import com.plim.kati_app.R;
 import com.plim.kati_app.domain.asset.KatiDialog;
 import com.plim.kati_app.domain.model.room.KatiDatabase;
 import com.plim.kati_app.domain.view.MainActivity;
-import com.plim.kati_app.domain.view.search.map.MapServiceActivity;
 import com.plim.kati_app.domain.view.user.logOut.LogOutActivity;
 
 import static com.plim.kati_app.constants.Constant_jung.ROOM_AUTHORIZATION_KEY;
@@ -45,7 +45,14 @@ public class TempActivity extends AppCompatActivity {
         });
 
         this.mapButton.setOnClickListener(v->{
-            startActivity(new Intent(TempActivity.this, MapServiceActivity.class));
+
+            // Search for restaurants nearby
+            Uri gmmIntentUri = Uri.parse("geo:0,0?q=convenience_store");
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+            mapIntent.setPackage("com.google.android.apps.maps");
+            startActivity(mapIntent);
+
+//            startActivity(new Intent(TempActivity.this, MapServiceActivity.class));
         });
     }
 
