@@ -1,6 +1,8 @@
-package com.plim.kati_app.domain.view.search.food.list.fragment;
+package com.plim.kati_app.domain.view.search.food.list.list;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.plim.kati_app.constants.Constant;
 import com.plim.kati_app.R;
 import com.plim.kati_app.constants.Constant_yun;
@@ -30,7 +34,6 @@ import com.plim.kati_app.tech.RestAPI;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Vector;
 
 import retrofit2.Call;
@@ -118,6 +121,7 @@ public class FoodSearchResultListFragment extends Fragment {
         @Override
         public void run() {
             requireActivity().runOnUiThread(() -> {
+                //android.view.WindowLeaked: Activity com.plim.kati_app.domain.view.search.food.list.FoodSearchActivity has leaked window DecorView@420548c[FoodSearchActivity] that was originally added here
                 dialog.show();
             });
 
@@ -218,6 +222,7 @@ public class FoodSearchResultListFragment extends Fragment {
         private class RecyclerViewViewHolder extends RecyclerView.ViewHolder {
             private ImageView imageView;
             private TextView productName, companyName;
+            private String imageAddress;
 
             public RecyclerViewViewHolder(@NonNull View itemView) {
                 super(itemView);
@@ -226,18 +231,24 @@ public class FoodSearchResultListFragment extends Fragment {
                 this.imageView = itemView.findViewById(R.id.foodItem_foodImageView);
             }
 
+            /**
+             * 각 값을 설정한다.
+             * @param item
+             */
             public void setValue(@NotNull FoodResponse item) {
+                this.imageAddress = item.getFoodImageAddress();
+                Glide.with(getContext()).load(this.imageAddress).fitCenter().transform(new CenterCrop(), new CircleCrop()).into(imageView);
 
-//                Log.d("이미지 주소",item.getFoodImageAddress());
-                Glide.with(getContext()).load(item.getFoodImageAddress()).into(imageView);
-
+                this.imageView.setOnClickListener(v -> {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(imageAddress));
+                    startActivity(intent);
+                });
 
                 this.productName.setText(item.getFoodName());
                 this.companyName.setText(item.getManufacturerName());
             }
         }
     }
-
 
 
 }

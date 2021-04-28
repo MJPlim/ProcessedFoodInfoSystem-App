@@ -1,4 +1,4 @@
-package com.plim.kati_app.domain.view.search.food.list.fragment;
+package com.plim.kati_app.domain.view.search.food.list.setting;
 
 import android.os.Bundle;
 
@@ -20,6 +20,9 @@ import com.plim.kati_app.R;
 import com.plim.kati_app.constants.Constant_yun;
 import com.plim.kati_app.domain.asset.BlankFragment;
 import com.plim.kati_app.domain.view.search.food.list.adapter.SortButtonRecyclerViewAdapter;
+import com.plim.kati_app.domain.view.search.food.list.setting.AllergyViewFragment;
+import com.plim.kati_app.domain.view.search.food.list.setting.FoodCategoryDetailListFragment;
+import com.plim.kati_app.domain.view.search.food.list.setting.FoodSearchSortMenuFragment;
 
 import java.util.Vector;
 

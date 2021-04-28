@@ -1,4 +1,4 @@
-package com.plim.kati_app.domain.view.search.food.list.adapter;
+package com.plim.kati_app.domain.view.search.food.list.recommendation;
 
 import android.content.Context;
 import android.view.LayoutInflater;

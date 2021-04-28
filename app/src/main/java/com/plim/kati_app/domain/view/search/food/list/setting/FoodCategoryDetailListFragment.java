@@ -1,4 +1,4 @@
-package com.plim.kati_app.domain.view.search.food.list.fragment;
+package com.plim.kati_app.domain.view.search.food.list.setting;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

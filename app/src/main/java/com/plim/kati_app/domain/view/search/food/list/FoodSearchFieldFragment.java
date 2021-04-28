@@ -1,4 +1,4 @@
-package com.plim.kati_app.domain.view.search.food.list.fragment;
+package com.plim.kati_app.domain.view.search.food.list;
 
 import android.app.Activity;
 import android.os.Bundle;
