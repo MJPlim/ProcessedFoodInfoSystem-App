@@ -7,8 +7,11 @@ import lombok.Getter;
 
 public class Constant_yun {
 
-    public static final String KATI_DIALOG_YES = "확인";
-    public static final String KATI_DIALOG_NO = "취소";
+    public static final String KATI_DIALOG_CONFIRM = "확인";
+    public static final String KATI_DIALOG_CANCEL = "취소";
+
+    public static final String KATI_DIALOG_YES = "예";
+    public static final String KATI_DIALOG_NO = "아니오";
 
     //mainActivity
     public static final String MAIN_ACTIVITY_FINISH_DIALOG_TITLE = "정말 종료하시겠습니까?";
@@ -49,6 +52,12 @@ public class Constant_yun {
 
     public static final String FOOD_SEARCH_RECOMMENDATION_FRAGMENT_BUNDLE_KEY="text";
 
+    public static final String SEARCH_WORD_DELETE_ALL_DIALOG_TITLE="검색어 이력을 모두 지우시겠습니까?";
+    public static final String SEARCH_WORD_DELETE_ALL_DIALOG_MESSAGE="저장된 최근 검색어들을 모두 삭제합니다.";
+    public static final String SEARCH_WORD_DELETE_ONE_DIALOG_TITLE="해당 검색어 이력을 정말 지우시겠습니까?";
+    public static final String SEARCH_WORD_DELETE_ONE_DIALOG_MESSAGE_HEAD="검색어 '";
+    public static final String SEARCH_WORD_DELETE_ONE_DIALOG_MESSAGE_TAIL="'를 삭제합니다.";
+
 
     public enum ESortMode{
         오름차순,내림차순,세부
@@ -63,7 +72,6 @@ public class Constant_yun {
         star("별점 순"),
         review("리뷰 개수")
         ;
-
         public String name;
     }
 

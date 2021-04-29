@@ -10,7 +10,6 @@ import com.plim.kati_app.domain.service.AutoLoginService;
 import com.plim.kati_app.domain.view.search.food.list.FoodSearchActivity;
 import com.plim.kati_app.domain.view.search.food.detail.DetailActivity;
 import com.plim.kati_app.domain.view.user.changePW.ChangePasswordActivity;
-import com.plim.kati_app.domain.view.user.logOut.LogOutActivity;
 import com.plim.kati_app.domain.view.user.login.LoginActivity;
 import com.plim.kati_app.domain.view.user.signOut.TempActivity;
 
@@ -53,10 +52,10 @@ public class MainActivity extends AppCompatActivity { // a test
         KatiDialog katiDialog = new KatiDialog(this);
         katiDialog.setTitle(Constant_yun.MAIN_ACTIVITY_FINISH_DIALOG_TITLE);
         katiDialog.setMessage(Constant_yun.MAIN_ACTIVITY_FINISH_DIALOG_MESSAGE);
-        katiDialog.setPositiveButton(Constant_yun.KATI_DIALOG_YES, (dialog, which) ->{
+        katiDialog.setPositiveButton(Constant_yun.KATI_DIALOG_CONFIRM, (dialog, which) ->{
                 this.finishApp();
             });
-        katiDialog.setNegativeButton(Constant_yun.KATI_DIALOG_NO, null);
+        katiDialog.setNegativeButton(Constant_yun.KATI_DIALOG_CANCEL, null);
         katiDialog.setColor(this.getResources().getColor(R.color.kati_coral,this.getTheme()));
         katiDialog.showDialog();
     }
