@@ -3,6 +3,7 @@ package com.plim.kati_app.domain.view.user.signOut;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,14 +46,24 @@ public class TempActivity extends AppCompatActivity {
         });
 
         this.mapButton.setOnClickListener(v->{
-
-            // Search for restaurants nearby
-            Uri gmmIntentUri = Uri.parse("geo:0,0?q=convenience_store");
-            Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-            mapIntent.setPackage("com.google.android.apps.maps");
-            startActivity(mapIntent);
-
-//            startActivity(new Intent(TempActivity.this, MapServiceActivity.class));
+            try{
+                Uri gmmIntentUri = Uri.parse("geo:0,0?q=convenience store");
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                startActivity(mapIntent);
+            }catch(Exception e){
+                KatiDialog signOutCompleteDialog = new KatiDialog(this);
+                signOutCompleteDialog.setTitle("안내");
+                signOutCompleteDialog.setMessage("주변 판매처 찾기 기능을 실행하기 위해, 구글 맵을 사용 상태로 바꿔주세요.");
+                signOutCompleteDialog.setPositiveButton("확인", (dialog, which) -> {
+                    Intent intent= new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                    intent.setData(Uri.parse("package:" + "com.google.android.apps.maps"));
+                    startActivity(intent);
+                });
+                signOutCompleteDialog.setNegativeButton("취소", null);
+                signOutCompleteDialog.setColor(this.getResources().getColor(R.color.kati_coral, this.getTheme()));
+                signOutCompleteDialog.showDialog();
+            }
         });
     }
 
