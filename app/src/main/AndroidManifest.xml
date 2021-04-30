@@ -4,10 +4,8 @@
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="false"
@@ -17,10 +15,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KATI_app"
         android:usesCleartextTraffic="true">
+        <activity android:name=".domain.view.search.food.review.WriteReviewActivity"></activity>
+        <activity android:name=".domain.view.search.food.detail.NewDetailActivity" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAH63IC9w2B6lP4RYw05b7qAyNja8gOyjU" />
-        <activity android:name=".domain.view.user.changePW.ChangePasswordActivity"></activity>
+
+        <activity android:name=".domain.view.user.changePW.ChangePasswordActivity" />
         <activity android:name=".domain.view.search.map.MapServiceActivity" />
         <activity android:name=".domain.view.user.findPW.FindPasswordActivity" />
         <activity

@@ -52,6 +52,36 @@ public class Constant_yun {
 
     public static final String FOOD_SEARCH_RECOMMENDATION_FRAGMENT_BUNDLE_KEY="text";
 
+
+    //product detail Activity
+    public static final String DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_FOOD_ID_EXTRA="foodId";
+    public static final String DETAIL_PRODUCT_INFO_FRAGMENT_SHOPPING_LINK_="https://msearch.shopping.naver.com/search/all?query=";
+
+    public static final String DETAIL_PHOTO_VIEW_FRAGMENT_BUNDLE_KEY="detailImage";
+    public static final String DETAIL_PHOTO_VIEW_FRAGMENT_BUNDLE_FRONT_IMAGE="frontImage";
+    public static final String DETAIL_PHOTO_VIEW_FRAGMENT_BUNDLE_BACK_IMAGE="backImage";
+
+    public static final String ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_NAME="name";
+    public static final String ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_HASH_MAP="hashMap";
+    public static final String ABSTRACT_TABLE_FRAGMENT_LARGE="펼치기>";
+    public static final String ABSTRACT_TABLE_FRAGMENT_SMALL="접기>";
+
+    public static final String DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_BUNDLE_KEY="detailProductInfo";
+    public static final String DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_TABLE_NAME="제품정보";
+    public static final String DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_PRODUCT_NAME="제품명";
+    public static final String DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_MANUFACTURER_NAME="회사명";
+    public static final String DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_EXPIRATION_DATE="유통기한";
+
+
+    public static final String DETAIL_PRODUCT_MATERIAL_TABLE_FRAGMENT_BUNDLE_KEY="detailProductMaterial";
+    public static final String DETAIL_PRODUCT_MATERIAL_TABLE_FRAGMENT_TABLE_NAME="성분 및 원재료";
+    public static final String DETAIL_PRODUCT_MATERIAL_TABLE_FRAGMENT_MATERIAL_NAME="영양성분";
+    public static final String DETAIL_PRODUCT_MATERIAL_TABLE_FRAGMENT_INGREDIENT_NAME="원재료";
+
+
+
+
+
     public static final String SEARCH_WORD_DELETE_ALL_DIALOG_TITLE="검색어 이력을 모두 지우시겠습니까?";
     public static final String SEARCH_WORD_DELETE_ALL_DIALOG_MESSAGE="저장된 최근 검색어들을 모두 삭제합니다.";
     public static final String SEARCH_WORD_DELETE_ONE_DIALOG_TITLE="해당 검색어 이력을 정말 지우시겠습니까?";
@@ -120,6 +150,14 @@ public class Constant_yun {
         }
     }
 
+    @AllArgsConstructor
+    @Getter
+    public enum EReviewCateGory {
+        rank("인기순"), latest("최신순"), like("좋아요순"), five("5점"), four("4점"), three("3점"), two("2점"), one("1점");
+        private String name;
+    }
+
+
     //exception
     public static final String LOGIN_DATA_WRONG_EXCEPTION_MESSAGE = "로그인 정보가 틀렸습니다.";
     public static final int LOGIN_DATA_WRONG_EXCEPTION_CODE = 401;
@@ -132,5 +170,10 @@ public class Constant_yun {
 
     public static final String SERVER_WRONG_METHOD_EXCEPTION_MESSAGE = "요청 방법이 잘못되었습니다.";
     public static final int SERVER_WRONG_METHOD_EXCEPTION_CODE = 405;
+
+
+
+
+
 
 }

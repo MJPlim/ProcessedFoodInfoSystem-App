@@ -2,6 +2,7 @@ package com.plim.kati_app.tech;
 
 import com.plim.kati_app.domain.model.FindPasswordRequest;
 import com.plim.kati_app.domain.model.FindPasswordResponse;
+import com.plim.kati_app.domain.model.dto.FoodDetailResponse;
 import com.plim.kati_app.domain.model.FoodResponse;
 import com.plim.kati_app.domain.model.Password;
 import com.plim.kati_app.domain.model.SignUpResponse;
@@ -14,7 +15,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -37,6 +37,9 @@ public interface RestAPI {
     Call<List<FoodResponse>> getFoodListByProductName( @Query("foodName") String foodName);
 
     @GET("/api/v1/food/findFood/manufacturerName")
-    Call<List<FoodResponse>> getFoodListByCompanyName( @Query("manufacturerName") String bsshName);
+    Call<List<FoodResponse>> getFoodListByCompanyName( @Query("manufacturerName") String manufacturerName);
+
+    @GET("/api/v1/food/findFood/foodDetail")
+    Call<FoodDetailResponse> getFoodDetailByFoodId(@Query("foodId") Long foodId);
 
 }

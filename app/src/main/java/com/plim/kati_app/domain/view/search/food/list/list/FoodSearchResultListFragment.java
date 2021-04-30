@@ -27,6 +27,7 @@ import com.plim.kati_app.domain.asset.LoadingDialog;
 import com.plim.kati_app.domain.model.FoodResponse;
 import com.plim.kati_app.domain.model.room.KatiData;
 import com.plim.kati_app.domain.model.room.KatiDatabase;
+import com.plim.kati_app.domain.view.search.food.detail.NewDetailActivity;
 import com.plim.kati_app.domain.view.search.food.list.adapter.FoodInfoRecyclerViewAdapter;
 //import com.plim.kati_app.tech.GlideApp;
 import com.plim.kati_app.tech.RestAPI;
@@ -108,66 +109,63 @@ public class FoodSearchResultListFragment extends Fragment {
     public void set(int index, String mode, String text) {
         foodSearchMode = mode;
         foodSearchText = text;
-        Thread thread = new Thread(new FoodSearch());
+        Thread thread = new Thread(()->this.search());
         thread.start();
     }
 
-
     /**
-     * 검색D을 하는 부분.
+     * 검색하는 메소드.
      */
-    public class FoodSearch implements Runnable {
-
-        @Override
-        public void run() {
-            requireActivity().runOnUiThread(() -> {
-                //android.view.WindowLeaked: Activity com.plim.kati_app.domain.view.search.food.list.FoodSearchActivity has leaked window DecorView@420548c[FoodSearchActivity] that was originally added here
-                dialog.show();
-            });
+    private void search() {
+        //java.lang.IllegalStateException: Fragment FoodSearchResultListFragment{9275fcf} (9f1df36e-8aa9-4197-adb4-b353110ab62e)} not attached to an activity.
+        requireActivity().runOnUiThread(() -> {
+            //android.view.WindowLeaked: Activity com.plim.kati_app.domain.view.search.food.list.FoodSearchActivity has leaked window DecorView@420548c[FoodSearchActivity] that was originally added here
+            dialog.show();
+        });
 
 
-            KatiDatabase database = KatiDatabase.getAppDatabase(getContext());
+//        KatiDatabase database = KatiDatabase.getAppDatabase(getContext());
 
-            Retrofit retrofit = new Retrofit.Builder()
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .baseUrl(Constant.URL)
-                    .build();
-            RestAPI service = retrofit.create(RestAPI.class);
-            Call<List<FoodResponse>> listCall;
-            if (foodSearchMode.equals(Constant_yun.ESearchMode.제품.name())) {
-                listCall = service.getFoodListByProductName(foodSearchText);
-            } else {
-                listCall = service.getFoodListByCompanyName(foodSearchText);
+        Retrofit retrofit = new Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl(Constant.URL)
+                .build();
+        RestAPI service = retrofit.create(RestAPI.class);
+        Call<List<FoodResponse>> listCall;
+        if (foodSearchMode.equals(Constant_yun.ESearchMode.제품.name())) {
+            listCall = service.getFoodListByProductName(foodSearchText);
+        } else {
+            listCall = service.getFoodListByCompanyName(foodSearchText);
+        }
+
+        listCall.enqueue(new Callback<List<FoodResponse>>() {
+            @Override
+            public void onResponse(Call<List<FoodResponse>> call, Response<List<FoodResponse>> response) {
+                Vector<FoodResponse> items = new Vector<>(response.body());
+//                new Thread(() ->
+//                        database.katiDataDao().insert(new KatiData(KatiDatabase.AUTHORIZATION, response.headers().get(KatiDatabase.AUTHORIZATION)))).start();
+                getActivity().runOnUiThread(() -> {
+                    dialog.hide();
+                    recyclerAdapter.setItems(items);
+                    foodInfoRecyclerView.setAdapter(recyclerAdapter);
+                });
+
             }
 
-            listCall.enqueue(new Callback<List<FoodResponse>>() {
-                @Override
-                public void onResponse(Call<List<FoodResponse>> call, Response<List<FoodResponse>> response) {
-                    Vector<FoodResponse> items = new Vector<>(response.body());
-                    new Thread(() ->
-                            database.katiDataDao().insert(new KatiData(KatiDatabase.AUTHORIZATION, response.headers().get(KatiDatabase.AUTHORIZATION)))).start();
-                    getActivity().runOnUiThread(() -> {
-                        dialog.hide();
-                        recyclerAdapter.setItems(items);
-                        foodInfoRecyclerView.setAdapter(recyclerAdapter);
-                    });
-
-                }
-
-                @Override
-                public void onFailure(Call<List<FoodResponse>> call, Throwable t) {
-                    getActivity().runOnUiThread(() -> {
-                        dialog.hide();
-                    });
-                    KatiDialog.simpleAlertDialog(getContext(),
-                            FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE,
-                            t.getMessage(), null,
-                            getContext().getResources().getColor(R.color.kati_coral, getContext().getTheme())
-                    ).showDialog();
-                }
-            });
-        }
+            @Override
+            public void onFailure(Call<List<FoodResponse>> call, Throwable t) {
+                getActivity().runOnUiThread(() -> {
+                    dialog.hide();
+                });
+                KatiDialog.simpleAlertDialog(getContext(),
+                        FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE,
+                        t.getMessage(), null,
+                        getContext().getResources().getColor(R.color.kati_coral, getContext().getTheme())
+                ).showDialog();
+            }
+        });
     }
+    
 
 
     /**
@@ -229,6 +227,12 @@ public class FoodSearchResultListFragment extends Fragment {
                 this.productName = itemView.findViewById(R.id.foodItem_productName);
                 this.companyName = itemView.findViewById(R.id.foodItem_companyName);
                 this.imageView = itemView.findViewById(R.id.foodItem_foodImageView);
+
+                itemView.setOnClickListener(v->{
+                    Intent intent= new Intent(getActivity(), NewDetailActivity.class);
+                    intent.putExtra("foodId",items.get(this.getAdapterPosition()).getFoodId());
+                    startActivity(intent);
+                });
             }
 
             /**
@@ -241,6 +245,7 @@ public class FoodSearchResultListFragment extends Fragment {
 
                 this.imageView.setOnClickListener(v -> {
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(imageAddress));
+
                     startActivity(intent);
                 });
 

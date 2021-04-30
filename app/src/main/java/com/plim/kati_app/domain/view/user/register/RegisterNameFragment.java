@@ -64,7 +64,9 @@ public class RegisterNameFragment extends AbstractFragment1 {
                     loadingDialog.hide();
                     Navigation.findNavController(getView()).navigate(R.id.action_register3Fragment_to_registerFinishedFragment); }
             }
-            @Override public void onFailure(Call<SignUpResponse> call, Throwable t) { Log.d("회원가입 실패! : 인터넷 연결을 확인해 주세요", t.getMessage()); }
+            @Override public void onFailure(Call<SignUpResponse> call, Throwable t) {
+                loadingDialog.hide();
+                Log.d("회원가입 실패! : 인터넷 연결을 확인해 주세요", t.getMessage()); }
         });
     }
 }

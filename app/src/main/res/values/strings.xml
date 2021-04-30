@@ -68,7 +68,7 @@
     <string name="mainActivity_searchTestButton_text">search</string>
     <string name="mainActivity_logOutTestButton_text">logout</string>
     <string name="mainActivity_detailTestButton_text">detail</string>
-<string name="mainActivity_changePWButton_text">changePW</string>
+    <string name="mainActivity_changePWButton_text">changePW</string>
 
     <!--    loadingDialog-->
     <string name="loadingDialog_textView_text">loading</string>
@@ -90,10 +90,19 @@
 
 
     <string name="tempActivity_mapButton_text">위치 정보</string>
-    <string name="foodSearchRecommendationFragment_deleteAllButton_text" >모두 지우기</string>
-    <string name="foodSearchRecommendationFragment_rankSearchWordTitle_text" >인기 검색어</string>
-    <string name="foodSearchRecommendationFragment_recentSearchWordTextView_text" >최근 검색어</string>
+    <string name="foodSearchRecommendationFragment_deleteAllButton_text">모두 지우기</string>
+    <string name="foodSearchRecommendationFragment_rankSearchWordTitle_text">인기 검색어</string>
+    <string name="foodSearchRecommendationFragment_recentSearchWordTextView_text">최근 검색어</string>
     <string name="foodSearchRecommendationFragment_emptyWordTextView_text">저장된 검색어가 없습니다.</string>
+    <string name="detailProductInfoFragment_buyButton_text" >온라인 구매처</string>
+    <string name="detailProductInfoFragment_writeReviewButton_text" >리뷰 작성하기</string>
+    <string name="reviewItem_reviewTextTextView_text" >리뷰 내용</string>
+    <string name="reviewItem_reviewLikeTextView" >120</string>
+    <string name="reviewItem_reviewScoreTextView_text" >3.0</string>
+    <string name="reviewItem_EditDateTextView_text">2021년 05월 01일 11시 00분 작성</string>
+    <string name="reviewItem_ProductNameTextView_text">제품명</string>
+
+
 </resources>
 
 
