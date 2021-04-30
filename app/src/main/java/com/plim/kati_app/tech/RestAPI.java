@@ -9,6 +9,7 @@ import com.plim.kati_app.domain.model.SignUpResponse;
 import com.plim.kati_app.domain.model.User;
 import com.plim.kati_app.domain.model.WithdrawResponse;
 import com.plim.kati_app.domain.view.user.login.LoginRequest;
+import com.plim.kati_app.domain.model.AdvertisementResponse;
 
 import java.util.List;
 
@@ -42,4 +43,6 @@ public interface RestAPI {
     @GET("/api/v1/food/findFood/foodDetail")
     Call<FoodDetailResponse> getFoodDetailByFoodId(@Query("foodId") Long foodId);
 
+    @GET("api/v1/advertisement/ads")
+    Call<List<AdvertisementResponse>> getAdFoodList();
 }

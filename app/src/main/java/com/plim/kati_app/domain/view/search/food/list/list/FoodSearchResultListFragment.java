@@ -164,6 +164,38 @@ public class FoodSearchResultListFragment extends Fragment {
                 ).showDialog();
             }
         });
+
+
+
+        Call<List<FoodResponse>> adListCall;
+            adListCall = service.getAdFoodList();
+
+        listCall.enqueue(new Callback<List<FoodResponse>>() {
+            @Override
+            public void onResponse(Call<List<FoodResponse>> call, Response<List<FoodResponse>> response) {
+                Vector<FoodResponse> items = new Vector<>(response.body());
+//                new Thread(() ->
+//                        database.katiDataDao().insert(new KatiData(KatiDatabase.AUTHORIZATION, response.headers().get(KatiDatabase.AUTHORIZATION)))).start();
+                getActivity().runOnUiThread(() -> {
+                    dialog.hide();
+                    recyclerAdapter.setItems(items);
+                    foodInfoRecyclerView.setAdapter(recyclerAdapter);
+                });
+
+            }
+
+            @Override
+            public void onFailure(Call<List<FoodResponse>> call, Throwable t) {
+                getActivity().runOnUiThread(() -> {
+                    dialog.hide();
+                });
+                KatiDialog.simpleAlertDialog(getContext(),
+                        FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE,
+                        t.getMessage(), null,
+                        getContext().getResources().getColor(R.color.kati_coral, getContext().getTheme())
+                ).showDialog();
+            }
+        });
     }
     
 
