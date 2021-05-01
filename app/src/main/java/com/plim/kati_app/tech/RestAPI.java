@@ -9,7 +9,7 @@ import com.plim.kati_app.domain.model.SignUpResponse;
 import com.plim.kati_app.domain.model.User;
 import com.plim.kati_app.domain.model.WithdrawResponse;
 import com.plim.kati_app.domain.view.user.login.LoginRequest;
-import com.plim.kati_app.domain.model.AdvertisementResponse;
+import com.plim.kati_app.domain.model.dto.AdvertisementResponse;
 
 import java.util.List;
 

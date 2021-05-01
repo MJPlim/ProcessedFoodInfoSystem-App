@@ -1,0 +1,15 @@
+package com.plim.kati_app.domain.model.dto;
+
+import com.plim.kati_app.domain.model.dto.entity.Food;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+
+@Getter
+@Builder
+@AllArgsConstructor
+public class AdvertisementResponse {
+    private final Long id;
+    private final Food food;
+}

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,8 +26,7 @@ import com.plim.kati_app.constants.Constant_yun;
 import com.plim.kati_app.domain.asset.KatiDialog;
 import com.plim.kati_app.domain.asset.LoadingDialog;
 import com.plim.kati_app.domain.model.FoodResponse;
-import com.plim.kati_app.domain.model.room.KatiData;
-import com.plim.kati_app.domain.model.room.KatiDatabase;
+import com.plim.kati_app.domain.model.dto.AdvertisementResponse;
 import com.plim.kati_app.domain.view.search.food.detail.NewDetailActivity;
 import com.plim.kati_app.domain.view.search.food.list.adapter.FoodInfoRecyclerViewAdapter;
 //import com.plim.kati_app.tech.GlideApp;
@@ -64,6 +64,7 @@ public class FoodSearchResultListFragment extends Fragment {
     private LoadingDialog dialog;
 
     private RecyclerAdapter recyclerAdapter;
+    private AdRecyclerAdapter adRecyclerAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -80,7 +81,7 @@ public class FoodSearchResultListFragment extends Fragment {
         this.adFoodInfoRecyclerView = view.findViewById(R.id.searchFragment_adFoodInfoRecyclerView);
         this.foodInfoRecyclerView = view.findViewById(R.id.searchFragment_foodInfoRecyclerView);
 
-
+        this.adRecyclerAdapter = new AdRecyclerAdapter();
         this.recyclerAdapter = new RecyclerAdapter();
 
         this.dialog = new LoadingDialog(getContext());
@@ -88,7 +89,7 @@ public class FoodSearchResultListFragment extends Fragment {
         this.foodInfoRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         this.foodInfoRecyclerView.setAdapter(new FoodInfoRecyclerViewAdapter(5));
         this.adFoodInfoRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        this.adFoodInfoRecyclerView.setAdapter(new FoodInfoRecyclerViewAdapter(1));
+        this.adFoodInfoRecyclerView.setAdapter(this.recyclerAdapter);
 
 
         this.getActivity().getSupportFragmentManager().setFragmentResultListener(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_KEY, getActivity(), new FragmentResultListener() {
@@ -109,8 +110,47 @@ public class FoodSearchResultListFragment extends Fragment {
     public void set(int index, String mode, String text) {
         foodSearchMode = mode;
         foodSearchText = text;
-        Thread thread = new Thread(()->this.search());
+        Thread thread = new Thread(() -> {this.search(); this.ad();});
         thread.start();
+    }
+
+    private void ad(){
+        Retrofit retrofit2 = new Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl(Constant.URL)
+                .build();
+        RestAPI service2 = retrofit2.create(RestAPI.class);
+        Call<List<AdvertisementResponse>> adListCall;
+        adListCall = service2.getAdFoodList();
+
+        adListCall.enqueue(new Callback<List<AdvertisementResponse>>() {
+            @Override
+            public void onResponse(Call<List<AdvertisementResponse>> call, Response<List<AdvertisementResponse>> response) {
+                Vector<AdvertisementResponse> items = new Vector<>(response.body());
+//                new Thread(() ->
+//                        database.katiDataDao().insert(new KatiData(KatiDatabase.AUTHORIZATION, response.headers().get(KatiDatabase.AUTHORIZATION)))).start();
+                getActivity().runOnUiThread(() -> {
+//                    dialog.hide();
+                    Log.d("광고 디버그","리스폰스 받음");
+                    adRecyclerAdapter.setItems(items);
+                    adFoodInfoRecyclerView.setAdapter(adRecyclerAdapter);
+                });
+
+            }
+
+            @Override
+            public void onFailure(Call<List<AdvertisementResponse>> call, Throwable t) {
+                getActivity().runOnUiThread(() -> {
+                    dialog.hide();
+                    Log.d("광고 디버그","실패"+t.getMessage());
+                });
+                KatiDialog.simpleAlertDialog(getContext(),
+                        FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE,
+                        t.getMessage(), null,
+                        getContext().getResources().getColor(R.color.kati_coral, getContext().getTheme())
+                ).showDialog();
+            }
+        });
     }
 
     /**
@@ -166,39 +206,96 @@ public class FoodSearchResultListFragment extends Fragment {
         });
 
 
-
-        Call<List<FoodResponse>> adListCall;
-            adListCall = service.getAdFoodList();
-
-        listCall.enqueue(new Callback<List<FoodResponse>>() {
-            @Override
-            public void onResponse(Call<List<FoodResponse>> call, Response<List<FoodResponse>> response) {
-                Vector<FoodResponse> items = new Vector<>(response.body());
-//                new Thread(() ->
-//                        database.katiDataDao().insert(new KatiData(KatiDatabase.AUTHORIZATION, response.headers().get(KatiDatabase.AUTHORIZATION)))).start();
-                getActivity().runOnUiThread(() -> {
-                    dialog.hide();
-                    recyclerAdapter.setItems(items);
-                    foodInfoRecyclerView.setAdapter(recyclerAdapter);
-                });
-
-            }
-
-            @Override
-            public void onFailure(Call<List<FoodResponse>> call, Throwable t) {
-                getActivity().runOnUiThread(() -> {
-                    dialog.hide();
-                });
-                KatiDialog.simpleAlertDialog(getContext(),
-                        FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE,
-                        t.getMessage(), null,
-                        getContext().getResources().getColor(R.color.kati_coral, getContext().getTheme())
-                ).showDialog();
-            }
-        });
     }
-    
 
+    /**
+     * 어댑터 클래스.
+     */
+    private class AdRecyclerAdapter extends RecyclerView.Adapter {
+
+        private Vector<AdvertisementResponse> items;
+
+        private AdRecyclerAdapter() {
+            items = new Vector<AdvertisementResponse>();
+        }
+
+        @NonNull
+        @Override
+        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            Context context = parent.getContext();
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View view = inflater.inflate(R.layout.item_food, parent, false);
+            AdRecyclerViewViewHolder rankRecyclerViewViewHolder = new AdRecyclerViewViewHolder(view);
+
+            return rankRecyclerViewViewHolder;
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+            AdvertisementResponse item = items.get(position);
+            ((AdRecyclerViewViewHolder) holder).setValue(item);
+        }
+
+        @Override
+        public int getItemCount() {
+            return items.size();
+        }
+
+        public void clearItems() {
+            this.items = new Vector<>();
+        }
+
+        public void addItems(Vector<AdvertisementResponse> items) {
+            this.items.addAll(items);
+        }
+
+        public void setItems(Vector<AdvertisementResponse> items) {
+            this.clearItems();
+            this.addItems(items);
+        }
+
+        /**
+         * 뷰 홀더.
+         */
+        private class AdRecyclerViewViewHolder extends RecyclerView.ViewHolder {
+            private ImageView imageView;
+            private TextView productName, companyName;
+            private String imageAddress;
+
+            public AdRecyclerViewViewHolder(@NonNull View itemView) {
+                super(itemView);
+                this.productName = itemView.findViewById(R.id.foodItem_productName);
+                this.companyName = itemView.findViewById(R.id.foodItem_companyName);
+                this.imageView = itemView.findViewById(R.id.foodItem_foodImageView);
+
+                itemView.setOnClickListener(v -> {
+                    Intent intent = new Intent(getActivity(), NewDetailActivity.class);
+                    intent.putExtra("foodId", items.get(this.getAdapterPosition()).getFood().getId());
+                    startActivity(intent);
+                });
+            }
+
+            /**
+             * 각 값을 설정한다.
+             *
+             * @param item
+             */
+            public void setValue(@NotNull AdvertisementResponse item) {
+                this.imageAddress = item.getFood().getFoodImage().getFoodImageAddress();
+                Glide.with(getContext()).load(this.imageAddress).fitCenter().transform(new CenterCrop(), new CircleCrop()).into(imageView);
+
+                this.imageView.setOnClickListener(v -> {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(imageAddress));
+
+                    startActivity(intent);
+                });
+
+                this.productName.setText(item.getFood().getFoodName());
+                this.companyName.setText(item.getFood().getManufacturerName());
+            }
+        }
+    }
+    /////////////////
 
     /**
      * 어댑터 클래스.
@@ -260,15 +357,16 @@ public class FoodSearchResultListFragment extends Fragment {
                 this.companyName = itemView.findViewById(R.id.foodItem_companyName);
                 this.imageView = itemView.findViewById(R.id.foodItem_foodImageView);
 
-                itemView.setOnClickListener(v->{
-                    Intent intent= new Intent(getActivity(), NewDetailActivity.class);
-                    intent.putExtra("foodId",items.get(this.getAdapterPosition()).getFoodId());
+                itemView.setOnClickListener(v -> {
+                    Intent intent = new Intent(getActivity(), NewDetailActivity.class);
+                    intent.putExtra("foodId", items.get(this.getAdapterPosition()).getFoodId());
                     startActivity(intent);
                 });
             }
 
             /**
              * 각 값을 설정한다.
+             *
              * @param item
              */
             public void setValue(@NotNull FoodResponse item) {
