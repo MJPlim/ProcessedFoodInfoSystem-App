@@ -213,6 +213,7 @@ public class FoodSearchResultListFragment extends Fragment {
      */
     private class AdRecyclerAdapter extends RecyclerView.Adapter {
 
+
         private Vector<AdvertisementResponse> items;
 
         private AdRecyclerAdapter() {

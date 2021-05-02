@@ -1,5 +1,7 @@
 package com.plim.kati_app.tech;
 
+import com.plim.kati_app.domain.model.ModifyPasswordRequest;
+import com.plim.kati_app.domain.model.ModifyPasswordResponse;
 import com.plim.kati_app.domain.model.FindPasswordRequest;
 import com.plim.kati_app.domain.model.FindPasswordResponse;
 import com.plim.kati_app.domain.model.dto.FoodDetailResponse;
@@ -29,6 +31,9 @@ public interface RestAPI {
 
     @POST("find-password")
     Call<FindPasswordResponse> findPassword(@Body FindPasswordRequest request);
+
+    @POST("modify-password")
+    Call<ModifyPasswordResponse> ChangePassword(@Body ModifyPasswordRequest request);
 
 
     @POST("login")
