@@ -6,7 +6,7 @@
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/abstractRegisterLayout_mainTextView"
+        android:id="@+id/abstractRegisterLayout2_mainTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="64dp"
@@ -14,12 +14,12 @@
         android:textColor="@color/black"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/abstractRegisterLayout_editText"
+        app:layout_constraintBottom_toTopOf="@+id/abstractRegisterLayout2_editText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/abstractRegisterLayout_subTextView"
+        android:id="@+id/abstractRegisterLayout2_subTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Sub Text"
@@ -28,21 +28,36 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/abstractRegisterLayout_mainTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/abstractRegisterLayout2_mainTextView" />
 
     <EditText
-        android:id="@+id/abstractRegisterLayout_editText"
+        android:id="@+id/abstractRegisterLayout2_editText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="@color/kati_coral"
+        android:hint="Edit Text"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/abstractRegisterLayout2_editText2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/abstractRegisterLayout2_editText2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="64dp"
         android:backgroundTint="@color/kati_coral"
         android:hint="Edit Text"
-        app:layout_constraintBottom_toTopOf="@+id/abstractRegisterLayout_button"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/abstractRegisterLayout2_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+
+
     <Button
-        android:id="@+id/abstractRegisterLayout_button"
+        android:id="@+id/abstractRegisterLayout2_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/kati_red"

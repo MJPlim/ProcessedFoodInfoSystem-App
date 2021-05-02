@@ -168,7 +168,7 @@ public class FoodSearchResultListFragment extends Fragment {
 
 
         Call<List<FoodResponse>> adListCall;
-            adListCall = service.getAdFoodList();
+
 
         listCall.enqueue(new Callback<List<FoodResponse>>() {
             @Override

@@ -2,6 +2,7 @@ package com.plim.kati_app.domain.view.user.findPW;
 
 import android.content.Intent;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.navigation.Navigation;
 
@@ -86,6 +87,7 @@ public class FindPasswordEmailInputFragment extends AbstractFragment1 {
                 public void onResponse(Call<FindPasswordResponse> call, Response<FindPasswordResponse> response) {
                     getActivity().runOnUiThread(()->{loadingDialog.hide();});
                     if (!response.isSuccessful()) {
+
                             showNoUserDialog();
                     } else {
                         FindPasswordResponse result = response.body();
