@@ -17,6 +17,7 @@ import com.plim.kati_app.domain.model.ModifyPasswordResponse;
 import com.plim.kati_app.domain.model.room.KatiData;
 import com.plim.kati_app.domain.model.room.KatiDatabase;
 import com.plim.kati_app.domain.view.MainActivity;
+import com.plim.kati_app.domain.view.user.logOut.LogOutActivity;
 import com.plim.kati_app.tech.RestAPI;
 import com.plim.kati_app.tech.RestAPIClient;
 
@@ -34,6 +35,7 @@ public class ChangePasswordInputFragment extends AbstractFragment2 {
 
     private LoadingDialog loadingDialog;
     KatiDatabase database = KatiDatabase.getAppDatabase(getContext());
+
     @Override
     protected void initializeView() {
         this.mainTextView.setText(CHANGE_PASSWORD_TITLE);
@@ -59,18 +61,22 @@ public class ChangePasswordInputFragment extends AbstractFragment2 {
         KatiDialog.simpleAlertDialog(getContext(),
                 LOG_OUT_ACTIVITY_FAILURE_DIALOG_TITLE,
                 LOG_OUT_ACTIVITY_FAILURE_DIALOG_TITLE,
-                (dialog, which) -> { Intent intent = new Intent(getActivity(), MainActivity.class);startActivity(intent);
+                (dialog, which) -> {
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    startActivity(intent);
                 }, getResources().getColor(R.color.kati_coral, getContext().getTheme())).showDialog();
     }
 
     @Override
     protected void buttonClicked() {
-        if(this.loadingDialog==null)    this.loadingDialog=new LoadingDialog(this.getContext());
+        if (this.loadingDialog == null) this.loadingDialog = new LoadingDialog(this.getContext());
         Thread thread = new Thread(() -> {
-            getActivity().runOnUiThread(()->{loadingDialog.show();});
+            getActivity().runOnUiThread(() -> {
+                loadingDialog.show();
+            });
 
             // THIS IS TEST! Get Data From View Model
-            ModifyPasswordRequest request= new ModifyPasswordRequest();
+            ModifyPasswordRequest request = new ModifyPasswordRequest();
             request.setBeforePassword(this.editText.getText().toString());
             request.setAfterPassword(this.editText2.getText().toString());
 
@@ -82,45 +88,54 @@ public class ChangePasswordInputFragment extends AbstractFragment2 {
                     .baseUrl(Constant.URL)
                     .build();
             RestAPI service = retrofit.create(RestAPI.class);
-            Call<ModifyPasswordResponse> listCall= RestAPIClient.getApiService2(token).ChangePassword(request);
+            Call<ModifyPasswordResponse> listCall = RestAPIClient.getApiService2(token).ChangePassword(request);
             listCall.enqueue(new Callback<ModifyPasswordResponse>() {
                 @Override
                 public void onResponse(Call<ModifyPasswordResponse> call, Response<ModifyPasswordResponse> response) {
-                    getActivity().runOnUiThread(()->{loadingDialog.hide();});
+                    getActivity().runOnUiThread(() -> {
+                        loadingDialog.hide();
+                    });
                     ModifyPasswordResponse result = response.body();
                     if (!response.isSuccessful()) {
                         try {
                             JSONObject jObjError = new JSONObject(response.errorBody().string());
                             Toast.makeText(getContext(), jObjError.getString("error-message"), Toast.LENGTH_LONG).show();
-                        } catch (Exception e) { Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show(); }
+                        } catch (Exception e) {
+                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
 
                     } else {
+                        getActivity().runOnUiThread(() -> {
+                            showCompletedDialog();
 
-//
-
-                        getActivity().runOnUiThread(() ->showCompletedDialog());
+                        });
 
                     }
                 }
 
                 @Override
                 public void onFailure(Call<ModifyPasswordResponse> call, Throwable t) {
-                    getActivity().runOnUiThread(()->{loadingDialog.hide();});
+                    getActivity().runOnUiThread(() -> {
+                        loadingDialog.hide();
+                    });
 //                    Log.d(getStringOfId(R.string.withdrawalPasswordInputFragment_log_pleaseCheckInternet), t.getMessage());
-
                 }
             });
         });
         thread.start();
     }
 
+    private void moveToLogOutActivity() {
+        Intent intent = new Intent(this.getActivity(), LogOutActivity.class);
+        startActivity(intent);
+    }
 
 
     private void showCompletedDialog() {
         KatiDialog signOutAskDialog = new KatiDialog(this.getContext());
         signOutAskDialog.setTitle(COMPLETE_CHANGE_PASSWORD_TITLE);
         signOutAskDialog.setMessage(COMPLETE_CHANGE_PASSWORD_MESSAGE);
-        signOutAskDialog.setPositiveButton(DIALOG_CONFIRM, (dialog, which) -> this.startActivity(new Intent(getActivity(), MainActivity.class)));
+        signOutAskDialog.setPositiveButton(DIALOG_CONFIRM, (dialog, which) ->  moveToLogOutActivity());
         signOutAskDialog.setColor(this.getResources().getColor(R.color.kati_coral, this.getActivity().getTheme()));
         signOutAskDialog.showDialog();
     }

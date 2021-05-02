@@ -57,6 +57,7 @@ public class RegisterNameFragment extends AbstractFragment1 {
             public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
                 if(!response.isSuccessful()){
                     try {
+                        loadingDialog.hide();
                         JSONObject jObjError = new JSONObject(response.errorBody().string());
                         Toast.makeText(getContext(), jObjError.getString("error-message"), Toast.LENGTH_LONG).show();
                     } catch (Exception e) { Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show(); }

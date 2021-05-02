@@ -35,7 +35,6 @@ public interface RestAPI {
     @POST("modify-password")
     Call<ModifyPasswordResponse> ChangePassword(@Body ModifyPasswordRequest request);
 
-
     @POST("login")
     Call<LoginRequest> postRetrofitData(@Body LoginRequest loginRequest);
 

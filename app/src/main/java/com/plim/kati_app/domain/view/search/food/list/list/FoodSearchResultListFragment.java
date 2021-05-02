@@ -287,7 +287,6 @@ public class FoodSearchResultListFragment extends Fragment {
 
                 this.imageView.setOnClickListener(v -> {
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(imageAddress));
-
                     startActivity(intent);
                 });
 
