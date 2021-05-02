@@ -33,21 +33,16 @@ public class GoogleLoginActivity extends AppCompatActivity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        Log.d("로그인", "On Create");
-
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         // 구글 로그인 여부 확인
-        Log.d("로그인", "구글 로그인 여부 확인");
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         if(account != null){
             // 로그인 된 상태
@@ -58,7 +53,6 @@ public class GoogleLoginActivity extends AppCompatActivity {
     }
 
     public void signIn() {
-        Log.d("로그인", "signIn 시작");
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
 }
@@ -66,7 +60,6 @@ public class GoogleLoginActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.d("로그인", "result 확인");
         // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             // The Task returned from this call is always completed, no need to attach
@@ -82,7 +75,6 @@ public class GoogleLoginActivity extends AppCompatActivity {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             Toast.makeText(this, account.getEmail() + account.getGivenName(), Toast.LENGTH_SHORT).show();
             // Signed in successfully, show authenticated UI.
-            Log.d("로그인", "메인 액티비티 돌아가기" + account.getEmail());
             startMainActivity();
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
@@ -92,8 +84,6 @@ public class GoogleLoginActivity extends AppCompatActivity {
     }
 
     public void signOut() {
-        Log.d("로그인", "구글 로그아웃");
-
         mGoogleSignInClient.signOut()
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
                     @Override
