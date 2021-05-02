@@ -7,40 +7,7 @@
     >
 
 
-    <ImageView
-        android:id="@+id/imageFood"
-        android:layout_width="200dp"
-        android:layout_height="240dp"
-        android:background="@drawable/food_round_rect"
-        android:padding="10dp"
-        android:layout_marginTop="30dp"
 
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/icon" />
-
-    <ImageView
-        android:id="@+id/foodItem_shareImageView"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginLeft="15dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageFood"
-        app:layout_constraintStart_toEndOf="@+id/imageFood"
-
-        app:srcCompat="@drawable/share_icon"
-        app:tint="@color/black" />
-
-    <ImageView
-        android:id="@+id/foodItem_favoriteImageView"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginLeft="15dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageFood"
-        app:layout_constraintStart_toEndOf="@+id/foodItem_shareImageView"
-
-        app:srcCompat="@drawable/ic_baseline_favorite_border_24"
-        app:tint="@color/black" />
 
     <TableLayout
         android:layout_width="0dp"
@@ -50,7 +17,8 @@
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageFood"
+        app:layout_constraintTop_toTopOf="parent"
+
 
         android:background="@color/kati_yellow"
         android:padding="0dp"
@@ -65,7 +33,7 @@
             android:paddingBottom="1dp">
 
             <TextView
-                android:layout_width="5dp"
+                android:layout_width="50dp"
                 android:layout_height="42dp"
                 android:layout_marginRight="0dp"
                 android:gravity="center"
@@ -73,7 +41,7 @@
                 android:textColor="@color/black"
                 android:background="@color/kati_yellow"
 
-                android:text="제품정보 " />
+                android:text="성분 및 원재료 " />
 
             <TextView
                 android:layout_width="5dp"
@@ -223,7 +191,7 @@
             android:paddingRight="0dp"
             android:paddingLeft="0dp"
             android:paddingTop="1dp"
-            android:paddingBottom="1dp">
+            android:paddingBottom="2dp">
 
             <TextView
                 android:layout_width="5dp"
@@ -248,78 +216,10 @@
                 android:text="input text" />
 
         </TableRow>
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingRight="0dp"
-            android:paddingLeft="0dp"
-            android:paddingTop="1dp"
-            android:paddingBottom="1dp">
 
-            <TextView
-                android:layout_width="5dp"
-                android:layout_height="42dp"
-                android:layout_marginRight="2dp"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:textColor="@color/black"
-                android:background="@color/white"
-
-                android:text="가격" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="42dp"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:textColor="@color/black"
-                android:background="@color/white"
-
-                android:layout_span="2"
-                android:layout_marginRight="0dp"
-                android:text="input text" />
-        </TableRow>
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingRight="0dp"
-            android:paddingLeft="0dp"
-            android:paddingTop="1dp"
-            android:paddingBottom="2dp">
-
-            <TextView
-                android:layout_width="5dp"
-                android:layout_height="42dp"
-                android:layout_marginRight="2dp"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:textColor="@color/black"
-                android:background="@color/white"
-
-                android:text="판매처" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="42dp"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:textColor="@color/black"
-                android:background="@color/white"
-                android:layout_span="2"
-                android:layout_marginRight="0dp"
-                android:text="input text" />
-        </TableRow>
 
     </TableLayout>
-    <Button
-        android:id="@+id/registerTest"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="오프라인 판매처 찾기"
-        android:layout_margin="20dp"
-        android:backgroundTint="@color/kati_orange"
-        app:layout_constraintTop_toBottomOf="@+id/foodItem_detailTable"
-        />
+
 
 
 
