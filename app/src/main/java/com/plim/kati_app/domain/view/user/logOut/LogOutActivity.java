@@ -6,12 +6,15 @@ import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.plim.kati_app.R;
 import com.plim.kati_app.constants.Constant_yun;
 import com.plim.kati_app.domain.model.room.KatiData;
 import com.plim.kati_app.domain.model.room.KatiDatabase;
 import com.plim.kati_app.domain.view.MainActivity;
 import com.plim.kati_app.domain.asset.KatiDialog;
+import com.plim.kati_app.domain.view.user.login.GoogleLoginActivity;
 
 /**
  * 로그아웃하는 액티비티.
@@ -27,6 +30,12 @@ public class LogOutActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        if(account != null){
+            // 로그인 된 상태
+            Intent intent = new Intent(this, GoogleLoginActivity.class);
+            startActivity(intent);
+        }
 
         //저장되어있는 사용자 토큰 존재 여부로 로그인 여부를 확인
         Thread thread = new Thread(()->{

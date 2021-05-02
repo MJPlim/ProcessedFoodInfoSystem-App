@@ -40,6 +40,7 @@
         <activity android:name=".domain.view.user.register.RegisterActivity" />
         <activity android:name=".domain.view.user.logOut.LogOutActivity" />
         <activity android:name=".domain.view.user.login.LoginActivity" />
+        <activity android:name=".domain.view.user.login.GoogleLoginActivity" />
         <activity android:name=".domain.view.search.food.detail.DetailActivity" />
 
         <service
