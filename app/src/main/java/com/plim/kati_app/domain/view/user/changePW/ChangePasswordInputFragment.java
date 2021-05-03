@@ -128,6 +128,7 @@ public class ChangePasswordInputFragment extends AbstractFragment2 {
             });
             thread.start();
         }else{
+            //빼세요
             Toast.makeText(getContext(), "새 비밀번호를 동일하게 입력해 주세요.", Toast.LENGTH_LONG).show();
         }
     }

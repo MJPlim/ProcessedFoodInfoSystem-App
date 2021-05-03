@@ -99,11 +99,11 @@
     <string name="foodSearchRecommendationFragment_rankSearchWordTitle_text">인기 검색어</string>
     <string name="foodSearchRecommendationFragment_recentSearchWordTextView_text">최근 검색어</string>
     <string name="foodSearchRecommendationFragment_emptyWordTextView_text">저장된 검색어가 없습니다.</string>
-    <string name="detailProductInfoFragment_buyButton_text" >온라인 구매처</string>
-    <string name="detailProductInfoFragment_writeReviewButton_text" >리뷰 작성하기</string>
-    <string name="reviewItem_reviewTextTextView_text" >리뷰 내용</string>
-    <string name="reviewItem_reviewLikeTextView" >120</string>
-    <string name="reviewItem_reviewScoreTextView_text" >3.0</string>
+    <string name="detailProductInfoFragment_buyButton_text">온라인 구매처</string>
+    <string name="detailProductInfoFragment_writeReviewButton_text">리뷰 작성하기</string>
+    <string name="reviewItem_reviewTextTextView_text">리뷰 내용</string>
+    <string name="reviewItem_reviewLikeTextView">120</string>
+    <string name="reviewItem_reviewScoreTextView_text">3.0</string>
     <string name="reviewItem_EditDateTextView_text">2021년 05월 01일 11시 00분 작성</string>
     <string name="reviewItem_ProductNameTextView_text">제품명</string>
 
