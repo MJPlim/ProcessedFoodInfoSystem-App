@@ -17,7 +17,7 @@ public abstract class AbstractFragment2 extends Fragment {
     // Associate
         // View
         protected TextView mainTextView, subTextView;
-        protected EditText editText,editText2;
+        protected EditText editText,editText2,editText3;
         protected Button button;
 
     /**
@@ -36,6 +36,7 @@ public abstract class AbstractFragment2 extends Fragment {
         this.subTextView = view.findViewById(R.id.abstractRegisterLayout2_subTextView);
         this.editText = view.findViewById(R.id.abstractRegisterLayout2_editText);
         this.editText2 = view.findViewById(R.id.abstractRegisterLayout2_editText2);
+        this.editText3 = view.findViewById(R.id.abstractRegisterLayout2_editText3);
         this.button = view.findViewById(R.id.abstractRegisterLayout2_button);
 
         // Initialize View

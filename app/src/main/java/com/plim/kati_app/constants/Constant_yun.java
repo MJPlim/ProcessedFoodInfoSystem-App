@@ -43,7 +43,8 @@ public class Constant_yun {
     public static final String COMPLETE_CHANGE_PASSWORD_TITLE="비밀번호 변경이 완료되었습니다.";
     public static final String COMPLETE_CHANGE_PASSWORD_MESSAGE="변경된 비밀번호로 다시 로그인 해주세요.";
     public static final String BEFORE_PASSWORD_HINT="현재 비밀번호";
-    public static final String AFTER_PASSWORD_HINT="바꾸실 비밀번호";
+    public static final String AFTER_PASSWORD_HINT="새 비밀번호";
+    public static final String AFTER_PASSWORD_HINT2="새 비밀번호 확인";
 
 
     //allergyViewFragment
