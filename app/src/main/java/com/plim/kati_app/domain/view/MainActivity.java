@@ -1,27 +1,21 @@
 package com.plim.kati_app.domain.view;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
+import android.service.notification.NotificationListenerService;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.Task;
 import com.plim.kati_app.R;
 import com.plim.kati_app.constants.Constant_yun;
 import com.plim.kati_app.domain.asset.KatiDialog;
 import com.plim.kati_app.domain.service.AutoLoginService;
+import com.plim.kati_app.domain.view.rank.RankingActivity;
 import com.plim.kati_app.domain.view.search.food.list.FoodSearchActivity;
 import com.plim.kati_app.domain.view.search.food.detail.DetailActivity;
 import com.plim.kati_app.domain.view.user.changePW.ChangePasswordActivity;
+import com.plim.kati_app.domain.view.user.dataChange.UserDataChangeActivity;
 import com.plim.kati_app.domain.view.user.login.LoginActivity;
+import com.plim.kati_app.domain.view.user.myPage.UserMyPageActivity;
 import com.plim.kati_app.domain.view.user.signOut.TempActivity;
 
 /**
@@ -41,8 +35,9 @@ public class MainActivity extends AppCompatActivity { // a test
         this.findViewById(R.id.mainActivity_tempButton).setOnClickListener(v -> this.startActivity(new Intent(this, TempActivity.class)));
         this.findViewById(R.id.mainActivity_loginTestButton).setOnClickListener(v -> this.startActivity(new Intent(this, LoginActivity.class)));
         this.findViewById(R.id.mainActivity_searchTestButton).setOnClickListener(v -> this.startActivity(new Intent(this, FoodSearchActivity.class)));
-        this.findViewById(R.id.mainActivity_changePWButton).setOnClickListener(v -> this.startActivity(new Intent(this, ChangePasswordActivity.class)));
-        this.findViewById(R.id.mainActivity_detailTestButton).setOnClickListener(v -> this.startActivity(new Intent(this, DetailActivity.class)));
+        this.findViewById(R.id.mainActivity_myPageTestButton).setOnClickListener(v -> this.startActivity(new Intent(this, UserMyPageActivity.class)));
+        this.findViewById(R.id.mainActivity_userDataChangeTestButton).setOnClickListener(v->this.startActivity(new Intent(this, UserDataChangeActivity.class)));
+        this.findViewById(R.id.mainActivity_RankingTestButton).setOnClickListener(v -> this.startActivity(new Intent(this, RankingActivity.class)));
 
         //start AutoLogin service
         this.intent=new Intent(this, AutoLoginService.class);
