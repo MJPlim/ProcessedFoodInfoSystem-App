@@ -9,9 +9,10 @@
         android:id="@+id/loginActivity_logoImage"
         android:layout_width="126dp"
         android:layout_height="129dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="48dp"
         android:src="@drawable/plim_logo"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -75,18 +76,16 @@
         app:layout_constraintStart_toEndOf="@+id/loginActivity_idSaveCheckBox"
         app:layout_constraintTop_toBottomOf="@+id/loginActivity_loginButton" />
 
-    <Button
-        android:id="@+id/loginActivity_idFindButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="#00ff0000"
-        android:text="@string/find_id_button"
-        android:textColor="#000000"
+    <View
+        android:id="@+id/view7"
+        android:layout_width="1dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="15dp"
+        android:background="#BBBBBB"
         app:layout_constraintEnd_toStartOf="@+id/loginActivity_pwFindButton"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginActivity_idSaveCheckBox" />
+        app:layout_constraintStart_toEndOf="@+id/loginActivity_idFindButton"
+        app:layout_constraintTop_toTopOf="@+id/loginActivity_idFindButton" />
 
     <Button
         android:id="@+id/loginActivity_pwFindButton"
@@ -95,46 +94,87 @@
         android:background="#00ff0000"
         android:text="@string/find_pw_button"
         android:textColor="#000000"
+        app:layout_constraintEnd_toStartOf="@+id/view5"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/view7"
+        app:layout_constraintTop_toTopOf="@+id/loginActivity_idFindButton" />
+
+    <View
+        android:id="@+id/view5"
+        android:layout_width="1dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="15dp"
+        android:background="#BBBBBB"
         app:layout_constraintEnd_toStartOf="@+id/loginActivity_accountCreateButton"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/loginActivity_idFindButton"
+        app:layout_constraintStart_toEndOf="@+id/loginActivity_pwFindButton"
         app:layout_constraintTop_toTopOf="@+id/loginActivity_idFindButton" />
 
     <Button
         android:id="@+id/loginActivity_accountCreateButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
         android:background="#00ff0000"
         android:text="@string/singup_button"
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/loginActivity_pwFindButton"
+        app:layout_constraintStart_toEndOf="@+id/view5"
         app:layout_constraintTop_toTopOf="@+id/loginActivity_pwFindButton" />
+
+    <Button
+        android:id="@+id/loginActivity_idFindButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="10dp"
+        android:background="#00ff0000"
+        android:text="@string/find_id_button"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toStartOf="@+id/view7"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginActivity_idSaveCheckBox" />
 
     <View
         android:id="@+id/view2"
         android:layout_width="match_parent"
         android:layout_height="2dp"
+        android:layout_marginTop="30dp"
         android:background="@color/kati_coral"
-        app:layout_constraintBottom_toTopOf="@+id/textView6"
+        app:layout_constraintBottom_toTopOf="@+id/social_login_button_google"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginActivity_idFindButton" />
 
-    <Button
-        android:id="@+id/textView6"
-        android:layout_width="221dp"
-        android:layout_height="59dp"
-        android:backgroundTint="@color/kati_red"
-        android:padding="15dp"
-        android:text="@string/social_login"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/social_login_button_kakao"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/white_rect"
+        android:drawableLeft="@drawable/kakao_icon"
+        android:padding="10dp"
+        android:text="@string/kakao_login"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/social_login_button_google" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/social_login_button_google"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/white_rect"
+        android:drawableLeft="@drawable/google_icon"
+        android:padding="10dp"
+        android:text="@string/google_login"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/social_login_button_kakao"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view2" />
 

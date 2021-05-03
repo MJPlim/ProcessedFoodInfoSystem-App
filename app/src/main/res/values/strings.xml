@@ -10,7 +10,6 @@
     <string name="find_id_button">아이디 찾기</string>
     <string name="find_pw_button">비밀번호 찾기</string>
     <string name="singup_button">회원가입</string>
-    <string name="social_login">소셜 계정으로 간편 로그인</string>
 
     <string name="button_ok">확인</string>
 
@@ -22,6 +21,8 @@
     <string name="login_failed_dialog">해당하는 유저가 없습니다.</string>
     <string name="login_failed_content_dialog">잘못 입력하였거나 해당하는 유저를 찾을 수 없습니다.</string>
     <string name="title_activity_log_out">LogOutActivity</string>
+    <string name="kakao_login">카카오로 로그인</string>
+    <string name="google_login">Google로 로그인</string>
 
     <!-- RegisterEmailFragment !-->
     <string name="register_email_maintext">이메일을 입력해주세요</string>
@@ -39,6 +40,10 @@
     <!-- RegisterPasswordFragment !-->
     <string name="register_password_maintext">비밀번호를 입력해주세요</string>
     <string name="register_password_hint">6자리 이상, 숫자+알파벳 조합</string>
+
+    <!-- GoogleLoginActivity !-->
+    <string name="google_logout_maintext">구글 계정 로그아웃</string>
+    <string name="google_logout_subtext">구글 계정이 정상적으로 로그아웃 되었습니다.</string>
 
     <!--
     This string is used for square devices and overridden by hello_world in

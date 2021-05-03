@@ -10,8 +10,15 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 import com.plim.kati_app.R;
 import com.plim.kati_app.domain.asset.KatiDialog;
 import com.plim.kati_app.domain.model.room.KatiData;
@@ -32,7 +39,7 @@ public class LoginHomeFragment extends Fragment {
     // Associate
     // View
     private EditText idText, pwText;
-    private Button loginButton, idFindButton, pwFindButton, accountCreateButton;
+    private Button loginButton, idFindButton, pwFindButton, accountCreateButton, social_login_button_kakao, social_login_button_google;
     private CheckBox autologinCheckBox;
 
     /**
@@ -54,12 +61,12 @@ public class LoginHomeFragment extends Fragment {
         this.pwFindButton = view.findViewById(R.id.loginActivity_pwFindButton);
         this.accountCreateButton = view.findViewById(R.id.loginActivity_accountCreateButton);
         this.autologinCheckBox=view.findViewById(R.id.loginActivity_autologinCheckBox);
+        this.social_login_button_kakao = view.findViewById(R.id.social_login_button_kakao);
+        this.social_login_button_google = view.findViewById(R.id.social_login_button_google);
 
         //디버그 시 입력 귀찮아서 미리 입력해놓는 코드. 주석 해놓을 것.
 //        this.idText.setText("remember@rem.com");
 //        this.pwText.setText("1234");
-
-        this.pwFindButton.setOnClickListener(v->this.startActivity(new Intent(this.getContext(), FindPasswordActivity.class)));
 
         new Thread(() -> {
             KatiDatabase database = KatiDatabase.getAppDatabase(this.getContext());
@@ -74,25 +81,48 @@ public class LoginHomeFragment extends Fragment {
         this.autologinCheckBox.setOnClickListener((v -> {
             this.setAutoLogin();
         }));
-
-        /*
-         * 회원가입 버튼 클릭
-         */
-        this.accountCreateButton.setOnClickListener(v -> {
-            this.startActivity(new Intent(getContext(), RegisterActivity.class));
-        });
-
-        /*
+         /*
          * 로그인 버튼 클릭
          * 401 -> 인증 실패
          * 500 -> 서버 오류
          * 200 -> 인증 성공
          * */
-        this.loginButton.setOnClickListener(v -> {
-            new Thread(()->{
-                this.retrofitLogin();
-            }).start();
-        });
+        View.OnClickListener onClickListener = new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()){
+                    case R.id.loginActivity_accountCreateButton:
+                        startActivity(new Intent(getContext(), RegisterActivity.class));
+                        break;
+                    case R.id.loginActivity_pwFindButton:
+                        startActivity(new Intent(getContext(), FindPasswordActivity.class));
+                    case R.id.loginActivity_loginButton:
+                        retrofitLogin();
+                        break;
+                    case R.id.social_login_button_google:
+                        googleLogin();
+                        break;
+                    case R.id.social_login_button_kakao:
+                        kakaoLogin();
+                        break;
+                }
+            }
+        };
+
+        this.accountCreateButton.setOnClickListener(onClickListener);
+        this.pwFindButton.setOnClickListener(onClickListener);
+        this.loginButton.setOnClickListener(onClickListener);
+        this.social_login_button_google.setOnClickListener(onClickListener);
+        this.social_login_button_kakao.setOnClickListener(onClickListener);
+    }
+
+    private void kakaoLogin() {
+    }
+
+    private void googleLogin() {
+        Log.d("로그인", "구글 로그인 시작");
+        Intent intent = new Intent(getContext(), GoogleLoginActivity.class);
+        startActivity(intent);
     }
 
     /**

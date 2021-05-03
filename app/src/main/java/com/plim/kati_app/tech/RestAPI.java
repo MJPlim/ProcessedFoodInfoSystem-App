@@ -1,5 +1,7 @@
 package com.plim.kati_app.tech;
 
+import com.plim.kati_app.domain.model.ModifyPasswordRequest;
+import com.plim.kati_app.domain.model.ModifyPasswordResponse;
 import com.plim.kati_app.domain.model.FindPasswordRequest;
 import com.plim.kati_app.domain.model.FindPasswordResponse;
 import com.plim.kati_app.domain.model.dto.FoodDetailResponse;
@@ -9,6 +11,7 @@ import com.plim.kati_app.domain.model.SignUpResponse;
 import com.plim.kati_app.domain.model.User;
 import com.plim.kati_app.domain.model.WithdrawResponse;
 import com.plim.kati_app.domain.view.user.login.LoginRequest;
+import com.plim.kati_app.domain.model.dto.AdvertisementResponse;
 
 import java.util.List;
 
@@ -29,6 +32,8 @@ public interface RestAPI {
     @POST("find-password")
     Call<FindPasswordResponse> findPassword(@Body FindPasswordRequest request);
 
+    @POST("modify-password")
+    Call<ModifyPasswordResponse> ChangePassword(@Body ModifyPasswordRequest request);
 
     @POST("login")
     Call<LoginRequest> postRetrofitData(@Body LoginRequest loginRequest);
@@ -42,4 +47,9 @@ public interface RestAPI {
     @GET("/api/v1/food/findFood/foodDetail")
     Call<FoodDetailResponse> getFoodDetailByFoodId(@Query("foodId") Long foodId);
 
+    @GET("/api/v1/advertisement/foodDetail")
+    Call<FoodDetailResponse> getAdFoodDetail(@Query("adId") Long adId);
+
+    @GET("api/v1/advertisement/ads")
+    Call<List<AdvertisementResponse>> getAdFoodList();
 }

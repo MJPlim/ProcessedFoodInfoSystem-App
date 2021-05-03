@@ -22,7 +22,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAH63IC9w2B6lP4RYw05b7qAyNja8gOyjU" />
 
-        <activity android:name=".domain.view.user.changePW.ChangePasswordActivity" />
+
         <activity android:name=".domain.view.search.map.MapServiceActivity" />
         <activity android:name=".domain.view.user.findPW.FindPasswordActivity" />
         <activity
@@ -40,7 +40,9 @@
         <activity android:name=".domain.view.user.register.RegisterActivity" />
         <activity android:name=".domain.view.user.logOut.LogOutActivity" />
         <activity android:name=".domain.view.user.login.LoginActivity" />
+        <activity android:name=".domain.view.user.login.GoogleLoginActivity" />
         <activity android:name=".domain.view.search.food.detail.DetailActivity" />
+        <activity android:name=".domain.view.user.changePW.ChangePasswordActivity" />
 
         <service
             android:name=".domain.service.AutoLoginService"

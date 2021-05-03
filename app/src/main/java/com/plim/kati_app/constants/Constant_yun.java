@@ -38,6 +38,15 @@ public class Constant_yun {
     public static final String EMAIL_INPUT_HINT="example@plim.com";
 
 
+    //changePasswordActivity
+    public static final String CHANGE_PASSWORD_TITLE="비밀번호 변경";
+    public static final String COMPLETE_CHANGE_PASSWORD_TITLE="비밀번호 변경이 완료되었습니다.";
+    public static final String COMPLETE_CHANGE_PASSWORD_MESSAGE="변경된 비밀번호로 다시 로그인 해주세요.";
+    public static final String BEFORE_PASSWORD_HINT="현재 비밀번호";
+    public static final String AFTER_PASSWORD_HINT="새 비밀번호";
+    public static final String AFTER_PASSWORD_HINT2="새 비밀번호 확인";
+
+
     //allergyViewFragment
     public static final int ALLERGY_VIEW_FRAGMENT_BUTTON_ITEM_HEIGHT = 80;
     public static final int ALLERGY_VIEW_FRAGMENT_BUTTON_ITEM_WIDTH = 150;
@@ -78,7 +87,8 @@ public class Constant_yun {
     public static final String DETAIL_PRODUCT_MATERIAL_TABLE_FRAGMENT_MATERIAL_NAME="영양성분";
     public static final String DETAIL_PRODUCT_MATERIAL_TABLE_FRAGMENT_INGREDIENT_NAME="원재료";
 
-
+    public static final String NEW_DETAIL_ACTIVITY_EXTRA_FOOD_ID="foodId";
+    public static final String NEW_DETAIL_ACTIVITY_EXTRA_IS_AD="isAd";
 
 
 
