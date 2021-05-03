@@ -48,6 +48,8 @@ import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_FIELD_FRAGMEN
 import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_MODE;
 import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_TEXT;
 import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE;
+import static com.plim.kati_app.constants.Constant_yun.NEW_DETAIL_ACTIVITY_EXTRA_FOOD_ID;
+import static com.plim.kati_app.constants.Constant_yun.NEW_DETAIL_ACTIVITY_EXTRA_IS_AD;
 
 /**
  * 음식 검색하여 나온 리스트와 정렬화면 프래그먼트.
@@ -110,11 +112,17 @@ public class FoodSearchResultListFragment extends Fragment {
     public void set(int index, String mode, String text) {
         foodSearchMode = mode;
         foodSearchText = text;
-        Thread thread = new Thread(() -> {this.search(); this.ad();});
+        Thread thread = new Thread(() -> {
+            this.search();
+            this.ad();
+        });
         thread.start();
     }
 
-    private void ad(){
+    /**
+     * 광고 불러오기.
+     */
+    private void ad() {
         Retrofit retrofit2 = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(Constant.URL)
@@ -131,7 +139,7 @@ public class FoodSearchResultListFragment extends Fragment {
 //                        database.katiDataDao().insert(new KatiData(KatiDatabase.AUTHORIZATION, response.headers().get(KatiDatabase.AUTHORIZATION)))).start();
                 getActivity().runOnUiThread(() -> {
 //                    dialog.hide();
-                    Log.d("광고 디버그","리스폰스 받음");
+                    Log.d("광고 디버그", "리스폰스 받음");
                     adRecyclerAdapter.setItems(items);
                     adFoodInfoRecyclerView.setAdapter(adRecyclerAdapter);
                 });
@@ -142,7 +150,7 @@ public class FoodSearchResultListFragment extends Fragment {
             public void onFailure(Call<List<AdvertisementResponse>> call, Throwable t) {
                 getActivity().runOnUiThread(() -> {
                     dialog.hide();
-                    Log.d("광고 디버그","실패"+t.getMessage());
+                    Log.d("광고 디버그", "실패" + t.getMessage());
                 });
                 KatiDialog.simpleAlertDialog(getContext(),
                         FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE,
@@ -151,6 +159,21 @@ public class FoodSearchResultListFragment extends Fragment {
                 ).showDialog();
             }
         });
+    }
+
+    private void startNewDetailActivity(Long foodId, boolean isAd) {
+        Intent intent = new Intent(getActivity(), NewDetailActivity.class);
+        intent.putExtra(NEW_DETAIL_ACTIVITY_EXTRA_FOOD_ID, foodId);
+        intent.putExtra(NEW_DETAIL_ACTIVITY_EXTRA_IS_AD, isAd);
+        startActivity(intent);
+    }
+
+    private void intentAdPage(Long foodId) {
+        this.startNewDetailActivity(foodId, true);
+    }
+
+    private void intentDetailPage(Long foodId) {
+        this.startNewDetailActivity(foodId, false);
     }
 
     /**
@@ -217,7 +240,7 @@ public class FoodSearchResultListFragment extends Fragment {
         private Vector<AdvertisementResponse> items;
 
         private AdRecyclerAdapter() {
-            items = new Vector<AdvertisementResponse>();
+            items = new Vector<>();
         }
 
         @NonNull
@@ -270,9 +293,7 @@ public class FoodSearchResultListFragment extends Fragment {
                 this.imageView = itemView.findViewById(R.id.foodItem_foodImageView);
 
                 itemView.setOnClickListener(v -> {
-                    Intent intent = new Intent(getActivity(), NewDetailActivity.class);
-                    intent.putExtra("foodId", items.get(this.getAdapterPosition()).getFood().getId());
-                    startActivity(intent);
+                    intentAdPage(items.get(this.getAdapterPosition()).getId());
                 });
             }
 
@@ -358,9 +379,7 @@ public class FoodSearchResultListFragment extends Fragment {
                 this.imageView = itemView.findViewById(R.id.foodItem_foodImageView);
 
                 itemView.setOnClickListener(v -> {
-                    Intent intent = new Intent(getActivity(), NewDetailActivity.class);
-                    intent.putExtra("foodId", items.get(this.getAdapterPosition()).getFoodId());
-                    startActivity(intent);
+                    intentDetailPage(items.get(this.getAdapterPosition()).getFoodId());
                 });
             }
 

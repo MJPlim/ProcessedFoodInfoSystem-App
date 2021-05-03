@@ -86,7 +86,8 @@ public class Constant_yun {
     public static final String DETAIL_PRODUCT_MATERIAL_TABLE_FRAGMENT_MATERIAL_NAME="영양성분";
     public static final String DETAIL_PRODUCT_MATERIAL_TABLE_FRAGMENT_INGREDIENT_NAME="원재료";
 
-
+    public static final String NEW_DETAIL_ACTIVITY_EXTRA_FOOD_ID="foodId";
+    public static final String NEW_DETAIL_ACTIVITY_EXTRA_IS_AD="isAd";
 
 
 

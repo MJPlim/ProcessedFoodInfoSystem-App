@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,7 @@ import static com.plim.kati_app.constants.Constant_yun.DETAIL_PRODUCT_MATERIAL_T
 import static com.plim.kati_app.constants.Constant_yun.DETAIL_PRODUCT_MATERIAL_TABLE_FRAGMENT_MATERIAL_NAME;
 import static com.plim.kati_app.constants.Constant_yun.DETAIL_PRODUCT_MATERIAL_TABLE_FRAGMENT_TABLE_NAME;
 import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE;
+import static com.plim.kati_app.constants.Constant_yun.NEW_DETAIL_ACTIVITY_EXTRA_IS_AD;
 
 /**
  * 상세페이지, 제품 기본 정보가 들어있는 fragment.
@@ -56,6 +58,7 @@ public class DetailProductInfoFragment extends Fragment {
     private Button purchaseSiteButton, writeReviewButton;
     private LoadingDialog loadingDialog;
     private Long foodId;
+    private boolean isAd;
 
     public DetailProductInfoFragment() {
         // Required empty public constructor
@@ -71,57 +74,61 @@ public class DetailProductInfoFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         this.purchaseSiteButton = view.findViewById(R.id.detailProductInfoFragment_buyButton);
-        this.writeReviewButton=view.findViewById(R.id.detailProductInfoFragment_writeReviewButton);
-        this.loadingDialog= new LoadingDialog(this.getContext());
-        this.foodId=this.getActivity().getIntent().getLongExtra(DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_FOOD_ID_EXTRA,0L);
+        this.writeReviewButton = view.findViewById(R.id.detailProductInfoFragment_writeReviewButton);
+        this.loadingDialog = new LoadingDialog(this.getContext());
+        this.foodId = this.getActivity().getIntent().getLongExtra(DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_FOOD_ID_EXTRA, 0L);
+        this.isAd = this.getActivity().getIntent().getBooleanExtra(NEW_DETAIL_ACTIVITY_EXTRA_IS_AD, false);
         this.search();
     }
 
     /**
      * 이미지 프래그먼트, 정보 테이블, 재료 테이블에 번들로 보낸다.
      */
-    public void putBundle(FoodDetailResponse value){
+    public void putBundle(FoodDetailResponse value) {
 
-        Bundle imageBundle= new Bundle();
-        imageBundle.putString(DETAIL_PHOTO_VIEW_FRAGMENT_BUNDLE_FRONT_IMAGE,value.getFoodImageAddress());
-        imageBundle.putString(DETAIL_PHOTO_VIEW_FRAGMENT_BUNDLE_BACK_IMAGE,value.getFoodMeteImageAddress());
-        getActivity().getSupportFragmentManager().setFragmentResult(DETAIL_PHOTO_VIEW_FRAGMENT_BUNDLE_KEY,imageBundle);
+        if(value==null){
+            Log.d("디버그","value가 널임");
+            return;}
+        Bundle imageBundle = new Bundle();
+        imageBundle.putString(DETAIL_PHOTO_VIEW_FRAGMENT_BUNDLE_FRONT_IMAGE, value.getFoodImageAddress());
+        imageBundle.putString(DETAIL_PHOTO_VIEW_FRAGMENT_BUNDLE_BACK_IMAGE, value.getFoodMeteImageAddress());
+        getActivity().getSupportFragmentManager().setFragmentResult(DETAIL_PHOTO_VIEW_FRAGMENT_BUNDLE_KEY, imageBundle);
 
 
-        HashMap<String,String> infoMap=new HashMap<>();
-        infoMap.put(DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_PRODUCT_NAME,value.getFoodName());
-        infoMap.put(DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_MANUFACTURER_NAME,value.getManufacturerName());
-        infoMap.put(DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_EXPIRATION_DATE,"-");
-        Bundle infoBundle= new Bundle();
-        infoBundle.putString(ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_NAME,DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_TABLE_NAME);
-        infoBundle.putSerializable(ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_HASH_MAP,infoMap);
-        getActivity().getSupportFragmentManager().setFragmentResult(DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_BUNDLE_KEY,infoBundle);
+        HashMap<String, String> infoMap = new HashMap<>();
+        infoMap.put(DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_PRODUCT_NAME, value.getFoodName());
+        infoMap.put(DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_MANUFACTURER_NAME, value.getManufacturerName());
+        infoMap.put(DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_EXPIRATION_DATE, "-");
+        Bundle infoBundle = new Bundle();
+        infoBundle.putString(ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_NAME, DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_TABLE_NAME);
+        infoBundle.putSerializable(ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_HASH_MAP, infoMap);
+        getActivity().getSupportFragmentManager().setFragmentResult(DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_BUNDLE_KEY, infoBundle);
 
-        this.purchaseSiteButton.setOnClickListener(v->{
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(DETAIL_PRODUCT_INFO_FRAGMENT_SHOPPING_LINK_+value.getFoodName()));
+        this.purchaseSiteButton.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(DETAIL_PRODUCT_INFO_FRAGMENT_SHOPPING_LINK_ + value.getFoodName()));
             startActivity(intent);
         });
 
-        HashMap<String,String> materialMap=new HashMap<>();
-        materialMap.put(DETAIL_PRODUCT_MATERIAL_TABLE_FRAGMENT_MATERIAL_NAME,value.getMaterials());
+        HashMap<String, String> materialMap = new HashMap<>();
+        materialMap.put(DETAIL_PRODUCT_MATERIAL_TABLE_FRAGMENT_MATERIAL_NAME, value.getMaterials());
         materialMap.put(DETAIL_PRODUCT_MATERIAL_TABLE_FRAGMENT_INGREDIENT_NAME, value.getNutrient());
-        Bundle materialBundle= new Bundle();
-        materialBundle.putString(ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_NAME,DETAIL_PRODUCT_MATERIAL_TABLE_FRAGMENT_TABLE_NAME);
-        materialBundle.putSerializable(ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_HASH_MAP,materialMap);
-        getActivity().getSupportFragmentManager().setFragmentResult(DETAIL_PRODUCT_MATERIAL_TABLE_FRAGMENT_BUNDLE_KEY,materialBundle);
+        Bundle materialBundle = new Bundle();
+        materialBundle.putString(ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_NAME, DETAIL_PRODUCT_MATERIAL_TABLE_FRAGMENT_TABLE_NAME);
+        materialBundle.putSerializable(ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_HASH_MAP, materialMap);
+        getActivity().getSupportFragmentManager().setFragmentResult(DETAIL_PRODUCT_MATERIAL_TABLE_FRAGMENT_BUNDLE_KEY, materialBundle);
 
-        this.writeReviewButton.setOnClickListener(v->{
+        this.writeReviewButton.setOnClickListener(v -> {
             Intent intent = new Intent(this.getActivity(), WriteReviewActivity.class);
             startActivity(intent);
         });
 
-}
+    }
 
     /**
      * api 불러서 검색.
      */
-    private void search(){
-        this.getActivity().runOnUiThread(()->{
+    private void search() {
+        this.getActivity().runOnUiThread(() -> {
             this.loadingDialog.show();
         });
 
@@ -130,31 +137,57 @@ public class DetailProductInfoFragment extends Fragment {
                 .baseUrl(Constant.URL)
                 .build();
         RestAPI service = retrofit.create(RestAPI.class);
+        if (!isAd) {
+            Call<FoodDetailResponse> listCall = service.getFoodDetailByFoodId(this.foodId);
+            listCall.enqueue(new Callback<FoodDetailResponse>() {
+                @Override
+                public void onResponse(Call<FoodDetailResponse> call, Response<FoodDetailResponse> response) {
+                    FoodDetailResponse item = response.body();
+                    putBundle(item);
 
-    Call<FoodDetailResponse> listCall=service.getFoodDetailByFoodId(this.foodId);
-        listCall.enqueue(new Callback<FoodDetailResponse>() {
-            @Override
-            public void onResponse(Call<FoodDetailResponse> call, Response<FoodDetailResponse> response) {
-                FoodDetailResponse item = response.body();
-                putBundle(item);
+                    getActivity().runOnUiThread(() -> {
+                        loadingDialog.hide();
+                    });
+                }
 
-                getActivity().runOnUiThread(() -> {
-                    loadingDialog.hide();
-                });
-            }
+                @Override
+                public void onFailure(Call<FoodDetailResponse> call, Throwable t) {
+                    getActivity().runOnUiThread(() -> {
+                        loadingDialog.hide();
+                    });
+                    KatiDialog.simpleAlertDialog(getContext(),
+                            FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE,
+                            t.getMessage(), null,
+                            getContext().getResources().getColor(R.color.kati_coral, getContext().getTheme())
+                    ).showDialog();
+                }
+            });
+        } else {
+            Call<FoodDetailResponse> listCall = service.getAdFoodDetail(this.foodId);
+            listCall.enqueue(new Callback<FoodDetailResponse>() {
+                @Override
+                public void onResponse(Call<FoodDetailResponse> call, Response<FoodDetailResponse> response) {
+                    FoodDetailResponse item = response.body();
+                    putBundle(item);
 
-            @Override
-            public void onFailure(Call<FoodDetailResponse> call, Throwable t) {
-                getActivity().runOnUiThread(() -> {
-                    loadingDialog.hide();
-                });
-                KatiDialog.simpleAlertDialog(getContext(),
-                        FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE,
-                        t.getMessage(), null,
-                        getContext().getResources().getColor(R.color.kati_coral, getContext().getTheme())
-                ).showDialog();
-            }
-        });
+                    getActivity().runOnUiThread(() -> {
+                        loadingDialog.hide();
+                    });
+                }
 
+                @Override
+                public void onFailure(Call<FoodDetailResponse> call, Throwable t) {
+                    getActivity().runOnUiThread(() -> {
+                        loadingDialog.hide();
+                    });
+                    KatiDialog.simpleAlertDialog(getContext(),
+                            FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE,
+                            t.getMessage(), null,
+                            getContext().getResources().getColor(R.color.kati_coral, getContext().getTheme())
+                    ).showDialog();
+                }
+            });
+
+        }
     }
 }
