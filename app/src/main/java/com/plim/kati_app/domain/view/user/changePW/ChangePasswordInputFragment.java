@@ -42,6 +42,7 @@ public class ChangePasswordInputFragment extends AbstractFragment2 {
         this.subTextView.setVisibility(View.INVISIBLE);
         this.editText.setHint(BEFORE_PASSWORD_HINT);
         this.editText2.setHint(AFTER_PASSWORD_HINT);
+        this.editText3.setHint(AFTER_PASSWORD_HINT2);
         this.button.setText(DIALOG_CONFIRM);
     }
 
@@ -69,61 +70,68 @@ public class ChangePasswordInputFragment extends AbstractFragment2 {
 
     @Override
     protected void buttonClicked() {
-        if (this.loadingDialog == null) this.loadingDialog = new LoadingDialog(this.getContext());
-        Thread thread = new Thread(() -> {
-            getActivity().runOnUiThread(() -> {
-                loadingDialog.show();
-            });
+        if(this.editText2.getText().toString().equals(this.editText3.getText().toString())) {
+            if (this.loadingDialog == null)
+                this.loadingDialog = new LoadingDialog(this.getContext());
+            Thread thread = new Thread(() -> {
+                getActivity().runOnUiThread(() -> {
+                    loadingDialog.show();
+                });
 
-            // THIS IS TEST! Get Data From View Model
-            ModifyPasswordRequest request = new ModifyPasswordRequest();
-            request.setBeforePassword(this.editText.getText().toString());
-            request.setAfterPassword(this.editText2.getText().toString());
 
-            KatiDatabase database = KatiDatabase.getAppDatabase(getContext());
-            String token = database.katiDataDao().getValue(KatiDatabase.AUTHORIZATION);
+                // THIS IS TEST! Get Data From View Model
+                ModifyPasswordRequest request = new ModifyPasswordRequest();
+                request.setBeforePassword(this.editText.getText().toString());
+                request.setAfterPassword(this.editText2.getText().toString());
 
-            Retrofit retrofit = new Retrofit.Builder()
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .baseUrl(Constant.URL)
-                    .build();
-            RestAPI service = retrofit.create(RestAPI.class);
-            Call<ModifyPasswordResponse> listCall = RestAPIClient.getApiService2(token).ChangePassword(request);
-            listCall.enqueue(new Callback<ModifyPasswordResponse>() {
-                @Override
-                public void onResponse(Call<ModifyPasswordResponse> call, Response<ModifyPasswordResponse> response) {
-                    getActivity().runOnUiThread(() -> {
-                        loadingDialog.hide();
-                    });
-                    ModifyPasswordResponse result = response.body();
-                    if (!response.isSuccessful()) {
-                        try {
-                            JSONObject jObjError = new JSONObject(response.errorBody().string());
-                            Toast.makeText(getContext(), jObjError.getString("error-message"), Toast.LENGTH_LONG).show();
-                        } catch (Exception e) {
-                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-                        }
+                KatiDatabase database = KatiDatabase.getAppDatabase(getContext());
+                String token = database.katiDataDao().getValue(KatiDatabase.AUTHORIZATION);
 
-                    } else {
+                Retrofit retrofit = new Retrofit.Builder()
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .baseUrl(Constant.URL)
+                        .build();
+                RestAPI service = retrofit.create(RestAPI.class);
+                Call<ModifyPasswordResponse> listCall = RestAPIClient.getApiService2(token).ChangePassword(request);
+                listCall.enqueue(new Callback<ModifyPasswordResponse>() {
+                    @Override
+                    public void onResponse(Call<ModifyPasswordResponse> call, Response<ModifyPasswordResponse> response) {
                         getActivity().runOnUiThread(() -> {
-                            showCompletedDialog();
-
+                            loadingDialog.hide();
                         });
+                        ModifyPasswordResponse result = response.body();
+                        if (!response.isSuccessful()) {
+                            try {
+                                JSONObject jObjError = new JSONObject(response.errorBody().string());
+                                Toast.makeText(getContext(), jObjError.getString("error-message"), Toast.LENGTH_LONG).show();
+                            } catch (Exception e) {
+                                Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                            }
 
+                        } else {
+                            getActivity().runOnUiThread(() -> {
+                                showCompletedDialog();
+
+                            });
+
+                        }
                     }
-                }
 
-                @Override
-                public void onFailure(Call<ModifyPasswordResponse> call, Throwable t) {
-                    getActivity().runOnUiThread(() -> {
-                        loadingDialog.hide();
-                    });
+                    @Override
+                    public void onFailure(Call<ModifyPasswordResponse> call, Throwable t) {
+                        getActivity().runOnUiThread(() -> {
+                            loadingDialog.hide();
+                        });
 //                    Log.d(getStringOfId(R.string.withdrawalPasswordInputFragment_log_pleaseCheckInternet), t.getMessage());
-                }
+                    }
+                });
             });
-        });
-        thread.start();
+            thread.start();
+        }else{
+            Toast.makeText(getContext(), "새 비밀번호를 동일하게 입력해 주세요.", Toast.LENGTH_LONG).show();
+        }
     }
+
 
     private void moveToLogOutActivity() {
         Intent intent = new Intent(this.getActivity(), LogOutActivity.class);
