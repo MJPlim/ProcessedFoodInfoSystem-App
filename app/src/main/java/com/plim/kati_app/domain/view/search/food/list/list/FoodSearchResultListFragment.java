@@ -303,7 +303,7 @@ public class FoodSearchResultListFragment extends Fragment {
              * @param item
              */
             public void setValue(@NotNull AdvertisementResponse item) {
-                this.imageAddress = item.getFood().getFoodImage().getFoodImageAddress();
+                this.imageAddress = item.getFood().getFoodImageAddress();
                 Glide.with(getContext()).load(this.imageAddress).fitCenter().transform(new CenterCrop(), new CircleCrop()).into(imageView);
 
                 this.imageView.setOnClickListener(v -> {
