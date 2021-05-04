@@ -29,6 +29,8 @@ import com.plim.kati_app.domain.view.user.signOut.TempActivity;
  */
 public class MainActivity extends AppCompatActivity { // a test
 
+    // TEST
+
     //service intent
     private Intent intent;
 
