@@ -23,15 +23,19 @@ public class BarcodeActivity extends AppCompatActivity {
 
 
     }
-    // 바코드 스캔 결과
+    // 바코드 스캔 결과 sb.toString() 가져다 쓰면 됩니다.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        StringBuilder sb = new StringBuilder(result.getContents());
+        sb.insert(1, ' ');
+        sb.insert(8, ' ');
+
         if(result != null) {
             if(result.getContents() == null) {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
             } else {
-                Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Scanned: " + sb.toString(), Toast.LENGTH_LONG).show();
             }
             finish();
         } else {
