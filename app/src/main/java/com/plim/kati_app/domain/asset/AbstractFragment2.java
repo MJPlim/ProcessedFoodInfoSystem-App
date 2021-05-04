@@ -17,7 +17,7 @@ public abstract class AbstractFragment2 extends Fragment {
     // Associate
         // View
         protected TextView mainTextView, subTextView;
-        protected EditText editText,editText2,editText3;
+        protected EditText Present_Password_editText, New_Password_editText, New_Password_Verify_editText;
         protected Button button;
 
     /**
@@ -25,7 +25,7 @@ public abstract class AbstractFragment2 extends Fragment {
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.abstract_layout2, container, false);
+        return inflater.inflate(R.layout.fragment_change_password, container, false);
     }
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -34,9 +34,9 @@ public abstract class AbstractFragment2 extends Fragment {
         // Associate View
         this.mainTextView = view.findViewById(R.id.abstractRegisterLayout2_mainTextView);
         this.subTextView = view.findViewById(R.id.abstractRegisterLayout2_subTextView);
-        this.editText = view.findViewById(R.id.abstractRegisterLayout2_editText);
-        this.editText2 = view.findViewById(R.id.abstractRegisterLayout2_editText2);
-        this.editText3 = view.findViewById(R.id.abstractRegisterLayout2_editText3);
+        this.Present_Password_editText = view.findViewById(R.id.abstractRegisterLayout2_editText);
+        this.New_Password_editText = view.findViewById(R.id.abstractRegisterLayout2_editText2);
+        this.New_Password_Verify_editText = view.findViewById(R.id.abstractRegisterLayout2_editText3);
         this.button = view.findViewById(R.id.abstractRegisterLayout2_button);
 
         // Initialize View
