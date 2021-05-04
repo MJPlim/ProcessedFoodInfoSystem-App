@@ -17,9 +17,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class KatiData {
+
     @NonNull
     @PrimaryKey
     private String name;
+
     @ColumnInfo(name = "value")
     private String value;
 

@@ -3,21 +3,19 @@ package com.plim.kati_app.domain.service;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 
 import com.plim.kati_app.R;
-import com.plim.kati_app.constants.Constant_yun;
+import com.plim.kati_app.domain.constant.Constant_yun;
 import com.plim.kati_app.domain.asset.KatiDialog;
 import com.plim.kati_app.domain.model.room.KatiData;
 import com.plim.kati_app.domain.model.room.KatiDatabase;
-import com.plim.kati_app.domain.view.user.login.LoginRequest;
-import com.plim.kati_app.domain.view.user.login.RetrofitClient;
-import com.plim.kati_app.exception.LoginDataWrongException;
-import com.plim.kati_app.exception.RequestFailureException;
-import com.plim.kati_app.exception.RequestNotSuccessfulException;
-import com.plim.kati_app.tech.RestAPIClient;
+import com.plim.kati_app.domain2.user.account.login.LoginRequest;
+import com.plim.kati_app.domain2.user.account.login.RetrofitClient;
+import com.plim.kati_app.domain.exception.LoginDataWrongException;
+import com.plim.kati_app.domain.exception.RequestFailureException;
+import com.plim.kati_app.domain.exception.RequestNotSuccessfulException;
 
 import lombok.SneakyThrows;
 import retrofit2.Call;

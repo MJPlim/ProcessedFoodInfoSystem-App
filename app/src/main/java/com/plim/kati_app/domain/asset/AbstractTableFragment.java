@@ -19,8 +19,8 @@ import com.plim.kati_app.domain.model.DetailTableItem;
 
 import java.util.HashMap;
 
-import static com.plim.kati_app.constants.Constant_yun.ABSTRACT_TABLE_FRAGMENT_LARGE;
-import static com.plim.kati_app.constants.Constant_yun.ABSTRACT_TABLE_FRAGMENT_SMALL;
+import static com.plim.kati_app.domain.constant.Constant_yun.ABSTRACT_TABLE_FRAGMENT_LARGE;
+import static com.plim.kati_app.domain.constant.Constant_yun.ABSTRACT_TABLE_FRAGMENT_SMALL;
 
 /**
  * 재사용 할 테이블 모양 프레그먼트.

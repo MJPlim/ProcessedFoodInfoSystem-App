@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:padding="@dimen/box_inset_layout_padding"
-    tools:context=".domain.view.user.signOut.NewWithdrawalActivity" >
+    tools:context=".domain2.user.account.signOut.NewWithdrawalActivity" >
 
 
     <androidx.fragment.app.FragmentContainerView

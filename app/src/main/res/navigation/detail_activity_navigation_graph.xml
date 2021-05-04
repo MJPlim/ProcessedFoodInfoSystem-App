@@ -9,7 +9,7 @@
 
     <fragment
         android:id="@+id/detailItemFragment"
-        android:name="com.plim.kati_app.domain.view.search.food.detail.DetailItemFragment"
+        android:name="com.plim.kati_app.domain2.search.food.detail.DetailItemFragment"
         android:label="fragment_detailItem"
         tools:layout="@layout/fragment_detail_item" >
     </fragment>
