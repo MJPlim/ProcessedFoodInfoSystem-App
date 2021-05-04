@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".domain2.MainActivity">
+    tools:context=".domain2.view.TempMainActivity">
 
     <TextView
         android:id="@+id/mainActivity_tempTitleTextView"

@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".domain2.search.food.review.WriteReviewActivity">
+    tools:context=".domain2.view.search.food.review.WriteReviewActivity">
 
 </androidx.constraintlayout.widget.ConstraintLayout>

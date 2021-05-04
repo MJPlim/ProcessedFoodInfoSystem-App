@@ -15,18 +15,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KATI_app"
         android:usesCleartextTraffic="true">
-        <activity android:name=".domain2.search.food.review.WriteReviewActivity"></activity>
-        <activity android:name=".domain2.search.food.detail.NewDetailActivity" />
+        <activity android:name=".domain2.view.search.food.review.WriteReviewActivity"></activity>
+        <activity android:name=".domain2.view.search.food.detail.NewDetailActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAH63IC9w2B6lP4RYw05b7qAyNja8gOyjU" />
 
 
-        <activity android:name=".domain2.search.map.MapServiceActivity" />
-        <activity android:name=".domain2.user.account.pwFind.FindPasswordActivity" />
+        <activity android:name=".domain2.view.search.map.MapServiceActivity" />
+        <activity android:name=".domain2.view.user.account.pwFind.FindPasswordActivity" />
         <activity
-            android:name=".domain2.MainActivity"
+            android:name=".domain2.view.TempMainActivity"
             android:label="@string/title_activity_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,15 +34,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".domain2.search.food.list.FoodSearchActivity" />
-        <activity android:name=".domain2.user.account.signOut.NewWithdrawalActivity" />
-        <activity android:name=".domain2.user.account.signOut.TempActivity" />
-        <activity android:name=".domain2.user.account.signIn.RegisterActivity" />
-        <activity android:name=".domain2.user.account.logout.LogOutActivity" />
-        <activity android:name=".domain2.user.account.login.view.LoginActivity" />
-        <activity android:name=".domain2.user.account.login.GoogleLoginActivity" />
-        <activity android:name=".domain2.search.food.detail.DetailActivity" />
-        <activity android:name=".domain2.user.account.pwChange.ChangePasswordActivity" />
+        <activity android:name=".domain2.view.search.food.list.FoodSearchActivity" />
+        <activity android:name=".domain2.view.user.account.signOut.NewWithdrawalActivity" />
+        <activity android:name=".domain2.view.user.account.signOut.TempActivity" />
+        <activity android:name=".domain2.view.user.account.signIn.RegisterActivity" />
+        <activity android:name=".domain2.view.user.account.logout.LogOutActivity" />
+        <activity android:name=".domain2.view.user.account.login.view.LoginActivity" />
+        <activity android:name=".domain2.view.user.account.login.GoogleLoginActivity" />
+        <activity android:name=".domain2.view.search.food.detail.DetailActivity" />
+        <activity android:name=".domain2.view.user.account.pwChange.ChangePasswordActivity" />
 
         <service
             android:name=".domain.service.AutoLoginService"
