@@ -1,25 +1,17 @@
 package com.plim.kati_app.domain.view;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.Task;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.plim.kati_app.R;
 import com.plim.kati_app.constants.Constant_yun;
 import com.plim.kati_app.domain.asset.KatiDialog;
 import com.plim.kati_app.domain.service.AutoLoginService;
-import com.plim.kati_app.domain.view.search.food.list.FoodSearchActivity;
 import com.plim.kati_app.domain.view.search.food.detail.DetailActivity;
+import com.plim.kati_app.domain.view.search.food.list.FoodSearchActivity;
 import com.plim.kati_app.domain.view.user.changePW.ChangePasswordActivity;
 import com.plim.kati_app.domain.view.user.login.LoginActivity;
 import com.plim.kati_app.domain.view.user.signOut.TempActivity;
@@ -31,6 +23,8 @@ public class MainActivity extends AppCompatActivity { // a test
 
     //service intent
     private Intent intent;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,7 +1,9 @@
 package com.plim.kati_app.domain.view.search.food.list;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,16 +19,24 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.google.zxing.client.android.Intents;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.plim.kati_app.R;
 import com.plim.kati_app.domain.model.room.KatiDatabase;
 import com.plim.kati_app.domain.model.room.KatiSearchWord;
+import com.plim.kati_app.domain.view.search.food.list.barcode.BarcodeActivity;
+import com.plim.kati_app.domain.view.user.logOut.LogOutActivity;
+
 
 import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_INDEX;
 import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_KEY;
 import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_MODE;
 import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_TEXT;
 import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_RECOMMENDATION_FRAGMENT_BUNDLE_KEY;
+
 
 
 /**
@@ -40,8 +50,8 @@ public class FoodSearchFieldFragment extends Fragment {
     private Spinner searchModeSpinner;
     private EditText searchEditText;
     private ImageView cameraSearchButton, textSearchButton;
-
     private boolean listFragmentOn=false;
+    private String toast;
 
 
     @Override
@@ -84,11 +94,28 @@ public class FoodSearchFieldFragment extends Fragment {
         }));
 
 
+        /**
+         * 카메라 버튼을 눌려서 바코드 스캔을 시작한다.
+         */
+        this.cameraSearchButton.setOnClickListener((v ->  moveToBarcodeActivity()));
+
+
+
         this.getActivity().getSupportFragmentManager().setFragmentResultListener(FOOD_SEARCH_RECOMMENDATION_FRAGMENT_BUNDLE_KEY, getActivity(), ((requestKey, result) -> {
             this.searchEditText.setText(result.getString(FOOD_SEARCH_RECOMMENDATION_FRAGMENT_BUNDLE_KEY));
         }));
 
+
+
     }
+
+    private void moveToBarcodeActivity() {
+        Intent intent = new Intent(this.getActivity(), BarcodeActivity.class);
+        startActivity(intent);
+    }
+
+
+
 
     /**
      * 검색 버튼이 눌려서 검색을 시작한다.
