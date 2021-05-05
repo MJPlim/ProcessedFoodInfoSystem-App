@@ -8,7 +8,6 @@ import com.plim.kati_app.jshCrossDomain.domain.model.room.converter.JSHConverter
 
 import lombok.Getter;
 import lombok.Setter;
-
 @Getter
 @Setter
 @Entity(tableName = "jsh_table")
@@ -20,7 +19,4 @@ public class JSHEntity {
 
     @ColumnInfo(name = "entityString")
     private String entityString;
-
-    public <T> T getEntity(){ return JSHConverter.fromStringToType(this.entityString); }
-    public <T> void setEntity(T entity){ this.entityString = JSHConverter.fromTypeToString(entity); }
 }

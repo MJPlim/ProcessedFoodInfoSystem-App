@@ -37,12 +37,8 @@ public class GoogleLoginActivity extends AppCompatActivity {
 
     // Sign In
     private void signIn() { JSHGoogleLogin.signIn(this); }
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    @Override public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        this.handleSignInResult(data);
-    }
-    private void handleSignInResult(Intent data) {
         Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
         try {
             GoogleSignInAccount account = task.getResult(ApiException.class);

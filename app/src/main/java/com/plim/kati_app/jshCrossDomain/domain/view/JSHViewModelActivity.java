@@ -9,17 +9,17 @@ import com.plim.kati_app.jshCrossDomain.domain.model.viewModel.ViewModelToolCall
 
 import java.util.ArrayList;
 
-public abstract class JSHViewModelActivity<T> extends AppCompatActivity implements ViewModelToolCallback {
+public abstract class JSHViewModelActivity extends AppCompatActivity implements ViewModelToolCallback {
 
     // Component
-    private JSHViewModelTool<T> viewModelTool;
+    protected JSHViewModelTool viewModelTool;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // Create Component
-        this.viewModelTool = new JSHViewModelTool<>(this, this);
+        this.viewModelTool = new JSHViewModelTool(this, this);
     }
     @Override
     protected void onResume() {
@@ -30,8 +30,5 @@ public abstract class JSHViewModelActivity<T> extends AppCompatActivity implemen
     protected void onPause() {
         super.onPause();
         this.viewModelTool.stopObserve();
-    }
-    public ArrayList<T> getDomainEntities(){
-        return this.viewModelTool.getDomainEntities();
     }
 }

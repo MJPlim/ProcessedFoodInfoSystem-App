@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class KatiEntity {
 
     // Static Value
@@ -16,6 +21,7 @@ public class KatiEntity {
     // Constructor
     public KatiEntity() {
         this.dataset = new HashMap<>();
+        this.dataset.put(EKatiData.AUTO_LOGIN.name(), EKatiData.FALSE.name());
         this.searchWords = new ArrayList<>();
     }
 }

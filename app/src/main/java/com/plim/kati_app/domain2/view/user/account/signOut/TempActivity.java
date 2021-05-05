@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.plim.kati_app.R;
 import com.plim.kati_app.domain.asset.KatiDialog;
+import com.plim.kati_app.domain.model.room.KatiDatabase;
 import com.plim.kati_app.domain2.view.TempMainActivity;
 import com.plim.kati_app.domain2.view.user.account.logout.LogOutActivity;
 import com.plim.kati_app.jshCrossDomain.tech.JSHGoogleMap;

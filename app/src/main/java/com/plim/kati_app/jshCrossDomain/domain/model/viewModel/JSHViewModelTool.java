@@ -12,18 +12,21 @@ import com.plim.kati_app.jshCrossDomain.domain.model.room.entity.JSHEntity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JSHViewModelTool<T> implements Observer {
+public class JSHViewModelTool implements Observer {
 
     // Associate
         // View
-        private Activity activity;
+        private final Activity activity;
         // Model
         protected JSHViewModel model;
-        private ViewModelToolCallback callback;
-        private ArrayList<T> domainEntities;
+        private final ViewModelToolCallback callback;
+        private final ArrayList<JSHEntity> jshEntities;
 
     // Constructor
     public JSHViewModelTool(Activity activity, ViewModelToolCallback callback) {
+        // Create Component
+        this.jshEntities = new ArrayList<>();
+
         // Associate View
         this.activity=activity;
 
@@ -37,20 +40,17 @@ public class JSHViewModelTool<T> implements Observer {
 
     @Override
     public void onChanged(Object o) {
-        this.convertJSHEntityToDomainEntity();
+        this.updateJSHEntities();
         this.callback.viewModelDataUpdated();
     }
-    private void convertJSHEntityToDomainEntity(){
-        this.domainEntities.clear();
+    private void updateJSHEntities(){
+        this.jshEntities.clear();
         List<JSHEntity> jshEntities = this.model.getDataset().getValue();
-        for(JSHEntity jshEntity : jshEntities){
-            this.domainEntities.add(jshEntity.getEntity());
-        }
+        for(JSHEntity jshEntity : jshEntities)this.jshEntities.add(jshEntity);
     }
 
-    public ArrayList<T> getDomainEntities(){
-        return this.domainEntities;
-    }
+    public ArrayList<JSHEntity> getJSHEntities(){ return this.jshEntities; }
+    public JSHViewModel getModel() { return model; }
 }
 
 // JSH View Model 이 Android View Model 이 아니게 될 수 있는 경우 사용 // type=Class<T> type
