@@ -20,7 +20,7 @@ public class DetailReviewStatisticsTableFragment extends AbstractTableFragment {
         this.fragmentRequestKey="temp";
         HashMap<String,String> hashMap= new HashMap<>();
         hashMap.put("4.7\n(250+)","5점     80%\n4점     11%\n3점     8%\n2점     1%\n1점     1%");
-        this.setItemValues(new DetailTableItem("제품 리뷰",hashMap));
+        this.setItemValues(new DetailTableItem("제품 리뷰",hashMap,new HashMap<String, String>()));
     }
 
     @Override

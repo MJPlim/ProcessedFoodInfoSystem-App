@@ -73,6 +73,7 @@ public class Constant_yun {
 
     public static final String ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_NAME="name";
     public static final String ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_HASH_MAP="hashMap";
+    public static final String ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_LINK_MAP="linkMap";
     public static final String ABSTRACT_TABLE_FRAGMENT_LARGE="펼치기>";
     public static final String ABSTRACT_TABLE_FRAGMENT_SMALL="접기>";
 

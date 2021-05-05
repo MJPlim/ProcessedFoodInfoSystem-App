@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".domain.asset.AbstractExpandableItemList"
+    android:orientation="vertical">
+
+    <include layout="@layout/item_allergy_title"
+        android:id="@+id/include"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/expandableItemListFragment_recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:itemCount="3"
+        tools:listitem="@layout/item_allergy_row" />
+
+</LinearLayout>

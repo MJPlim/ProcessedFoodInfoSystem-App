@@ -1,10 +1,6 @@
 package com.plim.kati_app.domain.asset;
 
-import android.animation.ValueAnimator;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Paint;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,27 +14,20 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.plim.kati_app.R;
+import com.plim.kati_app.domain.asset.ExpandableFragment;
 import com.plim.kati_app.domain.model.DetailTableItem;
 
 import java.util.HashMap;
 
-import static com.plim.kati_app.constants.Constant_yun.ABSTRACT_TABLE_FRAGMENT_LARGE;
-import static com.plim.kati_app.constants.Constant_yun.ABSTRACT_TABLE_FRAGMENT_SMALL;
 
-/**
- * 재사용 할 테이블 모양 프레그먼트.
- */
-public abstract class AbstractTableFragment extends ExpandableFragment {
+public abstract class AbstractExpandableItemList extends ExpandableFragment {
+    private TextView title;
 
-    //associate view
-    private TextView nameTextView;
-
-    //component
     private DetailTableItem detailTableItem;
     private RecyclerAdapter adapter;
 
 
-    public AbstractTableFragment() {
+    public AbstractExpandableItemList() {
         // Required empty public constructor
     }
 
@@ -46,17 +35,14 @@ public abstract class AbstractTableFragment extends ExpandableFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.abstract_detail_table, container, false);
+        return inflater.inflate(R.layout.abstract_expandable_item_list, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
-
-        //find view
-        this.nameTextView = view.findViewById(R.id.detailInformationTableTitle_NameTextView);
-        this.expandButton = view.findViewById(R.id.detailInformationTableTitle_expandButton);
-        this.recyclerView = view.findViewById(R.id.detailInformationTable_recyclerView);
+        this.title=view.findViewById(R.id.expandableItemListFragment_titleTextView);
+        this.expandButton=view.findViewById(R.id.expandableItemListFragment_expandButton);
+        this.recyclerView=view.findViewById(R.id.expandableItemListFragment_recyclerView);
 
         //set view
         this.recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false));
@@ -75,11 +61,8 @@ public abstract class AbstractTableFragment extends ExpandableFragment {
         this.detailTableItem = detailTableItem;
         this.adapter.setItems(this.detailTableItem.getValueMap());
         this.adapter.notifyDataSetChanged();
-        this.nameTextView.setText(this.detailTableItem.getName());
-        this.nameTextView.setBackgroundColor(getContext().getResources().getColor(R.color.kati_yellow,getContext().getTheme()));
+        this.title.setText(this.detailTableItem.getName());
     }
-
-
 
     /**
      * 어댑터 클래스.
@@ -97,7 +80,7 @@ public abstract class AbstractTableFragment extends ExpandableFragment {
         public RecyclerViewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             Context context = parent.getContext();
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View view = inflater.inflate(R.layout.item_detail_information_table, parent, false);
+            View view = inflater.inflate(R.layout.item_allergy_row, parent, false);
 
             return new RecyclerViewViewHolder(view);
         }
@@ -148,15 +131,9 @@ public abstract class AbstractTableFragment extends ExpandableFragment {
             public void setValue(DetailTableItem.Data data) {
                 this.title.setText(data.getTitle());
                 this.value.setText(data.getValue());
-                if(data.getLink()!=null) this.value.setOnClickListener(v->{
-                    this.value.setPaintFlags(this.value.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(data.getLink()+data.getValue()));
-                    startActivity(intent);
-                });
 
             }
 
         }
     }
-
 }

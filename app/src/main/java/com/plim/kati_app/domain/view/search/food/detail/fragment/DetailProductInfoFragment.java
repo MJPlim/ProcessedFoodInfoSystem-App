@@ -31,6 +31,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.plim.kati_app.constants.Constant_yun.ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_HASH_MAP;
+import static com.plim.kati_app.constants.Constant_yun.ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_LINK_MAP;
 import static com.plim.kati_app.constants.Constant_yun.ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_NAME;
 import static com.plim.kati_app.constants.Constant_yun.DETAIL_PHOTO_VIEW_FRAGMENT_BUNDLE_BACK_IMAGE;
 import static com.plim.kati_app.constants.Constant_yun.DETAIL_PHOTO_VIEW_FRAGMENT_BUNDLE_FRONT_IMAGE;
@@ -95,13 +96,17 @@ public class DetailProductInfoFragment extends Fragment {
         getActivity().getSupportFragmentManager().setFragmentResult(DETAIL_PHOTO_VIEW_FRAGMENT_BUNDLE_KEY, imageBundle);
 
 
+        //디테일 맵.
         HashMap<String, String> infoMap = new HashMap<>();
         infoMap.put(DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_PRODUCT_NAME, value.getFoodName());
         infoMap.put(DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_MANUFACTURER_NAME, value.getManufacturerName());
         infoMap.put(DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_EXPIRATION_DATE, "-");
+        HashMap<String, String> infoLink = new HashMap<>();
+        infoLink.put(DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_MANUFACTURER_NAME,"https://m.search.naver.com/search.naver?query=");
         Bundle infoBundle = new Bundle();
         infoBundle.putString(ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_NAME, DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_TABLE_NAME);
         infoBundle.putSerializable(ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_HASH_MAP, infoMap);
+        infoBundle.putSerializable(ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_LINK_MAP,infoLink);
         getActivity().getSupportFragmentManager().setFragmentResult(DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_BUNDLE_KEY, infoBundle);
 
         this.purchaseSiteButton.setOnClickListener(v -> {
@@ -109,6 +114,7 @@ public class DetailProductInfoFragment extends Fragment {
             startActivity(intent);
         });
 
+        //원재료 성분 맵.
         HashMap<String, String> materialMap = new HashMap<>();
         materialMap.put(DETAIL_PRODUCT_MATERIAL_TABLE_FRAGMENT_MATERIAL_NAME, value.getMaterials());
         materialMap.put(DETAIL_PRODUCT_MATERIAL_TABLE_FRAGMENT_INGREDIENT_NAME, value.getNutrient());
