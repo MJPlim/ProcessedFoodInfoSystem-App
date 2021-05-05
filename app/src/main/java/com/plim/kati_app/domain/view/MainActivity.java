@@ -3,16 +3,12 @@ package com.plim.kati_app.domain.view;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.service.notification.NotificationListenerService;
-
 import com.plim.kati_app.R;
 import com.plim.kati_app.constants.Constant_yun;
 import com.plim.kati_app.domain.asset.KatiDialog;
 import com.plim.kati_app.domain.service.AutoLoginService;
 import com.plim.kati_app.domain.view.rank.RankingActivity;
 import com.plim.kati_app.domain.view.search.food.list.FoodSearchActivity;
-import com.plim.kati_app.domain.view.search.food.detail.DetailActivity;
-import com.plim.kati_app.domain.view.user.changePW.ChangePasswordActivity;
 import com.plim.kati_app.domain.view.user.dataChange.UserDataChangeActivity;
 import com.plim.kati_app.domain.view.user.login.LoginActivity;
 import com.plim.kati_app.domain.view.user.myPage.UserMyPageActivity;
@@ -25,6 +21,8 @@ public class MainActivity extends AppCompatActivity { // a test
 
     //service intent
     private Intent intent;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

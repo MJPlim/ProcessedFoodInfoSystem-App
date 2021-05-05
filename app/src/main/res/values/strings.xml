@@ -74,7 +74,7 @@
     <string name="mainActivity_logOutTestButton_text">logout</string>
     <string name="mainActivity_detailTestButton_text">detail</string>
     <string name="mainActivity_changePWButton_text">changePW</string>
-
+    <string name="mainActivity_barcodeScanButton_text">barcodeScan</string>
     <!--    loadingDialog-->
     <string name="loadingDialog_textView_text">loading</string>
 

@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.plim.kati_app">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+
 
     <application
         android:allowBackup="false"
@@ -14,13 +17,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.KATI_app"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".domain.view.user.findId.FindIdActivity"></activity>
-        <activity android:name=".domain.view.rank.RankingActivity" />
-        <activity android:name=".domain.view.user.myPage.UserMyPageActivity" />
-        <activity android:name=".domain.view.user.dataChange.UserDataChangeActivity" />
-        <activity android:name=".domain.view.search.food.review.WriteReviewActivity" />
+        android:usesCleartextTraffic="true"
+        android:hardwareAccelerated="true"
+        >
+        <activity android:name=".domain.view.search.food.review.WriteReviewActivity"></activity>
         <activity android:name=".domain.view.search.food.detail.NewDetailActivity" />
+        <activity
+            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+            android:screenOrientation="portrait"
+            tools:replace="android:screenOrientation"
+            android:stateNotNeeded="true"> </activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -37,6 +43,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+    <activity android:name=".domain.view.user.findId.FindIdActivity"/>
+    <activity android:name=".domain.view.rank.RankingActivity" />
+    <activity android:name=".domain.view.user.myPage.UserMyPageActivity" />
+    <activity android:name=".domain.view.user.dataChange.UserDataChangeActivity" />
         <activity android:name=".domain.view.search.food.list.FoodSearchActivity" />
         <activity android:name=".domain.view.user.signOut.NewWithdrawalActivity" />
         <activity android:name=".domain.view.user.signOut.TempActivity" />
@@ -46,6 +56,8 @@
         <activity android:name=".domain.view.user.login.GoogleLoginActivity" />
         <activity android:name=".domain.view.search.food.detail.DetailActivity" />
         <activity android:name=".domain.view.user.changePW.ChangePasswordActivity" />
+        <activity android:name=".domain.view.search.food.list.barcode.BarcodeActivity" />
+
 
         <service
             android:name=".domain.service.AutoLoginService"
