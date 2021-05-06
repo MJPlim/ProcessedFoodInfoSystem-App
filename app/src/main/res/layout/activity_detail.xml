@@ -23,7 +23,10 @@
         app:navGraph="@navigation/detail_activity_navigation_graph" >
 
 
+
     </androidx.fragment.app.FragmentContainerView>
+
+
 
 
 
