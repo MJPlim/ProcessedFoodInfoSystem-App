@@ -13,11 +13,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.plim.kati_app.R;
 import com.plim.kati_app.constants.Constant;
 import com.plim.kati_app.domain.asset.KatiDialog;
 import com.plim.kati_app.domain.asset.LoadingDialog;
+import com.plim.kati_app.domain.model.dto.FindFoodByBarcodeRequest;
 import com.plim.kati_app.domain.model.dto.FoodDetailResponse;
 import com.plim.kati_app.domain.view.search.food.review.WriteReviewActivity;
 import com.plim.kati_app.tech.RestAPI;
@@ -60,6 +62,7 @@ public class DetailProductInfoFragment extends Fragment {
     private LoadingDialog loadingDialog;
     private Long foodId;
     private boolean isAd;
+    private String barcode;
 
     public DetailProductInfoFragment() {
         // Required empty public constructor
@@ -77,9 +80,62 @@ public class DetailProductInfoFragment extends Fragment {
         this.purchaseSiteButton = view.findViewById(R.id.detailProductInfoFragment_buyButton);
         this.writeReviewButton = view.findViewById(R.id.detailProductInfoFragment_writeReviewButton);
         this.loadingDialog = new LoadingDialog(this.getContext());
+        this.barcode=this.getActivity().getIntent().getStringExtra("barcode");
         this.foodId = this.getActivity().getIntent().getLongExtra(DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_FOOD_ID_EXTRA, 0L);
         this.isAd = this.getActivity().getIntent().getBooleanExtra(NEW_DETAIL_ACTIVITY_EXTRA_IS_AD, false);
-        this.search();
+        this.getReview();
+//        if(this.barcode!=null) this.barcodeSearch();
+//            else this.search();
+
+    }
+
+    private void barcodeSearch() {
+        this.getActivity().runOnUiThread(() -> {
+            this.loadingDialog.show();
+        });
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl(Constant.URL)
+                .build();
+        RestAPI service = retrofit.create(RestAPI.class);
+            Call<FoodDetailResponse> listCall = service.findByBarcode(new FindFoodByBarcodeRequest(this.barcode));
+            listCall.enqueue(new Callback<FoodDetailResponse>() {
+                @Override
+                public void onResponse(Call<FoodDetailResponse> call, Response<FoodDetailResponse> response) {
+                    FoodDetailResponse item = response.body();
+                    putBundle(item);
+
+                    getActivity().runOnUiThread(() -> {
+                        loadingDialog.hide();
+                    });
+                }
+
+                @Override
+                public void onFailure(Call<FoodDetailResponse> call, Throwable t) {
+                    Log.d("여기야","바코드");
+                    getActivity().runOnUiThread(() -> {
+                        loadingDialog.hide();
+                    });
+                    KatiDialog.simpleAlertDialog(getContext(),
+                            FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE,
+                            t.getMessage(), null,
+                            getContext().getResources().getColor(R.color.kati_coral, getContext().getTheme())
+                    ).showDialog();
+                }
+            });
+
+    }
+
+    /**
+     * 리뷰 불러오기 하기.
+     */
+    private void getReview() {
+        Log.d("리뷰 불러오게 FragmentResult 설정",this.foodId+"");
+//        Toast.makeText(this.getActivity(), foodId+"아이디", Toast.LENGTH_SHORT).show();
+        Bundle reviewBundle= new Bundle();
+        reviewBundle.putLong("foodId",this.foodId);
+        getActivity().getSupportFragmentManager().setFragmentResult("reviewBundle",reviewBundle);
     }
 
     /**
@@ -158,6 +214,7 @@ public class DetailProductInfoFragment extends Fragment {
 
                 @Override
                 public void onFailure(Call<FoodDetailResponse> call, Throwable t) {
+                    Log.d("여기야","상세");
                     getActivity().runOnUiThread(() -> {
                         loadingDialog.hide();
                     });
@@ -186,6 +243,7 @@ public class DetailProductInfoFragment extends Fragment {
                     getActivity().runOnUiThread(() -> {
                         loadingDialog.hide();
                     });
+                    Log.d("여기야","광고");
                     KatiDialog.simpleAlertDialog(getContext(),
                             FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE,
                             t.getMessage(), null,

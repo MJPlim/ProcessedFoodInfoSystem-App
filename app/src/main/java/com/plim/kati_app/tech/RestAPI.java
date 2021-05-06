@@ -4,12 +4,17 @@ import com.plim.kati_app.domain.model.ModifyPasswordRequest;
 import com.plim.kati_app.domain.model.ModifyPasswordResponse;
 import com.plim.kati_app.domain.model.FindPasswordRequest;
 import com.plim.kati_app.domain.model.FindPasswordResponse;
+import com.plim.kati_app.domain.model.dto.FindFoodByBarcodeRequest;
 import com.plim.kati_app.domain.model.dto.FoodDetailResponse;
 import com.plim.kati_app.domain.model.FoodResponse;
 import com.plim.kati_app.domain.model.Password;
 import com.plim.kati_app.domain.model.SignUpResponse;
 import com.plim.kati_app.domain.model.User;
 import com.plim.kati_app.domain.model.WithdrawResponse;
+import com.plim.kati_app.domain.model.dto.ReadReviewRequest;
+import com.plim.kati_app.domain.model.dto.ReadReviewResponse;
+import com.plim.kati_app.domain.model.dto.UserInfoModifyRequest;
+import com.plim.kati_app.domain.model.dto.UserInfoResponse;
 import com.plim.kati_app.domain.view.user.login.LoginRequest;
 import com.plim.kati_app.domain.model.dto.AdvertisementResponse;
 
@@ -17,9 +22,12 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.FieldMap;
 import retrofit2.http.GET;
+import retrofit2.http.HTTP;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 
 public interface RestAPI {
 
@@ -50,6 +58,19 @@ public interface RestAPI {
     @GET("/api/v1/advertisement/foodDetail")
     Call<FoodDetailResponse> getAdFoodDetail(@Query("adId") Long adId);
 
-    @GET("api/v1/advertisement/ads")
+    @GET("/api/v1/advertisement/ads")
     Call<List<AdvertisementResponse>> getAdFoodList();
+
+//    @HTTP(method="GET",path="/readReview",hasBody=true)
+//    Call<List<ReadReviewResponse>> readReview(@Body ReadReviewRequest dto);
+//
+//    @HTTP(method="GET",path="/api/v1/food/findFood/barcode",hasBody=true)
+//    Call<FoodDetailResponse> findByBarcode(@Body FindFoodByBarcodeRequest request);
+
+
+    @GET("user-info")
+    Call<UserInfoResponse> getUserInfo();
+
+    @POST("modify-user-info")
+    Call<UserInfoResponse> modifyUserInfo(@Body UserInfoModifyRequest request);
 }

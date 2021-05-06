@@ -2,6 +2,7 @@ package com.plim.kati_app.domain.view.search.food.list.barcode;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.plim.kati_app.R;
+import com.plim.kati_app.domain.view.search.food.detail.NewDetailActivity;
 
 
 public class BarcodeActivity extends AppCompatActivity {
@@ -36,13 +38,17 @@ public class BarcodeActivity extends AppCompatActivity {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(this, "Scanned: " + sb.toString(), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(this,NewDetailActivity.class);
+                intent.putExtra("barcode",sb.toString());
+                startActivity(intent);
             }
+
             finish();
+
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
-
 
 
 }
