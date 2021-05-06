@@ -29,14 +29,15 @@ public class BarcodeActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        StringBuilder sb = new StringBuilder(result.getContents());
-        sb.insert(1, ' ');
-        sb.insert(8, ' ');
+
 
         if(result != null) {
             if(result.getContents() == null) {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
             } else {
+                StringBuilder sb = new StringBuilder(result.getContents());
+                sb.insert(1, ' ');
+                sb.insert(8, ' ');
                 Toast.makeText(this, "Scanned: " + sb.toString(), Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(this,NewDetailActivity.class);
                 intent.putExtra("barcode",sb.toString());
