@@ -11,7 +11,7 @@ public class UserInfoResponse {
 
     private String name;
 
-    private LocalDate birth;
+    private String birth;
 
     private String address;
 

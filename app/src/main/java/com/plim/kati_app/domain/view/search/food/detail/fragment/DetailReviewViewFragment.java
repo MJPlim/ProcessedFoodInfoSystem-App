@@ -96,7 +96,7 @@ public class DetailReviewViewFragment extends GetResultFragment {
                 .baseUrl(Constant.URL)
                 .build();
         RestAPI service = retrofit.create(RestAPI.class);
-        Call<List<ReadReviewResponse>> listCall = service.readReview(new ReadReviewRequest(foodId));
+        Call<List<ReadReviewResponse>> listCall = service.readReview(foodId);
         listCall.enqueue(new Callback<List<ReadReviewResponse>>() {
             @Override
             public void onResponse(Call<List<ReadReviewResponse>> call, Response<List<ReadReviewResponse>> response) {

@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class UserInfoModifyRequest {
-    private String name;
-    private LocalDate birth;
-    private String address;
+    private String name; //이름
+    private String birth; //생일
+    private String address; //주소
 }

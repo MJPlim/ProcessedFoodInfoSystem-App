@@ -61,16 +61,16 @@ public interface RestAPI {
     @GET("/api/v1/advertisement/ads")
     Call<List<AdvertisementResponse>> getAdFoodList();
 
-//    @HTTP(method="GET",path="/readReview",hasBody=true)
-//    Call<List<ReadReviewResponse>> readReview(@Body ReadReviewRequest dto);
+    @GET("/readReview")
+    Call<List<ReadReviewResponse>> readReview(@Query("foodId") Long foodId);
 //
-//    @HTTP(method="GET",path="/api/v1/food/findFood/barcode",hasBody=true)
-//    Call<FoodDetailResponse> findByBarcode(@Body FindFoodByBarcodeRequest request);
+    @POST("/api/v1/food/findFood/barcode")
+    Call<FoodDetailResponse> findByBarcode(@Body FindFoodByBarcodeRequest request);
 
 
-    @GET("user-info")
+    @GET("api/v1/user/user-info")
     Call<UserInfoResponse> getUserInfo();
 
-    @POST("modify-user-info")
+    @POST("api/v1/user/modify-user-info")
     Call<UserInfoResponse> modifyUserInfo(@Body UserInfoModifyRequest request);
 }

@@ -29,6 +29,15 @@ public class Constant_yun {
     public static final String FIND_USER_PASSWORD_DIALOG_TITLE="임시 비밀번호가 발급되었습니다.";
     public static final String FIND_USER_PASSWORD_DIALOG_MESSAGE="메일함에서 임시 비밀번호 메일을 확인해 주세요.";
 
+    public static final String RETROFIT_FAIL_CONNECTION="연결오류";
+    public static final String RETROFIT_NOT_SUCCESS="비성공적";
+
+    public static final String USER_DATA_CHANGE_SUCCESSFUL_DIALOG_TITLE="성공적으로 수정하였습니다.";
+    public static final String USER_DATA_CHANGE_SUCCESSFUL_DIALOG_MESSAGE="유저정보를 수정하였습니다.";
+
+
+    public static final String BASIC_DATE_FORMAT="YYYY-MM-dd";
+    
     //findPasswordActivity
     public static final String LOGINED_DIALOG_TITLE="이미 로그인 된 상태입니다.";
     public static final String NO_USER_DIALOG_TITLE="해당하는 유저가 없습니다.";
