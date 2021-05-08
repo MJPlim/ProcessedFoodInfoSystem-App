@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/myPage_activity_navigation_graph"
+    app:startDestination="@id/myPageFragment">
+
+    <fragment
+        android:id="@+id/myPageFragment"
+        android:name="com.plim.kati_app.domain.view.user.myPage.UserMyPageFragment"
+        android:label="fragment_myPage"
+        tools:layout="@layout/fragment_mypage" >
+
+    </fragment>
+
+</navigation>
