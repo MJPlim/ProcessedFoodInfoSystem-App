@@ -11,6 +11,7 @@ import com.plim.kati_app.domain.model.Password;
 import com.plim.kati_app.domain.model.SignUpResponse;
 import com.plim.kati_app.domain.model.User;
 import com.plim.kati_app.domain.model.WithdrawResponse;
+import com.plim.kati_app.domain.model.dto.ReadReviewDto;
 import com.plim.kati_app.domain.model.dto.ReadReviewRequest;
 import com.plim.kati_app.domain.model.dto.ReadReviewResponse;
 import com.plim.kati_app.domain.model.dto.UserInfoModifyRequest;
@@ -19,6 +20,7 @@ import com.plim.kati_app.domain.view.user.login.LoginRequest;
 import com.plim.kati_app.domain.model.dto.AdvertisementResponse;
 
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -47,10 +49,10 @@ public interface RestAPI {
     Call<LoginRequest> postRetrofitData(@Body LoginRequest loginRequest);
 
     @GET("/api/v1/food/findFood/foodName")
-    Call<List<FoodResponse>> getFoodListByProductName( @Query("foodName") String foodName);
+    Call<List<FoodResponse>> getFoodListByProductName(@Query("foodName") String foodName);
 
     @GET("/api/v1/food/findFood/manufacturerName")
-    Call<List<FoodResponse>> getFoodListByCompanyName( @Query("manufacturerName") String manufacturerName);
+    Call<List<FoodResponse>> getFoodListByCompanyName(@Query("manufacturerName") String manufacturerName);
 
     @GET("/api/v1/food/findFood/foodDetail")
     Call<FoodDetailResponse> getFoodDetailByFoodId(@Query("foodId") Long foodId);
@@ -62,8 +64,11 @@ public interface RestAPI {
     Call<List<AdvertisementResponse>> getAdFoodList();
 
     @GET("/readReview")
-    Call<List<ReadReviewResponse>> readReview(@Query("foodId") Long foodId);
-//
+    Call<ReadReviewDto> readReview(@Query("foodId") Long foodId, @Query("pageNum") int pageNum);
+
+    @GET("api/v1/user/readReview")
+    Call<ReadReviewDto> readReviewByUser(@Query("foodId") Long foodId, @Query("pageNum") int pageNum);
+
     @POST("/api/v1/food/findFood/barcode")
     Call<FoodDetailResponse> findByBarcode(@Body FindFoodByBarcodeRequest request);
 
@@ -73,4 +78,5 @@ public interface RestAPI {
 
     @POST("api/v1/user/modify-user-info")
     Call<UserInfoResponse> modifyUserInfo(@Body UserInfoModifyRequest request);
+
 }
