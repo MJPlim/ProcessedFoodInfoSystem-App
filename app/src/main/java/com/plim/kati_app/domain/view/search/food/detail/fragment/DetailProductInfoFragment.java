@@ -21,6 +21,7 @@ import com.plim.kati_app.domain.asset.KatiDialog;
 import com.plim.kati_app.domain.asset.LoadingDialog;
 import com.plim.kati_app.domain.model.dto.FindFoodByBarcodeRequest;
 import com.plim.kati_app.domain.model.dto.FoodDetailResponse;
+import com.plim.kati_app.domain.view.MainActivity;
 import com.plim.kati_app.domain.view.search.food.review.WriteReviewActivity;
 import com.plim.kati_app.tech.RestAPI;
 
@@ -80,13 +81,42 @@ public class DetailProductInfoFragment extends Fragment {
         this.purchaseSiteButton = view.findViewById(R.id.detailProductInfoFragment_buyButton);
         this.writeReviewButton = view.findViewById(R.id.detailProductInfoFragment_writeReviewButton);
         this.loadingDialog = new LoadingDialog(this.getContext());
-        this.barcode=this.getActivity().getIntent().getStringExtra("barcode");
+        this.barcode = this.getActivity().getIntent().getStringExtra("barcode");
         this.foodId = this.getActivity().getIntent().getLongExtra(DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_FOOD_ID_EXTRA, 0L);
         this.isAd = this.getActivity().getIntent().getBooleanExtra(NEW_DETAIL_ACTIVITY_EXTRA_IS_AD, false);
         this.getReview();
-//        if(this.barcode!=null) this.barcodeSearch();
-//            else this.search();
+        if (this.barcode != null) this.barcodeSearch();
+        else this.search();
 
+    }
+
+    private void parseCall(Call<FoodDetailResponse> call) {
+        call.enqueue(new Callback<FoodDetailResponse>() {
+            @Override
+            public void onResponse(Call<FoodDetailResponse> call, Response<FoodDetailResponse> response) {
+                FoodDetailResponse item = response.body();
+                if (item == null) {
+                    KatiDialog.showRetrofitNotSuccessDialog(
+                            getContext(),
+                            "일치하는 제품이 없습니다.",
+                            (dialog, which) -> startActivity(new Intent(getActivity(), MainActivity.class))
+                    ).showDialog();
+                } else {
+                    putBundle(item);
+                }
+                getActivity().runOnUiThread(() -> {
+                    loadingDialog.hide();
+                });
+            }
+
+            @Override
+            public void onFailure(Call<FoodDetailResponse> call, Throwable t) {
+                getActivity().runOnUiThread(() -> {
+                    loadingDialog.hide();
+                });
+                KatiDialog.showRetrofitFailDialog(getContext(), t.getMessage(), null).showDialog();
+            }
+        });
     }
 
     private void barcodeSearch() {
@@ -99,43 +129,19 @@ public class DetailProductInfoFragment extends Fragment {
                 .baseUrl(Constant.URL)
                 .build();
         RestAPI service = retrofit.create(RestAPI.class);
-            Call<FoodDetailResponse> listCall = service.findByBarcode(new FindFoodByBarcodeRequest(this.barcode));
-            listCall.enqueue(new Callback<FoodDetailResponse>() {
-                @Override
-                public void onResponse(Call<FoodDetailResponse> call, Response<FoodDetailResponse> response) {
-                    FoodDetailResponse item = response.body();
-                    putBundle(item);
-
-                    getActivity().runOnUiThread(() -> {
-                        loadingDialog.hide();
-                    });
-                }
-
-                @Override
-                public void onFailure(Call<FoodDetailResponse> call, Throwable t) {
-                    Log.d("여기야","바코드");
-                    getActivity().runOnUiThread(() -> {
-                        loadingDialog.hide();
-                    });
-                    KatiDialog.simpleAlertDialog(getContext(),
-                            FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE,
-                            t.getMessage(), null,
-                            getContext().getResources().getColor(R.color.kati_coral, getContext().getTheme())
-                    ).showDialog();
-                }
-            });
-
+        Call<FoodDetailResponse> listCall = service.findByBarcode(new FindFoodByBarcodeRequest(this.barcode));
+        this.parseCall(listCall);
     }
 
     /**
      * 리뷰 불러오기 하기.
      */
     private void getReview() {
-        Log.d("리뷰 불러오게 FragmentResult 설정",this.foodId+"");
+        Log.d("리뷰 불러오게 FragmentResult 설정", this.foodId + "");
 //        Toast.makeText(this.getActivity(), foodId+"아이디", Toast.LENGTH_SHORT).show();
-        Bundle reviewBundle= new Bundle();
-        reviewBundle.putLong("foodId",this.foodId);
-        getActivity().getSupportFragmentManager().setFragmentResult("reviewBundle",reviewBundle);
+        Bundle reviewBundle = new Bundle();
+        reviewBundle.putLong("foodId", this.foodId);
+        getActivity().getSupportFragmentManager().setFragmentResult("reviewBundle", reviewBundle);
     }
 
     /**
@@ -143,9 +149,10 @@ public class DetailProductInfoFragment extends Fragment {
      */
     public void putBundle(FoodDetailResponse value) {
 
-        if(value==null){
-            Log.d("디버그","value가 널임");
-            return;}
+        if (value == null) {
+            Log.d("디버그", "value가 널임");
+            return;
+        }
         Bundle imageBundle = new Bundle();
         imageBundle.putString(DETAIL_PHOTO_VIEW_FRAGMENT_BUNDLE_FRONT_IMAGE, value.getFoodImageAddress());
         imageBundle.putString(DETAIL_PHOTO_VIEW_FRAGMENT_BUNDLE_BACK_IMAGE, value.getFoodMeteImageAddress());
@@ -158,11 +165,11 @@ public class DetailProductInfoFragment extends Fragment {
         infoMap.put(DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_MANUFACTURER_NAME, value.getManufacturerName());
         infoMap.put(DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_EXPIRATION_DATE, "-");
         HashMap<String, String> infoLink = new HashMap<>();
-        infoLink.put(DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_MANUFACTURER_NAME,"https://m.search.naver.com/search.naver?query=");
+        infoLink.put(DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_MANUFACTURER_NAME, "https://m.search.naver.com/search.naver?query=");
         Bundle infoBundle = new Bundle();
         infoBundle.putString(ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_NAME, DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_TABLE_NAME);
         infoBundle.putSerializable(ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_HASH_MAP, infoMap);
-        infoBundle.putSerializable(ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_LINK_MAP,infoLink);
+        infoBundle.putSerializable(ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_LINK_MAP, infoLink);
         getActivity().getSupportFragmentManager().setFragmentResult(DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_BUNDLE_KEY, infoBundle);
 
         this.purchaseSiteButton.setOnClickListener(v -> {
@@ -201,56 +208,10 @@ public class DetailProductInfoFragment extends Fragment {
         RestAPI service = retrofit.create(RestAPI.class);
         if (!isAd) {
             Call<FoodDetailResponse> listCall = service.getFoodDetailByFoodId(this.foodId);
-            listCall.enqueue(new Callback<FoodDetailResponse>() {
-                @Override
-                public void onResponse(Call<FoodDetailResponse> call, Response<FoodDetailResponse> response) {
-                    FoodDetailResponse item = response.body();
-                    putBundle(item);
-
-                    getActivity().runOnUiThread(() -> {
-                        loadingDialog.hide();
-                    });
-                }
-
-                @Override
-                public void onFailure(Call<FoodDetailResponse> call, Throwable t) {
-                    Log.d("여기야","상세");
-                    getActivity().runOnUiThread(() -> {
-                        loadingDialog.hide();
-                    });
-                    KatiDialog.simpleAlertDialog(getContext(),
-                            FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE,
-                            t.getMessage(), null,
-                            getContext().getResources().getColor(R.color.kati_coral, getContext().getTheme())
-                    ).showDialog();
-                }
-            });
+            this.parseCall(listCall);
         } else {
             Call<FoodDetailResponse> listCall = service.getAdFoodDetail(this.foodId);
-            listCall.enqueue(new Callback<FoodDetailResponse>() {
-                @Override
-                public void onResponse(Call<FoodDetailResponse> call, Response<FoodDetailResponse> response) {
-                    FoodDetailResponse item = response.body();
-                    putBundle(item);
-
-                    getActivity().runOnUiThread(() -> {
-                        loadingDialog.hide();
-                    });
-                }
-
-                @Override
-                public void onFailure(Call<FoodDetailResponse> call, Throwable t) {
-                    getActivity().runOnUiThread(() -> {
-                        loadingDialog.hide();
-                    });
-                    Log.d("여기야","광고");
-                    KatiDialog.simpleAlertDialog(getContext(),
-                            FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE,
-                            t.getMessage(), null,
-                            getContext().getResources().getColor(R.color.kati_coral, getContext().getTheme())
-                    ).showDialog();
-                }
-            });
+            this.parseCall(listCall);
 
         }
     }

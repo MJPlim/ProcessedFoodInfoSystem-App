@@ -2,6 +2,7 @@ package com.plim.kati_app.domain.view.search.food.list.barcode;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -35,12 +36,12 @@ public class BarcodeActivity extends AppCompatActivity {
             if(result.getContents() == null) {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
             } else {
-                StringBuilder sb = new StringBuilder(result.getContents());
-                sb.insert(1, ' ');
-                sb.insert(8, ' ');
-                Toast.makeText(this, "Scanned: " + sb.toString(), Toast.LENGTH_LONG).show();
+                String string= result.getContents();
+
+                Toast.makeText(this, "Scanned: " + string, Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(this,NewDetailActivity.class);
-                intent.putExtra("barcode",sb.toString());
+                intent.putExtra("barcode",string);
+                Log.d(string,"바코드 스캔");
                 startActivity(intent);
             }
 

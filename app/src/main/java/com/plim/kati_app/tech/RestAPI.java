@@ -54,11 +54,20 @@ public interface RestAPI {
     @GET("/api/v1/food/findFood/manufacturerName")
     Call<List<FoodResponse>> getFoodListByCompanyName(@Query("manufacturerName") String manufacturerName);
 
+
+
+
     @GET("/api/v1/food/findFood/foodDetail")
     Call<FoodDetailResponse> getFoodDetailByFoodId(@Query("foodId") Long foodId);
 
     @GET("/api/v1/advertisement/foodDetail")
     Call<FoodDetailResponse> getAdFoodDetail(@Query("adId") Long adId);
+
+    @POST("/api/v1/food/findFood/barcode")
+    Call<FoodDetailResponse> findByBarcode(@Body FindFoodByBarcodeRequest request);
+
+
+
 
     @GET("/api/v1/advertisement/ads")
     Call<List<AdvertisementResponse>> getAdFoodList();
@@ -69,8 +78,7 @@ public interface RestAPI {
     @GET("api/v1/user/readReview")
     Call<ReadReviewDto> readReviewByUser(@Query("foodId") Long foodId, @Query("pageNum") int pageNum);
 
-    @POST("/api/v1/food/findFood/barcode")
-    Call<FoodDetailResponse> findByBarcode(@Body FindFoodByBarcodeRequest request);
+
 
 
     @GET("api/v1/user/user-info")
