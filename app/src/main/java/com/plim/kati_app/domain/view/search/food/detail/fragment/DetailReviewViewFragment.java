@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,10 +27,12 @@ import com.plim.kati_app.constants.Constant;
 import com.plim.kati_app.constants.Constant_yun;
 import com.plim.kati_app.domain.asset.GetResultFragment;
 import com.plim.kati_app.domain.asset.KatiDialog;
+import com.plim.kati_app.domain.model.RegisterActivityViewModel;
 import com.plim.kati_app.domain.model.WithdrawResponse;
 import com.plim.kati_app.domain.model.dto.ReadReviewDto;
 import com.plim.kati_app.domain.model.dto.ReadReviewRequest;
 import com.plim.kati_app.domain.model.dto.ReadReviewResponse;
+import com.plim.kati_app.domain.model.dto.ReviewViewmodel;
 import com.plim.kati_app.domain.model.dto.UpdateReviewLikeRequest;
 import com.plim.kati_app.domain.model.dto.UpdateReviewLikeResponse;
 import com.plim.kati_app.domain.model.room.KatiData;
@@ -54,6 +58,7 @@ import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_RESULT_LIST_F
  */
 public class DetailReviewViewFragment extends GetResultFragment {
 
+
     private int currentPageNum = 1;
     private Long foodId;
     private boolean isLogin = false;
@@ -66,6 +71,7 @@ public class DetailReviewViewFragment extends GetResultFragment {
     private TabLayout categoryTabLayout;
 
     public DetailReviewViewFragment() {
+
         // Required empty public constructor
     }
 
@@ -217,6 +223,15 @@ public class DetailReviewViewFragment extends GetResultFragment {
                             vector.addAll(reviewList);
                             adapter.setItems(vector);
 
+
+                            ReviewViewmodel viewmodel = new ViewModelProvider(requireActivity()).get(ReviewViewmodel.class);
+                            viewmodel.setScore(0);
+                            viewmodel.setFoodId(0l);
+                            viewmodel.setImageUrl("");
+                            viewmodel.setManufacturerName("");
+                            viewmodel.setProductName("");
+                            viewmodel.setReviewValue("");
+
                         }
                     }
 
@@ -280,7 +295,7 @@ public class DetailReviewViewFragment extends GetResultFragment {
 
 
             private TextView productName, date, score, reviewContent, like;
-            private Button editButton;
+            private Button editButton, deleteButton;
             private ImageView likeImageButton;
 
             public ReviewViewHolder(@NonNull View itemView) {
@@ -292,6 +307,7 @@ public class DetailReviewViewFragment extends GetResultFragment {
                 this.like = itemView.findViewById(R.id.reviewItem_reviewLikeTextView);
                 this.editButton = itemView.findViewById(R.id.reviewItem_editButton);
                 this.likeImageButton = itemView.findViewById(R.id.reviewItem_reviewLikeImageView);
+                this.deleteButton= itemView.findViewById(R.id.reviewItem_deleteButton);
             }
 
             public void setValue(ReadReviewResponse value) {
@@ -303,7 +319,7 @@ public class DetailReviewViewFragment extends GetResultFragment {
                 this.reviewContent.setText(value.getReviewDescription());
                 this.like.setText(value.getLikeCount() + "");
 
-
+                this.deleteButton.setEnabled(value.isUserCheck());
                 this.editButton.setEnabled(value.isUserCheck());
 
                 this.likeImageButton.setColorFilter(value.isUserLikeCheck()?R.color.kati_orange:R.color.black, PorterDuff.Mode.SRC_IN);

@@ -87,6 +87,14 @@
                 android:text="@string/detailProductInfoFragment_writeReviewButton_text" />
 
             <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/detailProductInfoFragment_reviewWriteFragment"
+                android:name="com.plim.kati_app.domain.view.search.food.detail.fragment.ReviewWriteFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:layout="@layout/fragment_detail_review_view"
+                />
+
+            <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/detailProductInfoFragment_reviewViewFragment"
                 android:name="com.plim.kati_app.domain.view.search.food.detail.fragment.DetailReviewViewFragment"
 

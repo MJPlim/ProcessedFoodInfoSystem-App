@@ -1,5 +1,6 @@
 package com.plim.kati_app.domain.view.search.food.detail.fragment;
 
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -38,6 +39,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import static com.plim.kati_app.constants.Constant_yun.ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_HASH_MAP;
 import static com.plim.kati_app.constants.Constant_yun.ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_LINK_MAP;
 import static com.plim.kati_app.constants.Constant_yun.ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_NAME;
+import static com.plim.kati_app.constants.Constant_yun.ABSTRACT_TABLE_FRAGMENT_LARGE;
+import static com.plim.kati_app.constants.Constant_yun.ABSTRACT_TABLE_FRAGMENT_SMALL;
 import static com.plim.kati_app.constants.Constant_yun.DETAIL_PHOTO_VIEW_FRAGMENT_BUNDLE_BACK_IMAGE;
 import static com.plim.kati_app.constants.Constant_yun.DETAIL_PHOTO_VIEW_FRAGMENT_BUNDLE_FRONT_IMAGE;
 import static com.plim.kati_app.constants.Constant_yun.DETAIL_PHOTO_VIEW_FRAGMENT_BUNDLE_KEY;
@@ -66,6 +69,10 @@ public class DetailProductInfoFragment extends Fragment {
     private Long foodId;
     private boolean isAd;
     private String barcode;
+    private boolean isExpanded=false;
+
+    private View fragment;
+
 
     public DetailProductInfoFragment() {
         // Required empty public constructor
@@ -80,16 +87,47 @@ public class DetailProductInfoFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        this.fragment=view.findViewById(R.id.detailProductInfoFragment_reviewWriteFragment);
         this.purchaseSiteButton = view.findViewById(R.id.detailProductInfoFragment_buyButton);
         this.writeReviewButton = view.findViewById(R.id.detailProductInfoFragment_writeReviewButton);
         this.loadingDialog = new LoadingDialog(this.getContext());
         this.barcode = this.getActivity().getIntent().getStringExtra("barcode");
         this.foodId = this.getActivity().getIntent().getLongExtra(DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_FOOD_ID_EXTRA, 0L);
         this.isAd = this.getActivity().getIntent().getBooleanExtra(NEW_DETAIL_ACTIVITY_EXTRA_IS_AD, false);
+        this.writeReviewButton.setOnClickListener(v->{
+            this.changeVisibility(this.isExpanded);
+        });
+
+
         if (this.barcode != null) this.barcodeSearch();
         else this.search();
 
     }
+    /**
+     * 인터넷 펌 Expandable recyclerView 메소드. 임시. ValueAnimator를 활용하여 애니메이션으로 늘리고 줄여준다.
+     * @param isExpanded 확장할지 안할지.
+     */
+    protected void changeVisibility(final boolean isExpanded) {
+        this.isExpanded = isExpanded;
+        // ValueAnimator.ofInt(int... values)는 View가 변할 값을 지정, 인자는 int 배열
+        ValueAnimator va = isExpanded ? ValueAnimator.ofInt(0, fragment.getHeight()) : ValueAnimator.ofInt(fragment.getHeight(), 0);
+        // Animation이 실행되는 시간, n/1000초
+        va.setDuration(500);
+        va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                // imageView의 높이 변경
+                fragment.getLayoutParams().height = (int) animation.getAnimatedValue();
+                fragment.requestLayout();
+                // imageView가 실제로 사라지게하는 부분
+                fragment.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+//                writeReviewButton.setText(isExpanded ? "리뷰작성: ABSTRACT_TABLE_FRAGMENT_LARGE);
+            }
+        });
+        // Animation start
+        va.start();
+    }
+
 
     private void parseCall(Call<FoodDetailResponse> call) {
         call.enqueue(new Callback<FoodDetailResponse>() {

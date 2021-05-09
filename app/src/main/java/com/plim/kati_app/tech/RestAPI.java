@@ -5,6 +5,8 @@ import com.plim.kati_app.domain.model.ModifyPasswordResponse;
 import com.plim.kati_app.domain.model.FindPasswordRequest;
 import com.plim.kati_app.domain.model.FindPasswordResponse;
 
+import com.plim.kati_app.domain.model.dto.CreateReviewRequest;
+import com.plim.kati_app.domain.model.dto.CreateReviewResponse;
 import com.plim.kati_app.domain.model.dto.FindFoodByBarcodeRequest;
 
 import com.plim.kati_app.domain.model.UserInfoResponse;
@@ -89,8 +91,8 @@ public interface RestAPI {
     @POST("api/v1/user/updateReviewLike")
     Call<UpdateReviewLikeResponse> likeReview(@Body UpdateReviewLikeRequest updateReviewLikeRequest);
 
-
-
+    @POST("api/v1/user/createReview")
+    Call<CreateReviewResponse>createReview(@Body CreateReviewRequest dto);
 
 
     @GET("api/v1/user/user-info")

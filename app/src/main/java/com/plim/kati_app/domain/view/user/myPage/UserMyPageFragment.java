@@ -161,7 +161,7 @@ public class UserMyPageFragment extends Fragment {
     
     // 서버에서 사용자 정보를 받아와서 이름을 바꿔주는 메서드
     private void changeId() {
-        Call<UserInfoResponse> call = getApiService2(token).getUserInfo();
+        Call<UserInfoResponse> call = RestAPIClient.getApiService2(token).getUserInfo();
         Callback<UserInfoResponse> callback = new Callback<UserInfoResponse>() {
             @Override
             public void onResponse(retrofit2.Call<UserInfoResponse> call, Response<UserInfoResponse> response) {
