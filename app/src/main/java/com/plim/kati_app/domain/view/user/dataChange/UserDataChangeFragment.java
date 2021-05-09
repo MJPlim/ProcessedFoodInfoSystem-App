@@ -35,6 +35,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.plim.kati_app.constants.Constant_yun.BASIC_DATE_FORMAT;
+import static com.plim.kati_app.constants.Constant_yun.DETAIL_PHOTO_VIEW_FRAGMENT_BUNDLE_KEY;
 import static com.plim.kati_app.constants.Constant_yun.USER_DATA_CHANGE_SUCCESSFUL_DIALOG_MESSAGE;
 import static com.plim.kati_app.constants.Constant_yun.USER_DATA_CHANGE_SUCCESSFUL_DIALOG_TITLE;
 
@@ -167,6 +168,8 @@ public class UserDataChangeFragment extends Fragment {
                                     (dialog, which) -> startActivity(new Intent(getActivity(), MainActivity.class)),
                                     getContext().getResources().getColor(R.color.kati_coral, getContext().getTheme())
                             ).showDialog();
+                            Bundle bundle = new Bundle();
+                            getActivity().getSupportFragmentManager().setFragmentResult("saveAllergyList", bundle);
                         }
 
                         new Thread(() -> {

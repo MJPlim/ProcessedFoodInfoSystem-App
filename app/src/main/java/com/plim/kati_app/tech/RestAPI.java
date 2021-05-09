@@ -12,6 +12,7 @@ import com.plim.kati_app.domain.model.SetSecondEmailRequest;
 import com.plim.kati_app.domain.model.SetSecondEmailResponse;
 import com.plim.kati_app.domain.model.dto.CreateReviewRequest;
 import com.plim.kati_app.domain.model.dto.CreateReviewResponse;
+import com.plim.kati_app.domain.model.dto.CreateUserAllergyRequest;
 import com.plim.kati_app.domain.model.dto.DeleteReviewRequest;
 import com.plim.kati_app.domain.model.dto.FindFoodByBarcodeRequest;
 
@@ -115,6 +116,8 @@ public interface RestAPI {
     @GET("api/v1/user/favorite/checkFavorite")
     Call<Boolean>getFavoriteStateForFood(@Query("foodId") Long foodId);
 
+    @POST("api/v1/user/createUserAllergy")
+    Call<UserInfoResponse>createUserAllergy(@Body CreateUserAllergyRequest dto);
 
     @GET("api/v1/user/readUserAllergy")
     Call<ReadUserAllergyResponse>readUserAllergy();

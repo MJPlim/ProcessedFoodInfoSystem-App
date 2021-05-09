@@ -32,6 +32,11 @@ public class UserCategoryListFragment extends AbstractExpandableItemList {
     }
 
     @Override
+    protected void addItem(String toString) {
+
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         this.loadCategory();

@@ -150,7 +150,7 @@ public abstract class AbstractTableFragment extends ExpandableFragment {
                 this.value.setText(data.getValue());
                 if(data.getLink()!=null) this.value.setOnClickListener(v->{
                     this.value.setPaintFlags(this.value.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(data.getLink()+data.getValue()));
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(data.getLink()+data.getValue().split("_")[0]));
                     startActivity(intent);
                 });
 
