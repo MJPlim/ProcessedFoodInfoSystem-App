@@ -4,6 +4,7 @@ import com.plim.kati_app.domain.model.ModifyPasswordRequest;
 import com.plim.kati_app.domain.model.ModifyPasswordResponse;
 import com.plim.kati_app.domain.model.FindPasswordRequest;
 import com.plim.kati_app.domain.model.FindPasswordResponse;
+import com.plim.kati_app.domain.model.UserInfoResponse;
 import com.plim.kati_app.domain.model.dto.FoodDetailResponse;
 import com.plim.kati_app.domain.model.FoodResponse;
 import com.plim.kati_app.domain.model.Password;
@@ -52,4 +53,7 @@ public interface RestAPI {
 
     @GET("api/v1/advertisement/ads")
     Call<List<AdvertisementResponse>> getAdFoodList();
+
+    @GET("/api/v1/user/user-info")
+    Call<UserInfoResponse> getUserInfo();
 }
