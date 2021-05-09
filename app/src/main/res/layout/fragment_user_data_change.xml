@@ -6,153 +6,172 @@
     android:layout_height="match_parent"
     tools:context=".domain.view.user.dataChange.UserDataChangeFragment">
 
-    <ImageView
-        android:id="@+id/userDataChangeFragment_addImageButton"
-        android:layout_width="218dp"
-        android:layout_height="148dp"
-        android:layout_marginTop="15dp"
-        android:foregroundTint="@color/kati_light_orange"
-        android:src="@android:drawable/ic_input_add"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="프로필 이미지 추가"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userDataChangeFragment_addImageButton" />
-
-
-    <TextView
-        android:id="@+id/userDataChangeFragment_nameTextView"
-        android:layout_width="94dp"
-        android:layout_height="21dp"
-        android:layout_marginTop="12dp"
-        android:gravity="center_horizontal"
-        android:text="이름"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        android:textStyle="bold"
-
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-
-    <EditText
-        android:id="@+id/userDataChangeFragment_nameEditText"
-        android:layout_width="296dp"
-        android:layout_height="40dp"
-        android:ems="10"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/userDataChangeFragment_nameTextView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <TextView
-        android:id="@+id/userDataChangeFragment_birthTextView"
-        android:layout_width="94dp"
-        android:layout_height="21dp"
-        android:layout_marginTop="12dp"
-        android:gravity="center_horizontal"
-        android:text="생일"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        android:textStyle="bold"
-
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userDataChangeFragment_nameTextView" />
-
-
-
-    <EditText
-        android:id="@+id/userDataChangeFragment_birthEditText"
-        android:layout_width="296dp"
-        android:layout_height="40dp"
-        android:ems="10"
-        android:inputType="date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/userDataChangeFragment_birthTextView"
-        app:layout_constraintTop_toBottomOf="@+id/userDataChangeFragment_nameEditText" />
-
-    <TextView
-        android:id="@+id/userDataChangeFragment_addressTextView"
-        android:layout_width="94dp"
-        android:layout_height="21dp"
-        android:layout_marginTop="12dp"
-        android:gravity="center_horizontal"
-        android:text="주소"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        android:textStyle="bold"
-
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userDataChangeFragment_birthTextView" />
-
-
-    <EditText
-        android:id="@+id/userDataChangeFragment_addressEditText"
-        android:layout_width="296dp"
-        android:layout_height="40dp"
-
-        android:ems="10"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/userDataChangeFragment_addressTextView"
-        app:layout_constraintTop_toBottomOf="@+id/userDataChangeFragment_birthEditText" />
-
-    <View
-        android:id="@+id/view6"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/kati_yellow"
-        app:layout_constraintTop_toBottomOf="@+id/userDataChangeFragment_addressEditText"
-        tools:layout_editor_absoluteX="16dp" />
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/userDataChangeFragment_allergyListFragment"
-        android:name="com.plim.kati_app.domain.view.user.dataChange.UserAllergyListFragment"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view6"
-        tools:layout="@layout/abstract_expandable_item_list" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <View
-        android:id="@+id/view8"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/kati_yellow"
-        app:layout_constraintTop_toBottomOf="@+id/userDataChangeFragment_allergyListFragment"
-        tools:layout_editor_absoluteX="-29dp" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/userDataChangeFragment_categoryListFragment"
-        android:name="com.plim.kati_app.domain.view.user.dataChange.UserAllergyListFragment"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view8"
-        tools:layout="@layout/abstract_expandable_item_list" />
+            <ImageView
+                android:id="@+id/userDataChangeFragment_addImageButton"
+                android:layout_width="218dp"
+                android:layout_height="148dp"
+                android:layout_marginTop="15dp"
+                android:foregroundTint="@color/kati_light_orange"
+                android:src="@android:drawable/ic_input_add"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/view9"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/kati_yellow"
-        app:layout_constraintTop_toBottomOf="@+id/userDataChangeFragment_categoryListFragment"
-        tools:layout_editor_absoluteX="-29dp" />
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="프로필 이미지 추가"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/userDataChangeFragment_addImageButton" />
 
-    <Button
-        android:id="@+id/userDataChangeFragment_finalEditButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="수정하기"
-        app:layout_constraintTop_toBottomOf="@+id/view8"
-        tools:layout_editor_absoluteX="53dp" />
+
+            <TextView
+
+                android:id="@+id/userDataChangeFragment_nameTextView"
+                android:layout_width="94dp"
+                android:layout_height="21dp"
+                android:layout_marginTop="32dp"
+                android:gravity="center_horizontal"
+                android:text="이름"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+
+            <EditText
+                android:id="@+id/userDataChangeFragment_nameEditText"
+                android:layout_width="296dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/userDataChangeFragment_nameTextView"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <TextView
+                android:id="@+id/userDataChangeFragment_birthTextView"
+                android:layout_width="94dp"
+                android:layout_height="21dp"
+                android:layout_marginTop="12dp"
+                android:gravity="center_horizontal"
+                android:text="생일"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/userDataChangeFragment_nameTextView" />
+
+
+            <EditText
+                android:id="@+id/userDataChangeFragment_birthEditText"
+                android:layout_width="296dp"
+                android:layout_height="40dp"
+                android:ems="10"
+                android:inputType="date"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/userDataChangeFragment_birthTextView"
+                app:layout_constraintTop_toBottomOf="@+id/userDataChangeFragment_nameEditText" />
+
+            <TextView
+                android:id="@+id/userDataChangeFragment_addressTextView"
+                android:layout_width="94dp"
+                android:layout_height="21dp"
+                android:layout_marginTop="12dp"
+                android:gravity="center_horizontal"
+                android:text="주소"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/userDataChangeFragment_birthTextView" />
+
+
+            <EditText
+                android:id="@+id/userDataChangeFragment_addressEditText"
+                android:layout_width="296dp"
+                android:layout_height="40dp"
+
+                android:ems="10"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/userDataChangeFragment_addressTextView"
+                app:layout_constraintTop_toBottomOf="@+id/userDataChangeFragment_birthEditText" />
+
+            <View
+                android:id="@+id/view6"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="30dp"
+                android:background="@color/kati_yellow"
+                app:layout_constraintTop_toBottomOf="@+id/userDataChangeFragment_addressEditText"
+                tools:layout_editor_absoluteX="16dp" />
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/userDataChangeFragment_allergyListFragment"
+                android:name="com.plim.kati_app.domain.view.user.dataChange.UserAllergyListFragment"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view6"
+                tools:layout="@layout/abstract_expandable_item_list" />
+
+            <View
+                android:id="@+id/view8"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="30dp"
+                android:background="@color/kati_yellow"
+                app:layout_constraintTop_toBottomOf="@+id/userDataChangeFragment_allergyListFragment"
+                tools:layout_editor_absoluteX="-29dp" />
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/userDataChangeFragment_categoryListFragment"
+                android:name="com.plim.kati_app.domain.view.user.dataChange.UserCategoryListFragment"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view8"
+                tools:layout="@layout/abstract_expandable_item_list" />
+
+            <View
+                android:id="@+id/view9"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="30dp"
+                android:background="@color/kati_yellow"
+                app:layout_constraintTop_toBottomOf="@+id/userDataChangeFragment_categoryListFragment"
+                tools:layout_editor_absoluteX="-29dp" />
+
+            <Button
+                android:id="@+id/userDataChangeFragment_finalEditButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="수정하기"
+                app:layout_constraintTop_toBottomOf="@+id/view9"
+                tools:layout_editor_absoluteX="53dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

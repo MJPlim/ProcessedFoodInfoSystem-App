@@ -26,6 +26,7 @@ import com.plim.kati_app.domain.model.WithdrawResponse;
 import com.plim.kati_app.domain.model.dto.ReadReviewDto;
 import com.plim.kati_app.domain.model.dto.ReadReviewRequest;
 import com.plim.kati_app.domain.model.dto.ReadReviewResponse;
+import com.plim.kati_app.domain.model.dto.ReadUserAllergyResponse;
 import com.plim.kati_app.domain.model.dto.UpdateReviewLikeRequest;
 import com.plim.kati_app.domain.model.dto.UpdateReviewLikeResponse;
 import com.plim.kati_app.domain.model.dto.UpdateReviewRequest;
@@ -114,6 +115,9 @@ public interface RestAPI {
     @GET("api/v1/user/favorite/checkFavorite")
     Call<Boolean>getFavoriteStateForFood(@Query("foodId") Long foodId);
 
+
+    @GET("api/v1/user/readUserAllergy")
+    Call<ReadUserAllergyResponse>readUserAllergy();
 
     @POST("api/v1/user/favorite/addFavorite")
     Call<Boolean>addFavoriteFood(@Query("foodId") Long foodId);

@@ -8,23 +8,30 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.plim.kati_app.R;
-import com.plim.kati_app.domain.asset.ExpandableFragment;
 import com.plim.kati_app.domain.model.DetailTableItem;
 
 import java.util.HashMap;
+import java.util.Vector;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 
 public abstract class AbstractExpandableItemList extends ExpandableFragment {
     private TextView title;
 
-    private DetailTableItem detailTableItem;
+//    private DetailTableItem detailTableItem;
     private RecyclerAdapter adapter;
+    private ExpandableListItem expandableListItem;
 
 
     public AbstractExpandableItemList() {
@@ -45,7 +52,7 @@ public abstract class AbstractExpandableItemList extends ExpandableFragment {
         this.recyclerView=view.findViewById(R.id.expandableItemListFragment_recyclerView);
 
         //set view
-        this.recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false));
+        this.recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         this.adapter = new RecyclerAdapter();
         this.recyclerView.setAdapter(this.adapter);
         this.expandButton.setOnClickListener(v -> changeVisibility(!this.isExpanded));
@@ -55,13 +62,23 @@ public abstract class AbstractExpandableItemList extends ExpandableFragment {
 
     /**
      * 데이터를 ui에 표시한다.
-     * @param detailTableItem 이 테이블을 위한 데이터 클래스 타입.
+     * @param expandableListItem 이 테이블을 위한 데이터 클래스 타입.
      */
-    protected void setItemValues(DetailTableItem detailTableItem) {
-        this.detailTableItem = detailTableItem;
-        this.adapter.setItems(this.detailTableItem.getValueMap());
+    protected void setItemValues(ExpandableListItem expandableListItem) {
+        this.expandableListItem=expandableListItem;
+        this.adapter.setItems(this.expandableListItem.getValues());
+        this.title.setText(this.expandableListItem.getTitle());
         this.adapter.notifyDataSetChanged();
-        this.title.setText(this.detailTableItem.getName());
+//        this.recyclerView.setAdapter(this.adapter);
+
+
+    }
+
+    @AllArgsConstructor
+    @Getter
+    protected class ExpandableListItem {
+        private String title;
+        private Vector<String> values;
     }
 
     /**
@@ -69,10 +86,10 @@ public abstract class AbstractExpandableItemList extends ExpandableFragment {
      */
     private class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RecyclerViewViewHolder> {
 
-        private HashMap<Integer, DetailTableItem.Data> itemMap;
+        private Vector<String> values;
 
         private RecyclerAdapter() {
-            this.itemMap = new HashMap<>();
+            this.values = new Vector<>();
         }
 
         @NonNull
@@ -87,51 +104,46 @@ public abstract class AbstractExpandableItemList extends ExpandableFragment {
 
         @Override
         public void onBindViewHolder(@NonNull RecyclerViewViewHolder holder, int position) {
-            DetailTableItem.Data data = itemMap.get(position);
-            holder.setValue(data);
+            holder.setValue(values.get(position));
         }
 
 
         @Override
         public int getItemCount() {
-            return itemMap.entrySet().size();
+            return values.size();
         }
 
-        public void clearItems() {
-            this.itemMap = new HashMap<>();
+
+
+        public void setItems(Vector<String> values) {
+            this.values=values;
             this.notifyDataSetChanged();
-        }
-
-        public void addItems(HashMap<Integer, DetailTableItem.Data> itemMap) {
-            this.itemMap.putAll(itemMap);
-            this.notifyDataSetChanged();
-        }
-
-        public void setItems(HashMap<Integer, DetailTableItem.Data> itemMap) {
-            this.clearItems();
-            this.addItems(itemMap);
         }
 
         /**
          * 뷰 홀더.
          */
         private class RecyclerViewViewHolder extends RecyclerView.ViewHolder {
-            private TextView title, value;
+            private TextView textView;
+            private ImageView delView;
 
             public RecyclerViewViewHolder(@NonNull View itemView) {
                 super(itemView);
-                this.title = itemView.findViewById(R.id.detailInformationTableTitle_nameTextView);
-                this.value = itemView.findViewById(R.id.detailInformationTableTitle_valueTextView);
+                this.textView = itemView.findViewById(R.id.allergyItem_value);
+                this.delView=itemView.findViewById(R.id.allergyItem_delete);
             }
 
             /**
              * ui에 데이터를 표시한다.
-             * @param data 테이블의 하나의 행을 위한 데이터 인스턴스.
+             * @param value 테이블의 하나의 행을 위한 데이터 인스턴스.
              */
-            public void setValue(DetailTableItem.Data data) {
-                this.title.setText(data.getTitle());
-                this.value.setText(data.getValue());
-
+            public void setValue(String value) {
+                Log.d("디버그",value);
+                this.textView.setText(value);
+                this.delView.setColorFilter(R.color.kati_orange);
+                this.delView.setOnClickListener(v->{
+                    Toast.makeText(getActivity(), "삭제 누름", Toast.LENGTH_SHORT).show();
+                });
             }
 
         }
