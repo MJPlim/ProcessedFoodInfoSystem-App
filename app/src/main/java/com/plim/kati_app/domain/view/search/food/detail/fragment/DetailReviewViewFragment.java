@@ -215,8 +215,8 @@ public class DetailReviewViewFragment extends GetResultFragment {
                             int findReviewPageCount = reviewDto.getReviewCount().getFindReviewPageCount();
                             pageNum.setText(currentPageNum + "/" + findReviewPageCount);
 
-                            prevPageButton.setEnabled(currentPageNum == 1 ? false : true);
-                            nextPageButton.setEnabled(currentPageNum == findReviewPageCount ? false : true);
+                            prevPageButton.setEnabled(currentPageNum <= 1 ? false : true);
+                            nextPageButton.setEnabled(currentPageNum == findReviewPageCount||findReviewPageCount==0 ? false : true);
 
                             List<ReadReviewResponse> reviewList = reviewDto.getReadReviewResponse();
                             Vector<ReadReviewResponse> vector = new Vector<>();
@@ -224,13 +224,7 @@ public class DetailReviewViewFragment extends GetResultFragment {
                             adapter.setItems(vector);
 
 
-                            ReviewViewmodel viewmodel = new ViewModelProvider(requireActivity()).get(ReviewViewmodel.class);
-                            viewmodel.setScore(0);
-                            viewmodel.setFoodId(0l);
-                            viewmodel.setImageUrl("");
-                            viewmodel.setManufacturerName("");
-                            viewmodel.setProductName("");
-                            viewmodel.setReviewValue("");
+
 
                         }
                     }
@@ -322,7 +316,8 @@ public class DetailReviewViewFragment extends GetResultFragment {
                 this.deleteButton.setEnabled(value.isUserCheck());
                 this.editButton.setEnabled(value.isUserCheck());
 
-                this.likeImageButton.setColorFilter(value.isUserLikeCheck()?R.color.kati_orange:R.color.black, PorterDuff.Mode.SRC_IN);
+                this.likeImageButton.getDrawable().clearColorFilter();
+                this.likeImageButton.getDrawable().setColorFilter(getResources().getColor(value.isUserLikeCheck()?R.color.kati_orange:R.color.gray,getContext().getTheme()), PorterDuff.Mode.SRC_IN);
                 this.like.setOnClickListener(isLogin ? v -> like(value.getReviewId(),value.isUserLikeCheck()) : null);
                 this.likeImageButton.setOnClickListener(isLogin ? v -> like(value.getReviewId(),value.isUserLikeCheck()) : null);
 

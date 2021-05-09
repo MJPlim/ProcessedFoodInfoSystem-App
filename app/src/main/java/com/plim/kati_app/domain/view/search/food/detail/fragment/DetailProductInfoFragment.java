@@ -8,20 +8,24 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.plim.kati_app.R;
 import com.plim.kati_app.constants.Constant;
+import com.plim.kati_app.domain.asset.BlankFragment;
 import com.plim.kati_app.domain.asset.KatiDialog;
 import com.plim.kati_app.domain.asset.LoadingDialog;
 import com.plim.kati_app.domain.model.dto.FindFoodByBarcodeRequest;
 import com.plim.kati_app.domain.model.dto.FoodDetailResponse;
+import com.plim.kati_app.domain.model.dto.ReviewViewmodel;
 import com.plim.kati_app.domain.model.room.KatiData;
 import com.plim.kati_app.domain.model.room.KatiDatabase;
 import com.plim.kati_app.domain.view.MainActivity;
@@ -63,19 +67,19 @@ import static com.plim.kati_app.constants.Constant_yun.NEW_DETAIL_ACTIVITY_EXTRA
  */
 public class DetailProductInfoFragment extends Fragment {
 
+    private Intent intent;
+    private Button writeReviewButton;
 
-    private Button purchaseSiteButton, writeReviewButton;
+    private Button purchaseSiteButton;
     private LoadingDialog loadingDialog;
     private Long foodId;
     private boolean isAd;
     private String barcode;
-    private boolean isExpanded=false;
 
-    private View fragment;
 
 
     public DetailProductInfoFragment() {
-        // Required empty public constructor
+
     }
 
     @Override
@@ -87,46 +91,23 @@ public class DetailProductInfoFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        this.fragment=view.findViewById(R.id.detailProductInfoFragment_reviewWriteFragment);
+        this.intent= new Intent(this.getActivity(),WriteReviewActivity.class);
+    this.writeReviewButton=view.findViewById(R.id.detailProductInfoFragment_reviewWriteButton);
         this.purchaseSiteButton = view.findViewById(R.id.detailProductInfoFragment_buyButton);
-        this.writeReviewButton = view.findViewById(R.id.detailProductInfoFragment_writeReviewButton);
         this.loadingDialog = new LoadingDialog(this.getContext());
         this.barcode = this.getActivity().getIntent().getStringExtra("barcode");
         this.foodId = this.getActivity().getIntent().getLongExtra(DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_FOOD_ID_EXTRA, 0L);
         this.isAd = this.getActivity().getIntent().getBooleanExtra(NEW_DETAIL_ACTIVITY_EXTRA_IS_AD, false);
-        this.writeReviewButton.setOnClickListener(v->{
-            this.changeVisibility(this.isExpanded);
-        });
-
 
         if (this.barcode != null) this.barcodeSearch();
         else this.search();
 
-    }
-    /**
-     * 인터넷 펌 Expandable recyclerView 메소드. 임시. ValueAnimator를 활용하여 애니메이션으로 늘리고 줄여준다.
-     * @param isExpanded 확장할지 안할지.
-     */
-    protected void changeVisibility(final boolean isExpanded) {
-        this.isExpanded = isExpanded;
-        // ValueAnimator.ofInt(int... values)는 View가 변할 값을 지정, 인자는 int 배열
-        ValueAnimator va = isExpanded ? ValueAnimator.ofInt(0, fragment.getHeight()) : ValueAnimator.ofInt(fragment.getHeight(), 0);
-        // Animation이 실행되는 시간, n/1000초
-        va.setDuration(500);
-        va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                // imageView의 높이 변경
-                fragment.getLayoutParams().height = (int) animation.getAnimatedValue();
-                fragment.requestLayout();
-                // imageView가 실제로 사라지게하는 부분
-                fragment.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
-//                writeReviewButton.setText(isExpanded ? "리뷰작성: ABSTRACT_TABLE_FRAGMENT_LARGE);
-            }
+        this.writeReviewButton.setOnClickListener(v->{
+            startActivity(this.intent);
         });
-        // Animation start
-        va.start();
+
     }
+
 
 
     private void parseCall(Call<FoodDetailResponse> call) {
@@ -144,15 +125,8 @@ public class DetailProductInfoFragment extends Fragment {
                     if(isAd)foodId=item.getFoodId();
                     putBundle(item);
                 }
-
-//                new Thread(() -> {
-//                    String token = response.headers().get(KatiDatabase.AUTHORIZATION);
-//                    KatiDatabase database = KatiDatabase.getAppDatabase(getContext());
-//                    database.katiDataDao().insert(new KatiData(KatiDatabase.AUTHORIZATION, token));
-//                    Log.d("디테일 프레그먼트",token+"");
-//
+                    writeForm(item);
                     getReview(foodId);
-//                }).start();
 
                 getActivity().runOnUiThread(() -> {
                     loadingDialog.hide();
@@ -169,6 +143,8 @@ public class DetailProductInfoFragment extends Fragment {
         });
     }
 
+
+
     private void barcodeSearch() {
         this.getActivity().runOnUiThread(() -> {
             this.loadingDialog.show();
@@ -183,6 +159,29 @@ public class DetailProductInfoFragment extends Fragment {
         this.parseCall(listCall);
     }
 
+    private void writeForm(FoodDetailResponse item) {
+//        Log.d("e디버그","넣음넣음");
+//        Bundle writeBundle= new Bundle();
+//        writeBundle.putInt("score",0);
+//        writeBundle.putLong("foodId",item.getFoodId());
+//        writeBundle.putString("image",item.getFoodImageAddress());
+//
+//        writeBundle.putString("manufacturer",item.getManufacturerName());
+//        writeBundle.putString("product",item.getFoodName());
+//        writeBundle.putString("value","");
+//        getActivity().getSupportFragmentManager().setFragmentResult("formBundle", writeBundle);
+
+
+        intent.putExtra("score",0);
+        intent.putExtra("foodId",item.getFoodId());
+        intent.putExtra("image",item.getFoodImageAddress());
+
+        intent.putExtra("manufacturer",item.getManufacturerName());
+        intent.putExtra("product",item.getFoodName());
+        intent.putExtra("value","");
+
+    }
+
     /**
      * 리뷰 불러오기 하기.
      * @param foodId
@@ -192,6 +191,8 @@ public class DetailProductInfoFragment extends Fragment {
         Bundle reviewBundle = new Bundle();
         reviewBundle.putLong("foodId", foodId);
         getActivity().getSupportFragmentManager().setFragmentResult("reviewBundle", reviewBundle);
+
+
     }
 
     /**
@@ -238,10 +239,7 @@ public class DetailProductInfoFragment extends Fragment {
         materialBundle.putSerializable(ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_HASH_MAP, materialMap);
         getActivity().getSupportFragmentManager().setFragmentResult(DETAIL_PRODUCT_MATERIAL_TABLE_FRAGMENT_BUNDLE_KEY, materialBundle);
 
-        this.writeReviewButton.setOnClickListener(v -> {
-            Intent intent = new Intent(this.getActivity(), WriteReviewActivity.class);
-            startActivity(intent);
-        });
+
 
     }
 
