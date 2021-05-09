@@ -6,6 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SetSecondEmailRequest {
-    private String email;
+    private String secondEmail;
 
 }

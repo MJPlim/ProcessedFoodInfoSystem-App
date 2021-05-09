@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/set_second_email_activity_navigation_graph"
+    app:startDestination="@id/setSecondEmailStart">
+
+    <fragment
+        android:id="@+id/setSecondEmailStart"
+        android:name="com.plim.kati_app.domain.view.user.setId.SetSecondEmailStart"
+        android:label="fragment_setSecondEmailStart"
+        tools:layout="@layout/abstract_layout" >
+        <action
+            android:id="@+id/action_setSecondEmailStart_to_setSecondEmailResult"
+            app:destination="@id/setSecondEmailResult" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/setSecondEmailResult"
+        android:name="com.plim.kati_app.domain.view.user.setId.SetSecondEmailResult"
+        android:label="fragment_setSecondEmailResult"
+        tools:layout="@layout/abstract_layout" />
+</navigation>

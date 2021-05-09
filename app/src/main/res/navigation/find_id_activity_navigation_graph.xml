@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/find_id_activity_navigation_graph"
+    app:startDestination="@id/findEmailInputFragment">
+
+    <fragment
+        android:id="@+id/findEmailInputFragment"
+        android:name="com.plim.kati_app.domain.view.user.findId.FindEmailInputFragment"
+        android:label="fragment_email_input"
+        tools:layout="@layout/abstract_layout" >
+        <action
+            android:id="@+id/action_findEmailInputFragment_to_findEmailResultFragment"
+            app:destination="@id/findEmailResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/findEmailResultFragment"
+        android:name="com.plim.kati_app.domain.view.user.findId.FindEmailResultFragment"
+        android:label="fragment_find_id_result"
+        tools:layout="@layout/abstract_layout" />
+</navigation>

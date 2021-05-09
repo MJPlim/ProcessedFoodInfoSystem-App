@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.plim.kati_app.R;
 
-public class FindIdActivity extends AppCompatActivity {
+public class FindEmailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

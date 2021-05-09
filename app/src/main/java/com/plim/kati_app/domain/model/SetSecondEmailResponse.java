@@ -6,5 +6,5 @@ import lombok.Getter;
 @Getter
 @Builder
 public class SetSecondEmailResponse {
-    private final String email;
+    private final String secondEmail;
 }

@@ -7,6 +7,6 @@ import lombok.Getter;
 @Builder
 public class FindEmailResponse {
 
-    private final String email;
+    private final String secondEmail;
 
 }

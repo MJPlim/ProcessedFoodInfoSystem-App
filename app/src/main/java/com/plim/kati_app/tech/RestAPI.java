@@ -1,10 +1,15 @@
 package com.plim.kati_app.tech;
 
+import com.plim.kati_app.domain.model.FindEmailRequest;
+import com.plim.kati_app.domain.model.FindEmailResponse;
+import com.plim.kati_app.domain.model.ItemRankingResponse;
 import com.plim.kati_app.domain.model.ModifyPasswordRequest;
 import com.plim.kati_app.domain.model.ModifyPasswordResponse;
 import com.plim.kati_app.domain.model.FindPasswordRequest;
 import com.plim.kati_app.domain.model.FindPasswordResponse;
 
+import com.plim.kati_app.domain.model.SetSecondEmailRequest;
+import com.plim.kati_app.domain.model.SetSecondEmailResponse;
 import com.plim.kati_app.domain.model.dto.CreateReviewRequest;
 import com.plim.kati_app.domain.model.dto.CreateReviewResponse;
 import com.plim.kati_app.domain.model.dto.FindFoodByBarcodeRequest;
@@ -50,6 +55,12 @@ public interface RestAPI {
     @POST("find-password")
     Call<FindPasswordResponse> findPassword(@Body FindPasswordRequest request);
 
+    @POST("find-email")
+    Call<FindEmailResponse> findEmail(@Body FindEmailRequest request);
+
+    @POST("api/v1/user/set-secondEmail")
+    Call<SetSecondEmailResponse> setSecondEmail(@Body SetSecondEmailRequest request);
+
     @POST("api/v1/user/modify-password")
     Call<ModifyPasswordResponse> ChangePassword(@Body ModifyPasswordRequest request);
 
@@ -62,9 +73,6 @@ public interface RestAPI {
     @GET("/api/v1/food/findFood/manufacturerName")
     Call<List<FoodResponse>> getFoodListByCompanyName(@Query("manufacturerName") String manufacturerName);
 
-
-
-
     @GET("/api/v1/food/findFood/foodDetail")
     Call<FoodDetailResponse> getFoodDetailByFoodId(@Query("foodId") Long foodId);
 
@@ -74,12 +82,8 @@ public interface RestAPI {
     @POST("/api/v1/food/findFood/barcode")
     Call<FoodDetailResponse> findByBarcode(@Body FindFoodByBarcodeRequest request);
 
-
-
-
     @GET("/api/v1/advertisement/ads")
     Call<List<AdvertisementResponse>> getAdFoodList();
-
 
     @GET("/readReview")
     Call<ReadReviewDto> readReview(@Query("foodId") Long foodId, @Query("pageNum") int pageNum);
@@ -87,21 +91,17 @@ public interface RestAPI {
     @GET("api/v1/user/readReview")
     Call<ReadReviewDto> readReviewByUser(@Query("foodId") Long foodId, @Query("pageNum") int pageNum);
 
-
     @POST("api/v1/user/updateReviewLike")
     Call<UpdateReviewLikeResponse> likeReview(@Body UpdateReviewLikeRequest updateReviewLikeRequest);
 
     @POST("api/v1/user/createReview")
     Call<CreateReviewResponse>createReview(@Body CreateReviewRequest dto);
 
-
     @GET("api/v1/user/user-info")
     Call<UserInfoResponse> getUserInfo();
 
     @POST("api/v1/user/modify-user-info")
     Call<UserInfoResponse> modifyUserInfo(@Body UserInfoModifyRequest request);
-
-
 
     @GET("api/v1/user/favorite/checkFavorite")
     Call<Boolean>getFavoriteStateForFood(@Query("foodId") Long foodId);
@@ -113,6 +113,6 @@ public interface RestAPI {
     @DELETE("api/v1/user/favorite/deleteFavorite")
     Call<Void> deleteFavoriteFood(@Query("foodId") Long foodId);
 
-
-
+    @GET("reviewRanking")
+    Call<List<ItemRankingResponse>> getRankingList();
 }
