@@ -1,6 +1,7 @@
 package com.plim.kati_app.domain.view.search.food.detail.fragment;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -28,6 +29,8 @@ import com.plim.kati_app.domain.model.WithdrawResponse;
 import com.plim.kati_app.domain.model.dto.ReadReviewDto;
 import com.plim.kati_app.domain.model.dto.ReadReviewRequest;
 import com.plim.kati_app.domain.model.dto.ReadReviewResponse;
+import com.plim.kati_app.domain.model.dto.UpdateReviewLikeRequest;
+import com.plim.kati_app.domain.model.dto.UpdateReviewLikeResponse;
 import com.plim.kati_app.domain.model.room.KatiData;
 import com.plim.kati_app.domain.model.room.KatiDatabase;
 import com.plim.kati_app.domain.view.user.login.RetrofitClient;
@@ -106,16 +109,7 @@ public class DetailReviewViewFragment extends GetResultFragment {
         });
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        new Thread(() -> {
-            KatiDatabase database = KatiDatabase.getAppDatabase(getContext());
-            String token = database.katiDataDao().getValue(KatiDatabase.AUTHORIZATION);
-            if (token != null) this.isLogin = true;
-        });
 
-    }
 
     @Override
     public void setFragmentRequestKey() {
@@ -130,7 +124,55 @@ public class DetailReviewViewFragment extends GetResultFragment {
         this.getReviews();
     }
 
-    private void like() {
+    private void refresh(){
+        this.getReviews();
+    }
+
+    private void like(Long reviewId, boolean likeCheck) {
+        new Thread(()->{
+        UpdateReviewLikeRequest request= new UpdateReviewLikeRequest();
+        request.setReviewId(reviewId);
+        request.setLikeCheck(likeCheck);
+
+        KatiDatabase database= KatiDatabase.getAppDatabase(getContext());
+        String token = database.katiDataDao().getValue(KatiDatabase.AUTHORIZATION);
+
+    Call<UpdateReviewLikeResponse> call =RestAPIClient.getApiService2(token).likeReview(request);
+    call.enqueue(new Callback<UpdateReviewLikeResponse>() {
+        @Override
+        public void onResponse(Call<UpdateReviewLikeResponse> call, Response<UpdateReviewLikeResponse> response) {
+
+            if(!response.isSuccessful()){
+                KatiDialog.showRetrofitNotSuccessDialog(getContext(),response.code()+"",null).showDialog();
+            }
+            else
+                KatiDialog.simpleAlertDialog(
+                        getContext(),
+                        "좋아요를 눌렀습니다.",
+                        !likeCheck?"좋아요를 저장하였습니다.":"좋아요를 취소하였습니다.",
+                        (dialog, which)->{
+                            refresh();
+                        },
+                        getContext().getResources().getColor(R.color.kati_coral,getContext().getTheme())
+                ).showDialog();
+        }
+
+        @Override
+        public void onFailure(Call<UpdateReviewLikeResponse> call, Throwable t) {
+
+        }
+    });
+        }).start();
+
+
+
+
+
+        Toast.makeText(getActivity(), "조아요", Toast.LENGTH_SHORT).show();
+
+
+
+
     }
 
     /**
@@ -138,21 +180,16 @@ public class DetailReviewViewFragment extends GetResultFragment {
      */
     private void getReviews() {
         new Thread(() -> {
+                KatiDatabase database = KatiDatabase.getAppDatabase(getContext());
+                String token = database.katiDataDao().getValue(KatiDatabase.AUTHORIZATION);
+                if(token!=null)this.isLogin=true;
+                Log.d("토큰토ㅌ큰",token+"");
 
             Call<ReadReviewDto> listCall;
             if (!this.isLogin) {
-                Retrofit retrofit = new Retrofit.Builder()
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .baseUrl(Constant.URL)
-                        .build();
-                RestAPI service = retrofit.create(RestAPI.class);
-                listCall = service.readReview(this.foodId, this.currentPageNum);
+                listCall = RestAPIClient.getApiService().readReview(this.foodId, this.currentPageNum);
             } else {
-                KatiDatabase database = KatiDatabase.getAppDatabase(getContext());
-                String token = database.katiDataDao().getValue(KatiDatabase.AUTHORIZATION);
-
                 listCall = RestAPIClient.getApiService2(token).readReviewByUser(this.foodId, this.currentPageNum);
-
             }
             listCall.enqueue(new Callback<ReadReviewDto>() {
                 @Override
@@ -241,6 +278,7 @@ public class DetailReviewViewFragment extends GetResultFragment {
          */
         private class ReviewViewHolder extends RecyclerView.ViewHolder {
 
+
             private TextView productName, date, score, reviewContent, like;
             private Button editButton;
             private ImageView likeImageButton;
@@ -268,9 +306,9 @@ public class DetailReviewViewFragment extends GetResultFragment {
 
                 this.editButton.setEnabled(value.isUserCheck());
 
-
-                this.like.setOnClickListener((!value.isUserLikeCheck()) && isLogin ? v -> like() : null);
-                this.likeImageButton.setOnClickListener((!value.isUserLikeCheck()) && isLogin ? v -> like() : null);
+                this.likeImageButton.setColorFilter(value.isUserLikeCheck()?R.color.kati_orange:R.color.black, PorterDuff.Mode.SRC_IN);
+                this.like.setOnClickListener(isLogin ? v -> like(value.getReviewId(),value.isUserLikeCheck()) : null);
+                this.likeImageButton.setOnClickListener(isLogin ? v -> like(value.getReviewId(),value.isUserLikeCheck()) : null);
 
 
             }

@@ -64,6 +64,7 @@ public class WithdrawalPasswordInputFragment extends AbstractFragment1 {
                         }
                     } else {
                         getActivity().runOnUiThread(() ->showSignOutCompleteDialog());
+                        Log.d("회원탈퇴","실행");
                        new Thread(()-> database.katiDataDao().delete(ROOM_AUTHORIZATION_KEY)).start();
                     }
                 }

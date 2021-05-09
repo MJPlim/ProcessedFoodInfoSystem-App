@@ -142,8 +142,8 @@ public class DetailPhotoViewFragment extends GetResultFragment {
 
                         new Thread(() -> {
                             String token = response.headers().get(KatiDatabase.AUTHORIZATION);
-                            KatiDatabase database = KatiDatabase.getAppDatabase(getContext());
                             database.katiDataDao().insert(new KatiData(KatiDatabase.AUTHORIZATION, token));
+                            Log.d("좋아요 불러오기 토큰",token);
                         }).start();
 
                     }
@@ -189,8 +189,8 @@ public class DetailPhotoViewFragment extends GetResultFragment {
 
                         new Thread(() -> {
                             String token = response.headers().get(KatiDatabase.AUTHORIZATION);
-                            KatiDatabase database = KatiDatabase.getAppDatabase(getContext());
                             database.katiDataDao().insert(new KatiData(KatiDatabase.AUTHORIZATION, token));
+                            Log.d("좋아요 저장 토큰",token);
                         }).start();
                     }
 
@@ -220,9 +220,10 @@ public class DetailPhotoViewFragment extends GetResultFragment {
 
 
                         new Thread(() -> {
+                            
                             String token = response.headers().get(KatiDatabase.AUTHORIZATION);
-                            KatiDatabase database = KatiDatabase.getAppDatabase(getContext());
                             database.katiDataDao().insert(new KatiData(KatiDatabase.AUTHORIZATION, token));
+                            Log.d("좋아요 삭제 토큰",token);
                         }).start();
                     }
 

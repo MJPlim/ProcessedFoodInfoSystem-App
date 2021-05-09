@@ -18,6 +18,8 @@ import com.plim.kati_app.domain.model.WithdrawResponse;
 import com.plim.kati_app.domain.model.dto.ReadReviewDto;
 import com.plim.kati_app.domain.model.dto.ReadReviewRequest;
 import com.plim.kati_app.domain.model.dto.ReadReviewResponse;
+import com.plim.kati_app.domain.model.dto.UpdateReviewLikeRequest;
+import com.plim.kati_app.domain.model.dto.UpdateReviewLikeResponse;
 import com.plim.kati_app.domain.model.dto.UserInfoModifyRequest;
 import com.plim.kati_app.domain.view.user.login.LoginRequest;
 import com.plim.kati_app.domain.model.dto.AdvertisementResponse;
@@ -46,7 +48,7 @@ public interface RestAPI {
     @POST("find-password")
     Call<FindPasswordResponse> findPassword(@Body FindPasswordRequest request);
 
-    @POST("modify-password")
+    @POST("api/v1/user/modify-password")
     Call<ModifyPasswordResponse> ChangePassword(@Body ModifyPasswordRequest request);
 
     @POST("login")
@@ -82,6 +84,11 @@ public interface RestAPI {
 
     @GET("api/v1/user/readReview")
     Call<ReadReviewDto> readReviewByUser(@Query("foodId") Long foodId, @Query("pageNum") int pageNum);
+
+
+    @POST("api/v1/user/updateReviewLike")
+    Call<UpdateReviewLikeResponse> likeReview(@Body UpdateReviewLikeRequest updateReviewLikeRequest);
+
 
 
 

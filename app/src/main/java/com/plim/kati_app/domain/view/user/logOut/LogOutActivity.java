@@ -41,6 +41,7 @@ public class LogOutActivity extends AppCompatActivity {
             KatiDatabase database = KatiDatabase.getAppDatabase(this);
             //존재하면 사용자 토큰을 버린다.
             if (database.katiDataDao().getValue(KatiDatabase.AUTHORIZATION) != null) {
+                Log.d("로그아웃 액티비티","실행");
                 database.katiDataDao().delete(KatiDatabase.AUTHORIZATION);
                 database.katiDataDao().delete(KatiDatabase.EMAIL);
                 database.katiDataDao().delete(KatiDatabase.PASSWORD);

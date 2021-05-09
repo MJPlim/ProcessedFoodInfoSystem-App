@@ -107,12 +107,14 @@ public class DetailProductInfoFragment extends Fragment {
                     putBundle(item);
                 }
 
-                new Thread(() -> {
-                    String token = response.headers().get(KatiDatabase.AUTHORIZATION);
-                    KatiDatabase database = KatiDatabase.getAppDatabase(getContext());
-                    database.katiDataDao().insert(new KatiData(KatiDatabase.AUTHORIZATION, token));
+//                new Thread(() -> {
+//                    String token = response.headers().get(KatiDatabase.AUTHORIZATION);
+//                    KatiDatabase database = KatiDatabase.getAppDatabase(getContext());
+//                    database.katiDataDao().insert(new KatiData(KatiDatabase.AUTHORIZATION, token));
+//                    Log.d("디테일 프레그먼트",token+"");
+//
                     getReview(foodId);
-                }).start();
+//                }).start();
 
                 getActivity().runOnUiThread(() -> {
                     loadingDialog.hide();
@@ -149,7 +151,6 @@ public class DetailProductInfoFragment extends Fragment {
      */
     private void getReview(Long foodId) {
         Log.d("리뷰 불러오게 FragmentResult 설정", this.foodId + "");
-//        Toast.makeText(this.getActivity(), foodId+"아이디", Toast.LENGTH_SHORT).show();
         Bundle reviewBundle = new Bundle();
         reviewBundle.putLong("foodId", foodId);
         getActivity().getSupportFragmentManager().setFragmentResult("reviewBundle", reviewBundle);
@@ -167,6 +168,7 @@ public class DetailProductInfoFragment extends Fragment {
         Bundle imageBundle = new Bundle();
         imageBundle.putString(DETAIL_PHOTO_VIEW_FRAGMENT_BUNDLE_FRONT_IMAGE, value.getFoodImageAddress());
         imageBundle.putString(DETAIL_PHOTO_VIEW_FRAGMENT_BUNDLE_BACK_IMAGE, value.getFoodMeteImageAddress());
+
         imageBundle.putLong("foodId",this.foodId);
         getActivity().getSupportFragmentManager().setFragmentResult(DETAIL_PHOTO_VIEW_FRAGMENT_BUNDLE_KEY, imageBundle);
 

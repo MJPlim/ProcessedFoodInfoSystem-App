@@ -11,6 +11,7 @@ import com.plim.kati_app.domain.asset.KatiDialog;
 import com.plim.kati_app.domain.asset.LoadingDialog;
 import com.plim.kati_app.domain.model.ModifyPasswordRequest;
 import com.plim.kati_app.domain.model.ModifyPasswordResponse;
+import com.plim.kati_app.domain.model.room.KatiData;
 import com.plim.kati_app.domain.model.room.KatiDatabase;
 import com.plim.kati_app.domain.view.MainActivity;
 import com.plim.kati_app.domain.view.user.logOut.LogOutActivity;
@@ -70,9 +71,7 @@ public class ChangePasswordInputFragment extends AbstractFragment2 {
             if (this.loadingDialog == null)
                 this.loadingDialog = new LoadingDialog(this.getContext());
             Thread thread = new Thread(() -> {
-                getActivity().runOnUiThread(() -> {
-                    loadingDialog.show();
-                });
+                getActivity().runOnUiThread(() -> loadingDialog.show());
 
 
                 // THIS IS TEST! Get Data From View Model
@@ -83,11 +82,6 @@ public class ChangePasswordInputFragment extends AbstractFragment2 {
                 KatiDatabase database = KatiDatabase.getAppDatabase(getContext());
                 String token = database.katiDataDao().getValue(KatiDatabase.AUTHORIZATION);
 
-                Retrofit retrofit = new Retrofit.Builder()
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .baseUrl(Constant.URL)
-                        .build();
-                RestAPI service = retrofit.create(RestAPI.class);
                 Call<ModifyPasswordResponse> listCall = RestAPIClient.getApiService2(token).ChangePassword(request);
                 listCall.enqueue(new Callback<ModifyPasswordResponse>() {
                     @Override
@@ -97,6 +91,7 @@ public class ChangePasswordInputFragment extends AbstractFragment2 {
                         });
                         ModifyPasswordResponse result = response.body();
                         if (!response.isSuccessful()) {
+                            KatiDialog.showRetrofitNotSuccessDialog(getContext(),response.code()+"",null).showDialog();
                             try {
                                 JSONObject jObjError = new JSONObject(response.errorBody().string());
                                 Toast.makeText(getContext(), jObjError.getString("error-message"), Toast.LENGTH_LONG).show();
@@ -111,6 +106,11 @@ public class ChangePasswordInputFragment extends AbstractFragment2 {
                             });
 
                         }
+                        new Thread(() -> {
+                            String token = response.headers().get(KatiDatabase.AUTHORIZATION);
+                            KatiDatabase database = KatiDatabase.getAppDatabase(getContext());
+                            database.katiDataDao().insert(new KatiData(KatiDatabase.AUTHORIZATION, token));
+                        }).start();
                     }
 
                     @Override
@@ -130,6 +130,11 @@ public class ChangePasswordInputFragment extends AbstractFragment2 {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        this.loadingDialog.dismiss();
+    }
 
     private void moveToLogOutActivity() {
         Intent intent = new Intent(this.getActivity(), LogOutActivity.class);
