@@ -44,6 +44,7 @@
                 android:textColor="@color/kati_orange"
                 android:textSize="90px" />
 
+
             <Button
                 android:id="@+id/myPage_logout_button"
                 android:layout_width="0dp"

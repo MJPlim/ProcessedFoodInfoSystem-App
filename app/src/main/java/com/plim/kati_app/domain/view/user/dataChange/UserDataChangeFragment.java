@@ -17,8 +17,8 @@ import android.widget.ImageView;
 
 import com.plim.kati_app.R;
 import com.plim.kati_app.domain.asset.KatiDialog;
+import com.plim.kati_app.domain.model.UserInfoResponse;
 import com.plim.kati_app.domain.model.dto.UserInfoModifyRequest;
-import com.plim.kati_app.domain.model.dto.UserInfoResponse;
 import com.plim.kati_app.domain.model.room.KatiData;
 import com.plim.kati_app.domain.model.room.KatiDatabase;
 import com.plim.kati_app.domain.view.MainActivity;

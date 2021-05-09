@@ -4,7 +4,11 @@ import com.plim.kati_app.domain.model.ModifyPasswordRequest;
 import com.plim.kati_app.domain.model.ModifyPasswordResponse;
 import com.plim.kati_app.domain.model.FindPasswordRequest;
 import com.plim.kati_app.domain.model.FindPasswordResponse;
+
 import com.plim.kati_app.domain.model.dto.FindFoodByBarcodeRequest;
+
+import com.plim.kati_app.domain.model.UserInfoResponse;
+
 import com.plim.kati_app.domain.model.dto.FoodDetailResponse;
 import com.plim.kati_app.domain.model.FoodResponse;
 import com.plim.kati_app.domain.model.Password;
@@ -15,7 +19,6 @@ import com.plim.kati_app.domain.model.dto.ReadReviewDto;
 import com.plim.kati_app.domain.model.dto.ReadReviewRequest;
 import com.plim.kati_app.domain.model.dto.ReadReviewResponse;
 import com.plim.kati_app.domain.model.dto.UserInfoModifyRequest;
-import com.plim.kati_app.domain.model.dto.UserInfoResponse;
 import com.plim.kati_app.domain.view.user.login.LoginRequest;
 import com.plim.kati_app.domain.model.dto.AdvertisementResponse;
 
@@ -73,6 +76,7 @@ public interface RestAPI {
     @GET("/api/v1/advertisement/ads")
     Call<List<AdvertisementResponse>> getAdFoodList();
 
+
     @GET("/readReview")
     Call<ReadReviewDto> readReview(@Query("foodId") Long foodId, @Query("pageNum") int pageNum);
 
@@ -99,5 +103,7 @@ public interface RestAPI {
 
     @DELETE("api/v1/user/favorite/deleteFavorite")
     Call<Void> deleteFavoriteFood(@Query("foodId") Long foodId);
+
+
 
 }
