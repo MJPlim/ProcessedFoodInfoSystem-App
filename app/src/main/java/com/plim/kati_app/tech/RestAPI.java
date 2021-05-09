@@ -12,6 +12,7 @@ import com.plim.kati_app.domain.model.SetSecondEmailRequest;
 import com.plim.kati_app.domain.model.SetSecondEmailResponse;
 import com.plim.kati_app.domain.model.dto.CreateReviewRequest;
 import com.plim.kati_app.domain.model.dto.CreateReviewResponse;
+import com.plim.kati_app.domain.model.dto.DeleteReviewRequest;
 import com.plim.kati_app.domain.model.dto.FindFoodByBarcodeRequest;
 
 import com.plim.kati_app.domain.model.UserInfoResponse;
@@ -96,6 +97,9 @@ public interface RestAPI {
 
     @POST("api/v1/user/createReview")
     Call<CreateReviewResponse>createReview(@Body CreateReviewRequest dto);
+
+    @POST("api/v1/user/deleteReview")
+    Call<CreateReviewResponse>deleteReview(@Body DeleteReviewRequest dto);
 
     @GET("api/v1/user/user-info")
     Call<UserInfoResponse> getUserInfo();

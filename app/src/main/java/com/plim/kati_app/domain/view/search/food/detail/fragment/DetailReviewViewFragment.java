@@ -29,6 +29,8 @@ import com.plim.kati_app.domain.asset.GetResultFragment;
 import com.plim.kati_app.domain.asset.KatiDialog;
 import com.plim.kati_app.domain.model.RegisterActivityViewModel;
 import com.plim.kati_app.domain.model.WithdrawResponse;
+import com.plim.kati_app.domain.model.dto.CreateReviewResponse;
+import com.plim.kati_app.domain.model.dto.DeleteReviewRequest;
 import com.plim.kati_app.domain.model.dto.ReadReviewDto;
 import com.plim.kati_app.domain.model.dto.ReadReviewRequest;
 import com.plim.kati_app.domain.model.dto.ReadReviewResponse;
@@ -134,6 +136,44 @@ public class DetailReviewViewFragment extends GetResultFragment {
         this.getReviews();
     }
 
+    private void deleteReview(Long reviewId){
+        new Thread(()->{
+
+            DeleteReviewRequest request= new DeleteReviewRequest();
+            request.setReviewId(reviewId);
+
+
+            KatiDatabase database= KatiDatabase.getAppDatabase(getContext());
+            String token = database.katiDataDao().getValue(KatiDatabase.AUTHORIZATION);
+
+            Call<CreateReviewResponse> call =RestAPIClient.getApiService2(token).deleteReview(request);
+            call.enqueue(new Callback<CreateReviewResponse>() {
+                @Override
+                public void onResponse(Call<CreateReviewResponse> call, Response<CreateReviewResponse> response) {
+
+                    if(!response.isSuccessful()){
+                        KatiDialog.showRetrofitNotSuccessDialog(getContext(),response.code()+"",null).showDialog();
+                    }
+                    else
+                        KatiDialog.simpleAlertDialog(
+                                getContext(),
+                                "리뷰 삭제",
+                                "리뷰를 성공적으로 삭제하였습니다.",
+                                (dialog, which)->{
+                                    refresh();
+                                },
+                                getContext().getResources().getColor(R.color.kati_coral,getContext().getTheme())
+                        ).showDialog();
+                }
+
+                @Override
+                public void onFailure(Call<CreateReviewResponse> call, Throwable t) {
+                    KatiDialog.showRetrofitFailDialog(getContext(),t.getMessage(),null);
+                }
+            });
+        }).start();
+    }
+
     private void like(Long reviewId, boolean likeCheck) {
         new Thread(()->{
         UpdateReviewLikeRequest request= new UpdateReviewLikeRequest();
@@ -165,21 +205,14 @@ public class DetailReviewViewFragment extends GetResultFragment {
 
         @Override
         public void onFailure(Call<UpdateReviewLikeResponse> call, Throwable t) {
-
+KatiDialog.showRetrofitFailDialog(getContext(),t.getMessage(),null);
         }
     });
         }).start();
-
-
-
-
-
-        Toast.makeText(getActivity(), "조아요", Toast.LENGTH_SHORT).show();
-
-
-
-
     }
+
+
+
 
     /**
      * 리뷰들을 불러온다.
@@ -315,6 +348,8 @@ public class DetailReviewViewFragment extends GetResultFragment {
 
                 this.deleteButton.setEnabled(value.isUserCheck());
                 this.editButton.setEnabled(value.isUserCheck());
+
+                this.deleteButton.setOnClickListener(v->deleteReview(value.getReviewId()));
 
                 this.likeImageButton.getDrawable().clearColorFilter();
                 this.likeImageButton.getDrawable().setColorFilter(getResources().getColor(value.isUserLikeCheck()?R.color.kati_orange:R.color.gray,getContext().getTheme()), PorterDuff.Mode.SRC_IN);

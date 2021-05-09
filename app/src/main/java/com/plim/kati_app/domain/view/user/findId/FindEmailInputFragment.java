@@ -114,4 +114,10 @@ public class FindEmailInputFragment extends AbstractFragment1 {
         signOutAskDialog.setColor(this.getResources().getColor(R.color.kati_coral, this.getActivity().getTheme()));
         signOutAskDialog.showDialog();
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        this.loadingDialog.dismiss();
+    }
 }
