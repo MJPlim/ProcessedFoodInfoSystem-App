@@ -29,8 +29,10 @@ import com.plim.kati_app.domain.model.RegisterActivityViewModel;
 import com.plim.kati_app.domain.model.dto.CreateReviewRequest;
 import com.plim.kati_app.domain.model.dto.CreateReviewResponse;
 import com.plim.kati_app.domain.model.dto.ReviewViewmodel;
+import com.plim.kati_app.domain.model.dto.UpdateReviewRequest;
 import com.plim.kati_app.domain.model.room.KatiData;
 import com.plim.kati_app.domain.model.room.KatiDatabase;
+import com.plim.kati_app.domain.view.search.food.detail.NewDetailActivity;
 import com.plim.kati_app.tech.GlideApp;
 import com.plim.kati_app.tech.RestAPIClient;
 
@@ -51,6 +53,7 @@ public class ReviewWriteFragment extends Fragment {
     private Button saveButton;
     private long foodId;
     private int score;
+    private long reviewId;
 
     @Getter
     private class Star {
@@ -66,9 +69,9 @@ public class ReviewWriteFragment extends Fragment {
         public void setFlag(boolean flag) {
 //            Log.d("값",flag+"");
             this.flag = flag;
-            if(flag)
+            if (flag)
                 this.imageView.getDrawable().clearColorFilter();
-            this.imageView.getDrawable().setColorFilter(getResources().getColor(!flag?R.color.kati_yellow:R.color.kati_orange,getContext().getTheme()),PorterDuff.Mode.SRC_IN);
+            this.imageView.getDrawable().setColorFilter(getResources().getColor(!flag ? R.color.kati_yellow : R.color.kati_orange, getContext().getTheme()), PorterDuff.Mode.SRC_IN);
         }
     }
 
@@ -97,14 +100,31 @@ public class ReviewWriteFragment extends Fragment {
         this.scoreStar(view.findViewById(R.id.writeReviewFragment_star5));
 
 
-      Intent intent= getActivity().getIntent();
+        Intent intent = getActivity().getIntent();
 
         Glide.with(getContext()).load(intent.getStringExtra("image")).fitCenter().transform(new CenterCrop(), new CircleCrop()).into(productImage);
         this.productName.setText(intent.getStringExtra("product"));
         this.manufacturer.setText(intent.getStringExtra("manufacturer"));
         this.reviewValue.setText(intent.getStringExtra("value"));
-        this.foodId = intent.getLongExtra("foodId",0L);
-        this.scoreStar(view.findViewById(R.id.writeReviewFragment_star5));
+        this.foodId = intent.getLongExtra("foodId", 0L);
+        this.reviewId = intent.getLongExtra("reviewId", 0L);
+
+        int id;
+        if (intent.getFloatExtra("score", 0f) == 1f)
+            id = R.id.writeReviewFragment_star1;
+        else if (intent.getFloatExtra("score", 0f) == 2f)
+            id = R.id.writeReviewFragment_star2;
+        else if (intent.getFloatExtra("score", 0f) == 3f)
+            id = R.id.writeReviewFragment_star3;
+        else if (intent.getFloatExtra("score", 0f) == 4f)
+            id = R.id.writeReviewFragment_star4;
+        else if (intent.getFloatExtra("score", 0f) == 5f)
+            id = R.id.writeReviewFragment_star5;
+        else {
+            id = R.id.writeReviewFragment_star5;
+        }
+
+        this.scoreStar(view.findViewById(id));
         this.saveButton.setOnClickListener(v -> {
             Log.d("디버그", "버튼눌림");
             this.saveReview();
@@ -138,12 +158,12 @@ public class ReviewWriteFragment extends Fragment {
         int score = 0;
         boolean startColor = false;
 
-        for (int i = stars.size()-1; i > -1; i--) {
+        for (int i = stars.size() - 1; i > -1; i--) {
             if (stars.get(i).getImageView().equals(oneStar)) {
                 startColor = true;
                 score = i + 1;
             }
-                    Log.d("디버그"+i,"별 그리기"+startColor);
+            Log.d("디버그" + i, "별 그리기" + startColor);
             stars.get(i).setFlag(startColor);
         }
         this.score = score;
@@ -152,10 +172,7 @@ public class ReviewWriteFragment extends Fragment {
 
     private void saveReview() {
         new Thread(() -> {
-            CreateReviewRequest request = new CreateReviewRequest();
-            request.setFoodId(this.foodId);
-            request.setReviewDescription(this.reviewValue.getText().toString());
-            request.setReviewRating(this.score);
+
 
             KatiDatabase katiDatabase = KatiDatabase.getAppDatabase(getContext());
             String token = katiDatabase.katiDataDao().getValue(KatiDatabase.AUTHORIZATION);
@@ -169,37 +186,80 @@ public class ReviewWriteFragment extends Fragment {
                 ).showDialog();
                 return;
             }
-            RestAPIClient.getApiService2(token).createReview(request).enqueue(new Callback<CreateReviewResponse>() {
-                @Override
-                public void onResponse(Call<CreateReviewResponse> call, Response<CreateReviewResponse> response) {
-                    if (!response.isSuccessful()) {
-                        KatiDialog.showRetrofitNotSuccessDialog(getContext(), response.code() + "", null);
-                    } else {
-                        KatiDialog.simpleAlertDialog(
-                                getContext(),
-                                "리뷰 저장 완료",
-                                "성공적으로 리뷰를 저장하였습니다.",
-                                (dialog, which) -> {
-                                    Intent intent =new Intent(getActivity(),DetailProductInfoFragment.class);
-                                    intent.putExtra("foodId",foodId);
-                                    intent.putExtra("isAd",false);
-                                    startActivity(intent);
-                                },
-                                getContext().getResources().getColor(R.color.kati_coral, getContext().getTheme())
-                        ).showDialog();
-                    }
-                    new Thread(() -> {
-                        String token = response.headers().get(KatiDatabase.AUTHORIZATION);
-                        katiDatabase.katiDataDao().insert(new KatiData(KatiDatabase.AUTHORIZATION, token));
-                    }).start();
-                }
 
-                @Override
-                public void onFailure(Call<CreateReviewResponse> call, Throwable t) {
-                    KatiDialog.showRetrofitFailDialog(getContext(), t.getMessage(), null);
-                }
-            });
+            if (reviewId == 0L) {
+                CreateReviewRequest request = new CreateReviewRequest();
+                request.setFoodId(this.foodId);
+                request.setReviewDescription(this.reviewValue.getText().toString());
+                request.setReviewRating(this.score);
+                RestAPIClient.getApiService2(token).createReview(request).enqueue(new Callback<CreateReviewResponse>() {
+                    @Override
+                    public void onResponse(Call<CreateReviewResponse> call, Response<CreateReviewResponse> response) {
+                        if (!response.isSuccessful()) {
+                            KatiDialog.showRetrofitNotSuccessDialog(getContext(), response.code() + "", null);
+                        } else {
+                            KatiDialog.simpleAlertDialog(
+                                    getContext(),
+                                    "리뷰 저장 완료",
+                                    "성공적으로 리뷰를 저장하였습니다.",
+                                    (dialog, which) -> {
+                                        Intent intent = new Intent(getActivity(), NewDetailActivity.class);
+                                        intent.putExtra("foodId", foodId);
+                                        intent.putExtra("isAd", false);
+                                        startActivity(intent);
+                                    },
+                                    getContext().getResources().getColor(R.color.kati_coral, getContext().getTheme())
+                            ).showDialog();
+                        }
+                        new Thread(() -> {
+                            String token = response.headers().get(KatiDatabase.AUTHORIZATION);
+                            katiDatabase.katiDataDao().insert(new KatiData(KatiDatabase.AUTHORIZATION, token));
+                        }).start();
+                    }
+
+                    @Override
+                    public void onFailure(Call<CreateReviewResponse> call, Throwable t) {
+                        KatiDialog.showRetrofitFailDialog(getContext(), t.getMessage(), null);
+                    }
+                });
+            } else {
+                UpdateReviewRequest request = new UpdateReviewRequest();
+                request.setReviewDescription(this.reviewValue.getText().toString());
+                request.setReviewRating(this.score);
+                request.setReviewId(this.reviewId);
+                RestAPIClient.getApiService2(token).updateReview(request).enqueue(new Callback<CreateReviewResponse>() {
+                    @Override
+                    public void onResponse(Call<CreateReviewResponse> call, Response<CreateReviewResponse> response) {
+                        if (!response.isSuccessful()) {
+                            KatiDialog.showRetrofitNotSuccessDialog(getContext(), response.code() + "", null);
+                        } else {
+                            KatiDialog.simpleAlertDialog(
+                                    getContext(),
+                                    "리뷰 저장 완료",
+                                    "성공적으로 리뷰를 저장하였습니다.",
+                                    (dialog, which) -> {
+                                        Intent intent = new Intent(getActivity(), NewDetailActivity.class);
+                                        intent.putExtra("foodId", foodId);
+                                        intent.putExtra("isAd", false);
+                                        startActivity(intent);
+                                    },
+                                    getContext().getResources().getColor(R.color.kati_coral, getContext().getTheme())
+                            ).showDialog();
+
+                        }
+                        new Thread(() ->{
+                            String token = response.headers().get(KatiDatabase.AUTHORIZATION);
+                            katiDatabase.katiDataDao().insert(new KatiData(KatiDatabase.AUTHORIZATION, token));
+                        }).start();
+                    }
+                    @Override
+                    public void onFailure(Call<CreateReviewResponse> call, Throwable t) {
+                        KatiDialog.showRetrofitFailDialog(getContext(), t.getMessage(), null);
+                    }
+                });
+            }
         }).start();
+
 
     }
 

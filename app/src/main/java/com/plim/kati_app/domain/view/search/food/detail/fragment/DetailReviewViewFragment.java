@@ -1,11 +1,13 @@
 package com.plim.kati_app.domain.view.search.food.detail.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresPermission;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -39,6 +41,7 @@ import com.plim.kati_app.domain.model.dto.UpdateReviewLikeRequest;
 import com.plim.kati_app.domain.model.dto.UpdateReviewLikeResponse;
 import com.plim.kati_app.domain.model.room.KatiData;
 import com.plim.kati_app.domain.model.room.KatiDatabase;
+import com.plim.kati_app.domain.view.search.food.review.WriteReviewActivity;
 import com.plim.kati_app.domain.view.user.login.RetrofitClient;
 import com.plim.kati_app.tech.RestAPI;
 import com.plim.kati_app.tech.RestAPIClient;
@@ -71,6 +74,9 @@ public class DetailReviewViewFragment extends GetResultFragment {
     private ReviewRecyclerAdapter adapter;
     private RecyclerView recyclerView;
     private TabLayout categoryTabLayout;
+    private String manufacturer;
+    private String foodName;
+    private String image;
 
     public DetailReviewViewFragment() {
 
@@ -127,6 +133,9 @@ public class DetailReviewViewFragment extends GetResultFragment {
     @Override
     public void ResultParse(String requestKey, Bundle result) {
         Long foodId = result.getLong("foodId");
+        this.foodName=result.getString("foodName");
+        this.manufacturer=result.getString("manufacturer");
+        this.image=result.getString("image");
         this.foodId = foodId;
         Log.d("리뷰,foodId", foodId + "");
         this.getReviews();
@@ -214,6 +223,8 @@ KatiDialog.showRetrofitFailDialog(getContext(),t.getMessage(),null);
 
 
 
+
+
     /**
      * 리뷰들을 불러온다.
      */
@@ -279,7 +290,19 @@ KatiDialog.showRetrofitFailDialog(getContext(),t.getMessage(),null);
             });
         }).start();
     }
+    private void updateReviews(Long foodId,Long reviewId,String image,String manufacturer, String foodName, String value, int score){
+        Intent intent= new Intent(this.getActivity(), WriteReviewActivity.class);
 
+        intent.putExtra("score",score);
+        intent.putExtra("foodId",foodId);
+        intent.putExtra("reviewId",reviewId);
+        intent.putExtra("image",image);
+
+        intent.putExtra("manufacturer",manufacturer);
+        intent.putExtra("product",foodName);
+        intent.putExtra("value",value);
+        startActivity(intent);
+    }
 
     private class ReviewRecyclerAdapter extends RecyclerView.Adapter<ReviewRecyclerAdapter.ReviewViewHolder> {
 
@@ -325,6 +348,7 @@ KatiDialog.showRetrofitFailDialog(getContext(),t.getMessage(),null);
             private Button editButton, deleteButton;
             private ImageView likeImageButton;
 
+
             public ReviewViewHolder(@NonNull View itemView) {
                 super(itemView);
                 this.productName = itemView.findViewById(R.id.reviewItem_ProductNameTextView);
@@ -356,6 +380,10 @@ KatiDialog.showRetrofitFailDialog(getContext(),t.getMessage(),null);
                 this.like.setOnClickListener(isLogin ? v -> like(value.getReviewId(),value.isUserLikeCheck()) : null);
                 this.likeImageButton.setOnClickListener(isLogin ? v -> like(value.getReviewId(),value.isUserLikeCheck()) : null);
 
+                this.editButton.setOnClickListener(v->{
+                    updateReviews(value.getFoodId(),value.getReviewId(),image,manufacturer,foodName,value.getReviewDescription(),(int)value.getReviewRating());
+
+                });
 
             }
         }

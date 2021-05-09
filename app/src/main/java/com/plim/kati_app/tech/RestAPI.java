@@ -28,6 +28,7 @@ import com.plim.kati_app.domain.model.dto.ReadReviewRequest;
 import com.plim.kati_app.domain.model.dto.ReadReviewResponse;
 import com.plim.kati_app.domain.model.dto.UpdateReviewLikeRequest;
 import com.plim.kati_app.domain.model.dto.UpdateReviewLikeResponse;
+import com.plim.kati_app.domain.model.dto.UpdateReviewRequest;
 import com.plim.kati_app.domain.model.dto.UserInfoModifyRequest;
 import com.plim.kati_app.domain.view.user.login.LoginRequest;
 import com.plim.kati_app.domain.model.dto.AdvertisementResponse;
@@ -97,6 +98,9 @@ public interface RestAPI {
 
     @POST("api/v1/user/createReview")
     Call<CreateReviewResponse>createReview(@Body CreateReviewRequest dto);
+
+    @POST("api/v1/user/updateReview")
+    Call<CreateReviewResponse>updateReview(@Body UpdateReviewRequest dto);
 
     @POST("api/v1/user/deleteReview")
     Call<CreateReviewResponse>deleteReview(@Body DeleteReviewRequest dto);

@@ -126,7 +126,7 @@ public class DetailProductInfoFragment extends Fragment {
                     putBundle(item);
                 }
                     writeForm(item);
-                    getReview(foodId);
+                    getReview(foodId,item.getFoodName(),item.getManufacturerName(),item.getFoodImageAddress());
 
                 getActivity().runOnUiThread(() -> {
                     loadingDialog.hide();
@@ -186,10 +186,13 @@ public class DetailProductInfoFragment extends Fragment {
      * 리뷰 불러오기 하기.
      * @param foodId
      */
-    private void getReview(Long foodId) {
+    private void getReview(Long foodId,String foodName, String manufacturer,String image) {
         Log.d("리뷰 불러오게 FragmentResult 설정", this.foodId + "");
         Bundle reviewBundle = new Bundle();
         reviewBundle.putLong("foodId", foodId);
+        reviewBundle.putString("foodName",foodName);
+        reviewBundle.putString("manufacturer",manufacturer);
+        reviewBundle.putString("image",image);
         getActivity().getSupportFragmentManager().setFragmentResult("reviewBundle", reviewBundle);
 
 
