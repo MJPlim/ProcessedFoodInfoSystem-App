@@ -4,29 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".domain.view.user.signOut.TempActivity">
 
 
     <Button
         android:id="@+id/tempActivity_withdrawalButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:text="@string/tempActivity_withdrawalButton_text" />
 
     <Button
+        android:id="@+id/tempActivity_mapButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="@string/tempActivity_mapButton_text" />
+
+    <Button
         android:id="@+id/tempActivity_logOutButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:text="@string/tempActivity_logOutButton_text" />
 
     <Button
-        android:id="@+id/tempActivity_mapButton"
-        android:layout_width="wrap_content"
+        android:id="@+id/tempActivity_setSecondEmailButton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="@string/tempActivity_mapButton_text" />
+        android:text="복구 이메일" />
 
 
 </LinearLayout>

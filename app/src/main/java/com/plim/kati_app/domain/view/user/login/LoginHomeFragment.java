@@ -24,6 +24,7 @@ import com.plim.kati_app.domain.asset.KatiDialog;
 import com.plim.kati_app.domain.model.room.KatiData;
 import com.plim.kati_app.domain.model.room.KatiDatabase;
 import com.plim.kati_app.domain.view.MainActivity;
+import com.plim.kati_app.domain.view.user.findId.FindEmailActivity;
 import com.plim.kati_app.domain.view.user.findPW.FindPasswordActivity;
 import com.plim.kati_app.domain.view.user.register.RegisterActivity;
 import com.plim.kati_app.tech.RestAPIClient;
@@ -96,6 +97,10 @@ public class LoginHomeFragment extends Fragment {
                         break;
                     case R.id.loginActivity_pwFindButton:
                         startActivity(new Intent(getContext(), FindPasswordActivity.class));
+                        break;
+                    case R.id.loginActivity_idFindButton:
+                        startActivity(new Intent(getContext(), FindEmailActivity.class));
+                        break;
                     case R.id.loginActivity_loginButton:
                         retrofitLogin();
                         break;
@@ -111,6 +116,7 @@ public class LoginHomeFragment extends Fragment {
 
         this.accountCreateButton.setOnClickListener(onClickListener);
         this.pwFindButton.setOnClickListener(onClickListener);
+        this.idFindButton.setOnClickListener(onClickListener);
         this.loginButton.setOnClickListener(onClickListener);
         this.social_login_button_google.setOnClickListener(onClickListener);
         this.social_login_button_kakao.setOnClickListener(onClickListener);

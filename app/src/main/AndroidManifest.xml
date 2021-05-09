@@ -43,7 +43,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    <activity android:name=".domain.view.user.findId.FindIdActivity"/>
+        <activity android:name=".domain.view.user.findId.FindEmailActivity"/>
+    <activity android:name=".domain.view.user.setId.SetSecondEmailActivity"/>
     <activity android:name=".domain.view.rank.RankingActivity" />
     <activity android:name=".domain.view.user.myPage.UserMyPageActivity" />
     <activity android:name=".domain.view.user.dataChange.UserDataChangeActivity" />

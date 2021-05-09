@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".domain.view.user.findId.FindEmailActivity">
+    android:background="@color/white"
+    android:padding="@dimen/box_inset_layout_padding"
+    tools:context=".domain.view.user.setId.SetSecondEmailActivity" >
+
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"
@@ -17,5 +20,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
 
         app:defaultNavHost="true"
-        app:navGraph="@navigation/find_id_activity_navigation_graph" />
+        app:navGraph="@navigation/set_second_email_activity_navigation_graph" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

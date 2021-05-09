@@ -13,6 +13,7 @@ import com.plim.kati_app.domain.asset.KatiDialog;
 import com.plim.kati_app.domain.model.room.KatiDatabase;
 import com.plim.kati_app.domain.view.MainActivity;
 import com.plim.kati_app.domain.view.user.logOut.LogOutActivity;
+import com.plim.kati_app.domain.view.user.setId.SetSecondEmailActivity;
 
 import static com.plim.kati_app.constants.Constant_jung.ROOM_AUTHORIZATION_KEY;
 
@@ -26,6 +27,8 @@ public class TempActivity extends AppCompatActivity {
 
         private Button mapButton;
 
+        private Button setSecondEmailButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +38,7 @@ public class TempActivity extends AppCompatActivity {
         this.signOutButton = this.findViewById(R.id.tempActivity_withdrawalButton);
         this.logOutButton= this.findViewById(R.id.tempActivity_logOutButton);
         this.mapButton=this.findViewById(R.id.tempActivity_mapButton);
+	    this.setSecondEmailButton=this.findViewById(R.id.tempActivity_setSecondEmailButton);
 
         // Initialize View
         this.signOutButton.setOnClickListener(v->{
@@ -64,6 +68,10 @@ public class TempActivity extends AppCompatActivity {
                 signOutCompleteDialog.setColor(this.getResources().getColor(R.color.kati_coral, this.getTheme()));
                 signOutCompleteDialog.showDialog();
             }
+        });
+
+	this.setSecondEmailButton.setOnClickListener(v->{
+            startActivity(new Intent(TempActivity.this, SetSecondEmailActivity.class));
         });
     }
 
