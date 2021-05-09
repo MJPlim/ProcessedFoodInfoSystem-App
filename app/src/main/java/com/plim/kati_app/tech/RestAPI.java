@@ -24,6 +24,7 @@ import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.FieldMap;
 import retrofit2.http.GET;
 import retrofit2.http.HTTP;
@@ -86,5 +87,17 @@ public interface RestAPI {
 
     @POST("api/v1/user/modify-user-info")
     Call<UserInfoResponse> modifyUserInfo(@Body UserInfoModifyRequest request);
+
+
+
+    @GET("api/v1/user/favorite/checkFavorite")
+    Call<Boolean>getFavoriteStateForFood(@Query("foodId") Long foodId);
+
+
+    @POST("api/v1/user/favorite/addFavorite")
+    Call<Boolean>addFavoriteFood(@Query("foodId") Long foodId);
+
+    @DELETE("api/v1/user/favorite/deleteFavorite")
+    Call<Void> deleteFavoriteFood(@Query("foodId") Long foodId);
 
 }

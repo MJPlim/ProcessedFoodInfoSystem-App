@@ -6,6 +6,7 @@ import android.os.Bundle;
 import com.plim.kati_app.R;
 import com.plim.kati_app.constants.Constant_yun;
 import com.plim.kati_app.domain.asset.KatiDialog;
+import com.plim.kati_app.domain.model.room.KatiDatabase;
 import com.plim.kati_app.domain.service.AutoLoginService;
 import com.plim.kati_app.domain.view.rank.RankingActivity;
 import com.plim.kati_app.domain.view.search.food.list.FoodSearchActivity;
@@ -21,7 +22,7 @@ public class MainActivity extends AppCompatActivity { // a test
 
     //service intent
     private Intent intent;
-
+private KatiDialog katiDialog;
 
 
     @Override
@@ -52,16 +53,22 @@ public class MainActivity extends AppCompatActivity { // a test
      * 종료를 할 지 확인하는 다이얼로그를 표시한다.
      */
     public void showDialog(){
-        KatiDialog katiDialog = new KatiDialog(this);
+        this.katiDialog = new KatiDialog(this);
         katiDialog.setTitle(Constant_yun.MAIN_ACTIVITY_FINISH_DIALOG_TITLE);
         katiDialog.setMessage(Constant_yun.MAIN_ACTIVITY_FINISH_DIALOG_MESSAGE);
-        katiDialog.setPositiveButton(Constant_yun.KATI_DIALOG_CONFIRM, (dialog, which) ->{
-                this.finishApp();
-            });
+        katiDialog.setPositiveButton(Constant_yun.KATI_DIALOG_CONFIRM, (dialog, which) -> this.finishApp());
         katiDialog.setNegativeButton(Constant_yun.KATI_DIALOG_CANCEL, null);
         katiDialog.setColor(this.getResources().getColor(R.color.kati_coral,this.getTheme()));
         katiDialog.showDialog();
     }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        katiDialog.dismiss();
+    }
+
 
 
     /**
@@ -70,6 +77,7 @@ public class MainActivity extends AppCompatActivity { // a test
     public void finishApp(){
         this.finish();
         this.finishAffinity();
+        KatiDatabase.destroyInstance();
         stopService(intent);
     }
 }

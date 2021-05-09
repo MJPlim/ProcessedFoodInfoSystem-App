@@ -50,6 +50,10 @@ public class KatiDialog extends AlertDialog.Builder{
         dialog.show();
     }
 
+    public void dismiss(){
+        this.dismiss();
+    }
+
     public static KatiDialog simpleAlertDialog(Context context, String title, String message, DialogInterface.OnClickListener listener, @ColorInt int color){
         KatiDialog kDialog= new KatiDialog(context);
         kDialog.setTitle(title);

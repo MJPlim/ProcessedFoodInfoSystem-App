@@ -21,6 +21,8 @@ import com.plim.kati_app.domain.asset.KatiDialog;
 import com.plim.kati_app.domain.asset.LoadingDialog;
 import com.plim.kati_app.domain.model.dto.FindFoodByBarcodeRequest;
 import com.plim.kati_app.domain.model.dto.FoodDetailResponse;
+import com.plim.kati_app.domain.model.room.KatiData;
+import com.plim.kati_app.domain.model.room.KatiDatabase;
 import com.plim.kati_app.domain.view.MainActivity;
 import com.plim.kati_app.domain.view.search.food.review.WriteReviewActivity;
 import com.plim.kati_app.tech.RestAPI;
@@ -84,7 +86,6 @@ public class DetailProductInfoFragment extends Fragment {
         this.barcode = this.getActivity().getIntent().getStringExtra("barcode");
         this.foodId = this.getActivity().getIntent().getLongExtra(DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_FOOD_ID_EXTRA, 0L);
         this.isAd = this.getActivity().getIntent().getBooleanExtra(NEW_DETAIL_ACTIVITY_EXTRA_IS_AD, false);
-        this.getReview();
         if (this.barcode != null) this.barcodeSearch();
         else this.search();
 
@@ -102,8 +103,17 @@ public class DetailProductInfoFragment extends Fragment {
                             (dialog, which) -> startActivity(new Intent(getActivity(), MainActivity.class))
                     ).showDialog();
                 } else {
+                    if(isAd)foodId=item.getFoodId();
                     putBundle(item);
                 }
+
+                new Thread(() -> {
+                    String token = response.headers().get(KatiDatabase.AUTHORIZATION);
+                    KatiDatabase database = KatiDatabase.getAppDatabase(getContext());
+                    database.katiDataDao().insert(new KatiData(KatiDatabase.AUTHORIZATION, token));
+                    getReview(foodId);
+                }).start();
+
                 getActivity().runOnUiThread(() -> {
                     loadingDialog.hide();
                 });
@@ -135,12 +145,13 @@ public class DetailProductInfoFragment extends Fragment {
 
     /**
      * 리뷰 불러오기 하기.
+     * @param foodId
      */
-    private void getReview() {
+    private void getReview(Long foodId) {
         Log.d("리뷰 불러오게 FragmentResult 설정", this.foodId + "");
 //        Toast.makeText(this.getActivity(), foodId+"아이디", Toast.LENGTH_SHORT).show();
         Bundle reviewBundle = new Bundle();
-        reviewBundle.putLong("foodId", this.foodId);
+        reviewBundle.putLong("foodId", foodId);
         getActivity().getSupportFragmentManager().setFragmentResult("reviewBundle", reviewBundle);
     }
 
@@ -156,6 +167,7 @@ public class DetailProductInfoFragment extends Fragment {
         Bundle imageBundle = new Bundle();
         imageBundle.putString(DETAIL_PHOTO_VIEW_FRAGMENT_BUNDLE_FRONT_IMAGE, value.getFoodImageAddress());
         imageBundle.putString(DETAIL_PHOTO_VIEW_FRAGMENT_BUNDLE_BACK_IMAGE, value.getFoodMeteImageAddress());
+        imageBundle.putLong("foodId",this.foodId);
         getActivity().getSupportFragmentManager().setFragmentResult(DETAIL_PHOTO_VIEW_FRAGMENT_BUNDLE_KEY, imageBundle);
 
 
@@ -214,5 +226,11 @@ public class DetailProductInfoFragment extends Fragment {
             this.parseCall(listCall);
 
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        this.loadingDialog.dismiss();
     }
 }

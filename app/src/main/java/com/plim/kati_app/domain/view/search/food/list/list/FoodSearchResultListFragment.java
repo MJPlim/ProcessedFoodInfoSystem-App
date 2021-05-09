@@ -285,13 +285,15 @@ public class FoodSearchResultListFragment extends Fragment {
             private ImageView imageView;
             private TextView productName, companyName;
             private String imageAddress;
+            private ImageView favorite;
 
             public AdRecyclerViewViewHolder(@NonNull View itemView) {
                 super(itemView);
                 this.productName = itemView.findViewById(R.id.foodItem_productName);
                 this.companyName = itemView.findViewById(R.id.foodItem_companyName);
                 this.imageView = itemView.findViewById(R.id.foodItem_foodImageView);
-
+                this.favorite=itemView.findViewById(R.id.foodItem_favoriteImageView);
+                this.favorite.setVisibility(View.GONE);
                 itemView.setOnClickListener(v -> {
                     intentAdPage(items.get(this.getAdapterPosition()).getId());
                 });
@@ -312,7 +314,7 @@ public class FoodSearchResultListFragment extends Fragment {
                 });
 
                 this.productName.setText(item.getFood().getFoodName());
-                this.companyName.setText(item.getFood().getManufacturerName());
+                this.companyName.setText(item.getFood().getManufacturerName().split("_")[0]);
             }
         }
     }
@@ -371,13 +373,15 @@ public class FoodSearchResultListFragment extends Fragment {
             private ImageView imageView;
             private TextView productName, companyName;
             private String imageAddress;
+            private ImageView favorite;
 
             public RecyclerViewViewHolder(@NonNull View itemView) {
                 super(itemView);
                 this.productName = itemView.findViewById(R.id.foodItem_productName);
                 this.companyName = itemView.findViewById(R.id.foodItem_companyName);
                 this.imageView = itemView.findViewById(R.id.foodItem_foodImageView);
-
+                this.favorite=itemView.findViewById(R.id.foodItem_favoriteImageView);
+                this.favorite.setVisibility(View.GONE);
                 itemView.setOnClickListener(v -> {
                     intentDetailPage(items.get(this.getAdapterPosition()).getFoodId());
                 });
@@ -399,7 +403,7 @@ public class FoodSearchResultListFragment extends Fragment {
                 });
 
                 this.productName.setText(item.getFoodName());
-                this.companyName.setText(item.getManufacturerName());
+                this.companyName.setText(item.getManufacturerName().split("_")[0]);
             }
         }
     }
