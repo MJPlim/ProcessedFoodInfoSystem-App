@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/foodSearchRecommendationFragment"
 
-        android:name="com.plim.kati_app.domain2.view.search.food.list.recommendation.FoodSearchRecommendationFragment"
+        android:name="com.plim.kati_app.domain2.view.searchFood.list.recommendation.FoodSearchRecommendationFragment"
 
         tools:layout="@layout/fragment_food_search_recommendation"
         android:label="fragment_food_search_recommendation">
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/foodSearchResultListFragment"
-        android:name="com.plim.kati_app.domain2.view.search.food.list.list.FoodSearchResultListFragment"
+        android:name="com.plim.kati_app.domain2.view.searchFood.list.list.FoodSearchResultListFragment"
         tools:layout="@layout/fragment_food_search_result_list"
         android:label="fragment_food_search_result_list">
         <action

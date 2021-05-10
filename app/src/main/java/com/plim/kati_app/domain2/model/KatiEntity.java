@@ -12,16 +12,16 @@ import lombok.Setter;
 public class KatiEntity {
 
     // Static Value
-    public enum EKatiData {AUTHORIZATION, AUTO_LOGIN, EMAIL, PASSWORD, TRUE, FALSE}
+    public enum EKatiData {AUTHORIZATION, AUTO_LOGIN, EMAIL, PASSWORD, NAME, TRUE, FALSE}
 
     // Component
-    private Map<String, String> dataset;  // email, pw, authorization... 등 엥간한 것들을 여기 저장
+    private Map<EKatiData, String> dataset;  // email, pw, authorization... 등 엥간한 것들을 여기 저장
     private ArrayList<String> searchWords; // 검색 기록 저장
 
     // Constructor
     public KatiEntity() {
         this.dataset = new HashMap<>();
-        this.dataset.put(EKatiData.AUTO_LOGIN.name(), EKatiData.FALSE.name());
+        this.dataset.put(EKatiData.AUTO_LOGIN, EKatiData.FALSE.name());
         this.searchWords = new ArrayList<>();
     }
 }

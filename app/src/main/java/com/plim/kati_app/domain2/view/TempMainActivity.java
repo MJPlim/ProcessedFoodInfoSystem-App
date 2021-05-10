@@ -9,15 +9,10 @@ import com.plim.kati_app.R;
 import com.plim.kati_app.domain.asset.KatiDialog;
 import com.plim.kati_app.domain.constant.Constant_yun;
 import com.plim.kati_app.domain.service.AutoLoginService;
-import com.plim.kati_app.domain2.model.KatiEntity;
-import com.plim.kati_app.domain2.view.search.food.detail.DetailActivity;
-import com.plim.kati_app.domain2.view.search.food.list.FoodSearchActivity;
-import com.plim.kati_app.domain2.view.user.account.login.view.LoginActivity;
-import com.plim.kati_app.domain2.view.user.account.pwChange.ChangePasswordActivity;
-import com.plim.kati_app.domain2.view.user.account.signOut.TempActivity;
-import com.plim.kati_app.jshCrossDomain.domain.view.JSHViewModelActivity;
-
-import java.util.ArrayList;
+import com.plim.kati_app.domain2.view.searchFood.list.FoodSearchActivity;
+import com.plim.kati_app.domain2.view.userAccount.login.LoginActivity;
+import com.plim.kati_app.domain2.view.userAccount.pwChange.ChangePasswordActivity;
+import com.plim.kati_app.domain2.view.userAccount.TempActivity;
 
 public class TempMainActivity extends AppCompatActivity {
 
@@ -34,7 +29,6 @@ public class TempMainActivity extends AppCompatActivity {
         this.findViewById(R.id.mainActivity_loginTestButton).setOnClickListener(v -> this.startActivity(new Intent(this, LoginActivity.class)));
         this.findViewById(R.id.mainActivity_searchTestButton).setOnClickListener(v -> this.startActivity(new Intent(this, FoodSearchActivity.class)));
         this.findViewById(R.id.mainActivity_changePWButton).setOnClickListener(v -> this.startActivity(new Intent(this, ChangePasswordActivity.class)));
-        this.findViewById(R.id.mainActivity_detailTestButton).setOnClickListener(v -> this.startActivity(new Intent(this, DetailActivity.class)));
 
         //start AutoLogin service
         this.intent=new Intent(this, AutoLoginService.class);

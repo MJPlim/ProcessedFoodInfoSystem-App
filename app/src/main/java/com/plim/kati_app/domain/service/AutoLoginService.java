@@ -9,10 +9,10 @@ import androidx.annotation.Nullable;
 import com.plim.kati_app.R;
 import com.plim.kati_app.domain.constant.Constant_yun;
 import com.plim.kati_app.domain.asset.KatiDialog;
-import com.plim.kati_app.domain.model.room.KatiData;
-import com.plim.kati_app.domain.model.room.KatiDatabase;
-import com.plim.kati_app.domain2.view.user.account.login.LoginRequest;
-import com.plim.kati_app.domain2.view.user.account.login.RetrofitClient;
+import com.plim.kati_app.domain.room.KatiData;
+import com.plim.kati_app.domain.room.KatiDatabase;
+import com.plim.kati_app.retrofit.dto.LoginRequest;
+import com.plim.kati_app.retrofit.RetrofitClient;
 import com.plim.kati_app.domain.exception.LoginDataWrongException;
 import com.plim.kati_app.domain.exception.RequestFailureException;
 import com.plim.kati_app.domain.exception.RequestNotSuccessfulException;
@@ -100,7 +100,7 @@ public class AutoLoginService extends Service {
 
         LoginRequest login = new LoginRequest(email, password);
         RetrofitClient retrofitClient = new RetrofitClient();
-        Call<LoginRequest> call = retrofitClient.apiService.postRetrofitData(login);
+        Call<LoginRequest> call = retrofitClient.apiService.login(login);
         call.enqueue(new Callback<LoginRequest>() {
 
             @SneakyThrows

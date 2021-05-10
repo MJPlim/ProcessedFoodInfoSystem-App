@@ -1,5 +1,6 @@
 package com.plim.kati_app.domain2.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +19,7 @@ public abstract class KatiViewModelActivity extends JSHViewModelActivity {
     // Associate
         // Model
         protected KatiEntity entity;
-        protected Map<String, String> dataset;
+        protected Map<KatiEntity.EKatiData, String> dataset;
         protected ArrayList<String> searchWords;
 
     @Override
@@ -38,9 +39,15 @@ public abstract class KatiViewModelActivity extends JSHViewModelActivity {
             this.dataset = this.entity.getDataset();
             this.searchWords = this.entity.getSearchWords();
 
+            this.associateView();
+            this.initializeView();
             this.katiEntityUpdated();
         }
     }
 
+    protected abstract void associateView();
+    protected abstract void initializeView();
     public abstract void katiEntityUpdated();
+
+    public void startActivity(Class<?> cls){ this.startActivity(new Intent(this, cls)); }
 }

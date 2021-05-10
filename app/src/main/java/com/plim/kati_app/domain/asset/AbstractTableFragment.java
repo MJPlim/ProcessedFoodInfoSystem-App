@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.plim.kati_app.R;
-import com.plim.kati_app.domain.model.DetailTableItem;
+import com.plim.kati_app.domain.DetailTableItem;
 
 import java.util.HashMap;
 

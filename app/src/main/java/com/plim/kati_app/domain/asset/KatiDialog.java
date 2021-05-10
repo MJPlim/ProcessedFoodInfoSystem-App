@@ -48,7 +48,7 @@ public class KatiDialog extends AlertDialog.Builder{
         KatiDialog kDialog= new KatiDialog(context);
         kDialog.setTitle(title);
         kDialog.setMessage(message);
-        kDialog.setPositiveButton("확인",listener);
+        kDialog.setPositiveButton("확인", listener);
         kDialog.setColor(color);
         return kDialog;
     }

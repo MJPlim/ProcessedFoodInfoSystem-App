@@ -1,10 +1,13 @@
 package com.plim.kati_app.domain2.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.navigation.Navigation;
 
 import com.plim.kati_app.domain2.model.KatiEntityTool;
 import com.plim.kati_app.domain2.model.KatiEntity;
@@ -19,17 +22,12 @@ public abstract class KatiViewModelFragment extends JSHViewModelFragment {
     // Associate
         // Model
         protected KatiEntity entity;
-        protected Map<String, String> dataset;
+        protected Map<KatiEntity.EKatiData, String> dataset;
         protected ArrayList<String> searchWords;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(this.getLayoutId(), container, false);
-    }
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        this.associateView(view);
     }
     @Override
     public void onPause() {
@@ -49,6 +47,7 @@ public abstract class KatiViewModelFragment extends JSHViewModelFragment {
             this.dataset = this.entity.getDataset();
             this.searchWords = this.entity.getSearchWords();
 
+            this.associateView(this.getView());
             this.initializeView();
             this.katiEntityUpdated();
         }
@@ -58,4 +57,8 @@ public abstract class KatiViewModelFragment extends JSHViewModelFragment {
     protected abstract void associateView(View view);
     protected abstract void initializeView();
     protected abstract void katiEntityUpdated();
+
+    public void startActivity(Class<?> cls){ this.startActivity(new Intent(this.getContext(), cls)); }
+    protected void navigateTo(int id){ Navigation.findNavController(this.getView()).navigate(id); }
+    protected String getStringOfId(int id){ return this.getResources().getString(id); }
 }

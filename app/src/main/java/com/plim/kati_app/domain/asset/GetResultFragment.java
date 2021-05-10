@@ -23,7 +23,8 @@ public abstract class GetResultFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         this.setFragmentRequestKey();
-        this.requireActivity().getSupportFragmentManager().setFragmentResultListener(this.fragmentRequestKey,this.requireActivity(),(this::ResultParse));
+        this.requireActivity().getSupportFragmentManager()
+                .setFragmentResultListener(this.fragmentRequestKey,this.requireActivity(),(this::ResultParse));
     }
 
     /**
@@ -37,10 +38,4 @@ public abstract class GetResultFragment extends Fragment {
      * @param result 결과로 받아온 번들.
      */
     public abstract void ResultParse(String requestKey, Bundle result);
-
-
-
-
-
-
 }
