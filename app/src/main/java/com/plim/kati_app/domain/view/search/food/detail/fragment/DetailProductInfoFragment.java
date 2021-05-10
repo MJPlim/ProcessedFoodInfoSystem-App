@@ -124,9 +124,10 @@ public class DetailProductInfoFragment extends Fragment {
                 } else {
                     if(isAd)foodId=item.getFoodId();
                     putBundle(item);
-                }
                     writeForm(item);
                     getReview(foodId,item.getFoodName(),item.getManufacturerName(),item.getFoodImageAddress());
+                }
+
 
                 getActivity().runOnUiThread(() -> {
                     loadingDialog.hide();
