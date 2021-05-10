@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresPermission;
@@ -62,7 +63,6 @@ import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_RESULT_LIST_F
  * 리뷰를 보여주는 fragment
  */
 public class DetailReviewViewFragment extends GetResultFragment {
-
 
     private int currentPageNum = 1;
     private Long foodId;
@@ -375,8 +375,11 @@ KatiDialog.showRetrofitFailDialog(getContext(),t.getMessage(),null);
 
                 this.deleteButton.setOnClickListener(v->deleteReview(value.getReviewId()));
 
-                this.likeImageButton.getDrawable().clearColorFilter();
-                this.likeImageButton.getDrawable().setColorFilter(getResources().getColor(value.isUserLikeCheck()?R.color.kati_orange:R.color.gray,getContext().getTheme()), PorterDuff.Mode.SRC_IN);
+                this.likeImageButton.clearColorFilter();
+                int color= getResources().getColor(value.isUserLikeCheck()?R.color.kati_orange:R.color.gray,getContext().getTheme());
+                this.likeImageButton.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+
+
                 this.like.setOnClickListener(isLogin ? v -> like(value.getReviewId(),value.isUserLikeCheck()) : null);
                 this.likeImageButton.setOnClickListener(isLogin ? v -> like(value.getReviewId(),value.isUserLikeCheck()) : null);
 
