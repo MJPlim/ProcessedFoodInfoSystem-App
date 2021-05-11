@@ -1,11 +1,8 @@
 package com.plim.kati_app.domain.view.user.changePW;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
-import androidx.navigation.Navigation;
 
 import com.plim.kati_app.R;
 import com.plim.kati_app.constants.Constant;
@@ -40,9 +37,9 @@ public class ChangePasswordInputFragment extends AbstractFragment2 {
     protected void initializeView() {
         this.mainTextView.setText(CHANGE_PASSWORD_TITLE);
         this.subTextView.setVisibility(View.INVISIBLE);
-        this.editText.setHint(BEFORE_PASSWORD_HINT);
-        this.editText2.setHint(AFTER_PASSWORD_HINT);
-        this.editText3.setHint(AFTER_PASSWORD_HINT2);
+        this.Present_Password_editText.setHint(BEFORE_PASSWORD_HINT);
+        this.New_Password_editText.setHint(AFTER_PASSWORD_HINT);
+        this.New_Password_Verify_editText.setHint(AFTER_PASSWORD_VERIFY_HINT);
         this.button.setText(DIALOG_CONFIRM);
     }
 
@@ -70,28 +67,21 @@ public class ChangePasswordInputFragment extends AbstractFragment2 {
 
     @Override
     protected void buttonClicked() {
-        if(this.editText2.getText().toString().equals(this.editText3.getText().toString())) {
+        if(this.New_Password_editText.getText().toString().equals(this.New_Password_Verify_editText.getText().toString())) {
             if (this.loadingDialog == null)
                 this.loadingDialog = new LoadingDialog(this.getContext());
             Thread thread = new Thread(() -> {
-                getActivity().runOnUiThread(() -> {
-                    loadingDialog.show();
-                });
+                getActivity().runOnUiThread(() -> loadingDialog.show());
 
 
                 // THIS IS TEST! Get Data From View Model
                 ModifyPasswordRequest request = new ModifyPasswordRequest();
-                request.setBeforePassword(this.editText.getText().toString());
-                request.setAfterPassword(this.editText2.getText().toString());
+                request.setBeforePassword(this.Present_Password_editText.getText().toString());
+                request.setAfterPassword(this.New_Password_editText.getText().toString());
 
                 KatiDatabase database = KatiDatabase.getAppDatabase(getContext());
                 String token = database.katiDataDao().getValue(KatiDatabase.AUTHORIZATION);
 
-                Retrofit retrofit = new Retrofit.Builder()
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .baseUrl(Constant.URL)
-                        .build();
-                RestAPI service = retrofit.create(RestAPI.class);
                 Call<ModifyPasswordResponse> listCall = RestAPIClient.getApiService2(token).ChangePassword(request);
                 listCall.enqueue(new Callback<ModifyPasswordResponse>() {
                     @Override
@@ -101,6 +91,7 @@ public class ChangePasswordInputFragment extends AbstractFragment2 {
                         });
                         ModifyPasswordResponse result = response.body();
                         if (!response.isSuccessful()) {
+                            KatiDialog.showRetrofitNotSuccessDialog(getContext(),response.code()+"",null).showDialog();
                             try {
                                 JSONObject jObjError = new JSONObject(response.errorBody().string());
                                 Toast.makeText(getContext(), jObjError.getString("error-message"), Toast.LENGTH_LONG).show();
@@ -115,6 +106,11 @@ public class ChangePasswordInputFragment extends AbstractFragment2 {
                             });
 
                         }
+                        new Thread(() -> {
+                            String token = response.headers().get(KatiDatabase.AUTHORIZATION);
+                            KatiDatabase database = KatiDatabase.getAppDatabase(getContext());
+                            database.katiDataDao().insert(new KatiData(KatiDatabase.AUTHORIZATION, token));
+                        }).start();
                     }
 
                     @Override
@@ -122,16 +118,23 @@ public class ChangePasswordInputFragment extends AbstractFragment2 {
                         getActivity().runOnUiThread(() -> {
                             loadingDialog.hide();
                         });
-//                    Log.d(getStringOfId(R.string.withdrawalPasswordInputFragment_log_pleaseCheckInternet), t.getMessage());
+//
                     }
                 });
             });
             thread.start();
         }else{
-            Toast.makeText(getContext(), "새 비밀번호를 동일하게 입력해 주세요.", Toast.LENGTH_LONG).show();
+
+            Toast.makeText(getContext(), PASSWORD_ISNOT_SAME, Toast.LENGTH_LONG).show();
+
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        this.loadingDialog.dismiss();
+    }
 
     private void moveToLogOutActivity() {
         Intent intent = new Intent(this.getActivity(), LogOutActivity.class);

@@ -32,6 +32,8 @@ public class FoodCategoryDetailListFragment extends Fragment {
     //component
     private Vector<String> values;
 
+    public FoodCategoryDetailListFragment(){}
+
     public FoodCategoryDetailListFragment(Vector<String> values) {
         this.values = new Vector<>();
         this.values.addAll(values);

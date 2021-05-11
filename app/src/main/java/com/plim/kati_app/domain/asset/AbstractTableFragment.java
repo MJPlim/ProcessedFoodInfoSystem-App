@@ -2,6 +2,9 @@ package com.plim.kati_app.domain.asset;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -25,18 +28,15 @@ import static com.plim.kati_app.constants.Constant_yun.ABSTRACT_TABLE_FRAGMENT_S
 /**
  * 재사용 할 테이블 모양 프레그먼트.
  */
-public abstract class AbstractTableFragment extends GetResultFragment {
+public abstract class AbstractTableFragment extends ExpandableFragment {
 
     //associate view
-    private TextView nameTextView, expandButton;
-    private RecyclerView recyclerView;
+    private TextView nameTextView;
 
     //component
     private DetailTableItem detailTableItem;
     private RecyclerAdapter adapter;
 
-    //working variable
-    private boolean isExpanded = true;
 
     public AbstractTableFragment() {
         // Required empty public constructor
@@ -73,37 +73,12 @@ public abstract class AbstractTableFragment extends GetResultFragment {
      */
     protected void setItemValues(DetailTableItem detailTableItem) {
         this.detailTableItem = detailTableItem;
-        this.adapter.setItems(detailTableItem.getValueMap());
+        this.adapter.setItems(this.detailTableItem.getValueMap());
         this.adapter.notifyDataSetChanged();
         this.nameTextView.setText(this.detailTableItem.getName());
         this.nameTextView.setBackgroundColor(getContext().getResources().getColor(R.color.kati_yellow,getContext().getTheme()));
     }
 
-
-    /**
-     * 인터넷 펌 Expandable recyclerView 메소드. 임시. ValueAnimator를 활용하여 애니메이션으로 늘리고 줄여준다.
-     * @param isExpanded
-     */
-    private void changeVisibility(final boolean isExpanded) {
-        this.isExpanded = isExpanded;
-        // ValueAnimator.ofInt(int... values)는 View가 변할 값을 지정, 인자는 int 배열
-        ValueAnimator va = isExpanded ? ValueAnimator.ofInt(0, recyclerView.getHeight()) : ValueAnimator.ofInt(recyclerView.getHeight(), 0);
-        // Animation이 실행되는 시간, n/1000초
-        va.setDuration(500);
-        va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                // imageView의 높이 변경
-                recyclerView.getLayoutParams().height = (int) animation.getAnimatedValue();
-                recyclerView.requestLayout();
-                // imageView가 실제로 사라지게하는 부분
-                recyclerView.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
-                expandButton.setText(isExpanded ? ABSTRACT_TABLE_FRAGMENT_SMALL : ABSTRACT_TABLE_FRAGMENT_LARGE);
-            }
-        });
-        // Animation start
-        va.start();
-    }
 
 
     /**
@@ -173,6 +148,11 @@ public abstract class AbstractTableFragment extends GetResultFragment {
             public void setValue(DetailTableItem.Data data) {
                 this.title.setText(data.getTitle());
                 this.value.setText(data.getValue());
+                if(data.getLink()!=null) this.value.setOnClickListener(v->{
+                    this.value.setPaintFlags(this.value.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(data.getLink()+data.getValue().split("_")[0]));
+                    startActivity(intent);
+                });
 
             }
 

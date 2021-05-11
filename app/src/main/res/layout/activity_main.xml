@@ -49,22 +49,34 @@
         app:layout_constraintTop_toBottomOf="@+id/mainActivity_loginTestButton"
         tools:layout_editor_absoluteX="16dp" />
 
+
     <Button
-        android:id="@+id/mainActivity_changePWButton"
+        android:id="@+id/mainActivity_myPageTestButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="@string/mainActivity_changePWButton_text"
+        android:text="MyPage"
         app:layout_constraintTop_toBottomOf="@+id/mainActivity_searchTestButton"
         tools:layout_editor_absoluteX="24dp" />
 
     <Button
-        android:id="@+id/mainActivity_detailTestButton"
+        android:id="@+id/mainActivity_userDataChangeTestButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="@string/mainActivity_detailTestButton_text"
-        app:layout_constraintTop_toBottomOf="@+id/mainActivity_changePWButton"
+        android:text="MyDataChange"
+        app:layout_constraintTop_toBottomOf="@+id/mainActivity_myPageTestButton"
         tools:layout_editor_absoluteX="24dp" />
+
+    <Button
+        android:id="@+id/mainActivity_RankingTestButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Ranking"
+        app:layout_constraintTop_toBottomOf="@+id/mainActivity_userDataChangeTestButton"
+        tools:layout_editor_absoluteX="24dp" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

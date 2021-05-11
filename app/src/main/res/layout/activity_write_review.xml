@@ -6,4 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".domain.view.search.food.review.WriteReviewActivity">
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/detailProductInfoFragment_reviewWriteFragment"
+        android:name="com.plim.kati_app.domain.view.search.food.detail.fragment.ReviewWriteFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout="@layout/fragment_detail_review_view" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

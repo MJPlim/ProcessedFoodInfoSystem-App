@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout android:id="@+id/myPage_favorite_Layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <TextView
+        android:id="@+id/myPage_favorite_num"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/kati_yellow"
+        android:paddingLeft="20dp"
+        android:textSize="60px"
+        android:text="@string/userPageFragment_default_numOfFood"
+        android:textColor="@color/black"
+        />
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/myPage_foodInfoRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/item_food">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</LinearLayout>

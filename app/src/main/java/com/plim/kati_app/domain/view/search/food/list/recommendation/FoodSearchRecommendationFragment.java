@@ -121,8 +121,6 @@ public class FoodSearchRecommendationFragment extends Fragment {
 
     /**
      * 최근에 검색할 때 사용한 검색어들을 데이터베이스에서 불러오고, 리사이클러뷰에 어댑터를 설정한다.
-     *
-     * @return 검색어로 이루어진 벡터.
      */
     private void loadRecentSearchedWords() {
         this.recentSearchedWords.clear();

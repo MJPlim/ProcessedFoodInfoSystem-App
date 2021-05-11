@@ -14,18 +14,18 @@ public class DetailTableItem {
     private String name;//테이블 제목
     private HashMap<Integer, Data> valueMap; //테이블의 행번호와 행 데이터.
 
-    public DetailTableItem(String name, HashMap<String, String> map) {
+    public DetailTableItem(String name, HashMap<String, String> map, HashMap<String,String> link) {
         this.name = name;
         this.valueMap = new HashMap<>();
         int index = 0;
         for (Map.Entry<String, String> entry : map.entrySet()) {
-            this.valueMap.put(index++, new Data(entry.getKey(), entry.getValue()));
+            this.valueMap.put(index++, new Data(entry.getKey(), entry.getValue(),link==null?null:link.get(entry.getKey())));
         }
     }
 
     @AllArgsConstructor
     @Getter
     public class Data {
-        private String title, value;
+        private String title, value,link;
     }
 }

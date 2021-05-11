@@ -65,6 +65,7 @@ public class AutoLoginService extends Service {
      */
     private void autoLogOut() {
         new Thread(() -> {
+            Log.d("로그아웃 오토","실행");
             KatiDatabase database = KatiDatabase.getAppDatabase(this);
             database.katiDataDao().delete(KatiDatabase.AUTHORIZATION);
         }).start();

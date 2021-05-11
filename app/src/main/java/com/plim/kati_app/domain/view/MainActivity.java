@@ -1,27 +1,18 @@
 package com.plim.kati_app.domain.view;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.Task;
 import com.plim.kati_app.R;
 import com.plim.kati_app.constants.Constant_yun;
 import com.plim.kati_app.domain.asset.KatiDialog;
+import com.plim.kati_app.domain.model.room.KatiDatabase;
 import com.plim.kati_app.domain.service.AutoLoginService;
+import com.plim.kati_app.domain.view.rank.RankingActivity;
 import com.plim.kati_app.domain.view.search.food.list.FoodSearchActivity;
-import com.plim.kati_app.domain.view.search.food.detail.DetailActivity;
-import com.plim.kati_app.domain.view.user.changePW.ChangePasswordActivity;
+import com.plim.kati_app.domain.view.user.dataChange.UserDataChangeActivity;
 import com.plim.kati_app.domain.view.user.login.LoginActivity;
+import com.plim.kati_app.domain.view.user.myPage.UserMyPageActivity;
 import com.plim.kati_app.domain.view.user.signOut.TempActivity;
 
 /**
@@ -31,6 +22,8 @@ public class MainActivity extends AppCompatActivity { // a test
 
     //service intent
     private Intent intent;
+private KatiDialog katiDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +34,9 @@ public class MainActivity extends AppCompatActivity { // a test
         this.findViewById(R.id.mainActivity_tempButton).setOnClickListener(v -> this.startActivity(new Intent(this, TempActivity.class)));
         this.findViewById(R.id.mainActivity_loginTestButton).setOnClickListener(v -> this.startActivity(new Intent(this, LoginActivity.class)));
         this.findViewById(R.id.mainActivity_searchTestButton).setOnClickListener(v -> this.startActivity(new Intent(this, FoodSearchActivity.class)));
-        this.findViewById(R.id.mainActivity_changePWButton).setOnClickListener(v -> this.startActivity(new Intent(this, ChangePasswordActivity.class)));
-        this.findViewById(R.id.mainActivity_detailTestButton).setOnClickListener(v -> this.startActivity(new Intent(this, DetailActivity.class)));
+        this.findViewById(R.id.mainActivity_myPageTestButton).setOnClickListener(v -> this.startActivity(new Intent(this, UserMyPageActivity.class)));
+        this.findViewById(R.id.mainActivity_userDataChangeTestButton).setOnClickListener(v->this.startActivity(new Intent(this, UserDataChangeActivity.class)));
+        this.findViewById(R.id.mainActivity_RankingTestButton).setOnClickListener(v -> this.startActivity(new Intent(this, RankingActivity.class)));
 
         //start AutoLogin service
         this.intent=new Intent(this, AutoLoginService.class);
@@ -59,16 +53,22 @@ public class MainActivity extends AppCompatActivity { // a test
      * 종료를 할 지 확인하는 다이얼로그를 표시한다.
      */
     public void showDialog(){
-        KatiDialog katiDialog = new KatiDialog(this);
+        this.katiDialog = new KatiDialog(this);
         katiDialog.setTitle(Constant_yun.MAIN_ACTIVITY_FINISH_DIALOG_TITLE);
         katiDialog.setMessage(Constant_yun.MAIN_ACTIVITY_FINISH_DIALOG_MESSAGE);
-        katiDialog.setPositiveButton(Constant_yun.KATI_DIALOG_CONFIRM, (dialog, which) ->{
-                this.finishApp();
-            });
+        katiDialog.setPositiveButton(Constant_yun.KATI_DIALOG_CONFIRM, (dialog, which) -> this.finishApp());
         katiDialog.setNegativeButton(Constant_yun.KATI_DIALOG_CANCEL, null);
         katiDialog.setColor(this.getResources().getColor(R.color.kati_coral,this.getTheme()));
         katiDialog.showDialog();
     }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        katiDialog.dismiss();
+    }
+
 
 
     /**
@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity { // a test
     public void finishApp(){
         this.finish();
         this.finishAffinity();
+        KatiDatabase.destroyInstance();
         stopService(intent);
     }
 }

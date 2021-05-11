@@ -9,6 +9,7 @@ import com.plim.kati_app.domain.model.DetailTableItem;
 import java.util.HashMap;
 
 import static com.plim.kati_app.constants.Constant_yun.ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_HASH_MAP;
+import static com.plim.kati_app.constants.Constant_yun.ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_LINK_MAP;
 import static com.plim.kati_app.constants.Constant_yun.ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_NAME;
 import static com.plim.kati_app.constants.Constant_yun.DETAIL_PRODUCT_MATERIAL_TABLE_FRAGMENT_BUNDLE_KEY;
 
@@ -26,9 +27,9 @@ public class DetailProductMaterialTableFragment extends AbstractTableFragment {
     public void ResultParse(String requestKey, Bundle result) {
         String name= result.getString(ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_NAME);
         HashMap<String, String> valueMap= (HashMap<String, String>) result.getSerializable(ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_HASH_MAP);
-
+        HashMap<String, String> linkMap= (HashMap<String, String>) result.getSerializable(ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_LINK_MAP);
         if(valueMap!=null){
-            DetailTableItem item = new DetailTableItem(name, valueMap);
+            DetailTableItem item = new DetailTableItem(name, valueMap,linkMap);
             this.setItemValues(item);
         }
     }
