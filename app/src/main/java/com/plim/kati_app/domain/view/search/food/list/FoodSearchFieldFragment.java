@@ -25,6 +25,7 @@ import com.google.zxing.client.android.Intents;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.plim.kati_app.R;
+import com.plim.kati_app.domain.asset.KatiDialog;
 import com.plim.kati_app.domain.model.room.KatiDatabase;
 import com.plim.kati_app.domain.model.room.KatiSearchWord;
 import com.plim.kati_app.domain.view.search.food.list.barcode.BarcodeActivity;
@@ -121,6 +122,17 @@ public class FoodSearchFieldFragment extends Fragment {
      * 검색 버튼이 눌려서 검색을 시작한다.
      */
     private void searchStart() {
+        if(this.searchEditText.length()==0) {
+            KatiDialog.simpleAlertDialog(
+                    getContext(),
+                    "검색 오류",
+                    "검색어가 입력되지 않았습니다.",
+                    null,
+                    getContext().getResources().getColor(R.color.kati_coral, getContext().getTheme())
+            ).showDialog();
+        return;
+        }
+
         NavHostFragment navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_search_fragment);
         NavController navController = navHostFragment.getNavController();
         navController.navigate(R.id.action_foodSearchRecommendationFragment_to_foodSearchResultListFragment);

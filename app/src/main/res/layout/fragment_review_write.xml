@@ -103,11 +103,14 @@
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="text|textMultiLine"
+        android:minLines="3"
         android:scrollbars="vertical"
+        android:padding="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/writeReviewFragment_star3"
+        android:background="@drawable/textfield"
         tools:inputType="textMultiLine" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

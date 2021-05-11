@@ -31,7 +31,6 @@ public class BarcodeActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
 
-
         if(result != null) {
             if(result.getContents() == null) {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
@@ -40,7 +39,6 @@ public class BarcodeActivity extends AppCompatActivity {
 
                 Toast.makeText(this, "Scanned: " + string, Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(this,NewDetailActivity.class);
-
                 intent.putExtra("barcode",string);
                 Log.d(string,"바코드 스캔");
                 startActivity(intent);

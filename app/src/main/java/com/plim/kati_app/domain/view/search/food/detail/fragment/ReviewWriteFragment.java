@@ -104,27 +104,35 @@ public class ReviewWriteFragment extends Fragment {
 
         Glide.with(getContext()).load(intent.getStringExtra("image")).fitCenter().transform(new CenterCrop(), new CircleCrop()).into(productImage);
         this.productName.setText(intent.getStringExtra("product"));
-        this.manufacturer.setText(intent.getStringExtra("manufacturer"));
+        this.manufacturer.setText(intent.getStringExtra("manufacturer").split("_")[0]);
         this.reviewValue.setText(intent.getStringExtra("value"));
         this.foodId = intent.getLongExtra("foodId", 0L);
         this.reviewId = intent.getLongExtra("reviewId", 0L);
+        float tempScore = intent.getFloatExtra("score", 0f);
 
-        int id;
-        if (intent.getFloatExtra("score", 0f) == 1f)
-            id = R.id.writeReviewFragment_star1;
-        else if (intent.getFloatExtra("score", 0f) == 2f)
-            id = R.id.writeReviewFragment_star2;
-        else if (intent.getFloatExtra("score", 0f) == 3f)
-            id = R.id.writeReviewFragment_star3;
-        else if (intent.getFloatExtra("score", 0f) == 4f)
-            id = R.id.writeReviewFragment_star4;
-        else if (intent.getFloatExtra("score", 0f) == 5f)
-            id = R.id.writeReviewFragment_star5;
-        else {
-            id = R.id.writeReviewFragment_star5;
+        Log.d("디버그",tempScore+"");
+        if (tempScore == 1f) {
+
+            this.score = 1;
+            this.scoreStar(view.findViewById(R.id.writeReviewFragment_star1));
+        } else if (tempScore == 2f) {
+            this.score = 2;
+            this.scoreStar(view.findViewById(R.id.writeReviewFragment_star2));
+        } else if (tempScore == 3f) {
+            this.score = 3;
+            this.scoreStar(view.findViewById(R.id.writeReviewFragment_star3));
+        } else if (tempScore == 4f) {
+            this.score = 4;
+            this.scoreStar(view.findViewById(R.id.writeReviewFragment_star4));
+        } else if (tempScore == 5f) {
+            this.score = 5;
+            this.scoreStar(view.findViewById(R.id.writeReviewFragment_star5));
+        } else {
+    this.score=5;
+            this.scoreStar(view.findViewById(R.id.writeReviewFragment_star5));
         }
+        Log.d("디버그",tempScore+"/"+this.score);
 
-        this.scoreStar(view.findViewById(id));
         this.saveButton.setOnClickListener(v -> {
             Log.d("디버그", "버튼눌림");
             this.saveReview();
@@ -247,11 +255,12 @@ public class ReviewWriteFragment extends Fragment {
                             ).showDialog();
 
                         }
-                        new Thread(() ->{
+                        new Thread(() -> {
                             String token = response.headers().get(KatiDatabase.AUTHORIZATION);
                             katiDatabase.katiDataDao().insert(new KatiData(KatiDatabase.AUTHORIZATION, token));
                         }).start();
                     }
+
                     @Override
                     public void onFailure(Call<CreateReviewResponse> call, Throwable t) {
                         KatiDialog.showRetrofitFailDialog(getContext(), t.getMessage(), null);

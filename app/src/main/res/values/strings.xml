@@ -128,7 +128,7 @@
     <string name="userPageFragment_notice_text">공지시항</string>
     <string name="userPageFragment_setting_text">설정</string>
     <string name="userPageFragment_default_text">0</string>
-
+    <string name="userPageFragment_default_numOfFood">총 0개</string>
 
 </resources>
 

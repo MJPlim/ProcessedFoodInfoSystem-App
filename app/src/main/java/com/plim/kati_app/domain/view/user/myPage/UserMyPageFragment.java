@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,44 +14,27 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
-import com.plim.kati_app.constants.Constant_yun;
-import com.plim.kati_app.domain.model.FoodResponse;
-import com.plim.kati_app.domain.model.UserInfoResponse;
 import com.plim.kati_app.R;
-import com.plim.kati_app.constants.Constant;
 import com.plim.kati_app.domain.asset.KatiDialog;
-
-import com.plim.kati_app.domain.model.dto.AdvertisementResponse;
+import com.plim.kati_app.domain.model.UserInfoResponse;
+import com.plim.kati_app.domain.model.room.KatiData;
 import com.plim.kati_app.domain.model.room.KatiDatabase;
-import com.plim.kati_app.domain.view.MainActivity;
-import com.plim.kati_app.domain.view.rank.RankingActivity;
 import com.plim.kati_app.domain.view.user.changePW.ChangePasswordActivity;
 import com.plim.kati_app.domain.view.user.dataChange.UserDataChangeActivity;
-import com.plim.kati_app.domain.view.user.findPW.FindPasswordActivity;
 import com.plim.kati_app.domain.view.user.logOut.LogOutActivity;
 import com.plim.kati_app.domain.view.user.login.LoginActivity;
-import com.plim.kati_app.domain.view.user.register.RegisterActivity;
-import com.plim.kati_app.tech.RestAPI;
 import com.plim.kati_app.tech.RestAPIClient;
 
 import org.json.JSONObject;
 
-import java.util.List;
-import java.util.Vector;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE;
 import static com.plim.kati_app.constants.Constant_yun.LOG_OUT_ACTIVITY_FAILURE_DIALOG_TITLE;
-import static com.plim.kati_app.tech.RestAPIClient.getApiService2;
 
 /**
  * 마이페이지 프래그먼트.
@@ -79,10 +61,11 @@ public class UserMyPageFragment extends Fragment {
         new Thread(() -> {
             if (database.katiDataDao().getValue(KatiDatabase.AUTHORIZATION) == null) {
                 getActivity().runOnUiThread(() -> showNotLoginedDialog());
+            }else {
+                // 토큰값 저장
+                token = database.katiDataDao().getValue(KatiDatabase.AUTHORIZATION);
+                changeId();
             }
-            // 토큰값 저장
-            token=database.katiDataDao().getValue(KatiDatabase.AUTHORIZATION);
-            changeId();
         }).start();
     }
 
@@ -119,16 +102,21 @@ public class UserMyPageFragment extends Fragment {
                     case R.id.myPage_modifyUser:
                         moveToModifyUserActivity();
                         break;
-
+                    case R.id.myPage_review_num:
+                        Navigation.findNavController(view).navigate(R.id.action_myPageFragment_to_myPageReviewFragment);
+                        break;
+                    case R.id.myPage_favorite_num:
+                        Navigation.findNavController(view).navigate(R.id.action_myPageFragment_to_myPageFavoriteFragment);
+                        break;
                 }
             }
         };
-
+        this.reviewNum.setOnClickListener(onClickListener);
         this.logoutButton.setOnClickListener(onClickListener);
         this.changePasswordText.setOnClickListener(onClickListener);
         this.modifyUserText.setOnClickListener(onClickListener);
 
-
+        this.favoriteNum.setOnClickListener(onClickListener);
     }
 
     private void moveToLogOutActivity() {
@@ -184,12 +172,14 @@ public class UserMyPageFragment extends Fragment {
                     });
 
                 }
+new Thread(()-> database.katiDataDao().insert(new KatiData(KatiDatabase.AUTHORIZATION,response.headers().get(KatiDatabase.AUTHORIZATION))));
+
 
             }
 
             @Override
             public void onFailure(retrofit2.Call<UserInfoResponse> call, Throwable t) {
-
+                KatiDialog.showRetrofitFailDialog(getContext(),t.getMessage(),null);
             }
         };
         call.enqueue(callback);

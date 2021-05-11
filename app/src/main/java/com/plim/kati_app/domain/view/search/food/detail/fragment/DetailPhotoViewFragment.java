@@ -143,7 +143,7 @@ public class DetailPhotoViewFragment extends GetResultFragment {
                         new Thread(() -> {
                             String token = response.headers().get(KatiDatabase.AUTHORIZATION);
                             database.katiDataDao().insert(new KatiData(KatiDatabase.AUTHORIZATION, token));
-                            Log.d("좋아요 불러오기 토큰",token);
+//                            Log.d("좋아요 불러오기 토큰",token);
                         }).start();
 
                     }

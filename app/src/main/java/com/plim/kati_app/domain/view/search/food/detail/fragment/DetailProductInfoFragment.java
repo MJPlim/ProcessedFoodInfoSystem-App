@@ -177,7 +177,7 @@ public class DetailProductInfoFragment extends Fragment {
         intent.putExtra("foodId",item.getFoodId());
         intent.putExtra("image",item.getFoodImageAddress());
 
-        intent.putExtra("manufacturer",item.getManufacturerName());
+        intent.putExtra("manufacturer",item.getManufacturerName().split("_")[0]);
         intent.putExtra("product",item.getFoodName());
         intent.putExtra("value","");
 
@@ -219,10 +219,10 @@ public class DetailProductInfoFragment extends Fragment {
         //디테일 맵.
         HashMap<String, String> infoMap = new HashMap<>();
         infoMap.put(DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_PRODUCT_NAME, value.getFoodName());
-        infoMap.put(DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_MANUFACTURER_NAME, value.getManufacturerName());
+        infoMap.put(DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_MANUFACTURER_NAME, value.getManufacturerName().split("_")[0]);
         infoMap.put(DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_EXPIRATION_DATE, "-");
         HashMap<String, String> infoLink = new HashMap<>();
-        infoLink.put(DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_MANUFACTURER_NAME, "https://m.search.naver.com/search.naver?query=");
+        infoLink.put(DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_MANUFACTURER_NAME, "https://m.search.naver.com/search.naver?where=m_news&sm=mtb_jum&query=");
         Bundle infoBundle = new Bundle();
         infoBundle.putString(ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_NAME, DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_TABLE_NAME);
         infoBundle.putSerializable(ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_HASH_MAP, infoMap);
