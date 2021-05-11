@@ -59,6 +59,8 @@ public class UserReviewFragment  extends Fragment {
 
 
 
+
+
     // 서버에서 사용자 정보를 받아와서 이름을 바꿔주는 메서드
     private void getReviewFoods() {
         Call<UserInfoResponse> call = getApiService2(token).getUserInfo();
