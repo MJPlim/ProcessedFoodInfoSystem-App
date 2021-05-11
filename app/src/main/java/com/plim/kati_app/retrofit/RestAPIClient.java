@@ -18,24 +18,21 @@ public class RestAPIClient {
     private static final String BASE_URL = Constant.URL;
 
     public static RestAPI getApiService(){return RestAPIClient.getInstance().create(RestAPI.class);}
-
     private static Retrofit getInstance(){
         Gson gson = new GsonBuilder().create();
-        return new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create(gson)).build();
+        return new Retrofit.Builder().baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson)).build();
     }
 
-    public static RestAPI getApiService2(String token){return RestAPIClient.getInstance2(token).create(RestAPI.class);}
 
+    public static RestAPI getApiService2(String token){return RestAPIClient.getInstance2(token).create(RestAPI.class);}
     private static Retrofit getInstance2(String token){
         Gson gson = new GsonBuilder().create();
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Request newRequest  = chain.request().newBuilder()
-                        .addHeader("Authorization", token)
-                        .build();
-                return chain.proceed(newRequest);
-            }
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(chain -> {
+            Request newRequest  = chain.request().newBuilder()
+                    .addHeader("Authorization", token)
+                    .build();
+            return chain.proceed(newRequest);
         }).build();
         return new Retrofit.Builder()
                 .client(client)

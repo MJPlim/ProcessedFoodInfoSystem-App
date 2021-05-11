@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".domain2.view.searchFood.detail.NewDetailActivity">
+    tools:context=".domain2.view.main.search.detail.NewDetailActivity">
 
 
     <androidx.fragment.app.FragmentContainerView

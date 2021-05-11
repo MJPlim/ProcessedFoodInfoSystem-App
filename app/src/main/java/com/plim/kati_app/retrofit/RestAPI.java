@@ -1,17 +1,17 @@
 package com.plim.kati_app.retrofit;
 
-import com.plim.kati_app.retrofit.dto.ModifyPasswordRequest;
-import com.plim.kati_app.retrofit.dto.ModifyPasswordResponse;
-import com.plim.kati_app.retrofit.dto.FindPasswordRequest;
-import com.plim.kati_app.retrofit.dto.FindPasswordResponse;
-import com.plim.kati_app.retrofit.dto.FoodDetailResponse;
-import com.plim.kati_app.retrofit.dto.FoodResponse;
-import com.plim.kati_app.retrofit.dto.Password;
-import com.plim.kati_app.retrofit.dto.SignUpResponse;
-import com.plim.kati_app.retrofit.dto.User;
-import com.plim.kati_app.retrofit.dto.WithdrawResponse;
-import com.plim.kati_app.retrofit.dto.LoginRequest;
-import com.plim.kati_app.retrofit.dto.AdvertisementResponse;
+import com.plim.kati_app.domain2.model.forBackend.userAccount.ModifyPasswordRequest;
+import com.plim.kati_app.domain2.model.forBackend.userAccount.ModifyPasswordResponse;
+import com.plim.kati_app.domain2.model.forBackend.userAccount.FindPasswordRequest;
+import com.plim.kati_app.domain2.model.forBackend.userAccount.FindPasswordResponse;
+import com.plim.kati_app.domain2.model.forBackend.searchFood.FoodDetailResponse;
+import com.plim.kati_app.domain2.model.forBackend.searchFood.FoodResponse;
+import com.plim.kati_app.domain2.model.forBackend.userAccount.WithdrawRequest;
+import com.plim.kati_app.domain2.model.forBackend.userAccount.SignUpResponse;
+import com.plim.kati_app.domain2.model.forBackend.userAccount.SignUpRequest;
+import com.plim.kati_app.domain2.model.forBackend.userAccount.WithdrawResponse;
+import com.plim.kati_app.domain2.model.forBackend.userAccount.LoginRequest;
+import com.plim.kati_app.domain2.model.forBackend.searchFood.AdvertisementResponse;
 
 import java.util.List;
 
@@ -22,8 +22,8 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface RestAPI {
-    @POST("signup") Call<SignUpResponse> signUp(@Body User user);
-    @POST("withdraw") Call<WithdrawResponse> withdraw(@Body Password user);
+    @POST("signup") Call<SignUpResponse> signUp(@Body SignUpRequest signUpRequest);
+    @POST("withdraw") Call<WithdrawResponse> withdraw(@Body WithdrawRequest user);
     @POST("find-password") Call<FindPasswordResponse> findPassword(@Body FindPasswordRequest request);
     @POST("modify-password") Call<ModifyPasswordResponse> modifyPassword(@Body ModifyPasswordRequest request);
     @POST("login") Call<LoginRequest> login(@Body LoginRequest loginRequest);

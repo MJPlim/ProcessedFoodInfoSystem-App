@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".domain2.view.searchFood.detail.fragment.DetailReviewViewFragment">
+    tools:context=".domain2.view.main.search.detail.fragment.DetailReviewViewFragment">
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/reviewViewFragment_tabLayout"

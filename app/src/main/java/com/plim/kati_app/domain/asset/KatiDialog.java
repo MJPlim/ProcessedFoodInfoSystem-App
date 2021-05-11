@@ -1,19 +1,19 @@
 package com.plim.kati_app.domain.asset;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.text.Layout;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.AlignmentSpan;
 import android.text.style.StyleSpan;
-import android.view.View;
+
 import androidx.annotation.ColorInt;
+
 import com.plim.kati_app.R;
-import static android.os.Build.VERSION_CODES.R;
 
 
 public class KatiDialog extends AlertDialog.Builder{
@@ -51,5 +51,22 @@ public class KatiDialog extends AlertDialog.Builder{
         kDialog.setPositiveButton("확인", listener);
         kDialog.setColor(color);
         return kDialog;
+    }
+
+    public static void simplerAlertDialog(Activity activity, int titleId, int messageId, DialogInterface.OnClickListener listener){
+        KatiDialog kDialog= new KatiDialog(activity);
+        kDialog.setTitle(activity.getString(titleId));
+        kDialog.setMessage(activity.getString(messageId));
+        kDialog.setPositiveButton("확인", listener);
+        kDialog.setColor(activity.getResources().getColor(R.color.kati_coral, activity.getTheme()));
+        kDialog.showDialog();
+    }
+    public static void simplerAlertDialog(Activity activity,  String title, String message, DialogInterface.OnClickListener listener){
+        KatiDialog kDialog= new KatiDialog(activity);
+        kDialog.setTitle(title);
+        kDialog.setMessage(message);
+        kDialog.setPositiveButton("확인", listener);
+        kDialog.setColor(activity.getResources().getColor(R.color.kati_coral, activity.getTheme()));
+        kDialog.showDialog();
     }
 }

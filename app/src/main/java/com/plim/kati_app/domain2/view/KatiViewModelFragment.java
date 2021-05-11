@@ -2,15 +2,14 @@ package com.plim.kati_app.domain2.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.navigation.Navigation;
 
-import com.plim.kati_app.domain2.model.KatiEntityTool;
-import com.plim.kati_app.domain2.model.KatiEntity;
+import com.plim.kati_app.domain2.model.forFrontend.KatiEntityTool;
+import com.plim.kati_app.domain2.model.forFrontend.KatiEntity;
 import com.plim.kati_app.jshCrossDomain.domain.model.room.entity.JSHEntity;
 import com.plim.kati_app.jshCrossDomain.domain.view.JSHViewModelFragment;
 
