@@ -6,7 +6,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.plim.kati_app.R;
-import com.plim.kati_app.domain2.view.KatiViewModelFragment;
+import com.plim.kati_app.domain2.katiCrossDomain.domain.view.KatiViewModelFragment;
 
 public abstract class AbstractFragment2 extends KatiViewModelFragment {
 

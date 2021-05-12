@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".domain2.view.main.search.list.FoodSearchActivity">
+    tools:context=".domain2.view.search2.search.FoodSearchActivity">
 
 
     <fragment
-        android:id="@+id/fragment"
+        android:id="@+id/searchBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout="@layout/layout_food_search_field"
-        android:name="com.plim.kati_app.domain2.view.main.search.list.FoodSearchFieldFragment"/>
+        android:name="com.plim.kati_app.domain2.view.search2.search.searchBar.FoodSearchFieldFragment"/>
 
 
 
@@ -28,7 +28,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment"
+        app:layout_constraintTop_toBottomOf="@+id/searchBar"
 
         android:layout_margin="10dp"
         app:defaultNavHost="true"

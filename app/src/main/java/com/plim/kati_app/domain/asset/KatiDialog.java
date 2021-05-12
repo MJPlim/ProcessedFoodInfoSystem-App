@@ -12,6 +12,7 @@ import android.text.style.AlignmentSpan;
 import android.text.style.StyleSpan;
 
 import androidx.annotation.ColorInt;
+import androidx.fragment.app.FragmentActivity;
 
 import com.plim.kati_app.R;
 

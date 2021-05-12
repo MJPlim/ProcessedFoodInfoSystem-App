@@ -15,17 +15,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KATI_app"
         android:usesCleartextTraffic="true">
-        <activity android:name=".domain2.view.main.search.review.WriteReviewActivity"></activity>
-        <activity android:name=".domain2.view.main.search.detail.NewDetailActivity" />
+        <activity android:name=".domain2.view.search2.foodInfo.review.WriteReviewActivity"></activity>
+        <activity android:name=".domain2.view.search2.foodInfo.NewDetailActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAH63IC9w2B6lP4RYw05b7qAyNja8gOyjU" />
 
 
-        <activity android:name=".domain2.view.main.login.pwFind.FindPasswordActivity" />
+        <activity android:name=".domain2.view.login.pwFind.FindPasswordActivity" />
         <activity
-            android:name=".domain2.view.main.TempMainActivity"
+            android:name=".domain2.view.TempMainActivity"
             android:label="@string/title_activity_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,13 +33,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".domain2.view.main.search.list.FoodSearchActivity" />
-        <activity android:name=".domain2.view.main.temp.signOut.SignOutActivity" />
-        <activity android:name=".domain2.view.main.temp.TempActivity" />
-        <activity android:name=".domain2.view.main.login.signIn.SignInActivity" />
-        <activity android:name=".domain2.view.main.temp.logout.LogOutActivity" />
-        <activity android:name=".domain2.view.main.login.LoginActivity" />
-        <activity android:name=".domain2.view.main.changePW.ChangePasswordActivity" />
+        <activity android:name=".domain2.view.search2.search.FoodSearchActivity" />
+        <activity android:name=".domain2.view.temp.signOut.SignOutActivity" />
+        <activity android:name=".domain2.view.temp.TempActivity" />
+        <activity android:name=".domain2.view.login.signIn.SignInActivity" />
+        <activity android:name=".domain2.view.temp.logout.LogOutActivity" />
+        <activity android:name=".domain2.view.login.LoginActivity" />
+        <activity android:name=".domain2.view.changePW.ChangePasswordActivity" />
 
     </application>
 

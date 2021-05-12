@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".domain2.view.main.search.detail.DetailProductInfoFragment">
+    tools:context=".domain2.view.search2.foodInfo.DetailProductInfoFragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

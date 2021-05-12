@@ -5,10 +5,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import androidx.navigation.Navigation;
-
 import com.plim.kati_app.R;
-import com.plim.kati_app.domain2.view.KatiViewModelFragment;
+import com.plim.kati_app.domain2.katiCrossDomain.domain.view.KatiViewModelFragment;
 
 public abstract class AbstractFragment1 extends KatiViewModelFragment {
 
