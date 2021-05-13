@@ -16,7 +16,7 @@
         android:theme="@style/Theme.KATI_app"
         android:usesCleartextTraffic="true">
         <activity android:name=".domain2.view.search2.foodInfo.review.WriteReviewActivity"></activity>
-        <activity android:name=".domain2.view.search2.foodInfo.NewDetailActivity" />
+        <activity android:name=".domain2.view.search2.foodInfo.FoodInfoActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.plim.kati_app.R;
 
-public class NewDetailActivity extends AppCompatActivity {
+public class FoodInfoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

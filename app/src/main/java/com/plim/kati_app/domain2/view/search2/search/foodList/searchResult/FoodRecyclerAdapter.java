@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.plim.kati_app.R;
 import com.plim.kati_app.domain2.katiCrossDomain.domain.model.forBackend.searchFood.FoodResponse;
-import com.plim.kati_app.domain2.view.search2.foodInfo.NewDetailActivity;
+import com.plim.kati_app.domain2.view.search2.foodInfo.FoodInfoActivity;
 
 import java.util.Vector;
 
@@ -42,7 +42,7 @@ public class FoodRecyclerAdapter extends RecyclerView.Adapter<FoodViewHolder> {
 
     public void setItems(Vector<FoodResponse> items) { this.items=items; }
     private void startNewDetailActivity(Long foodId) {
-        Intent intent = new Intent(this.activity, NewDetailActivity.class);
+        Intent intent = new Intent(this.activity, FoodInfoActivity.class);
         intent.putExtra(NEW_DETAIL_ACTIVITY_EXTRA_FOOD_ID, foodId);
         intent.putExtra(NEW_DETAIL_ACTIVITY_EXTRA_IS_AD, false);
         this.activity.startActivity(intent);

@@ -8,11 +8,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.plim.kati_app.R;
 import com.plim.kati_app.domain.asset.KatiDialog;
-import com.plim.kati_app.domain2.katiCrossDomain.domain.view.KatiFoodFragment;
+import com.plim.kati_app.domain2.katiCrossDomain.domain.view.KatiSearchFragment;
 import com.plim.kati_app.domain2.view.search2.search.foodRecommand.ranking.FoodRankAdapter;
 import com.plim.kati_app.domain2.view.search2.search.foodRecommand.recentSearch.SearchHistoryAdapter;
 
-import java.util.Collections;
 import java.util.Vector;
 
 import static com.plim.kati_app.domain.constant.Constant_yun.SEARCH_WORD_DELETE_ALL_DIALOG_MESSAGE;
@@ -21,7 +20,7 @@ import static com.plim.kati_app.domain.constant.Constant_yun.SEARCH_WORD_DELETE_
 import static com.plim.kati_app.domain.constant.Constant_yun.SEARCH_WORD_DELETE_ONE_DIALOG_MESSAGE_TAIL;
 import static com.plim.kati_app.domain.constant.Constant_yun.SEARCH_WORD_DELETE_ONE_DIALOG_TITLE;
 
-public class FoodSearchRecommendationFragment extends KatiFoodFragment {
+public class SearchSearchRecommendationFragment extends KatiSearchFragment {
 
     //Associate
         //view
@@ -32,15 +31,10 @@ public class FoodSearchRecommendationFragment extends KatiFoodFragment {
         //adapter
         private SearchHistoryAdapter searchHistoryAdapter;
         private FoodRankAdapter foodRankAdapter;
-        private Vector<String> recentSearchedWords;
 
     /**
      * System Life Cycle Callback
      */
-    // Constructor
-    public FoodSearchRecommendationFragment() {
-        this.recentSearchedWords = new Vector<>();
-    }
     @Override
     protected int getLayoutId() { return R.layout.fragment_food_search_recommendation; }
     @Override
@@ -53,7 +47,7 @@ public class FoodSearchRecommendationFragment extends KatiFoodFragment {
     @Override
     protected void initializeView() {
         this.foodRankAdapter = new FoodRankAdapter(this.getDataSet());
-        this.searchHistoryAdapter = new SearchHistoryAdapter(this.recentSearchedWords,
+        this.searchHistoryAdapter = new SearchHistoryAdapter(this.searchWords,
                 v-> {this.showDeleteSearchedWordConfirm((String) v.getTag()); return true;});
         this.recentValueRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false));
         this.rankRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
@@ -62,19 +56,15 @@ public class FoodSearchRecommendationFragment extends KatiFoodFragment {
         this.deleteAllButton.setOnClickListener(v -> showDeleteSearchedWordConfirm());
     }
     @Override
-    protected void katiEntityUpdated() { }
-    @Override
-    public void onResume() { super.onResume(); this.loadRecentSearchedWords(); }
+    protected void katiEntityUpdated() { this.loadRecentSearchedWords(); }
 
     /**
      * Method
      */
     private void loadRecentSearchedWords() {
-        this.recentSearchedWords.clear();
-        this.recentSearchedWords.addAll(this.searchWords);
-        Collections.reverse(this.recentSearchedWords);
-        this.searchHistoryAdapter.setValueVector(this.recentSearchedWords);
-        int visibility = this.recentSearchedWords.size() == 0? View.INVISIBLE:View.VISIBLE;
+        this.searchHistoryAdapter.setValueVector(this.searchWords);
+        this.searchHistoryAdapter.notifyDataSetChanged();
+        int visibility = this.searchWords.size() == 0? View.INVISIBLE:View.VISIBLE;
         this.deleteAllButton.setVisibility(visibility);
         this.emptyWordTextView.setVisibility(visibility);
     }

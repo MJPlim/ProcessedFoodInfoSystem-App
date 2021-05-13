@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".domain2.view.search2.foodInfo.DetailProductInfoFragment">
+    tools:context=".domain2.view.search2.foodInfo.foodInfo.ProductInfoFragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -20,30 +20,30 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <androidx.fragment.app.FragmentContainerView
+            <fragment
                 android:id="@+id/newDetailActivity_detailPhotoViewFragment"
-                android:name="com.plim.kati_app.domain.view.search.food.detail.fragment.DetailPhotoViewFragment"
+                android:name="com.plim.kati_app.domain2.view.search2.foodInfo.foodInfo.DetailPhotoViewFragment"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:layout="@layout/fragment_detail_photo_view" >
 
-            </androidx.fragment.app.FragmentContainerView>
+            </fragment>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:background="@color/white" />
 
-            <androidx.fragment.app.FragmentContainerView
+            <fragment
                 android:id="@+id/detailProductInfoFragment_infoFragment"
-                android:name="com.plim.kati_app.domain.view.search.food.detail.fragment.DetailProductInfoTableFragment"
+                android:name="com.plim.kati_app.domain2.view.search2.foodInfo.foodInfo.DetailProductInfoTableFragment"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:layout="@layout/abstract_detail_table" >
 
-            </androidx.fragment.app.FragmentContainerView>
+            </fragment>
 
             <Button
                 android:id="@+id/detailProductInfoFragment_buyButton"
@@ -56,24 +56,23 @@
                 android:layout_height="50dp"
                 android:background="@color/white" />
 
-            <androidx.fragment.app.FragmentContainerView
+            <fragment
                 android:id="@+id/detailProductInfoFragment_materialFragment"
-                android:name="com.plim.kati_app.domain.view.search.food.detail.fragment.DetailProductMaterialTableFragment"
+                android:name="com.plim.kati_app.domain2.view.search2.foodInfo.foodInfo.DetailProductMaterialTableFragment"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:layout="@layout/abstract_detail_table"
                 />
 
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@color/white" />
 
-            <androidx.fragment.app.FragmentContainerView
+            <fragment
                 android:id="@+id/detailProductInfoFragment_reviewTableFragment"
-                android:name="com.plim.kati_app.domain.view.search.food.detail.fragment.DetailReviewStatisticsTableFragment"
+                android:name="com.plim.kati_app.domain2.view.search2.foodInfo.foodInfo.DetailReviewStatisticsTableFragment"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -86,9 +85,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/detailProductInfoFragment_writeReviewButton_text" />
 
-            <androidx.fragment.app.FragmentContainerView
+            <fragment
                 android:id="@+id/detailProductInfoFragment_reviewViewFragment"
-                android:name="com.plim.kati_app.domain.view.search.food.detail.fragment.DetailReviewViewFragment"
+                android:name="com.plim.kati_app.domain2.view.search2.foodInfo.foodInfo.DetailReviewViewFragment"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

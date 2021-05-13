@@ -5,10 +5,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
-import com.plim.kati_app.R;
-import com.plim.kati_app.domain2.katiCrossDomain.domain.view.KatiFoodFragment;
+import androidx.navigation.Navigation;
 
-public class FoodSearchFieldFragment extends KatiFoodFragment {
+import com.plim.kati_app.R;
+import com.plim.kati_app.domain2.katiCrossDomain.domain.view.KatiSearchFragment;
+
+public class SearchSearchFieldFragment extends KatiSearchFragment {
 
     // Associate
         // view
@@ -40,9 +42,11 @@ public class FoodSearchFieldFragment extends KatiFoodFragment {
      */
     private void searchStart() {
         this.searchWords.add(this.searchEditText.getText().toString());
-        this.foodModel.setSearchPageNum(Integer.toString(1));
-        this.foodModel.setSearchMode(this.searchModeSpinner.getSelectedItem().toString());
-        this.foodModel.setSearchText(this.searchEditText.getText().toString().replaceAll("[ ]", "_"));
-        this.navigateTo(R.id.action_foodSearchRecommendationFragment_to_foodSearchResultListFragment);
+        this.searchModel.setSearchPageNum(Integer.toString(1));
+        this.searchModel.setSearchMode(this.searchModeSpinner.getSelectedItem().toString());
+        this.searchModel.setSearchText(this.searchEditText.getText().toString().replaceAll("[ ]", "_"));
+
+        Navigation.findNavController(this.getActivity().getCurrentFocus().getRootView().findViewById(R.id.nav_search_fragment))
+                .navigate(R.id.action_foodSearchRecommendationFragment_to_foodSearchResultListFragment);
     }
 }

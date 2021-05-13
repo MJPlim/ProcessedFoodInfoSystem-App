@@ -11,7 +11,7 @@ import com.plim.kati_app.domain.asset.LoadingDialog;
 import com.plim.kati_app.domain.constant.Constant_yun;
 import com.plim.kati_app.domain2.katiCrossDomain.domain.model.forBackend.searchFood.AdvertisementResponse;
 import com.plim.kati_app.domain2.katiCrossDomain.domain.model.forBackend.searchFood.FoodResponse;
-import com.plim.kati_app.domain2.katiCrossDomain.domain.view.KatiFoodFragment;
+import com.plim.kati_app.domain2.katiCrossDomain.domain.view.KatiSearchFragment;
 import com.plim.kati_app.domain2.katiCrossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.domain2.view.search.list.adapter.FoodInfoRecyclerViewAdapter;
 import com.plim.kati_app.domain2.view.search2.search.foodList.advertisement.AdRecyclerAdapter;
@@ -26,7 +26,7 @@ import retrofit2.Response;
 
 import static com.plim.kati_app.domain.constant.Constant_yun.FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE;
 
-public class FoodSearchResultListFragment extends KatiFoodFragment {
+public class SearchSearchResultListFragment extends KatiSearchFragment {
 
     // Associate
         // View
@@ -69,10 +69,10 @@ public class FoodSearchResultListFragment extends KatiFoodFragment {
     }
     private void loadSearchResult() {
         dialog.show();
-        if (this.foodModel.getSearchMode().equals(Constant_yun.ESearchMode.제품.name())) {
-            KatiRetrofitTool.getAPI().getSearchResultByFoodName(this.foodModel.getSearchText()).enqueue(JSHRetrofitTool.getCallback(new SearchRequestCallback()));
+        if (this.searchModel.getSearchMode().equals(Constant_yun.ESearchMode.제품.name())) {
+            KatiRetrofitTool.getAPI().getSearchResultByFoodName(this.searchModel.getSearchText()).enqueue(JSHRetrofitTool.getCallback(new SearchRequestCallback()));
         } else {
-            KatiRetrofitTool.getAPI().getSearchResultByCompanyName(this.foodModel.getSearchText()).enqueue(JSHRetrofitTool.getCallback(new SearchRequestCallback()));
+            KatiRetrofitTool.getAPI().getSearchResultByCompanyName(this.searchModel.getSearchText()).enqueue(JSHRetrofitTool.getCallback(new SearchRequestCallback()));
         }
     }
 

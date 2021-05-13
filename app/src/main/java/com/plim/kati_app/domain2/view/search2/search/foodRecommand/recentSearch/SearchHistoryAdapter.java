@@ -8,17 +8,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.plim.kati_app.R;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 public class SearchHistoryAdapter extends RecyclerView.Adapter<RecentViewHolder> {
 
     // Associate
         // Model
-        private Vector<String> values;
+        private ArrayList<String> values;
         private View.OnLongClickListener onLongClickListener;
 
     // Constructor
-    public SearchHistoryAdapter(Vector<String> values, View.OnLongClickListener onLongClickListener) {
+    public SearchHistoryAdapter(ArrayList<String> values, View.OnLongClickListener onLongClickListener) {
         this.values = values;
         this.onLongClickListener = onLongClickListener;
     }
@@ -33,7 +34,7 @@ public class SearchHistoryAdapter extends RecyclerView.Adapter<RecentViewHolder>
     @Override
     public int getItemCount() { return this.values.size(); }
 
-    public void setValueVector(Vector<String> recentSearchedWords) {
+    public void setValueVector(ArrayList<String> recentSearchedWords) {
         this.values = recentSearchedWords;
         this.notifyDataSetChanged();
     }

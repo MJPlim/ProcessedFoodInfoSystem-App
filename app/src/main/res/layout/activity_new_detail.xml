@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".domain2.view.search2.foodInfo.NewDetailActivity">
+    tools:context=".domain2.view.search2.foodInfo.FoodInfoActivity">
 
 
     <androidx.fragment.app.FragmentContainerView
@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout="@layout/fragment_detail_product_info"
-        android:name="com.plim.kati_app.domain.view.search.food.detail.fragment.DetailProductInfoFragment">
+        android:name="com.plim.kati_app.domain2.view.search2.foodInfo.foodInfo.ProductInfoFragment">
     </androidx.fragment.app.FragmentContainerView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

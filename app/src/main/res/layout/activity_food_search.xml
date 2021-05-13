@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout="@layout/layout_food_search_field"
-        android:name="com.plim.kati_app.domain2.view.search2.search.searchBar.FoodSearchFieldFragment"/>
+        android:name="com.plim.kati_app.domain2.view.search2.search.searchBar.SearchSearchFieldFragment"/>
 
 
 
