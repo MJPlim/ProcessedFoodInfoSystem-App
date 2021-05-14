@@ -108,7 +108,7 @@ public class ReviewWriteFragment extends Fragment {
         this.reviewValue.setText(intent.getStringExtra("value"));
         this.foodId = intent.getLongExtra("foodId", 0L);
         this.reviewId = intent.getLongExtra("reviewId", 0L);
-        float tempScore = intent.getFloatExtra("score", 0f);
+        int tempScore = intent.getIntExtra("score", 0);
 
         Log.d("디버그",tempScore+"");
         if (tempScore == 1f) {
@@ -196,6 +196,7 @@ public class ReviewWriteFragment extends Fragment {
             }
 
             if (reviewId == 0L) {
+                Log.d("새로작성","댓글");
                 CreateReviewRequest request = new CreateReviewRequest();
                 request.setFoodId(this.foodId);
                 request.setReviewDescription(this.reviewValue.getText().toString());
@@ -231,6 +232,7 @@ public class ReviewWriteFragment extends Fragment {
                     }
                 });
             } else {
+                Log.d("업데이트","댓글");
                 UpdateReviewRequest request = new UpdateReviewRequest();
                 request.setReviewDescription(this.reviewValue.getText().toString());
                 request.setReviewRating(this.score);

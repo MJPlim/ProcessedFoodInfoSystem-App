@@ -20,6 +20,7 @@ import com.plim.kati_app.domain.model.dto.FindFoodByBarcodeRequest;
 
 import com.plim.kati_app.domain.model.UserInfoResponse;
 
+import com.plim.kati_app.domain.model.dto.FindFoodBySortingResponse;
 import com.plim.kati_app.domain.model.dto.FoodDetailResponse;
 import com.plim.kati_app.domain.model.FoodResponse;
 import com.plim.kati_app.domain.model.Password;
@@ -73,11 +74,21 @@ public interface RestAPI {
     @POST("login")
     Call<LoginRequest> postRetrofitData(@Body LoginRequest loginRequest);
 
-    @GET("/api/v1/food/findFood/foodName")
-    Call<List<FoodResponse>> getFoodListByProductName(@Query("foodName") String foodName);
+//    @GET("/api/v1/food/findFood/foodName")
+//    Call<List<FoodResponse>> getFoodListByProductName(@Query("foodName") String foodName);
+//    @GET("/api/v1/food/findFood/manufacturerName")
+//    Call<List<FoodResponse>> getFoodListByCompanyName(@Query("manufacturerName") String manufacturerName);
 
-    @GET("/api/v1/food/findFood/manufacturerName")
-    Call<List<FoodResponse>> getFoodListByCompanyName(@Query("manufacturerName") String manufacturerName);
+    @GET("/api/v1/food/getFoodListBySorting")
+    Call<FindFoodBySortingResponse> getNameFoodListBySorting(@Query("pageNo")int pageNo,
+                                                         @Query("size")int size,
+                                                         @Query("sort")String sortElement,
+                                                         @Query("foodName")String foodName);
+    @GET("/api/v1/food/getFoodListBySorting")
+    Call<FindFoodBySortingResponse> getManufacturerFoodListBySorting(@Query("pageNo")int pageNo,
+                                                         @Query("size")int size,
+                                                         @Query("sort")String sortElement,
+                                                         @Query("manufacturerName")String manufacturerName);
 
     @GET("/api/v1/food/findFood/foodDetail")
     Call<FoodDetailResponse> getFoodDetailByFoodId(@Query("foodId") Long foodId);

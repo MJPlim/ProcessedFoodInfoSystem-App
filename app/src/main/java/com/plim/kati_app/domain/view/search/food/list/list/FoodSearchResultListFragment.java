@@ -27,10 +27,12 @@ import com.plim.kati_app.domain.asset.KatiDialog;
 import com.plim.kati_app.domain.asset.LoadingDialog;
 import com.plim.kati_app.domain.model.FoodResponse;
 import com.plim.kati_app.domain.model.dto.AdvertisementResponse;
+import com.plim.kati_app.domain.model.dto.FindFoodBySortingResponse;
 import com.plim.kati_app.domain.view.search.food.detail.NewDetailActivity;
 import com.plim.kati_app.domain.view.search.food.list.adapter.FoodInfoRecyclerViewAdapter;
 //import com.plim.kati_app.tech.GlideApp;
 import com.plim.kati_app.tech.RestAPI;
+import com.plim.kati_app.tech.RestAPIClient;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -46,6 +48,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_INDEX;
 import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_KEY;
 import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_MODE;
+import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_SORT;
 import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_TEXT;
 import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE;
 import static com.plim.kati_app.constants.Constant_yun.NEW_DETAIL_ACTIVITY_EXTRA_FOOD_ID;
@@ -59,6 +62,7 @@ public class FoodSearchResultListFragment extends Fragment {
 
     private String foodSearchMode;
     private String foodSearchText;
+    private String foodSortElement;
 
     //음식 리스트
     private RecyclerView adFoodInfoRecyclerView;
@@ -67,6 +71,8 @@ public class FoodSearchResultListFragment extends Fragment {
 
     private RecyclerAdapter recyclerAdapter;
     private AdRecyclerAdapter adRecyclerAdapter;
+    private int pageNum = 1;
+    private int pageSize = 10;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -84,8 +90,6 @@ public class FoodSearchResultListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // Associate View
-
-
         this.adFoodInfoRecyclerView = view.findViewById(R.id.searchFragment_adFoodInfoRecyclerView);
         this.foodInfoRecyclerView = view.findViewById(R.id.searchFragment_foodInfoRecyclerView);
 
@@ -103,21 +107,27 @@ public class FoodSearchResultListFragment extends Fragment {
         this.getActivity().getSupportFragmentManager().setFragmentResultListener(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_KEY, getActivity(), new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                set(Integer.parseInt(result.getString(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_INDEX)), result.getString(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_MODE), result.getString(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_TEXT));
+
+                int pageNum=result.getInt(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_INDEX);
+                String sort=result.getString(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_SORT);
+                String mode=result.getString(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_MODE);
+                String text=result.getString(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_TEXT);
+//                Log.d("디버그",sort+" 널");
+                set(pageNum, sort, mode, text);
             }
         });
     }
 
-    /**
-     * 검색을 위한 정보를 넣고 시작.
-     *
-     * @param index 페이지 번호
-     * @param mode  회사 혹은 제품
-     * @param text  검색어
-     */
-    public void set(int index, String mode, String text) {
-        foodSearchMode = mode;
-        foodSearchText = text;
+    public void set(int pageNum, String foodSortElement, String mode, String text) {
+        if(pageNum!=0)this.pageNum = pageNum;
+        if(foodSortElement!=null)this.foodSortElement = foodSortElement;
+        if(mode!=null)this.foodSearchMode = mode;
+        if(text!=null)this.foodSearchText = text;
+        
+        Log.d("디버그 세팅","페이지 번호: "+this.pageNum);
+        Log.d("디버그 세팅","정렬: "+this.foodSortElement);
+        Log.d("디버그 세팅","검색모드: "+this.foodSearchMode);
+        Log.d("디버그 세팅","검색 텍스트: "+this.foodSearchText);
         Thread thread = new Thread(() -> {
             this.search();
             this.ad();
@@ -129,40 +139,28 @@ public class FoodSearchResultListFragment extends Fragment {
      * 광고 불러오기.
      */
     private void ad() {
-        Retrofit retrofit2 = new Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(Constant.URL)
-                .build();
-        RestAPI service2 = retrofit2.create(RestAPI.class);
-        Call<List<AdvertisementResponse>> adListCall;
-        adListCall = service2.getAdFoodList();
-
+        Call<List<AdvertisementResponse>> adListCall = RestAPIClient.getApiService().getAdFoodList();
         adListCall.enqueue(new Callback<List<AdvertisementResponse>>() {
             @Override
             public void onResponse(Call<List<AdvertisementResponse>> call, Response<List<AdvertisementResponse>> response) {
-                Vector<AdvertisementResponse> items = new Vector<>(response.body());
-//                new Thread(() ->
-//                        database.katiDataDao().insert(new KatiData(KatiDatabase.AUTHORIZATION, response.headers().get(KatiDatabase.AUTHORIZATION)))).start();
-                getActivity().runOnUiThread(() -> {
-//                    dialog.hide();
-                    Log.d("광고 디버그", "리스폰스 받음");
-                    adRecyclerAdapter.setItems(items);
-                    adFoodInfoRecyclerView.setAdapter(adRecyclerAdapter);
-                });
-
+                if (!response.isSuccessful()) {
+                    KatiDialog.showRetrofitNotSuccessDialog(getContext(), response.code() + "", null);
+                } else {
+                    Vector<AdvertisementResponse> items = new Vector<>(response.body());
+                    getActivity().runOnUiThread(() -> {
+                        Log.d("광고 디버그", "리스폰스 받음");
+                        adRecyclerAdapter.setItems(items);
+                        adFoodInfoRecyclerView.setAdapter(adRecyclerAdapter);
+                    });
+                }
             }
 
             @Override
             public void onFailure(Call<List<AdvertisementResponse>> call, Throwable t) {
                 getActivity().runOnUiThread(() -> {
                     dialog.hide();
-                    Log.d("광고 디버그", "실패" + t.getMessage());
                 });
-                KatiDialog.simpleAlertDialog(getContext(),
-                        FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE,
-                        t.getMessage(), null,
-                        getContext().getResources().getColor(R.color.kati_coral, getContext().getTheme())
-                ).showDialog();
+                KatiDialog.showRetrofitFailDialog(getContext(), t.getMessage(), null);
             }
         });
     }
@@ -192,45 +190,36 @@ public class FoodSearchResultListFragment extends Fragment {
             dialog.show();
         });
 
-
-//        KatiDatabase database = KatiDatabase.getAppDatabase(getContext());
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(Constant.URL)
-                .build();
-        RestAPI service = retrofit.create(RestAPI.class);
-        Call<List<FoodResponse>> listCall;
+        RestAPI service = RestAPIClient.getApiService();
+        Call<FindFoodBySortingResponse> listCall;
         if (foodSearchMode.equals(Constant_yun.ESearchMode.제품.name())) {
-            listCall = service.getFoodListByProductName(foodSearchText);
+            listCall = service.getNameFoodListBySorting(this.pageNum, this.pageSize, this.foodSortElement, foodSearchText);
         } else {
-            listCall = service.getFoodListByCompanyName(foodSearchText);
+            listCall = service.getManufacturerFoodListBySorting(this.pageNum, this.pageSize, this.foodSortElement, foodSearchText);
         }
 
-        listCall.enqueue(new Callback<List<FoodResponse>>() {
+        listCall.enqueue(new Callback<FindFoodBySortingResponse>() {
             @Override
-            public void onResponse(Call<List<FoodResponse>> call, Response<List<FoodResponse>> response) {
-                Vector<FoodResponse> items = new Vector<>(response.body());
-//                new Thread(() ->
-//                        database.katiDataDao().insert(new KatiData(KatiDatabase.AUTHORIZATION, response.headers().get(KatiDatabase.AUTHORIZATION)))).start();
-                getActivity().runOnUiThread(() -> {
-                    dialog.hide();
-                    recyclerAdapter.setItems(items);
-                    foodInfoRecyclerView.setAdapter(recyclerAdapter);
-                });
-
+            public void onResponse(Call<FindFoodBySortingResponse> call, Response<FindFoodBySortingResponse> response) {
+                if (!response.isSuccessful()) {
+                    getActivity().runOnUiThread(() -> dialog.hide());
+                    KatiDialog.showRetrofitNotSuccessDialog(getContext(), response.code() + "", null);
+                } else {
+                    Vector<FoodResponse> items = new Vector<>(response.body().getResultList());
+                    getActivity().runOnUiThread(() -> {
+                        dialog.hide();
+                        recyclerAdapter.setItems(items);
+                        foodInfoRecyclerView.setAdapter(recyclerAdapter);
+                    });
+                }
             }
 
             @Override
-            public void onFailure(Call<List<FoodResponse>> call, Throwable t) {
+            public void onFailure(Call<FindFoodBySortingResponse> call, Throwable t) {
                 getActivity().runOnUiThread(() -> {
                     dialog.hide();
                 });
-                KatiDialog.simpleAlertDialog(getContext(),
-                        FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE,
-                        t.getMessage(), null,
-                        getContext().getResources().getColor(R.color.kati_coral, getContext().getTheme())
-                ).showDialog();
+                KatiDialog.showRetrofitFailDialog(getContext(), t.getMessage(), null);
             }
         });
 
@@ -298,7 +287,7 @@ public class FoodSearchResultListFragment extends Fragment {
                 this.productName = itemView.findViewById(R.id.foodItem_productName);
                 this.companyName = itemView.findViewById(R.id.foodItem_companyName);
                 this.imageView = itemView.findViewById(R.id.foodItem_foodImageView);
-                this.favorite=itemView.findViewById(R.id.foodItem_favoriteImageView);
+                this.favorite = itemView.findViewById(R.id.foodItem_favoriteImageView);
                 this.favorite.setVisibility(View.GONE);
                 itemView.setOnClickListener(v -> {
                     intentAdPage(items.get(this.getAdapterPosition()).getId());
@@ -386,7 +375,7 @@ public class FoodSearchResultListFragment extends Fragment {
                 this.productName = itemView.findViewById(R.id.foodItem_productName);
                 this.companyName = itemView.findViewById(R.id.foodItem_companyName);
                 this.imageView = itemView.findViewById(R.id.foodItem_foodImageView);
-                this.favorite=itemView.findViewById(R.id.foodItem_favoriteImageView);
+                this.favorite = itemView.findViewById(R.id.foodItem_favoriteImageView);
                 this.favorite.setVisibility(View.GONE);
                 itemView.setOnClickListener(v -> {
                     intentDetailPage(items.get(this.getAdapterPosition()).getFoodId());
@@ -404,7 +393,6 @@ public class FoodSearchResultListFragment extends Fragment {
 
                 this.imageView.setOnClickListener(v -> {
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(imageAddress));
-
                     startActivity(intent);
                 });
 

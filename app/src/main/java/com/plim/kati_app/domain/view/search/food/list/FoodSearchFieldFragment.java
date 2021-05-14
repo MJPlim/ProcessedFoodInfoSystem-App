@@ -150,7 +150,7 @@ public class FoodSearchFieldFragment extends Fragment {
         }).start();
 
         Bundle result = new Bundle();
-        result.putString(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_INDEX,1+"");
+        result.putInt(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_INDEX,1);
         result.putString(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_MODE,searchModeSpinner.getSelectedItem().toString());
         result.putString(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_TEXT,this.searchEditText.getText().toString().replaceAll("[ ]", "_"));
         this.getParentFragmentManager().setFragmentResult(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_KEY,result);

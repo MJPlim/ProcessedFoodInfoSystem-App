@@ -4,8 +4,20 @@ import java.util.Vector;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 public class Constant_yun {
+
+    @Getter
+    @RequiredArgsConstructor
+    public enum SortElement {
+
+        RANK("ranking"),
+        MANUFACTURER("manufacturer"),
+        REVIEW_COUNT("reviewCount");
+
+        private final String message;
+    }
 
     public static final String KATI_DIALOG_CONFIRM = "확인";
     public static final String KATI_DIALOG_CANCEL = "취소";
@@ -66,6 +78,7 @@ public class Constant_yun {
     //foodSearchFieldFragment
     public static final String FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_KEY = "result";
     public static final String FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_INDEX = "index";
+    public static final String FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_SORT = "sort";
     public static final String FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_MODE = "mode";
     public static final String FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_TEXT = "text";
 

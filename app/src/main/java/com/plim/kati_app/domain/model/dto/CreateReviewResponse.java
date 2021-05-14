@@ -6,5 +6,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class CreateReviewResponse {
-    private String message;
+    private Long foodId;
+    private Integer reviewRating;
+    private String reviewDescription;
 }

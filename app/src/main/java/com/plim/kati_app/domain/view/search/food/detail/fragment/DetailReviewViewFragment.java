@@ -253,10 +253,10 @@ KatiDialog.showRetrofitFailDialog(getContext(),t.getMessage(),null);
 
                             ReadReviewDto reviewDto = response.body();
 
-                            int findReviewCount = reviewDto.getReviewCount().getFindReviewCount();
+                            int findReviewCount = reviewDto.getReadSummaryResponse().getReviewCount();
                             reviewTotalCount.setText("리뷰 총 " + findReviewCount + "개");
 
-                            int findReviewPageCount = reviewDto.getReviewCount().getFindReviewPageCount();
+                            int findReviewPageCount = reviewDto.getReadSummaryResponse().getReviewPageCount();
                             pageNum.setText(currentPageNum + "/" + findReviewPageCount);
 
                             prevPageButton.setEnabled(currentPageNum <= 1 ? false : true);

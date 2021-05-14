@@ -1,30 +1,31 @@
 package com.plim.kati_app.domain.view.search.food.list.setting;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-
+import com.google.android.material.chip.Chip;
 import com.google.android.material.tabs.TabLayout;
 import com.plim.kati_app.R;
 import com.plim.kati_app.constants.Constant_yun;
 import com.plim.kati_app.domain.asset.BlankFragment;
-import com.plim.kati_app.domain.view.search.food.list.adapter.SortButtonRecyclerViewAdapter;
-import com.plim.kati_app.domain.view.search.food.list.setting.AllergyViewFragment;
-import com.plim.kati_app.domain.view.search.food.list.setting.FoodCategoryDetailListFragment;
-import com.plim.kati_app.domain.view.search.food.list.setting.FoodSearchSortMenuFragment;
 
 import java.util.Vector;
+
+import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_INDEX;
+import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_KEY;
+import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_MODE;
+import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_SORT;
 
 
 public class SearchSettingFragment extends Fragment {
@@ -38,19 +39,19 @@ public class SearchSettingFragment extends Fragment {
     // Associate
     // View
     //카테고리를 선택.
-    private RecyclerView sortButtonsRecyclerView;
     private TabLayout categoryTabLayout;
     //알레르기 필터링
     private ImageView allergyImageView;
     private TextView allergyTextView;
 
+    private Constant_yun.SortElement sortElement;
+
+    private Chip rankChip, manufacturerChip, reviewChip;
 
     //component
     private Vector<Fragment> categoryViewFragmentVector;
     private Fragment allergyViewFragment;
     private BlankFragment blankFragment;
-
-
 
 
     public SearchSettingFragment() {
@@ -72,8 +73,41 @@ public class SearchSettingFragment extends Fragment {
         // Associate View
         this.allergyImageView = view.findViewById(R.id.searchFragment_allergyImageView);
         this.allergyTextView = view.findViewById(R.id.searchFragment_allergyTextView);
-        this.sortButtonsRecyclerView = view.findViewById(R.id.searchFragment_sortButtonRecyclerView);
         this.categoryTabLayout = view.findViewById(R.id.searchFragment_tabLayout);
+
+        this.manufacturerChip = view.findViewById(R.id.searchSettingFragment_manufacturerChip);
+        this.rankChip = view.findViewById(R.id.searchSettingFragment_rankingChip);
+        this.reviewChip = view.findViewById(R.id.searchSettingFragment_reviewChip);
+
+        this.manufacturerChip.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            boolean flag =buttonView.getId()==R.id.searchSettingFragment_manufacturerChip;
+            Log.d("디버그",flag+"");
+            if (isChecked) {
+            Log.d("디버그", "회사 클릭");
+            this.sortElement = Constant_yun.SortElement.MANUFACTURER;
+            Bundle bundle = new Bundle();
+            bundle.putString(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_SORT, this.sortElement.getMessage());
+            this.getActivity().getSupportFragmentManager().setFragmentResult(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_KEY, bundle);
+        }});
+        this.rankChip.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                    if (isChecked) {
+                        Log.d("디버그", "랭크 클릭");
+                        this.sortElement = Constant_yun.SortElement.RANK;
+                        Bundle bundle = new Bundle();
+                        bundle.putString(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_SORT, this.sortElement.getMessage());
+                        this.getActivity().getSupportFragmentManager().setFragmentResult(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_KEY, bundle);
+                    }
+                }
+        );
+        this.reviewChip.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                Log.d("디버그", "리뷰 클릭");
+                this.sortElement = Constant_yun.SortElement.REVIEW_COUNT;
+                Bundle bundle = new Bundle();
+                bundle.putString(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_SORT, this.sortElement.getMessage());
+                this.getActivity().getSupportFragmentManager().setFragmentResult(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_KEY, bundle);
+            } });
+
 
         // Set View Attribute
         //enum 값을 바탕으로 카테고리 구성하기.
@@ -107,9 +141,7 @@ public class SearchSettingFragment extends Fragment {
             }
         });
 
-
-        Vector<String> data = this.getData();
-        this.allergyViewFragment = new AllergyViewFragment(data);
+        this.allergyViewFragment = new AllergyViewFragment(this.getData());
         this.blankFragment = new BlankFragment();
         this.allergyTextView.setOnClickListener(v -> {
             this.showAllergy = !showAllergy;
@@ -122,33 +154,18 @@ public class SearchSettingFragment extends Fragment {
         this.allergyImageView.setOnClickListener((v) -> {
             setColor();
         });
-
         this.setColor();
-        this.sortButtonsRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false));
-        val.clear();
-        for (Constant_yun.ESortModeBig mode : Constant_yun.ESortModeBig.values())
-            val.add(mode.getName());
-
-        this.sortButtonsRecyclerView.setAdapter(new SortButtonRecyclerViewAdapter(val, new myListener()));
 
 
     }
 
 
-    /**
-     * 알러지 필터 버튼 눌렀을 때 색 변경하는 메소드.
-     */
     public void setColor() {
         int newTint = this.isFiltered ? R.color.kati_red : R.color.kati_yellow;
         this.isFiltered = !isFiltered;
         this.allergyImageView.setColorFilter(ContextCompat.getColor(getContext(), newTint), android.graphics.PorterDuff.Mode.SRC_IN);
     }
 
-    /**
-     * 설정된 알러지 필터 목록을 불러온다.
-     *
-     * @return 알러지 필터로 된 벡터.
-     */
     private Vector<String> getData() {
         Vector<String> data = new Vector<>();
         //임시. 실제로는 저장 값 가져온다.
@@ -160,39 +177,28 @@ public class SearchSettingFragment extends Fragment {
     }
 
 
-
-
-
-
-    /**
-     * 알레르기 필터 레이아웃을 교체하는 리스너.
-     */
-    private class myListener implements View.OnClickListener {
-
-        private boolean show;
-        private Fragment menuFragment, blankFragment;
-
-        public myListener() {
-            this.menuFragment = new FoodSearchSortMenuFragment();
-            this.blankFragment = new BlankFragment();
-        }
-
-        @Override
-        public void onClick(View v) {
-            this.show = !show;
-            if (show)
-                getChildFragmentManager().beginTransaction().replace(R.id.searchFragment_sortFrameLayout, menuFragment).commit();
-            else
-                getChildFragmentManager().beginTransaction().replace(R.id.searchFragment_sortFrameLayout, blankFragment).commit();
-        }
-    }
-
-
-
-
-
-
-
+//    /**
+//     * 알레르기 필터 레이아웃을 교체하는 리스너.
+//     */
+//    private class myListener implements View.OnClickListener {
+//
+//        private boolean show;
+//        private Fragment menuFragment, blankFragment;
+//
+//        public myListener() {
+//            this.menuFragment = new FoodSearchSortMenuFragment();
+//            this.blankFragment = new BlankFragment();
+//        }
+//
+//        @Override
+//        public void onClick(View v) {
+//            this.show = !show;
+//            if (show)
+//                getChildFragmentManager().beginTransaction().replace(R.id.searchFragment_sortFrameLayout, menuFragment).commit();
+//            else
+//                getChildFragmentManager().beginTransaction().replace(R.id.searchFragment_sortFrameLayout, blankFragment).commit();
+//        }
+//    }
 
 
 }
