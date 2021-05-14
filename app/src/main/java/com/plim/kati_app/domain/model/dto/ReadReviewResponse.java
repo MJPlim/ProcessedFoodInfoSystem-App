@@ -19,6 +19,7 @@ public class ReadReviewResponse {
     private boolean userCheck;
     private boolean userLikeCheck;
     private Integer likeCount;
+    private String foodName;
 
     public enum ReviewStateType {
         NORMAL, DELETED

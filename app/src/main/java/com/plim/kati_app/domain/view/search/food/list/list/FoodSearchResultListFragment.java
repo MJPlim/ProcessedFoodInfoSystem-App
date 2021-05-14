@@ -280,15 +280,14 @@ public class FoodSearchResultListFragment extends Fragment {
             private ImageView imageView;
             private TextView productName, companyName;
             private String imageAddress;
-            private ImageView favorite;
+
 
             public AdRecyclerViewViewHolder(@NonNull View itemView) {
                 super(itemView);
                 this.productName = itemView.findViewById(R.id.foodItem_productName);
                 this.companyName = itemView.findViewById(R.id.foodItem_companyName);
                 this.imageView = itemView.findViewById(R.id.foodItem_foodImageView);
-                this.favorite = itemView.findViewById(R.id.foodItem_favoriteImageView);
-                this.favorite.setVisibility(View.GONE);
+
                 itemView.setOnClickListener(v -> {
                     intentAdPage(items.get(this.getAdapterPosition()).getId());
                 });
@@ -368,15 +367,13 @@ public class FoodSearchResultListFragment extends Fragment {
             private ImageView imageView;
             private TextView productName, companyName;
             private String imageAddress;
-            private ImageView favorite;
+
 
             public RecyclerViewViewHolder(@NonNull View itemView) {
                 super(itemView);
                 this.productName = itemView.findViewById(R.id.foodItem_productName);
                 this.companyName = itemView.findViewById(R.id.foodItem_companyName);
                 this.imageView = itemView.findViewById(R.id.foodItem_foodImageView);
-                this.favorite = itemView.findViewById(R.id.foodItem_favoriteImageView);
-                this.favorite.setVisibility(View.GONE);
                 itemView.setOnClickListener(v -> {
                     intentDetailPage(items.get(this.getAdapterPosition()).getFoodId());
                 });

@@ -44,28 +44,15 @@ public class FoodInfoRecyclerViewAdapter extends RecyclerView.Adapter {
      */
     private class FoodInfoViewHolder extends RecyclerView.ViewHolder {
 
-        // Working Variable
-        private boolean favorite = false;
 
-        // Associate
         // View
-        private ImageView favoriteImageView;
+
 
         @SuppressLint("ResourceAsColor")
         public FoodInfoViewHolder(View itemView) {
             super(itemView);
 
-            // Associate View
-            this.favoriteImageView = itemView.findViewById(R.id.foodItem_favoriteImageView);
 
-            // Set View Callback
-            this.favoriteImageView.setOnClickListener(v -> {
-                this.favorite = !this.favorite;
-                int newImageId = this.favorite ? R.drawable.ic_baseline_favorite_24 : R.drawable.ic_baseline_favorite_border_24;
-                int newTint = this.favorite ? R.color.kati_red : R.color.kati_yellow;
-                this.favoriteImageView.setImageResource(newImageId);
-                this.favoriteImageView.setColorFilter(ContextCompat.getColor(v.getContext(), newTint), android.graphics.PorterDuff.Mode.SRC_IN);
-            });
         }
     }
 }

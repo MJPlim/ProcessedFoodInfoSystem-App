@@ -189,9 +189,7 @@ public class UserFavoriteFragment extends Fragment {
                 this.productName = itemView.findViewById(R.id.foodItem_productName);
                 this.companyName = itemView.findViewById(R.id.foodItem_companyName);
                 this.imageView = itemView.findViewById(R.id.foodItem_foodImageView);
-
                 itemView.setOnClickListener(v -> {
-                    Log.d("asd","123");
                     intentDetailPage(items.get(this.getAdapterPosition()).getFood().getFoodId());
                 });
             }
