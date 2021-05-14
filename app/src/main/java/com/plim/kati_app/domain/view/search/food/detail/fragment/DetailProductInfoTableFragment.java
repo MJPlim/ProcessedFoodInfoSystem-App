@@ -25,6 +25,10 @@ public class DetailProductInfoTableFragment extends AbstractTableFragment {
 
     @Override
     public void ResultParse(String requestKey, Bundle result) {
+
+
+
+
         String name= result.getString(ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_NAME);
         HashMap<String, String> valueMap= (HashMap<String, String>) result.getSerializable(ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_HASH_MAP);
         HashMap<String, String> linkMap= (HashMap<String, String>) result.getSerializable(ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_LINK_MAP);
