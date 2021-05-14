@@ -50,7 +50,6 @@ public class ReviewWriteFragment extends Fragment {
     private long reviewId;
 
 
-
     public ReviewWriteFragment() {
         this.stars = new Vector<>();
 
@@ -65,7 +64,7 @@ public class ReviewWriteFragment extends Fragment {
         this.reviewValue = view.findViewById(R.id.writeReviewFragment_writeReviewEditText);
         this.saveButton = view.findViewById(R.id.writeReviewFragment_saveButton);
 
-        for(EReviewStar reviewStar: EReviewStar.values())
+        for (EReviewStar reviewStar : EReviewStar.values())
             this.stars.add(new Star(view.findViewById(reviewStar.getId())));
         this.scoreStar(view.findViewById(EReviewStar.fifth.getId()));
 
@@ -77,8 +76,8 @@ public class ReviewWriteFragment extends Fragment {
         this.foodId = intent.getLongExtra("foodId", 0L);
         this.reviewId = intent.getLongExtra("reviewId", 0L);
         int temp = intent.getIntExtra("score", 0);
-        this.score=temp!=0? temp : 5;
-        this.scoreStar(this.stars.get(score-1).getImageView());
+        this.score = temp != 0 ? temp : 5;
+        this.scoreStar(this.stars.get(score - 1).getImageView());
 
         this.saveButton.setOnClickListener(v -> {
             this.saveReview();
@@ -120,40 +119,40 @@ public class ReviewWriteFragment extends Fragment {
             request.setReviewRating(this.score);
             if (reviewId == 0L) {
                 request.setFoodId(this.foodId);
-                call =RestAPIClient.getApiService2(token).createReview(request);
-            }else{
+                call = RestAPIClient.getApiService2(token).createReview(request);
+            } else {
                 request.setReviewId(this.reviewId);
-                call=RestAPIClient.getApiService2(token).updateReview(request);
+                call = RestAPIClient.getApiService2(token).updateReview(request);
             }
-                        call.enqueue(new Callback<CreateReviewResponse>() {
-                    @Override
-                    public void onResponse(Call<CreateReviewResponse> call, Response<CreateReviewResponse> response) {
-                        if (!response.isSuccessful()) {
-                            KatiDialog.showRetrofitNotSuccessDialog(getContext(), response.code() + "", null);
-                        } else {
-                            KatiDialog.simpleAlertDialog(
-                                    getContext(),
-                                    "리뷰 저장 완료",
-                                    "성공적으로 리뷰를 저장하였습니다.",
-                                    (dialog, which) -> {
-                                        Intent intent = new Intent(getActivity(), NewDetailActivity.class);
-                                        intent.putExtra("foodId", foodId);
-                                        intent.putExtra("isAd", false);
-                                        startActivity(intent);
-                                    },
-                                    getContext().getResources().getColor(R.color.kati_coral, getContext().getTheme())
-                            ).showDialog();
-                        }
-                        new Thread(() -> {
-                            katiDatabase.katiDataDao().insert(new KatiData(KatiDatabase.AUTHORIZATION, response.headers().get(KatiDatabase.AUTHORIZATION)));
-                        }).start();
+            call.enqueue(new Callback<CreateReviewResponse>() {
+                @Override
+                public void onResponse(Call<CreateReviewResponse> call, Response<CreateReviewResponse> response) {
+                    if (!response.isSuccessful()) {
+                        KatiDialog.showRetrofitNotSuccessDialog(getContext(), response.code() + "", null);
+                    } else {
+                        KatiDialog.simpleAlertDialog(
+                                getContext(),
+                                "리뷰 저장 완료",
+                                "성공적으로 리뷰를 저장하였습니다.",
+                                (dialog, which) -> {
+                                    Intent intent = new Intent(getActivity(), NewDetailActivity.class);
+                                    intent.putExtra("foodId", foodId);
+                                    intent.putExtra("isAd", false);
+                                    startActivity(intent);
+                                },
+                                getContext().getResources().getColor(R.color.kati_coral, getContext().getTheme())
+                        ).showDialog();
                     }
+                    new Thread(() -> {
+                        katiDatabase.katiDataDao().insert(new KatiData(KatiDatabase.AUTHORIZATION, response.headers().get(KatiDatabase.AUTHORIZATION)));
+                    }).start();
+                }
 
-                    @Override
-                    public void onFailure(Call<CreateReviewResponse> call, Throwable t) {
-                        KatiDialog.showRetrofitFailDialog(getContext(), t.getMessage(), null);
-                    }
-                });
+                @Override
+                public void onFailure(Call<CreateReviewResponse> call, Throwable t) {
+                    KatiDialog.showRetrofitFailDialog(getContext(), t.getMessage(), null);
+                }
+            });
         }).start();
     }
 
@@ -176,14 +175,27 @@ public class ReviewWriteFragment extends Fragment {
 
         public void setFlag(boolean flag) {
             this.flag = flag;
+            this.imageView.setImageDrawable(getResources().getDrawable(
+                    !flag ?
+                            R.drawable.icon_star :
+                            R.drawable.icon_star_filled,
+                    getContext().getTheme()
+            ));
             this.imageView.clearColorFilter();
-            this.imageView.setColorFilter(getResources().getColor(!flag ? R.color.kati_yellow : R.color.kati_orange, getContext().getTheme()), PorterDuff.Mode.SRC_IN);
+            this.imageView.setColorFilter(
+                    getResources().getColor(
+                            !flag ?
+                                    R.color.kati_yellow :
+                                    R.color.kati_orange,
+                            getContext().getTheme()
+                    ),
+                    PorterDuff.Mode.SRC_IN);
         }
     }
 
     @AllArgsConstructor
     @Getter
-    private enum EReviewStar{
+    private enum EReviewStar {
         first(R.id.writeReviewFragment_star1),
         second(R.id.writeReviewFragment_star2),
         third(R.id.writeReviewFragment_star3),
