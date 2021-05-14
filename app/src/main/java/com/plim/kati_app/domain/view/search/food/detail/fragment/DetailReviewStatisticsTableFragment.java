@@ -17,14 +17,25 @@ public class DetailReviewStatisticsTableFragment extends AbstractTableFragment {
      */
     @Override
     public void setFragmentRequestKey() {
-        this.fragmentRequestKey="temp";
-        HashMap<String,String> hashMap= new HashMap<>();
-        hashMap.put("4.7\n(250+)","5점     80%\n4점     11%\n3점     8%\n2점     1%\n1점     1%");
-        this.setItemValues(new DetailTableItem("제품 리뷰",hashMap,new HashMap<String, String>()));
-    }
+        this.fragmentRequestKey="reviewStatistics";
+       }
 
     @Override
     public void ResultParse(String requestKey, Bundle result) {
+
+
+        Long count=result.getLong("count");
+        HashMap<String,Float>map= (HashMap<String, Float>) result.getSerializable("map");
+
+        HashMap<String,String> hashMap= new HashMap<>();
+        hashMap.put(map.get("avgRating")+"("+count+")",
+                "5점     "+map.get("oneCount")*100
+                        +"%\n4점     "+map.get("twoCount")*100
+                        +"%\n3점     "+map.get("threeCount")*100
+                        +"%\n2점     "+map.get("fourCount")*100
+                        +"%\n1점     "+map.get("fiveCount")*100+"%");
+        this.setItemValues(new DetailTableItem("제품 리뷰",hashMap,new HashMap<String, String>()));
+
 
     }
 }

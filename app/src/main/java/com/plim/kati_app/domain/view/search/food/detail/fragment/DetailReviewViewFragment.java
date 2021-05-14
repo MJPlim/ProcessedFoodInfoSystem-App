@@ -47,6 +47,8 @@ import com.plim.kati_app.domain.view.user.login.RetrofitClient;
 import com.plim.kati_app.tech.RestAPI;
 import com.plim.kati_app.tech.RestAPIClient;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -124,7 +126,6 @@ public class DetailReviewViewFragment extends GetResultFragment {
     }
 
 
-
     @Override
     public void setFragmentRequestKey() {
         this.fragmentRequestKey = "reviewBundle";
@@ -133,96 +134,89 @@ public class DetailReviewViewFragment extends GetResultFragment {
     @Override
     public void ResultParse(String requestKey, Bundle result) {
         Long foodId = result.getLong("foodId");
-        this.foodName=result.getString("foodName");
-        this.manufacturer=result.getString("manufacturer");
-        this.image=result.getString("image");
+        this.foodName = result.getString("foodName");
+        this.manufacturer = result.getString("manufacturer");
+        this.image = result.getString("image");
         this.foodId = foodId;
         Log.d("리뷰,foodId", foodId + "");
         this.getReviews();
     }
 
-    private void refresh(){
+    private void refresh() {
         this.getReviews();
     }
 
-    private void deleteReview(Long reviewId){
-        new Thread(()->{
+    private void deleteReview(Long reviewId) {
+        new Thread(() -> {
 
-            DeleteReviewRequest request= new DeleteReviewRequest();
+            DeleteReviewRequest request = new DeleteReviewRequest();
             request.setReviewId(reviewId);
 
 
-            KatiDatabase database= KatiDatabase.getAppDatabase(getContext());
+            KatiDatabase database = KatiDatabase.getAppDatabase(getContext());
             String token = database.katiDataDao().getValue(KatiDatabase.AUTHORIZATION);
 
-            Call<CreateReviewResponse> call =RestAPIClient.getApiService2(token).deleteReview(request);
+            Call<CreateReviewResponse> call = RestAPIClient.getApiService2(token).deleteReview(request);
             call.enqueue(new Callback<CreateReviewResponse>() {
                 @Override
                 public void onResponse(Call<CreateReviewResponse> call, Response<CreateReviewResponse> response) {
 
-                    if(!response.isSuccessful()){
-                        KatiDialog.showRetrofitNotSuccessDialog(getContext(),response.code()+"",null).showDialog();
-                    }
-                    else
+                    if (!response.isSuccessful()) {
+                        KatiDialog.showRetrofitNotSuccessDialog(getContext(), response.code() + "", null).showDialog();
+                    } else
                         KatiDialog.simpleAlertDialog(
                                 getContext(),
                                 "리뷰 삭제",
                                 "리뷰를 성공적으로 삭제하였습니다.",
-                                (dialog, which)->{
+                                (dialog, which) -> {
                                     refresh();
                                 },
-                                getContext().getResources().getColor(R.color.kati_coral,getContext().getTheme())
+                                getContext().getResources().getColor(R.color.kati_coral, getContext().getTheme())
                         ).showDialog();
                 }
 
                 @Override
                 public void onFailure(Call<CreateReviewResponse> call, Throwable t) {
-                    KatiDialog.showRetrofitFailDialog(getContext(),t.getMessage(),null);
+                    KatiDialog.showRetrofitFailDialog(getContext(), t.getMessage(), null);
                 }
             });
         }).start();
     }
 
     private void like(Long reviewId, boolean likeCheck) {
-        new Thread(()->{
-        UpdateReviewLikeRequest request= new UpdateReviewLikeRequest();
-        request.setReviewId(reviewId);
-        request.setLikeCheck(likeCheck);
+        new Thread(() -> {
+            UpdateReviewLikeRequest request = new UpdateReviewLikeRequest();
+            request.setReviewId(reviewId);
+            request.setLikeCheck(likeCheck);
 
-        KatiDatabase database= KatiDatabase.getAppDatabase(getContext());
-        String token = database.katiDataDao().getValue(KatiDatabase.AUTHORIZATION);
+            KatiDatabase database = KatiDatabase.getAppDatabase(getContext());
+            String token = database.katiDataDao().getValue(KatiDatabase.AUTHORIZATION);
 
-    Call<UpdateReviewLikeResponse> call =RestAPIClient.getApiService2(token).likeReview(request);
-    call.enqueue(new Callback<UpdateReviewLikeResponse>() {
-        @Override
-        public void onResponse(Call<UpdateReviewLikeResponse> call, Response<UpdateReviewLikeResponse> response) {
+            Call<UpdateReviewLikeResponse> call = RestAPIClient.getApiService2(token).likeReview(request);
+            call.enqueue(new Callback<UpdateReviewLikeResponse>() {
+                @Override
+                public void onResponse(Call<UpdateReviewLikeResponse> call, Response<UpdateReviewLikeResponse> response) {
+                    if (!response.isSuccessful()) {
+                        KatiDialog.showRetrofitNotSuccessDialog(getContext(), response.code() + "", null).showDialog();
+                    } else
+                        KatiDialog.simpleAlertDialog(
+                                getContext(),
+                                "좋아요를 눌렀습니다.",
+                                !likeCheck ? "좋아요를 저장하였습니다." : "좋아요를 취소하였습니다.",
+                                (dialog, which) -> {
+                                    refresh();
+                                },
+                                getContext().getResources().getColor(R.color.kati_coral, getContext().getTheme())
+                        ).showDialog();
+                }
 
-            if(!response.isSuccessful()){
-                KatiDialog.showRetrofitNotSuccessDialog(getContext(),response.code()+"",null).showDialog();
-            }
-            else
-                KatiDialog.simpleAlertDialog(
-                        getContext(),
-                        "좋아요를 눌렀습니다.",
-                        !likeCheck?"좋아요를 저장하였습니다.":"좋아요를 취소하였습니다.",
-                        (dialog, which)->{
-                            refresh();
-                        },
-                        getContext().getResources().getColor(R.color.kati_coral,getContext().getTheme())
-                ).showDialog();
-        }
-
-        @Override
-        public void onFailure(Call<UpdateReviewLikeResponse> call, Throwable t) {
-KatiDialog.showRetrofitFailDialog(getContext(),t.getMessage(),null);
-        }
-    });
+                @Override
+                public void onFailure(Call<UpdateReviewLikeResponse> call, Throwable t) {
+                    KatiDialog.showRetrofitFailDialog(getContext(), t.getMessage(), null);
+                }
+            });
         }).start();
     }
-
-
-
-
 
 
     /**
@@ -230,11 +224,9 @@ KatiDialog.showRetrofitFailDialog(getContext(),t.getMessage(),null);
      */
     private void getReviews() {
         new Thread(() -> {
-                KatiDatabase database = KatiDatabase.getAppDatabase(getContext());
-                String token = database.katiDataDao().getValue(KatiDatabase.AUTHORIZATION);
-                if(token!=null)this.isLogin=true;
-                Log.d("토큰토ㅌ큰",token+"");
-
+            KatiDatabase database = KatiDatabase.getAppDatabase(getContext());
+            String token = database.katiDataDao().getValue(KatiDatabase.AUTHORIZATION);
+            if (token != null) this.isLogin = true;
             Call<ReadReviewDto> listCall;
             if (!this.isLogin) {
                 listCall = RestAPIClient.getApiService().readReview(this.foodId, this.currentPageNum);
@@ -253,23 +245,33 @@ KatiDialog.showRetrofitFailDialog(getContext(),t.getMessage(),null);
 
                             ReadReviewDto reviewDto = response.body();
 
-                            int findReviewCount = reviewDto.getReadSummaryResponse().getReviewCount();
+                            ReadReviewDto.ReadSummaryResponse readSummaryResponse=reviewDto.getReadSummaryResponse();
+                            int findReviewCount = readSummaryResponse.getReviewCount();
                             reviewTotalCount.setText("리뷰 총 " + findReviewCount + "개");
-
-                            int findReviewPageCount = reviewDto.getReadSummaryResponse().getReviewPageCount();
+                            int findReviewPageCount = readSummaryResponse.getReviewPageCount();
                             pageNum.setText(currentPageNum + "/" + findReviewPageCount);
-
                             prevPageButton.setEnabled(currentPageNum <= 1 ? false : true);
-                            nextPageButton.setEnabled(currentPageNum == findReviewPageCount||findReviewPageCount==0 ? false : true);
+                            nextPageButton.setEnabled(currentPageNum == findReviewPageCount || findReviewPageCount == 0 ? false : true);
+
+                            Bundle bundle= new Bundle();
+                            HashMap<String, Float> map = new HashMap<>();
+                            map.put("oneCount",(float)readSummaryResponse.getOneCount()/readSummaryResponse.getReviewCount());
+                            map.put("twoCount",(float)readSummaryResponse.getTwoCount()/readSummaryResponse.getReviewCount());
+                            map.put("threeCount",(float)readSummaryResponse.getThreeCount()/readSummaryResponse.getReviewCount());
+                            map.put("fourCount",(float)readSummaryResponse.getFourCount()/readSummaryResponse.getReviewCount());
+                            map.put("fiveCount",(float)readSummaryResponse.getFiveCount()/readSummaryResponse.getReviewCount());
+
+                            map.put("avgRating",readSummaryResponse.getAvgRating());
+                            bundle.putSerializable("map",map);
+                            bundle.putLong("count",readSummaryResponse.getReviewCount());
+
+                            getActivity().getSupportFragmentManager().setFragmentResult("reviewStatistics",bundle);
+
 
                             List<ReadReviewResponse> reviewList = reviewDto.getReadReviewResponse();
                             Vector<ReadReviewResponse> vector = new Vector<>();
                             vector.addAll(reviewList);
                             adapter.setItems(vector);
-
-
-
-
                         }
                     }
 
@@ -290,17 +292,18 @@ KatiDialog.showRetrofitFailDialog(getContext(),t.getMessage(),null);
             });
         }).start();
     }
-    private void updateReviews(Long foodId,Long reviewId,String image,String manufacturer, String foodName, String value, int score){
-        Intent intent= new Intent(this.getActivity(), WriteReviewActivity.class);
 
-        intent.putExtra("score",score);
-        intent.putExtra("foodId",foodId);
-        intent.putExtra("reviewId",reviewId);
-        intent.putExtra("image",image);
+    private void updateReviews(Long foodId, Long reviewId, String image, String manufacturer, String foodName, String value, int score) {
+        Intent intent = new Intent(this.getActivity(), WriteReviewActivity.class);
 
-        intent.putExtra("manufacturer",manufacturer);
-        intent.putExtra("product",foodName);
-        intent.putExtra("value",value);
+        intent.putExtra("score", score);
+        intent.putExtra("foodId", foodId);
+        intent.putExtra("reviewId", reviewId);
+        intent.putExtra("image", image);
+
+        intent.putExtra("manufacturer", manufacturer);
+        intent.putExtra("product", foodName);
+        intent.putExtra("value", value);
         startActivity(intent);
     }
 
@@ -358,7 +361,7 @@ KatiDialog.showRetrofitFailDialog(getContext(),t.getMessage(),null);
                 this.like = itemView.findViewById(R.id.reviewItem_reviewLikeTextView);
                 this.editButton = itemView.findViewById(R.id.reviewItem_editButton);
                 this.likeImageButton = itemView.findViewById(R.id.reviewItem_reviewLikeImageView);
-                this.deleteButton= itemView.findViewById(R.id.reviewItem_deleteButton);
+                this.deleteButton = itemView.findViewById(R.id.reviewItem_deleteButton);
             }
 
             public void setValue(ReadReviewResponse value) {
@@ -373,18 +376,18 @@ KatiDialog.showRetrofitFailDialog(getContext(),t.getMessage(),null);
                 this.deleteButton.setEnabled(value.isUserCheck());
                 this.editButton.setEnabled(value.isUserCheck());
 
-                this.deleteButton.setOnClickListener(v->deleteReview(value.getReviewId()));
+                this.deleteButton.setOnClickListener(v -> deleteReview(value.getReviewId()));
 
                 this.likeImageButton.clearColorFilter();
-                int color= getResources().getColor(value.isUserLikeCheck()?R.color.kati_orange:R.color.gray,getContext().getTheme());
+                int color = getResources().getColor(value.isUserLikeCheck() ? R.color.kati_orange : R.color.gray, getContext().getTheme());
                 this.likeImageButton.setColorFilter(color, PorterDuff.Mode.SRC_IN);
 
 
-                this.like.setOnClickListener(isLogin ? v -> like(value.getReviewId(),value.isUserLikeCheck()) : null);
-                this.likeImageButton.setOnClickListener(isLogin ? v -> like(value.getReviewId(),value.isUserLikeCheck()) : null);
+                this.like.setOnClickListener(isLogin ? v -> like(value.getReviewId(), value.isUserLikeCheck()) : null);
+                this.likeImageButton.setOnClickListener(isLogin ? v -> like(value.getReviewId(), value.isUserLikeCheck()) : null);
 
-                this.editButton.setOnClickListener(v->{
-                    updateReviews(value.getFoodId(),value.getReviewId(),image,manufacturer,foodName,value.getReviewDescription(),(int)value.getReviewRating());
+                this.editButton.setOnClickListener(v -> {
+                    updateReviews(value.getFoodId(), value.getReviewId(), image, manufacturer, foodName, value.getReviewDescription(), (int) value.getReviewRating());
 
                 });
 
