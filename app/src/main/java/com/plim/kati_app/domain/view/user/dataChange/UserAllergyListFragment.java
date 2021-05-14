@@ -90,14 +90,17 @@ public class UserAllergyListFragment extends AbstractExpandableItemList {
                                 null
                         ).showDialog();
                     } else {
-                        KatiDialog.simpleAlertDialog(
-                                getContext(),
-                                "알레르기 정보 저장 성공",
-                                "알레르기 정보를 성공적으로 저장하였습니다.",
-                                null,
-                                getContext().getResources().getColor(R.color.kati_coral,getContext().getTheme())
-                        ).showDialog();
+//                        KatiDialog.simpleAlertDialog(
+//                                getContext(),
+//                                "알레르기 정보 저장 성공",
+//                                "알레르기 정보를 성공적으로 저장하였습니다.",
+//                                null,
+//                                getContext().getResources().getColor(R.color.kati_coral,getContext().getTheme())
+//                        ).showDialog();
 
+                        Bundle bundle= new Bundle();
+                        bundle.putBoolean("result",true);
+                        getActivity().getSupportFragmentManager().setFragmentResult("saveAllergy",bundle);
                     }
 
                     new Thread(() -> {

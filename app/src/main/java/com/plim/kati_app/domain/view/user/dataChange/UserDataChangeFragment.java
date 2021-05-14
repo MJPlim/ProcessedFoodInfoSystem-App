@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.plim.kati_app.R;
+import com.plim.kati_app.domain.asset.GetResultFragment;
 import com.plim.kati_app.domain.asset.KatiDialog;
 import com.plim.kati_app.domain.model.UserInfoResponse;
 import com.plim.kati_app.domain.model.dto.UserInfoModifyRequest;
@@ -40,10 +41,12 @@ import static com.plim.kati_app.constants.Constant_yun.USER_DATA_CHANGE_SUCCESSF
 import static com.plim.kati_app.constants.Constant_yun.USER_DATA_CHANGE_SUCCESSFUL_DIALOG_TITLE;
 
 
-public class UserDataChangeFragment extends Fragment {
+public class UserDataChangeFragment extends GetResultFragment {
 
     private ImageView addImageButton;
     private Button finalEditButton;
+
+    private boolean successful=false;
 
     private EditText nameEditText, birthEditText, addressEditText;
 
@@ -74,6 +77,26 @@ public class UserDataChangeFragment extends Fragment {
                 this.getUserData(database.katiDataDao().getValue(KatiDatabase.AUTHORIZATION))
         ).start();
         this.finalEditButton.setOnClickListener(v -> this.modifyUserData());
+    }
+
+    @Override
+    public void setFragmentRequestKey() {
+        this.fragmentRequestKey="saveAllergy";
+    }
+
+    @Override
+    public void ResultParse(String requestKey, Bundle result) {
+        boolean flag = result.getBoolean("result");
+        if(flag&&this.successful){
+            this.successful=false;
+            KatiDialog.simpleAlertDialog(
+                    getContext(),
+                    USER_DATA_CHANGE_SUCCESSFUL_DIALOG_TITLE,
+                    USER_DATA_CHANGE_SUCCESSFUL_DIALOG_MESSAGE,
+                    (dialog, which) -> startActivity(new Intent(getActivity(), MainActivity.class)),
+                    getContext().getResources().getColor(R.color.kati_coral, getContext().getTheme())
+            ).showDialog();
+        }
     }
 
     @Override
@@ -161,15 +184,11 @@ public class UserDataChangeFragment extends Fragment {
                             ).showDialog();
 
                         } else {
-                            KatiDialog.simpleAlertDialog(
-                                    getContext(),
-                                    USER_DATA_CHANGE_SUCCESSFUL_DIALOG_TITLE,
-                                    USER_DATA_CHANGE_SUCCESSFUL_DIALOG_MESSAGE,
-                                    (dialog, which) -> startActivity(new Intent(getActivity(), MainActivity.class)),
-                                    getContext().getResources().getColor(R.color.kati_coral, getContext().getTheme())
-                            ).showDialog();
+//
+                            successful=true;
                             Bundle bundle = new Bundle();
                             getActivity().getSupportFragmentManager().setFragmentResult("saveAllergyList", bundle);
+
                         }
 
                         new Thread(() -> {

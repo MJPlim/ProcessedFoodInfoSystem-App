@@ -158,6 +158,11 @@ public abstract class AbstractExpandableItemList extends ExpandableFragment {
                 this.notifyItemRangeChanged(values.indexOf(value), getItemCount());
             }
         }
+        public void delete(String value){
+            int index = this.values.indexOf(value);
+            this.values.remove(index);
+            this.notifyItemRemoved(index);
+        }
 
         public List<String> getItems() {
             return this.values;
@@ -184,9 +189,10 @@ public abstract class AbstractExpandableItemList extends ExpandableFragment {
             public void setValue(String value) {
                 Log.d("디버그", value);
                 this.textView.setText(value);
-                this.delView.setColorFilter(R.color.kati_orange);
+                this.delView.setColorFilter(getResources().getColor(R.color.kati_orange,getContext().getTheme()));
                 this.delView.setOnClickListener(v -> {
-                    Toast.makeText(getActivity(), "삭제 누름", Toast.LENGTH_SHORT).show();
+                    Log.d("디버그","삭제 눌림");
+                    adapter.delete(value);
                 });
             }
 
