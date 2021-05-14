@@ -234,7 +234,7 @@ public class FoodSearchResultListFragment extends Fragment {
 
     }
 
-<<<<<<< HEAD
+
     /**
      * 어댑터 클래스.
      */
@@ -322,8 +322,7 @@ public class FoodSearchResultListFragment extends Fragment {
         }
     }
     /////////////////
-=======
->>>>>>> 1b6d53c63af7b6eb2206ac1b541c509eb86abe7e
+
 
     /**
      * 어댑터 클래스.
@@ -386,13 +385,8 @@ public class FoodSearchResultListFragment extends Fragment {
                 this.productName = itemView.findViewById(R.id.foodItem_productName);
                 this.companyName = itemView.findViewById(R.id.foodItem_companyName);
                 this.imageView = itemView.findViewById(R.id.foodItem_foodImageView);
-<<<<<<< HEAD
-=======
-                this.favorite = itemView.findViewById(R.id.foodItem_favoriteImageView);
                 this.reviewCount=itemView.findViewById(R.id.foodItem_reviewCountTextView);
                 this.score=itemView.findViewById(R.id.foodItem_scoreTextView);
-                this.favorite.setVisibility(View.GONE);
->>>>>>> 1b6d53c63af7b6eb2206ac1b541c509eb86abe7e
                 itemView.setOnClickListener(v -> {
                     if(isAd)
                         intentAdPage(items.get(this.getAdapterPosition()).getFoodId());
