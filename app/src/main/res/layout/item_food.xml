@@ -12,9 +12,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:text="@string/foodItem_productName_text"
         android:textColor="@color/black"
         android:textSize="18sp"
-        android:text="@string/foodItem_productName_text"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/foodItem_foodImageView"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,15 +23,17 @@
         android:id="@+id/imageView4"
         android:layout_width="15dp"
         android:layout_height="15dp"
-        android:layout_marginTop="4dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="26dp"
+        app:layout_constraintBottom_toTopOf="@+id/view"
         app:layout_constraintStart_toEndOf="@+id/foodItem_foodImageView"
         app:layout_constraintTop_toBottomOf="@+id/foodItem_companyName"
         app:srcCompat="@drawable/ic_baseline_star_24"
         app:tint="@color/teal_200" />
 
     <TextView
-        android:id="@+id/foodSearchRecommendationFragment_recentSearchWordTextView"
+        android:id="@+id/foodItem_scoreTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -39,7 +41,7 @@
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView4"
         app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toTopOf="@+id/imageView4"  />
+        app:layout_constraintTop_toTopOf="@+id/imageView4" />
 
     <TextView
         android:id="@+id/foodItem_reviewCountTextView"
@@ -47,9 +49,10 @@
         android:layout_height="wrap_content"
         android:text="@string/foodItem_reviewCountTextView_text"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/foodSearchRecommendationFragment_recentSearchWordTextView"
-        app:layout_constraintStart_toEndOf="@+id/foodSearchRecommendationFragment_recentSearchWordTextView"
-        app:layout_constraintTop_toTopOf="@+id/foodSearchRecommendationFragment_recentSearchWordTextView"/>
+        app:layout_constraintBottom_toBottomOf="@+id/foodItem_scoreTextView"
+        app:layout_constraintStart_toEndOf="@+id/foodItem_scoreTextView"
+        app:layout_constraintTop_toTopOf="@+id/foodItem_scoreTextView"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/foodItem_companyName"
@@ -66,10 +69,10 @@
         android:id="@+id/foodItem_foodImageView"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:scaleType="fitCenter"
         android:adjustViewBounds="true"
         android:background="@drawable/food_round_rect"
         android:padding="10dp"
+        android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/icon" />
@@ -89,9 +92,9 @@
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_marginTop="10dp"
         android:background="@color/kati_yellow"
         app:layout_constraintTop_toBottomOf="@+id/foodItem_foodImageView"
-        android:layout_marginTop="10dp"
         tools:layout_editor_absoluteX="0dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

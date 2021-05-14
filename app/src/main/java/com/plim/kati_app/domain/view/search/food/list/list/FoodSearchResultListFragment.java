@@ -70,7 +70,7 @@ public class FoodSearchResultListFragment extends Fragment {
     private LoadingDialog dialog;
 
     private RecyclerAdapter recyclerAdapter;
-    private AdRecyclerAdapter adRecyclerAdapter;
+    private RecyclerAdapter adRecyclerAdapter;
     private int pageNum = 1;
     private int pageSize = 10;
 
@@ -93,7 +93,7 @@ public class FoodSearchResultListFragment extends Fragment {
         this.adFoodInfoRecyclerView = view.findViewById(R.id.searchFragment_adFoodInfoRecyclerView);
         this.foodInfoRecyclerView = view.findViewById(R.id.searchFragment_foodInfoRecyclerView);
 
-        this.adRecyclerAdapter = new AdRecyclerAdapter();
+        this.adRecyclerAdapter = new RecyclerAdapter();
         this.recyclerAdapter = new RecyclerAdapter();
 
         this.dialog = new LoadingDialog(getContext());
@@ -146,10 +146,16 @@ public class FoodSearchResultListFragment extends Fragment {
                 if (!response.isSuccessful()) {
                     KatiDialog.showRetrofitNotSuccessDialog(getContext(), response.code() + "", null);
                 } else {
-                    Vector<AdvertisementResponse> items = new Vector<>(response.body());
+                    Vector<FoodResponse> items = new Vector<>();
+                    Vector<AdvertisementResponse> responseVector = new Vector<>(response.body());
+                    for(AdvertisementResponse advertisementResponse: responseVector) {
+                        FoodResponse response1 = advertisementResponse.getFood();
+                        response1.setFoodId(advertisementResponse.getId());
+                        items.add(response1);
+                    }
                     getActivity().runOnUiThread(() -> {
                         Log.d("광고 디버그", "리스폰스 받음");
-                        adRecyclerAdapter.setItems(items);
+                        adRecyclerAdapter.setItems(items,true);
                         adFoodInfoRecyclerView.setAdapter(adRecyclerAdapter);
                     });
                 }
@@ -191,6 +197,8 @@ public class FoodSearchResultListFragment extends Fragment {
         });
 
         RestAPI service = RestAPIClient.getApiService();
+
+
         Call<FindFoodBySortingResponse> listCall;
         if (foodSearchMode.equals(Constant_yun.ESearchMode.제품.name())) {
             listCall = service.getNameFoodListBySorting(this.pageNum, this.pageSize, this.foodSortElement, foodSearchText);
@@ -208,7 +216,7 @@ public class FoodSearchResultListFragment extends Fragment {
                     Vector<FoodResponse> items = new Vector<>(response.body().getResultList());
                     getActivity().runOnUiThread(() -> {
                         dialog.hide();
-                        recyclerAdapter.setItems(items);
+                        recyclerAdapter.setItems(items,false);
                         foodInfoRecyclerView.setAdapter(recyclerAdapter);
                     });
                 }
@@ -226,15 +234,16 @@ public class FoodSearchResultListFragment extends Fragment {
 
     }
 
+
     /**
      * 어댑터 클래스.
      */
-    private class AdRecyclerAdapter extends RecyclerView.Adapter {
+    private class RecyclerAdapter extends RecyclerView.Adapter {
 
+        private Vector<FoodResponse> items;
+        private boolean isAd;
 
-        private Vector<AdvertisementResponse> items;
-
-        private AdRecyclerAdapter() {
+        private RecyclerAdapter() {
             items = new Vector<>();
         }
 
@@ -244,96 +253,7 @@ public class FoodSearchResultListFragment extends Fragment {
             Context context = parent.getContext();
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view = inflater.inflate(R.layout.item_food, parent, false);
-            AdRecyclerViewViewHolder rankRecyclerViewViewHolder = new AdRecyclerViewViewHolder(view);
-
-            return rankRecyclerViewViewHolder;
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-            AdvertisementResponse item = items.get(position);
-            ((AdRecyclerViewViewHolder) holder).setValue(item);
-        }
-
-        @Override
-        public int getItemCount() {
-            return items.size();
-        }
-
-        public void clearItems() {
-            this.items = new Vector<>();
-        }
-
-        public void addItems(Vector<AdvertisementResponse> items) {
-            this.items.addAll(items);
-        }
-
-        public void setItems(Vector<AdvertisementResponse> items) {
-            this.clearItems();
-            this.addItems(items);
-        }
-
-        /**
-         * 뷰 홀더.
-         */
-        private class AdRecyclerViewViewHolder extends RecyclerView.ViewHolder {
-            private ImageView imageView;
-            private TextView productName, companyName;
-            private String imageAddress;
-            private ImageView favorite;
-
-            public AdRecyclerViewViewHolder(@NonNull View itemView) {
-                super(itemView);
-                this.productName = itemView.findViewById(R.id.foodItem_productName);
-                this.companyName = itemView.findViewById(R.id.foodItem_companyName);
-                this.imageView = itemView.findViewById(R.id.foodItem_foodImageView);
-                this.favorite = itemView.findViewById(R.id.foodItem_favoriteImageView);
-                this.favorite.setVisibility(View.GONE);
-                itemView.setOnClickListener(v -> {
-                    intentAdPage(items.get(this.getAdapterPosition()).getId());
-                });
-            }
-
-            /**
-             * 각 값을 설정한다.
-             *
-             * @param item
-             */
-            public void setValue(@NotNull AdvertisementResponse item) {
-                this.imageAddress = item.getFood().getFoodImageAddress();
-                Glide.with(getContext()).load(this.imageAddress).fitCenter().transform(new CenterCrop(), new CircleCrop()).into(imageView);
-
-                this.imageView.setOnClickListener(v -> {
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(imageAddress));
-                    startActivity(intent);
-                });
-
-                this.productName.setText(item.getFood().getFoodName());
-                this.companyName.setText(item.getFood().getManufacturerName().split("_")[0]);
-            }
-        }
-    }
-    /////////////////
-
-    /**
-     * 어댑터 클래스.
-     */
-    private class RecyclerAdapter extends RecyclerView.Adapter {
-
-        private Vector<FoodResponse> items;
-
-        private RecyclerAdapter() {
-            items = new Vector<FoodResponse>();
-        }
-
-        @NonNull
-        @Override
-        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            Context context = parent.getContext();
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View view = inflater.inflate(R.layout.item_food, parent, false);
             RecyclerViewViewHolder rankRecyclerViewViewHolder = new RecyclerViewViewHolder(view);
-
             return rankRecyclerViewViewHolder;
         }
 
@@ -356,7 +276,8 @@ public class FoodSearchResultListFragment extends Fragment {
             this.items.addAll(items);
         }
 
-        public void setItems(Vector<FoodResponse> items) {
+        public void setItems(Vector<FoodResponse> items,boolean isAd) {
+            this.isAd=isAd;
             this.clearItems();
             this.addItems(items);
         }
@@ -366,7 +287,7 @@ public class FoodSearchResultListFragment extends Fragment {
          */
         private class RecyclerViewViewHolder extends RecyclerView.ViewHolder {
             private ImageView imageView;
-            private TextView productName, companyName;
+            private TextView productName, companyName,reviewCount,score;
             private String imageAddress;
             private ImageView favorite;
 
@@ -376,26 +297,30 @@ public class FoodSearchResultListFragment extends Fragment {
                 this.companyName = itemView.findViewById(R.id.foodItem_companyName);
                 this.imageView = itemView.findViewById(R.id.foodItem_foodImageView);
                 this.favorite = itemView.findViewById(R.id.foodItem_favoriteImageView);
+                this.reviewCount=itemView.findViewById(R.id.foodItem_reviewCountTextView);
+                this.score=itemView.findViewById(R.id.foodItem_scoreTextView);
                 this.favorite.setVisibility(View.GONE);
                 itemView.setOnClickListener(v -> {
-                    intentDetailPage(items.get(this.getAdapterPosition()).getFoodId());
+                    if(isAd)
+                        intentAdPage(items.get(this.getAdapterPosition()).getFoodId());
+                    else
+                        intentDetailPage(items.get(this.getAdapterPosition()).getFoodId());
                 });
             }
 
             /**
              * 각 값을 설정한다.
-             *
              * @param item
              */
             public void setValue(@NotNull FoodResponse item) {
                 this.imageAddress = item.getFoodImageAddress();
                 Glide.with(getContext()).load(this.imageAddress).fitCenter().transform(new CenterCrop(), new CircleCrop()).into(imageView);
-
                 this.imageView.setOnClickListener(v -> {
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(imageAddress));
                     startActivity(intent);
                 });
-
+                this.score.setText(item.getReviewRate()==null?"0.00":item.getReviewRate());
+                this.reviewCount.setText("("+item.getReviewCount()+")");
                 this.productName.setText(item.getFoodName());
                 this.companyName.setText(item.getManufacturerName().split("_")[0]);
             }
