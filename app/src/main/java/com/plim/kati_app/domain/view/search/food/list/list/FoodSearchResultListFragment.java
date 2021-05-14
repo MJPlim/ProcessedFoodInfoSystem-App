@@ -238,6 +238,95 @@ public class FoodSearchResultListFragment extends Fragment {
     /**
      * 어댑터 클래스.
      */
+    private class AdRecyclerAdapter extends RecyclerView.Adapter {
+
+
+        private Vector<AdvertisementResponse> items;
+
+        private AdRecyclerAdapter() {
+            items = new Vector<>();
+        }
+
+        @NonNull
+        @Override
+        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            Context context = parent.getContext();
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View view = inflater.inflate(R.layout.item_food, parent, false);
+            AdRecyclerViewViewHolder rankRecyclerViewViewHolder = new AdRecyclerViewViewHolder(view);
+
+            return rankRecyclerViewViewHolder;
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+            AdvertisementResponse item = items.get(position);
+            ((AdRecyclerViewViewHolder) holder).setValue(item);
+        }
+
+        @Override
+        public int getItemCount() {
+            return items.size();
+        }
+
+        public void clearItems() {
+            this.items = new Vector<>();
+        }
+
+        public void addItems(Vector<AdvertisementResponse> items) {
+            this.items.addAll(items);
+        }
+
+        public void setItems(Vector<AdvertisementResponse> items) {
+            this.clearItems();
+            this.addItems(items);
+        }
+
+        /**
+         * 뷰 홀더.
+         */
+        private class AdRecyclerViewViewHolder extends RecyclerView.ViewHolder {
+            private ImageView imageView;
+            private TextView productName, companyName;
+            private String imageAddress;
+
+
+            public AdRecyclerViewViewHolder(@NonNull View itemView) {
+                super(itemView);
+                this.productName = itemView.findViewById(R.id.foodItem_productName);
+                this.companyName = itemView.findViewById(R.id.foodItem_companyName);
+                this.imageView = itemView.findViewById(R.id.foodItem_foodImageView);
+
+                itemView.setOnClickListener(v -> {
+                    intentAdPage(items.get(this.getAdapterPosition()).getId());
+                });
+            }
+
+            /**
+             * 각 값을 설정한다.
+             *
+             * @param item
+             */
+            public void setValue(@NotNull AdvertisementResponse item) {
+                this.imageAddress = item.getFood().getFoodImageAddress();
+                Glide.with(getContext()).load(this.imageAddress).fitCenter().transform(new CenterCrop(), new CircleCrop()).into(imageView);
+
+                this.imageView.setOnClickListener(v -> {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(imageAddress));
+                    startActivity(intent);
+                });
+
+                this.productName.setText(item.getFood().getFoodName());
+                this.companyName.setText(item.getFood().getManufacturerName().split("_")[0]);
+            }
+        }
+    }
+    /////////////////
+
+
+    /**
+     * 어댑터 클래스.
+     */
     private class RecyclerAdapter extends RecyclerView.Adapter {
 
         private Vector<FoodResponse> items;
@@ -289,17 +378,15 @@ public class FoodSearchResultListFragment extends Fragment {
             private ImageView imageView;
             private TextView productName, companyName,reviewCount,score;
             private String imageAddress;
-            private ImageView favorite;
+
 
             public RecyclerViewViewHolder(@NonNull View itemView) {
                 super(itemView);
                 this.productName = itemView.findViewById(R.id.foodItem_productName);
                 this.companyName = itemView.findViewById(R.id.foodItem_companyName);
                 this.imageView = itemView.findViewById(R.id.foodItem_foodImageView);
-                this.favorite = itemView.findViewById(R.id.foodItem_favoriteImageView);
                 this.reviewCount=itemView.findViewById(R.id.foodItem_reviewCountTextView);
                 this.score=itemView.findViewById(R.id.foodItem_scoreTextView);
-                this.favorite.setVisibility(View.GONE);
                 itemView.setOnClickListener(v -> {
                     if(isAd)
                         intentAdPage(items.get(this.getAdapterPosition()).getFoodId());

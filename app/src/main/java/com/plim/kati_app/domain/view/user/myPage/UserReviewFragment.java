@@ -63,10 +63,6 @@ public class UserReviewFragment extends Fragment {
     private String token;
     private UserReviewFragment.ReviewRecyclerAdapter adapter;
     private RecyclerView recyclerView;
-    private String manufacturer;
-    private String foodName;
-    private String image;
-    private Long foodId;
     private boolean isLogin = true;
 
     @Override
@@ -207,15 +203,12 @@ public class UserReviewFragment extends Fragment {
         call.enqueue(callback);
     }
 
-    private void updateReviews(Long foodId,Long reviewId,String image,String manufacturer, String foodName, String value, int score){
+    private void updateReviews(Long foodId,Long reviewId, String foodName, String value, int score){
         Intent intent= new Intent(this.getActivity(), WriteReviewActivity.class);
 
         intent.putExtra("score",score);
         intent.putExtra("foodId",foodId);
         intent.putExtra("reviewId",reviewId);
-        intent.putExtra("image",image);
-
-        intent.putExtra("manufacturer",manufacturer);
         intent.putExtra("product",foodName);
         intent.putExtra("value",value);
         startActivity(intent);
@@ -281,7 +274,7 @@ public class UserReviewFragment extends Fragment {
         }
 
         public void setValue(ReadReviewResponse value) {
-            this.productName.setText(value.getUserName());
+            this.productName.setText(value.getFoodName());
             this.date.setText(value.getReviewModifiedDate() == null ?
                     value.getReviewCreatedDate().toString() + "작성" :
                     value.getReviewModifiedDate().toString() + "수정");
@@ -303,7 +296,7 @@ public class UserReviewFragment extends Fragment {
             this.likeImageButton.setOnClickListener(isLogin ? v -> like(value.getReviewId(),value.isUserLikeCheck()) : null);
 
             this.editButton.setOnClickListener(v->{
-                updateReviews(value.getFoodId(),value.getReviewId(),image,manufacturer,foodName,value.getReviewDescription(),(int)value.getReviewRating());
+                updateReviews(value.getFoodId(),value.getReviewId(),value.getFoodName(),value.getReviewDescription(),(int)value.getReviewRating());
 
             });
 
