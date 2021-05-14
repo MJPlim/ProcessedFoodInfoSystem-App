@@ -11,7 +11,7 @@ import com.plim.kati_app.domain.model.FindPasswordResponse;
 import com.plim.kati_app.domain.model.SetSecondEmailRequest;
 import com.plim.kati_app.domain.model.SetSecondEmailResponse;
 import com.plim.kati_app.domain.model.UserFavoriteResponse;
-import com.plim.kati_app.domain.model.UserReviewResponse;
+import com.plim.kati_app.domain.model.UserSummaryResponse;
 import com.plim.kati_app.domain.model.dto.CreateReviewRequest;
 import com.plim.kati_app.domain.model.dto.CreateReviewResponse;
 import com.plim.kati_app.domain.model.dto.CreateUserAllergyRequest;
@@ -137,5 +137,8 @@ public interface RestAPI {
     Call<List<UserFavoriteResponse>> getUserFavorite();
 
     @GET("/api/v1/user/readReviewByUserID")
-    Call<List<UserReviewResponse>> getUserReview();
+    Call<List<ReadReviewResponse>> getUserReview();
+
+    @GET("/api/v1/user/summary")
+    Call<UserSummaryResponse> getUserSummary();
 }

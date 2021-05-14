@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.fragment.app.FragmentTransaction;
+
 import com.plim.kati_app.R;
 import com.plim.kati_app.constants.Constant;
 import com.plim.kati_app.domain.asset.AbstractFragment2;
@@ -67,74 +69,62 @@ public class ChangePasswordInputFragment extends AbstractFragment2 {
 
     @Override
     protected void buttonClicked() {
-        if(this.New_Password_editText.getText().toString().equals(this.New_Password_Verify_editText.getText().toString())) {
-            if (this.loadingDialog == null)
-                this.loadingDialog = new LoadingDialog(this.getContext());
-            Thread thread = new Thread(() -> {
-                getActivity().runOnUiThread(() -> loadingDialog.show());
-
-
-                // THIS IS TEST! Get Data From View Model
-                ModifyPasswordRequest request = new ModifyPasswordRequest();
-                request.setBeforePassword(this.Present_Password_editText.getText().toString());
-                request.setAfterPassword(this.New_Password_editText.getText().toString());
-
-                KatiDatabase database = KatiDatabase.getAppDatabase(getContext());
-                String token = database.katiDataDao().getValue(KatiDatabase.AUTHORIZATION);
-
-                Call<ModifyPasswordResponse> listCall = RestAPIClient.getApiService2(token).ChangePassword(request);
-                listCall.enqueue(new Callback<ModifyPasswordResponse>() {
-                    @Override
-                    public void onResponse(Call<ModifyPasswordResponse> call, Response<ModifyPasswordResponse> response) {
-                        getActivity().runOnUiThread(() -> {
-                            loadingDialog.hide();
-                        });
-                        ModifyPasswordResponse result = response.body();
-                        if (!response.isSuccessful()) {
-                            KatiDialog.showRetrofitNotSuccessDialog(getContext(),response.code()+"",null).showDialog();
-                            try {
-                                JSONObject jObjError = new JSONObject(response.errorBody().string());
-                                Toast.makeText(getContext(), jObjError.getString("error-message"), Toast.LENGTH_LONG).show();
-                            } catch (Exception e) {
-                                Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+            if (this.New_Password_editText.getText().toString().equals(this.New_Password_Verify_editText.getText().toString())) {
+                if (this.loadingDialog == null)
+                    this.loadingDialog = new LoadingDialog(this.getContext());
+                Thread thread = new Thread(() -> {
+                    getActivity().runOnUiThread(() -> loadingDialog.show());
+                    // THIS IS TEST! Get Data From View Model
+                    ModifyPasswordRequest request = new ModifyPasswordRequest();
+                    request.setBeforePassword(this.Present_Password_editText.getText().toString());
+                    request.setAfterPassword(this.New_Password_editText.getText().toString());
+                    KatiDatabase database = KatiDatabase.getAppDatabase(getContext());
+                    String token = database.katiDataDao().getValue(KatiDatabase.AUTHORIZATION);
+                    Call<ModifyPasswordResponse> listCall = RestAPIClient.getApiService2(token).ChangePassword(request);
+                    listCall.enqueue(new Callback<ModifyPasswordResponse>() {
+                        @Override
+                        public void onResponse(Call<ModifyPasswordResponse> call, Response<ModifyPasswordResponse> response) {
+                            getActivity().runOnUiThread(() -> {
+                                loadingDialog.hide();
+                            });
+                            ModifyPasswordResponse result = response.body();
+                            if (!response.isSuccessful()) {
+                                try {
+                                    JSONObject jObjError = new JSONObject(response.errorBody().string());
+                                    Toast.makeText(getContext(), jObjError.getString("error-message"), Toast.LENGTH_LONG).show();
+                                } catch (Exception e) {
+                                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                                }
+                            } else {
+                                getActivity().runOnUiThread(() -> {
+                                    showCompletedDialog();
+                                });
                             }
 
-                        } else {
-                            getActivity().runOnUiThread(() -> {
-                                showCompletedDialog();
-
-                            });
-
+                            new Thread(() -> {
+                                String token = response.headers().get(KatiDatabase.AUTHORIZATION);
+                                KatiDatabase database = KatiDatabase.getAppDatabase(getContext());
+                                database.katiDataDao().insert(new KatiData(KatiDatabase.AUTHORIZATION, token));
+                            }).start();
                         }
-                        new Thread(() -> {
-                            String token = response.headers().get(KatiDatabase.AUTHORIZATION);
-                            KatiDatabase database = KatiDatabase.getAppDatabase(getContext());
-                            database.katiDataDao().insert(new KatiData(KatiDatabase.AUTHORIZATION, token));
-                        }).start();
-                    }
-
-                    @Override
-                    public void onFailure(Call<ModifyPasswordResponse> call, Throwable t) {
-                        getActivity().runOnUiThread(() -> {
-                            loadingDialog.hide();
-                        });
-//
-                    }
+                        @Override
+                        public void onFailure(Call<ModifyPasswordResponse> call, Throwable t) {
+                            getActivity().runOnUiThread(() -> {
+                                loadingDialog.hide();
+                            });
+                        }
+                    });
                 });
-            });
-            thread.start();
-        }else{
-
-            Toast.makeText(getContext(), PASSWORD_ISNOT_SAME, Toast.LENGTH_LONG).show();
-
-        }
+                thread.start();
+            } else {
+                Toast.makeText(getContext(), PASSWORD_ISNOT_SAME, Toast.LENGTH_LONG).show();
+            }
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        this.loadingDialog.dismiss();
-    }
+
+
+
+
 
     private void moveToLogOutActivity() {
         Intent intent = new Intent(this.getActivity(), LogOutActivity.class);

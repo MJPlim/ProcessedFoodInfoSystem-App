@@ -55,6 +55,7 @@ public class Constant_yun {
     public static final String AFTER_PASSWORD_HINT="새 비밀번호";
     public static final String AFTER_PASSWORD_VERIFY_HINT="새 비밀번호 확인";
     public static final String PASSWORD_ISNOT_SAME="새 비밀번호를 동일하게 입력해 주세요.";
+    public static final String PASSWORD_IS_NULL ="모두 입력해 주세요." ;
 
 
     //allergyViewFragment
@@ -108,6 +109,7 @@ public class Constant_yun {
     public static final String SEARCH_WORD_DELETE_ONE_DIALOG_TITLE="해당 검색어 이력을 정말 지우시겠습니까?";
     public static final String SEARCH_WORD_DELETE_ONE_DIALOG_MESSAGE_HEAD="검색어 '";
     public static final String SEARCH_WORD_DELETE_ONE_DIALOG_MESSAGE_TAIL="'를 삭제합니다.";
+
 
 
     public enum ESortMode{
