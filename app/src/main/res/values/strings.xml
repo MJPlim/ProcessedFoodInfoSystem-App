@@ -122,7 +122,8 @@
     <string name="userPageFragment_myReview_text">내가 쓴 리뷰</string>
     <string name="userPageFragment_myReply_text">내가 쓴 댓글</string>
     <string name="userPageFragment_myPost_text">내가 쓴 글</string>
-    <string name="userPageFragment_serviceCenter_text">고객 센터</string>
+    <string name="userPageFragment_restore_email_text">복구 이메일 등록</string>
+    <string name="userPageFragment_customerCenter_text">고객 센터</string>
     <string name="userPageFragment_modifyUser_text">개인 정보 수정</string>
     <string name="userPageFragment_changePassword_text">비밀번호 변경</string>
     <string name="userPageFragment_notice_text">공지시항</string>
