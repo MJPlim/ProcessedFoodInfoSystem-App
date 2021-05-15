@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.plim.kati_app.R;
 import com.plim.kati_app.domain.asset.GetResultFragment;
@@ -24,6 +25,7 @@ import com.plim.kati_app.domain.model.room.KatiData;
 import com.plim.kati_app.domain.model.room.KatiDatabase;
 import com.plim.kati_app.domain.view.MainActivity;
 import com.plim.kati_app.domain.view.user.login.LoginActivity;
+import com.plim.kati_app.domain.view.user.signOut.NewWithdrawalActivity;
 import com.plim.kati_app.tech.RestAPIClient;
 
 
@@ -49,6 +51,7 @@ public class UserDataChangeFragment extends GetResultFragment {
     private boolean successful=false;
 
     private EditText nameEditText, birthEditText, addressEditText;
+            private TextView withdrawalTextView;
 
 
     public UserDataChangeFragment() {
@@ -71,6 +74,11 @@ public class UserDataChangeFragment extends GetResultFragment {
         this.nameEditText = view.findViewById(R.id.userDataChangeFragment_nameEditText);
         this.birthEditText = view.findViewById(R.id.userDataChangeFragment_birthEditText);
         this.addressEditText = view.findViewById(R.id.userDataChangeFragment_addressEditText);
+        this.withdrawalTextView=view.findViewById(R.id.userDataChangeFragment_withdrawalTextView);
+
+        this.withdrawalTextView.setOnClickListener(v->{
+            startActivity(new Intent(this.getActivity(), NewWithdrawalActivity.class));
+        });
 
         KatiDatabase database = KatiDatabase.getAppDatabase(this.getActivity());
         new Thread(() ->
