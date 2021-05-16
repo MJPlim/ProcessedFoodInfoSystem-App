@@ -9,7 +9,7 @@
 
     <fragment
         android:id="@+id/loginHomeFragment"
-        android:name="com.plim.kati_app.domain2.view.login.LoginFragment"
+        android:name="com.plim.kati_app.domain.view.login.LoginFragment"
         android:label="fragment_loginHome"
         tools:layout="@layout/activity_login_home_layout" >
     </fragment>
