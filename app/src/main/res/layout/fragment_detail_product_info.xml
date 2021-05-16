@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".domain.view.search2.foodInfo.foodInfo.ProductInfoFragment">
+    tools:context=".kati.domain.search.foodInfo.view.foodInfo.view.ProductInfoFragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
 
             <fragment
                 android:id="@+id/newDetailActivity_detailPhotoViewFragment"
-                android:name="com.plim.kati_app.domain.view.search2.foodInfo.foodInfo.DetailPhotoViewFragment"
+                android:name="com.plim.kati_app.kati.domain.search.foodInfo.view.foodInfo.view.DetailPhotoViewFragment"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
 
             <fragment
                 android:id="@+id/detailProductInfoFragment_infoFragment"
-                android:name="com.plim.kati_app.domain.view.search2.foodInfo.foodInfo.DetailProductInfoTableFragment"
+                android:name="com.plim.kati_app.kati.domain.search.foodInfo.view.foodInfo.view.DetailProductInfoTableFragmentKati"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
 
             <fragment
                 android:id="@+id/detailProductInfoFragment_materialFragment"
-                android:name="com.plim.kati_app.domain.view.search2.foodInfo.foodInfo.DetailProductMaterialTableFragment"
+                android:name="com.plim.kati_app.kati.domain.search.foodInfo.view.foodInfo.view.DetailProductMaterialTableFragmentKati"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
 
             <fragment
                 android:id="@+id/detailProductInfoFragment_reviewTableFragment"
-                android:name="com.plim.kati_app.domain.view.search2.foodInfo.foodInfo.DetailReviewStatisticsTableFragment"
+                android:name="com.plim.kati_app.kati.domain.search.foodInfo.view.foodInfo.view.DetailReviewStatisticsTableFragmentKati"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
 
             <fragment
                 android:id="@+id/detailProductInfoFragment_reviewViewFragment"
-                android:name="com.plim.kati_app.domain.view.search2.foodInfo.foodInfo.DetailReviewViewFragment"
+                android:name="com.plim.kati_app.kati.domain.search.foodInfo.view.foodInfo.view.DetailReviewViewFragment"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

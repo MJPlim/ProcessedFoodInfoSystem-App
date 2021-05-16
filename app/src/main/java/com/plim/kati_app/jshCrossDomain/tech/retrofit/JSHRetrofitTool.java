@@ -1,7 +1,5 @@
 package com.plim.kati_app.jshCrossDomain.tech.retrofit;
 
-import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitCallback;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

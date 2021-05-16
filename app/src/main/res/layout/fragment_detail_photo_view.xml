@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="20dp"
-    tools:context=".domain.view.search2.foodInfo.foodInfo.DetailPhotoViewFragment">
+    tools:context=".kati.domain.search.foodInfo.view.foodInfo.view.DetailPhotoViewFragment">
 
     <ImageView
         android:id="@+id/detailPhotoFragment_productImageView"
