@@ -45,9 +45,7 @@
                 android:id="@+id/searchFragment_adFoodInfoRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:listitem="@layout/item_food">
-
-            </androidx.recyclerview.widget.RecyclerView>
+                tools:listitem="@layout/item_food"/>
 
             <View
                 android:layout_width="match_parent"
@@ -58,9 +56,7 @@
                 android:id="@+id/searchFragment_foodInfoRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:listitem="@layout/item_food">
-
-            </androidx.recyclerview.widget.RecyclerView>
+                tools:listitem="@layout/item_food"/>
 
         </LinearLayout>
 

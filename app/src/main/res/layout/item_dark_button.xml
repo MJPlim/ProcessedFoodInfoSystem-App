@@ -4,13 +4,24 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <ToggleButton
+<!--    <Button-->
+<!--        android:id="@+id/item_button"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="35dp"-->
+<!--        android:layout_marginRight="10dp"-->
+<!--        android:background="@drawable/selecter_dark_toggle_button"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:backgroundTintMode="screen"-->
+<!--        android:buttonTint="@color/kati_red"/>-->
+
+
+    <com.google.android.material.chip.Chip
         android:id="@+id/item_button"
         android:layout_width="wrap_content"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
-        android:background="@drawable/selecter_dark_toggle_button"
-        android:textColor="@color/black"
-        android:backgroundTintMode="screen"
-        android:buttonTint="@color/kati_red"/>
+        android:text="아이템"
+        style="@style/Widget.MaterialComponents.Chip.Filter"
+        />
+
 </LinearLayout>

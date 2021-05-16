@@ -1,9 +1,12 @@
-package com.plim.kati_app.domain.view.search.food.list.setting;
+package com.plim.kati_app.domain.view.search.food.category;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,8 +14,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.plim.kati_app.R;
 import com.plim.kati_app.domain.view.search.food.list.adapter.DarkToggleButtonRecyclerViewAdapter;
+import com.plim.kati_app.domain.view.search.food.list.adapter.LightButtonRecyclerViewAdapter;
 
 import java.util.Vector;
 
@@ -24,10 +30,7 @@ public class FoodCategoryDetailListFragment extends Fragment {
 
     //Associate
     //View
-    private RecyclerView categoryDetailRecyclerView;
-
-    //adapter
-    private DarkToggleButtonRecyclerViewAdapter categoryDetailRecyclerViewAdapter;
+    private ChipGroup chipGroup;
 
     //component
     private Vector<String> values;
@@ -42,10 +45,14 @@ public class FoodCategoryDetailListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        this.categoryDetailRecyclerView = getView().findViewById(R.id.foodSearchListFragment_categoryDetailRecyclerView);
-        this.categoryDetailRecyclerViewAdapter = new DarkToggleButtonRecyclerViewAdapter(this.values);
-        this.categoryDetailRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false));
-        this.categoryDetailRecyclerView.setAdapter(this.categoryDetailRecyclerViewAdapter);
+        this.chipGroup = getView().findViewById(R.id.foodSearchListFragment_chipGroup);
+        for(String value:values){
+            Chip chip= new Chip(getContext());
+            chip.setCheckable(true);
+            chip.setText(value);
+            chip.setOnCheckedChangeListener(((buttonView, isChecked) -> {if(isChecked)this.searchFood(value);}));
+            this.chipGroup.addView(chip);
+        }
     }
 
     @Override
@@ -53,4 +60,14 @@ public class FoodCategoryDetailListFragment extends Fragment {
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_category_detail_list, container, false);
     }
+
+    private void searchFood(String value) {
+        Bundle bundle= new Bundle();
+        bundle.putString("categoryName",value);
+        this.getActivity().getSupportFragmentManager().setFragmentResult("searchCategory",bundle);
+    }
+
+
+
+
 }

@@ -38,36 +38,36 @@ public class Constant_yun {
     public static final String LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_MESSAGE = "성공적으로 로그아웃하였습니다.";
     public static final String LOG_OUT_ACTIVITY_FAILURE_DIALOG_TITLE = "로그인 되어 있지 않습니다.";
     public static final String LOG_OUT_ACTIVITY_FAILURE_DIALOG_MESSAGE = "로그인 되어 있지 않습니다.";
-    public static final String FIND_USER_PASSWORD_DIALOG_TITLE="임시 비밀번호가 발급되었습니다.";
-    public static final String FIND_USER_PASSWORD_DIALOG_MESSAGE="메일함에서 임시 비밀번호 메일을 확인해 주세요.";
+    public static final String FIND_USER_PASSWORD_DIALOG_TITLE = "임시 비밀번호가 발급되었습니다.";
+    public static final String FIND_USER_PASSWORD_DIALOG_MESSAGE = "메일함에서 임시 비밀번호 메일을 확인해 주세요.";
 
-    public static final String RETROFIT_FAIL_CONNECTION="연결오류";
-    public static final String RETROFIT_NOT_SUCCESS="비성공적";
+    public static final String RETROFIT_FAIL_CONNECTION = "연결오류";
+    public static final String RETROFIT_NOT_SUCCESS = "비성공적";
 
-    public static final String USER_DATA_CHANGE_SUCCESSFUL_DIALOG_TITLE="성공적으로 수정하였습니다.";
-    public static final String USER_DATA_CHANGE_SUCCESSFUL_DIALOG_MESSAGE="유저정보를 수정하였습니다.";
+    public static final String USER_DATA_CHANGE_SUCCESSFUL_DIALOG_TITLE = "성공적으로 수정하였습니다.";
+    public static final String USER_DATA_CHANGE_SUCCESSFUL_DIALOG_MESSAGE = "유저정보를 수정하였습니다.";
 
 
-    public static final String BASIC_DATE_FORMAT="YYYY-MM-dd";
-    
+    public static final String BASIC_DATE_FORMAT = "YYYY-MM-dd";
+
     //findPasswordActivity
-    public static final String LOGINED_DIALOG_TITLE="이미 로그인 된 상태입니다.";
-    public static final String NO_USER_DIALOG_TITLE="해당하는 유저가 없습니다.";
-    public static final String NO_USER_DIALOG_MESSAGE="잘못 입력하였거나 해당하는 유저를 찾을 수 없습니다.";
-    public static final String DIALOG_CONFIRM="확인";
-    public static final String EMAIL_INPUT_MESSAGE="이메일을 입력해주세요";
-    public static final String EMAIL_INPUT_HINT="example@plim.com";
+    public static final String LOGINED_DIALOG_TITLE = "이미 로그인 된 상태입니다.";
+    public static final String NO_USER_DIALOG_TITLE = "해당하는 유저가 없습니다.";
+    public static final String NO_USER_DIALOG_MESSAGE = "잘못 입력하였거나 해당하는 유저를 찾을 수 없습니다.";
+    public static final String DIALOG_CONFIRM = "확인";
+    public static final String EMAIL_INPUT_MESSAGE = "이메일을 입력해주세요";
+    public static final String EMAIL_INPUT_HINT = "example@plim.com";
 
 
     //changePasswordActivity
-    public static final String CHANGE_PASSWORD_TITLE="비밀번호 변경";
-    public static final String COMPLETE_CHANGE_PASSWORD_TITLE="비밀번호 변경이 완료되었습니다.";
-    public static final String COMPLETE_CHANGE_PASSWORD_MESSAGE="변경된 비밀번호로 다시 로그인 해주세요.";
-    public static final String BEFORE_PASSWORD_HINT="현재 비밀번호";
-    public static final String AFTER_PASSWORD_HINT="새 비밀번호";
-    public static final String AFTER_PASSWORD_VERIFY_HINT="새 비밀번호 확인";
-    public static final String PASSWORD_ISNOT_SAME="새 비밀번호를 동일하게 입력해 주세요.";
-    public static final String PASSWORD_IS_NULL ="모두 입력해 주세요." ;
+    public static final String CHANGE_PASSWORD_TITLE = "비밀번호 변경";
+    public static final String COMPLETE_CHANGE_PASSWORD_TITLE = "비밀번호 변경이 완료되었습니다.";
+    public static final String COMPLETE_CHANGE_PASSWORD_MESSAGE = "변경된 비밀번호로 다시 로그인 해주세요.";
+    public static final String BEFORE_PASSWORD_HINT = "현재 비밀번호";
+    public static final String AFTER_PASSWORD_HINT = "새 비밀번호";
+    public static final String AFTER_PASSWORD_VERIFY_HINT = "새 비밀번호 확인";
+    public static final String PASSWORD_ISNOT_SAME = "새 비밀번호를 동일하게 입력해 주세요.";
+    public static final String PASSWORD_IS_NULL = "모두 입력해 주세요.";
 
 
     //allergyViewFragment
@@ -83,97 +83,172 @@ public class Constant_yun {
     public static final String FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_MODE = "mode";
     public static final String FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_TEXT = "text";
 
-    public static final String FOOD_SEARCH_RECOMMENDATION_FRAGMENT_BUNDLE_KEY="text";
+    public static final String FOOD_SEARCH_RECOMMENDATION_FRAGMENT_BUNDLE_KEY = "text";
 
 
     //product detail Activity
-    public static final String DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_FOOD_ID_EXTRA="foodId";
-    public static final String DETAIL_PRODUCT_INFO_FRAGMENT_SHOPPING_LINK_="https://msearch.shopping.naver.com/search/all?query=";
+    public static final String DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_FOOD_ID_EXTRA = "foodId";
+    public static final String DETAIL_PRODUCT_INFO_FRAGMENT_SHOPPING_LINK_ = "https://msearch.shopping.naver.com/search/all?query=";
 
-    public static final String DETAIL_PHOTO_VIEW_FRAGMENT_BUNDLE_KEY="detailImage";
-    public static final String DETAIL_PHOTO_VIEW_FRAGMENT_BUNDLE_FRONT_IMAGE="frontImage";
-    public static final String DETAIL_PHOTO_VIEW_FRAGMENT_BUNDLE_BACK_IMAGE="backImage";
+    public static final String DETAIL_PHOTO_VIEW_FRAGMENT_BUNDLE_KEY = "detailImage";
+    public static final String DETAIL_PHOTO_VIEW_FRAGMENT_BUNDLE_FRONT_IMAGE = "frontImage";
+    public static final String DETAIL_PHOTO_VIEW_FRAGMENT_BUNDLE_BACK_IMAGE = "backImage";
 
-    public static final String ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_NAME="name";
-    public static final String ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_HASH_MAP="hashMap";
-    public static final String ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_LINK_MAP="linkMap";
-    public static final String ABSTRACT_TABLE_FRAGMENT_LARGE="펼치기>";
-    public static final String ABSTRACT_TABLE_FRAGMENT_SMALL="접기>";
+    public static final String ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_NAME = "name";
+    public static final String ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_HASH_MAP = "hashMap";
+    public static final String ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_LINK_MAP = "linkMap";
+    public static final String ABSTRACT_TABLE_FRAGMENT_LARGE = "펼치기>";
+    public static final String ABSTRACT_TABLE_FRAGMENT_SMALL = "접기>";
 
-    public static final String DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_BUNDLE_KEY="detailProductInfo";
-    public static final String DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_TABLE_NAME="제품정보";
-    public static final String DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_PRODUCT_NAME="제품명";
-    public static final String DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_MANUFACTURER_NAME="회사명";
-    public static final String DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_EXPIRATION_DATE="유통기한";
-
-
-    public static final String DETAIL_PRODUCT_MATERIAL_TABLE_FRAGMENT_BUNDLE_KEY="detailProductMaterial";
-    public static final String DETAIL_PRODUCT_MATERIAL_TABLE_FRAGMENT_TABLE_NAME="성분 및 원재료";
-    public static final String DETAIL_PRODUCT_MATERIAL_TABLE_FRAGMENT_MATERIAL_NAME="영양성분";
-    public static final String DETAIL_PRODUCT_MATERIAL_TABLE_FRAGMENT_INGREDIENT_NAME="원재료";
-
-    public static final String NEW_DETAIL_ACTIVITY_EXTRA_FOOD_ID="foodId";
-    public static final String NEW_DETAIL_ACTIVITY_EXTRA_IS_AD="isAd";
+    public static final String DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_BUNDLE_KEY = "detailProductInfo";
+    public static final String DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_TABLE_NAME = "제품정보";
+    public static final String DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_PRODUCT_NAME = "제품명";
+    public static final String DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_MANUFACTURER_NAME = "회사명";
+    public static final String DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_EXPIRATION_DATE = "유통기한";
 
 
+    public static final String DETAIL_PRODUCT_MATERIAL_TABLE_FRAGMENT_BUNDLE_KEY = "detailProductMaterial";
+    public static final String DETAIL_PRODUCT_MATERIAL_TABLE_FRAGMENT_TABLE_NAME = "성분 및 원재료";
+    public static final String DETAIL_PRODUCT_MATERIAL_TABLE_FRAGMENT_MATERIAL_NAME = "영양성분";
+    public static final String DETAIL_PRODUCT_MATERIAL_TABLE_FRAGMENT_INGREDIENT_NAME = "원재료";
 
-    public static final String SEARCH_WORD_DELETE_ALL_DIALOG_TITLE="검색어 이력을 모두 지우시겠습니까?";
-    public static final String SEARCH_WORD_DELETE_ALL_DIALOG_MESSAGE="저장된 최근 검색어들을 모두 삭제합니다.";
-    public static final String SEARCH_WORD_DELETE_ONE_DIALOG_TITLE="해당 검색어 이력을 정말 지우시겠습니까?";
-    public static final String SEARCH_WORD_DELETE_ONE_DIALOG_MESSAGE_HEAD="검색어 '";
-    public static final String SEARCH_WORD_DELETE_ONE_DIALOG_MESSAGE_TAIL="'를 삭제합니다.";
+    public static final String NEW_DETAIL_ACTIVITY_EXTRA_FOOD_ID = "foodId";
+    public static final String NEW_DETAIL_ACTIVITY_EXTRA_IS_AD = "isAd";
 
 
+    public static final String SEARCH_WORD_DELETE_ALL_DIALOG_TITLE = "검색어 이력을 모두 지우시겠습니까?";
+    public static final String SEARCH_WORD_DELETE_ALL_DIALOG_MESSAGE = "저장된 최근 검색어들을 모두 삭제합니다.";
+    public static final String SEARCH_WORD_DELETE_ONE_DIALOG_TITLE = "해당 검색어 이력을 정말 지우시겠습니까?";
+    public static final String SEARCH_WORD_DELETE_ONE_DIALOG_MESSAGE_HEAD = "검색어 '";
+    public static final String SEARCH_WORD_DELETE_ONE_DIALOG_MESSAGE_TAIL = "'를 삭제합니다.";
 
-    public enum ESortMode{
-        오름차순,내림차순,세부
-        ;
+
+    public enum ESortMode {
+        오름차순, 내림차순, 세부;
     }
 
     @AllArgsConstructor
     @Getter
-    public enum ESortModeBig{
+    public enum ESortModeBig {
         rank("랭킹 순"),
         price("가격 순"),
         star("별점 순"),
-        review("리뷰 개수")
-        ;
+        review("리뷰 개수");
         public String name;
     }
 
- //foodSearchResultListFragment
+    //foodSearchResultListFragment
 
-    public static final String FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE="연결 실패";
+    public static final String FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE = "연결 실패";
+
     @AllArgsConstructor
     @Getter
     public enum ECategory {
-        tea("차", ETeaCategory.values()), drink("음료", EDrinkCategory.values()), simple("간편식", ESimpleCategory.values());
+        snack("간식",ESnackCategory.values()),
+        dairy("유제품", EDairyCategory.values()),
+        drink("음료/차", EDrinkCategory.values()),
+        condiment("조미료", ECondimentCategoty.values()),
+        meat("육류", EMeatCategory.values()),
+        farm("농수산물",EFarmCategory.values()),
+        kimchi("김치",EKimchiCategory.values()),
+        mealkit("즉석조리",EMealkitCategory.values()),
+        etcmaterial("식재료",EMaterialCategory.values()),
+        etc("기타",EEtcCategory.values()),
+        ;
         private String name;
         private EChildCategory[] childCategories;
 
         public Vector<String> getChildNames() {
             Vector<String> childNames = new Vector<>();
             for (EChildCategory childCategory : childCategories)
-                childNames.add(childCategory.name());
+                childNames.add(childCategory.getName());
             return childNames;
         }
     }
+
     public interface EChildCategory {
-        String name();
+        String getName();
     }
 
-    public enum ETeaCategory implements EChildCategory {
-        커피, 핫초코, 아이스티, 녹차, 홍차, 보이차, 꽃차;
-
+    @AllArgsConstructor
+    @Getter
+    public enum EDairyCategory implements EChildCategory {
+        dairy("유제품");
+        private String name;
     }
 
+    @AllArgsConstructor
+    @Getter
     public enum EDrinkCategory implements EChildCategory {
-        생수, 콜라, 사이다, 기타_탄산음료, 보리차, 두유, 과채주스, 전통주, 어린이음료;
+        drink("음료"), coffee("커피"), tea("커피/차");
+        private String name;
     }
 
-    public enum ESimpleCategory implements EChildCategory {
-        라면, 즉석밥, 즉석국, 통조림, 카레, 짜장, 밀키트;
+    @AllArgsConstructor
+    @Getter
+    public enum ECondimentCategoty implements EChildCategory {
+        sugar("설탕"), salt("소금"), sauce("소스"), jang("장류");
+        private String name;
     }
+
+    @AllArgsConstructor
+    @Getter
+    public enum EMeatCategory implements EChildCategory {
+        meat("육류"), ham("햄/소시지");
+        private String name;
+    }
+
+    @AllArgsConstructor
+    @Getter
+    public enum ESnackCategory implements EChildCategory {
+        snack("과자"), tteok("떡"), bread("빵"),candy("사탕/껌/젤리"), icecream("아이스크림"),chocolate("초콜릿");
+        private String name;
+    }
+
+    @AllArgsConstructor
+    @Getter
+    public enum EFarmCategory implements EChildCategory {
+        egg("계란"), fruit("과일/채소"), gim("김"),fish("수산물"),peanut("견과"),grain("곡류");
+        private String name;
+    }
+
+
+    @AllArgsConstructor
+    @Getter
+    public enum EKimchiCategory implements EChildCategory {
+        kimchi("김치"), jeokgal("젓갈");
+        private String name;
+    }
+
+    @AllArgsConstructor
+    @Getter
+    public enum EMealkitCategory implements EChildCategory {
+        mealkit("즉석조리식품");
+        private String name;
+    }
+
+    @AllArgsConstructor
+    @Getter
+    public enum EMaterialCategory implements EChildCategory {
+        noodle("국수"),
+        tofu("두부"),
+        oil("식용유"),
+        fishcake("어묵"),
+        ;
+        private String name;
+    }
+
+    @AllArgsConstructor
+    @Getter
+    public enum EEtcCategory implements EChildCategory {
+        etc("기타가공품")
+        ;
+        private String name;
+    }
+
+
+
+
 
 
     @Getter
@@ -206,10 +281,6 @@ public class Constant_yun {
 
     public static final String SERVER_WRONG_METHOD_EXCEPTION_MESSAGE = "요청 방법이 잘못되었습니다.";
     public static final int SERVER_WRONG_METHOD_EXCEPTION_CODE = 405;
-
-
-
-
 
 
 }

@@ -29,17 +29,12 @@ import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_FIELD_FRAGMEN
 
 
 public class SearchSettingFragment extends Fragment {
-
-
     //working variable
     private boolean isFiltered = true;
     private boolean showAllergy = false;
 
-
     // Associate
     // View
-    //카테고리를 선택.
-    private TabLayout categoryTabLayout;
     //알레르기 필터링
     private ImageView allergyImageView;
     private TextView allergyTextView;
@@ -49,7 +44,6 @@ public class SearchSettingFragment extends Fragment {
     private Chip rankChip, manufacturerChip, reviewChip;
 
     //component
-    private Vector<Fragment> categoryViewFragmentVector;
     private Fragment allergyViewFragment;
     private BlankFragment blankFragment;
 
@@ -73,7 +67,7 @@ public class SearchSettingFragment extends Fragment {
         // Associate View
         this.allergyImageView = view.findViewById(R.id.searchFragment_allergyImageView);
         this.allergyTextView = view.findViewById(R.id.searchFragment_allergyTextView);
-        this.categoryTabLayout = view.findViewById(R.id.searchFragment_tabLayout);
+
 
         this.manufacturerChip = view.findViewById(R.id.searchSettingFragment_manufacturerChip);
         this.rankChip = view.findViewById(R.id.searchSettingFragment_rankingChip);
@@ -109,37 +103,7 @@ public class SearchSettingFragment extends Fragment {
             } });
 
 
-        // Set View Attribute
-        //enum 값을 바탕으로 카테고리 구성하기.
-        this.categoryViewFragmentVector = new Vector<>();
-        Vector<String> val = new Vector<>();
-        int i = 0;
-        for (Constant_yun.ECategory category : Constant_yun.ECategory.values()) {
-            categoryTabLayout.addTab(categoryTabLayout.newTab().setText(category.getName()), i);
-            val.addAll(category.getChildNames());
-            this.categoryViewFragmentVector.add(i, new FoodCategoryDetailListFragment(val));
 
-            //재사용하기 위해 다시 세팅
-            i++;
-            val.clear();
-        }
-        getParentFragmentManager().beginTransaction().replace(R.id.searchFragment_frameLayout, categoryViewFragmentVector.get(0)).commit();
-        this.categoryTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                int position = tab.getPosition();
-                Fragment selected = categoryViewFragmentVector.get(position);
-                getParentFragmentManager().beginTransaction().replace(R.id.searchFragment_frameLayout, selected).commit();
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-            }
-        });
 
         this.allergyViewFragment = new AllergyViewFragment(this.getData());
         this.blankFragment = new BlankFragment();
@@ -175,30 +139,5 @@ public class SearchSettingFragment extends Fragment {
         data.add("호두");
         return data;
     }
-
-
-//    /**
-//     * 알레르기 필터 레이아웃을 교체하는 리스너.
-//     */
-//    private class myListener implements View.OnClickListener {
-//
-//        private boolean show;
-//        private Fragment menuFragment, blankFragment;
-//
-//        public myListener() {
-//            this.menuFragment = new FoodSearchSortMenuFragment();
-//            this.blankFragment = new BlankFragment();
-//        }
-//
-//        @Override
-//        public void onClick(View v) {
-//            this.show = !show;
-//            if (show)
-//                getChildFragmentManager().beginTransaction().replace(R.id.searchFragment_sortFrameLayout, menuFragment).commit();
-//            else
-//                getChildFragmentManager().beginTransaction().replace(R.id.searchFragment_sortFrameLayout, blankFragment).commit();
-//        }
-//    }
-
 
 }

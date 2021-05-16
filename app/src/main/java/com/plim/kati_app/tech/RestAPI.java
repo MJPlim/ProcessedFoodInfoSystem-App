@@ -17,6 +17,7 @@ import com.plim.kati_app.domain.model.UserInfoResponse;
 import com.plim.kati_app.domain.model.UserSummaryResponse;
 import com.plim.kati_app.domain.model.WithdrawResponse;
 import com.plim.kati_app.domain.model.dto.AdvertisementResponse;
+import com.plim.kati_app.domain.model.dto.CategoryFoodListResponse;
 import com.plim.kati_app.domain.model.dto.CreateAndUpdateReviewRequest;
 import com.plim.kati_app.domain.model.dto.CreateReviewResponse;
 import com.plim.kati_app.domain.model.dto.CreateUserAllergyRequest;
@@ -139,4 +140,8 @@ public interface RestAPI {
 
     @GET("/api/v1/user/summary")
     Call<UserSummaryResponse> getUserSummary();
+
+    @GET("/api/v1/food/list/category")
+    Call<CategoryFoodListResponse> getCategoryFood(@Query("category") String category,
+                                                   @Query("page")int page);
 }
