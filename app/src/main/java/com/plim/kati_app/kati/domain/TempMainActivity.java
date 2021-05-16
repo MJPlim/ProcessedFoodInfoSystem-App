@@ -19,7 +19,7 @@ import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 
 import retrofit2.Response;
 
-public class TempMainActivity extends KatiViewModelActivity {
+public class TempMainActivity extends KatiViewModelActivity { // 이게 끝나긴 하네
 
     /**
      * System Life Cycle Callback
