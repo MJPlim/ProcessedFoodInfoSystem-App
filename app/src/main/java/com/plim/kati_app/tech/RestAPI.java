@@ -67,16 +67,22 @@ public interface RestAPI {
 
 
     @GET("/api/v1/food/getFoodListBySorting")
-    Call<FindFoodBySortingResponse> getNameFoodListBySorting(@Query("pageNo") int pageNo,
-                                                             @Query("size") int size,
-                                                             @Query("sort") String sortElement,
-                                                             @Query("foodName") String foodName);
+    Call<FindFoodBySortingResponse> getNameFoodListBySorting(
+            @Query("pageNo") int pageNo,
+            @Query("size") int size,
+            @Query("sort") String sortElement,
+            @Query("foodName") String foodName,
+            @Query("allergies") List<String> allergyList
+    );
 
     @GET("/api/v1/food/getFoodListBySorting")
-    Call<FindFoodBySortingResponse> getManufacturerFoodListBySorting(@Query("pageNo") int pageNo,
-                                                                     @Query("size") int size,
-                                                                     @Query("sort") String sortElement,
-                                                                     @Query("manufacturerName") String manufacturerName);
+    Call<FindFoodBySortingResponse> getManufacturerFoodListBySorting(
+            @Query("pageNo") int pageNo,
+            @Query("size") int size,
+            @Query("sort") String sortElement,
+            @Query("manufacturerName") String manufacturerName,
+            @Query("allergies") List<String> allergyList
+    );
 
     @GET("/api/v1/food/findFood/foodDetail")
     Call<FoodDetailResponse> getFoodDetailByFoodId(@Query("foodId") Long foodId);
@@ -143,5 +149,5 @@ public interface RestAPI {
 
     @GET("/api/v1/food/list/category")
     Call<CategoryFoodListResponse> getCategoryFood(@Query("category") String category,
-                                                   @Query("page")int page);
+                                                   @Query("page") int page);
 }

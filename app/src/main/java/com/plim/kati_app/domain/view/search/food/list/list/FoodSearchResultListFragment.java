@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,9 +19,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
-import com.plim.kati_app.constants.Constant;
 import com.plim.kati_app.R;
 import com.plim.kati_app.constants.Constant_yun;
+import com.plim.kati_app.domain.asset.GetResultFragment;
 import com.plim.kati_app.domain.asset.KatiDialog;
 import com.plim.kati_app.domain.asset.LoadingDialog;
 import com.plim.kati_app.domain.model.FoodResponse;
@@ -42,15 +41,12 @@ import java.util.Vector;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_INDEX;
 import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_KEY;
 import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_MODE;
 import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_SORT;
 import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_TEXT;
-import static com.plim.kati_app.constants.Constant_yun.FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE;
 import static com.plim.kati_app.constants.Constant_yun.NEW_DETAIL_ACTIVITY_EXTRA_FOOD_ID;
 import static com.plim.kati_app.constants.Constant_yun.NEW_DETAIL_ACTIVITY_EXTRA_IS_AD;
 
@@ -58,11 +54,13 @@ import static com.plim.kati_app.constants.Constant_yun.NEW_DETAIL_ACTIVITY_EXTRA
  * 음식 검색하여 나온 리스트와 정렬화면 프래그먼트.
  * !이슈 여기랑 레코멘데이션이랑 왔다갔다 하다보면 Activity가 없다고 하는 일이 생긴다 왜지?
  */
-public class FoodSearchResultListFragment extends Fragment {
+public class FoodSearchResultListFragment extends GetResultFragment {
 
     private String foodSearchMode;
     private String foodSearchText;
     private String foodSortElement;
+    private boolean isFiltered = false;
+    private Vector<String> allergyList;
 
     //음식 리스트
     private RecyclerView adFoodInfoRecyclerView;
@@ -73,6 +71,10 @@ public class FoodSearchResultListFragment extends Fragment {
     private RecyclerAdapter adRecyclerAdapter;
     private int pageNum = 1;
     private int pageSize = 10;
+
+    public FoodSearchResultListFragment() {
+        this.allergyList = new Vector<>();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -108,26 +110,43 @@ public class FoodSearchResultListFragment extends Fragment {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
 
-                int pageNum=result.getInt(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_INDEX);
-                String sort=result.getString(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_SORT);
-                String mode=result.getString(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_MODE);
-                String text=result.getString(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_TEXT);
+                int pageNum = result.getInt(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_INDEX);
+                String sort = result.getString(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_SORT);
+                String mode = result.getString(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_MODE);
+                String text = result.getString(FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_TEXT);
 //                Log.d("디버그",sort+" 널");
                 set(pageNum, sort, mode, text);
             }
         });
     }
 
+    @Override
+    public void setFragmentRequestKey() {
+        this.fragmentRequestKey = "allergyFilter";
+    }
+
+    @Override
+    public void ResultParse(String requestKey, Bundle result) {
+        this.isFiltered = result.getBoolean("flag");
+        this.allergyList = (Vector<String>) result.getSerializable("allergy");
+        this.refresh();
+    }
+
+
+    private void refresh() {
+        this.set(0, null, null, null);
+    }
+
     public void set(int pageNum, String foodSortElement, String mode, String text) {
-        if(pageNum!=0)this.pageNum = pageNum;
-        if(foodSortElement!=null)this.foodSortElement = foodSortElement;
-        if(mode!=null)this.foodSearchMode = mode;
-        if(text!=null)this.foodSearchText = text;
-        
-        Log.d("디버그 세팅","페이지 번호: "+this.pageNum);
-        Log.d("디버그 세팅","정렬: "+this.foodSortElement);
-        Log.d("디버그 세팅","검색모드: "+this.foodSearchMode);
-        Log.d("디버그 세팅","검색 텍스트: "+this.foodSearchText);
+        if (pageNum != 0) this.pageNum = pageNum;
+        if (foodSortElement != null) this.foodSortElement = foodSortElement;
+        if (mode != null) this.foodSearchMode = mode;
+        if (text != null) this.foodSearchText = text;
+
+        Log.d("디버그 세팅", "페이지 번호: " + this.pageNum);
+        Log.d("디버그 세팅", "정렬: " + this.foodSortElement);
+        Log.d("디버그 세팅", "검색모드: " + this.foodSearchMode);
+        Log.d("디버그 세팅", "검색 텍스트: " + this.foodSearchText);
         Thread thread = new Thread(() -> {
             this.search();
             this.ad();
@@ -148,14 +167,14 @@ public class FoodSearchResultListFragment extends Fragment {
                 } else {
                     Vector<FoodResponse> items = new Vector<>();
                     Vector<AdvertisementResponse> responseVector = new Vector<>(response.body());
-                    for(AdvertisementResponse advertisementResponse: responseVector) {
+                    for (AdvertisementResponse advertisementResponse : responseVector) {
                         FoodResponse response1 = advertisementResponse.getFood();
                         response1.setFoodId(advertisementResponse.getId());
                         items.add(response1);
                     }
                     getActivity().runOnUiThread(() -> {
                         Log.d("광고 디버그", "리스폰스 받음");
-                        adRecyclerAdapter.setItems(items,true);
+                        adRecyclerAdapter.setItems(items, true);
                         adFoodInfoRecyclerView.setAdapter(adRecyclerAdapter);
                     });
                 }
@@ -201,9 +220,9 @@ public class FoodSearchResultListFragment extends Fragment {
 
         Call<FindFoodBySortingResponse> listCall;
         if (foodSearchMode.equals(Constant_yun.ESearchMode.제품.name())) {
-            listCall = service.getNameFoodListBySorting(this.pageNum, this.pageSize, this.foodSortElement, foodSearchText);
+            listCall = service.getNameFoodListBySorting(this.pageNum, this.pageSize, this.foodSortElement, foodSearchText, isFiltered ? allergyList : null);
         } else {
-            listCall = service.getManufacturerFoodListBySorting(this.pageNum, this.pageSize, this.foodSortElement, foodSearchText);
+            listCall = service.getManufacturerFoodListBySorting(this.pageNum, this.pageSize, this.foodSortElement, foodSearchText, isFiltered ? allergyList : null);
         }
 
         listCall.enqueue(new Callback<FindFoodBySortingResponse>() {
@@ -216,7 +235,7 @@ public class FoodSearchResultListFragment extends Fragment {
                     Vector<FoodResponse> items = new Vector<>(response.body().getResultList());
                     getActivity().runOnUiThread(() -> {
                         dialog.hide();
-                        recyclerAdapter.setItems(items,false);
+                        recyclerAdapter.setItems(items, false);
                         foodInfoRecyclerView.setAdapter(recyclerAdapter);
                     });
                 }
@@ -231,7 +250,6 @@ public class FoodSearchResultListFragment extends Fragment {
             }
         });
     }
-
 
 
     /**
@@ -275,8 +293,8 @@ public class FoodSearchResultListFragment extends Fragment {
             this.items.addAll(items);
         }
 
-        public void setItems(Vector<FoodResponse> items,boolean isAd) {
-            this.isAd=isAd;
+        public void setItems(Vector<FoodResponse> items, boolean isAd) {
+            this.isAd = isAd;
             this.clearItems();
             this.addItems(items);
         }
@@ -286,7 +304,7 @@ public class FoodSearchResultListFragment extends Fragment {
          */
         private class RecyclerViewViewHolder extends RecyclerView.ViewHolder {
             private ImageView imageView;
-            private TextView productName, companyName,reviewCount,score;
+            private TextView productName, companyName, reviewCount, score;
             private String imageAddress;
 
 
@@ -295,10 +313,10 @@ public class FoodSearchResultListFragment extends Fragment {
                 this.productName = itemView.findViewById(R.id.foodItem_productName);
                 this.companyName = itemView.findViewById(R.id.foodItem_companyName);
                 this.imageView = itemView.findViewById(R.id.foodItem_foodImageView);
-                this.reviewCount=itemView.findViewById(R.id.foodItem_reviewCountTextView);
-                this.score=itemView.findViewById(R.id.foodItem_scoreTextView);
+                this.reviewCount = itemView.findViewById(R.id.foodItem_reviewCountTextView);
+                this.score = itemView.findViewById(R.id.foodItem_scoreTextView);
                 itemView.setOnClickListener(v -> {
-                    if(isAd)
+                    if (isAd)
                         intentAdPage(items.get(this.getAdapterPosition()).getFoodId());
                     else
                         intentDetailPage(items.get(this.getAdapterPosition()).getFoodId());
@@ -307,6 +325,7 @@ public class FoodSearchResultListFragment extends Fragment {
 
             /**
              * 각 값을 설정한다.
+             *
              * @param item
              */
             public void setValue(@NotNull FoodResponse item) {
@@ -316,8 +335,8 @@ public class FoodSearchResultListFragment extends Fragment {
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(imageAddress));
                     startActivity(intent);
                 });
-                this.score.setText(item.getReviewRate()==null?"0.00":item.getReviewRate());
-                this.reviewCount.setText("("+item.getReviewCount()+")");
+                this.score.setText(item.getReviewRate() == null ? "0.00" : item.getReviewRate());
+                this.reviewCount.setText("(" + item.getReviewCount() + ")");
                 this.productName.setText(item.getFoodName());
                 this.companyName.setText(item.getManufacturerName().split("_")[0]);
             }
