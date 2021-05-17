@@ -77,6 +77,14 @@
         app:layout_constraintTop_toBottomOf="@+id/mainActivity_userDataChangeTestButton"
         tools:layout_editor_absoluteX="24dp" />
 
+    <Button
+        android:id="@+id/mainActivity_categoryTestButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="category"
+        app:layout_constraintTop_toBottomOf="@+id/mainActivity_RankingTestButton"
+        tools:layout_editor_absoluteX="24dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

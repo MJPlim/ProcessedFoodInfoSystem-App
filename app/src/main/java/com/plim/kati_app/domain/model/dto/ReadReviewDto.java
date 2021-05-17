@@ -9,15 +9,20 @@ import lombok.Setter;
 @Getter
 public class ReadReviewDto {
     private List<ReadReviewResponse> readReviewResponse;
-    private ReviewCount reviewCount;
-
+    private ReadSummaryResponse readSummaryResponse;
 
     @Getter
-    @Setter
-    public class ReviewCount {
-        private int findReviewPageCount;
-        private int findReviewCount;
-
+    public class ReadSummaryResponse{
+        private Long foodId;
+        private int oneCount;
+        private int twoCount;
+        private int threeCount;
+        private int fourCount;
+        private int fiveCount;
+        private long sumRating;
+        private float avgRating;
+        private int reviewCount;
+        private int reviewPageCount;
     }
 }
 

@@ -1,14 +1,17 @@
 package com.plim.kati_app.domain.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
+
 import com.plim.kati_app.R;
 import com.plim.kati_app.constants.Constant_yun;
 import com.plim.kati_app.domain.asset.KatiDialog;
 import com.plim.kati_app.domain.model.room.KatiDatabase;
 import com.plim.kati_app.domain.service.AutoLoginService;
 import com.plim.kati_app.domain.view.rank.RankingActivity;
+import com.plim.kati_app.domain.view.search.food.category.FoodCategoryActivity;
 import com.plim.kati_app.domain.view.search.food.list.FoodSearchActivity;
 import com.plim.kati_app.domain.view.user.dataChange.UserDataChangeActivity;
 import com.plim.kati_app.domain.view.user.login.LoginActivity;
@@ -22,7 +25,7 @@ public class MainActivity extends AppCompatActivity { // a test
 
     //service intent
     private Intent intent;
-private KatiDialog katiDialog;
+    private KatiDialog katiDialog;
 
 
     @Override
@@ -35,11 +38,12 @@ private KatiDialog katiDialog;
         this.findViewById(R.id.mainActivity_loginTestButton).setOnClickListener(v -> this.startActivity(new Intent(this, LoginActivity.class)));
         this.findViewById(R.id.mainActivity_searchTestButton).setOnClickListener(v -> this.startActivity(new Intent(this, FoodSearchActivity.class)));
         this.findViewById(R.id.mainActivity_myPageTestButton).setOnClickListener(v -> this.startActivity(new Intent(this, UserMyPageActivity.class)));
-        this.findViewById(R.id.mainActivity_userDataChangeTestButton).setOnClickListener(v->this.startActivity(new Intent(this, UserDataChangeActivity.class)));
+        this.findViewById(R.id.mainActivity_userDataChangeTestButton).setOnClickListener(v -> this.startActivity(new Intent(this, UserDataChangeActivity.class)));
         this.findViewById(R.id.mainActivity_RankingTestButton).setOnClickListener(v -> this.startActivity(new Intent(this, RankingActivity.class)));
+        this.findViewById(R.id.mainActivity_categoryTestButton).setOnClickListener(v -> this.startActivity(new Intent(this, FoodCategoryActivity.class)));
 
         //start AutoLogin service
-        this.intent=new Intent(this, AutoLoginService.class);
+        this.intent = new Intent(this, AutoLoginService.class);
         startService(intent);
     }
 
@@ -52,13 +56,13 @@ private KatiDialog katiDialog;
     /**
      * 종료를 할 지 확인하는 다이얼로그를 표시한다.
      */
-    public void showDialog(){
+    public void showDialog() {
         this.katiDialog = new KatiDialog(this);
         katiDialog.setTitle(Constant_yun.MAIN_ACTIVITY_FINISH_DIALOG_TITLE);
         katiDialog.setMessage(Constant_yun.MAIN_ACTIVITY_FINISH_DIALOG_MESSAGE);
         katiDialog.setPositiveButton(Constant_yun.KATI_DIALOG_CONFIRM, (dialog, which) -> this.finishApp());
         katiDialog.setNegativeButton(Constant_yun.KATI_DIALOG_CANCEL, null);
-        katiDialog.setColor(this.getResources().getColor(R.color.kati_coral,this.getTheme()));
+        katiDialog.setColor(this.getResources().getColor(R.color.kati_coral, this.getTheme()));
         katiDialog.showDialog();
     }
 
@@ -70,11 +74,10 @@ private KatiDialog katiDialog;
     }
 
 
-
     /**
      * 애플리케이션과 서비스를 종료한다.
      */
-    public void finishApp(){
+    public void finishApp() {
         this.finish();
         this.finishAffinity();
         KatiDatabase.destroyInstance();

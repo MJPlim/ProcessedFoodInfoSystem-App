@@ -59,7 +59,6 @@ public class DetailPhotoViewFragment extends GetResultFragment {
         super.onResume();
 
 
-
     }
 
 
@@ -103,18 +102,21 @@ public class DetailPhotoViewFragment extends GetResultFragment {
 
     private void setIsFavorite(boolean flag) {
         this.isFavorite = flag;
-        likeButton.setImageResource(
+        this.likeButton.setImageDrawable(getResources().getDrawable(
                 this.isFavorite ?
                         R.drawable.ic_baseline_favorite_24 :
                         R.drawable.ic_baseline_favorite_border_24
-        );
-        likeButton.setColorFilter(
-                this.isFavorite ?
-                        R.color.kati_orange :
-                        R.color.kati_yellow,
+                , getContext().getTheme()
+        ));
+        this.likeButton.clearColorFilter();
+        this.likeButton.setColorFilter(
+                getResources().getColor(
+                        this.isFavorite ?
+                                R.color.kati_orange :
+                                R.color.kati_yellow, getContext().getTheme()
+                ),
                 PorterDuff.Mode.SRC_IN
         );
-
 
 
     }
@@ -131,7 +133,7 @@ public class DetailPhotoViewFragment extends GetResultFragment {
                     @Override
                     public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                         if (!response.isSuccessful()) {
-                            KatiDialog.showRetrofitNotSuccessDialog(getContext(), response.toString() , null).showDialog();
+                            KatiDialog.showRetrofitNotSuccessDialog(getContext(), response.toString(), null).showDialog();
 
                         } else {
                             Log.d("디버그", response.body() + "");
@@ -175,7 +177,7 @@ public class DetailPhotoViewFragment extends GetResultFragment {
                     @Override
                     public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                         if (!response.isSuccessful())
-                            KatiDialog.showRetrofitNotSuccessDialog(getContext(), response.toString() , null).showDialog();
+                            KatiDialog.showRetrofitNotSuccessDialog(getContext(), response.toString(), null).showDialog();
                         else {
                             KatiDialog.simpleAlertDialog(
                                     getContext(),
@@ -190,7 +192,7 @@ public class DetailPhotoViewFragment extends GetResultFragment {
                         new Thread(() -> {
                             String token = response.headers().get(KatiDatabase.AUTHORIZATION);
                             database.katiDataDao().insert(new KatiData(KatiDatabase.AUTHORIZATION, token));
-                            Log.d("좋아요 저장 토큰",token);
+                            Log.d("좋아요 저장 토큰", token);
                         }).start();
                     }
 
@@ -200,13 +202,13 @@ public class DetailPhotoViewFragment extends GetResultFragment {
                     }
                 });
             } else {
-                Log.d("디버그","좋아요 삭제");
+                Log.d("디버그", "좋아요 삭제");
                 Call<Void> call = RestAPIClient.getApiService2(token).deleteFavoriteFood(foodId);
                 call.enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if (!response.isSuccessful())
-                            KatiDialog.showRetrofitNotSuccessDialog(getContext(), response.toString() , null).showDialog();
+                            KatiDialog.showRetrofitNotSuccessDialog(getContext(), response.toString(), null).showDialog();
                         else {
                             KatiDialog.simpleAlertDialog(
                                     getContext(),
@@ -220,10 +222,10 @@ public class DetailPhotoViewFragment extends GetResultFragment {
 
 
                         new Thread(() -> {
-                            
+
                             String token = response.headers().get(KatiDatabase.AUTHORIZATION);
                             database.katiDataDao().insert(new KatiData(KatiDatabase.AUTHORIZATION, token));
-                            Log.d("좋아요 삭제 토큰",token);
+                            Log.d("좋아요 삭제 토큰", token);
                         }).start();
                     }
 

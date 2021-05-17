@@ -24,6 +24,7 @@
         android:layout_height="wrap_content"
         android:paddingLeft="10dp"
         android:paddingTop="5dp"
+        android:paddingRight="10dp"
         android:text="리뷰 개수 ㅇㅇ개"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/reviewViewFragment_tabLayout" />
@@ -49,9 +50,9 @@
 
         <Button
             android:id="@+id/reviewViewFragment_prevPageButton"
-            android:layout_width="40dp"
+            android:layout_width="42dp"
             android:layout_height="40dp"
-            android:text="prev" />
+            android:text="p" />
 
         <TextView
             android:id="@+id/reviewViewFragment_pageNum"
@@ -65,9 +66,9 @@
 
         <Button
             android:id="@+id/reviewViewFragment_nextPageButton"
-            android:layout_width="40dp"
+            android:layout_width="42dp"
             android:layout_height="40dp"
-            android:text="next" />
+            android:text="n" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

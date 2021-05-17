@@ -189,6 +189,7 @@
 
         </TableRow>
 
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -199,19 +200,20 @@
             android:paddingBottom="2dp">
 
             <TextView
-                android:id="@+id/myPage_serviceCenter"
+                android:id="@+id/userPageFragment_customerCenter"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_span="4"
                 android:layout_weight="1"
                 android:background="@color/white"
                 android:gravity="center"
-                android:text="@string/userPageFragment_serviceCenter_text"
+                android:text="@string/userPageFragment_customerCenter_text"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
 
         </TableRow>
+
 
         <TableRow
             android:layout_width="match_parent"
@@ -231,6 +233,30 @@
                 android:background="@color/white"
                 android:gravity="center"
                 android:text="@string/userPageFragment_modifyUser_text"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingLeft="0dp"
+            android:paddingTop="0dp"
+            android:paddingRight="0dp"
+            android:paddingBottom="2dp">
+
+            <TextView
+                android:id="@+id/myPage_restoreEmail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_span="4"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:gravity="center"
+                android:text="@string/userPageFragment_restore_email_text"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 

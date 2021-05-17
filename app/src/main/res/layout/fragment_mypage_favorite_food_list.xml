@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout android:id="@+id/myPage_review_Layout"
+<LinearLayout android:id="@+id/myPage_favorite_Layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -9,7 +9,7 @@
 
 
     <TextView
-        android:id="@+id/myPage_review_num"
+        android:id="@+id/myPage_favorite_num"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/kati_yellow"
@@ -25,8 +25,9 @@
         android:id="@+id/myPage_foodInfoRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:listitem="@layout/item_review">
+        tools:listitem="@layout/item_food">
 
     </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>
+

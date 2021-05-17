@@ -152,10 +152,19 @@ public class RankingActivity extends AppCompatActivity {
              */
             public void setValue(@NotNull ItemRankingResponse item) {
 
+                // enum으로 처리할 것
+                // enum { number, image}
+                // setImageResource(image)....
                 if(count==0) {this.foodItem_rankImage.setImageResource(R.drawable.first);}
                 else if(count==1) {this.foodItem_rankImage.setImageResource(R.drawable.second);}
                 else if(count==2) {this.foodItem_rankImage.setImageResource(R.drawable.third);}
-                else {this.foodItem_rankImage.setImageResource(R.drawable.ic_baseline_star_24);}
+                else if(count==3) {this.foodItem_rankImage.setImageResource(R.drawable.four);}
+                else if(count==4) {this.foodItem_rankImage.setImageResource(R.drawable.five);}
+                else if(count==5) {this.foodItem_rankImage.setImageResource(R.drawable.six);}
+                else if(count==6) {this.foodItem_rankImage.setImageResource(R.drawable.seven);}
+                else if(count==7) {this.foodItem_rankImage.setImageResource(R.drawable.eight);}
+                else if(count==8) {this.foodItem_rankImage.setImageResource(R.drawable.nine);}
+                else {this.foodItem_rankImage.setImageResource(R.drawable.ten);}
 
               //  this.foodItem_rankImage.setImageResource(R.drawable.first);
                 this.foodItem_productName.setText(item.getFoodName());

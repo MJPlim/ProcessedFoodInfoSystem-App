@@ -1,5 +1,4 @@
 package com.plim.kati_app.domain.view.user.myPage;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,28 +12,31 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-
+import com.plim.kati_app.domain.model.UserInfoResponse;
 import com.plim.kati_app.R;
 import com.plim.kati_app.domain.asset.KatiDialog;
-import com.plim.kati_app.domain.model.UserInfoResponse;
+import com.plim.kati_app.domain.model.UserSummaryResponse;
 import com.plim.kati_app.domain.model.room.KatiData;
 import com.plim.kati_app.domain.model.room.KatiDatabase;
 import com.plim.kati_app.domain.view.user.changePW.ChangePasswordActivity;
 import com.plim.kati_app.domain.view.user.dataChange.UserDataChangeActivity;
 import com.plim.kati_app.domain.view.user.logOut.LogOutActivity;
 import com.plim.kati_app.domain.view.user.login.LoginActivity;
-import com.plim.kati_app.tech.RestAPIClient;
+import com.plim.kati_app.domain.view.user.setId.SetSecondEmailActivity;
 
 import org.json.JSONObject;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 import static com.plim.kati_app.constants.Constant_yun.LOG_OUT_ACTIVITY_FAILURE_DIALOG_TITLE;
+import static com.plim.kati_app.tech.RestAPIClient.getApiService2;
+import android.content.Intent;
+import android.util.Log;
+import android.view.View;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 /**
  * 마이페이지 프래그먼트.
@@ -46,7 +48,7 @@ import static com.plim.kati_app.constants.Constant_yun.LOG_OUT_ACTIVITY_FAILURE_
 public class UserMyPageFragment extends Fragment {
     KatiDatabase database = KatiDatabase.getAppDatabase(getContext());
     private Button logoutButton;
-    private TextView userId, favoriteNum, reviewNum, replyNum, postNum, favoriteText, reviewText, replyText, postText, serviceCenterText, modifyUserText, changePasswordText, noticeText, settingText;
+    private TextView userId, favoriteNum, reviewNum, replyNum, postNum, favoriteText, reviewText, replyText, postText,customerCenterText, restoreEmailText, modifyUserText, changePasswordText, noticeText, settingText;
     private ImageView userImage;
     private String token;
 
@@ -61,11 +63,12 @@ public class UserMyPageFragment extends Fragment {
         new Thread(() -> {
             if (database.katiDataDao().getValue(KatiDatabase.AUTHORIZATION) == null) {
                 getActivity().runOnUiThread(() -> showNotLoginedDialog());
-            }else {
+            }else{
                 // 토큰값 저장
-                token = database.katiDataDao().getValue(KatiDatabase.AUTHORIZATION);
+                token=database.katiDataDao().getValue(KatiDatabase.AUTHORIZATION);
                 changeId();
             }
+
         }).start();
     }
 
@@ -82,12 +85,14 @@ public class UserMyPageFragment extends Fragment {
         this.reviewText = view.findViewById(R.id.myPage_review);
         this.replyText = view.findViewById(R.id.myPage_reply);
         this.postText = view.findViewById(R.id.myPage_post);
-        this.serviceCenterText = view.findViewById(R.id.myPage_serviceCenter);
+        this.restoreEmailText = view.findViewById(R.id.myPage_restoreEmail);
         this.modifyUserText = view.findViewById(R.id.myPage_modifyUser);
         this.changePasswordText = view.findViewById(R.id.myPage_changePassword);
         this.noticeText = view.findViewById(R.id.myPage_notice);
         this.settingText = view.findViewById(R.id.myPage_setting);
         this.userImage = view.findViewById(R.id.myPage_imageUser);
+        this.customerCenterText = view.findViewById(R.id.userPageFragment_customerCenter);
+
 
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
@@ -108,6 +113,10 @@ public class UserMyPageFragment extends Fragment {
                     case R.id.myPage_favorite_num:
                         Navigation.findNavController(view).navigate(R.id.action_myPageFragment_to_myPageFavoriteFragment);
                         break;
+                    case R.id.myPage_restoreEmail:
+                        moveToRestoreEmailActivity();
+                        break;
+
                 }
             }
         };
@@ -115,8 +124,14 @@ public class UserMyPageFragment extends Fragment {
         this.logoutButton.setOnClickListener(onClickListener);
         this.changePasswordText.setOnClickListener(onClickListener);
         this.modifyUserText.setOnClickListener(onClickListener);
-
         this.favoriteNum.setOnClickListener(onClickListener);
+        this.restoreEmailText.setOnClickListener(onClickListener);
+
+    }
+
+    private void moveToRestoreEmailActivity() {
+        Intent intent = new Intent(this.getActivity(), SetSecondEmailActivity.class);
+        startActivity(intent);
     }
 
     private void moveToLogOutActivity() {
@@ -146,13 +161,13 @@ public class UserMyPageFragment extends Fragment {
                 }, getResources().getColor(R.color.kati_coral, getContext().getTheme())).showDialog();
     }
 
-    
+
     // 서버에서 사용자 정보를 받아와서 이름을 바꿔주는 메서드
     private void changeId() {
-        Call<UserInfoResponse> call = RestAPIClient.getApiService2(token).getUserInfo();
-        Callback<UserInfoResponse> callback = new Callback<UserInfoResponse>() {
+        Call<UserSummaryResponse> call = getApiService2(token).getUserSummary();
+        Callback<UserSummaryResponse> callback = new Callback<UserSummaryResponse>() {
             @Override
-            public void onResponse(retrofit2.Call<UserInfoResponse> call, Response<UserInfoResponse> response) {
+            public void onResponse(retrofit2.Call<UserSummaryResponse> call, Response<UserSummaryResponse> response) {
                 if (!response.isSuccessful()) {
                     try {
                         JSONObject jObjError = new JSONObject(response.errorBody().string());
@@ -162,30 +177,37 @@ public class UserMyPageFragment extends Fragment {
                     }
 
                 } else {
+                    new Thread(() -> {
+                        String token = response.headers().get(KatiDatabase.AUTHORIZATION);
+                        database.katiDataDao().insert(new KatiData(KatiDatabase.AUTHORIZATION, token));
+                    }).start();
                     getActivity().runOnUiThread(() -> {
                         //  "님" 색상을 바꿔주는 메서드
-                        String temp=response.body().getName()+" 님";
+                        String temp=response.body().getUser_name()+" 님";
                         SpannableStringBuilder ssb = new SpannableStringBuilder(temp);
                         ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#FFFFFFFF")), temp.length()-1, temp.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                         userId.setText(ssb);
-
+                        favoriteNum.setText(response.body().getFavorite_count());
+                        reviewNum.setText(response.body().getReview_count());
                     });
 
                 }
-new Thread(()-> database.katiDataDao().insert(new KatiData(KatiDatabase.AUTHORIZATION,response.headers().get(KatiDatabase.AUTHORIZATION))));
-
 
             }
 
             @Override
-            public void onFailure(retrofit2.Call<UserInfoResponse> call, Throwable t) {
-                KatiDialog.showRetrofitFailDialog(getContext(),t.getMessage(),null);
+            public void onFailure(Call<UserSummaryResponse> call, Throwable t) {
+
             }
+
+
         };
         call.enqueue(callback);
 
 
     }
+
+
 
 
 }
