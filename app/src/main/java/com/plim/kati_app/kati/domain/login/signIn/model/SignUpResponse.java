@@ -14,6 +14,9 @@ public class SignUpResponse {
     @SerializedName("email")
     private String email;
 
-    @SerializedName("createDate")
-    private Timestamp createDate;
+    @SerializedName("message")
+    private String message;
+
+//    @SerializedName("createDate")
+//    private Timestamp createDate;
 }

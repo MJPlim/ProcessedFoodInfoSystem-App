@@ -21,16 +21,29 @@ public abstract class JSHViewModelFragment extends Fragment implements ViewModel
         super.onViewCreated(view, savedInstanceState);
 
         // Create Component
-        this.viewModelTool = new JSHViewModelTool(this.getActivity(), this);
+        this.viewModelTool = new JSHViewModelTool(this.getActivity(), this, this);
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        this.viewModelTool.startObserve();
+    }
+
     @Override
     public void onResume() {
         super.onResume();
-        this.viewModelTool.startObserve();
+//        this.viewModelTool.startObserve();
     }
     @Override
     public void onPause() {
         super.onPause();
+//        this.viewModelTool.stopObserve();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
         this.viewModelTool.stopObserve();
     }
 }

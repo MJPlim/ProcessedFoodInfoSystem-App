@@ -60,10 +60,12 @@ public class FindPasswordEmailInputFragmentEditText extends AbstractFragment_1Ed
     private class FindPasswordRequestCallback implements JSHRetrofitCallback<FindPasswordResponse> {
         @Override
         public void onSuccessResponse(Response<FindPasswordResponse> response) {
+            loadingDialog.hide();
             showCompletedDialog();
         }
         @Override
         public void onFailResponse(Response<FindPasswordResponse> response) {
+            loadingDialog.hide();
             showNoUserDialog();
         }
         @Override

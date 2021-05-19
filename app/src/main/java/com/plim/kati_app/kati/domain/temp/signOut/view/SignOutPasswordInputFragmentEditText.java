@@ -48,6 +48,10 @@ public class SignOutPasswordInputFragmentEditText extends AbstractFragment_1Edit
         }
         @Override
         public void onFailResponse(Response<WithdrawResponse> response) {
+            Log.d("TEST123", "onFailResponse "
+                    +response.message()+"\r\n"+
+                    response.toString()+"\r\n"
+            );
             try {
                 JSONObject jObjError = new JSONObject(response.errorBody().string());
                 Toast.makeText(getContext(), jObjError.getString(JSONOBJECT_ERROR_MESSAGE), Toast.LENGTH_LONG).show();
@@ -66,6 +70,8 @@ public class SignOutPasswordInputFragmentEditText extends AbstractFragment_1Edit
         WithdrawRequest withdrawRequest = new WithdrawRequest();
         withdrawRequest.setPassword(this.editText.getText().toString());
         String token = this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION);
+        Log.d("TEST123", "PW: "+this.editText.getText().toString());
+        Log.d("TEST123", "AUTHORIZATION: "+token);
         KatiRetrofitTool.getAPIWithAuthorizationToken(token).withdraw(withdrawRequest).enqueue(JSHRetrofitTool.getCallback(new SignOutRequestCallback()));
     }
 }

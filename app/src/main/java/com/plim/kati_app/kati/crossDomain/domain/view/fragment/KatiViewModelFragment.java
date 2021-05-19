@@ -33,6 +33,9 @@ public abstract class KatiViewModelFragment extends JSHViewModelFragment {
         super.onPause();
         KatiEntityTool.save(this.viewModelTool, this.entity);
     }
+    public void save(){
+        KatiEntityTool.save(this.viewModelTool, this.entity);
+    }
     @Override
     public void viewModelDataUpdated() {
         ArrayList<KatiEntity> katiEntityArray = KatiEntityTool.convertJSHEntityArrayToDomainArray(this.viewModelTool.getJSHEntities());

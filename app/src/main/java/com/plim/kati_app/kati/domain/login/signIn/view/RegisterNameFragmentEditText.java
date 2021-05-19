@@ -69,6 +69,8 @@ public class RegisterNameFragmentEditText extends AbstractFragment_1EditText {
      */
     private void signUp() {
         this.dataset.put(KatiEntity.EKatiData.NAME, this.editText.getText().toString());
+        this.save();
+
         this.loadingDialog= new LoadingDialog(this.getContext());
         this.loadingDialog.show();
 
@@ -76,6 +78,7 @@ public class RegisterNameFragmentEditText extends AbstractFragment_1EditText {
         signUpRequest.setEmail(this.dataset.get(KatiEntity.EKatiData.EMAIL));
         signUpRequest.setPassword(this.dataset.get(KatiEntity.EKatiData.PASSWORD));
         signUpRequest.setName(this.dataset.get(KatiEntity.EKatiData.NAME));
+
         KatiRetrofitTool.getAPI().signUp(signUpRequest).enqueue(JSHRetrofitTool.getCallback(new SignUpRequestCallback()));
     }
 }

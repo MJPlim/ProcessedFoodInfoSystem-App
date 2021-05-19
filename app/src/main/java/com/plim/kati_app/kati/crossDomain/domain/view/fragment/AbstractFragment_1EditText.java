@@ -1,11 +1,13 @@
 package com.plim.kati_app.kati.crossDomain.domain.view.fragment;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.plim.kati_app.R;
+import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 
 public abstract class AbstractFragment_1EditText extends KatiViewModelFragment {
 

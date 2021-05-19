@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
 import com.plim.kati_app.jshCrossDomain.domain.model.room.entity.JSHEntity;
+import com.plim.kati_app.jshCrossDomain.domain.view.JSHViewModelFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ public class JSHViewModelTool implements Observer {
         private final ArrayList<JSHEntity> jshEntities;
 
     // Constructor
-    public JSHViewModelTool(Activity activity, ViewModelToolCallback callback) {
+    public JSHViewModelTool(Activity activity, ViewModelStoreOwner viewModelStoreOwner, ViewModelToolCallback callback) {
         // Create Component
         this.jshEntities = new ArrayList<>();
 
@@ -31,7 +32,7 @@ public class JSHViewModelTool implements Observer {
         this.activity=activity;
 
         // Associate Model
-        this.model = new ViewModelProvider((ViewModelStoreOwner) activity,
+        this.model = new ViewModelProvider(viewModelStoreOwner,
                 ViewModelProvider.AndroidViewModelFactory.getInstance(activity.getApplication())).get(JSHViewModel.class);
         this.callback=callback;
     }

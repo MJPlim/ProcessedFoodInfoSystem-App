@@ -7,8 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.plim.kati_app.jshCrossDomain.domain.model.viewModel.JSHViewModelTool;
 import com.plim.kati_app.jshCrossDomain.domain.model.viewModel.ViewModelToolCallback;
 
-import java.util.ArrayList;
-
 public abstract class JSHViewModelActivity extends AppCompatActivity implements ViewModelToolCallback {
 
     // Component
@@ -19,7 +17,7 @@ public abstract class JSHViewModelActivity extends AppCompatActivity implements 
         super.onCreate(savedInstanceState);
 
         // Create Component
-        this.viewModelTool = new JSHViewModelTool(this, this);
+        this.viewModelTool = new JSHViewModelTool(this, this, this);
     }
     @Override
     protected void onResume() {
