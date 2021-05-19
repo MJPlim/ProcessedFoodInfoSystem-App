@@ -23,7 +23,7 @@ import retrofit2.http.Query;
 
 public interface KatiRestAPI {
     @POST("signup") Call<SignUpResponse> signUp(@Body SignUpRequest signUpRequest);
-    @POST("withdraw") Call<WithdrawResponse> withdraw(@Body WithdrawRequest user);
+    @POST("api/v1/user/withdraw") Call<WithdrawResponse> withdraw(@Body WithdrawRequest user);
     @POST("find-password") Call<FindPasswordResponse> findPassword(@Body FindPasswordRequest request);
     @POST("modify-password") Call<ModifyPasswordResponse> modifyPassword(@Body ModifyPasswordRequest request);
     @POST("login") Call<LoginRequest> login(@Body LoginRequest loginRequest);
