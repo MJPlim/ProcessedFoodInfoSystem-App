@@ -12,9 +12,17 @@ public class Constant { // ㅎㅎ Resource 로 옮겨조...
 
     public static final String KATI_DIALOG_CONFIRM = "확인";
     public static final String KATI_DIALOG_CANCEL = "취소";
+    public static final String RETROFIT_FAIL_CONNECTION_TITLE = "연결오류";
+    public static final String RETROFIT_FAIL_CONNECTION_MESSAGE = "인터넷 연결을 확인해주세요!";
+    public static final String RETROFIT_NOT_SUCCESS_TITLE_PREFIX = "비성공적";
 
     public static final String KATI_DIALOG_YES = "예";
     public static final String KATI_DIALOG_NO = "아니오";
+
+    public static final String BASIC_DATE_FORMAT = "YYYY-MM-dd";
+
+    public static final String ABSTRACT_TABLE_FRAGMENT_LARGE = "펼치기>";
+    public static final String ABSTRACT_TABLE_FRAGMENT_SMALL = "접기>";
 
     //mainActivity
     public static final String MAIN_ACTIVITY_FINISH_DIALOG_TITLE = "정말 종료하시겠습니까?";
@@ -28,7 +36,7 @@ public class Constant { // ㅎㅎ Resource 로 옮겨조...
     public static final String LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_TITLE = "성공적으로 로그아웃하였습니다.";
     public static final String LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_MESSAGE = "성공적으로 로그아웃하였습니다.";
     public static final String LOG_OUT_ACTIVITY_FAILURE_DIALOG_TITLE = "로그인 되어 있지 않습니다.";
-    public static final String LOG_OUT_ACTIVITY_FAILURE_DIALOG_MESSAGE = "로그인 되어 있지 않습니다.";
+    public static final String LOG_OUT_ACTIVITY_FAILURE_DIALOG_MESSAGE = "로그인하고 다시 시도해 주세요";
     public static final String FIND_USER_PASSWORD_DIALOG_TITLE="임시 비밀번호가 발급되었습니다.";
     public static final String FIND_USER_PASSWORD_DIALOG_MESSAGE="메일함에서 임시 비밀번호 메일을 확인해 주세요.";
 
@@ -64,6 +72,19 @@ public class Constant { // ㅎㅎ Resource 로 옮겨조...
 
     public static final String FOOD_SEARCH_RECOMMENDATION_FRAGMENT_BUNDLE_KEY="text";
 
+    public enum EAllergyList{
+        새우,게,우유,아몬드,잣,호두,땅콩,대두,밀,메밀,메추리알,난류,계란,소고기,닭고기,쇠고기,돼지고기,오징어,조개류,복숭아,토마토,아황산류;
+    }
+
+public static final String ALLERGY_EXPANDABLE_LIST_TITLE="알레르기";
+    public static final String ALLERGY_MODIFY_SUCCESS_DIALOG_TITLE="알레르기 정보 저장 성공";
+    public static final String ALLERGY_MODIFY_SUCCESS_DIALOG_MESSAGE="알레르기 정보를 성공적으로 저장하였습니다.";
+
+    public static final String USER_MODIFY_SUCCESS_DIALOG_TITLE="사용자 정보 저장 성공";
+    public static final String USER_MODIFY_SUCCESS_DIALOG_MESSAGE="사용자 정보를 성공적으로 저장하였습니다.";
+
+    public static final String ALLERGY_LIST_NO_SUCH_ITEM_TITLE="해당하는 아이템 없음";
+    public static final String ALLERGY_LIST_NO_SUCH_ITEM_MESSAGE_SUFFIX="(이)라는 아이템이 존재하지 않습니다.";
 
     //product detail Activity
     public static final String DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_FOOD_ID_EXTRA="foodId";
@@ -75,10 +96,13 @@ public class Constant { // ㅎㅎ Resource 로 옮겨조...
 
     public static final String ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_NAME="name";
     public static final String ABSTRACT_TABLE_FRAGMENT_BUNDLE_TABLE_HASH_MAP="hashMap";
-    public static final String ABSTRACT_TABLE_FRAGMENT_LARGE="펼치기>";
-    public static final String ABSTRACT_TABLE_FRAGMENT_SMALL="접기>";
 
     public static final String DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_BUNDLE_KEY="detailProductInfo";
+
+
+    public static final String SAVE_ALLERGY_LIST_FRAGMENT_BUNDLE_KEY="saveAllergyList";
+    public static final String SAVE_ALLERGY_LIST_RESULT_FRAGMENT_BUNDLE_KEY="AllergyListSaved";
+
     public static final String DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_TABLE_NAME="제품정보";
     public static final String DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_PRODUCT_NAME="제품명";
     public static final String DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_MANUFACTURER_NAME="회사명";

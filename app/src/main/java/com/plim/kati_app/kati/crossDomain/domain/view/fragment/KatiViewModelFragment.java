@@ -1,5 +1,6 @@
 package com.plim.kati_app.kati.crossDomain.domain.view.fragment;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +13,8 @@ import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntityTool;
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.jshCrossDomain.domain.model.room.entity.JSHEntity;
 import com.plim.kati_app.jshCrossDomain.domain.view.JSHViewModelFragment;
+import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
+import com.plim.kati_app.kati.domain.login.login.view.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -62,4 +65,12 @@ public abstract class KatiViewModelFragment extends JSHViewModelFragment {
     public void startActivity(Class<?> cls){ this.startActivity(new Intent(this.getContext(), cls)); }
     protected void navigateTo(int id){ Navigation.findNavController(this.getView()).navigate(id); }
     protected String getStringOfId(int id){ return this.getResources().getString(id); }
+
+
+    protected void showDialog(String title, String message, DialogInterface.OnClickListener listener){
+        KatiDialog.simplerAlertDialog(this.getActivity(),title,message,listener);
+    }
+    protected void notLoginedDialog(){
+        KatiDialog.NotLogInDialog(this.getActivity(),(dialog,which)->this.startActivity(LoginActivity.class));
+    }
 }

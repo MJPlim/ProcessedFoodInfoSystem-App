@@ -106,6 +106,8 @@
     <string name="reviewItem_reviewScoreTextView_text">3.0</string>
     <string name="reviewItem_EditDateTextView_text">2021년 05월 01일 11시 00분 작성</string>
     <string name="reviewItem_ProductNameTextView_text">제품명</string>
+    <string name="tempActivity_userDataEditButton_text">유저 정보 수정</string>
+    <string name="expandableItemListFragment_saveButton_text">저장하기</string>
 
 
 </resources>

@@ -63,8 +63,8 @@ public class ProductInfoFragment extends KatiFoodFragment {
 
     private void search() {
         this.loadingDialog.show();
-        if (!isAd) { KatiRetrofitTool.getAPI().getFoodDetailByFoodId(this.foodId).enqueue(JSHRetrofitTool.getCallback(new FoodDetailRequestCallback())); }
-        else { KatiRetrofitTool.getAPI().getAdvertisementFoodDetail(this.foodId).enqueue(JSHRetrofitTool.getCallback(new FoodDetailRequestCallback())); }
+//        if (!isAd) { KatiRetrofitTool.getAPI().getFoodDetailByFoodId(this.foodId).enqueue(JSHRetrofitTool.getCallback(new FoodDetailRequestCallback())); }
+//        else { KatiRetrofitTool.getAPI().getAdvertisementFoodDetail(this.foodId).enqueue(JSHRetrofitTool.getCallback(new FoodDetailRequestCallback())); }
     }
     private class FoodDetailRequestCallback implements JSHRetrofitCallback<FoodDetailResponse> {
         @Override

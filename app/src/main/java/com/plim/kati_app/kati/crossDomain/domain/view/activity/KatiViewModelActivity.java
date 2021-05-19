@@ -1,11 +1,13 @@
 package com.plim.kati_app.kati.crossDomain.domain.view.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntityTool;
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.jshCrossDomain.domain.model.room.entity.JSHEntity;
 import com.plim.kati_app.jshCrossDomain.domain.view.JSHViewModelActivity;
+import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -46,4 +48,7 @@ public abstract class KatiViewModelActivity extends JSHViewModelActivity {
     public abstract void katiEntityUpdated();
 
     public void startActivity(Class<?> cls){ this.startActivity(new Intent(this, cls)); }
+    protected void showDialog(String title, String message, DialogInterface.OnClickListener listener){
+        KatiDialog.simplerAlertDialog(this,title,message,listener);
+    }
 }

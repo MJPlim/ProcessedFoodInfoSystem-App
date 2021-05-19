@@ -64,15 +64,15 @@ public class SearchSearchResultListFragment extends KatiSearchFragment {
         this.loadSearchResult();
     }
     private void loadAdvertisement() {
-        KatiRetrofitTool.getAPI().getAdvertisementFoodList().enqueue(JSHRetrofitTool.getCallback(new AdListRequestCallback()));
+//        KatiRetrofitTool.getAPI().getAdvertisementFoodList().enqueue(JSHRetrofitTool.getCallback(new AdListRequestCallback()));
     }
     private void loadSearchResult() {
         dialog.show();
-        if (this.searchModel.getSearchMode().equals(Constant.ESearchMode.제품.name())) {
-            KatiRetrofitTool.getAPI().getSearchResultByFoodName(this.searchModel.getSearchText()).enqueue(JSHRetrofitTool.getCallback(new SearchRequestCallback()));
-        } else {
-            KatiRetrofitTool.getAPI().getSearchResultByCompanyName(this.searchModel.getSearchText()).enqueue(JSHRetrofitTool.getCallback(new SearchRequestCallback()));
-        }
+//        if (this.searchModel.getSearchMode().equals(Constant.ESearchMode.제품.name())) {
+//            KatiRetrofitTool.getAPI().getSearchResultByFoodName(this.searchModel.getSearchText()).enqueue(JSHRetrofitTool.getCallback(new SearchRequestCallback()));
+//        } else {
+//            KatiRetrofitTool.getAPI().getSearchResultByCompanyName(this.searchModel.getSearchText()).enqueue(JSHRetrofitTool.getCallback(new SearchRequestCallback()));
+//        }
     }
 
     /**

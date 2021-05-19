@@ -39,7 +39,7 @@ public class LogOutFragment extends KatiViewModelFragment {
     }
     public void showOkDialog(){ this.showDialog(Constant.LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_TITLE, Constant.LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_MESSAGE); }
     public void showNoDialog(){ this.showDialog(Constant.LOG_OUT_ACTIVITY_FAILURE_DIALOG_TITLE, Constant.LOG_OUT_ACTIVITY_FAILURE_DIALOG_MESSAGE); }
-    public void showDialog(String title, String message){ KatiDialog.simplerAlertDialog(this.getActivity(), title, message, (dialog, which) -> this.startActivity(TempMainActivity.class)); }
+    public void showDialog(String title, String message){ super.showDialog(title, message, (dialog, which) -> this.startActivity(TempMainActivity.class)); }
 
     @Override
     protected void associateView(View view) {
