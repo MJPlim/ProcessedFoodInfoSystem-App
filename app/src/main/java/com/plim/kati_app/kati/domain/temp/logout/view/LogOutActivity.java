@@ -20,20 +20,7 @@ public class LogOutActivity extends KatiViewModelActivity {
         this.setContentView(R.layout.activity_log_out);
     }
     @Override
-    public void katiEntityUpdated() {
-        if(this.dataset.containsKey(KatiEntity.EKatiData.AUTHORIZATION)){
-            this.dataset.remove(KatiEntity.EKatiData.AUTHORIZATION);
-            this.dataset.remove(KatiEntity.EKatiData.EMAIL);
-            this.dataset.remove(KatiEntity.EKatiData.PASSWORD);
-            this.dataset.put(KatiEntity.EKatiData.AUTO_LOGIN, KatiEntity.EKatiData.FALSE.name());
-            this.showOkDialog();
-        }else{
-            this.showNoDialog();
-        }
-    }
-    public void showOkDialog(){ this.showDialog(Constant.LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_TITLE, Constant.LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_MESSAGE); }
-    public void showNoDialog(){ this.showDialog(Constant.LOG_OUT_ACTIVITY_FAILURE_DIALOG_TITLE, Constant.LOG_OUT_ACTIVITY_FAILURE_DIALOG_MESSAGE); }
-    public void showDialog(String title, String message){ KatiDialog.simplerAlertDialog(this, title, message, (dialog, which) -> this.startActivity(TempMainActivity.class)); }
+    public void katiEntityUpdated() { }
 
     @Override protected void associateView() { }
     @Override protected void initializeView() { }

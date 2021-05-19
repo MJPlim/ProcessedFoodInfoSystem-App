@@ -32,4 +32,13 @@ public interface KatiRestAPI {
     @GET("/api/v1/food/findFood/foodDetail") Call<FoodDetailResponse> getFoodDetailByFoodId(@Query("foodId") Long foodId);
     @GET("/api/v1/advertisement/foodDetail") Call<FoodDetailResponse> getAdvertisementFoodDetail(@Query("adId") Long adId);
     @GET("api/v1/advertisement/ads") Call<List<AdvertisementResponse>> getAdvertisementFoodList();
+
+
+
+
+
+
+
+
+
 }

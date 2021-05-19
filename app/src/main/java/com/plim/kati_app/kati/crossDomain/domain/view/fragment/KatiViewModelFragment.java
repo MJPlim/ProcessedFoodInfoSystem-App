@@ -22,7 +22,7 @@ public abstract class KatiViewModelFragment extends JSHViewModelFragment {
         // Model
         protected KatiEntity entity;
         protected Map<KatiEntity.EKatiData, String> dataset;
-        protected ArrayList<String> searchWords;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,7 +47,6 @@ public abstract class KatiViewModelFragment extends JSHViewModelFragment {
         }else{
             this.entity = katiEntityArray.get(0);
             this.dataset = this.entity.getDataset();
-            this.searchWords = this.entity.getSearchWords();
 
             this.associateView(this.getView());
             this.initializeView();
