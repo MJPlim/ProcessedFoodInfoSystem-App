@@ -94,14 +94,23 @@ public class UserMyPageFragment extends KatiViewModelFragment {
         this.restoreEmailText.setOnClickListener(v -> this.moveToRestoreEmailActivity());
         this.modifyUserText.setOnClickListener(v -> Toast.makeText(getContext(), "미구현", Toast.LENGTH_LONG).show());
         this.changePasswordText.setOnClickListener(v -> this.moveToChangePasswordActivity());
-        this.getUserInfo();
+        if(this.dataset.containsKey(KatiEntity.EKatiData.AUTHORIZATION)){
+            this.getUserInfo();
+        }
+
     }
 
     @Override
     protected void katiEntityUpdated() {
-        if (!this.dataset.containsKey(KatiEntity.EKatiData.AUTHORIZATION)) {
-            this.showNotLoginedDialog();
+        if (this.dataset.containsKey(KatiEntity.EKatiData.AUTHORIZATION)) {
+
+        } else {
+            KatiDialog.simplerAlertDialog(this.getActivity(),
+                    LOG_OUT_ACTIVITY_FAILURE_DIALOG_TITLE, LOG_OUT_ACTIVITY_FAILURE_DIALOG_MESSAGE,
+                    (dialog, which) -> startMainActivity()
+            );
         }
+
     }
 
     /**
@@ -114,11 +123,8 @@ public class UserMyPageFragment extends KatiViewModelFragment {
         startActivity(intent);
     }
 
-    private void showNotLoginedDialog() {
-        KatiDialog.simplerAlertDialog(this.getActivity(),
-                LOG_OUT_ACTIVITY_FAILURE_DIALOG_TITLE, LOG_OUT_ACTIVITY_FAILURE_DIALOG_TITLE,
-                (dialog, which) -> this.startActivity(TempMainActivity.class)
-        );
+    public void startMainActivity() {
+        this.startActivity(new Intent(this.getContext(), TempMainActivity.class));
     }
 
     private void moveToLogOutActivity() {
@@ -152,6 +158,7 @@ public class UserMyPageFragment extends KatiViewModelFragment {
             SpannableStringBuilder ssb = new SpannableStringBuilder(temp);
             ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#FFFFFFFF")), temp.length() - 1, temp.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             userId.setText(ssb);
+            dataset.put(KatiEntity.EKatiData.NAME,response.body().getUser_name());
             favoriteNum.setText(response.body().getFavorite_count());
             reviewNum.setText(response.body().getReview_count());
         }
