@@ -116,6 +116,21 @@
     <string name="reviewItem_EditDateTextView_text">2021년 05월 01일 11시 00분 작성</string>
     <string name="reviewItem_ProductNameTextView_text">제품명</string>
 
+    <!-- MyPageFragment !-->
+    <string name="userPageFragment_logoutButton_text">로그아웃</string>
+    <string name="userPageFragment_myFavorite_text">내가 찜한 제품</string>
+    <string name="userPageFragment_myReview_text">내가 쓴 리뷰</string>
+    <string name="userPageFragment_myReply_text">내가 쓴 댓글</string>
+    <string name="userPageFragment_myPost_text">내가 쓴 글</string>
+    <string name="userPageFragment_restore_email_text">복구 이메일 등록</string>
+    <string name="userPageFragment_customerCenter_text">고객 센터</string>
+    <string name="userPageFragment_modifyUser_text">개인 정보 수정</string>
+    <string name="userPageFragment_changePassword_text">비밀번호 변경</string>
+    <string name="userPageFragment_notice_text">공지사항</string>
+    <string name="userPageFragment_setting_text">설정</string>
+    <string name="userPageFragment_default_text">0</string>
+    <string name="userPageFragment_default_numOfFood">총 0개</string>
+
 
 </resources>
 

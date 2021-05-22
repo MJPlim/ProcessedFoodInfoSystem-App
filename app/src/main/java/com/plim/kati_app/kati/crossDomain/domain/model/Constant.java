@@ -45,6 +45,9 @@ public class Constant { // ㅎㅎ Resource 로 옮겨조...
 
     //changePasswordActivity
     public static final String CHANGE_PASSWORD_TITLE="비밀번호 변경";
+    public static final String CHANGE_PASSWORD_DIFF_ERROR="새 비밀번호를 동일하게 입력해 주세요.";
+
+
     public static final String COMPLETE_CHANGE_PASSWORD_TITLE="비밀번호 변경이 완료되었습니다.";
     public static final String COMPLETE_CHANGE_PASSWORD_MESSAGE="변경된 비밀번호로 다시 로그인 해주세요.";
     public static final String BEFORE_PASSWORD_HINT="현재 비밀번호";
@@ -69,6 +72,7 @@ public class Constant { // ㅎㅎ Resource 로 옮겨조...
 
     //product detail Activity
     public static final String DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_FOOD_ID_EXTRA="foodId";
+    public static final String DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_FOOD_ID_BARCODE="foodId";
     public static final String DETAIL_PRODUCT_INFO_FRAGMENT_SHOPPING_LINK_="https://msearch.shopping.naver.com/search/all?query=";
 
     public static final String DETAIL_PHOTO_VIEW_FRAGMENT_BUNDLE_KEY="detailImage";

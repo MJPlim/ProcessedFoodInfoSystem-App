@@ -1,6 +1,5 @@
 package com.plim.kati_app.kati.domain;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -10,6 +9,7 @@ import com.plim.kati_app.kati.crossDomain.domain.model.Constant;
 import com.plim.kati_app.kati.domain.login.login.model.LoginRequest;
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.kati.crossDomain.domain.view.activity.KatiViewModelActivity;
+import com.plim.kati_app.kati.domain.mypage.main.view.UserMyPageActivity;
 import com.plim.kati_app.kati.domain.search.search.view.FoodSearchActivity;
 import com.plim.kati_app.kati.domain.login.login.view.LoginActivity;
 import com.plim.kati_app.kati.domain.changePW.view.ChangePasswordActivity;
@@ -39,6 +39,7 @@ public class TempMainActivity extends KatiViewModelActivity { // 이게 끝나�
         this.findViewById(R.id.mainActivity_searchTestButton).setOnClickListener(v -> this.startActivity(FoodSearchActivity.class));
         this.findViewById(R.id.mainActivity_changePWButton).setOnClickListener(v -> this.startActivity(ChangePasswordActivity.class));
         this.findViewById(R.id.mainActivity_RankingTestButton).setOnClickListener(v -> this.startActivity(RankingActivity.class));
+        this.findViewById(R.id.mainActivity_myPageTestButton).setOnClickListener(v -> this.startActivity(UserMyPageActivity.class));
 
     }
     @Override public void katiEntityUpdated() { this.autoLogin(); }

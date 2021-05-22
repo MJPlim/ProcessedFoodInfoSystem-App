@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.plim.kati_app">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -17,7 +18,6 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".kati.domain.search.foodInfo.view.review.WriteReviewActivity"></activity>
         <activity android:name=".kati.domain.search.foodInfo.view.FoodInfoActivity" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAH63IC9w2B6lP4RYw05b7qAyNja8gOyjU" />
@@ -37,12 +37,22 @@
         <activity android:name=".kati.domain.temp.setSecondEmail.view.SetSecondEmailActivity" />
         <activity android:name=".kati.domain.temp.itemRank.view.RankingActivity" />
         <activity android:name=".kati.domain.search.search.view.FoodSearchActivity" />
+        <activity android:name=".kati.domain.search.search.view.searchBar.barcode.view.BarcodeActivity" />
+        <activity
+            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+            android:screenOrientation="portrait"
+            tools:replace="android:screenOrientation"
+            android:stateNotNeeded="true"> </activity>
         <activity android:name=".kati.domain.temp.signOut.view.SignOutActivity" />
         <activity android:name=".kati.domain.temp.TempActivity" />
         <activity android:name=".kati.domain.login.signIn.view.SignInActivity" />
         <activity android:name=".kati.domain.temp.logout.view.LogOutActivity" />
         <activity android:name=".kati.domain.login.login.view.LoginActivity" />
         <activity android:name=".kati.domain.changePW.view.ChangePasswordActivity" />
+        <activity android:name=".kati.domain.mypage.main.view.UserMyPageActivity"/>
+
+
+
 
     </application>
 
