@@ -5,7 +5,7 @@ import com.plim.kati_app.kati.domain.changePW.model.ModifyPasswordResponse;
 import com.plim.kati_app.kati.domain.login.pwFind.model.FindPasswordRequest;
 import com.plim.kati_app.kati.domain.login.pwFind.model.FindPasswordResponse;
 import com.plim.kati_app.kati.domain.search.foodInfo.model.FoodDetailResponse;
-import com.plim.kati_app.kati.domain.search.search.model.FoodResponse;
+import com.plim.kati_app.kati.domain.search.search.model.FindFoodBySortingResponse;
 import com.plim.kati_app.kati.domain.temp.editData.allergy.model.CreateUserAllergyRequest;
 import com.plim.kati_app.kati.domain.temp.editData.allergy.model.CreateUserAllergyResponse;
 import com.plim.kati_app.kati.domain.temp.editData.allergy.model.ReadUserAllergyResponse;
@@ -59,23 +59,23 @@ public interface KatiRestAPI {
 
 
     //제품 검색
-//    @GET("/api/v1/food/getFoodListBySorting")
-//    Call<FindFoodBySortingResponse> getNameFoodListBySorting(
-//            @Query("pageNo") int pageNo,
-//            @Query("size") int size,
-//            @Query("sort") String sortElement,
-//            @Query("foodName") String foodName,
-//            @Query("allergies") List<String> allergyList
-//    );
+    @GET("/api/v1/food/getFoodListBySorting")
+    Call<FindFoodBySortingResponse> getNameFoodListBySorting(
+            @Query("pageNo") int pageNo,
+            @Query("size") int size,
+            @Query("sort") String sortElement,
+            @Query("foodName") String foodName,
+            @Query("allergies") List<String> allergyList
+    );
 
-//    @GET("/api/v1/food/getFoodListBySorting")
-//    Call<FindFoodBySortingResponse> getManufacturerFoodListBySorting(
-//            @Query("pageNo") int pageNo,
-//            @Query("size") int size,
-//            @Query("sort") String sortElement,
-//            @Query("manufacturerName") String manufacturerName,
-//            @Query("allergies") List<String> allergyList
-//    );
+    @GET("/api/v1/food/getFoodListBySorting")
+    Call<FindFoodBySortingResponse> getManufacturerFoodListBySorting(
+            @Query("pageNo") int pageNo,
+            @Query("size") int size,
+            @Query("sort") String sortElement,
+            @Query("manufacturerName") String manufacturerName,
+            @Query("allergies") List<String> allergyList
+    );
 
     @GET("/api/v1/food/findFood/foodDetail")
     Call<FoodDetailResponse> getFoodDetailByFoodId(@Query("foodId") Long foodId);

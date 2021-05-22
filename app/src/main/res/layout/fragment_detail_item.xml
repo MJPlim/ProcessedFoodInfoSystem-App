@@ -11,7 +11,7 @@
         android:id="@+id/imageFood"
         android:layout_width="200dp"
         android:layout_height="240dp"
-        android:background="@drawable/food_round_rect"
+        android:background="@drawable/food_search_round_rect"
         android:padding="10dp"
         android:layout_marginTop="30dp"
 

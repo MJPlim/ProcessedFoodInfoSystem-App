@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
 
-    android:background="@drawable/food_round_rect"
+    android:background="@drawable/food_search_round_rect"
     android:padding="10dp">
 
     <Spinner

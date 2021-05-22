@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,10 +29,13 @@ public class LogOutFragment extends KatiViewModelFragment {
     @Override
     public void katiEntityUpdated() {
         if(this.dataset.containsKey(KatiEntity.EKatiData.AUTHORIZATION)){
+
             this.dataset.remove(KatiEntity.EKatiData.AUTHORIZATION);
             this.dataset.remove(KatiEntity.EKatiData.EMAIL);
             this.dataset.remove(KatiEntity.EKatiData.PASSWORD);
             this.dataset.put(KatiEntity.EKatiData.AUTO_LOGIN, KatiEntity.EKatiData.FALSE.name());
+            this.save();
+            Log.d("디버그","외않돼!!"+this.dataset.containsKey(KatiEntity.EKatiData.AUTHORIZATION));
             this.showOkDialog();
         }else{
             this.showNoDialog();

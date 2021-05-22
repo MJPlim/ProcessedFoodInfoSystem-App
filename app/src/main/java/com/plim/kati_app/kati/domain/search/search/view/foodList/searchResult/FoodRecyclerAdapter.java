@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.plim.kati_app.R;
-import com.plim.kati_app.kati.domain.search.search.model.FoodResponse;
 import com.plim.kati_app.kati.domain.search.foodInfo.view.FoodInfoActivity;
+import com.plim.kati_app.kati.domain.search.search.model.FoodResponse;
 
 import java.util.Vector;
 

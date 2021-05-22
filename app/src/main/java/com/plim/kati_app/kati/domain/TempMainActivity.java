@@ -29,7 +29,10 @@ public class TempMainActivity extends KatiViewModelActivity { // 이게 끝나�
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-    @Override protected void associateView() { }
+
+    @Override
+    protected void associateView() { }
+
     @Override
     protected void initializeView() {
         this.findViewById(R.id.mainActivity_tempButton).setOnClickListener(v -> this.startActivity(TempActivity.class));
@@ -37,29 +40,27 @@ public class TempMainActivity extends KatiViewModelActivity { // 이게 끝나�
         this.findViewById(R.id.mainActivity_searchTestButton).setOnClickListener(v -> this.startActivity(FoodSearchActivity.class));
         this.findViewById(R.id.mainActivity_changePWButton).setOnClickListener(v -> this.startActivity(ChangePasswordActivity.class));
     }
-    @Override public void katiEntityUpdated() { this.autoLogin(); }
-    @Override protected void onDestroy() { super.onDestroy(); this.autoLogout(); }
 
-    /**
-     * System Callback
-     */
+    @Override
+    public void katiEntityUpdated() {
+        this.autoLogin();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        this.autoLogout();
+    }
+
+
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         this.showSystemOffCheckDialog();
     }
-    private void autoLogin() {
-        if(this.dataset.get(KatiEntity.EKatiData.AUTO_LOGIN).equals(KatiEntity.EKatiData.TRUE.name())){
-            LoginRequest loginRequest = new LoginRequest(this.dataset.get(KatiEntity.EKatiData.EMAIL), this.dataset.get(KatiEntity.EKatiData.PASSWORD));
-            KatiRetrofitTool.getAPIWithNullConverter().login(loginRequest).enqueue(JSHRetrofitTool.getCallback(new LoginRequestCallback()));
-        }
-    }
-    private void autoLogout() {
-        if(this.dataset.get(KatiEntity.EKatiData.AUTO_LOGIN).equals(KatiEntity.EKatiData.TRUE.name())
-                && this.dataset.containsKey(KatiEntity.EKatiData.AUTHORIZATION)){
-            this.dataset.remove(KatiEntity.EKatiData.AUTHORIZATION);
-        }
-    }
+
+
+
+
 
     /**
      * Callback
@@ -69,26 +70,49 @@ public class TempMainActivity extends KatiViewModelActivity { // 이게 끝나�
         public void onSuccessResponse(Response<LoginRequest> response) {
             dataset.put(KatiEntity.EKatiData.AUTHORIZATION, response.headers().get("Authorization"));
         }
+
         @Override
         public void onFailResponse(Response<LoginRequest> response) {
             showLoginFailDialog();
         }
+
         @Override
         public void onConnectionFail(Throwable t) {
             Log.e("연결실패", t.getMessage());
         }
     }
-    public void showSystemOffCheckDialog(){
+
+    /**
+     * method
+     */
+    private void autoLogin() {
+        if (this.dataset.get(KatiEntity.EKatiData.AUTO_LOGIN).equals(KatiEntity.EKatiData.TRUE.name())) {
+            LoginRequest loginRequest = new LoginRequest(this.dataset.get(KatiEntity.EKatiData.EMAIL), this.dataset.get(KatiEntity.EKatiData.PASSWORD));
+            KatiRetrofitTool.getAPIWithNullConverter().login(loginRequest).enqueue(JSHRetrofitTool.getCallback(new LoginRequestCallback()));
+        }
+    }
+
+    private void autoLogout() {
+        if (this.dataset.get(KatiEntity.EKatiData.AUTO_LOGIN).equals(KatiEntity.EKatiData.TRUE.name())
+                && this.dataset.containsKey(KatiEntity.EKatiData.AUTHORIZATION)) {
+            this.dataset.remove(KatiEntity.EKatiData.AUTHORIZATION);
+        }
+    }
+
+    public void showSystemOffCheckDialog() {
         KatiDialog.simplerAlertDialog(this,
-            Constant.MAIN_ACTIVITY_FINISH_DIALOG_TITLE, Constant.MAIN_ACTIVITY_FINISH_DIALOG_MESSAGE,
-            (dialog, which) -> { this.finish(); this.finishAffinity();}
+                Constant.MAIN_ACTIVITY_FINISH_DIALOG_TITLE, Constant.MAIN_ACTIVITY_FINISH_DIALOG_MESSAGE,
+                (dialog, which) -> {
+                    this.finish();
+                    this.finishAffinity();
+                }
         );
     }
 
     private void showLoginFailDialog() {
         KatiDialog.simplerAlertDialog(this,
-            Constant.AUTO_LOGIN_SERVICE_FAIL_DIALOG_TITLE, Constant.AUTO_LOGIN_SERVICE_FAIL_DIALOG_MESSAGE,
-            null
+                Constant.AUTO_LOGIN_SERVICE_FAIL_DIALOG_TITLE, Constant.AUTO_LOGIN_SERVICE_FAIL_DIALOG_MESSAGE,
+                null
         );
     }
 }

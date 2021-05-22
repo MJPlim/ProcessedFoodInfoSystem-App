@@ -26,13 +26,15 @@ import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.ALLERGY_M
 
 public class UserAllergyListFragment extends AbstractExpandableItemList {
 
+
     @Override
-    protected void katiEntityUpdated() {
-        if (this.dataset.containsKey(KatiEntity.EKatiData.AUTHORIZATION)) {
-            this.loadAllergy(this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION));
-        } else {
-            this.notLoginedDialog();
-        }
+    protected void katiEntityUpdatedAndLogin() {
+        this.loadAllergy(this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION));
+    }
+
+    @Override
+    protected void katiEntityUpdatedAndNoLogin() {
+        this.notLoginDialog();
     }
 
     @Override

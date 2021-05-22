@@ -73,6 +73,7 @@ public class LoginFragment extends KatiViewModelFragment {
                 (dialog, which) -> startMainActivity()
             );
         }
+        Log.d("디버그","로그인 할 때는"+this.dataset.containsKey(KatiEntity.EKatiData.AUTHORIZATION));
     }
     private class LoginRequestCallback implements JSHRetrofitCallback<LoginRequest> {
         @Override
@@ -80,6 +81,7 @@ public class LoginFragment extends KatiViewModelFragment {
             dataset.put(KatiEntity.EKatiData.AUTHORIZATION, response.headers().get("Authorization"));
             dataset.put(KatiEntity.EKatiData.EMAIL, id.getText().toString());
             dataset.put(KatiEntity.EKatiData.PASSWORD, pw.getText().toString());
+            save();
             KatiDialog.simplerAlertDialog(getActivity(),
                 R.string.login_success_dialog, R.string.login_success_content_dialog,
                 (dialog, which) -> startMainActivity()

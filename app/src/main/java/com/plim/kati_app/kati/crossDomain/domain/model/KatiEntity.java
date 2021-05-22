@@ -12,7 +12,8 @@ import lombok.Setter;
 public class KatiEntity {
 
     // Static Value
-    public enum EKatiData {AUTHORIZATION, AUTO_LOGIN, EMAIL, PASSWORD, NAME, TRUE, FALSE}
+    public enum EKatiData {AUTHORIZATION, AUTO_LOGIN, EMAIL, PASSWORD, NAME, TRUE, FALSE,SEARCH_WORDS;
+    }
 
     // Component
     private Map<EKatiData, String> dataset;  // email, pw, authorization... 등 엥간한 것들을 여기 저장

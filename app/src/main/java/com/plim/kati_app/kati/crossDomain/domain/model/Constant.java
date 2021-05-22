@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 public class Constant { // ㅎㅎ Resource 로 옮겨조...
 
@@ -90,6 +91,9 @@ public static final String ALLERGY_EXPANDABLE_LIST_TITLE="알레르기";
     public static final String DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_FOOD_ID_EXTRA="foodId";
     public static final String DETAIL_PRODUCT_INFO_FRAGMENT_SHOPPING_LINK_="https://msearch.shopping.naver.com/search/all?query=";
 
+    public static final String ALLERGY_FILTER_INTENT_DIALOG_TITLE="알레르기 필터를 수정하시겠습니까?";
+    public static final String ALLERGY_FILTER_INTENT_DIALOG_MESSAGE="수정하기 위해 수정 페이지로 이동합니다.";
+
     public static final String DETAIL_PHOTO_VIEW_FRAGMENT_BUNDLE_KEY="detailImage";
     public static final String DETAIL_PHOTO_VIEW_FRAGMENT_BUNDLE_FRONT_IMAGE="frontImage";
     public static final String DETAIL_PHOTO_VIEW_FRAGMENT_BUNDLE_BACK_IMAGE="backImage";
@@ -144,38 +148,122 @@ public static final String ALLERGY_EXPANDABLE_LIST_TITLE="알레르기";
 
  //foodSearchResultListFragment
 
+    @Getter
+    @RequiredArgsConstructor
+    public enum SortElement {
+
+        RANK("ranking"),
+        MANUFACTURER("manufacturer"),
+        REVIEW_COUNT("reviewCount");
+
+        private final String message;
+    }
+
     public static final String FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE="연결 실패";
     @AllArgsConstructor
     @Getter
     public enum ECategory {
-        tea("차", ETeaCategory.values()), drink("음료", EDrinkCategory.values()), simple("간편식", ESimpleCategory.values());
+        snack("간식",ESnackCategory.values()),
+        dairy("유제품", EDairyCategory.values()),
+        drink("음료/차", EDrinkCategory.values()),
+        condiment("조미료", ECondimentCategoty.values()),
+        meat("육류", EMeatCategory.values()),
+        farm("농수산물",EFarmCategory.values()),
+        kimchi("김치",EKimchiCategory.values()),
+        mealkit("즉석조리",EMealkitCategory.values()),
+        etcmaterial("식재료",EMaterialCategory.values()),
+        etc("기타",EEtcCategory.values()),
+        ;
         private String name;
         private EChildCategory[] childCategories;
 
         public Vector<String> getChildNames() {
             Vector<String> childNames = new Vector<>();
             for (EChildCategory childCategory : childCategories)
-                childNames.add(childCategory.name());
+                childNames.add(childCategory.getName());
             return childNames;
         }
     }
+
     public interface EChildCategory {
-        String name();
+        String getName();
     }
 
-    public enum ETeaCategory implements EChildCategory {
-        커피, 핫초코, 아이스티, 녹차, 홍차, 보이차, 꽃차;
-
+    @AllArgsConstructor
+    @Getter
+    public enum EDairyCategory implements EChildCategory {
+        dairy("유제품");
+        private String name;
     }
 
+    @AllArgsConstructor
+    @Getter
     public enum EDrinkCategory implements EChildCategory {
-        생수, 콜라, 사이다, 기타_탄산음료, 보리차, 두유, 과채주스, 전통주, 어린이음료;
+        drink("음료"), coffee("커피"), tea("커피/차");
+        private String name;
     }
 
-    public enum ESimpleCategory implements EChildCategory {
-        라면, 즉석밥, 즉석국, 통조림, 카레, 짜장, 밀키트;
+    @AllArgsConstructor
+    @Getter
+    public enum ECondimentCategoty implements EChildCategory {
+        sugar("설탕"), salt("소금"), sauce("소스"), jang("장류");
+        private String name;
     }
 
+    @AllArgsConstructor
+    @Getter
+    public enum EMeatCategory implements EChildCategory {
+        meat("육류"), ham("햄/소시지");
+        private String name;
+    }
+
+    @AllArgsConstructor
+    @Getter
+    public enum ESnackCategory implements EChildCategory {
+        snack("과자"), tteok("떡"), bread("빵"),candy("사탕/껌/젤리"), icecream("아이스크림"),chocolate("초콜릿");
+        private String name;
+    }
+
+    @AllArgsConstructor
+    @Getter
+    public enum EFarmCategory implements EChildCategory {
+        egg("계란"), fruit("과일/채소"), gim("김"),fish("수산물"),peanut("견과"),grain("곡류");
+        private String name;
+    }
+
+
+    @AllArgsConstructor
+    @Getter
+    public enum EKimchiCategory implements EChildCategory {
+        kimchi("김치"), jeokgal("젓갈");
+        private String name;
+    }
+
+    @AllArgsConstructor
+    @Getter
+    public enum EMealkitCategory implements EChildCategory {
+        mealkit("즉석조리식품");
+        private String name;
+    }
+
+    @AllArgsConstructor
+    @Getter
+    public enum EMaterialCategory implements EChildCategory {
+        noodle("국수"),
+        tofu("두부"),
+        oil("식용유"),
+        fishcake("어묵"),
+        ;
+        private String name;
+    }
+
+    @AllArgsConstructor
+    @Getter
+    public enum EEtcCategory implements EChildCategory {
+        etc("기타가공품")
+        ;
+        private String name;
+    }
 
     @Getter
     public enum ESearchMode {

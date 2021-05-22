@@ -42,7 +42,7 @@ public class SearchSearchFieldFragment extends KatiSearchFragment {
      */
     private void searchStart() {
         this.searchWords.add(this.searchEditText.getText().toString());
-        this.searchModel.setSearchPageNum(Integer.toString(1));
+        this.searchModel.setSearchPageNum(1);
         this.searchModel.setSearchMode(this.searchModeSpinner.getSelectedItem().toString());
         this.searchModel.setSearchText(this.searchEditText.getText().toString().replaceAll("[ ]", "_"));
 

@@ -21,23 +21,25 @@ public class FoodViewHolder extends RecyclerView.ViewHolder {
     private String imageAddress;
 
     // Associate
-        // View
-        private ImageView imageView;
-        private TextView productName, companyName;
-        // ETC
-        private Activity activity;
+    // View
+    private ImageView imageView;
+    private TextView productName, companyName, reviewCount, score;
+    // ETC
+    private Activity activity;
 
     // Constructor
     public FoodViewHolder(View itemView, View.OnClickListener onClickListener, Activity activity) {
         super(itemView);
 
         // Associate
-        this.activity=activity;
+        this.activity = activity;
 
         // Associate View
         this.productName = itemView.findViewById(R.id.foodItem_productName);
         this.companyName = itemView.findViewById(R.id.foodItem_companyName);
         this.imageView = itemView.findViewById(R.id.foodItem_foodImageView);
+        this.reviewCount = itemView.findViewById(R.id.foodItem_reviewCountTextView);
+        this.score = itemView.findViewById(R.id.foodItem_scoreTextView);
 
         // Initialize View
         itemView.setOnClickListener(onClickListener);
@@ -46,9 +48,11 @@ public class FoodViewHolder extends RecyclerView.ViewHolder {
     public void setValue(FoodResponse foodInfo) {
         this.itemView.setTag(foodInfo.getFoodId());
         this.productName.setText(foodInfo.getFoodName());
-        this.companyName.setText(foodInfo.getManufacturerName());
+        this.companyName.setText(foodInfo.getManufacturerName().split("_")[0]);
         this.imageAddress = foodInfo.getFoodImageAddress();
         Glide.with(this.activity).load(this.imageAddress).fitCenter().transform(new CenterCrop(), new CircleCrop()).into(this.imageView);
-        this.imageView.setOnClickListener(v -> this.activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(this.imageAddress))));
+        this.score.setText(foodInfo.getReviewRate() == null ? " ㅡ " : foodInfo.getReviewRate());
+        this.reviewCount.setText("(" + foodInfo.getReviewCount() + ")");
+//        this.imageView.setOnClickListener(v -> this.activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(this.imageAddress))));
     }
 }

@@ -70,7 +70,5 @@ public abstract class KatiViewModelFragment extends JSHViewModelFragment {
     protected void showDialog(String title, String message, DialogInterface.OnClickListener listener){
         KatiDialog.simplerAlertDialog(this.getActivity(),title,message,listener);
     }
-    protected void notLoginedDialog(){
-        KatiDialog.NotLogInDialog(this.getActivity(),(dialog,which)->this.startActivity(LoginActivity.class));
-    }
+
 }

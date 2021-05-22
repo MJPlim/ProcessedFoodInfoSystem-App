@@ -1,8 +1,6 @@
 package com.plim.kati_app.kati.domain.temp.editData.userData.view;
 
 import android.app.Activity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,11 +10,10 @@ import android.widget.TextView;
 import com.plim.kati_app.R;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
-import com.plim.kati_app.kati.crossDomain.domain.view.fragment.GetAndSetFragmentResultFragment;
+import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiLoginCheckViewModelFragment;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiViewModelFragment;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBack;
-import com.plim.kati_app.kati.domain.TempMainActivity;
 import com.plim.kati_app.kati.domain.temp.TempActivity;
 import com.plim.kati_app.kati.domain.temp.editData.userData.model.UserInfoModifyRequest;
 import com.plim.kati_app.kati.domain.temp.editData.userData.model.UserInfoResponse;
@@ -28,12 +25,10 @@ import java.time.format.DateTimeFormatter;
 import retrofit2.Response;
 
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.BASIC_DATE_FORMAT;
-import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.SAVE_ALLERGY_LIST_FRAGMENT_BUNDLE_KEY;
-import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.SAVE_ALLERGY_LIST_RESULT_FRAGMENT_BUNDLE_KEY;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.USER_MODIFY_SUCCESS_DIALOG_MESSAGE;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.USER_MODIFY_SUCCESS_DIALOG_TITLE;
 
-public class EditDataFragment extends KatiViewModelFragment {
+public class EditDataFragment extends KatiLoginCheckViewModelFragment {
 
     //associate
     //view
@@ -69,12 +64,13 @@ public class EditDataFragment extends KatiViewModelFragment {
     }
 
     @Override
-    protected void katiEntityUpdated() {
-        if (this.dataset.containsKey(KatiEntity.EKatiData.AUTHORIZATION)) {
-            this.getUserData(this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION));
-        } else {
-            this.notLoginedDialog();
-        }
+    protected void katiEntityUpdatedAndLogin() {
+        this.getUserData(this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION));
+    }
+
+    @Override
+    protected void katiEntityUpdatedAndNoLogin() {
+        this.notLoginDialog();
     }
 
     private void getUserData(String header) {

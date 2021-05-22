@@ -20,6 +20,7 @@ public abstract class KatiSearchFragment extends KatiViewModelFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.searchModel = new ViewModelProvider(this.getActivity()).get(SearchViewModel.class);
+        this.searchWords= new ArrayList<>();
     }
 
     @Override

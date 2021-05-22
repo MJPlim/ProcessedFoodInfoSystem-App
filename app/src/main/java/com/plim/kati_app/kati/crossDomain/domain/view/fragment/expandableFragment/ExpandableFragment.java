@@ -10,13 +10,14 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.GetAndSetFragmentResultFragment;
+import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiLoginCheckViewModelFragment;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiViewModelFragment;
 
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.ABSTRACT_TABLE_FRAGMENT_LARGE;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.ABSTRACT_TABLE_FRAGMENT_SMALL;
 
 
-public abstract class ExpandableFragment extends KatiViewModelFragment {
+public abstract class ExpandableFragment extends KatiLoginCheckViewModelFragment {
 
     //associate
     //view

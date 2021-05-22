@@ -108,6 +108,8 @@
     <string name="reviewItem_ProductNameTextView_text">제품명</string>
     <string name="tempActivity_userDataEditButton_text">유저 정보 수정</string>
     <string name="expandableItemListFragment_saveButton_text">저장하기</string>
+    <string name="allergyViewFragment_noTextView_text">아직 설정된 알레르기 필터가 없습니다.</string>
+    <string name="allergyViewFragment_editTextView_text">수정하기</string>
 
 
 </resources>
