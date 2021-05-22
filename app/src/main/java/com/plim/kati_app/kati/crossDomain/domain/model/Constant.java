@@ -1,5 +1,7 @@
 package com.plim.kati_app.kati.crossDomain.domain.model;
 
+import com.plim.kati_app.R;
+
 import java.util.Vector;
 
 import lombok.AllArgsConstructor;
@@ -184,8 +186,29 @@ public class Constant { // ㅎㅎ Resource 로 옮겨조...
     public static final String SERVER_WRONG_METHOD_EXCEPTION_MESSAGE = "요청 방법이 잘못되었습니다.";
     public static final int SERVER_WRONG_METHOD_EXCEPTION_CODE = 405;
 
+    public enum ERankImage {
+        first(R.drawable.first),
+        second(R.drawable.second),
+        third(R.drawable.third),
+        fourth(R.drawable.four),
+        fifth(R.drawable.five),
+        sixth(R.drawable.six),
+        seventh(R.drawable.seven),
+        eighth(R.drawable.eight),
+        ninth(R.drawable.nine),
+        tenth(R.drawable.ten)
+        ;
 
+        private int image;
 
+        private ERankImage(int image) {
+            this.image = image;
+
+        }
+        public int getImage() {
+            return this.image;
+        }
+    }
 
 
 

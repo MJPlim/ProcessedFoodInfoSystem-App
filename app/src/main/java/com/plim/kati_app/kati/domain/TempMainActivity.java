@@ -1,5 +1,6 @@
 package com.plim.kati_app.kati.domain;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -16,6 +17,7 @@ import com.plim.kati_app.kati.domain.temp.TempActivity;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitCallback;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
+import com.plim.kati_app.kati.domain.temp.itemRank.view.RankingActivity;
 
 import retrofit2.Response;
 
@@ -36,6 +38,8 @@ public class TempMainActivity extends KatiViewModelActivity { // 이게 끝나�
         this.findViewById(R.id.mainActivity_loginTestButton).setOnClickListener(v -> this.startActivity(LoginActivity.class));
         this.findViewById(R.id.mainActivity_searchTestButton).setOnClickListener(v -> this.startActivity(FoodSearchActivity.class));
         this.findViewById(R.id.mainActivity_changePWButton).setOnClickListener(v -> this.startActivity(ChangePasswordActivity.class));
+        this.findViewById(R.id.mainActivity_RankingTestButton).setOnClickListener(v -> this.startActivity(RankingActivity.class));
+
     }
     @Override public void katiEntityUpdated() { this.autoLogin(); }
     @Override protected void onDestroy() { super.onDestroy(); this.autoLogout(); }

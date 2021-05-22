@@ -33,6 +33,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".kati.domain.login.emailFind.view.FindEmailActivity" />
+        <activity android:name=".kati.domain.temp.setSecondEmail.view.SetSecondEmailActivity" />
+        <activity android:name=".kati.domain.temp.itemRank.view.RankingActivity" />
         <activity android:name=".kati.domain.search.search.view.FoodSearchActivity" />
         <activity android:name=".kati.domain.temp.signOut.view.SignOutActivity" />
         <activity android:name=".kati.domain.temp.TempActivity" />

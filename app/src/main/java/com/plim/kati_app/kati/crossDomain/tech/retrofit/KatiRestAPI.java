@@ -2,10 +2,15 @@ package com.plim.kati_app.kati.crossDomain.tech.retrofit;
 
 import com.plim.kati_app.kati.domain.changePW.model.ModifyPasswordRequest;
 import com.plim.kati_app.kati.domain.changePW.model.ModifyPasswordResponse;
+import com.plim.kati_app.kati.domain.login.emailFind.model.FindEmailRequest;
+import com.plim.kati_app.kati.domain.login.emailFind.model.FindEmailResponse;
 import com.plim.kati_app.kati.domain.login.pwFind.model.FindPasswordRequest;
 import com.plim.kati_app.kati.domain.login.pwFind.model.FindPasswordResponse;
 import com.plim.kati_app.kati.domain.search.foodInfo.model.FoodDetailResponse;
 import com.plim.kati_app.kati.domain.search.search.model.FoodResponse;
+import com.plim.kati_app.kati.domain.temp.itemRank.model.ItemRankingResponse;
+import com.plim.kati_app.kati.domain.temp.setSecondEmail.model.SetSecondEmailRequest;
+import com.plim.kati_app.kati.domain.temp.setSecondEmail.model.SetSecondEmailResponse;
 import com.plim.kati_app.kati.domain.temp.signOut.model.WithdrawRequest;
 import com.plim.kati_app.kati.domain.login.signIn.model.SignUpResponse;
 import com.plim.kati_app.kati.domain.login.signIn.model.SignUpRequest;
@@ -25,6 +30,8 @@ public interface KatiRestAPI {
     @POST("signup") Call<SignUpResponse> signUp(@Body SignUpRequest signUpRequest);
     @POST("api/v1/user/withdraw") Call<WithdrawResponse> withdraw(@Body WithdrawRequest user);
     @POST("find-password") Call<FindPasswordResponse> findPassword(@Body FindPasswordRequest request);
+    @POST("find-email") Call<FindEmailResponse> findEmail(@Body FindEmailRequest request);
+    @POST("api/v1/user/set-secondEmail") Call<SetSecondEmailResponse> setSecondEmail(@Body SetSecondEmailRequest request);
     @POST("modify-password") Call<ModifyPasswordResponse> modifyPassword(@Body ModifyPasswordRequest request);
     @POST("login") Call<LoginRequest> login(@Body LoginRequest loginRequest);
     @GET("/api/v1/food/findFood/foodName") Call<List<FoodResponse>> getSearchResultByFoodName(@Query("foodName") String foodName);
@@ -32,4 +39,5 @@ public interface KatiRestAPI {
     @GET("/api/v1/food/findFood/foodDetail") Call<FoodDetailResponse> getFoodDetailByFoodId(@Query("foodId") Long foodId);
     @GET("/api/v1/advertisement/foodDetail") Call<FoodDetailResponse> getAdvertisementFoodDetail(@Query("adId") Long adId);
     @GET("api/v1/advertisement/ads") Call<List<AdvertisementResponse>> getAdvertisementFoodList();
+    @GET("reviewRanking") Call<List<ItemRankingResponse>> getRankingList();
 }
