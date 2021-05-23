@@ -5,6 +5,15 @@ import com.plim.kati_app.kati.domain.changePW.model.ModifyPasswordResponse;
 import com.plim.kati_app.kati.domain.login.pwFind.model.FindPasswordRequest;
 import com.plim.kati_app.kati.domain.login.pwFind.model.FindPasswordResponse;
 import com.plim.kati_app.kati.domain.search.foodInfo.model.FoodDetailResponse;
+import com.plim.kati_app.kati.domain.search.foodInfo.view.foodInfo.model.CreateAndUpdateReviewRequest;
+import com.plim.kati_app.kati.domain.search.foodInfo.view.foodInfo.model.CreateReviewResponse;
+import com.plim.kati_app.kati.domain.search.foodInfo.view.foodInfo.model.DeleteReviewRequest;
+import com.plim.kati_app.kati.domain.search.foodInfo.view.foodInfo.model.FindFoodByBarcodeRequest;
+import com.plim.kati_app.kati.domain.search.foodInfo.view.foodInfo.model.ReadReviewDto;
+import com.plim.kati_app.kati.domain.search.foodInfo.view.foodInfo.model.ReadReviewIdResponse;
+import com.plim.kati_app.kati.domain.search.foodInfo.view.foodInfo.model.ReadReviewResponse;
+import com.plim.kati_app.kati.domain.search.foodInfo.view.foodInfo.model.UpdateReviewLikeRequest;
+import com.plim.kati_app.kati.domain.search.foodInfo.view.foodInfo.model.UpdateReviewLikeResponse;
 import com.plim.kati_app.kati.domain.search.search.model.FindFoodBySortingResponse;
 import com.plim.kati_app.kati.domain.temp.editData.allergy.model.CreateUserAllergyRequest;
 import com.plim.kati_app.kati.domain.temp.editData.allergy.model.CreateUserAllergyResponse;
@@ -80,6 +89,9 @@ public interface KatiRestAPI {
     @GET("/api/v1/food/findFood/foodDetail")
     Call<FoodDetailResponse> getFoodDetailByFoodId(@Query("foodId") Long foodId);
 
+    @POST("/api/v1/food/findFood/barcode")
+    Call<FoodDetailResponse> findByBarcode(@Body FindFoodByBarcodeRequest request);
+
     //제품 즐겨찾기
     @GET("api/v1/user/favorite/checkFavorite")
     Call<Boolean> getFavoriteStateForFood(@Query("foodId") Long foodId);
@@ -103,28 +115,29 @@ public interface KatiRestAPI {
 //                                                   @Query("page") int page);
 
     //제품 리뷰
-//    @GET("/readReview")
-//    Call<ReadReviewDto> readReview(@Query("foodId") Long foodId, @Query("pageNum") int pageNum);
-//
-//    @GET("api/v1/user/readReview")
-//    Call<ReadReviewDto> readReviewByUser(@Query("foodId") Long foodId, @Query("pageNum") int pageNum);
-//
-//    @POST("api/v1/user/updateReviewLike")
-//    Call<UpdateReviewLikeResponse> likeReview(@Body UpdateReviewLikeRequest updateReviewLikeRequest);
-//
-//    @POST("api/v1/user/createReview")
-//    Call<CreateReviewResponse> createReview(@Body CreateAndUpdateReviewRequest dto);
-//
-//    @POST("api/v1/user/updateReview")
-//    Call<CreateReviewResponse> updateReview(@Body CreateAndUpdateReviewRequest dto);
-//
-//    @POST("api/v1/user/deleteReview")
-//    Call<CreateReviewResponse> deleteReview(@Body DeleteReviewRequest dto);
+    @GET("/readReview")
+    Call<ReadReviewDto> readReview(@Query("foodId") Long foodId, @Query("pageNum") int pageNum);
 
+    @GET("api/v1/user/readReview")
+    Call<ReadReviewDto> readReviewByUser(@Query("foodId") Long foodId, @Query("pageNum") int pageNum);
+
+    @POST("api/v1/user/updateReviewLike")
+    Call<UpdateReviewLikeResponse> likeReview(@Body UpdateReviewLikeRequest updateReviewLikeRequest);
+
+    @POST("api/v1/user/createReview")
+    Call<CreateReviewResponse> createReview(@Body CreateAndUpdateReviewRequest dto);
+
+    @POST("api/v1/user/updateReview")
+    Call<CreateReviewResponse> updateReview(@Body CreateAndUpdateReviewRequest dto);
+
+    @POST("api/v1/user/deleteReview")
+    Call<CreateReviewResponse> deleteReview(@Body DeleteReviewRequest dto);
+
+    @GET("api/v1/user/readdReviewByReviewID")
+    Call<ReadReviewIdResponse> readReviewByReviewID(@Query("reviewId") Long reviewId);
 
     //동욱
-//    @POST("/api/v1/food/findFood/barcode")
-//    Call<FoodDetailResponse> findByBarcode(@Body FindFoodByBarcodeRequest request);
+
 //    @GET("/api/v1/user/favorite/list")
 //    Call<List<UserFavoriteResponse>> getUserFavorite();
 //    @GET("/api/v1/user/readReviewByUserID")

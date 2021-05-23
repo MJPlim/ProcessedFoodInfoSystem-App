@@ -9,8 +9,10 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.plim.kati_app.R;
+import com.plim.kati_app.kati.domain.search.foodInfo.model.FoodDetailResponse;
 import com.plim.kati_app.kati.domain.search.search.model.AdvertisementResponse;
 import com.plim.kati_app.kati.domain.search.foodInfo.view.FoodInfoActivity;
+import com.plim.kati_app.kati.domain.search.search.model.FoodResponse;
 import com.plim.kati_app.kati.domain.search.search.view.foodList.searchResult.FoodViewHolder;
 
 import java.util.Vector;
@@ -37,15 +39,21 @@ public class AdRecyclerAdapter extends RecyclerView.Adapter<FoodViewHolder> {
         return new FoodViewHolder(view, v->this.startNewDetailActivity((Long) v.getTag()), this.activity);
     }
     @Override
-    public void onBindViewHolder(FoodViewHolder holder, int position) { holder.setValue(items.get(position).getFood()); }
+    public void onBindViewHolder(FoodViewHolder holder, int position) {
+        FoodResponse response= items.get(position).getFood();
+        response.setFoodId(items.get(position).getId());
+
+        holder.setValue(items.get(position).getFood()); }
     @Override
     public int getItemCount() { return items.size(); }
 
     public void setItems(Vector<AdvertisementResponse> items) { this.items=items; }
-    private void startNewDetailActivity(Long foodId) {
+    private void startNewDetailActivity(Long adId) {
         Intent intent = new Intent(this.activity, FoodInfoActivity.class);
-        intent.putExtra(NEW_DETAIL_ACTIVITY_EXTRA_FOOD_ID, foodId);
+        intent.putExtra(NEW_DETAIL_ACTIVITY_EXTRA_FOOD_ID, adId);
         intent.putExtra(NEW_DETAIL_ACTIVITY_EXTRA_IS_AD, true);
         this.activity.startActivity(intent);
     }
+
+
 }

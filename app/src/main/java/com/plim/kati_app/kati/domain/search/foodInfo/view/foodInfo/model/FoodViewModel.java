@@ -12,4 +12,12 @@ import lombok.Setter;
 @Setter
 public class FoodViewModel extends ViewModel {
     MutableLiveData<FoodDetailResponse> foodDetailResponse;
+    MutableLiveData<ReadSummaryResponse> readSummaryResponse;
+
+    public FoodViewModel(){
+        this.foodDetailResponse= new MutableLiveData<>();
+        this.foodDetailResponse.setValue(new FoodDetailResponse());
+        this.readSummaryResponse= new MutableLiveData<>();
+        this.readSummaryResponse.setValue(new ReadSummaryResponse());
+    }
 }

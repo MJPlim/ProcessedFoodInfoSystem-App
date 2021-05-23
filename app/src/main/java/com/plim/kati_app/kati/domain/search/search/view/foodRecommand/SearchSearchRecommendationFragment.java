@@ -1,5 +1,6 @@
 package com.plim.kati_app.kati.domain.search.search.view.foodRecommand;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -51,12 +52,19 @@ public class SearchSearchRecommendationFragment extends KatiSearchFragment {
 
     @Override
     protected void initializeView() {
-        this.foodRankAdapter = new FoodRankAdapter(this.getDataSet());
+        View.OnClickListener listener = v -> {
+//            Log.d("버튼 누름", (String) v.getTag());
+            this.searchModel.setSearchText((String) v.getTag());
+            this.searchViewModel.getSearchModel().setValue(this.searchModel);
+        };
+        this.foodRankAdapter = new FoodRankAdapter(this.getDataSet(), listener);
         this.searchHistoryAdapter = new SearchHistoryAdapter(this.searchWords,
                 v -> {
                     this.showDeleteSearchedWordConfirm((String) v.getTag());
                     return true;
-                });
+                },
+                listener
+        );
         this.recentValueRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false));
         this.rankRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         this.rankRecyclerView.setAdapter(this.foodRankAdapter);
@@ -69,14 +77,22 @@ public class SearchSearchRecommendationFragment extends KatiSearchFragment {
         this.loadRecentSearchedWords();
     }
 
+    @Override
+    protected void searchModelDataUpdated() {
+        this.loadRecentSearchedWords();
+    }
+
     /**
      * Method
      */
     private void loadRecentSearchedWords() {
-        this.searchHistoryAdapter.setValueVector(this.searchWords);
-        this.searchHistoryAdapter.notifyDataSetChanged();
-        this.deleteAllButton.setVisibility(this.searchWords.size() == 0 ? View.INVISIBLE : View.VISIBLE);
-        this.emptyWordTextView.setVisibility(this.searchWords.size() != 0 ? View.INVISIBLE : View.VISIBLE);
+        if (this.searchHistoryAdapter != null&& this.searchWords!=null) {
+            this.searchHistoryAdapter.setValueVector(this.searchWords);
+            this.searchHistoryAdapter.notifyDataSetChanged();
+            this.deleteAllButton.setVisibility(this.searchWords.size() == 0 ? View.INVISIBLE : View.VISIBLE);
+            this.emptyWordTextView.setVisibility(this.searchWords.size() != 0 ? View.INVISIBLE : View.VISIBLE);
+        }
+
     }
 
     private void showDeleteSearchedWordConfirm() {
@@ -88,22 +104,23 @@ public class SearchSearchRecommendationFragment extends KatiSearchFragment {
 
     private void showDeleteSearchedWordConfirm(String value) {
         KatiDialog.simplerAlertDialog(this.getActivity(),
-                SEARCH_WORD_DELETE_ONE_DIALOG_TITLE, SEARCH_WORD_DELETE_ONE_DIALOG_MESSAGE_HEAD + value + SEARCH_WORD_DELETE_ONE_DIALOG_MESSAGE_TAIL,
+                SEARCH_WORD_DELETE_ONE_DIALOG_TITLE,
+                SEARCH_WORD_DELETE_ONE_DIALOG_MESSAGE_HEAD + value + SEARCH_WORD_DELETE_ONE_DIALOG_MESSAGE_TAIL,
                 (dialog, which) -> this.deleteSearchedWordByValue(value)
         );
     }
 
     private void deleteAllSearchedWords() {
         this.searchWords.clear();
-        loadRecentSearchedWords();
+        this.save();
     }
 
     private void deleteSearchedWordByValue(String value) {
         this.searchWords.remove(value);
-        loadRecentSearchedWords();
+        this.save();
     }
 
-    public Vector<String> getDataSet() { // 임시 랭크 데이터.
+    private Vector<String> getDataSet() { // 임시 랭크 데이터.
         Vector<String> val = new Vector<>();
         val.add("새우깡");
         val.add("감자깡");
@@ -117,4 +134,6 @@ public class SearchSearchRecommendationFragment extends KatiSearchFragment {
         val.add("벌집핏자");
         return val;
     }
+
+
 }

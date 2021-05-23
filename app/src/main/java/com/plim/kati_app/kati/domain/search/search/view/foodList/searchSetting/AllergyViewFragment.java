@@ -2,7 +2,6 @@ package com.plim.kati_app.kati.domain.search.search.view.foodList.searchSetting;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -57,20 +56,26 @@ public class AllergyViewFragment extends KatiSearchFragment {
                     katiDialog.showDialog();
                 }
         );
-            this.noTextView.setVisibility(this.searchModel.getAllergyList().size() != 0?View.GONE:View.VISIBLE);
+
     }
 
     @Override
     protected void katiEntityUpdated() {
-        this.group.removeAllViews();
-        for (String string : this.searchModel.getAllergyList()) {
-            Chip chip = new Chip(getView().getContext());
-            chip.setText(string);
-            chip.setChipBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.kati_yellow)));
-            chip.setClickable(false);
-            this.group.addView(chip);
+        if(this.searchModel.getAllergyList()!=null) {
+            this.group.removeAllViews();
+            for (String string : this.searchModel.getAllergyList()) {
+                Chip chip = new Chip(getView().getContext());
+                chip.setText(string);
+                chip.setChipBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.kati_yellow)));
+                chip.setClickable(false);
+                this.group.addView(chip);
+            }
+            this.noTextView.setVisibility(this.searchModel.getAllergyList().size() != 0 ? View.GONE : View.VISIBLE);
         }
     }
 
+    @Override
+    protected void searchModelDataUpdated() {
 
+    }
 }

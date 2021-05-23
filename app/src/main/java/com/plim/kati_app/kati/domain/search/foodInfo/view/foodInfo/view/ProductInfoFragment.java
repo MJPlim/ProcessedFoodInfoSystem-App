@@ -1,19 +1,32 @@
 package com.plim.kati_app.kati.domain.search.foodInfo.view.foodInfo.view;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.RequiresPermission;
+
 import com.plim.kati_app.R;
+import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.LoadingDialog;
+import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBack;
+import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBackImpl;
 import com.plim.kati_app.kati.domain.search.foodInfo.model.FoodDetailResponse;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiFoodFragment;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
+import com.plim.kati_app.kati.domain.search.foodInfo.view.foodInfo.model.FindFoodByBarcodeRequest;
 import com.plim.kati_app.kati.domain.search.foodInfo.view.review.WriteReviewActivity;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitCallback;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
+
+import org.json.JSONException;
+
+import java.io.IOException;
 
 import retrofit2.Response;
 
@@ -24,63 +37,92 @@ import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.NEW_DETAI
 
 public class ProductInfoFragment extends KatiFoodFragment {
 
-    // Working Variable
+    //attribute
+    private String barcode;
     private Long foodId;
     private boolean isAd;
 
     // Associate
-        // View
-        private Button purchaseSiteButton, writeReviewButton;
+    // View
+    private Button purchaseSiteButton, writeReviewButton;
 
     // Component
-        // View
-        private LoadingDialog loadingDialog;
+    // View
+    private LoadingDialog loadingDialog;
 
     @Override
-    protected int getLayoutId() { return R.layout.fragment_detail_product_info; }
+    protected int getLayoutId() {
+        return R.layout.fragment_detail_product_info;
+    }
+
     @Override
     protected void associateView(View view) {
         this.purchaseSiteButton = view.findViewById(R.id.detailProductInfoFragment_buyButton);
         this.writeReviewButton = view.findViewById(R.id.detailProductInfoFragment_writeReviewButton);
+        this.loadingDialog = new LoadingDialog(this.getContext());
     }
+
     @Override
     protected void initializeView() {
-        this.writeReviewButton.setOnClickListener(v -> this.startActivity(WriteReviewActivity.class));
+        this.writeReviewButton.setOnClickListener(v -> {
+            Intent intent = new Intent(this.getActivity(), WriteReviewActivity.class);
+            intent.putExtra("foodId", foodDetailResponse.getFoodId());
+            intent.putExtra("photo", foodDetailResponse.getFoodImageAddress());
+            intent.putExtra("foodName", foodDetailResponse.getFoodName());
+            intent.putExtra("manufacturerName", foodDetailResponse.getManufacturerName());
+            this.startActivity(intent);
+        });
         this.purchaseSiteButton.setOnClickListener(v ->
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(DETAIL_PRODUCT_INFO_FRAGMENT_SHOPPING_LINK_
-                            + this.foodModel.getFoodDetailResponse().getValue().getFoodName())))
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(DETAIL_PRODUCT_INFO_FRAGMENT_SHOPPING_LINK_
+                        + this.foodModel.getFoodDetailResponse().getValue().getFoodName())))
         );
     }
+
     @Override
     protected void katiEntityUpdated() {
+        this.barcode = this.getActivity().getIntent().getStringExtra("barcode");
         this.foodId = this.getActivity().getIntent().getLongExtra(DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_FOOD_ID_EXTRA, 0L);
         this.isAd = this.getActivity().getIntent().getBooleanExtra(NEW_DETAIL_ACTIVITY_EXTRA_IS_AD, false);
-        this.loadingDialog = new LoadingDialog(this.getContext());
-        this.search();
-    }
-    @Override
-    public void foodModelDataUpdated() { }
 
-    private void search() {
-        this.loadingDialog.show();
-//        if (!isAd) { KatiRetrofitTool.getAPI().getFoodDetailByFoodId(this.foodId).enqueue(JSHRetrofitTool.getCallback(new FoodDetailRequestCallback())); }
-//        else { KatiRetrofitTool.getAPI().getAdvertisementFoodDetail(this.foodId).enqueue(JSHRetrofitTool.getCallback(new FoodDetailRequestCallback())); }
+        if (this.barcode != null) this.barcodeSearch();
+        else this.search();
     }
-    private class FoodDetailRequestCallback implements JSHRetrofitCallback<FoodDetailResponse> {
+
+    @Override
+    protected boolean isLoginNeeded() {
+        return false;
+    }
+
+    @Override
+    public void foodModelDataUpdated() {
+    }
+
+
+    private class FoodDetailRequestCallback extends SimpleRetrofitCallBackImpl<FoodDetailResponse> {
+        public FoodDetailRequestCallback(Activity activity) {
+            super(activity);
+        }
         @Override
         public void onSuccessResponse(Response<FoodDetailResponse> response) {
-            loadingDialog.hide();
-            foodModel.getFoodDetailResponse().setValue(response.body());
+//            loadingDialog.hide();
+            foodDetailResponse=response.body();
+            saveFoodDetail();
         }
-        @Override
-        public void onFailResponse(Response<FoodDetailResponse> response) { }
-        @Override
-        public void onConnectionFail(Throwable t) {
-            loadingDialog.hide();
-            KatiDialog.simplerAlertDialog(getActivity(),
-                FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE, t.getMessage(),
-                null
-            );
+
+    }
+
+    private void search() {
+//        this.loadingDialog.show();
+        if (!isAd) {
+            KatiRetrofitTool.getAPI().getFoodDetailByFoodId(this.foodId).enqueue(JSHRetrofitTool.getCallback(new FoodDetailRequestCallback(this.getActivity())));
+        } else {
+            KatiRetrofitTool.getAPI().getAdFoodDetail(this.foodId).enqueue(JSHRetrofitTool.getCallback(new FoodDetailRequestCallback(this.getActivity())));
         }
     }
+
+    private void barcodeSearch() {
+//        this.loadingDialog.show();
+        KatiRetrofitTool.getAPI().findByBarcode(new FindFoodByBarcodeRequest(this.barcode)).enqueue(JSHRetrofitTool.getCallback(new FoodDetailRequestCallback(this.getActivity())));
+    }
+
 }

@@ -77,6 +77,15 @@ public class Constant { // ㅎㅎ Resource 로 옮겨조...
         새우,게,우유,아몬드,잣,호두,땅콩,대두,밀,메밀,메추리알,난류,계란,소고기,닭고기,쇠고기,돼지고기,오징어,조개류,복숭아,토마토,아황산류;
     }
 
+
+
+    public static final String ADD_FAVORITE_RESULT_DIALOG_TITLE="즐겨찾기 설정 하였습니다.";
+    public static final String ADD_FAVORITE_RESULT_DIALOG_MESSAGE="즐겨찾기 목록에 해당 제품이 추가되었습니다.";
+
+
+    public static final String DELETE_FAVORITE_RESULT_DIALOG_TITLE="즐겨찾기를 해제하였습니다.";
+    public static final String DELETE_FAVORITE_RESULT_DIALOG_MESSAGE="즐겨찾기 목록에서 해당 제품이 삭제되었습니다.";
+
 public static final String ALLERGY_EXPANDABLE_LIST_TITLE="알레르기";
     public static final String ALLERGY_MODIFY_SUCCESS_DIALOG_TITLE="알레르기 정보 저장 성공";
     public static final String ALLERGY_MODIFY_SUCCESS_DIALOG_MESSAGE="알레르기 정보를 성공적으로 저장하였습니다.";

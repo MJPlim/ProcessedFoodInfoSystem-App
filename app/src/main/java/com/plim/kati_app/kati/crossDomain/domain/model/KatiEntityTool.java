@@ -1,5 +1,7 @@
 package com.plim.kati_app.kati.crossDomain.domain.model;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.plim.kati_app.jshCrossDomain.domain.model.room.entity.JSHEntity;

@@ -7,7 +7,6 @@ import com.plim.kati_app.kati.crossDomain.domain.model.Constant.EAllergyList;
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.expandableFragment.AbstractExpandableItemList;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
-import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBack;
 import com.plim.kati_app.kati.domain.temp.TempActivity;
 import com.plim.kati_app.kati.domain.temp.editData.allergy.model.CreateUserAllergyRequest;
 import com.plim.kati_app.kati.domain.temp.editData.allergy.model.CreateUserAllergyResponse;
@@ -28,6 +27,11 @@ public class UserAllergyListFragment extends AbstractExpandableItemList {
 
 
     @Override
+    protected boolean isLoginNeeded() {
+        return true;
+    }
+
+    @Override
     protected void katiEntityUpdatedAndLogin() {
         this.loadAllergy(this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION));
     }
@@ -36,6 +40,7 @@ public class UserAllergyListFragment extends AbstractExpandableItemList {
     protected void katiEntityUpdatedAndNoLogin() {
         this.notLoginDialog();
     }
+
 
     @Override
     protected void addItem(String editText) {
@@ -58,18 +63,9 @@ public class UserAllergyListFragment extends AbstractExpandableItemList {
         this.saveAllergy(this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION));
     }
 
-    private void saveAllergy(String token) {
-        CreateUserAllergyRequest request = new CreateUserAllergyRequest();
-        request.setAllergyList(getItemsFromAdapter());
-        KatiRetrofitTool.getAPIWithAuthorizationToken(token).createUserAllergy(request).enqueue(JSHRetrofitTool.getCallback(new ModifyUserAllergyCallBack(this.getActivity())));
-    }
 
 
-    private void loadAllergy(String token) {
-        KatiRetrofitTool.getAPIWithAuthorizationToken(token).readUserAllergy().enqueue(JSHRetrofitTool.getCallback(new ReadUserAllergyCallBack(this.getActivity())));
-    }
-
-    private class ReadUserAllergyCallBack extends SimpleRetrofitCallBack<ReadUserAllergyResponse> {
+    private class ReadUserAllergyCallBack extends SimpleLoginRetrofitCallBack<ReadUserAllergyResponse> {
         public ReadUserAllergyCallBack(Activity activity) {
             super(activity);
         }
@@ -80,15 +76,10 @@ public class UserAllergyListFragment extends AbstractExpandableItemList {
             vector.addAll(response.body().getUserAllergyMaterials());
             setItemValues(new ExpandableListItem(ALLERGY_EXPANDABLE_LIST_TITLE, vector));
         }
-
-        @Override
-        public void refreshToken(KatiEntity.EKatiData eKatiData, String authorization) {
-            dataset.put(eKatiData, authorization);
-        }
     }
 
 
-    private class ModifyUserAllergyCallBack extends SimpleRetrofitCallBack<CreateUserAllergyResponse> {
+    private class ModifyUserAllergyCallBack extends SimpleLoginRetrofitCallBack<CreateUserAllergyResponse> {
 
         public ModifyUserAllergyCallBack(Activity activity) {
             super(activity);
@@ -102,12 +93,17 @@ public class UserAllergyListFragment extends AbstractExpandableItemList {
                     (dialog, which) -> startActivity(TempActivity.class)
             );
         }
-
-        @Override
-        public void refreshToken(KatiEntity.EKatiData eKatiData, String authorization) {
-            dataset.put(eKatiData, authorization);
-        }
     }
 
+
+    private void saveAllergy(String token) {
+        CreateUserAllergyRequest request = new CreateUserAllergyRequest();
+        request.setAllergyList(getItemsFromAdapter());
+        KatiRetrofitTool.getAPIWithAuthorizationToken(token).createUserAllergy(request).enqueue(JSHRetrofitTool.getCallback(new ModifyUserAllergyCallBack(this.getActivity())));
+    }
+
+    private void loadAllergy(String token) {
+        KatiRetrofitTool.getAPIWithAuthorizationToken(token).readUserAllergy().enqueue(JSHRetrofitTool.getCallback(new ReadUserAllergyCallBack(this.getActivity())));
+    }
 
 }

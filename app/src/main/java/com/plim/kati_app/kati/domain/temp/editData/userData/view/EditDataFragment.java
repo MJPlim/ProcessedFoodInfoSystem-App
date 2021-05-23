@@ -11,9 +11,7 @@ import com.plim.kati_app.R;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiLoginCheckViewModelFragment;
-import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiViewModelFragment;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
-import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBack;
 import com.plim.kati_app.kati.domain.temp.TempActivity;
 import com.plim.kati_app.kati.domain.temp.editData.userData.model.UserInfoModifyRequest;
 import com.plim.kati_app.kati.domain.temp.editData.userData.model.UserInfoResponse;
@@ -61,6 +59,12 @@ public class EditDataFragment extends KatiLoginCheckViewModelFragment {
     protected void initializeView() {
         this.withdrawalTextView.setOnClickListener(v -> this.startActivity(SignOutActivity.class));
         this.finalEditButton.setOnClickListener(v -> this.modifyUserData(this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION)));
+
+    }
+
+    @Override
+    protected boolean isLoginNeeded() {
+        return true;
     }
 
     @Override
@@ -70,7 +74,39 @@ public class EditDataFragment extends KatiLoginCheckViewModelFragment {
 
     @Override
     protected void katiEntityUpdatedAndNoLogin() {
-        this.notLoginDialog();
+
+    }
+
+
+
+
+    private class ReadUserDataCallBack extends SimpleLoginRetrofitCallBack<UserInfoResponse> {
+        public ReadUserDataCallBack(Activity activity) {
+            super(activity);
+        }
+
+        @Override
+        public void onSuccessResponse(Response<UserInfoResponse> response) {
+            UserInfoResponse userInfo = response.body();
+            nameEditText.setHint(userInfo.getName());
+            if (userInfo.getBirth() == null)
+                birthEditText.setHint(BASIC_DATE_FORMAT);
+            else
+                birthEditText.setHint(userInfo.getBirth());
+            addressEditText.setHint(userInfo.getAddress() == null ? "" : userInfo.getAddress());
+        }
+    }
+
+    private class ModifyUserDataCallBack extends SimpleLoginRetrofitCallBack<UserInfoResponse> {
+        public ModifyUserDataCallBack(Activity activity) {
+            super(activity);
+        }
+
+        @Override
+        public void onSuccessResponse(Response<UserInfoResponse> response) {
+            successful = true;
+            showDialog(USER_MODIFY_SUCCESS_DIALOG_TITLE,USER_MODIFY_SUCCESS_DIALOG_MESSAGE,(dialog, which) -> startActivity(TempActivity.class));
+        }
     }
 
     private void getUserData(String header) {
@@ -86,46 +122,5 @@ public class EditDataFragment extends KatiLoginCheckViewModelFragment {
 
         KatiRetrofitTool.getAPIWithAuthorizationToken(header).modifyUserInfo(request).enqueue(JSHRetrofitTool.getCallback(new ModifyUserDataCallBack(getActivity())));
     }
-
-
-    private class ReadUserDataCallBack extends SimpleRetrofitCallBack<UserInfoResponse> {
-        public ReadUserDataCallBack(Activity activity) {
-            super(activity);
-        }
-
-        @Override
-        public void onSuccessResponse(Response<UserInfoResponse> response) {
-            UserInfoResponse userInfo = response.body();
-            nameEditText.setHint(userInfo.getName());
-            if (userInfo.getBirth() == null)
-                birthEditText.setHint(BASIC_DATE_FORMAT);
-            else
-                birthEditText.setHint(userInfo.getBirth());
-            addressEditText.setHint(userInfo.getAddress() == null ? "" : userInfo.getAddress());
-        }
-
-        @Override
-        public void refreshToken(KatiEntity.EKatiData eKatiData,String authorization) {
-            dataset.put(eKatiData, authorization);
-        }
-    }
-
-    private class ModifyUserDataCallBack extends SimpleRetrofitCallBack<UserInfoResponse> {
-        public ModifyUserDataCallBack(Activity activity) {
-            super(activity);
-        }
-
-        @Override
-        public void onSuccessResponse(Response<UserInfoResponse> response) {
-            successful = true;
-            showDialog(USER_MODIFY_SUCCESS_DIALOG_TITLE,USER_MODIFY_SUCCESS_DIALOG_MESSAGE,(dialog, which) -> startActivity(TempActivity.class));
-        }
-
-        @Override
-        public void refreshToken(KatiEntity.EKatiData eKatiData, String authorization) {
-            dataset.put(eKatiData,authorization);
-        }
-    }
-
 }
 

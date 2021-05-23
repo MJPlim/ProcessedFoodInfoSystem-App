@@ -15,9 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KATI_app"
         android:usesCleartextTraffic="true">
-        <activity android:name=".kati.domain.temp.editData.allergy.view.UserAllergyListFragment"></activity>
         <activity android:name=".kati.domain.temp.editData.userData.view.EditDataActivity" />
         <activity android:name=".kati.domain.search.foodInfo.view.review.WriteReviewActivity" />
+        <activity android:name=".kati.domain.search.foodInfo.view.review.UpdateReviewActivity" />
         <activity android:name=".kati.domain.search.foodInfo.view.FoodInfoActivity" />
 
         <meta-data

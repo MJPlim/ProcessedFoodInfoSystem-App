@@ -6,6 +6,7 @@ import android.widget.Button;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.plim.kati_app.R;
+import com.plim.kati_app.kati.domain.search.search.model.SearchViewModel;
 
 public class RecentViewHolder extends RecyclerView.ViewHolder {
 
@@ -20,8 +21,9 @@ public class RecentViewHolder extends RecyclerView.ViewHolder {
         this.valueButton.setOnLongClickListener(onLongClickListener);
     }
 
-    public void setValueButton(String value) {
+    public void setValueButton(String value, View.OnClickListener listener) {
         this.valueButton.setText(value);
         this.valueButton.setTag(value);
+        this.valueButton.setOnClickListener(listener);
     }
 }

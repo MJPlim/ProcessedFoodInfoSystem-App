@@ -3,6 +3,7 @@ package com.plim.kati_app.kati.crossDomain.domain.view.fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,34 +23,45 @@ import java.util.Map;
 public abstract class KatiViewModelFragment extends JSHViewModelFragment {
 
     // Associate
-        // Model
-        protected KatiEntity entity;
-        protected Map<KatiEntity.EKatiData, String> dataset;
+    // Model
+    protected KatiEntity entity;
+    protected Map<KatiEntity.EKatiData, String> dataset;
+    protected ArrayList<String> searchWords;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(this.getLayoutId(), container, false);
     }
+
     @Override
     public void onPause() {
         super.onPause();
         KatiEntityTool.save(this.viewModelTool, this.entity);
     }
-    public void save(){
+
+    public void save() {
+//        Log.d("디버그, 최근검색어 저장?",
+//                this.entity.getSearchWords().size() != 0 ?
+//                        this.entity.getSearchWords().get(this.entity.getSearchWords().size() - 1) :
+//                        "최근 검색어가 없음");
+        Log.d("뷰모델 프래그먼트","저장하다");
         KatiEntityTool.save(this.viewModelTool, this.entity);
     }
+
     @Override
     public void viewModelDataUpdated() {
         ArrayList<KatiEntity> katiEntityArray = KatiEntityTool.convertJSHEntityArrayToDomainArray(this.viewModelTool.getJSHEntities());
 
-        if(katiEntityArray.size()==0){
+        if (katiEntityArray.size() == 0) {
             JSHEntity jshEntity = new JSHEntity();
             jshEntity.setEntityString(KatiEntityTool.fromKatiEntityToString(new KatiEntity()));
             this.viewModelTool.getModel().insert(jshEntity);
-        }else{
+        } else {
             this.entity = katiEntityArray.get(0);
             this.dataset = this.entity.getDataset();
+            this.searchWords = this.entity.getSearchWords();
+            Log.d("뷰모델이 바뀌어서 불러온 서치워드", this.searchWords.size() + "개");
 
             this.associateView(this.getView());
             this.initializeView();
@@ -58,17 +70,28 @@ public abstract class KatiViewModelFragment extends JSHViewModelFragment {
     }
 
     protected abstract int getLayoutId();
+
     protected abstract void associateView(View view);
+
     protected abstract void initializeView();
+
     protected abstract void katiEntityUpdated();
 
-    public void startActivity(Class<?> cls){ this.startActivity(new Intent(this.getContext(), cls)); }
-    protected void navigateTo(int id){ Navigation.findNavController(this.getView()).navigate(id); }
-    protected String getStringOfId(int id){ return this.getResources().getString(id); }
+    public void startActivity(Class<?> cls) {
+        this.startActivity(new Intent(this.getContext(), cls));
+    }
+
+    protected void navigateTo(int id) {
+        Navigation.findNavController(this.getView()).navigate(id);
+    }
+
+    protected String getStringOfId(int id) {
+        return this.getResources().getString(id);
+    }
 
 
-    protected void showDialog(String title, String message, DialogInterface.OnClickListener listener){
-        KatiDialog.simplerAlertDialog(this.getActivity(),title,message,listener);
+    protected void showDialog(String title, String message, DialogInterface.OnClickListener listener) {
+        KatiDialog.simplerAlertDialog(this.getActivity(), title, message, listener);
     }
 
 }

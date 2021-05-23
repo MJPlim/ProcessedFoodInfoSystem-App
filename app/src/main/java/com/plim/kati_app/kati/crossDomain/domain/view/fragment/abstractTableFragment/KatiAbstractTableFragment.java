@@ -48,7 +48,19 @@ public abstract class KatiAbstractTableFragment extends KatiFoodFragment {
         this.expandButton.setOnClickListener(v -> changeVisibility());
     }
     @Override
-    protected void katiEntityUpdated() { }
+    protected boolean isLoginNeeded() {
+        return false;
+    }
+
+    @Override
+    protected void katiEntityUpdatedAndLogin() {
+
+    }
+
+    @Override
+    protected void katiEntityUpdatedAndNoLogin() {
+
+    }
 
     /**
      * Method

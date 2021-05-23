@@ -1,7 +1,6 @@
 package com.plim.kati_app.kati.domain.search.search.view.foodList.searchSetting;
 
 import android.app.Activity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,7 +16,6 @@ import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.BlankFragment;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiSearchFragment;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
-import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBack;
 import com.plim.kati_app.kati.domain.temp.editData.allergy.model.ReadUserAllergyResponse;
 
 import java.util.Vector;
@@ -52,7 +50,7 @@ public class SearchSettingFragment extends KatiSearchFragment {
         this.rankChip = view.findViewById(R.id.searchSettingFragment_rankingChip);
         this.reviewChip = view.findViewById(R.id.searchSettingFragment_reviewChip);
         this.allergyViewFragment = new AllergyViewFragment();
-        this.blankFragment=new BlankFragment();
+        this.blankFragment = new BlankFragment();
     }
 
     @Override
@@ -65,38 +63,29 @@ public class SearchSettingFragment extends KatiSearchFragment {
     }
 
     @Override
-    protected void katiEntityUpdated() {
+    protected boolean isLoginNeeded() {
+        return false;
+    }
+
+    @Override
+    protected void katiEntityUpdatedAndLogin() {
         if (this.dataset.containsKey(KatiEntity.EKatiData.AUTHORIZATION)) {
             String token = this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION);
-            this.getData(token);
-        }else{
-            this.allergyTextView.setVisibility(View.GONE);
-            this.allergyImageView.setVisibility(View.GONE);
+            this.getAllergyData(token);
         }
-    }
-
-    private void doSort(boolean isChecked, SortElement element) {
-        if (isChecked) {
-            this.searchModel.setFoodSortElement(element.getMessage());
-            this.save();
         }
+
+    @Override
+    protected void katiEntityUpdatedAndNoLogin() {
+        this.allergyTextView.setVisibility(View.GONE);
+        this.allergyImageView.setVisibility(View.GONE);}
+
+    @Override
+    protected void searchModelDataUpdated() {
     }
 
-    private void setVector(Vector<String> allergyVector) {
-        this.searchModel.setAllergyList(allergyVector);
-    }
 
-    private void setAllergyFilter() {
-        this.searchModel.setFiltered(!this.searchModel.isFiltered());
-        this.setColor();
-        this.save();
-    }
-
-    private void getData(String token) {
-        KatiRetrofitTool.getAPIWithAuthorizationToken(token).readUserAllergy().enqueue(JSHRetrofitTool.getCallback(new ReadUserAllergyShowCallBack(getActivity())));
-    }
-
-    private class ReadUserAllergyShowCallBack extends SimpleRetrofitCallBack<ReadUserAllergyResponse> {
+    private class ReadUserAllergyShowCallBack extends SimpleLoginRetrofitCallBack<ReadUserAllergyResponse> {
         public ReadUserAllergyShowCallBack(Activity activity) {
             super(activity);
         }
@@ -107,13 +96,7 @@ public class SearchSettingFragment extends KatiSearchFragment {
             vector.addAll(response.body().getUserAllergyMaterials());
             setVector(vector);
         }
-
-        @Override
-        public void refreshToken(KatiEntity.EKatiData eKatiData, String authorization) {
-            dataset.put(eKatiData, authorization);
-        }
     }
-
 
     private void setAllergyFragmentVisibility(boolean showAllergy) {
         this.showAllergy = !showAllergy;
@@ -123,8 +106,30 @@ public class SearchSettingFragment extends KatiSearchFragment {
             getChildFragmentManager().beginTransaction().replace(R.id.searchFragment_allergyFrameLayout, blankFragment).commit();
     }
 
-    private void setColor() {
+    private void doSort(boolean isChecked, SortElement element) {
+        if (isChecked) {
+            this.searchModel.setSearchPageNum(1);
+            this.searchModel.setFoodSortElement(element.getMessage());
+            this.saveSearch();
+        }
+    }
+
+    private void setVector(Vector<String> allergyVector) {
+        this.searchModel.setAllergyList(allergyVector);
+        this.saveSearch();
+    }
+
+    private void setAllergyFilter() {
+        this.searchModel.setSearchPageNum(1);
+        this.searchModel.setFiltered(!this.searchModel.isFiltered());
         int newTint = this.searchModel.isFiltered() ? R.color.kati_orange : R.color.gray;
         this.allergyImageView.setColorFilter(ContextCompat.getColor(getContext(), newTint), android.graphics.PorterDuff.Mode.SRC_IN);
+        this.saveSearch();
     }
+
+    private void getAllergyData(String token) {
+        KatiRetrofitTool.getAPIWithAuthorizationToken(token).readUserAllergy().
+                enqueue(JSHRetrofitTool.getCallback(new ReadUserAllergyShowCallBack(getActivity())));
+    }
+
 }
