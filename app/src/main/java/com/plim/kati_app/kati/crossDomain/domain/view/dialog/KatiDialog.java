@@ -51,21 +51,23 @@ public class KatiDialog extends AlertDialog.Builder{
         dialog.show();
     }
 
-    public static void simplerAlertDialog(Activity activity, int titleId, int messageId, DialogInterface.OnClickListener listener){
+    public static KatiDialog simplerAlertDialog(Activity activity, int titleId, int messageId, DialogInterface.OnClickListener listener){
         KatiDialog kDialog= new KatiDialog(activity);
         kDialog.setTitle(activity.getString(titleId));
         kDialog.setMessage(activity.getString(messageId));
         kDialog.setPositiveButton(KATI_DIALOG_CONFIRM, listener);
         kDialog.setColor(activity.getResources().getColor(R.color.kati_coral, activity.getTheme()));
         kDialog.showDialog();
+        return kDialog;
     }
-    public static void simplerAlertDialog(Activity activity,  String title, String message, DialogInterface.OnClickListener listener){
+    public static KatiDialog simplerAlertDialog(Activity activity,  String title, String message, DialogInterface.OnClickListener listener){
         KatiDialog kDialog= new KatiDialog(activity);
         kDialog.setTitle(title);
         kDialog.setMessage(message);
         kDialog.setPositiveButton(KATI_DIALOG_CONFIRM, listener);
         kDialog.setColor(activity.getResources().getColor(R.color.kati_coral, activity.getTheme()));
         kDialog.showDialog();
+        return kDialog;
     }
 
     public static void NotLogInDialog(Activity context, DialogInterface.OnClickListener listener){
@@ -93,6 +95,10 @@ public class KatiDialog extends AlertDialog.Builder{
         kDialog.setPositiveButton(DIALOG_CONFIRM, listener);
         kDialog.setColor(context.getResources().getColor(R.color.kati_coral, context.getTheme()));
         kDialog.showDialog();
+    }
+
+    public void dismiss(){
+        this.dismiss();
     }
 
 

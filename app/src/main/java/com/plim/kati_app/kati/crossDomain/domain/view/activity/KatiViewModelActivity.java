@@ -2,6 +2,7 @@ package com.plim.kati_app.kati.crossDomain.domain.view.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntityTool;
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
@@ -23,7 +24,7 @@ public abstract class KatiViewModelActivity extends JSHViewModelActivity {
     @Override
     public void onPause() {
         super.onPause();
-        KatiEntityTool.save(this.viewModelTool, this.entity);
+        this.save();
     }
     @Override
     public void viewModelDataUpdated() {
@@ -41,6 +42,10 @@ public abstract class KatiViewModelActivity extends JSHViewModelActivity {
             this.initializeView();
             this.katiEntityUpdated();
         }
+    }
+
+    public void save() {
+        KatiEntityTool.save(this.viewModelTool, this.entity);
     }
 
     protected abstract void associateView();

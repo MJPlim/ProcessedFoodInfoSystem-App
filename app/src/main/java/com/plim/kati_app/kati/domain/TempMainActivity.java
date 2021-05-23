@@ -21,6 +21,8 @@ import retrofit2.Response;
 
 public class TempMainActivity extends KatiViewModelActivity { // 이게 끝나긴 하네 3
 
+    private KatiDialog dialog;
+
     /**
      * System Life Cycle Callback
      */
@@ -48,8 +50,9 @@ public class TempMainActivity extends KatiViewModelActivity { // 이게 끝나�
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         this.autoLogout();
+//        this.dialog.dismiss();
+        super.onDestroy();
     }
 
 
@@ -93,14 +96,15 @@ public class TempMainActivity extends KatiViewModelActivity { // 이게 끝나�
     }
 
     private void autoLogout() {
-        if (this.dataset.get(KatiEntity.EKatiData.AUTO_LOGIN).equals(KatiEntity.EKatiData.TRUE.name())
+        if (!this.dataset.get(KatiEntity.EKatiData.AUTO_LOGIN).equals(KatiEntity.EKatiData.TRUE.name())
                 && this.dataset.containsKey(KatiEntity.EKatiData.AUTHORIZATION)) {
             this.dataset.remove(KatiEntity.EKatiData.AUTHORIZATION);
+            this.save();
         }
     }
 
     public void showSystemOffCheckDialog() {
-        KatiDialog.simplerAlertDialog(this,
+        this.dialog= KatiDialog.simplerAlertDialog(this,
                 Constant.MAIN_ACTIVITY_FINISH_DIALOG_TITLE, Constant.MAIN_ACTIVITY_FINISH_DIALOG_MESSAGE,
                 (dialog, which) -> {
                     this.finish();
