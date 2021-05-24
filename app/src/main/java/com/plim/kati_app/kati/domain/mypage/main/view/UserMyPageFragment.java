@@ -168,6 +168,7 @@ public class UserMyPageFragment extends KatiViewModelFragment {
             try {
                 JSONObject jObjError = new JSONObject(response.errorBody().string());
                 Toast.makeText(getContext(), jObjError.getString("error-message"), Toast.LENGTH_LONG).show();
+                moveToLogOutActivity();
             } catch (Exception e) {
                 Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
             }
