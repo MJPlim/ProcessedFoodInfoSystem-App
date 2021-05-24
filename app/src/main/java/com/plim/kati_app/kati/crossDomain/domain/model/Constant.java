@@ -1,5 +1,7 @@
 package com.plim.kati_app.kati.crossDomain.domain.model;
 
+import com.plim.kati_app.R;
+
 import java.util.Vector;
 
 import lombok.AllArgsConstructor;
@@ -52,6 +54,9 @@ public class Constant { // ㅎㅎ Resource 로 옮겨조...
 
     //changePasswordActivity
     public static final String CHANGE_PASSWORD_TITLE="비밀번호 변경";
+    public static final String CHANGE_PASSWORD_DIFF_ERROR="새 비밀번호를 동일하게 입력해 주세요.";
+
+
     public static final String COMPLETE_CHANGE_PASSWORD_TITLE="비밀번호 변경이 완료되었습니다.";
     public static final String COMPLETE_CHANGE_PASSWORD_MESSAGE="변경된 비밀번호로 다시 로그인 해주세요.";
     public static final String BEFORE_PASSWORD_HINT="현재 비밀번호";
@@ -98,6 +103,7 @@ public static final String ALLERGY_EXPANDABLE_LIST_TITLE="알레르기";
 
     //product detail Activity
     public static final String DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_FOOD_ID_EXTRA="foodId";
+    public static final String DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_FOOD_ID_BARCODE="foodId";
     public static final String DETAIL_PRODUCT_INFO_FRAGMENT_SHOPPING_LINK_="https://msearch.shopping.naver.com/search/all?query=";
 
     public static final String ALLERGY_FILTER_INTENT_DIALOG_TITLE="알레르기 필터를 수정하시겠습니까?";
@@ -305,8 +311,29 @@ public static final String ALLERGY_EXPANDABLE_LIST_TITLE="알레르기";
     public static final String SERVER_WRONG_METHOD_EXCEPTION_MESSAGE = "요청 방법이 잘못되었습니다.";
     public static final int SERVER_WRONG_METHOD_EXCEPTION_CODE = 405;
 
+    public enum ERankImage {
+        first(R.drawable.first),
+        second(R.drawable.second),
+        third(R.drawable.third),
+        fourth(R.drawable.four),
+        fifth(R.drawable.five),
+        sixth(R.drawable.six),
+        seventh(R.drawable.seven),
+        eighth(R.drawable.eight),
+        ninth(R.drawable.nine),
+        tenth(R.drawable.ten)
+        ;
 
+        private int image;
 
+        private ERankImage(int image) {
+            this.image = image;
+
+        }
+        public int getImage() {
+            return this.image;
+        }
+    }
 
 
 

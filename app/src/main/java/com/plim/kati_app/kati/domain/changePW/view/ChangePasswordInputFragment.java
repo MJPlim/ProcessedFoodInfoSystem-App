@@ -1,5 +1,6 @@
 package com.plim.kati_app.kati.domain.changePW.view;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ import retrofit2.Response;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.AFTER_PASSWORD_HINT;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.AFTER_PASSWORD_HINT2;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.BEFORE_PASSWORD_HINT;
+import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.CHANGE_PASSWORD_DIFF_ERROR;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.CHANGE_PASSWORD_TITLE;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.COMPLETE_CHANGE_PASSWORD_MESSAGE;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.COMPLETE_CHANGE_PASSWORD_TITLE;
@@ -60,14 +62,12 @@ public class ChangePasswordInputFragment extends AbstractFragment_3EditText {
         if (this.editText2.getText().toString().equals(this.editText3.getText().toString())) {
             this.loadingDialog = new LoadingDialog(this.getContext());
             this.loadingDialog.show();
-
-            String token = this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION);
             ModifyPasswordRequest request = new ModifyPasswordRequest();
             request.setBeforePassword(this.editText.getText().toString());
             request.setAfterPassword(this.editText2.getText().toString());
-            KatiRetrofitTool.getAPIWithAuthorizationToken(token).modifyPassword(request).enqueue(JSHRetrofitTool.getCallback(new ChangePasswordRequestCallback()));
+            KatiRetrofitTool.getAPIWithAuthorizationToken(this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION)).modifyPassword(request).enqueue(JSHRetrofitTool.getCallback(new ChangePasswordRequestCallback()));
         } else {
-            Toast.makeText(getContext(), "새 비밀번호를 동일하게 입력해 주세요.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), CHANGE_PASSWORD_DIFF_ERROR, Toast.LENGTH_LONG).show();
         }
     }
     private class ChangePasswordRequestCallback implements JSHRetrofitCallback<ModifyPasswordResponse> {
@@ -87,9 +87,7 @@ public class ChangePasswordInputFragment extends AbstractFragment_3EditText {
             }
         }
         @Override
-        public void onConnectionFail(Throwable t) {
-            loadingDialog.hide();
-        }
+        public void onConnectionFail(Throwable t) { loadingDialog.hide(); }
     }
 
     /**

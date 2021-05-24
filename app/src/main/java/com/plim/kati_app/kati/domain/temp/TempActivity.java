@@ -1,5 +1,6 @@
 package com.plim.kati_app.kati.domain.temp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
@@ -10,6 +11,7 @@ import com.plim.kati_app.kati.crossDomain.domain.view.activity.KatiViewModelActi
 import com.plim.kati_app.kati.domain.TempMainActivity;
 import com.plim.kati_app.kati.domain.temp.editData.userData.view.EditDataActivity;
 import com.plim.kati_app.kati.domain.temp.logout.view.LogOutActivity;
+import com.plim.kati_app.kati.domain.temp.setSecondEmail.view.SetSecondEmailActivity;
 import com.plim.kati_app.kati.domain.temp.signOut.view.SignOutActivity;
 import com.plim.kati_app.jshCrossDomain.tech.google.JSHGoogleMap;
 
@@ -17,7 +19,8 @@ public class TempActivity extends KatiViewModelActivity {
 
     // Associate
         // View
-        private Button signOutButton, logOutButton, mapButton, userDataEditButton;
+        private Button signOutButton, logOutButton, mapButton, userDataEditButton, setSecondEmailButton;
+
 
     /**
      * System Life Cycle Callback
@@ -32,14 +35,22 @@ public class TempActivity extends KatiViewModelActivity {
         this.signOutButton = this.findViewById(R.id.tempActivity_withdrawalButton);
         this.logOutButton= this.findViewById(R.id.tempActivity_logOutButton);
         this.mapButton=this.findViewById(R.id.tempActivity_mapButton);
+
         this.userDataEditButton=this.findViewById(R.id.tempActivity_userDataEditButton);
+
+        this.setSecondEmailButton=this.findViewById(R.id.tempActivity_setSecondEmailButton);
+
     }
     @Override
     protected void initializeView() {
         this.signOutButton.setOnClickListener(v->this.signOutPressed());
         this.logOutButton.setOnClickListener(v->this.logoutPressed());
         this.mapButton.setOnClickListener(v->this.mapPressed());
+
         this.userDataEditButton.setOnClickListener(v->this.userDataEditPressed());
+
+        this.setSecondEmailButton.setOnClickListener(v->this.setSecondEmailPressed());
+
     }
 
 
@@ -57,7 +68,12 @@ public class TempActivity extends KatiViewModelActivity {
     }
     private void logoutPressed(){ this.startActivity(LogOutActivity.class); }
     private void mapPressed(){ JSHGoogleMap.openGoogleMapMyPositionAndSearch(this, "convenience store"); }
+
     private void userDataEditPressed() { this.startActivity(EditDataActivity.class);}
+
+    private void setSecondEmailPressed(){ this.startActivity(SetSecondEmailActivity.class); }
+
+
     /**
      * Method
      */

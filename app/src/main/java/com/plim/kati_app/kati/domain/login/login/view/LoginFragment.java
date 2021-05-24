@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import com.plim.kati_app.R;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
+import com.plim.kati_app.kati.domain.login.emailFind.view.FindEmailActivity;
 import com.plim.kati_app.kati.domain.login.login.model.LoginRequest;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitCallback;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
@@ -18,6 +19,7 @@ import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiViewModelFrag
 import com.plim.kati_app.kati.domain.TempMainActivity;
 import com.plim.kati_app.kati.domain.login.pwFind.view.FindPasswordActivity;
 import com.plim.kati_app.kati.domain.login.signIn.view.SignInActivity;
+import com.plim.kati_app.kati.domain.login.socialLogin.GoogleLoginActivity;
 
 import retrofit2.Response;
 
@@ -43,14 +45,20 @@ public class LoginFragment extends KatiViewModelFragment {
         this.pwFindButton = view.findViewById(R.id.loginActivity_pwFindButton);
         this.signInButton = view.findViewById(R.id.loginActivity_accountCreateButton);
         this.autologinCheckBox=view.findViewById(R.id.loginActivity_autologinCheckBox);
+        this.kakaoLoginButton = view.findViewById(R.id.social_login_button_kakao);
+        this.googleLoginButton = view.findViewById(R.id.social_login_button_google);
     }
     @Override
     protected void initializeView() {
         this.autologinCheckBox.setOnClickListener((v -> this.setAutoLogin()));
         this.signInButton.setOnClickListener(v->this.startActivity(new Intent(getContext(), SignInActivity.class)));
         this.pwFindButton.setOnClickListener(v->this.startActivity(new Intent(getContext(), FindPasswordActivity.class)));
+        this.idFindButton.setOnClickListener(v->this.startActivity(new Intent(getContext(), FindEmailActivity.class)));
         this.loginButton.setOnClickListener(v->this.login());
         this.autologinCheckBox.setChecked(this.dataset.get(KatiEntity.EKatiData.AUTO_LOGIN).equals(KatiEntity.EKatiData.TRUE.name()));
+        this.kakaoLoginButton.setOnClickListener(v->this.googleLogin());
+        this.googleLoginButton.setOnClickListener(v->this.kakaoLogin());
+
     }
     @Override
     public void katiEntityUpdated() { this.checkLogined(); }
@@ -58,6 +66,14 @@ public class LoginFragment extends KatiViewModelFragment {
     /**
      * Callback
      */
+    private void kakaoLogin() {
+    }
+
+    private void googleLogin() {
+//        Intent intent = new Intent(getContext(), GoogleLoginActivity.class);
+//        startActivity(intent);
+    }
+
     private void setAutoLogin() {
         this.dataset.put(KatiEntity.EKatiData.AUTO_LOGIN,
                 this.autologinCheckBox.isChecked()? KatiEntity.EKatiData.TRUE.name():KatiEntity.EKatiData.FALSE.name());

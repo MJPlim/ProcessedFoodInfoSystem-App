@@ -7,34 +7,41 @@
     android:orientation="vertical"
     tools:context=".kati.domain.temp.TempActivity">
 
-
     <Button
         android:id="@+id/tempActivity_withdrawalButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:text="@string/tempActivity_withdrawalButton_text" />
 
     <Button
         android:id="@+id/tempActivity_logOutButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:text="@string/tempActivity_logOutButton_text" />
 
     <Button
         android:id="@+id/tempActivity_mapButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:text="@string/tempActivity_mapButton_text" />
 
     <Button
+
         android:id="@+id/tempActivity_userDataEditButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:text="@string/tempActivity_userDataEditButton_text" />
+    <Button
+        android:id="@+id/tempActivity_setSecondEmailButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="복구 이메일" />
+
 
 
 </LinearLayout>

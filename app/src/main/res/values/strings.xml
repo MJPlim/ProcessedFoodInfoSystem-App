@@ -28,6 +28,9 @@
     <string name="register_email_maintext">이메일을 입력해주세요</string>
     <string name="register_email_hint">example@plim.com</string>
 
+    <!-- RegisterSecondEmailFragment !-->
+    <string name="register_second_email_maintext">복구용 이메일을 입력해주세요</string>
+
     <!-- RegisterFinishedFragment !-->
     <string name="welcome_start">환영합니다</string>
     <string name="welcome_end">님!</string>
@@ -44,6 +47,12 @@
     <!-- GoogleLoginActivity !-->
     <string name="google_logout_maintext">구글 계정 로그아웃</string>
     <string name="google_logout_subtext">구글 계정이 정상적으로 로그아웃 되었습니다.</string>
+
+    <!-- FindIdEmailInputFragment !-->
+    <string name="find_id_maintext">복구 이메일을 입력해주세요</string>
+    <string name="find_id_subtext">*마이페이지 메뉴에서 등록할 수 있습니다.</string>
+    <string name="find_user_email_dialog_title">복구 이메일으로 기존 아이디(이메일)가 발송되었습니다.</string>
+    <string name="find_user_email_dialog_message">메일함에서 아이디를 확인해주세요.</string>
 
     <!--
     This string is used for square devices and overridden by hello_world in
@@ -110,6 +119,21 @@
     <string name="expandableItemListFragment_saveButton_text">저장하기</string>
     <string name="allergyViewFragment_noTextView_text">아직 설정된 알레르기 필터가 없습니다.</string>
     <string name="allergyViewFragment_editTextView_text">수정하기</string>
+
+    <!-- MyPageFragment !-->
+    <string name="userPageFragment_logoutButton_text">로그아웃</string>
+    <string name="userPageFragment_myFavorite_text">내가 찜한 제품</string>
+    <string name="userPageFragment_myReview_text">내가 쓴 리뷰</string>
+    <string name="userPageFragment_myReply_text">내가 쓴 댓글</string>
+    <string name="userPageFragment_myPost_text">내가 쓴 글</string>
+    <string name="userPageFragment_restore_email_text">복구 이메일 등록</string>
+    <string name="userPageFragment_customerCenter_text">고객 센터</string>
+    <string name="userPageFragment_modifyUser_text">개인 정보 수정</string>
+    <string name="userPageFragment_changePassword_text">비밀번호 변경</string>
+    <string name="userPageFragment_notice_text">공지사항</string>
+    <string name="userPageFragment_setting_text">설정</string>
+    <string name="userPageFragment_default_text">0</string>
+    <string name="userPageFragment_default_numOfFood">총 0개</string>
 
 
 </resources>

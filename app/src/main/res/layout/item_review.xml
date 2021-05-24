@@ -24,6 +24,7 @@
         app:layout_constraintEnd_toStartOf="@+id/reviewItem_editButton"
         app:layout_constraintTop_toBottomOf="@+id/reviewItem_reviewTextTextView" />
 
+
     <TextView
         android:id="@+id/reviewItem_ProductNameTextView"
         android:layout_width="wrap_content"
