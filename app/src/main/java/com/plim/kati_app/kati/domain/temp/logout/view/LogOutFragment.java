@@ -16,9 +16,14 @@ import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiViewModelFragment;
 import com.plim.kati_app.kati.domain.TempMainActivity;
 
+import java.util.Vector;
+
 public class LogOutFragment extends KatiViewModelFragment {
 
+    private Vector<KatiDialog> dialogs;
+
     public LogOutFragment() {
+        this.dialogs= new Vector<>();
     }
 
     @Override
@@ -36,13 +41,21 @@ public class LogOutFragment extends KatiViewModelFragment {
     }
 
     @Override
+    public void onDestroy() {
+        for(KatiDialog dialog:dialogs){
+            dialog.dismiss();
+            dialogs.remove(dialog);
+        }
+        super.onDestroy();
+    }
+
+    @Override
     public void katiEntityUpdated() {
-        if (this.dataset.containsKey(KatiEntity.EKatiData.AUTHORIZATION)) {
-            this.dataset.remove(KatiEntity.EKatiData.AUTHORIZATION);
-            this.dataset.remove(KatiEntity.EKatiData.EMAIL);
-            this.dataset.remove(KatiEntity.EKatiData.PASSWORD);
+        if (!this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION).equals(KatiEntity.EKatiData.NULL.name())) {
+            this.dataset.put(KatiEntity.EKatiData.AUTHORIZATION, KatiEntity.EKatiData.NULL.name());
+            this.dataset.put(KatiEntity.EKatiData.EMAIL, KatiEntity.EKatiData.NULL.name());
+            this.dataset.put(KatiEntity.EKatiData.PASSWORD, KatiEntity.EKatiData.NULL.name());
             this.dataset.put(KatiEntity.EKatiData.AUTO_LOGIN, KatiEntity.EKatiData.FALSE.name());
-            this.save();
             this.showOkDialog();
         } else {
             this.showNoDialog();
@@ -51,15 +64,15 @@ public class LogOutFragment extends KatiViewModelFragment {
 
 
     public void showOkDialog() {
-        this.showDialog(Constant.LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_TITLE, Constant.LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_MESSAGE);
+        this.dialogs.add(this.showDialog(Constant.LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_TITLE, Constant.LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_MESSAGE));
     }
 
     public void showNoDialog() {
-        this.showDialog(Constant.LOG_OUT_ACTIVITY_FAILURE_DIALOG_TITLE, Constant.LOG_OUT_ACTIVITY_FAILURE_DIALOG_MESSAGE);
+        this.dialogs.add(this.showDialog(Constant.LOG_OUT_ACTIVITY_FAILURE_DIALOG_TITLE, Constant.LOG_OUT_ACTIVITY_FAILURE_DIALOG_MESSAGE));
     }
 
-    public void showDialog(String title, String message) {
-        super.showDialog(title, message, (dialog, which) -> this.startActivity(TempMainActivity.class));
+    public KatiDialog showDialog(String title, String message) {
+       return super.showDialog(title, message, (dialog, which) -> this.startActivity(TempMainActivity.class));
     }
 
 

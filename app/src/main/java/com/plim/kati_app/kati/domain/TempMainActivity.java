@@ -35,93 +35,30 @@ public class TempMainActivity extends KatiViewModelActivity { // 이게 끝나�
     }
 
     @Override
-    protected void associateView() { }
+    protected void associateView() {
+    }
 
     @Override
     protected void initializeView() {
-        this.findViewById(R.id.mainActivity_tempButton).setOnClickListener(v -> this.startActivity(TempActivity.class));
-        this.findViewById(R.id.mainActivity_loginTestButton).setOnClickListener(v -> this.startActivity(LoginActivity.class));
-        this.findViewById(R.id.mainActivity_searchTestButton).setOnClickListener(v -> this.startActivity(FoodSearchActivity.class));
-        this.findViewById(R.id.mainActivity_changePWButton).setOnClickListener(v -> this.startActivity(ChangePasswordActivity.class));
-        this.findViewById(R.id.mainActivity_RankingTestButton).setOnClickListener(v -> this.startActivity(RankingActivity.class));
-        this.findViewById(R.id.mainActivity_myPageTestButton).setOnClickListener(v -> this.startActivity(UserMyPageActivity.class));
 
     }
 
     @Override
     public void katiEntityUpdated() {
-        this.autoLogin();
     }
-
-    @Override
-    protected void onDestroy() {
-        this.autoLogout();
-//        this.dialog.dismiss();
-        super.onDestroy();
-    }
-
 
     @Override
     public void onBackPressed() {
         this.showSystemOffCheckDialog();
     }
 
-
-
-
-
-    /**
-     * Callback
-     */
-    private class LoginRequestCallback implements JSHRetrofitCallback<LoginRequest> {
-        @Override
-        public void onSuccessResponse(Response<LoginRequest> response) {
-            dataset.put(KatiEntity.EKatiData.AUTHORIZATION, response.headers().get("Authorization"));
-        }
-
-        @Override
-        public void onFailResponse(Response<LoginRequest> response) {
-            showLoginFailDialog();
-        }
-
-        @Override
-        public void onConnectionFail(Throwable t) {
-            Log.e("연결실패", t.getMessage());
-        }
-    }
-
-    /**
-     * method
-     */
-    private void autoLogin() {
-        if (this.dataset.get(KatiEntity.EKatiData.AUTO_LOGIN).equals(KatiEntity.EKatiData.TRUE.name())) {
-            LoginRequest loginRequest = new LoginRequest(this.dataset.get(KatiEntity.EKatiData.EMAIL), this.dataset.get(KatiEntity.EKatiData.PASSWORD));
-            KatiRetrofitTool.getAPIWithNullConverter().login(loginRequest).enqueue(JSHRetrofitTool.getCallback(new LoginRequestCallback()));
-        }
-    }
-
-    private void autoLogout() {
-        if (!this.dataset.get(KatiEntity.EKatiData.AUTO_LOGIN).equals(KatiEntity.EKatiData.TRUE.name())
-                && this.dataset.containsKey(KatiEntity.EKatiData.AUTHORIZATION)) {
-            this.dataset.remove(KatiEntity.EKatiData.AUTHORIZATION);
-            this.save();
-        }
-    }
-
     public void showSystemOffCheckDialog() {
-        this.dialog= KatiDialog.simplerAlertDialog(this,
+        this.dialog = KatiDialog.simplerAlertDialog(this,
                 Constant.MAIN_ACTIVITY_FINISH_DIALOG_TITLE, Constant.MAIN_ACTIVITY_FINISH_DIALOG_MESSAGE,
                 (dialog, which) -> {
                     this.finish();
                     this.finishAffinity();
                 }
-        );
-    }
-
-    private void showLoginFailDialog() {
-        KatiDialog.simplerAlertDialog(this,
-                Constant.AUTO_LOGIN_SERVICE_FAIL_DIALOG_TITLE, Constant.AUTO_LOGIN_SERVICE_FAIL_DIALOG_MESSAGE,
-                null
         );
     }
 }

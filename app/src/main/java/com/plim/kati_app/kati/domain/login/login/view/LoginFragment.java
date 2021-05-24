@@ -21,21 +21,34 @@ import com.plim.kati_app.kati.domain.login.pwFind.view.FindPasswordActivity;
 import com.plim.kati_app.kati.domain.login.signIn.view.SignInActivity;
 import com.plim.kati_app.kati.domain.login.socialLogin.GoogleLoginActivity;
 
+import java.util.Vector;
+
+
 import retrofit2.Response;
 
 public class LoginFragment extends KatiViewModelFragment {
 
     // Associate
-        // View
-        private EditText id, pw;
-        private Button loginButton, idFindButton, pwFindButton, signInButton, kakaoLoginButton, googleLoginButton;
-        private CheckBox autologinCheckBox;
+    // View
+    private EditText id, pw;
+    private Button loginButton, idFindButton, pwFindButton, signInButton, kakaoLoginButton, googleLoginButton;
+    private CheckBox autologinCheckBox;
+
+    private Vector<KatiDialog> dialogs;
+
+    public LoginFragment(){
+        this.dialogs= new Vector<>();
+    }
+
 
     /**
      * System Life Cycle Callback
      */
     @Override
-    protected int getLayoutId() { return R.layout.activity_login_home_layout; }
+    protected int getLayoutId() {
+        return R.layout.activity_login_home_layout;
+    }
+
     @Override
     protected void associateView(View view) {
         this.id = view.findViewById(R.id.loginActivity_idText);
@@ -44,13 +57,19 @@ public class LoginFragment extends KatiViewModelFragment {
         this.idFindButton = view.findViewById(R.id.loginActivity_idFindButton);
         this.pwFindButton = view.findViewById(R.id.loginActivity_pwFindButton);
         this.signInButton = view.findViewById(R.id.loginActivity_accountCreateButton);
+
         this.autologinCheckBox=view.findViewById(R.id.loginActivity_autologinCheckBox);
+
+        this.autologinCheckBox = view.findViewById(R.id.loginActivity_autologinCheckBox);
+
         this.kakaoLoginButton = view.findViewById(R.id.social_login_button_kakao);
         this.googleLoginButton = view.findViewById(R.id.social_login_button_google);
     }
+
     @Override
     protected void initializeView() {
         this.autologinCheckBox.setOnClickListener((v -> this.setAutoLogin()));
+
         this.signInButton.setOnClickListener(v->this.startActivity(new Intent(getContext(), SignInActivity.class)));
         this.pwFindButton.setOnClickListener(v->this.startActivity(new Intent(getContext(), FindPasswordActivity.class)));
         this.idFindButton.setOnClickListener(v->this.startActivity(new Intent(getContext(), FindEmailActivity.class)));
@@ -60,8 +79,19 @@ public class LoginFragment extends KatiViewModelFragment {
         this.googleLoginButton.setOnClickListener(v->this.kakaoLogin());
 
     }
+
     @Override
-    public void katiEntityUpdated() { this.checkLogined(); }
+    public void katiEntityUpdated() {
+        this.checkLogined();
+    }
+
+    @Override
+    public void onDestroy() {
+        for(KatiDialog dialog: dialogs) {
+            dialog.dismiss();
+        }
+        super.onDestroy();
+    }
 
     /**
      * Callback
@@ -76,40 +106,48 @@ public class LoginFragment extends KatiViewModelFragment {
 
     private void setAutoLogin() {
         this.dataset.put(KatiEntity.EKatiData.AUTO_LOGIN,
-                this.autologinCheckBox.isChecked()? KatiEntity.EKatiData.TRUE.name():KatiEntity.EKatiData.FALSE.name());
+                this.autologinCheckBox.isChecked() ? KatiEntity.EKatiData.TRUE.name() : KatiEntity.EKatiData.FALSE.name());
     }
-    private void login(){
+
+    private void login() {
         LoginRequest loginRequest = new LoginRequest(this.id.getText().toString(), this.pw.getText().toString());
         KatiRetrofitTool.getAPIWithNullConverter().login(loginRequest).enqueue(JSHRetrofitTool.getCallback(new LoginRequestCallback()));
     }
+
     private void checkLogined() {
-        if(this.dataset.containsKey(KatiEntity.EKatiData.AUTHORIZATION)){
-            KatiDialog.simplerAlertDialog(this.getActivity(),
-                R.string.login_already_signed_dialog, R.string.login_already_signed_content_dialog,
-                (dialog, which) -> startMainActivity()
-            );
-        }
-        Log.d("디버그","로그인 할 때는"+this.dataset.containsKey(KatiEntity.EKatiData.AUTHORIZATION));
+        if (this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION) != null)
+            if (!this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION).equals(KatiEntity.EKatiData.NULL.name())) {
+               this.dialogs.add( KatiDialog.simplerAlertDialog(this.getActivity(),
+                        R.string.login_already_signed_dialog, R.string.login_already_signed_content_dialog,
+                        (dialog, which) -> startMainActivity()
+                ));
+            }
     }
+
     private class LoginRequestCallback implements JSHRetrofitCallback<LoginRequest> {
         @Override
         public void onSuccessResponse(Response<LoginRequest> response) {
             dataset.put(KatiEntity.EKatiData.AUTHORIZATION, response.headers().get("Authorization"));
             dataset.put(KatiEntity.EKatiData.EMAIL, id.getText().toString());
             dataset.put(KatiEntity.EKatiData.PASSWORD, pw.getText().toString());
-            save();
-            KatiDialog.simplerAlertDialog(getActivity(),
-                R.string.login_success_dialog, R.string.login_success_content_dialog,
-                (dialog, which) -> startMainActivity()
-            );
+//            save();
+           dialogs.add( KatiDialog.simplerAlertDialog(getActivity(),
+                    R.string.login_success_dialog, R.string.login_success_content_dialog,
+                    (dialog, which) -> startMainActivity()
+            ));
         }
+
         @Override
         public void onFailResponse(Response<LoginRequest> response) {
-             KatiDialog.simplerAlertDialog(getActivity(),
-                R.string.login_failed_dialog, R.string.login_failed_content_dialog,
-                (dialog, which) -> { id.setText(""); pw.setText(""); }
-            );
+            dialogs.add(KatiDialog.simplerAlertDialog(getActivity(),
+                    R.string.login_failed_dialog, R.string.login_failed_content_dialog,
+                    (dialog, which) -> {
+                        id.setText("");
+                        pw.setText("");
+                    }
+            ));
         }
+
         @Override
         public void onConnectionFail(Throwable t) {
             Log.e("연결실패", t.getMessage());
@@ -119,5 +157,7 @@ public class LoginFragment extends KatiViewModelFragment {
     /**
      * Method
      */
-    public void startMainActivity() { this.startActivity(new Intent(this.getContext(), TempMainActivity.class)); }
+    public void startMainActivity() {
+        this.startActivity(new Intent(this.getContext(), TempMainActivity.class));
+    }
 }

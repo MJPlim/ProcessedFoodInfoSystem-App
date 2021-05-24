@@ -37,15 +37,10 @@ public abstract class KatiViewModelFragment extends JSHViewModelFragment {
     @Override
     public void onPause() {
         super.onPause();
-        KatiEntityTool.save(this.viewModelTool, this.entity);
+        this.save();
     }
 
     public void save() {
-//        Log.d("디버그, 최근검색어 저장?",
-//                this.entity.getSearchWords().size() != 0 ?
-//                        this.entity.getSearchWords().get(this.entity.getSearchWords().size() - 1) :
-//                        "최근 검색어가 없음");
-        Log.d("뷰모델 프래그먼트","저장하다");
         KatiEntityTool.save(this.viewModelTool, this.entity);
     }
 
@@ -58,11 +53,10 @@ public abstract class KatiViewModelFragment extends JSHViewModelFragment {
             jshEntity.setEntityString(KatiEntityTool.fromKatiEntityToString(new KatiEntity()));
             this.viewModelTool.getModel().insert(jshEntity);
         } else {
+
             this.entity = katiEntityArray.get(0);
             this.dataset = this.entity.getDataset();
             this.searchWords = this.entity.getSearchWords();
-            Log.d("뷰모델이 바뀌어서 불러온 서치워드", this.searchWords.size() + "개");
-
             this.associateView(this.getView());
             this.initializeView();
             this.katiEntityUpdated();
@@ -90,8 +84,8 @@ public abstract class KatiViewModelFragment extends JSHViewModelFragment {
     }
 
 
-    protected void showDialog(String title, String message, DialogInterface.OnClickListener listener) {
-        KatiDialog.simplerAlertDialog(this.getActivity(), title, message, listener);
+    protected KatiDialog showDialog(String title, String message, DialogInterface.OnClickListener listener) {
+        return KatiDialog.simplerAlertDialog(this.getActivity(), title, message, listener);
     }
 
 }

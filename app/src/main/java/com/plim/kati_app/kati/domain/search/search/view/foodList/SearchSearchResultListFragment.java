@@ -94,24 +94,6 @@ public class SearchSearchResultListFragment extends KatiSearchFragment {
             }
         });
 
-
-//        this.foodInfoRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-//            @Override
-//            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-//                super.onScrollStateChanged(recyclerView, newState);
-//            }
-//
-//            @Override
-//            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-//                super.onScrolled(recyclerView, dx, dy);
-//                int position = manager.findLastCompletelyVisibleItemPosition();
-//
-//                if (position>-1&&position == vector.size() - 1){
-//                    Log.d("스크롤 내림",position+"/"+vector.size());
-//                    loadMore();}
-//
-//            }
-//        });
     }
 
     private void loadMore() {

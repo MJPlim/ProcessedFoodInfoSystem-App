@@ -6,83 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".kati.domain.TempMainActivity">
 
-    <TextView
-        android:id="@+id/mainActivity_tempTitleTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:text="@string/mainActivity_tempTitleTextView_text"
-        android:textColor="@color/black"
-        android:textSize="20sp"
+
+    <fragment
+        android:id="@+id/fragment"
+        android:name="com.plim.kati_app.kati.domain.TempMainFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
-
-    <Button
-        android:id="@+id/mainActivity_tempButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:text="@string/mainActivity_tempButton_text"
-        app:layout_constraintTop_toBottomOf="@+id/mainActivity_tempTitleTextView"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <Button
-        android:id="@+id/mainActivity_loginTestButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:layout_marginTop="293dp"
-        android:text="@string/mainActivity_loginTestButton_text"
-        app:layout_constraintTop_toBottomOf="@+id/mainActivity_tempButton"
-        tools:layout_editor_absoluteX="-48dp" />
-
-    <Button
-        android:id="@+id/mainActivity_searchTestButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:text="@string/mainActivity_searchTestButton_text"
-        app:layout_constraintTop_toBottomOf="@+id/mainActivity_loginTestButton"
-        tools:layout_editor_absoluteX="16dp" />
-
-    <Button
-        android:id="@+id/mainActivity_changePWButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:text="@string/mainActivity_changePWButton_text"
-        app:layout_constraintTop_toBottomOf="@+id/mainActivity_searchTestButton"
-        tools:layout_editor_absoluteX="24dp" />
-
-    <Button
-        android:id="@+id/mainActivity_detailTestButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:text="@string/mainActivity_detailTestButton_text"
-        app:layout_constraintTop_toBottomOf="@+id/mainActivity_changePWButton"
-        tools:layout_editor_absoluteX="24dp" />
-
-    <Button
-        android:id="@+id/mainActivity_RankingTestButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:text="Ranking"
-        app:layout_constraintTop_toBottomOf="@+id/mainActivity_detailTestButton"
-        tools:layout_editor_absoluteX="24dp" />
-
-    <Button
-        android:id="@+id/mainActivity_myPageTestButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:text="MyPage"
-        app:layout_constraintTop_toBottomOf="@+id/mainActivity_RankingTestButton"
-        tools:layout_editor_absoluteX="24dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,6 +13,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.plim.kati_app.R;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiSearchFragment;
+import com.plim.kati_app.kati.domain.search.search.view.searchBar.barcode.view.BarcodeActivity;
 
 public class SearchSearchFieldFragment extends KatiSearchFragment {
 
@@ -41,6 +42,11 @@ public class SearchSearchFieldFragment extends KatiSearchFragment {
     @Override
     protected void initializeView() {
         this.textSearchButton.setOnClickListener(v -> this.searchStart());
+        this.cameraSearchButton.setOnClickListener(v->this.barcodeSearch());
+    }
+
+    private void barcodeSearch() {
+        startActivity(BarcodeActivity.class);
     }
 
     @Override
@@ -53,6 +59,8 @@ public class SearchSearchFieldFragment extends KatiSearchFragment {
         if (searchModel.getSearchText() != null && searchModel.getSearchText().length() != 0) {
             this.searchEditText.setText(searchModel.getSearchText());
 //            this.searchStart();
+//            this.textSearchButton.performClick();
+
         }
     }
 
@@ -85,6 +93,8 @@ public class SearchSearchFieldFragment extends KatiSearchFragment {
 //        Log.d("최근 저장한 검색어, 검색어 개수", this.searchWords.get(searchWords.size() - 1) + "," + searchWords.size());
 
 
+        Log.d("내비게이션","이동");
+        this.textSearchButton.setEnabled(false);
         NavHostFragment navHostFragment = (NavHostFragment) requireActivity().getSupportFragmentManager().findFragmentById(R.id.nav_search_fragment);
         navHostFragment.getNavController().navigate(R.id.action_foodSearchRecommendationFragment_to_foodSearchResultListFragment);
     }

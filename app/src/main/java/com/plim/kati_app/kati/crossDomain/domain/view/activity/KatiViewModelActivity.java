@@ -24,7 +24,6 @@ public abstract class KatiViewModelActivity extends JSHViewModelActivity {
     @Override
     public void onPause() {
         super.onPause();
-        this.save();
     }
     @Override
     public void viewModelDataUpdated() {
@@ -42,10 +41,6 @@ public abstract class KatiViewModelActivity extends JSHViewModelActivity {
             this.initializeView();
             this.katiEntityUpdated();
         }
-    }
-
-    public void save() {
-        KatiEntityTool.save(this.viewModelTool, this.entity);
     }
 
     protected abstract void associateView();

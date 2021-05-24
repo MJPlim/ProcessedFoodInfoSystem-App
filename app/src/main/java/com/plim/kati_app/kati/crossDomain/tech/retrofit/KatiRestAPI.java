@@ -2,8 +2,6 @@ package com.plim.kati_app.kati.crossDomain.tech.retrofit;
 
 import com.plim.kati_app.kati.domain.changePW.model.ModifyPasswordRequest;
 import com.plim.kati_app.kati.domain.changePW.model.ModifyPasswordResponse;
-import com.plim.kati_app.kati.domain.login.emailFind.model.FindEmailRequest;
-import com.plim.kati_app.kati.domain.login.emailFind.model.FindEmailResponse;
 import com.plim.kati_app.kati.domain.login.login.model.LoginRequest;
 import com.plim.kati_app.kati.domain.login.pwFind.model.FindPasswordRequest;
 import com.plim.kati_app.kati.domain.login.pwFind.model.FindPasswordResponse;
@@ -23,15 +21,12 @@ import com.plim.kati_app.kati.domain.search.foodInfo.view.foodInfo.model.UpdateR
 import com.plim.kati_app.kati.domain.search.foodInfo.view.foodInfo.model.UpdateReviewLikeResponse;
 import com.plim.kati_app.kati.domain.search.search.model.AdvertisementResponse;
 import com.plim.kati_app.kati.domain.search.search.model.FindFoodBySortingResponse;
-import com.plim.kati_app.kati.domain.search.search.model.FoodResponse;
 import com.plim.kati_app.kati.domain.temp.editData.allergy.model.CreateUserAllergyRequest;
 import com.plim.kati_app.kati.domain.temp.editData.allergy.model.CreateUserAllergyResponse;
 import com.plim.kati_app.kati.domain.temp.editData.allergy.model.ReadUserAllergyResponse;
 import com.plim.kati_app.kati.domain.temp.editData.userData.model.UserInfoModifyRequest;
 import com.plim.kati_app.kati.domain.temp.editData.userData.model.UserInfoResponse;
 import com.plim.kati_app.kati.domain.temp.itemRank.model.ItemRankingResponse;
-import com.plim.kati_app.kati.domain.temp.setSecondEmail.model.SetSecondEmailRequest;
-import com.plim.kati_app.kati.domain.temp.setSecondEmail.model.SetSecondEmailResponse;
 import com.plim.kati_app.kati.domain.temp.signOut.model.WithdrawRequest;
 import com.plim.kati_app.kati.domain.temp.signOut.model.WithdrawResponse;
 
@@ -147,36 +142,11 @@ public interface KatiRestAPI {
     @GET("api/v1/user/readdReviewByReviewID")
     Call<ReadReviewIdResponse> readReviewByReviewID(@Query("reviewId") Long reviewId);
 
-    //동욱
-
-//    @GET("/api/v1/user/favorite/list")
-//    Call<List<UserFavoriteResponse>> getUserFavorite();
-//    @GET("/api/v1/user/readReviewByUserID")
-//    Call<List<ReadReviewResponse>> getUserReview();
-//    @GET("/api/v1/user/summary")
-//    Call<UserSummaryResponse> getUserSummary();
 
 
 
 
 
-
-
-
-    //송은
-//    @POST("find-email")
-//    Call<FindEmailResponse> findEmail(@Body FindEmailRequest request);
-//    @POST("api/v1/user/set-secondEmail")
-//    Call<SetSecondEmailResponse> setSecondEmail(@Body SetSecondEmailRequest request);
-//    @GET("reviewRanking")
-//    Call<List<ItemRankingResponse>> getRankingList();
-
-
-
-    @POST("find-email") Call<FindEmailResponse> findEmail(@Body FindEmailRequest request);
-    @POST("api/v1/user/set-secondEmail") Call<SetSecondEmailResponse> setSecondEmail(@Body SetSecondEmailRequest request);
-    @GET("/api/v1/food/findFood/foodName") Call<List<FoodResponse>> getSearchResultByFoodName(@Query("foodName") String foodName);
-    @GET("/api/v1/food/findFood/manufacturerName") Call<List<FoodResponse>> getSearchResultByCompanyName(@Query("manufacturerName") String manufacturerName);
     @GET("/api/v1/advertisement/foodDetail") Call<FoodDetailResponse> getAdvertisementFoodDetail(@Query("adId") Long adId);
     @GET("api/v1/advertisement/ads") Call<List<AdvertisementResponse>> getAdvertisementFoodList();
     @GET("reviewRanking") Call<List<ItemRankingResponse>> getRankingList();

@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+
 import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +36,7 @@ import com.plim.kati_app.kati.domain.search.foodInfo.view.foodInfo.view.DetailRe
 import com.plim.kati_app.kati.domain.mypage.myFavorite.adapter.UserFavoriteFoodRecyclerAdapter;
 import com.plim.kati_app.kati.domain.search.search.view.foodList.searchResult.FoodViewHolder;
 
+
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 
@@ -44,15 +47,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.NEW_DETAIL_ACTIVITY_EXTRA_FOOD_ID;
+
 
 
 /**
  * 마이페이지 즐겨찾기 프래그먼트.
  *
  */
-
 public class UserFavoriteFragment extends KatiViewModelFragment {
     private TextView favoriteNum;
     private RecyclerView foodInfoRecyclerView;
@@ -117,4 +121,5 @@ public class UserFavoriteFragment extends KatiViewModelFragment {
             );
         }
     }
+
 }

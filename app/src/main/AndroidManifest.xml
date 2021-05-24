@@ -50,7 +50,6 @@
         <activity android:name=".kati.domain.temp.logout.view.LogOutActivity" />
         <activity android:name=".kati.domain.login.login.view.LoginActivity" />
         <activity android:name=".kati.domain.changePW.view.ChangePasswordActivity" />
-
         <activity android:name=".kati.domain.mypage.main.view.UserMyPageActivity"/>
 
     </application>

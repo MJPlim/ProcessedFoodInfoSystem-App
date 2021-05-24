@@ -10,7 +10,7 @@ import com.plim.kati_app.jshCrossDomain.domain.model.room.entity.JSHEntity;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-@Database(entities = {JSHEntity.class}, version = 2, exportSchema = false)
+@Database(entities = {JSHEntity.class}, version = 3, exportSchema = false)
 public abstract class JSHDatabase extends androidx.room.RoomDatabase {
 
     // Constant

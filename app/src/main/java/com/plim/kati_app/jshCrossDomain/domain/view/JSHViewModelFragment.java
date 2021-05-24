@@ -31,17 +31,6 @@ public abstract class JSHViewModelFragment extends Fragment implements ViewModel
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-//        this.viewModelTool.startObserve();
-    }
-    @Override
-    public void onPause() {
-        super.onPause();
-//        this.viewModelTool.stopObserve();
-    }
-
-    @Override
     public void onStop() {
         super.onStop();
         this.viewModelTool.stopObserve();

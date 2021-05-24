@@ -29,8 +29,10 @@ public class KatiEntityTool {
     public static void save(JSHViewModelTool viewModelTool, KatiEntity entity) {
         ArrayList<JSHEntity> jshEntityArray = viewModelTool.getJSHEntities();
         if(jshEntityArray.size()!=0){
+
             JSHEntity jshEntity = jshEntityArray.get(0);
             jshEntity.setEntityString(KatiEntityTool.fromKatiEntityToString(entity));
+            Log.d("디버그 진짜 저장 불림",KatiEntityTool.fromKatiEntityToString(entity)+'-');
             viewModelTool.getModel().update(jshEntity);
         }
     }

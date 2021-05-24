@@ -63,8 +63,7 @@ public class TempActivity extends KatiViewModelActivity {
      * Callback
      */
     private void signOutPressed(){
-        if(this.dataset.containsKey(KatiEntity.EKatiData.AUTHORIZATION)){ this.startActivity(SignOutActivity.class); }
-//        else {this.showNotLoginDialog();}
+       this.startActivity(SignOutActivity.class);
     }
     private void logoutPressed(){ this.startActivity(LogOutActivity.class); }
     private void mapPressed(){ JSHGoogleMap.openGoogleMapMyPositionAndSearch(this, "convenience store"); }

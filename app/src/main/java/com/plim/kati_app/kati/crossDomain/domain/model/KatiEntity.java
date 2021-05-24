@@ -12,7 +12,11 @@ import lombok.Setter;
 public class KatiEntity {
 
     // Static Value
-    public enum EKatiData {AUTHORIZATION, AUTO_LOGIN, EMAIL, PASSWORD, NAME, TRUE, FALSE,SEARCH_WORDS;
+    public enum EKatiData {AUTHORIZATION, AUTO_LOGIN, EMAIL, PASSWORD, NAME,SEARCH_WORDS,
+        TRUE,
+        FALSE,
+        NULL
+        ;
     }
 
     // Component
@@ -23,6 +27,12 @@ public class KatiEntity {
     public KatiEntity() {
         this.dataset = new HashMap<>();
         this.dataset.put(EKatiData.AUTO_LOGIN, EKatiData.FALSE.name());
+        this.dataset.put(EKatiData.AUTHORIZATION, EKatiData.NULL.name());
+        this.dataset.put(EKatiData.EMAIL, EKatiData.NULL.name());
+
+        this.dataset.put(EKatiData.PASSWORD, EKatiData.NULL.name());
+        this.dataset.put(EKatiData.NAME, EKatiData.NULL.name());
+        this.dataset.put(EKatiData.SEARCH_WORDS, EKatiData.NULL.name());
         this.searchWords = new ArrayList<>();
     }
 }
