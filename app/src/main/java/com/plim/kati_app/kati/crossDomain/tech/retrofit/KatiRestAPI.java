@@ -55,7 +55,7 @@ public interface KatiRestAPI {
     @POST("api/v1/user/modify-password")
     Call<ModifyPasswordResponse> modifyPassword(@Body ModifyPasswordRequest request);
 
-    @POST("login")
+    @POST("_login")
     Call<LoginRequest> login(@Body LoginRequest loginRequest);
 
 

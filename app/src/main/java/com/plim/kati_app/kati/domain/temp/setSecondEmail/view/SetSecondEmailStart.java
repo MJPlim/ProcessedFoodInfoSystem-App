@@ -73,7 +73,7 @@ public class SetSecondEmailStart extends AbstractFragment_1EditText {
         SetSecondEmailRequest request = new SetSecondEmailRequest();
         request.setSecondEmail(this.editText.getText().toString());
         String token = this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION);
-        KatiRetrofitTool.getAPIWithAuthorizationToken(token).setSecondEmail(request).enqueue(JSHRetrofitTool.getCallback(new SetSecondEmailRequestCallback()));
+//        KatiRetrofitTool.getAPIWithAuthorizationToken(token).setSecondEmail(request).enqueue(JSHRetrofitTool.getCallback(new SetSecondEmailRequestCallback()));
     }
 
     private void showNotLoginedDialog() {
