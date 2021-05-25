@@ -52,6 +52,11 @@
         <activity android:name=".kati.domain.changePW.view.ChangePasswordActivity" />
         <activity android:name=".kati.domain.mypage.main.view.UserMyPageActivity"/>
 
+
+<!--        여기부터-->
+
+        <activity android:name=".kati.domain.food.searchtext.FoodSearchTextActivity"/>
+
     </application>
 
 </manifest>
