@@ -2,7 +2,7 @@ package com.plim.kati_app.kati.crossDomain.tech.retrofit;
 
 import com.plim.kati_app.kati.domain.changePW.model.ModifyPasswordRequest;
 import com.plim.kati_app.kati.domain.changePW.model.ModifyPasswordResponse;
-import com.plim.kati_app.kati.domain.login.login.model.LoginRequest;
+import com.plim.kati_app.kati.domain.login.login.model.LoginResponse;
 import com.plim.kati_app.kati.domain.login.pwFind.model.FindPasswordRequest;
 import com.plim.kati_app.kati.domain.login.pwFind.model.FindPasswordResponse;
 import com.plim.kati_app.kati.domain.login.signIn.model.SignUpRequest;
@@ -24,8 +24,8 @@ import com.plim.kati_app.kati.domain.search.search.model.FindFoodBySortingRespon
 import com.plim.kati_app.kati.domain.temp.editData.allergy.model.CreateUserAllergyRequest;
 import com.plim.kati_app.kati.domain.temp.editData.allergy.model.CreateUserAllergyResponse;
 import com.plim.kati_app.kati.domain.temp.editData.allergy.model.ReadUserAllergyResponse;
-import com.plim.kati_app.kati.domain.temp.editData.userData.model.UserInfoModifyRequest;
-import com.plim.kati_app.kati.domain.temp.editData.userData.model.UserInfoResponse;
+import com.plim.kati_app.kati.domain.user.dataChange.model.UserInfoModifyRequest;
+import com.plim.kati_app.kati.domain.user.dataChange.model.UserInfoResponse;
 import com.plim.kati_app.kati.domain.temp.itemRank.model.ItemRankingResponse;
 import com.plim.kati_app.kati.domain.temp.signOut.model.WithdrawRequest;
 import com.plim.kati_app.kati.domain.temp.signOut.model.WithdrawResponse;
@@ -55,8 +55,8 @@ public interface KatiRestAPI {
     @POST("api/v1/user/modify-password")
     Call<ModifyPasswordResponse> modifyPassword(@Body ModifyPasswordRequest request);
 
-    @POST("_login")
-    Call<LoginRequest> login(@Body LoginRequest loginRequest);
+    @POST("login")
+    Call<LoginResponse> login(@Body LoginResponse loginRequest);
 
 
     @GET("api/v1/user/user-info")

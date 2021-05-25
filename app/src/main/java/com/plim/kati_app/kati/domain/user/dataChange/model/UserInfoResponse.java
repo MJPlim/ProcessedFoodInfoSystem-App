@@ -1,4 +1,4 @@
-package com.plim.kati_app.kati.domain.temp.editData.userData.model;
+package com.plim.kati_app.kati.domain.user.dataChange.model;
 
 import com.google.gson.annotations.SerializedName;
 

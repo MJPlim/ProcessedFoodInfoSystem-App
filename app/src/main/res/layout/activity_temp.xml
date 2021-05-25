@@ -43,13 +43,6 @@
         android:text="복구 이메일" />
 
 
-    <Button
-        android:id="@+id/tempActivity_setSecondEmailButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:text="복구 이메일" />
-
 
 
 </LinearLayout>

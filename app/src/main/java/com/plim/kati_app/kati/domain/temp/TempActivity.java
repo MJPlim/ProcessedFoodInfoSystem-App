@@ -14,6 +14,7 @@ import com.plim.kati_app.kati.domain.temp.logout.view.LogOutActivity;
 import com.plim.kati_app.kati.domain.temp.setSecondEmail.view.SetSecondEmailActivity;
 import com.plim.kati_app.kati.domain.temp.signOut.view.SignOutActivity;
 import com.plim.kati_app.jshCrossDomain.tech.google.JSHGoogleMap;
+import com.plim.kati_app.kati.domain.user.dataChange.UserDataChangeActivity;
 
 public class TempActivity extends KatiViewModelActivity {
 
@@ -68,7 +69,7 @@ public class TempActivity extends KatiViewModelActivity {
     private void logoutPressed(){ this.startActivity(LogOutActivity.class); }
     private void mapPressed(){ JSHGoogleMap.openGoogleMapMyPositionAndSearch(this, "convenience store"); }
 
-    private void userDataEditPressed() { this.startActivity(EditDataActivity.class);}
+    private void userDataEditPressed() { this.startActivity(UserDataChangeActivity.class);}
 
     private void setSecondEmailPressed(){ this.startActivity(SetSecondEmailActivity.class); }
 

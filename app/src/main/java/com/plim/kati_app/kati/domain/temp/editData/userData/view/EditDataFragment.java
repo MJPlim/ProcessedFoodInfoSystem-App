@@ -13,8 +13,8 @@ import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiLoginCheckViewModelFragment;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.domain.temp.TempActivity;
-import com.plim.kati_app.kati.domain.temp.editData.userData.model.UserInfoModifyRequest;
-import com.plim.kati_app.kati.domain.temp.editData.userData.model.UserInfoResponse;
+import com.plim.kati_app.kati.domain.user.dataChange.model.UserInfoModifyRequest;
+import com.plim.kati_app.kati.domain.user.dataChange.model.UserInfoResponse;
 import com.plim.kati_app.kati.domain.temp.signOut.view.SignOutActivity;
 
 import java.time.LocalDate;

@@ -12,7 +12,7 @@ import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBackImpl;
 import com.plim.kati_app.kati.domain.changePW.view.ChangePasswordActivity;
 import com.plim.kati_app.kati.domain.food.searchText.FoodSearchTextActivity;
-import com.plim.kati_app.kati.domain.login.login.model.LoginRequest;
+import com.plim.kati_app.kati.domain.login.login.model.LoginResponse;
 import com.plim.kati_app.kati.domain.login.login.view.LoginActivity;
 import com.plim.kati_app.kati.domain.mypage.main.view.UserMyPageActivity;
 import com.plim.kati_app.kati.domain.temp.TempActivity;
@@ -62,17 +62,17 @@ public class TempMainFragment extends KatiViewModelFragment {
     /**
      * Callback
      */
-    private class LoginRequestCallback extends SimpleRetrofitCallBackImpl<LoginRequest> {
+    private class LoginRequestCallback extends SimpleRetrofitCallBackImpl<LoginResponse> {
         public LoginRequestCallback(Activity activity) {
             super(activity);
         }
 
         @Override
-        public void onSuccessResponse(Response<LoginRequest> response) {
+        public void onSuccessResponse(Response<LoginResponse> response) {
         }
 
         @Override
-        public void onResponse(Response<LoginRequest> response) {
+        public void onResponse(Response<LoginResponse> response) {
             dataset.put(KatiEntity.EKatiData.AUTHORIZATION, response.headers().get("Authorization"));
         }
     }
@@ -83,7 +83,7 @@ public class TempMainFragment extends KatiViewModelFragment {
     private void autoLogin() {
         if (this.dataset.get(KatiEntity.EKatiData.AUTO_LOGIN).equals(KatiEntity.EKatiData.TRUE.name())) {
 //            Log.d("디버그 자동로그인", "설정O");
-            LoginRequest loginRequest = new LoginRequest(this.dataset.get(KatiEntity.EKatiData.EMAIL), this.dataset.get(KatiEntity.EKatiData.PASSWORD));
+            LoginResponse loginRequest = new LoginResponse(this.dataset.get(KatiEntity.EKatiData.EMAIL), this.dataset.get(KatiEntity.EKatiData.PASSWORD));
             KatiRetrofitTool.getAPIWithNullConverter().login(loginRequest).enqueue(JSHRetrofitTool.getCallback(new LoginRequestCallback(this.getActivity())));
         }
     }

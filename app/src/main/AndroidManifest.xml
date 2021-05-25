@@ -16,10 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KATI_app"
         android:usesCleartextTraffic="true">
+        <activity android:name=".kati.domain.user.dataChange.UserDataChangeActivity"></activity>
         <activity android:name=".kati.domain.temp.editData.userData.view.EditDataActivity" />
         <activity android:name=".kati.domain.search.foodInfo.view.review.WriteReviewActivity" />
         <activity android:name=".kati.domain.search.foodInfo.view.review.UpdateReviewActivity" />
         <activity android:name=".kati.domain.search.foodInfo.view.FoodInfoActivity" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAH63IC9w2B6lP4RYw05b7qAyNja8gOyjU" />
@@ -42,21 +44,16 @@
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="portrait"
-            tools:replace="android:screenOrientation"
-            android:stateNotNeeded="true"> </activity>
+            android:stateNotNeeded="true"
+            tools:replace="android:screenOrientation"></activity>
         <activity android:name=".kati.domain.temp.signOut.view.SignOutActivity" />
         <activity android:name=".kati.domain.temp.TempActivity" />
         <activity android:name=".kati.domain.login.signIn.view.SignInActivity" />
         <activity android:name=".kati.domain.temp.logout.view.LogOutActivity" />
         <activity android:name=".kati.domain.login.login.view.LoginActivity" />
         <activity android:name=".kati.domain.changePW.view.ChangePasswordActivity" />
-        <activity android:name=".kati.domain.mypage.main.view.UserMyPageActivity"/>
-
-
-<!--        여기부터-->
-
-        <activity android:name=".kati.domain.food.searchText.FoodSearchTextActivity"/>
-
+        <activity android:name=".kati.domain.mypage.main.view.UserMyPageActivity" /> <!-- 여기부터 -->
+        <activity android:name=".kati.domain.food.searchText.FoodSearchTextActivity" />
     </application>
 
 </manifest>

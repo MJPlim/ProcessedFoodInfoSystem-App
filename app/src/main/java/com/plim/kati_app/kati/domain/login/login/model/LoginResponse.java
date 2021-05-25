@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import lombok.Getter;
 
 @Getter
-public class LoginRequest {
+public class LoginResponse {
     @SerializedName("email")
     private String email;
 
@@ -13,7 +13,7 @@ public class LoginRequest {
     private String password;
 
     // Constructor
-    public LoginRequest(String email, String password) {
+    public LoginResponse(String email, String password) {
         this.email = email;
         this.password = password;
     }

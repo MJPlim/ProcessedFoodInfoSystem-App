@@ -10,7 +10,7 @@ import android.widget.EditText;
 import com.plim.kati_app.R;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 import com.plim.kati_app.kati.domain.login.emailFind.view.FindEmailActivity;
-import com.plim.kati_app.kati.domain.login.login.model.LoginRequest;
+import com.plim.kati_app.kati.domain.login.login.model.LoginResponse;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitCallback;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
@@ -19,7 +19,6 @@ import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiViewModelFrag
 import com.plim.kati_app.kati.domain.TempMainActivity;
 import com.plim.kati_app.kati.domain.login.pwFind.view.FindPasswordActivity;
 import com.plim.kati_app.kati.domain.login.signIn.view.SignInActivity;
-import com.plim.kati_app.kati.domain.login.socialLogin.GoogleLoginActivity;
 
 import java.util.Vector;
 
@@ -110,7 +109,7 @@ public class LoginFragment extends KatiViewModelFragment {
     }
 
     private void login() {
-        LoginRequest loginRequest = new LoginRequest(this.id.getText().toString(), this.pw.getText().toString());
+        LoginResponse loginRequest = new LoginResponse(this.id.getText().toString(), this.pw.getText().toString());
         KatiRetrofitTool.getAPIWithNullConverter().login(loginRequest).enqueue(JSHRetrofitTool.getCallback(new LoginRequestCallback()));
     }
 
@@ -124,9 +123,9 @@ public class LoginFragment extends KatiViewModelFragment {
             }
     }
 
-    private class LoginRequestCallback implements JSHRetrofitCallback<LoginRequest> {
+    private class LoginRequestCallback implements JSHRetrofitCallback<LoginResponse> {
         @Override
-        public void onSuccessResponse(Response<LoginRequest> response) {
+        public void onSuccessResponse(Response<LoginResponse> response) {
             dataset.put(KatiEntity.EKatiData.AUTHORIZATION, response.headers().get("Authorization"));
             dataset.put(KatiEntity.EKatiData.EMAIL, id.getText().toString());
             dataset.put(KatiEntity.EKatiData.PASSWORD, pw.getText().toString());
@@ -138,7 +137,7 @@ public class LoginFragment extends KatiViewModelFragment {
         }
 
         @Override
-        public void onFailResponse(Response<LoginRequest> response) {
+        public void onFailResponse(Response<LoginResponse> response) {
             dialogs.add(KatiDialog.simplerAlertDialog(getActivity(),
                     R.string.login_failed_dialog, R.string.login_failed_content_dialog,
                     (dialog, which) -> {

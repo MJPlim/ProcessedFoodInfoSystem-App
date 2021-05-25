@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".kati.domain.user.dataChange.UserDataChangeFragment">
+
+    <TextView
+        android:id="@+id/userDataChangeFragment_fragmentTitle"
+        style="@style/textTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:text="@string/userDataChangeFragment_fragmentTitle_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/userDataChangeFragment_editCompleteButton"
+        style="@style/textTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:text="@string/userDataChangeFragment_editCompleteButton_text"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/userDataChangeFragment_fragmentTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/userDataChangeFragment_firstBarrier"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginVertical="10dp"
+        android:background="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userDataChangeFragment_fragmentTitle" />
+
+
+    <View
+        android:id="@+id/userDataChangeFragment_secondBarrier"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_marginVertical="20dp"
+        android:background="@color/gray"
+        app:layout_constraintTop_toBottomOf="@+id/userDataChangeFragment_userNicknameEditText"
+        tools:layout_editor_absoluteX="26dp" />
+
+    <View
+        android:id="@+id/userDataChangeFragment_thirdBarrier"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_marginVertical="20dp"
+        android:background="@color/gray"
+        app:layout_constraintTop_toBottomOf="@+id/userDataChangeFragment_userAddressEditText"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <ImageView
+        android:id="@+id/userDataChangeFragment_userProfileImageView"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginVertical="10dp"
+        android:src="@drawable/user_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userDataChangeFragment_firstBarrier" />
+
+    <TextView
+        android:id="@+id/userDataChangeFragment_userProfileTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/userDataChangeFragment_userProfileTextView_Text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userDataChangeFragment_userProfileImageView" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/userDataChangeFragment_userNicknameEditText"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:boxBackgroundColor="@color/white"
+        android:background="@null"
+        app:endIconMode="clear_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userDataChangeFragment_userProfileTextView">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/userDataChangeFragment_userNicknameEditTextInput"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/userDataChangeFragment_logoutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="30dp"
+        android:text="@string/userDataChangeFragment_logoutButton_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/userDataChangeFragment_horizontalBarrier" />
+
+    <TextView
+        android:id="@+id/userDataChangeFragment_signoutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="30dp"
+        android:text="@string/userDataChangeFragment_signoutButton_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/userDataChangeFragment_horizontalBarrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="30dp"
+        android:text="@string/userDataChangeFragment_horizontalBarrier_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/userDataChangeFragment_signoutButton" />
+
+    <EditText
+        android:id="@+id/userDataChangeFragment_userBirthEditText"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:layout_marginStart="10dp"
+        android:background="@null"
+        android:ems="10"
+        android:hint="@string/userDataChangeFragment_userBirthEditText_text"
+        android:inputType="textPersonName"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/userDataChangeFragment_birthTitleTextView"
+        app:layout_constraintTop_toBottomOf="@+id/userDataChangeFragment_emailDataTextView" />
+
+    <TextView
+        android:id="@+id/userDataChangeFragment_emailTitleTextView"
+        style="@style/textTitle"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/userDataChangeFragment_emailTitleTextView_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userDataChangeFragment_secondBarrier" />
+
+    <TextView
+        android:id="@+id/userDataChangeFragment_emailDataTextView"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/userDataChangeFragment_emailDataTextView_text"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/userDataChangeFragment_emailTitleTextView"
+        app:layout_constraintTop_toBottomOf="@+id/userDataChangeFragment_secondBarrier" />
+
+    <TextView
+        android:id="@+id/userDataChangeFragment_secondEmailEditButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:layout_marginStart="10dp"
+        android:gravity="center"
+        android:text="@string/userDataChangeFragment_secondEmailEditButton_tex"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/userDataChangeFragment_secondEmailTitleTextView"
+        app:layout_constraintTop_toBottomOf="@+id/userDataChangeFragment_thirdBarrier" />
+
+    <TextView
+        android:id="@+id/userDataChangeFragment_allergyEditButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:layout_marginStart="10dp"
+        android:gravity="center"
+        android:text="@string/userDataChangeFragment_allergyEditButton_text"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/userDataChangeFragment_allergyTitleTextView"
+        app:layout_constraintTop_toBottomOf="@+id/userDataChangeFragment_secondEmailEditButton" />
+
+    <TextView
+        android:id="@+id/userDataChangeFragment_passwordEditButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="68dp"
+        android:gravity="center"
+        android:text="@string/userDataChangeFragment_passwordEditButton_text"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/userDataChangeFragment_passwordTitleTextView"
+        app:layout_constraintTop_toBottomOf="@+id/userDataChangeFragment_allergyEditButton" />
+
+    <TextView
+        android:id="@+id/userDataChangeFragment_addressTitleTextView"
+        style="@style/textTitle"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        android:text="@string/userDataChangeFragment_addressTitleTextView_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userDataChangeFragment_birthTitleTextView" />
+
+    <EditText
+        android:id="@+id/userDataChangeFragment_userAddressEditText"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="6dp"
+        android:background="@null"
+        android:ems="10"
+        android:hint="@string/userDataChangeFragment_userAddressEditText_text"
+        android:inputType="textPersonName"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/userDataChangeFragment_addressTitleTextView"
+        app:layout_constraintTop_toBottomOf="@+id/userDataChangeFragment_userBirthEditText" />
+
+    <TextView
+        android:id="@+id/userDataChangeFragment_secondEmailTitleTextView"
+        style="@style/textTitle"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="@string/userDataChangeFragment_secondEmailTitleTextView_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userDataChangeFragment_thirdBarrier" />
+
+    <TextView
+        android:id="@+id/userDataChangeFragment_allergyTitleTextView"
+        style="@style/textTitle"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="319dp"
+        android:text="@string/userDataChangeFragment_allergyTitleTextView_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userDataChangeFragment_secondEmailTitleTextView" />
+
+    <TextView
+        android:id="@+id/userDataChangeFragment_passwordTitleTextView"
+        style="@style/textTitle"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="330dp"
+        android:text="@string/userDataChangeFragment_passwordTitleTextView_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userDataChangeFragment_allergyTitleTextView" />
+
+    <TextView
+        android:id="@+id/userDataChangeFragment_birthTitleTextView"
+        style="@style/textTitle"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/userDataChangeFragment_birthTitleTextView_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userDataChangeFragment_emailTitleTextView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
