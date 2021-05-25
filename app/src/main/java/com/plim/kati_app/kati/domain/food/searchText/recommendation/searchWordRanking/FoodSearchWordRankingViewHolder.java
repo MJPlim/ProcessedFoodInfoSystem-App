@@ -1,22 +1,20 @@
-package com.plim.kati_app.kati.domain.search.search.view.foodRecommand.ranking;
+package com.plim.kati_app.kati.domain.food.searchText.recommendation.searchWordRanking;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.plim.kati_app.R;
-import com.plim.kati_app.kati.domain.search.search.model.SearchViewModel;
 
-public class FoodRankViewHolder extends RecyclerView.ViewHolder{
+public class FoodSearchWordRankingViewHolder extends RecyclerView.ViewHolder{
 
     // Associate
         // View
         private TextView rankNumber, rankValue;
 
     // Constructor
-    public FoodRankViewHolder(View itemView) {
+    public FoodSearchWordRankingViewHolder(View itemView) {
         super(itemView);
         this.rankNumber=itemView.findViewById(R.id.item_simpleRankNumber);
         this.rankValue=itemView.findViewById(R.id.item_simpleRankValue);

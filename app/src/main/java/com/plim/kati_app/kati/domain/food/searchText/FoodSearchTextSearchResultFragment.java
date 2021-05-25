@@ -1,4 +1,4 @@
-package com.plim.kati_app.kati.domain.food.searchtext;
+package com.plim.kati_app.kati.domain.food.searchText;
 
 import android.os.Bundle;
 

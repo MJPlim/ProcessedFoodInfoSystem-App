@@ -1,4 +1,4 @@
-package com.plim.kati_app.kati.domain.food.searchtext;
+package com.plim.kati_app.kati.domain.food.searchText.recommendation;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,7 +13,7 @@ import com.google.android.material.chip.ChipGroup;
 import com.plim.kati_app.R;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiSearchFragment;
-import com.plim.kati_app.kati.domain.search.search.view.foodRecommand.ranking.FoodRankAdapter;
+import com.plim.kati_app.kati.domain.food.searchText.recommendation.searchWordRanking.FoodSearchWordRankingAdapter;
 
 import java.util.Vector;
 
@@ -38,7 +38,7 @@ public class FoodSearchTextRecommendationFragment extends KatiSearchFragment {
     private View secondBarrier;
 
     //component
-    private FoodRankAdapter foodRankAdapter;
+    private FoodSearchWordRankingAdapter foodSearchWordRankingAdapter;
     private View.OnClickListener deleteAllListener, deleteOneListener, setSearchTextListener;
 
     public FoodSearchTextRecommendationFragment() {
@@ -80,9 +80,9 @@ public class FoodSearchTextRecommendationFragment extends KatiSearchFragment {
             this.save();
         };
 
-        this.foodRankAdapter = new FoodRankAdapter(this.getDataSet(), this.setSearchTextListener);
+        this.foodSearchWordRankingAdapter = new FoodSearchWordRankingAdapter(this.getDataSet(), this.setSearchTextListener);
         this.recentSearchedRankRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        this.recentSearchedRankRecyclerView.setAdapter(this.foodRankAdapter);
+        this.recentSearchedRankRecyclerView.setAdapter(this.foodSearchWordRankingAdapter);
         this.deleteRecentSearchedAllButtonChip.setOnClickListener(this.deleteAllListener);
 
     }

@@ -1,4 +1,4 @@
-package com.plim.kati_app.kati.domain.food.searchtext;
+package com.plim.kati_app.kati.domain.food.searchText;
 
 import android.os.Bundle;
 
@@ -11,6 +11,6 @@ public class FoodSearchTextActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_text);
+        setContentView(R.layout.activity_food_search_text);
     }
 }

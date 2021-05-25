@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/foodSearchTextRecommendationFragment"
-        android:name="com.plim.kati_app.kati.domain.food.searchtext.FoodSearchTextRecommendationFragment"
+        android:name="com.plim.kati_app.kati.domain.food.searchText.recommendation.FoodSearchTextRecommendationFragment"
         android:label="fragment_food_search_text_recommendation"
         tools:layout="@layout/fragment_food_search_text_recommendation" >
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/foodSearchTextSearchResultFragment"
-        android:name="com.plim.kati_app.kati.domain.food.searchtext.FoodSearchTextSearchResultFragment"
+        android:name="com.plim.kati_app.kati.domain.food.searchText.FoodSearchTextSearchResultFragment"
         android:label="fragment_food_search_text_search_result"
         tools:layout="@layout/fragment_food_search_text_search_result" >
     </fragment>

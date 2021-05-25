@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".kati.domain.food.searchtext.FoodSearchTextActivity">
+    tools:context=".kati.domain.food.searchText.FoodSearchTextActivity">
 
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/searchTextActivity_nav"
+        android:id="@+id/foodSearchTextActivity_nav"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"

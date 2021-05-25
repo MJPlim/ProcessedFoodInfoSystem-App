@@ -55,7 +55,7 @@
 
 <!--        여기부터-->
 
-        <activity android:name=".kati.domain.food.searchtext.FoodSearchTextActivity"/>
+        <activity android:name=".kati.domain.food.searchText.FoodSearchTextActivity"/>
 
     </application>
 

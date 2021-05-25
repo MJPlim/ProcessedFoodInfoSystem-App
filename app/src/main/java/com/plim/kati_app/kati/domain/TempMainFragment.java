@@ -1,30 +1,20 @@
 package com.plim.kati_app.kati.domain;
 
 import android.app.Activity;
-import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
-
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.plim.kati_app.R;
-import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitCallback;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
-import com.plim.kati_app.kati.crossDomain.domain.model.Constant;
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
-import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiViewModelFragment;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBackImpl;
 import com.plim.kati_app.kati.domain.changePW.view.ChangePasswordActivity;
-import com.plim.kati_app.kati.domain.food.searchtext.FoodSearchTextActivity;
+import com.plim.kati_app.kati.domain.food.searchText.FoodSearchTextActivity;
 import com.plim.kati_app.kati.domain.login.login.model.LoginRequest;
 import com.plim.kati_app.kati.domain.login.login.view.LoginActivity;
 import com.plim.kati_app.kati.domain.mypage.main.view.UserMyPageActivity;
-import com.plim.kati_app.kati.domain.search.search.view.FoodSearchActivity;
 import com.plim.kati_app.kati.domain.temp.TempActivity;
 import com.plim.kati_app.kati.domain.temp.itemRank.view.RankingActivity;
 

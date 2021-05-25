@@ -1,6 +1,5 @@
 package com.plim.kati_app.kati.domain.search.search.view.foodRecommand;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -10,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.plim.kati_app.R;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiSearchFragment;
-import com.plim.kati_app.kati.domain.search.search.view.foodRecommand.ranking.FoodRankAdapter;
+import com.plim.kati_app.kati.domain.food.searchText.recommendation.searchWordRanking.FoodSearchWordRankingAdapter;
 import com.plim.kati_app.kati.domain.search.search.view.foodRecommand.recentSearch.SearchHistoryAdapter;
 
 import java.util.Vector;
@@ -31,7 +30,7 @@ public class SearchSearchRecommendationFragment extends KatiSearchFragment {
     // Component
     //adapter
     private SearchHistoryAdapter searchHistoryAdapter;
-    private FoodRankAdapter foodRankAdapter;
+    private FoodSearchWordRankingAdapter foodSearchWordRankingAdapter;
 
 
     /**
@@ -57,7 +56,7 @@ public class SearchSearchRecommendationFragment extends KatiSearchFragment {
             this.searchModel.setSearchText((String) v.getTag());
             this.searchViewModel.getSearchModel().setValue(this.searchModel);
         };
-        this.foodRankAdapter = new FoodRankAdapter(this.getDataSet(), listener);
+        this.foodSearchWordRankingAdapter = new FoodSearchWordRankingAdapter(this.getDataSet(), listener);
         this.searchHistoryAdapter = new SearchHistoryAdapter(this.searchWords,
                 v -> {
                     this.showDeleteSearchedWordConfirm((String) v.getTag());
@@ -67,7 +66,7 @@ public class SearchSearchRecommendationFragment extends KatiSearchFragment {
         );
         this.recentValueRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false));
         this.rankRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        this.rankRecyclerView.setAdapter(this.foodRankAdapter);
+        this.rankRecyclerView.setAdapter(this.foodSearchWordRankingAdapter);
         this.recentValueRecyclerView.setAdapter(this.searchHistoryAdapter);
         this.deleteAllButton.setOnClickListener(v -> showDeleteSearchedWordConfirm());
     }

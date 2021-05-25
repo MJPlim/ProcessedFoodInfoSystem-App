@@ -1,32 +1,30 @@
-package com.plim.kati_app.kati.domain.search.search.view.foodRecommand.ranking;
+package com.plim.kati_app.kati.domain.food.searchText.recommendation.searchWordRanking;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
 import com.plim.kati_app.R;
-import com.plim.kati_app.kati.domain.search.search.model.SearchViewModel;
 
 import java.util.Vector;
 
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class FoodRankAdapter extends RecyclerView.Adapter<FoodRankViewHolder> {
+public class FoodSearchWordRankingAdapter extends RecyclerView.Adapter<FoodSearchWordRankingViewHolder> {
 
     // Component
     private Vector<String> recentValues;
     private View.OnClickListener listener;
 
     @Override
-    public FoodRankViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public FoodSearchWordRankingViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_simple_rank, parent, false);
-        return new FoodRankViewHolder(view);
+        return new FoodSearchWordRankingViewHolder(view);
     }
     @Override
-    public void onBindViewHolder(FoodRankViewHolder holder, int position) {
+    public void onBindViewHolder(FoodSearchWordRankingViewHolder holder, int position) {
         holder.setValueButton(position, this.recentValues.get(position),listener);
     }
     @Override

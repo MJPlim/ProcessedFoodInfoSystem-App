@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".kati.domain.food.searchtext.FoodSearchTextRecommendationFragment">
+    tools:context=".kati.domain.food.searchText.recommendation.FoodSearchTextRecommendationFragment">
 
     <EditText
         android:id="@+id/foodSearchTextRecommendationFragment_searchEditText"
