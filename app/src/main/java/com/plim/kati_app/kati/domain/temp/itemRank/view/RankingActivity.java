@@ -1,5 +1,6 @@
 package com.plim.kati_app.kati.domain.temp.itemRank.view;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +18,9 @@ import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitCallback;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.domain.model.Constant;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
+import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBackImpl;
+import com.plim.kati_app.kati.domain.search.foodInfo.view.foodInfo.model.FindFoodByBarcodeRequest;
+import com.plim.kati_app.kati.domain.search.foodInfo.view.foodInfo.view.ProductInfoFragment;
 import com.plim.kati_app.kati.domain.temp.itemRank.model.ItemRankingResponse;
 
 import org.jetbrains.annotations.NotNull;
@@ -48,31 +52,23 @@ public class RankingActivity extends AppCompatActivity {
         this.getRank();
     }
 
-    private class GetRankingListRequestCallback implements JSHRetrofitCallback<ItemRankingResponse>{
-
-        @Override
-        public void onSuccessResponse(Response<ItemRankingResponse> response) {
-            Vector<ItemRankingResponse> items = new Vector<ItemRankingResponse>((Collection<? extends ItemRankingResponse>) response.body());
-            Log.d("Test", "리스폰스 받음");
-            runOnUiThread(()->{
-                rankingViewAdapter.setItems(items);
-                rankingRecyclerView.setAdapter(rankingViewAdapter);
-            });
-        }
-
-        @Override
-        public void onFailResponse(Response<ItemRankingResponse> response) {
-            Log.d("Test", "실패" + response.message());
-        }
-
-        @Override
-        public void onConnectionFail(Throwable t) {
-            Log.d("Test", "실패" + t.getMessage());
-        }
-    }
-
     private void getRank(){
-    //    KatiRetrofitTool.getAPI().getRankingList().enqueue(JSHRetrofitTool.getCallback(new GetRankingListRequestCallback()));
+        KatiRetrofitTool.getAPI().getRankingList().enqueue(new Callback<List<ItemRankingResponse>>() {
+            @Override
+            public void onResponse(Call<List<ItemRankingResponse>> call, Response<List<ItemRankingResponse>> response) {
+                Vector<ItemRankingResponse> items = new Vector<>(response.body());
+                Log.d("Test", "리스폰스 받음");
+                runOnUiThread(()->{
+                    rankingViewAdapter.setItems(items);
+                    rankingRecyclerView.setAdapter(rankingViewAdapter);
+                });
+            }
+
+            @Override
+            public void onFailure(Call<List<ItemRankingResponse>> call, Throwable t) {
+                Log.d("Test", "실패" + t.getMessage());
+            }
+        });
     }
 
     private class RankingViewAdapter extends RecyclerView.Adapter {
