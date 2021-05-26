@@ -9,4 +9,5 @@ public class ItemRankingResponse {
     private Long foodId;
     private String foodName;
     private String avgRating;
+
 }
