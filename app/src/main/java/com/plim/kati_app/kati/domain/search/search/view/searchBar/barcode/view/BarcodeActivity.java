@@ -29,7 +29,6 @@ public class BarcodeActivity extends AppCompatActivity {
             else {
                 Intent intent = new Intent(this, FoodInfoActivity.class);
                 intent.putExtra("barcode",result.getContents());
-                Log.d("디버그",result.getContents());
                 startActivity(intent);
             }
             finish();

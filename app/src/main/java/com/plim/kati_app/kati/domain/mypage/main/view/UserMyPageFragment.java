@@ -30,6 +30,7 @@ import com.plim.kati_app.kati.domain.changePW.view.ChangePasswordActivity;
 import com.plim.kati_app.kati.domain.mypage.main.model.UserSummaryResponse;
 import com.plim.kati_app.kati.domain.temp.logout.view.LogOutActivity;
 import com.plim.kati_app.kati.domain.temp.setSecondEmail.view.SetSecondEmailActivity;
+import com.plim.kati_app.kati.domain.user.dataChange.UserDataChangeActivity;
 
 import org.json.JSONObject;
 
@@ -92,24 +93,21 @@ public class UserMyPageFragment extends KatiViewModelFragment {
         this.favoriteNum.setOnClickListener(v -> this.navigateTo(R.id.action_myPageFragment_to_myPageFavoriteFragment));
         this.reviewNum.setOnClickListener(v -> this.navigateTo(R.id.action_myPageFragment_to_myPageReviewFragment));
         this.restoreEmailText.setOnClickListener(v -> this.moveToRestoreEmailActivity());
-        this.modifyUserText.setOnClickListener(v -> Toast.makeText(getContext(), "미구현", Toast.LENGTH_LONG).show());
+        this.modifyUserText.setOnClickListener(v -> this.moveToUserDataChangeActivity());
         this.changePasswordText.setOnClickListener(v -> this.moveToChangePasswordActivity());
         if(this.dataset.containsKey(KatiEntity.EKatiData.AUTHORIZATION)){
             this.getUserInfo();
+        }else{
+            KatiDialog.simplerAlertDialog(this.getActivity(),
+                    LOG_OUT_ACTIVITY_FAILURE_DIALOG_TITLE, LOG_OUT_ACTIVITY_FAILURE_DIALOG_MESSAGE,
+                    (dialog, which) -> startMainActivity());
         }
 
     }
 
     @Override
     protected void katiEntityUpdated() {
-        if (this.dataset.containsKey(KatiEntity.EKatiData.AUTHORIZATION)) {
 
-        } else {
-            KatiDialog.simplerAlertDialog(this.getActivity(),
-                    LOG_OUT_ACTIVITY_FAILURE_DIALOG_TITLE, LOG_OUT_ACTIVITY_FAILURE_DIALOG_MESSAGE,
-                    (dialog, which) -> startMainActivity()
-            );
-        }
 
     }
 
@@ -136,6 +134,11 @@ public class UserMyPageFragment extends KatiViewModelFragment {
 
     private void moveToChangePasswordActivity() {
         Intent intent = new Intent(this.getActivity(), ChangePasswordActivity.class);
+        startActivity(intent);
+    }
+
+    private void moveToUserDataChangeActivity() {
+        Intent intent = new Intent(this.getActivity(), UserDataChangeActivity.class);
         startActivity(intent);
     }
 
