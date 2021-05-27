@@ -15,7 +15,6 @@ import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.jshCrossDomain.domain.model.room.entity.JSHEntity;
 import com.plim.kati_app.jshCrossDomain.domain.view.JSHViewModelFragment;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
-import com.plim.kati_app.kati.domain.login.login.view.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.Map;

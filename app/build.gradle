@@ -10,28 +10,37 @@ android {
         main {
             res.srcDirs = [
                     'src/main/res',
+                    'src/main/res/old',
+                    'src/main/res/nnew',
 
-                    'src/main/res/layout/trash',
+                    'src/main/res/nnew/edit_name',
+                    'src/main/res/nnew/edit_password',
+                    'src/main/res/nnew/find_id',
+                    'src/main/res/nnew/find_passward',
+                    'src/main/res/nnew/food_detail',
 
-                    'src/main/res/layout/main',
+                    'src/main/res/nnew/login',
+                    'src/main/res/nnew/main',
+                    'src/main/res/nnew/main/layout/favorite',
+                    'src/main/res/nnew/main/layout/home',
+                    'src/main/res/nnew/main/layout/home/layout/advertisement',
 
-                    'src/main/res/layout/user',
-                    'src/main/res/layout/user/_datachange',
-                    'src/main/res/layout/user/_findemail',
-                    'src/main/res/layout/user/_findpassword',
-                    'src/main/res/layout/user/_login',
-                    'src/main/res/layout/user/_logout',
-                    'src/main/res/layout/user/_mypage',
-                    'src/main/res/layout/user/_signin',
-                    'src/main/res/layout/user/_signout',
+                    'src/main/res/nnew/main/layout/my_kati',
+                    'src/main/res/nnew/main/layout/my_kati/layout/allergy',
+                    'src/main/res/nnew/main/layout/my_kati/layout/my_info_edit',
+                    'src/main/res/nnew/main/layout/my_kati/layout/review',
+                    'src/main/res/nnew/main/layout/search',
 
-                    'src/main/res/layout/food',
-                    'src/main/res/layout/food/_foodinfo',
-                    'src/main/res/layout/food/_foodranking',
-                    'src/main/res/layout/food/_foodreview',
-                    'src/main/res/layout/food/_searchbarcode',
-                    'src/main/res/layout/food/_searchmap',
-                    'src/main/res/layout/food/_searchtext',
+                    'src/main/res/nnew/review',
+                    'src/main/res/nnew/set_restore_email',
+                    'src/main/res/nnew/sign_out',
+                    'src/main/res/nnew/sign_up',
+                    'src/main/res/nnew/sign_up/layout/sign_up',
+
+                    'src/main/res/nnew/sign_up/layout/welcome',
+
+
+
             ]
         }
     }
@@ -68,10 +77,20 @@ android {
 }
 
 dependencies {
+
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    // heart button
+    compile 'com.github.varunest:sparkbutton:1.0.6'
+    // https://github.com/varunest/SparkButton
+
+
+
     // Google map
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'com.google.android.gms:play-services-location:17.0.0'
     implementation 'noman.placesapi:placesAPI:1.1.3'
+
+
 
     // Glide
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".kati.domain.nnew.login.LoginActivity">
+
+    <com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHToolBar
+        android:id="@+id/home_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:button_image="@drawable/jsh_close"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="KATI"
+        android:textColor="@color/kati_red"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_toolbar" />
+
+    <EditText
+        android:id="@+id/editTextTextEmailAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textSize="15sp"
+        android:padding="8dp"
+        android:hint="이메일 입력"
+        android:layout_marginTop="12dp"
+        android:layout_marginHorizontal="16dp"
+        android:background="@drawable/edittext_bg"
+        android:inputType="textEmailAddress"
+        app:layout_constraintTop_toBottomOf="@+id/textView7"
+        tools:layout_editor_absoluteX="99dp" />
+
+    <EditText
+        android:id="@+id/editTextTextPassword4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textSize="15sp"
+        android:hint="비밀번호 입력"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        android:padding="8dp"
+        android:background="@drawable/edittext_bg"
+        android:inputType="textPassword"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress"
+        tools:layout_editor_absoluteX="93dp" />
+
+    <CheckBox
+        android:id="@+id/checkBox2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="자동 로그인"
+        android:textSize="13sp"
+        android:textColor="@android:color/tab_indicator_text"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword4" />
+
+    <TextView
+        android:id="@+id/login_findId_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:text="아이디 찾기"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="@+id/login_findPW_textView"
+        app:layout_constraintEnd_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/login_findPW_textView" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="0.5dp"
+        android:layout_height="10dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/kati_dark_gray"
+        app:layout_constraintBottom_toBottomOf="@+id/login_findPW_textView"
+        app:layout_constraintEnd_toStartOf="@+id/login_findPW_textView"
+        app:layout_constraintTop_toTopOf="@+id/login_findPW_textView" />
+
+    <TextView
+        android:id="@+id/login_findPW_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="8dp"
+        android:textSize="13sp"
+        android:text="비밀번호 찾기"
+        app:layout_constraintBottom_toBottomOf="@+id/checkBox2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/checkBox2" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        android:text="로그인"
+        android:backgroundTint="@color/kati_middle_gray"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox2"
+        tools:layout_editor_absoluteX="152dp" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="KATI가 처음이신가요?  "
+        android:layout_marginTop="16dp"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toStartOf="@+id/login_signIn_textView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button4" />
+
+    <TextView
+        android:id="@+id/login_signIn_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="회원가입"
+        android:textColor="@color/kati_red"
+        android:layout_marginTop="16dp"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/button4" />
+</androidx.constraintlayout.widget.ConstraintLayout>

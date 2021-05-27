@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.plim.kati_app.kati.domain.nnew.main.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/myKatiFragment"
+        android:name="com.plim.kati_app.kati.domain.nnew.main.myKati.MyKatiFragment"
+        android:label="MyKatiFragment"
+        tools:layout="@layout/fragment_mykati">
+        <action
+            android:id="@+id/action_myKatiFragment_to_myInfoEditFragment"
+            app:destination="@id/myInfoEditFragment" />
+        <action
+            android:id="@+id/action_myKatiFragment_to_reviewFlagment"
+            app:destination="@id/reviewFlagment" />
+        <action
+            android:id="@+id/action_myKatiFragment_to_allergyFragment"
+            app:destination="@id/allergyFragment" />
+    </fragment>
+    <action android:id="@+id/action_global_mainFragment" app:destination="@id/homeFragment" />
+    <fragment
+        android:id="@+id/myInfoEditFragment"
+        android:name="com.plim.kati_app.kati.domain.nnew.main.myKati.myInfoEdit.MyInfoEditFragment"
+        android:label="fragment_my_info_edit"
+        tools:layout="@layout/fragment_my_info_edit" />
+    <fragment
+        android:id="@+id/reviewFlagment"
+        android:name="com.plim.kati_app.kati.domain.nnew.main.myKati.review.ReviewManagementFragment"
+        android:label="fragment_review_flagment"
+        tools:layout="@layout/fragment_review_management" />
+    <fragment
+        android:id="@+id/allergyFragment"
+        android:name="com.plim.kati_app.kati.domain.nnew.main.myKati.allergy.AllergyFragment"
+        android:label="fragment_allergy"
+        tools:layout="@layout/fragment_allergy" />
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.plim.kati_app.kati.domain.nnew.main.favorite.FavoriteFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" />
+    <action android:id="@+id/action_global_myKatiFragment" app:destination="@id/myKatiFragment" />
+    <action android:id="@+id/action_global_favoriteFragment" app:destination="@id/favoriteFragment" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.plim.kati_app.kati.domain.nnew.main.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_searchResultFragment"
+            app:destination="@id/searchResultFragment" />
+    </fragment>
+    <action android:id="@+id/action_global_searchFragment" app:destination="@id/searchFragment" />
+    <fragment
+        android:id="@+id/searchResultFragment"
+        android:name="com.plim.kati_app.kati.domain.nnew.main.search.SearchResultFragment"
+        android:label="SearchResultFragment"
+        tools:layout="@layout/fragment_search_result"/>
+</navigation>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/kati_light_gray"
+    tools:context="com.plim.kati_app.kati.domain.nnew.main.myKati.myInfoEdit.MyInfoEditFragment">
+
+    <com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHToolBar
+        android:id="@+id/home_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:button_image="@drawable/jsh_before"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/white"
+        android:elevation="5dp"
+        app:title="내 정보 수정" />
+
+    <com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHInfoItem
+        android:id="@+id/myInfo_restoreEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:JSHInfoItem_content="sh199919@gmail.com"
+        app:JSHInfoItem_title="복구 이메일"
+        app:layout_constraintTop_toBottomOf="@+id/home_toolbar" />
+
+    <com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHInfoItem
+        android:id="@+id/myInfo_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        app:JSHInfoItem_content="SNS 계정에서 변경하실 수 있습니다."
+        app:JSHInfoItem_title="비밀번호"
+        app:layout_constraintTop_toBottomOf="@+id/myInfo_restoreEmail" />
+
+    <com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHInfoItem
+        android:id="@+id/myInfo_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        app:JSHInfoItem_content="정상"
+        app:JSHInfoItem_title="닉네임"
+        app:layout_constraintTop_toBottomOf="@+id/myInfo_password" />
+
+    <Button
+        android:id="@+id/myInfoEditFragment_editPW"
+        android:layout_width="57dp"
+        android:layout_height="40dp"
+        android:layout_marginRight="16dp"
+        android:backgroundTint="@color/white"
+        android:text="변경"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/myInfo_password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myInfo_restoreEmail" />
+
+    <Button
+        android:id="@+id/myInfoEditFragment_editName"
+        android:layout_width="57dp"
+        android:layout_height="40dp"
+        android:layout_marginRight="16dp"
+        android:backgroundTint="@color/white"
+        android:text="변경"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/myInfo_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myInfo_password" />
+
+    <Button
+        android:id="@+id/myInfoEditFragment_editRestoreEmail"
+        android:layout_width="57dp"
+        android:layout_height="40dp"
+        android:layout_marginRight="16dp"
+        android:backgroundTint="@color/white"
+        android:text="변경"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/myInfo_restoreEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_toolbar" />
+
+    <TextView
+        android:id="@+id/myinfo_logout_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="로그아웃"
+        android:layout_marginRight="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/myinfo_signOut_textView"
+        app:layout_constraintEnd_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/myinfo_signOut_textView" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="0.5dp"
+        android:layout_height="10dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/kati_dark_gray"
+        app:layout_constraintBottom_toBottomOf="@+id/myinfo_signOut_textView"
+        app:layout_constraintEnd_toStartOf="@+id/myinfo_signOut_textView"
+        app:layout_constraintTop_toTopOf="@+id/myinfo_signOut_textView" />
+    <TextView
+        android:id="@+id/myinfo_signOut_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="회원탈퇴"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myInfo_name" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

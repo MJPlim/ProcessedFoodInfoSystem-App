@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/kati_light_gray"
+    tools:context=".kati.domain.nnew.main.myKati.allergy.AllergyFragment">
+
+    <com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHToolBar
+        android:id="@+id/home_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:button_image="@drawable/jsh_before"
+        android:background="@color/white"
+        android:elevation="5dp"
+        app:title="알러지 관리" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/home_toolbar"
+        >
+
+        <com.google.android.material.chip.ChipGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView9">
+
+            <com.google.android.material.chip.Chip
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipStrokeWidth="1.5dp"
+                app:chipStrokeColor="@color/kati_middle_gray"
+                app:chipBackgroundColor="@color/chip_choice_bg"
+                android:text="새우" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipStrokeWidth="1.5dp"
+                app:chipStrokeColor="@color/kati_middle_gray"
+                app:chipBackgroundColor="@color/chip_choice_bg"
+                android:text="오징어" />
+            <com.google.android.material.chip.Chip
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipStrokeWidth="1.5dp"
+                app:chipStrokeColor="@color/kati_middle_gray"
+                app:chipBackgroundColor="@color/chip_choice_bg"
+                android:text="어패류" />
+            <com.google.android.material.chip.Chip
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                app:chipStrokeWidth="1.5dp"
+                app:chipStrokeColor="@color/kati_middle_gray"
+                app:chipBackgroundColor="@color/chip_choice_bg"
+                android:layout_height="wrap_content"
+                android:text="소고기" />
+            <com.google.android.material.chip.Chip
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                app:chipStrokeWidth="1.5dp"
+                app:chipStrokeColor="@color/kati_middle_gray"
+                app:chipBackgroundColor="@color/chip_choice_bg"
+                android:layout_height="wrap_content"
+                android:text="돼지고기" />
+            <com.google.android.material.chip.Chip
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                app:chipStrokeWidth="1.5dp"
+                app:chipStrokeColor="@color/kati_middle_gray"
+                app:chipBackgroundColor="@color/chip_choice_bg"
+                android:layout_height="wrap_content"
+                android:text="대애애두" />
+            <com.google.android.material.chip.Chip
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                app:chipStrokeWidth="1.5dp"
+                app:chipStrokeColor="@color/kati_middle_gray"
+                app:chipBackgroundColor="@color/chip_choice_bg"
+                android:layout_height="wrap_content"
+                android:text="밀" />
+
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="알러지를 선택하세요"
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

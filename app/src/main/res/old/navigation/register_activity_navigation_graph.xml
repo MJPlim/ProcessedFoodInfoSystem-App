@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/register_activity_navigation_graph"
+    app:startDestination="@id/register1Fragment">
+
+    <fragment
+        android:id="@+id/register1Fragment"
+        android:name="com.plim.kati_app.kati.domain.old.login.signIn.view.RegisterEmailFragmentEditText"
+
+        android:label="fragment_register1"
+        tools:layout="@layout/abstract_layout" >
+        <action
+            android:id="@+id/action_register1Fragment_to_register2Fragment"
+            app:destination="@id/register2Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/register2Fragment"
+        android:name="com.plim.kati_app.kati.domain.old.login.signIn.view.RegisterPasswordFragmentEditText"
+
+        android:label="fragment_register2"
+        tools:layout="@layout/abstract_layout" >
+        <action
+            android:id="@+id/action_register2Fragment_to_register3Fragment"
+            app:destination="@id/register3Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/register3Fragment"
+        android:name="com.plim.kati_app.kati.domain.old.login.signIn.view.RegisterNameFragmentEditText"
+        android:label="fragment_register3"
+        tools:layout="@layout/abstract_layout" >
+        <action
+            android:id="@+id/action_register3Fragment_to_registerFinishedFragment"
+            app:destination="@id/registerFinishedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFinishedFragment"
+        android:name="com.plim.kati_app.kati.domain.old.login.signIn.view.RegisterFinishedFragmentEditText"
+        android:label="fragment_register_finished"
+        tools:layout="@layout/abstract_layout" >
+        <argument
+            android:name="userName"
+            app:argType="string" />
+    </fragment>
+</navigation>

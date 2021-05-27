@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".kati.domain.nnew.main.home.HomeFragment"
+    >
+
+    <com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHToolBar
+        android:id="@+id/home_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Kati" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/main_viewPager"
+        android:layout_marginHorizontal="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:layout_constraintTop_toBottomOf="@+id/home_toolbar"
+        />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="8dp"
+        android:background="@drawable/main_search_field_bg"
+        android:padding="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/main_viewPager"
+        tools:layout_editor_absoluteX="16dp">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:src="@drawable/ic_baseline_search_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:padding="4dp"
+            android:text="어떤 정보를 검색할까요?"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <GridLayout
+        android:id="@+id/home_category"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        tools:layout_editor_absoluteX="16dp">
+
+        <include
+            layout="@layout/item_home_category"
+            android:layout_row="0"
+            android:layout_rowWeight="1"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <include
+            layout="@layout/item_home_category"
+            android:layout_row="0"
+            android:layout_rowWeight="1"
+            android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+        <include
+            layout="@layout/item_home_category"
+            android:layout_row="0"
+            android:layout_rowWeight="1"
+            android:layout_column="2"
+            android:layout_columnWeight="1"
+            android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+        <include
+            layout="@layout/item_home_category"
+            android:layout_row="0"
+            android:layout_rowWeight="1"
+            android:layout_column="3"
+            android:layout_columnWeight="1"
+            android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+        <include
+            layout="@layout/item_home_category"
+            android:layout_row="1"
+            android:layout_rowWeight="1"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+        <include
+            layout="@layout/item_home_category"
+            android:layout_row="1"
+            android:layout_rowWeight="1"
+            android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+        <include
+            layout="@layout/item_home_category"
+            android:layout_row="0"
+            android:layout_rowWeight="1"
+            android:layout_column="4"
+            android:layout_columnWeight="1"
+            android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    </GridLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:layout_marginBottom="1dp">
+
+    <TextView
+        android:id="@+id/review_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="정상님"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:layout_margin="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/review_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:textSize="12sp"
+        android:text="2021.05.26"
+        app:layout_constraintBottom_toBottomOf="@+id/review_name"
+        app:layout_constraintStart_toEndOf="@+id/review_name"
+        app:layout_constraintTop_toTopOf="@+id/review_name" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="4dp"
+        android:progressTint="@color/kati_orange"
+        android:rating="4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/review_name" />
+
+    <TextView
+        android:id="@+id/review_warning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textSize="12sp"
+        android:padding="4dp"
+        android:text="신고"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:text="넘무 마시써요!\n맨날 여기서 머거요"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+
+    <View
+        android:id="@+id/review_goodButton"
+        android:layout_width="48dp"
+        android:layout_height="30dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/edittext_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="이 리뷰가 도움이 되었나요?"
+        android:layout_marginRight="8dp"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/review_goodButton"
+        app:layout_constraintEnd_toStartOf="@+id/review_goodButton"
+        app:layout_constraintTop_toTopOf="@+id/review_goodButton" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleX="0.7"
+        android:scaleY="0.7"
+        app:layout_constraintBottom_toBottomOf="@+id/review_goodButton"
+        app:layout_constraintEnd_toStartOf="@+id/review_goodCount"
+        app:layout_constraintTop_toTopOf="@+id/review_goodButton"
+        android:layout_marginRight="2dp"
+        app:srcCompat="@drawable/ic_outline_thumb_up_24" />
+
+    <TextView
+        android:id="@+id/review_goodCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:layout_marginRight="9dp"
+        app:layout_constraintBottom_toBottomOf="@+id/review_goodButton"
+        app:layout_constraintEnd_toEndOf="@+id/review_goodButton"
+        app:layout_constraintTop_toTopOf="@+id/review_goodButton" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,13 +6,23 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
-    <color name="gray">#FFdddddd</color>
     <color name="white">#FFFFFFFF</color>
 
-    <!--  우리 테마 색 여따 느쇼  -->
-    <!--  나는 로그인 디자인에서 색 추출했는데, 다 똑같은지는 모르니까 한번씩 확인 바람요 -->
-    <color name="kati_red">#ED2F3B</color>
-    <color name="kati_orange">#F56048</color>
+    <color name="kati_black">#343434</color>
+    <color name="kati_gray">#B9B9B9</color>
+    <color name="kati_light_gray">#F4F4F4</color>
+    <color name="kati_middle_gray">#DDDDDD</color>
+    <color name="kati_dark_gray">#444444</color>
+    <color name="kati_red">#E53154</color>
+    <color name="kati_red_ripple">#F8CDD6</color>
+    <color name="kati_orange">#F08430</color>
+
+
+<!--구버전 칼라-->
+<!--    <color name="kati_red">#ED2F3B</color>-->
+<!--    <color name="kati_orange">#F56048</color>-->
+
+    <color name="gray">#dddddd</color>
     <color name="kati_light_orange">#FE9B5A</color>
     <color name="kati_yellow">#FACE89</color>
     <color name="kati_green">#3A8082</color>

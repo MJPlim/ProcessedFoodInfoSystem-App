@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="JSHToolBar">
+        <attr name="title" format="string"/>
+        <attr name="button_image" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="JSHSelectItem">
+        <attr name="JSHSelectItem_title" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="JSHInfoItem">
+        <attr name="JSHInfoItem_title" format="string"/>
+        <attr name="JSHInfoItem_content" format="string"/>
+    </declare-styleable>
+
+</resources>

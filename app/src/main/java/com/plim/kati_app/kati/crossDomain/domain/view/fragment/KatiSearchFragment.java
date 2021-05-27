@@ -6,8 +6,8 @@ import android.util.Log;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.plim.kati_app.kati.domain.search.search.model.SearchModel;
-import com.plim.kati_app.kati.domain.search.search.model.SearchViewModel;
+import com.plim.kati_app.kati.domain.old.search.search.model.SearchModel;
+import com.plim.kati_app.kati.domain.old.search.search.model.SearchViewModel;
 
 public abstract class KatiSearchFragment extends KatiLoginCheckViewModelFragment implements Observer {
 

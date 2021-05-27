@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".kati.domain.old.food.searchText.recommendation.FoodSearchTextRecommendationFragment">
+
+    <EditText
+        android:id="@+id/foodSearchTextRecommendationFragment_searchEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:autofillHints="no"
+        android:background="@android:color/transparent"
+        android:ems="10"
+        android:hint="@string/foodSearchTextRecommendationFragment_searchEditText_text"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="10dp"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/foodSearchTextRecommendationFragment_firstBarrier"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/gray"
+        app:layout_constraintTop_toBottomOf="@+id/foodSearchTextRecommendationFragment_searchEditText"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/foodSearchTextRecommendationFragment_recentSearchedTitleTextView"
+        style="@style/textTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="@string/foodSearchTextRecommendationFragment_recentSearchedTitleTextView_text"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/foodSearchTextRecommendationFragment_firstBarrier" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/foodSearchTextRecommendationFragment_deleteRecentSearchedAllButtonChip"
+        style="@style/ThinnerChip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/foodSearchTextRecommendationFragment_deleteAllButtonChip_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/foodSearchTextRecommendationFragment_firstBarrier" />
+
+    <HorizontalScrollView
+        android:id="@+id/foodSearchTextRecommendationFragment_horizontalScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/foodSearchTextRecommendationFragment_deleteRecentSearchedAllButtonChip"
+        android:scrollbars="none">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/foodSearchTextRecommendationFragment_recentSearchedChipGroup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="8dp"
+
+            app:singleLine="true" />
+    </HorizontalScrollView>
+
+    <View
+        android:id="@+id/foodSearchTextRecommendationFragment_secondBarrier"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_marginVertical="10dp"
+        android:background="@color/gray"
+        app:layout_constraintTop_toBottomOf="@+id/foodSearchTextRecommendationFragment_horizontalScrollView"
+        tools:layout_editor_absoluteX="5dp" />
+
+    <TextView
+        android:id="@+id/foodSearchTextRecommendationFragment_recentSearchedRankTitleTextView"
+        style="@style/textTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:text="@string/foodSearchTextRecommendationFragment_recentSearchedRankTitleTextView_text"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/foodSearchTextRecommendationFragment_secondBarrier" />
+
+    <TextView
+        android:id="@+id/foodSearchTextRecommendationFragment_recentSearchedRankTimeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/foodSearchTextRecommendationFragment_recentSearchedRankTimeTextView_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/foodSearchTextRecommendationFragment_recentSearchedRankTitleTextView" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/foodSearchTextRecommendationFragment_recentSearchedRankRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/foodSearchTextRecommendationFragment_recentSearchedRankTimeTextView" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/myPage_activity_navigation_graph"
+    app:startDestination="@id/myPageFragment">
+    <fragment
+        android:id="@+id/myPageFragment"
+        android:name="com.plim.kati_app.kati.domain.old.mypage.main.view.UserMyPageFragment"
+        android:label="fragment_myPage"
+        tools:layout="@layout/fragment_mypage" >
+        <action
+            android:id="@+id/action_myPageFragment_to_myPageFavoriteFragment"
+            app:destination="@id/myPageFavoriteFragment" />
+        <action
+            android:id="@+id/action_myPageFragment_to_myPageReviewFragment"
+            app:destination="@id/myPageReviewFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/myPageFavoriteFragment"
+        android:name="com.plim.kati_app.kati.domain.old.mypage.myFavorite.view.UserFavoriteFragment"
+        android:label="fragment_myPage_favorite_food_list"
+        tools:layout="@layout/fragment_mypage_favorite_food_list" >
+        <action
+            android:id="@+id/action_myPageFavoriteFragment_to_myPageFragment"
+            app:destination="@id/myPageFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/myPageReviewFragment"
+        android:name="com.plim.kati_app.kati.domain.old.mypage.myReview.view.UserReviewFragment"
+        android:label="fragment_myPage_review_food_list"
+        tools:layout="@layout/fragment_mypage_review_food_list" >
+        <action
+            android:id="@+id/action_myPageReviewFragment_to_myPageFragment"
+            app:destination="@id/myPageFragment" />
+
+    </fragment>
+
+</navigation>
