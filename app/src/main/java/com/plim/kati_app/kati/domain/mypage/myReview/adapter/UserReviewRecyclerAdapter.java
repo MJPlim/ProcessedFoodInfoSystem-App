@@ -12,26 +12,20 @@ import java.util.Vector;
 
 public class UserReviewRecyclerAdapter extends RecyclerView.Adapter<UserReviewViewHolder> {
 
-    public interface OnItemClickListener {
-        void onItemClick(View v, int position) ;
-    }
-
     // Associate
         // ETC
         private Activity activity;
         private Vector<ReadReviewResponse> vector;
+        private View.OnClickListener onClickListener;
 
     // Constructor
-    public UserReviewRecyclerAdapter(Activity activity) {
+    public UserReviewRecyclerAdapter(Activity activity, View.OnClickListener listener) {
         this.vector = new Vector<>();
         this.activity=activity;
+        this.onClickListener=listener;
     }
 
-    private OnItemClickListener mListener=null;
 
-    public void setOnItemClickListener(OnItemClickListener listener){
-        this.mListener=listener;
-    }
 
     @Override
     public UserReviewViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -40,12 +34,13 @@ public class UserReviewRecyclerAdapter extends RecyclerView.Adapter<UserReviewVi
     }
     @Override
     public void onBindViewHolder(UserReviewViewHolder holder, int position) {
-        (holder).setValue(vector.get(position));}
+        holder.setValue(vector.get(position),this.onClickListener);
+    }
     @Override
     public int getItemCount() { return vector.size(); }
 
     public void setItems(Vector<ReadReviewResponse> vector) { this.vector=vector; }
     private void startNewDetailActivity(Long reviewId) {
-        Log.d("디버그",reviewId.toString());
+        Log.d("디버그2","1");
     }
 }

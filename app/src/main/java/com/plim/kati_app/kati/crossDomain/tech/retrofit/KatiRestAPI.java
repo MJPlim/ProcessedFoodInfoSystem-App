@@ -139,7 +139,7 @@ public interface KatiRestAPI {
     @POST("api/v1/user/deleteReview")
     Call<CreateReviewResponse> deleteReview(@Body DeleteReviewRequest dto);
 
-    @GET("api/v1/user/readdReviewByReviewID")
+    @GET("api/v1/user/readReviewByReviewID")
     Call<ReadReviewIdResponse> readReviewByReviewID(@Query("reviewId") Long reviewId);
 
 

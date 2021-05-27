@@ -3,6 +3,7 @@ package com.plim.kati_app.kati.domain.mypage.myReview.adapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,11 +17,11 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.plim.kati_app.R;
 import com.plim.kati_app.kati.domain.mypage.myFavorite.model.UserFavoriteResponse;
 import com.plim.kati_app.kati.domain.mypage.myReview.model.ReadReviewResponse;
+import com.plim.kati_app.kati.domain.search.foodInfo.view.review.UpdateReviewActivity;
 
 public class UserReviewViewHolder extends RecyclerView.ViewHolder {
 
     // Attribute
-
 
     // Associate
     // View
@@ -47,9 +48,10 @@ public class UserReviewViewHolder extends RecyclerView.ViewHolder {
         this.deleteButton = itemView.findViewById(R.id.reviewItem_deleteButton);
         // Initialize View
         itemView.setOnClickListener(onClickListener);
+
     }
 
-    public void setValue(ReadReviewResponse item) {
+    public void setValue(ReadReviewResponse item,View.OnClickListener listener) {
         this.productName.setText(item.getFoodName());
         this.date.setText(item.getReviewModifiedDate() == null ?
                 item.getReviewCreatedDate().toString() + "작성" :
@@ -57,22 +59,25 @@ public class UserReviewViewHolder extends RecyclerView.ViewHolder {
         this.score.setText(item.getReviewRating() + "");
         this.reviewContent.setText(item.getReviewDescription());
         this.like.setText(item.getLikeCount() + "");
+
+
         this.deleteButton.setEnabled(item.isUserCheck());
         this.editButton.setEnabled(item.isUserCheck());
 
-//        this.deleteButton.setOnClickListener(v -> deleteReview(item.getReviewId()));
-//
-//        this.likeImageButton.clearColorFilter();
+        this.deleteButton.setTag(item.getReviewId());
+        this.deleteButton.setOnClickListener(listener);
+
+
+        this.likeImageButton.clearColorFilter();
 //        int color = getResources().getColor(item.isUserLikeCheck() ? R.color.kati_orange : R.color.gray, getContext().getTheme());
 //        this.likeImageButton.setColorFilter(color, PorterDuff.Mode.SRC_IN);
-//
-//
 //        this.like.setOnClickListener(isLogin ? v -> like(value.getReviewId(), value.isUserLikeCheck()) : null);
 //        this.likeImageButton.setOnClickListener(isLogin ? v -> like(value.getReviewId(), value.isUserLikeCheck()) : null);
-//
-//        this.editButton.setOnClickListener(v -> {
-//            updateReviews(value.getFoodId(), value.getReviewId(), value.getFoodName(), value.getReviewDescription(), (int) value.getReviewRating());
-
-
-        }
+        this.editButton.setOnClickListener(v -> {
+            Intent intent = new Intent(this.activity, UpdateReviewActivity.class);
+            intent.putExtra("reviewId", item.getReviewId());
+            intent.putExtra("foodId", item.getFoodId());
+            this.activity.startActivity(intent);
+        });
+    }
     }

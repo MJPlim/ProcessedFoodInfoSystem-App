@@ -91,6 +91,8 @@ public class Constant { // ㅎㅎ Resource 로 옮겨조...
     public static final String DELETE_FAVORITE_RESULT_DIALOG_TITLE="즐겨찾기를 해제하였습니다.";
     public static final String DELETE_FAVORITE_RESULT_DIALOG_MESSAGE="즐겨찾기 목록에서 해당 제품이 삭제되었습니다.";
 
+    public static final String DELETE_REVIEW_RESULT_DIALOG_MESSAGE="해당 리뷰가 삭제되었습니다.";
+
 public static final String ALLERGY_EXPANDABLE_LIST_TITLE="알레르기";
     public static final String ALLERGY_MODIFY_SUCCESS_DIALOG_TITLE="알레르기 정보 저장 성공";
     public static final String ALLERGY_MODIFY_SUCCESS_DIALOG_MESSAGE="알레르기 정보를 성공적으로 저장하였습니다.";
