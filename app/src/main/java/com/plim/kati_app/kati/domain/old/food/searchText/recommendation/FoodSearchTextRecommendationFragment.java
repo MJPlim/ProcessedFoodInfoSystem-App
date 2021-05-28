@@ -56,8 +56,8 @@ public class FoodSearchTextRecommendationFragment extends KatiSearchFragment {
         this.deleteRecentSearchedAllButtonChip = view.findViewById(R.id.foodSearchTextRecommendationFragment_deleteRecentSearchedAllButtonChip);
         this.recentSearchedChipGroup = view.findViewById(R.id.foodSearchTextRecommendationFragment_recentSearchedChipGroup);
         this.recentSearchedRankRecyclerView = view.findViewById(R.id.foodSearchTextRecommendationFragment_recentSearchedRankRecyclerView);
-        this.recentSearchedTitleTextView=view.findViewById(R.id.foodSearchTextRecommendationFragment_recentSearchedTitleTextView);
-        this.secondBarrier=view.findViewById(R.id.foodSearchTextRecommendationFragment_secondBarrier);
+        this.recentSearchedTitleTextView = view.findViewById(R.id.foodSearchTextRecommendationFragment_recentSearchedTitleTextView);
+        this.secondBarrier = view.findViewById(R.id.foodSearchTextRecommendationFragment_secondBarrier);
 
     }
 
@@ -111,10 +111,10 @@ public class FoodSearchTextRecommendationFragment extends KatiSearchFragment {
                 this.recentSearchedChipGroup.addView(chip);
             }
 
-            int visibility= this.searchWords.size()==0? View.GONE:View.VISIBLE;
-                this.deleteRecentSearchedAllButtonChip.setVisibility(visibility);
-                this.recentSearchedTitleTextView.setVisibility(visibility);
-                this.secondBarrier.setVisibility(visibility);
+            int visibility = this.searchWords.size() == 0 ? View.GONE : View.VISIBLE;
+            this.deleteRecentSearchedAllButtonChip.setVisibility(visibility);
+            this.recentSearchedTitleTextView.setVisibility(visibility);
+            this.secondBarrier.setVisibility(visibility);
         }
 
     }

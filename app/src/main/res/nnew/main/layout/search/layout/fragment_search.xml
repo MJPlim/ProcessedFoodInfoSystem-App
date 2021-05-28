@@ -30,7 +30,7 @@
         app:tint="@color/kati_gray" />
 
     <EditText
-        android:id="@+id/searchFragment_searchFieldHint"
+        android:id="@+id/searchFragment_searchFieldEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
@@ -149,6 +149,8 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <GridLayout
+            android:id="@+id/searchFragment_rankGridLayout"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"

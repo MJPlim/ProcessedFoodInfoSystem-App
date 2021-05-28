@@ -23,7 +23,6 @@ import com.plim.kati_app.kati.domain.old.TempMainActivity;
 import com.plim.kati_app.kati.domain.old.changePW.view.ChangePasswordActivity;
 import com.plim.kati_app.kati.domain.old.dataChange.UserDataChangeActivity;
 import com.plim.kati_app.kati.domain.old.mypage.main.model.UserSummaryResponse;
-import com.plim.kati_app.kati.domain.old.temp.logout.view.LogOutActivity;
 
 import org.json.JSONObject;
 
@@ -80,7 +79,7 @@ public class UserMyPageFragment extends KatiViewModelFragment {
 
     @Override
     protected void initializeView() {
-        this.logoutButton.setOnClickListener(v -> this.moveToLogOutActivity());
+//        this.logoutButton.setOnClickListener(v -> this.moveToLogOutActivity());
         this.favoriteNum.setOnClickListener(v -> this.navigateTo(R.id.action_myPageFragment_to_myPageFavoriteFragment));
         this.reviewNum.setOnClickListener(v -> this.navigateTo(R.id.action_myPageFragment_to_myPageReviewFragment));
         this.restoreEmailText.setOnClickListener(v -> this.moveToRestoreEmailActivity());
@@ -116,11 +115,11 @@ public class UserMyPageFragment extends KatiViewModelFragment {
         this.startActivity(new Intent(this.getContext(), TempMainActivity.class));
     }
 
-    private void moveToLogOutActivity() {
-        Intent intent = new Intent(this.getActivity(), LogOutActivity.class);
-        startActivity(intent);
-        getActivity().finish();
-    }
+//    private void moveToLogOutActivity() {
+//        Intent intent = new Intent(this.getActivity(), LogOutActivity.class);
+//        startActivity(intent);
+//        getActivity().finish();
+//    }
 
 
     private void moveToChangePasswordActivity() {
@@ -162,7 +161,7 @@ public class UserMyPageFragment extends KatiViewModelFragment {
             try {
                 JSONObject jObjError = new JSONObject(response.errorBody().string());
                 Toast.makeText(getContext(), jObjError.getString("error-message"), Toast.LENGTH_LONG).show();
-                moveToLogOutActivity();
+//                moveToLogOutActivity();
             } catch (Exception e) {
                 Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
             }

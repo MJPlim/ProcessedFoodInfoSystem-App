@@ -17,7 +17,6 @@ import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.kati.domain.old.TempMainActivity;
-import com.plim.kati_app.kati.domain.old.temp.logout.view.LogOutActivity;
 
 import org.json.JSONObject;
 
@@ -130,7 +129,8 @@ public class ChangePasswordInputFragment extends KatiViewModelFragment {
     private void showCompletedDialog() {
         KatiDialog.simplerAlertDialog(this.getActivity(),
                 COMPLETE_CHANGE_PASSWORD_TITLE, COMPLETE_CHANGE_PASSWORD_MESSAGE,
-                (dialog, which) -> this.startActivity(LogOutActivity.class)
+//                (dialog, which) -> this.startActivity(LogOutActivity.class)
+        null
         );
     }
 }

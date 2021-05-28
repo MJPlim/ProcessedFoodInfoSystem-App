@@ -16,7 +16,6 @@ import com.plim.kati_app.kati.domain.old.changePW.view.ChangePasswordActivity;
 import com.plim.kati_app.kati.domain.old.temp.TempActivity;
 import com.plim.kati_app.kati.domain.old.dataChange.model.UserInfoModifyRequest;
 import com.plim.kati_app.kati.domain.old.dataChange.model.UserInfoResponse;
-import com.plim.kati_app.kati.domain.old.temp.logout.view.LogOutActivity;
 import com.plim.kati_app.kati.domain.old.temp.signOut.view.SignOutActivity;
 
 import java.time.LocalDate;
@@ -78,7 +77,7 @@ public class UserDataChangeFragment extends KatiLoginCheckViewModelFragment {
         this.userProfileImageView.setOnClickListener(listener);
         this.userProfileTextView.setOnClickListener(listener);
 
-        this.logoutButton.setOnClickListener(v -> this.startActivity(LogOutActivity.class));
+//        this.logoutButton.setOnClickListener(v -> this.startActivity(LogOutActivity.class));
         this.signOutButton.setOnClickListener(v -> this.startActivity(SignOutActivity.class));
 
 
