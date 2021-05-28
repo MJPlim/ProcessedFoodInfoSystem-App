@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/setSecondEmailStart"
-        android:name="com.plim.kati_app.kati.domain.old.temp.setSecondEmail.view.SetSecondEmailStart"
+        android:name="com.plim.kati_app.kati.domain.nnew.setRestoreEmail.view.SetSecondEmailStart"
         android:label="fragment_setSecondEmailStart"
         tools:layout="@layout/abstract_layout" >
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/setSecondEmailResult"
-        android:name="com.plim.kati_app.kati.domain.old.temp.setSecondEmail.view.SetSecondEmailResult"
+        android:name="com.plim.kati_app.kati.domain.nnew.setRestoreEmail.view.SetSecondEmailResult"
         android:label="fragment_setSecondEmailResult"
         tools:layout="@layout/abstract_layout" />
 </navigation>

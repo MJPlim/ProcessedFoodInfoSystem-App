@@ -8,7 +8,6 @@ import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 import com.plim.kati_app.kati.crossDomain.domain.view.activity.KatiViewModelActivity;
 import com.plim.kati_app.kati.domain.old.TempMainActivity;
 import com.plim.kati_app.kati.domain.old.temp.logout.view.LogOutActivity;
-import com.plim.kati_app.kati.domain.old.temp.setSecondEmail.view.SetSecondEmailActivity;
 import com.plim.kati_app.kati.domain.old.temp.signOut.view.SignOutActivity;
 import com.plim.kati_app.jshCrossDomain.tech.google.JSHGoogleMap;
 import com.plim.kati_app.kati.domain.old.dataChange.UserDataChangeActivity;
@@ -47,7 +46,7 @@ public class TempActivity extends KatiViewModelActivity {
 
         this.userDataEditButton.setOnClickListener(v->this.userDataEditPressed());
 
-        this.setSecondEmailButton.setOnClickListener(v->this.setSecondEmailPressed());
+       // this.setSecondEmailButton.setOnClickListener(v->this.setSecondEmailPressed());
 
     }
 
@@ -68,7 +67,7 @@ public class TempActivity extends KatiViewModelActivity {
 
     private void userDataEditPressed() { this.startActivity(UserDataChangeActivity.class);}
 
-    private void setSecondEmailPressed(){ this.startActivity(SetSecondEmailActivity.class); }
+   // private void setSecondEmailPressed(){ this.startActivity(SetSecondEmailActivity.class); }
 
 
     /**

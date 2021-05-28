@@ -24,7 +24,6 @@ import com.plim.kati_app.kati.domain.old.changePW.view.ChangePasswordActivity;
 import com.plim.kati_app.kati.domain.old.dataChange.UserDataChangeActivity;
 import com.plim.kati_app.kati.domain.old.mypage.main.model.UserSummaryResponse;
 import com.plim.kati_app.kati.domain.old.temp.logout.view.LogOutActivity;
-import com.plim.kati_app.kati.domain.old.temp.setSecondEmail.view.SetSecondEmailActivity;
 
 import org.json.JSONObject;
 
@@ -109,8 +108,8 @@ public class UserMyPageFragment extends KatiViewModelFragment {
 
 
     private void moveToRestoreEmailActivity() {
-        Intent intent = new Intent(this.getActivity(), SetSecondEmailActivity.class);
-        startActivity(intent);
+    //    Intent intent = new Intent(this.getActivity(), SetSecondEmailActivity.class);
+      //  startActivity(intent);
     }
 
     public void startMainActivity() {

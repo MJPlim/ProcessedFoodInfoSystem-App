@@ -1,4 +1,4 @@
-package com.plim.kati_app.kati.domain.old.login.login.model;
+package com.plim.kati_app.kati.domain.nnew.login.model;
 
 import com.google.gson.annotations.SerializedName;
 

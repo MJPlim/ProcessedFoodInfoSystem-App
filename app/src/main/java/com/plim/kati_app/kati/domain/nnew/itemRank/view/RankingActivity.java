@@ -1,4 +1,4 @@
-package com.plim.kati_app.kati.domain.old.temp.itemRank.view;
+package com.plim.kati_app.kati.domain.nnew.itemRank.view;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.plim.kati_app.R;
 import com.plim.kati_app.kati.crossDomain.domain.model.Constant;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
-import com.plim.kati_app.kati.domain.old.temp.itemRank.model.ItemRankingResponse;
+import com.plim.kati_app.kati.domain.nnew.itemRank.model.ItemRankingResponse;
 
 import org.jetbrains.annotations.NotNull;
 

@@ -1,8 +1,12 @@
 package com.plim.kati_app.kati.crossDomain.tech.retrofit;
 
+import com.plim.kati_app.kati.domain.nnew.findId.model.FindEmailRequest;
+import com.plim.kati_app.kati.domain.nnew.findId.model.FindEmailResponse;
+import com.plim.kati_app.kati.domain.nnew.setRestoreEmail.model.SetSecondEmailRequest;
+import com.plim.kati_app.kati.domain.nnew.setRestoreEmail.model.SetSecondEmailResponse;
 import com.plim.kati_app.kati.domain.old.changePW.model.ModifyPasswordRequest;
 import com.plim.kati_app.kati.domain.old.changePW.model.ModifyPasswordResponse;
-import com.plim.kati_app.kati.domain.old.login.login.model.LoginResponse;
+import com.plim.kati_app.kati.domain.nnew.login.model.LoginResponse;
 import com.plim.kati_app.kati.domain.old.login.pwFind.model.FindPasswordRequest;
 import com.plim.kati_app.kati.domain.old.login.pwFind.model.FindPasswordResponse;
 import com.plim.kati_app.kati.domain.old.login.signIn.model.SignUpRequest;
@@ -26,7 +30,7 @@ import com.plim.kati_app.kati.domain.old.temp.editData.allergy.model.CreateUserA
 import com.plim.kati_app.kati.domain.old.temp.editData.allergy.model.ReadUserAllergyResponse;
 import com.plim.kati_app.kati.domain.old.dataChange.model.UserInfoModifyRequest;
 import com.plim.kati_app.kati.domain.old.dataChange.model.UserInfoResponse;
-import com.plim.kati_app.kati.domain.old.temp.itemRank.model.ItemRankingResponse;
+import com.plim.kati_app.kati.domain.nnew.itemRank.model.ItemRankingResponse;
 import com.plim.kati_app.kati.domain.old.temp.signOut.model.WithdrawRequest;
 import com.plim.kati_app.kati.domain.old.temp.signOut.model.WithdrawResponse;
 
@@ -52,12 +56,17 @@ public interface KatiRestAPI {
     @POST("find-password")
     Call<FindPasswordResponse> findPassword(@Body FindPasswordRequest request);
 
+    @POST("find-email")
+    Call<FindEmailResponse> findEmail(@Body FindEmailRequest request);
+
+    @POST("api/v1/user/set-secondEmail")
+    Call<SetSecondEmailResponse> setSecondEmail(@Body SetSecondEmailRequest request);
+
     @POST("api/v1/user/modify-password")
     Call<ModifyPasswordResponse> modifyPassword(@Body ModifyPasswordRequest request);
 
     @POST("login")
     Call<LoginResponse> login(@Body LoginResponse loginRequest);
-
 
     @GET("api/v1/user/user-info")
     Call<UserInfoResponse> getUserInfo();
@@ -153,6 +162,5 @@ public interface KatiRestAPI {
     @GET("/api/v1/user/summary") Call<UserSummaryResponse> getUserSummary();
     @GET("/api/v1/user/favorite/list") Call<List<UserFavoriteResponse>> getUserFavorite();
     @GET("/api/v1/user/readReviewByUserID") Call<List<ReadReviewResponse>> getUserReview();
-
 }
 
