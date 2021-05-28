@@ -33,10 +33,10 @@ public class SetRestoreEmailActivity extends KatiViewModelActivity {
     Button setRestoreEmailAddressButton;
     EditText editTextRestoreEmail;
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_restore_email);
+    protected int getLayoutId() {
+        return R.layout.activity_restore_email;
     }
 
     @Override

@@ -14,10 +14,10 @@ public class TempMainActivity extends KatiViewModelActivity { // 이게 끝나�
     /**
      * System Life Cycle Callback
      */
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_old);
+    protected int getLayoutId() {
+        return R.layout.activity_main_old;
     }
 
     @Override

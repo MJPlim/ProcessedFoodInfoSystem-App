@@ -31,9 +31,8 @@ public class FindIdActivity extends KatiViewModelActivity {
     EditText editTextRestoreEmail;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_id_find);
+    protected int getLayoutId() {
+        return R.layout.activity_id_find;
     }
 
     @Override

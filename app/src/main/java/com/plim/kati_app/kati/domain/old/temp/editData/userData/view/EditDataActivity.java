@@ -8,9 +8,8 @@ import com.plim.kati_app.kati.crossDomain.domain.view.activity.KatiViewModelActi
 public class EditDataActivity extends KatiViewModelActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_data);
+    protected int getLayoutId() {
+        return R.layout.activity_edit_data;
     }
 
     @Override

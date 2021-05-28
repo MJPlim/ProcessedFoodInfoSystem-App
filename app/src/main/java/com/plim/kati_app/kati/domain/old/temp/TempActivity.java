@@ -21,11 +21,12 @@ public class TempActivity extends KatiViewModelActivity {
     /**
      * System Life Cycle Callback
      */
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_temp);
+    protected int getLayoutId() {
+        return R.layout.activity_temp;
     }
+
     @Override
     protected void associateView() {
         this.signOutButton = this.findViewById(R.id.tempActivity_withdrawalButton);

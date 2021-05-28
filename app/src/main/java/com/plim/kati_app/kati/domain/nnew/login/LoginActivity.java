@@ -36,10 +36,10 @@ public class LoginActivity extends KatiViewModelActivity {
     private CheckBox autologinCheckBox;
     private Vector<KatiDialog> dialogs;
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+    protected int getLayoutId() {
+        return R.layout.activity_login;
     }
 
     @Override
@@ -82,7 +82,7 @@ public class LoginActivity extends KatiViewModelActivity {
             dataset.put(KatiEntity.EKatiData.AUTHORIZATION, response.headers().get("Authorization"));
             dataset.put(KatiEntity.EKatiData.EMAIL, emailAddress.getText().toString());
             dataset.put(KatiEntity.EKatiData.PASSWORD, password.getText().toString());
-//            save();
+            save();
             dialogs.add( KatiDialog.simplerAlertDialog(LoginActivity.this,
                     R.string.login_success_dialog, R.string.login_success_content_dialog,
                     (dialog, which) -> startMainActivity()

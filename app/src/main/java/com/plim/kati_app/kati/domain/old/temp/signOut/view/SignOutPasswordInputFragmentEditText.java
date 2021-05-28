@@ -43,7 +43,7 @@ public class SignOutPasswordInputFragmentEditText extends AbstractFragment_1Edit
     private class SignOutRequestCallback implements JSHRetrofitCallback<WithdrawResponse> {
         @Override
         public void onSuccessResponse(Response<WithdrawResponse> response) {
-            dataset.remove(KatiEntity.EKatiData.AUTHORIZATION);
+            dataset.put(KatiEntity.EKatiData.AUTHORIZATION, KatiEntity.EKatiData.NULL.name());
             navigateTo(R.id.action_withdrawalActivity_withdrawalfragment1_to_withdrawalActivity_withdrawalfragment2);
         }
         @Override

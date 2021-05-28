@@ -62,8 +62,8 @@ public class MyInfoEditFragment extends KatiViewModelFragment {
     @Override
     protected void associateView(View view) {
         this.editPasswordButton = view.findViewById(R.id.myInfoEditFragment_editPasswordButton);
-        this.editNameButton = view.findViewById(R.id.myInfoEditFragment_changeNameItem);
-        this.editRestoreEmailButton = view.findViewById(R.id.myInfoEditFragment_restoreEmailItem);
+        this.editNameButton = view.findViewById(R.id.myInfoEditFragment_editNameButton);
+        this.editRestoreEmailButton = view.findViewById(R.id.myInfoEditFragment_restoreEmailButton);
 
         this.logOut = view.findViewById(R.id.myInfoEditFragment_logOutTextView);
         this.signOut = view.findViewById(R.id.myInfoEditFragment_signOutTextView);
