@@ -31,8 +31,8 @@ import com.plim.kati_app.kati.domain.old.temp.editData.allergy.model.ReadUserAll
 import com.plim.kati_app.kati.domain.old.dataChange.model.UserInfoModifyRequest;
 import com.plim.kati_app.kati.domain.old.dataChange.model.UserInfoResponse;
 import com.plim.kati_app.kati.domain.nnew.itemRank.model.ItemRankingResponse;
-import com.plim.kati_app.kati.domain.old.temp.signOut.model.WithdrawRequest;
-import com.plim.kati_app.kati.domain.old.temp.signOut.model.WithdrawResponse;
+import com.plim.kati_app.kati.domain.nnew.signOut.model.WithdrawRequest;
+import com.plim.kati_app.kati.domain.nnew.signOut.model.WithdrawResponse;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.plim.kati_app.kati.domain.old.temp.signOut.model;
+package com.plim.kati_app.kati.domain.nnew.signOut.model;
 
 import com.google.gson.annotations.SerializedName;
 

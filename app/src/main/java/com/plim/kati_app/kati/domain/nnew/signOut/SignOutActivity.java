@@ -2,14 +2,10 @@ package com.plim.kati_app.kati.domain.nnew.signOut;
 
 import android.app.Activity;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import androidx.navigation.NavHost;
 
 import com.plim.kati_app.R;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
@@ -17,8 +13,8 @@ import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.kati.crossDomain.domain.view.activity.KatiLoginCheckViewModelActivity;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.domain.nnew.main.MainActivity;
-import com.plim.kati_app.kati.domain.old.temp.signOut.model.WithdrawRequest;
-import com.plim.kati_app.kati.domain.old.temp.signOut.model.WithdrawResponse;
+import com.plim.kati_app.kati.domain.nnew.signOut.model.WithdrawRequest;
+import com.plim.kati_app.kati.domain.nnew.signOut.model.WithdrawResponse;
 
 import retrofit2.Response;
 

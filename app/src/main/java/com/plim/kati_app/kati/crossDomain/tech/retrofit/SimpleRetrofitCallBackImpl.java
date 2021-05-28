@@ -15,7 +15,7 @@ import retrofit2.Response;
 
 @AllArgsConstructor
 public abstract class SimpleRetrofitCallBackImpl<T> implements SimpleRetrofitCallBack<T> {
-    private Activity activity;
+    protected Activity activity;
 
     @Override
     public void onFailResponse(Response<T> response) throws IOException, JSONException {

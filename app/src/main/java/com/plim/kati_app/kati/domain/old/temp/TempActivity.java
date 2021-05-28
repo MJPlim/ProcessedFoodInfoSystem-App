@@ -7,7 +7,6 @@ import com.plim.kati_app.R;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 import com.plim.kati_app.kati.crossDomain.domain.view.activity.KatiViewModelActivity;
 import com.plim.kati_app.kati.domain.old.TempMainActivity;
-import com.plim.kati_app.kati.domain.old.temp.signOut.view.SignOutActivity;
 import com.plim.kati_app.jshCrossDomain.tech.google.JSHGoogleMap;
 import com.plim.kati_app.kati.domain.old.dataChange.UserDataChangeActivity;
 
@@ -60,7 +59,7 @@ public class TempActivity extends KatiViewModelActivity {
      * Callback
      */
     private void signOutPressed(){
-       this.startActivity(SignOutActivity.class);
+//       this.startActivity(SignOutActivity.class);
     }
 //    private void logoutPressed(){ this.startActivity(LogOutActivity.class); }
     private void mapPressed(){ JSHGoogleMap.openGoogleMapMyPositionAndSearch(this, "convenience store"); }

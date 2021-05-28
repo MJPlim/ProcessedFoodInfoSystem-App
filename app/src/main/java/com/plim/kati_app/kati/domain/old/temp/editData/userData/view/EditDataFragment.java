@@ -15,7 +15,6 @@ import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.domain.old.temp.TempActivity;
 import com.plim.kati_app.kati.domain.old.dataChange.model.UserInfoModifyRequest;
 import com.plim.kati_app.kati.domain.old.dataChange.model.UserInfoResponse;
-import com.plim.kati_app.kati.domain.old.temp.signOut.view.SignOutActivity;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -57,7 +56,7 @@ public class EditDataFragment extends KatiLoginCheckViewModelFragment {
 
     @Override
     protected void initializeView() {
-        this.withdrawalTextView.setOnClickListener(v -> this.startActivity(SignOutActivity.class));
+//        this.withdrawalTextView.setOnClickListener(v -> this.startActivity(SignOutActivity.class));
         this.finalEditButton.setOnClickListener(v -> this.modifyUserData(this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION)));
 
     }
