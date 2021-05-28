@@ -1,34 +1,25 @@
 package com.plim.kati_app.kati.domain.nnew.findPassword;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
-import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.plim.kati_app.R;
-import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitCallback;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
-import com.plim.kati_app.kati.crossDomain.domain.view.activity.KatiLoginCheckViewModelActivity;
 import com.plim.kati_app.kati.crossDomain.domain.view.activity.KatiViewModelActivity;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
-import com.plim.kati_app.kati.crossDomain.domain.view.dialog.LoadingDialog;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBackImpl;
 import com.plim.kati_app.kati.domain.nnew.main.MainActivity;
 import com.plim.kati_app.kati.domain.old.TempMainActivity;
-import com.plim.kati_app.kati.domain.old.login.pwFind.model.FindPasswordRequest;
-import com.plim.kati_app.kati.domain.old.login.pwFind.model.FindPasswordResponse;
-import com.plim.kati_app.kati.domain.old.login.pwFind.view.FindPasswordEmailInputFragmentEditText;
+import com.plim.kati_app.kati.domain.nnew.findPassword.model.FindPasswordRequest;
+import com.plim.kati_app.kati.domain.nnew.findPassword.model.FindPasswordResponse;
 
 import retrofit2.Response;
 
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.LOGINED_DIALOG_TITLE;
-import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.NO_USER_DIALOG_MESSAGE;
-import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.NO_USER_DIALOG_TITLE;
 
 
 public class FindPasswordActivity extends KatiViewModelActivity {

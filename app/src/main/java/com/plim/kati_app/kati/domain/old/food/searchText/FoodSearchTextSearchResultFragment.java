@@ -16,11 +16,11 @@ import com.plim.kati_app.kati.crossDomain.domain.view.dialog.LoadingDialog;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiSearchFragment;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBackImpl;
-import com.plim.kati_app.kati.domain.old.search.search.model.AdvertisementResponse;
-import com.plim.kati_app.kati.domain.old.search.search.model.FindFoodBySortingResponse;
-import com.plim.kati_app.kati.domain.old.search.search.model.FoodResponse;
-import com.plim.kati_app.kati.domain.old.search.search.view.foodList.advertisement.AdRecyclerAdapter;
-import com.plim.kati_app.kati.domain.old.search.search.view.foodList.searchResult.FoodRecyclerAdapter;
+import com.plim.kati_app.kati.domain.nnew.main.search.model.AdvertisementResponse;
+import com.plim.kati_app.kati.domain.nnew.main.search.model.FindFoodBySortingResponse;
+import com.plim.kati_app.kati.domain.nnew.main.search.model.FoodResponse;
+import com.plim.kati_app.kati.domain.nnew.main.search.adapter.AdRecyclerAdapter;
+import com.plim.kati_app.kati.domain.nnew.main.search.adapter.FoodRecyclerAdapter;
 
 import java.util.List;
 import java.util.Vector;

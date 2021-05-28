@@ -7,10 +7,10 @@ import com.plim.kati_app.kati.domain.nnew.setRestoreEmail.model.SetSecondEmailRe
 import com.plim.kati_app.kati.domain.old.changePW.model.ModifyPasswordRequest;
 import com.plim.kati_app.kati.domain.old.changePW.model.ModifyPasswordResponse;
 import com.plim.kati_app.kati.domain.nnew.login.model.LoginResponse;
-import com.plim.kati_app.kati.domain.old.login.pwFind.model.FindPasswordRequest;
-import com.plim.kati_app.kati.domain.old.login.pwFind.model.FindPasswordResponse;
-import com.plim.kati_app.kati.domain.old.login.signIn.model.SignUpRequest;
-import com.plim.kati_app.kati.domain.old.login.signIn.model.SignUpResponse;
+import com.plim.kati_app.kati.domain.nnew.findPassword.model.FindPasswordRequest;
+import com.plim.kati_app.kati.domain.nnew.findPassword.model.FindPasswordResponse;
+import com.plim.kati_app.kati.domain.nnew.signUp.model.SignUpRequest;
+import com.plim.kati_app.kati.domain.nnew.signUp.model.SignUpResponse;
 import com.plim.kati_app.kati.domain.old.mypage.main.model.UserSummaryResponse;
 import com.plim.kati_app.kati.domain.old.mypage.myFavorite.model.UserFavoriteResponse;
 import com.plim.kati_app.kati.domain.old.mypage.myReview.model.ReadReviewResponse;
@@ -23,8 +23,8 @@ import com.plim.kati_app.kati.domain.old.search.foodInfo.view.foodInfo.model.Rea
 import com.plim.kati_app.kati.domain.old.search.foodInfo.view.foodInfo.model.ReadReviewIdResponse;
 import com.plim.kati_app.kati.domain.old.search.foodInfo.view.foodInfo.model.UpdateReviewLikeRequest;
 import com.plim.kati_app.kati.domain.old.search.foodInfo.view.foodInfo.model.UpdateReviewLikeResponse;
-import com.plim.kati_app.kati.domain.old.search.search.model.AdvertisementResponse;
-import com.plim.kati_app.kati.domain.old.search.search.model.FindFoodBySortingResponse;
+import com.plim.kati_app.kati.domain.nnew.main.search.model.AdvertisementResponse;
+import com.plim.kati_app.kati.domain.nnew.main.search.model.FindFoodBySortingResponse;
 import com.plim.kati_app.kati.domain.old.temp.editData.allergy.model.CreateUserAllergyRequest;
 import com.plim.kati_app.kati.domain.old.temp.editData.allergy.model.CreateUserAllergyResponse;
 import com.plim.kati_app.kati.domain.old.temp.editData.allergy.model.ReadUserAllergyResponse;

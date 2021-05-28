@@ -9,16 +9,16 @@
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout4"
+        android:id="@+id/newFoodItem_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/foodItem_foodImageView"
+        app:layout_constraintStart_toEndOf="@+id/newFoodItem_foodImageView"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/foodItem_productName"
+            android:id="@+id/newFoodItem_productNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="행복한찜닭-DMC점"
@@ -28,17 +28,17 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/newFoodItem_starIcon"
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_marginTop="2dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/foodItem_productName"
+            app:layout_constraintTop_toBottomOf="@+id/newFoodItem_productNameTextView"
             app:srcCompat="@drawable/ic_baseline_star_24"
             app:tint="@color/kati_orange" />
 
         <TextView
-            android:id="@+id/foodSearchRecommendationFragment_recentSearchWordTextView"
+            android:id="@+id/newFoodItem_ratingTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
@@ -47,26 +47,26 @@
             android:textColor="@color/black"
             android:textSize="12sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-            app:layout_constraintStart_toEndOf="@+id/imageView4"
-            app:layout_constraintTop_toTopOf="@+id/imageView4" />
+            app:layout_constraintBottom_toBottomOf="@+id/newFoodItem_starIcon"
+            app:layout_constraintStart_toEndOf="@+id/newFoodItem_starIcon"
+            app:layout_constraintTop_toTopOf="@+id/newFoodItem_starIcon" />
 
         <TextView
-            android:id="@+id/foodItem_reviewCountTextView"
+            android:id="@+id/newFoodItem_reviewCountTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="2dp"
             android:text="(298)"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/foodSearchRecommendationFragment_recentSearchWordTextView"
-            app:layout_constraintStart_toEndOf="@+id/foodSearchRecommendationFragment_recentSearchWordTextView"
-            app:layout_constraintTop_toTopOf="@+id/foodSearchRecommendationFragment_recentSearchWordTextView" />
+            app:layout_constraintBottom_toBottomOf="@+id/newFoodItem_ratingTextView"
+            app:layout_constraintStart_toEndOf="@+id/newFoodItem_ratingTextView"
+            app:layout_constraintTop_toTopOf="@+id/newFoodItem_ratingTextView" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
-        android:id="@+id/foodItem_foodImageView"
+        android:id="@+id/newFoodItem_foodImageView"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_margin="16dp"
@@ -79,18 +79,5 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
-    <com.varunest.sparkbutton.SparkButton
-        android:id="@+id/spark_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginRight="16dp"
-        app:sparkbutton_activeImage="@drawable/ic_baseline_favorite_24"
-        app:sparkbutton_iconSize="25dp"
-        app:sparkbutton_inActiveImage="@drawable/ic_baseline_favorite_border_24"
-        app:sparkbutton_primaryColor="@color/kati_orange"
-        app:sparkbutton_secondaryColor="@color/kati_red" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

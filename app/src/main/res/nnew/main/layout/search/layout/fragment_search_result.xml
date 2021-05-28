@@ -9,14 +9,14 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
+        android:id="@+id/searchResultFragment_searchFieldLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/searchResultFragment_searchEditTextBackgroundImage"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_margin="16dp"
@@ -27,18 +27,18 @@
             app:tint="@color/kati_light_gray" />
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/searchResultFragment_searchIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:src="@drawable/ic_baseline_search_24"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView"
-            app:layout_constraintStart_toStartOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="@+id/imageView"
+            app:layout_constraintBottom_toBottomOf="@+id/searchResultFragment_searchEditTextBackgroundImage"
+            app:layout_constraintStart_toStartOf="@+id/searchResultFragment_searchEditTextBackgroundImage"
+            app:layout_constraintTop_toTopOf="@+id/searchResultFragment_searchEditTextBackgroundImage"
             app:tint="@color/kati_gray" />
 
         <EditText
-            android:id="@+id/search_searchEditText"
+            android:id="@+id/searchResultFragment_searchFieldEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
@@ -47,24 +47,24 @@
             android:hint="제품명이나 제조사명으로 검색하세요."
             android:inputType="textPersonName"
             android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView"
-            app:layout_constraintEnd_toStartOf="@+id/imageView5"
-            app:layout_constraintStart_toEndOf="@+id/imageView3"
-            app:layout_constraintTop_toTopOf="@+id/imageView" />
+            app:layout_constraintBottom_toBottomOf="@+id/searchResultFragment_searchEditTextBackgroundImage"
+            app:layout_constraintEnd_toStartOf="@+id/searchResultFragment_barcodeIcon"
+            app:layout_constraintStart_toEndOf="@+id/searchResultFragment_searchIcon"
+            app:layout_constraintTop_toTopOf="@+id/searchResultFragment_searchEditTextBackgroundImage" />
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/searchResultFragment_barcodeIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="8dp"
             android:src="@drawable/ic_baseline_close_24"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView"
-            app:layout_constraintEnd_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="@+id/imageView"
+            app:layout_constraintBottom_toBottomOf="@+id/searchResultFragment_searchEditTextBackgroundImage"
+            app:layout_constraintEnd_toEndOf="@+id/searchResultFragment_searchEditTextBackgroundImage"
+            app:layout_constraintTop_toTopOf="@+id/searchResultFragment_searchEditTextBackgroundImage"
             app:tint="@color/kati_gray" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/searchResultFragment_allergyFilterButton"
             android:layout_width="55dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -72,10 +72,10 @@
             android:textSize="0sp"
             app:icon="@drawable/ic_outline_filter_alt_24"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintTop_toBottomOf="@+id/searchResultFragment_searchEditTextBackgroundImage" />
 
         <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chipGroup"
+            android:id="@+id/searchResultFragment_chipGroup"
             android:layout_marginBottom="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -84,34 +84,38 @@
             app:singleSelection="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView">
+            app:layout_constraintTop_toBottomOf="@+id/searchResultFragment_searchEditTextBackgroundImage">
 
             <com.google.android.material.chip.Chip
+                android:id="@+id/searchResultFragment_rankingChip"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="카티랭킹순" />
+                android:text="카티 랭킹 순" />
 
             <com.google.android.material.chip.Chip
+                android:id="@+id/searchResultFragment_manufacturerChip"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="리뷰많은순" />
+                android:text="제조사 이름 순" />
 
             <com.google.android.material.chip.Chip
+                android:id="@+id/searchResultFragment_reviewCountChip"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="가나다순" />
+                android:text="리뷰 많은 순" />
 
         </com.google.android.material.chip.ChipGroup>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/searchResultFragment_nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/searchResultFragment_searchFieldLayout"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -119,7 +123,7 @@
             android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout7"
+                android:id="@+id/searchResultFragment_adLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -127,7 +131,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/textView11"
+                    android:id="@+id/searchResultFragment_adTitleTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
@@ -138,7 +142,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chip4"
+                    android:id="@+id/searchResultFragment_adChip"
                     android:layout_width="50dp"
                     android:layout_height="35dp"
                     android:gravity="center"
@@ -149,12 +153,12 @@
                     app:chipStartPadding="0dp"
                     app:chipStrokeColor="@color/kati_gray"
                     app:chipStrokeWidth="1.5dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView11"
-                    app:layout_constraintStart_toEndOf="@+id/textView11"
-                    app:layout_constraintTop_toTopOf="@+id/textView11" />
+                    app:layout_constraintBottom_toBottomOf="@+id/searchResultFragment_adTitleTextView"
+                    app:layout_constraintStart_toEndOf="@+id/searchResultFragment_adTitleTextView"
+                    app:layout_constraintTop_toTopOf="@+id/searchResultFragment_adTitleTextView" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/searchResult_advertisementList"
+                    android:id="@+id/searchResultFragment_adRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -164,7 +168,7 @@
                     android:paddingHorizontal="8dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView11"
+                    app:layout_constraintTop_toBottomOf="@+id/searchResultFragment_adTitleTextView"
                     tools:itemCount="4"
                     tools:listitem="@layout/item_food_vertical" />
 
@@ -172,7 +176,7 @@
 
 
             <TextView
-                android:id="@+id/textView15"
+                android:id="@+id/searchResultFragment_searchListTitleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
@@ -180,17 +184,17 @@
                 android:textColor="@color/black"
                 android:textSize="17sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout7" />
+                app:layout_constraintTop_toBottomOf="@+id/searchResultFragment_adLayout" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/searchResult_result"
+                android:id="@+id/searchResultFragment_resultRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="16dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:itemCount="6"
                 tools:listitem="@layout/item_food_old"
-                app:layout_constraintTop_toBottomOf="@+id/textView15" />
+                app:layout_constraintTop_toBottomOf="@+id/searchResultFragment_searchListTitleTextView" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

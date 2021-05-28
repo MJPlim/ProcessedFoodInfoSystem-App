@@ -1,36 +1,21 @@
 package com.plim.kati_app.kati.domain.nnew.signUp.signUp;
 
 import android.app.Activity;
-import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.plim.kati_app.R;
-import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitCallback;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
-import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
-import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.LoadingDialog;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiViewModelFragment;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBackImpl;
-import com.plim.kati_app.kati.domain.old.login.signIn.model.SignUpRequest;
-import com.plim.kati_app.kati.domain.old.login.signIn.model.SignUpResponse;
-import com.plim.kati_app.kati.domain.old.login.signIn.view.RegisterNameFragmentEditText;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
+import com.plim.kati_app.kati.domain.nnew.signUp.model.SignUpRequest;
+import com.plim.kati_app.kati.domain.nnew.signUp.model.SignUpResponse;
 
 import retrofit2.Response;
 
