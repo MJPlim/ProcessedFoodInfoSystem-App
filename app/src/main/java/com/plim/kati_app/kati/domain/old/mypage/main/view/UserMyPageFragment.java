@@ -108,8 +108,8 @@ public class UserMyPageFragment extends KatiViewModelFragment {
 
 
     private void moveToRestoreEmailActivity() {
-        Intent intent = new Intent(this.getActivity(), SetSecondEmailActivity.class);
-        startActivity(intent);
+    //    Intent intent = new Intent(this.getActivity(), SetSecondEmailActivity.class);
+      //  startActivity(intent);
     }
 
     public void startMainActivity() {

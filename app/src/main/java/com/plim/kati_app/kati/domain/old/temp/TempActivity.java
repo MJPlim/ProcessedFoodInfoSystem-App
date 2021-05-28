@@ -46,7 +46,7 @@ public class TempActivity extends KatiViewModelActivity {
 
         this.userDataEditButton.setOnClickListener(v->this.userDataEditPressed());
 
-        this.setSecondEmailButton.setOnClickListener(v->this.setSecondEmailPressed());
+       // this.setSecondEmailButton.setOnClickListener(v->this.setSecondEmailPressed());
 
     }
 
@@ -67,7 +67,7 @@ public class TempActivity extends KatiViewModelActivity {
 
     private void userDataEditPressed() { this.startActivity(UserDataChangeActivity.class);}
 
-    private void setSecondEmailPressed(){ this.startActivity(SetSecondEmailActivity.class); }
+   // private void setSecondEmailPressed(){ this.startActivity(SetSecondEmailActivity.class); }
 
 
     /**

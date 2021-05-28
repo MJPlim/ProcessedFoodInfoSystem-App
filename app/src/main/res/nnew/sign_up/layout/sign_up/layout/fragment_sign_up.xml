@@ -68,7 +68,7 @@
             app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
 
         <EditText
-            android:id="@+id/editTextTextPassword3"
+            android:id="@+id/nickNameButton"
             android:layout_height="wrap_content"
             android:ems="10"
             android:layout_width="match_parent"
@@ -84,7 +84,7 @@
             app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword2" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/nextButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -96,7 +96,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword3" />
+            app:layout_constraintTop_toBottomOf="@+id/nickNameButton" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

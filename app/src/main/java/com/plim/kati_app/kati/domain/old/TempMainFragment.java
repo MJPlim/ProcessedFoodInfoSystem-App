@@ -10,6 +10,7 @@ import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiViewModelFragment;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBackImpl;
+import com.plim.kati_app.kati.domain.nnew.login.LoginActivity;
 import com.plim.kati_app.kati.domain.old.changePW.view.ChangePasswordActivity;
 import com.plim.kati_app.kati.domain.old.food.searchText.FoodSearchTextActivity;
 import com.plim.kati_app.kati.domain.nnew.login.model.LoginResponse;

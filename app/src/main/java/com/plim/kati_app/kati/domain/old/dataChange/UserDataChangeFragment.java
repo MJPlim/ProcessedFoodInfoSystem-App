@@ -82,7 +82,7 @@ public class UserDataChangeFragment extends KatiLoginCheckViewModelFragment {
         this.signOutButton.setOnClickListener(v -> this.startActivity(SignOutActivity.class));
 
 
-        this.secondEmailEditButton.setOnClickListener(v -> this.startActivity(SetSecondEmailActivity.class));
+      //  this.secondEmailEditButton.setOnClickListener(v -> this.startActivity(SetSecondEmailActivity.class));
 //        this.allergyEditButton.setOnClickListener(v -> this.startActivity(Allerg.class));
         this.passwordEditButton.setOnClickListener(v -> this.startActivity(ChangePasswordActivity.class));
 
