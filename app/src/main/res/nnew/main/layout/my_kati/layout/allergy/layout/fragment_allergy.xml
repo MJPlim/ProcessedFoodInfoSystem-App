@@ -8,7 +8,7 @@
     tools:context=".kati.domain.nnew.main.myKati.allergy.AllergyFragment">
 
     <com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHToolBar
-        android:id="@+id/home_toolbar"
+        android:id="@+id/homeFragment_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        app:layout_constraintTop_toBottomOf="@+id/home_toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/homeFragment_toolbar"
         >
 
         <com.google.android.material.chip.ChipGroup

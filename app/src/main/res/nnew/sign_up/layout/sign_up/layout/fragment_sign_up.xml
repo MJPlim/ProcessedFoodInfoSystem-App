@@ -8,7 +8,7 @@
     tools:context=".kati.domain.nnew.signUp.SignUpActivity">
 
     <com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHToolBar
-        android:id="@+id/home_toolbar"
+        android:id="@+id/signUpFragment_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
@@ -21,11 +21,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        app:layout_constraintTop_toBottomOf="@+id/home_toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/signUpFragment_toolbar"
         tools:layout_editor_absoluteX="-86dp">
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/signUpFragment_titleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="회원가입 정보"
@@ -37,7 +37,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/editTextTextPassword"
+            android:id="@+id/signUpFragment_emailEditText"
             android:layout_width="match_parent"
             android:layout_marginHorizontal="16dp"
             android:layout_height="wrap_content"
@@ -49,10 +49,10 @@
             android:layout_marginTop="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            app:layout_constraintTop_toBottomOf="@+id/signUpFragment_titleTextView" />
 
         <EditText
-            android:id="@+id/editTextTextPassword2"
+            android:id="@+id/signUpFragment_passwordEditText"
             android:layout_width="match_parent"
             android:layout_marginHorizontal="16dp"
             android:layout_height="wrap_content"
@@ -65,10 +65,10 @@
             android:hint="비밀번호"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+            app:layout_constraintTop_toBottomOf="@+id/signUpFragment_emailEditText" />
 
         <EditText
-            android:id="@+id/editTextTextPassword3"
+            android:id="@+id/signUpFragment_nickNameEditText"
             android:layout_height="wrap_content"
             android:ems="10"
             android:layout_width="match_parent"
@@ -81,10 +81,10 @@
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword2" />
+            app:layout_constraintTop_toBottomOf="@+id/signUpFragment_passwordEditText" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/signUpFragment_submitButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -96,7 +96,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword3" />
+            app:layout_constraintTop_toBottomOf="@+id/signUpFragment_nickNameEditText" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

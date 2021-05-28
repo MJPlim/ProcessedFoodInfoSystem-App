@@ -27,7 +27,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ViewPager2 viewPager2 = view.findViewById(R.id.main_viewPager);
+        ViewPager2 viewPager2 = view.findViewById(R.id.homeFragment_viewPager);
         viewPager2.setAdapter(new AdvertisementViewPagerAdapter());
         JSHViewPagerTool.setAutoSlide(viewPager2, 5000);
         JSHViewPagerTool.setEffect(viewPager2);

@@ -8,7 +8,7 @@
     tools:context="com.plim.kati_app.kati.domain.nnew.main.myKati.myInfoEdit.MyInfoEditFragment">
 
     <com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHToolBar
-        android:id="@+id/home_toolbar"
+        android:id="@+id/homeFragment_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:button_image="@drawable/jsh_before"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         app:JSHInfoItem_content="sh199919@gmail.com"
         app:JSHInfoItem_title="복구 이메일"
-        app:layout_constraintTop_toBottomOf="@+id/home_toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/homeFragment_toolbar" />
 
     <com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHInfoItem
         android:id="@+id/myInfo_password"
@@ -80,7 +80,7 @@
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/myInfo_restoreEmail"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/homeFragment_toolbar" />
 
     <TextView
         android:id="@+id/myinfo_logout_textView"

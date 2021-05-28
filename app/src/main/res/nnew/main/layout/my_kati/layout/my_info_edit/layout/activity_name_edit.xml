@@ -8,7 +8,7 @@
     tools:context=".kati.domain.nnew.signUp.SignUpActivity">
 
     <com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHToolBar
-        android:id="@+id/home_toolbar"
+        android:id="@+id/homeFragment_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
@@ -21,11 +21,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        app:layout_constraintTop_toBottomOf="@+id/home_toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/homeFragment_toolbar"
         tools:layout_editor_absoluteX="-86dp">
 
         <EditText
-            android:id="@+id/editTextTextPassword"
+            android:id="@+id/signUpFragment_emailEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
@@ -40,7 +40,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/signUpFragment_submitButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
@@ -51,7 +51,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+            app:layout_constraintTop_toBottomOf="@+id/signUpFragment_emailEditText" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

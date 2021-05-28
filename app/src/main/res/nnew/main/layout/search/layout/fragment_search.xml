@@ -8,7 +8,7 @@
 
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/searchFragment_searchFieldBackGroundImageView"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_margin="16dp"
@@ -19,18 +19,18 @@
         app:tint="@color/kati_light_gray" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/searchFragment_searchIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_baseline_search_24"
         android:layout_marginLeft="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintBottom_toBottomOf="@+id/searchFragment_searchFieldBackGroundImageView"
+        app:layout_constraintStart_toStartOf="@+id/searchFragment_searchFieldBackGroundImageView"
+        app:layout_constraintTop_toTopOf="@+id/searchFragment_searchFieldBackGroundImageView"
         app:tint="@color/kati_gray" />
 
     <EditText
-        android:id="@+id/search_searchEditText"
+        android:id="@+id/searchFragment_searchFieldHint"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
@@ -40,31 +40,31 @@
         android:inputType="text"
         android:hint="제품명이나 제조사명으로 검색하세요."
         android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintEnd_toStartOf="@+id/imageView5"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
+        app:layout_constraintBottom_toBottomOf="@+id/searchFragment_searchFieldBackGroundImageView"
+        app:layout_constraintEnd_toStartOf="@+id/searchFragment_barcodeSearchIcon"
+        app:layout_constraintStart_toEndOf="@+id/searchFragment_searchIcon"
+        app:layout_constraintTop_toTopOf="@+id/searchFragment_searchFieldBackGroundImageView" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/searchFragment_barcodeSearchIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_baseline_photo_camera_24"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintBottom_toBottomOf="@+id/searchFragment_searchFieldBackGroundImageView"
+        app:layout_constraintEnd_toEndOf="@+id/searchFragment_searchFieldBackGroundImageView"
+        app:layout_constraintTop_toTopOf="@+id/searchFragment_searchFieldBackGroundImageView"
         app:tint="@color/kati_gray"
         android:layout_marginRight="8dp"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout5"
+        android:id="@+id/searchFragment_constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
+        app:layout_constraintTop_toBottomOf="@+id/searchFragment_searchFieldBackGroundImageView">
 
         <TextView
-            android:id="@+id/textView10"
+            android:id="@+id/searchFragment_recentSearchWordTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -75,25 +75,25 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/search_removeAllHistory"
+            android:id="@+id/searchFragment_deleteTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:text="전체삭제"
-            app:layout_constraintBottom_toBottomOf="@+id/textView10"
+            app:layout_constraintBottom_toBottomOf="@+id/searchFragment_recentSearchWordTitle"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView10" />
+            app:layout_constraintTop_toTopOf="@+id/searchFragment_recentSearchWordTitle" />
 
         <ImageView
-            android:id="@+id/imageView6"
+            android:id="@+id/searchFragment_deleteIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleX="0.8"
             android:scaleY="0.8"
             android:src="@drawable/ic_baseline_delete_outline_24"
-            app:layout_constraintBottom_toBottomOf="@+id/search_removeAllHistory"
-            app:layout_constraintEnd_toStartOf="@+id/search_removeAllHistory"
-            app:layout_constraintTop_toTopOf="@+id/search_removeAllHistory" />
+            app:layout_constraintBottom_toBottomOf="@+id/searchFragment_deleteTextView"
+            app:layout_constraintEnd_toStartOf="@+id/searchFragment_deleteTextView"
+            app:layout_constraintTop_toTopOf="@+id/searchFragment_deleteTextView" />
 
 
         <HorizontalScrollView
@@ -103,95 +103,26 @@
             android:layout_marginBottom="16dp"
             android:scrollbars="none"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView10"
+            app:layout_constraintTop_toBottomOf="@+id/searchFragment_recentSearchWordTitle"
             tools:layout_editor_absoluteX="0dp">
 
             <com.google.android.material.chip.ChipGroup
+                android:id="@+id/searchFragment_recentSearchWordChipGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="16dp"
                 app:chipSpacing="8dp"
                 app:singleSelection="true">
 
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="꼬북칩"
-                    app:chipBackgroundColor="@color/white"
-                    app:chipStrokeColor="@color/kati_middle_gray"
-                    app:chipStrokeWidth="1.5dp"
-                    app:closeIconEnabled="true"
-                    app:closeIconTint="@color/kati_middle_gray" />
-
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="꼬북칩"
-                    app:chipBackgroundColor="@color/white"
-                    app:chipStrokeColor="@color/kati_middle_gray"
-                    app:chipStrokeWidth="1.5dp"
-                    app:closeIconEnabled="true"
-                    app:closeIconTint="@color/kati_middle_gray" />
-
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="꼬북칩"
-                    app:chipBackgroundColor="@color/white"
-                    app:chipStrokeColor="@color/kati_middle_gray"
-                    app:chipStrokeWidth="1.5dp"
-                    app:closeIconEnabled="true"
-                    app:closeIconTint="@color/kati_middle_gray" />
-
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="꼬북칩"
-                    app:chipBackgroundColor="@color/white"
-                    app:chipStrokeColor="@color/kati_middle_gray"
-                    app:chipStrokeWidth="1.5dp"
-                    app:closeIconEnabled="true"
-                    app:closeIconTint="@color/kati_middle_gray" />
-
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="꼬북칩"
-                    app:chipBackgroundColor="@color/white"
-                    app:chipStrokeColor="@color/kati_middle_gray"
-                    app:chipStrokeWidth="1.5dp"
-                    app:closeIconEnabled="true"
-                    app:closeIconTint="@color/kati_middle_gray" />
-
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="꼬북칩"
-                    app:chipBackgroundColor="@color/white"
-                    app:chipStrokeColor="@color/kati_middle_gray"
-                    app:chipStrokeWidth="1.5dp"
-                    app:closeIconEnabled="true"
-                    app:closeIconTint="@color/kati_middle_gray" />
-
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="꼬북칩"
-                    app:chipBackgroundColor="@color/white"
-                    app:chipStrokeColor="@color/kati_middle_gray"
-                    app:chipStrokeWidth="1.5dp"
-                    app:closeIconEnabled="true"
-                    app:closeIconTint="@color/kati_middle_gray" />
-
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="꼬북칩"
-                    app:chipBackgroundColor="@color/white"
-                    app:chipStrokeColor="@color/kati_middle_gray"
-                    app:chipStrokeWidth="1.5dp"
-                    app:closeIconEnabled="true"
-                    app:closeIconTint="@color/kati_middle_gray" />
+<!--                <com.google.android.material.chip.Chip-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="꼬북칩"-->
+<!--                    app:chipBackgroundColor="@color/white"-->
+<!--                    app:chipStrokeColor="@color/kati_middle_gray"-->
+<!--                    app:chipStrokeWidth="1.5dp"-->
+<!--                    app:closeIconEnabled="true"-->
+<!--                    app:closeIconTint="@color/kati_middle_gray" />-->
 
 
             </com.google.android.material.chip.ChipGroup>
@@ -200,14 +131,14 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout6"
+        android:id="@+id/searchFragment_rankConstraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout5">
+        app:layout_constraintTop_toBottomOf="@+id/searchFragment_constraintLayout">
 
 
         <TextView
-            android:id="@+id/textView13"
+            android:id="@+id/searchFragment_rankTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -226,7 +157,7 @@
             android:columnCount="2"
             android:rowCount="5"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView13"
+            app:layout_constraintTop_toBottomOf="@+id/searchFragment_rankTitle"
             tools:layout_editor_absoluteX="24dp">
 
             <TextView
@@ -477,5 +408,5 @@
         android:layout_height="0dp"
         android:background="@color/kati_light_gray"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout6" />
+        app:layout_constraintTop_toBottomOf="@+id/searchFragment_rankConstraintLayout" />
 </androidx.constraintlayout.widget.ConstraintLayout>
