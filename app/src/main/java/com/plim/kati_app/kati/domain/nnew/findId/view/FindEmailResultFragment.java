@@ -1,10 +1,10 @@
-package com.plim.kati_app.kati.domain.old.login.emailFind.view;
+package com.plim.kati_app.kati.domain.nnew.findId.view;
 
 import android.view.View;
 
 import com.plim.kati_app.R;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.AbstractFragment_1EditText;
-import com.plim.kati_app.kati.domain.old.TempMainActivity;
+import com.plim.kati_app.kati.domain.nnew.main.MainActivity;
 
 public class FindEmailResultFragment extends AbstractFragment_1EditText {
 
@@ -19,6 +19,6 @@ public class FindEmailResultFragment extends AbstractFragment_1EditText {
 
     @Override
     protected void buttonClicked() {
-        this.startActivity(TempMainActivity.class);
+        this.startActivity(MainActivity.class);
     }
 }

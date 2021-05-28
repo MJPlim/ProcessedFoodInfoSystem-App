@@ -1,4 +1,4 @@
-package com.plim.kati_app.kati.domain.old.temp.setSecondEmail.view;
+package com.plim.kati_app.kati.domain.nnew.setRestoreEmail.view;
 
 import android.view.View;
 

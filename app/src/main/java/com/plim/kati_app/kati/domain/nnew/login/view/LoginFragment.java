@@ -1,4 +1,4 @@
-package com.plim.kati_app.kati.domain.old.login.login.view;
+package com.plim.kati_app.kati.domain.nnew.login.view;
 
 import android.content.Intent;
 import android.util.Log;
@@ -9,8 +9,8 @@ import android.widget.EditText;
 
 import com.plim.kati_app.R;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
-import com.plim.kati_app.kati.domain.old.login.emailFind.view.FindEmailActivity;
-import com.plim.kati_app.kati.domain.old.login.login.model.LoginResponse;
+import com.plim.kati_app.kati.domain.nnew.findId.FindIdActivity;
+import com.plim.kati_app.kati.domain.nnew.login.model.LoginResponse;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitCallback;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
@@ -71,7 +71,7 @@ public class LoginFragment extends KatiViewModelFragment {
 
         this.signInButton.setOnClickListener(v->this.startActivity(new Intent(getContext(), SignInActivity.class)));
         this.pwFindButton.setOnClickListener(v->this.startActivity(new Intent(getContext(), FindPasswordActivity.class)));
-        this.idFindButton.setOnClickListener(v->this.startActivity(new Intent(getContext(), FindEmailActivity.class)));
+        this.idFindButton.setOnClickListener(v->this.startActivity(new Intent(getContext(), FindIdActivity.class)));
         this.loginButton.setOnClickListener(v->this.login());
         this.autologinCheckBox.setChecked(this.dataset.get(KatiEntity.EKatiData.AUTO_LOGIN).equals(KatiEntity.EKatiData.TRUE.name()));
         this.kakaoLoginButton.setOnClickListener(v->this.googleLogin());

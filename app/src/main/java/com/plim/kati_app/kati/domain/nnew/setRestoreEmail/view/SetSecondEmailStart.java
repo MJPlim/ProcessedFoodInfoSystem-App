@@ -1,4 +1,4 @@
-package com.plim.kati_app.kati.domain.old.temp.setSecondEmail.view;
+package com.plim.kati_app.kati.domain.nnew.setRestoreEmail.view;
 
 import android.util.Log;
 import android.view.View;
@@ -10,8 +10,8 @@ import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.AbstractFragment_1EditText;
 import com.plim.kati_app.kati.domain.old.TempMainActivity;
-import com.plim.kati_app.kati.domain.old.temp.setSecondEmail.model.SetSecondEmailRequest;
-import com.plim.kati_app.kati.domain.old.temp.setSecondEmail.model.SetSecondEmailResponse;
+import com.plim.kati_app.kati.domain.nnew.setRestoreEmail.model.SetSecondEmailRequest;
+import com.plim.kati_app.kati.domain.nnew.setRestoreEmail.model.SetSecondEmailResponse;
 
 import org.json.JSONObject;
 

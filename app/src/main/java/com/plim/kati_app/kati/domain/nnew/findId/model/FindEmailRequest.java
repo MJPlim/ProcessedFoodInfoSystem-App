@@ -1,4 +1,4 @@
-package com.plim.kati_app.kati.domain.old.login.emailFind.model;
+package com.plim.kati_app.kati.domain.nnew.findId.model;
 
 import lombok.Getter;
 import lombok.Setter;

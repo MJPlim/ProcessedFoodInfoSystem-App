@@ -17,7 +17,6 @@ import com.plim.kati_app.kati.domain.old.temp.TempActivity;
 import com.plim.kati_app.kati.domain.old.dataChange.model.UserInfoModifyRequest;
 import com.plim.kati_app.kati.domain.old.dataChange.model.UserInfoResponse;
 import com.plim.kati_app.kati.domain.old.temp.logout.view.LogOutActivity;
-import com.plim.kati_app.kati.domain.old.temp.setSecondEmail.view.SetSecondEmailActivity;
 import com.plim.kati_app.kati.domain.old.temp.signOut.view.SignOutActivity;
 
 import java.time.LocalDate;

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:padding="@dimen/box_inset_layout_padding"
-    tools:context=".kati.domain.old.temp.setSecondEmail.view.SetSecondEmailActivity" >
+    tools:context=".kati.domain.nnew.setRestoreEmail.view.SetSecondEmailActivity" >
 
 
     <androidx.fragment.app.FragmentContainerView

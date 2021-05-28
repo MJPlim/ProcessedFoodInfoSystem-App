@@ -1,4 +1,4 @@
-package com.plim.kati_app.kati.domain.old.temp.itemRank.model;
+package com.plim.kati_app.kati.domain.nnew.itemRank.model;
 
 import lombok.Getter;
 import lombok.Setter;

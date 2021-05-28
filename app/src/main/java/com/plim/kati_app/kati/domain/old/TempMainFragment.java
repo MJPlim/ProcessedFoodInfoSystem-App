@@ -12,11 +12,10 @@ import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBackImpl;
 import com.plim.kati_app.kati.domain.old.changePW.view.ChangePasswordActivity;
 import com.plim.kati_app.kati.domain.old.food.searchText.FoodSearchTextActivity;
-import com.plim.kati_app.kati.domain.old.login.login.model.LoginResponse;
-import com.plim.kati_app.kati.domain.old.login.login.view.LoginActivity;
+import com.plim.kati_app.kati.domain.nnew.login.model.LoginResponse;
 import com.plim.kati_app.kati.domain.old.mypage.main.view.UserMyPageActivity;
 import com.plim.kati_app.kati.domain.old.temp.TempActivity;
-import com.plim.kati_app.kati.domain.old.temp.itemRank.view.RankingActivity;
+import com.plim.kati_app.kati.domain.nnew.itemRank.view.RankingActivity;
 
 import retrofit2.Response;
 

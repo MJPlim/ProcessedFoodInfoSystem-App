@@ -8,7 +8,6 @@ import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 import com.plim.kati_app.kati.crossDomain.domain.view.activity.KatiViewModelActivity;
 import com.plim.kati_app.kati.domain.old.TempMainActivity;
 import com.plim.kati_app.kati.domain.old.temp.logout.view.LogOutActivity;
-import com.plim.kati_app.kati.domain.old.temp.setSecondEmail.view.SetSecondEmailActivity;
 import com.plim.kati_app.kati.domain.old.temp.signOut.view.SignOutActivity;
 import com.plim.kati_app.jshCrossDomain.tech.google.JSHGoogleMap;
 import com.plim.kati_app.kati.domain.old.dataChange.UserDataChangeActivity;

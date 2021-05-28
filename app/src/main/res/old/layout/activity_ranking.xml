@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".kati.domain.old.temp.itemRank.view.RankingActivity">
+    tools:context=".kati.domain.nnew.itemRank.view.RankingActivity">
 
     <TextView
         android:id="@+id/hot_textView"
