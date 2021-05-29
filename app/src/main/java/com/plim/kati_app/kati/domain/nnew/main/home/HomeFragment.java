@@ -10,26 +10,54 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridLayout;
 
 import com.plim.kati_app.R;
+import com.plim.kati_app.kati.crossDomain.domain.model.Constant;
 import com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHViewPagerTool;
+import com.plim.kati_app.kati.crossDomain.domain.view.etc.YYECategoryItem;
+import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiViewModelFragment;
 import com.plim.kati_app.kati.domain.nnew.main.home.advertisement.AdvertisementViewPagerAdapter;
 
 import org.jetbrains.annotations.NotNull;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends KatiViewModelFragment {
+
+    private ViewPager2 viewPager2;
+
+    private GridLayout layout;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home, container, false);
+    protected int getLayoutId() {
+        return R.layout.fragment_home;
     }
 
     @Override
-    public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        ViewPager2 viewPager2 = view.findViewById(R.id.homeFragment_viewPager);
-        viewPager2.setAdapter(new AdvertisementViewPagerAdapter());
-        JSHViewPagerTool.setAutoSlide(viewPager2, 5000);
-        JSHViewPagerTool.setEffect(viewPager2);
+    protected void associateView(View view) {
+        this.viewPager2 = view.findViewById(R.id.homeFragment_viewPager);
+        this.layout= view.findViewById(R.id.homeFragment_category);
     }
+
+    @Override
+    protected void initializeView() {
+        this.viewPager2.setAdapter(new AdvertisementViewPagerAdapter());
+        JSHViewPagerTool.setAutoSlide(this.viewPager2, 5000);
+        JSHViewPagerTool.setEffect(this.viewPager2);
+
+        for(Constant.ECategory category: Constant.ECategory.values()){
+            YYECategoryItem item= new YYECategoryItem(getContext());
+            item.setText(category.getName());
+            item.setImage(getResources().getDrawable(category.getDrawable(), getActivity().getTheme()));
+            this.layout.addView(item);
+        }
+
+
+    }
+
+    @Override
+    protected void katiEntityUpdated() {
+
+    }
+
+
 }
