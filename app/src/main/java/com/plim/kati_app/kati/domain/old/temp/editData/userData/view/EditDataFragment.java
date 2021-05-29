@@ -57,7 +57,7 @@ public class EditDataFragment extends KatiLoginCheckViewModelFragment {
     @Override
     protected void initializeView() {
 //        this.withdrawalTextView.setOnClickListener(v -> this.startActivity(SignOutActivity.class));
-        this.finalEditButton.setOnClickListener(v -> this.modifyUserData(this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION)));
+//        this.finalEditButton.setOnClickListener(v -> this.modifyUserData(this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION)));
 
     }
 
@@ -68,7 +68,7 @@ public class EditDataFragment extends KatiLoginCheckViewModelFragment {
 
     @Override
     protected void katiEntityUpdatedAndLogin() {
-        this.getUserData(this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION));
+//        this.getUserData(this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION));
     }
 
     @Override
@@ -79,47 +79,47 @@ public class EditDataFragment extends KatiLoginCheckViewModelFragment {
 
 
 
-    private class ReadUserDataCallBack extends SimpleLoginRetrofitCallBack<UserInfoResponse> {
-        public ReadUserDataCallBack(Activity activity) {
-            super(activity);
-        }
+//    private class ReadUserDataCallBack extends SimpleLoginRetrofitCallBack<UserInfoResponse> {
+//        public ReadUserDataCallBack(Activity activity) {
+//            super(activity);
+//        }
+//
+//        @Override
+//        public void onSuccessResponse(Response<UserInfoResponse> response) {
+//            UserInfoResponse userInfo = response.body();
+//            nameEditText.setHint(userInfo.getName());
+//            if (userInfo.getBirth() == null)
+//                birthEditText.setHint(BASIC_DATE_FORMAT);
+//            else
+//                birthEditText.setHint(userInfo.getBirth());
+//            addressEditText.setHint(userInfo.getAddress() == null ? "" : userInfo.getAddress());
+//        }
+//    }
 
-        @Override
-        public void onSuccessResponse(Response<UserInfoResponse> response) {
-            UserInfoResponse userInfo = response.body();
-            nameEditText.setHint(userInfo.getName());
-            if (userInfo.getBirth() == null)
-                birthEditText.setHint(BASIC_DATE_FORMAT);
-            else
-                birthEditText.setHint(userInfo.getBirth());
-            addressEditText.setHint(userInfo.getAddress() == null ? "" : userInfo.getAddress());
-        }
-    }
+//    private class ModifyUserDataCallBack extends SimpleLoginRetrofitCallBack<UserInfoResponse> {
+//        public ModifyUserDataCallBack(Activity activity) {
+//            super(activity);
+//        }
+//
+//        @Override
+//        public void onSuccessResponse(Response<UserInfoResponse> response) {
+//            successful = true;
+//            showDialog(USER_MODIFY_SUCCESS_DIALOG_TITLE,USER_MODIFY_SUCCESS_DIALOG_MESSAGE,(dialog, which) -> startActivity(TempActivity.class));
+//        }
+//    }
 
-    private class ModifyUserDataCallBack extends SimpleLoginRetrofitCallBack<UserInfoResponse> {
-        public ModifyUserDataCallBack(Activity activity) {
-            super(activity);
-        }
+//    private void getUserData(String header) {
+//        KatiRetrofitTool.getAPIWithAuthorizationToken(header).getUserInfo().enqueue(JSHRetrofitTool.getCallback(new ReadUserDataCallBack(getActivity())));
+//    }
 
-        @Override
-        public void onSuccessResponse(Response<UserInfoResponse> response) {
-            successful = true;
-            showDialog(USER_MODIFY_SUCCESS_DIALOG_TITLE,USER_MODIFY_SUCCESS_DIALOG_MESSAGE,(dialog, which) -> startActivity(TempActivity.class));
-        }
-    }
-
-    private void getUserData(String header) {
-        KatiRetrofitTool.getAPIWithAuthorizationToken(header).getUserInfo().enqueue(JSHRetrofitTool.getCallback(new ReadUserDataCallBack(getActivity())));
-    }
-
-    private void modifyUserData(String header) {
-        String name = !nameEditText.getText().toString().equals("") ? nameEditText.getText().toString() : nameEditText.getHint().toString();
-        String birth = !birthEditText.getText().toString().equals("") ? LocalDate.parse(birthEditText.getText().toString()).format(DateTimeFormatter.ISO_DATE) :
-                !birthEditText.getHint().toString().equals(BASIC_DATE_FORMAT) ? LocalDate.parse(birthEditText.getHint().toString()).format(DateTimeFormatter.ISO_DATE) : null;
-        String address = !addressEditText.getText().toString().equals("") ? addressEditText.getText().toString() : addressEditText.getHint().toString();
-        UserInfoModifyRequest request = new UserInfoModifyRequest(name, birth, address);
-
-        KatiRetrofitTool.getAPIWithAuthorizationToken(header).modifyUserInfo(request).enqueue(JSHRetrofitTool.getCallback(new ModifyUserDataCallBack(getActivity())));
-    }
+//    private void modifyUserData(String header) {
+//        String name = !nameEditText.getText().toString().equals("") ? nameEditText.getText().toString() : nameEditText.getHint().toString();
+//        String birth = !birthEditText.getText().toString().equals("") ? LocalDate.parse(birthEditText.getText().toString()).format(DateTimeFormatter.ISO_DATE) :
+//                !birthEditText.getHint().toString().equals(BASIC_DATE_FORMAT) ? LocalDate.parse(birthEditText.getHint().toString()).format(DateTimeFormatter.ISO_DATE) : null;
+//        String address = !addressEditText.getText().toString().equals("") ? addressEditText.getText().toString() : addressEditText.getHint().toString();
+//        UserInfoModifyRequest request = new UserInfoModifyRequest(name, birth, address);
+//
+//        KatiRetrofitTool.getAPIWithAuthorizationToken(header).modifyUserInfo(request).enqueue(JSHRetrofitTool.getCallback(new ModifyUserDataCallBack(getActivity())));
+//    }
 }
 

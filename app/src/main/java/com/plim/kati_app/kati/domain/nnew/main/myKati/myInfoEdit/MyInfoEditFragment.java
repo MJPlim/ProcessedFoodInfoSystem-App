@@ -1,53 +1,57 @@
 package com.plim.kati_app.kati.domain.nnew.main.myKati.myInfoEdit;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.plim.kati_app.R;
-import com.plim.kati_app.kati.crossDomain.domain.model.Constant;
+import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
-import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiViewModelFragment;
+import com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHInfoItem;
+import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiInfoEditFragment;
+import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
+import com.plim.kati_app.kati.domain.nnew.editName.EditAddressActivity;
+import com.plim.kati_app.kati.domain.nnew.editName.EditBirthActivity;
 import com.plim.kati_app.kati.domain.nnew.editName.EditNameActivity;
+import com.plim.kati_app.kati.domain.nnew.editName.EditSingleActivity;
 import com.plim.kati_app.kati.domain.nnew.editPassword.EditPasswordActivity;
 import com.plim.kati_app.kati.domain.nnew.setRestoreEmail.SetRestoreEmailActivity;
 import com.plim.kati_app.kati.domain.nnew.signOut.SignOutActivity;
-
-import org.jetbrains.annotations.NotNull;
+import com.plim.kati_app.kati.domain.old.dataChange.model.UserInfoResponse;
 
 import java.util.Vector;
+
+import retrofit2.Response;
 
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.LOG_OUT_ACTIVITY_FAILURE_DIALOG_MESSAGE;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.LOG_OUT_ACTIVITY_FAILURE_DIALOG_TITLE;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_MESSAGE;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_TITLE;
+import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.NO_ADDRESS_DATA;
+import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.NO_BIRTH_DATA;
 
-public class MyInfoEditFragment extends KatiViewModelFragment {
+public class MyInfoEditFragment extends KatiInfoEditFragment {
 
     //component
     //view
-    private Button editPasswordButton, editNameButton, editRestoreEmailButton;
+    private Button editRestoreEmailButton, editPasswordButton, editNameButton, changeAddressButton, changeBirthButton;
+    private JSHInfoItem restoreEmailItem, editPasswordItem, changeNameItem, changeAddressItem, changeBirthItem;
     private TextView logOut, signOut;
 
     private Vector<KatiDialog> dialogs;
 
     public MyInfoEditFragment() {
-        this.dialogs= new Vector<>();
+        this.dialogs = new Vector<>();
     }
 
     @Override
     public void onDestroy() {
-        for(KatiDialog dialog:dialogs){
+        for (KatiDialog dialog : dialogs) {
             dialog.dismiss();
             dialogs.remove(dialog);
         }
@@ -64,6 +68,14 @@ public class MyInfoEditFragment extends KatiViewModelFragment {
         this.editPasswordButton = view.findViewById(R.id.myInfoEditFragment_editPasswordButton);
         this.editNameButton = view.findViewById(R.id.myInfoEditFragment_editNameButton);
         this.editRestoreEmailButton = view.findViewById(R.id.myInfoEditFragment_restoreEmailButton);
+        this.changeAddressButton = view.findViewById(R.id.myInfoEditFragment_changeAddressButton);
+        this.changeBirthButton = view.findViewById(R.id.myInfoEditFragment_changeBirthButton);
+
+        this.restoreEmailItem = view.findViewById(R.id.myInfoEditFragment_restoreEmailItem);
+        this.editPasswordItem = view.findViewById(R.id.myInfoEditFragment_editPasswordItem);
+        this.changeNameItem = view.findViewById(R.id.myInfoEditFragment_changeNameItem);
+        this.changeAddressItem = view.findViewById(R.id.myInfoEditFragment_changeAddressItem);
+        this.changeBirthItem = view.findViewById(R.id.myInfoEditFragment_changeBirthItem);
 
         this.logOut = view.findViewById(R.id.myInfoEditFragment_logOutTextView);
         this.signOut = view.findViewById(R.id.myInfoEditFragment_signOutTextView);
@@ -71,17 +83,62 @@ public class MyInfoEditFragment extends KatiViewModelFragment {
 
     @Override
     protected void initializeView() {
-        editPasswordButton.setOnClickListener(v -> this.getActivity().startActivity(new Intent(this.getContext(), EditPasswordActivity.class)));
-        editNameButton.setOnClickListener(v -> this.getActivity().startActivity(new Intent(this.getContext(), EditNameActivity.class)));
-        editRestoreEmailButton.setOnClickListener(v -> this.getActivity().startActivity(new Intent(this.getContext(), SetRestoreEmailActivity.class)));
+        this.editPasswordButton.setOnClickListener(v -> this.getActivity().startActivity(new Intent(this.getContext(), EditPasswordActivity.class)));
+       this.editRestoreEmailButton.setOnClickListener(v -> this.getActivity().startActivity(new Intent(this.getContext(), SetRestoreEmailActivity.class)));
+
+
+        this.editNameButton.setOnClickListener(v -> this.moveActivity(EditNameActivity.class));
+        this.changeAddressButton.setOnClickListener(v->this.moveActivity(EditAddressActivity.class));
+        this.changeBirthButton.setOnClickListener(v->this.moveActivity(EditBirthActivity.class));
+
 
         this.logOut.setOnClickListener(v -> this.logOut());
         this.signOut.setOnClickListener(v -> this.getActivity().startActivity(new Intent(this.getContext(), SignOutActivity.class)));
     }
 
-    @Override
-    protected void katiEntityUpdated() {
+    private void moveActivity(Class activity){
+        Intent intent= new Intent(this.getActivity(),activity);
+        intent.putExtra("name",this.userInfoResponse.getName());
+        intent.putExtra("address",this.userInfoResponse.getAddress());
+        intent.putExtra("birth",this.userInfoResponse.getBirth());
+        this.startActivity(intent);
+    }
 
+
+    @Override
+    protected boolean isLoginNeeded() {
+        return true;
+    }
+
+    @Override
+    protected void katiEntityUpdatedAndLogin() {
+        this.getUserData(this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION));
+    }
+
+    @Override
+    public void infoModelDataUpdated() {
+        this.changeNameItem.setContentText(this.userInfoResponse.getName());
+        this.changeBirthItem.setContentText(this.userInfoResponse.getBirth() == null ? NO_BIRTH_DATA : this.userInfoResponse.getBirth());
+        this.changeAddressItem.setContentText(this.userInfoResponse.getAddress() == null ? NO_ADDRESS_DATA : this.userInfoResponse.getAddress());
+
+    }
+
+
+    private class ReadUserDataCallBack extends SimpleLoginRetrofitCallBack<UserInfoResponse> {
+        public ReadUserDataCallBack(Activity activity) {
+            super(activity);
+        }
+
+        @Override
+        public void onSuccessResponse(Response<UserInfoResponse> response) {
+            userInfoResponse = response.body();
+            Log.d("디버그--정보",userInfoResponse.getName());
+            saveInfo();
+        }
+    }
+
+    private void getUserData(String header) {
+        KatiRetrofitTool.getAPIWithAuthorizationToken(header).getUserInfo().enqueue(JSHRetrofitTool.getCallback(new ReadUserDataCallBack(getActivity())));
     }
 
     private void logOut() {
@@ -97,11 +154,11 @@ public class MyInfoEditFragment extends KatiViewModelFragment {
     }
 
     public void showOkDialog() {
-        this.dialogs.add(this.showDialog(LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_TITLE, LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_MESSAGE,null));
+        this.dialogs.add(this.showDialog(LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_TITLE, LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_MESSAGE, null));
     }
 
     public void showNoDialog() {
-        this.dialogs.add(this.showDialog(LOG_OUT_ACTIVITY_FAILURE_DIALOG_TITLE, LOG_OUT_ACTIVITY_FAILURE_DIALOG_MESSAGE,null));
+        this.dialogs.add(this.showDialog(LOG_OUT_ACTIVITY_FAILURE_DIALOG_TITLE, LOG_OUT_ACTIVITY_FAILURE_DIALOG_MESSAGE, null));
     }
 
 

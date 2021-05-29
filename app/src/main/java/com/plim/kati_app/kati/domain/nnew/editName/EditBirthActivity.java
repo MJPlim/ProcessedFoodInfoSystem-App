@@ -6,10 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.plim.kati_app.R;
 
-public class EditNameActivity extends EditSingleActivity {
+public class EditBirthActivity extends EditSingleActivity {
 
     @Override
     protected EditMode getEditMode() {
-        return EditMode.name;
+        return EditMode.birth;
     }
 }

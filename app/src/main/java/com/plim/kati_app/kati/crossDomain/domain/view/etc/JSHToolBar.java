@@ -44,4 +44,8 @@ public class JSHToolBar extends LinearLayout {
     public void setToolBarOnClickListener(OnClickListener listener){
         this.button.setOnClickListener(listener);
     }
+
+    public void setToolBarTitle(String title){
+        this.title.setText(title);
+    }
 }

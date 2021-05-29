@@ -8,11 +8,14 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserInfoResponse {
-    @SerializedName("address")
     private String address;
-    @SerializedName("birth")
     private String birth;
-    @SerializedName("name")
     private String name;
+
+    public UserInfoResponse(){
+        this.address="";
+        this.birth="";
+        this.name="";
+    }
 
 }

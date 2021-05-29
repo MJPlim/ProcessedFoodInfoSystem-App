@@ -23,6 +23,9 @@ public class Constant { // ㅎㅎ Resource 로 옮겨조...
     public static final String KATI_DIALOG_NO = "아니오";
 
     public static final String BASIC_DATE_FORMAT = "YYYY-MM-dd";
+    public static final String NO_BIRTH_DATA = "아직 생일이 설정되지 않았습니다.";
+    public static final String NO_ADDRESS_DATA = "아직 생일이 설정되지 않았습니다.";
+//    public static final String NO = "아직 생일이 설정되지 않았습니다.";
 
     public static final String ABSTRACT_TABLE_FRAGMENT_LARGE = "펼치기>";
     public static final String ABSTRACT_TABLE_FRAGMENT_SMALL = "접기>";

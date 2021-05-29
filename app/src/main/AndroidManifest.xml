@@ -25,11 +25,13 @@
         <activity android:name=".kati.domain.nnew.review.ReviewActivity" />
         <activity android:name=".kati.domain.nnew.setRestoreEmail.SetRestoreEmailActivity" />
         <activity android:name=".kati.domain.nnew.findId.FindIdActivity" />
-        <activity android:name=".kati.domain.nnew.editName.EditNameActivity" />
+        <activity android:name=".kati.domain.nnew.editName.EditSingleActivity" />
         <activity android:name=".kati.domain.nnew.findPassword.FindPasswordActivity" />
         <activity android:name=".kati.domain.nnew.login.LoginActivity" />
         <activity android:name=".kati.domain.nnew.signOut.SignOutActivity" />
-        <activity android:name=".kati.domain.nnew.signOut.SignOutActivity" />
+        <activity android:name=".kati.domain.nnew.editName.EditNameActivity" />
+        <activity android:name=".kati.domain.nnew.editName.EditBirthActivity" />
+        <activity android:name=".kati.domain.nnew.editName.EditAddressActivity" />
         <activity
             android:name=".kati.domain.nnew.editPassword.EditPasswordActivity"
             android:label="@string/title_activity_password_edit"
