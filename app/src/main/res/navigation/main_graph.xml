@@ -43,7 +43,7 @@
         tools:layout="@layout/fragment_allergy" />
     <fragment
         android:id="@+id/favoriteFragment"
-        android:name="com.plim.kati_app.kati.domain.nnew.main.favorite.FavoriteFragment"
+        android:name="com.plim.kati_app.kati.domain.nnew.main.favorite.view.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />
     <action android:id="@+id/action_global_myKatiFragment" app:destination="@id/myKatiFragment" />

@@ -1,4 +1,4 @@
-package com.plim.kati_app.kati.domain.old.barcode.model;
+package com.plim.kati_app.kati.domain.nnew.main.search.barcode.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

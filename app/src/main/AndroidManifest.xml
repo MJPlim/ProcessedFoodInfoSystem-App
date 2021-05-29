@@ -32,8 +32,14 @@
         <activity android:name=".kati.domain.nnew.editName.EditNameActivity" />
         <activity android:name=".kati.domain.nnew.editName.EditBirthActivity" />
         <activity android:name=".kati.domain.nnew.editName.EditAddressActivity" />
+        <activity android:name=".kati.domain.nnew.main.search.barcode.view.BarcodeActivity"/>
         <activity
-            android:name=".kati.domain.nnew.editPassword.EditPasswordActivity"
+            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+            android:screenOrientation="portrait"
+            android:stateNotNeeded="true"
+            tools:replace="android:screenOrientation"></activity>
+        <activity
+            android:name=".kati.domain.nnew.editPassword.view.EditPasswordActivity"
             android:label="@string/title_activity_password_edit"
             android:theme="@style/Theme.KatiUI.NoActionBar" />
         <activity

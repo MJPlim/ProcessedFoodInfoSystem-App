@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.ImageView;
@@ -34,6 +35,7 @@ import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRestAPI;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBackImpl;
 import com.plim.kati_app.kati.domain.nnew.itemRank.model.ItemRankingResponse;
+import com.plim.kati_app.kati.domain.nnew.main.search.barcode.view.BarcodeActivity;
 
 import org.jetbrains.annotations.NotNull;
 import org.w3c.dom.Text;
@@ -54,7 +56,7 @@ public class SearchFragment extends KatiSearchFragment {
     private EditText searchFieldEditText;
     private TextView deleteTextView;
     private ImageView deleteIcon;
-
+    private ImageView barcodeSearchButton;
     private ConstraintLayout recentSearchWordLayout;
     private GridLayout rankGridLayout;
 
@@ -74,7 +76,7 @@ public class SearchFragment extends KatiSearchFragment {
     @Override
     protected void associateView(View view) {
         this.recentSearchedChipGroup = view.findViewById(R.id.searchFragment_recentSearchWordChipGroup);
-
+        this.barcodeSearchButton = view.findViewById(R.id.searchFragment_barcodeSearchIcon);
         this.searchFieldEditText = view.findViewById(R.id.searchFragment_searchFieldEditText);
         this.deleteTextView = view.findViewById(R.id.searchFragment_deleteTextView);
         this.deleteIcon = view.findViewById(R.id.searchFragment_deleteIcon);
@@ -86,6 +88,7 @@ public class SearchFragment extends KatiSearchFragment {
 
     @Override
     protected void initializeView() {
+        this.barcodeSearchButton.setOnClickListener(v->this.barcodeSearch());
         this.searchFieldEditText.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 this.doSearchStart(v);
@@ -111,7 +114,9 @@ public class SearchFragment extends KatiSearchFragment {
 
         this.loadRank();
     }
-
+    private void barcodeSearch() {
+        startActivity(BarcodeActivity.class);
+    }
     @Override
     protected void katiEntityUpdated() {
         this.loadRecentSearchedWords();

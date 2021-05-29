@@ -2,6 +2,7 @@ package com.plim.kati_app.kati.crossDomain.tech.retrofit;
 
 import com.plim.kati_app.kati.domain.nnew.findId.model.FindEmailRequest;
 import com.plim.kati_app.kati.domain.nnew.findId.model.FindEmailResponse;
+import com.plim.kati_app.kati.domain.nnew.main.favorite.model.UserFavoriteResponse;
 import com.plim.kati_app.kati.domain.nnew.setRestoreEmail.model.SetSecondEmailRequest;
 import com.plim.kati_app.kati.domain.nnew.setRestoreEmail.model.SetSecondEmailResponse;
 import com.plim.kati_app.kati.domain.nnew.editPassword.model.ModifyPasswordRequest;
@@ -12,7 +13,6 @@ import com.plim.kati_app.kati.domain.nnew.findPassword.model.FindPasswordRespons
 import com.plim.kati_app.kati.domain.nnew.signUp.model.SignUpRequest;
 import com.plim.kati_app.kati.domain.nnew.signUp.model.SignUpResponse;
 import com.plim.kati_app.kati.domain.old.mypage.main.model.UserSummaryResponse;
-import com.plim.kati_app.kati.domain.old.mypage.myFavorite.model.UserFavoriteResponse;
 import com.plim.kati_app.kati.domain.old.mypage.myReview.model.ReadReviewResponse;
 import com.plim.kati_app.kati.domain.old.search.foodInfo.model.FoodDetailResponse;
 import com.plim.kati_app.kati.domain.old.model.CreateAndUpdateReviewRequest;

@@ -23,6 +23,8 @@ public class FoodDetailResponse {
     private String nutrient; //영양성분
     private String allergyMaterials; //알레르기 유발물질
     private Long viewCount; //조회수
+    private Integer reviewCount; // 리뷰수
+    private String reviewRate; // 별점
 
 //    private final List<Review> reviewList;
 //    private final List<Favorite> favoriteList;

@@ -1,7 +1,8 @@
-package com.plim.kati_app.kati.domain.old.barcode.view;
+package com.plim.kati_app.kati.domain.nnew.main.search.barcode.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,7 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.plim.kati_app.R;
-import com.plim.kati_app.kati.domain.old.search.foodInfo.view.FoodInfoActivity;
+import com.plim.kati_app.kati.domain.nnew.foodDetail.FoodDetailActivity;
+
 
 public class BarcodeActivity extends AppCompatActivity {
     @Override
@@ -26,7 +28,7 @@ public class BarcodeActivity extends AppCompatActivity {
         if(result != null) {
             if(result.getContents() == null) { Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show(); }
             else {
-                Intent intent = new Intent(this, FoodInfoActivity.class);
+                Intent intent = new Intent(this, FoodDetailActivity.class);
                 intent.putExtra("barcode",result.getContents());
                 startActivity(intent);
             }

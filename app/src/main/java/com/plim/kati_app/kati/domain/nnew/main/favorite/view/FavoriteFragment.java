@@ -1,5 +1,7 @@
-package com.plim.kati_app.kati.domain.old.mypage.myFavorite.view;
+package com.plim.kati_app.kati.domain.nnew.main.favorite.view;
 
+import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,9 +17,9 @@ import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.LoadingDialog;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiViewModelFragment;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
+import com.plim.kati_app.kati.domain.nnew.login.LoginActivity;
 import com.plim.kati_app.kati.domain.nnew.main.favorite.adapter.UserFavoriteFoodRecyclerAdapter;
 import com.plim.kati_app.kati.domain.nnew.main.favorite.model.UserFavoriteResponse;
-
 
 import org.json.JSONObject;
 
@@ -26,30 +28,24 @@ import java.util.Vector;
 
 import retrofit2.Response;
 
-
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE;
+import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.LOG_OUT_ACTIVITY_FAILURE_DIALOG_TITLE;
 
-
-/**
- * 마이페이지 즐겨찾기 프래그먼트.
- *
- */
-public class UserFavoriteFragment extends KatiViewModelFragment {
+public class FavoriteFragment extends KatiViewModelFragment {
     private TextView favoriteNum;
     private RecyclerView foodInfoRecyclerView;
     private UserFavoriteFoodRecyclerAdapter foodRecyclerAdapter;
     private LoadingDialog dialog;
 
-
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_mypage_favorite_food_list;
+        return R.layout.fragment_favorite;
     }
 
     @Override
     protected void associateView(View view) {
-        this.foodInfoRecyclerView = view.findViewById(R.id.myPage_foodInfoRecyclerView);
-        this.favoriteNum=view.findViewById(R.id.myPage_favorite_num);
+        this.foodInfoRecyclerView = view.findViewById(R.id.favorite_list);
+        this.favoriteNum=view.findViewById(R.id.favorite_count);
     }
 
     @Override
@@ -59,7 +55,6 @@ public class UserFavoriteFragment extends KatiViewModelFragment {
         this.foodInfoRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         this.foodInfoRecyclerView.setAdapter(this.foodRecyclerAdapter);
         this.getUserFavorite();
-
     }
 
     @Override
@@ -68,9 +63,12 @@ public class UserFavoriteFragment extends KatiViewModelFragment {
     }
 
     private void getUserFavorite() {
+
         KatiRetrofitTool.getAPIWithAuthorizationToken(dataset.get(KatiEntity.EKatiData.AUTHORIZATION)).getUserFavorite()
                 .enqueue(JSHRetrofitTool.getCallback(new UserFavoriteResponseCallback()));
     }
+
+
 
     private class UserFavoriteResponseCallback implements JSHRetrofitCallback<List<UserFavoriteResponse>> {
         @Override
@@ -79,13 +77,14 @@ public class UserFavoriteFragment extends KatiViewModelFragment {
             dialog.hide();
             foodRecyclerAdapter.setItems(items);
             foodInfoRecyclerView.setAdapter(foodRecyclerAdapter);
-            favoriteNum.setText("총 "+items.size()+"개");
+            favoriteNum.setText(String.valueOf(items.size()));
         }
         @Override
         public void onFailResponse(Response<List<UserFavoriteResponse>> response) {
             try {
                 JSONObject jObjError = new JSONObject(response.errorBody().string());
                 Toast.makeText(getContext(), jObjError.getString("error-message"), Toast.LENGTH_LONG).show();
+                showNotLoginedDialog();
             } catch (Exception e) {
                 Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
             }
@@ -98,5 +97,15 @@ public class UserFavoriteFragment extends KatiViewModelFragment {
             );
         }
     }
+
+
+
+    private void showNotLoginedDialog() {
+        navigateTo(R.id.action_global_mainFragment);
+        this.getActivity().startActivity(new Intent(this.getContext(), LoginActivity.class));
+
+    }
+
+
 
 }
