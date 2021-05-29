@@ -12,8 +12,6 @@ import com.plim.kati_app.kati.domain.nnew.findPassword.model.FindPasswordRequest
 import com.plim.kati_app.kati.domain.nnew.findPassword.model.FindPasswordResponse;
 import com.plim.kati_app.kati.domain.nnew.signUp.model.SignUpRequest;
 import com.plim.kati_app.kati.domain.nnew.signUp.model.SignUpResponse;
-import com.plim.kati_app.kati.domain.old.mypage.main.model.UserSummaryResponse;
-import com.plim.kati_app.kati.domain.old.mypage.myReview.model.ReadReviewResponse;
 import com.plim.kati_app.kati.domain.old.search.foodInfo.model.FoodDetailResponse;
 import com.plim.kati_app.kati.domain.old.model.CreateAndUpdateReviewRequest;
 import com.plim.kati_app.kati.domain.old.model.CreateReviewResponse;
@@ -159,8 +157,7 @@ public interface KatiRestAPI {
     @GET("/api/v1/advertisement/foodDetail") Call<FoodDetailResponse> getAdvertisementFoodDetail(@Query("adId") Long adId);
     @GET("api/v1/advertisement/ads") Call<List<AdvertisementResponse>> getAdvertisementFoodList();
     @GET("reviewRanking") Call<List<ItemRankingResponse>> getRankingList();
-    @GET("/api/v1/user/summary") Call<UserSummaryResponse> getUserSummary();
     @GET("/api/v1/user/favorite/list") Call<List<UserFavoriteResponse>> getUserFavorite();
-    @GET("/api/v1/user/readReviewByUserID") Call<List<ReadReviewResponse>> getUserReview();
+
 }
 

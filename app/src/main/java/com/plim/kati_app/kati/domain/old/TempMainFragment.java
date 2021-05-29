@@ -13,7 +13,7 @@ import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBackIm
 import com.plim.kati_app.kati.domain.nnew.login.LoginActivity;
 //import com.plim.kati_app.kati.domain.old.changePW.view.ChangePasswordActivity;
 import com.plim.kati_app.kati.domain.nnew.login.model.LoginResponse;
-import com.plim.kati_app.kati.domain.old.mypage.main.view.UserMyPageActivity;
+
 import com.plim.kati_app.kati.domain.old.temp.TempActivity;
 import com.plim.kati_app.kati.domain.nnew.itemRank.view.RankingActivity;
 
@@ -34,7 +34,7 @@ public class TempMainFragment extends KatiViewModelFragment {
 //        view.findViewById(R.id.mainActivity_searchTestButton).setOnClickListener(v -> this.startActivity(FoodSearchTextActivity.class));
 //        view.findViewById(R.id.mainActivity_changePWButton).setOnClickListener(v -> this.startActivity(ChangePasswordActivity.class));
         view.findViewById(R.id.mainActivity_RankingTestButton).setOnClickListener(v -> this.startActivity(RankingActivity.class));
-        view.findViewById(R.id.mainActivity_myPageTestButton).setOnClickListener(v -> this.startActivity(UserMyPageActivity.class));
+
 
     }
 
