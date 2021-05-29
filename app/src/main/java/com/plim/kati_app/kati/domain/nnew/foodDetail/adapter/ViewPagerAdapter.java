@@ -1,4 +1,4 @@
-package com.plim.kati_app.kati.domain.nnew.foodDetail;
+package com.plim.kati_app.kati.domain.nnew.foodDetail.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +12,10 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+
+import com.plim.kati_app.kati.domain.nnew.foodDetail.ExtraInfoFragment;
+import com.plim.kati_app.kati.domain.nnew.foodDetail.FoodInfoFragment;
+import com.plim.kati_app.kati.domain.nnew.foodDetail.ReviewFragment;
 
 import org.jetbrains.annotations.NotNull;
 

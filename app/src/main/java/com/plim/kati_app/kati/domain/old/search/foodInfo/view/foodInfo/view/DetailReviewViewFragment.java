@@ -118,6 +118,11 @@ public class DetailReviewViewFragment extends KatiFoodFragment {
         } else this.getReviews();
     }
 
+    @Override
+    protected void summaryDataUpdated() {
+
+    }
+
     private void deleteReview(String token, Long reviewId) {
         DeleteReviewRequest request = new DeleteReviewRequest(reviewId);
         KatiRetrofitTool.getAPIWithAuthorizationToken(token).deleteReview(request).enqueue(JSHRetrofitTool.getCallback(new DeleteReviewCallback(getActivity())));

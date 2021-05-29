@@ -11,7 +11,7 @@ public class ReadSummaryResponse{
     private int fourCount;
     private int fiveCount;
     private long sumRating;
-    private float avgRating;
+    private float avgRating=0f;
     private int reviewCount;
     private int reviewPageCount;
 }

@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/summary"
+    android:id="@+id/reviewFragment_summary"
     android:layout_width="match_parent"
     android:layout_height="140dp"
     android:background="@color/white"
@@ -10,193 +10,193 @@
     app:layout_constraintTop_toTopOf="parent">
 
     <ProgressBar
-        android:id="@+id/progressBar11"
+        android:id="@+id/reviewSummaryWidget_firstProgressBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
         android:progress="0"
         android:progressTint="@color/kati_orange"
-        app:layout_constraintBottom_toBottomOf="@+id/textView41"
-        app:layout_constraintEnd_toStartOf="@+id/textView40"
-        app:layout_constraintStart_toEndOf="@+id/textView41"
-        app:layout_constraintTop_toTopOf="@+id/textView41" />
+        app:layout_constraintBottom_toBottomOf="@+id/reviewSummaryWidget_firstTitleTextView"
+        app:layout_constraintEnd_toStartOf="@+id/reviewSummaryWidget_firstValueTextView"
+        app:layout_constraintStart_toEndOf="@+id/reviewSummaryWidget_firstTitleTextView"
+        app:layout_constraintTop_toTopOf="@+id/reviewSummaryWidget_firstTitleTextView" />
 
     <TextView
-        android:id="@+id/textView41"
+        android:id="@+id/reviewSummaryWidget_firstTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
         android:text="1점"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView19"
-        app:layout_constraintTop_toBottomOf="@+id/textView39" />
+        app:layout_constraintStart_toEndOf="@+id/reviewSummaryWidget_ratingTextView"
+        app:layout_constraintTop_toBottomOf="@+id/reviewSummaryWidget_secondTitleTextView" />
 
     <TextView
-        android:id="@+id/textView40"
+        android:id="@+id/reviewSummaryWidget_firstValueTextView"
         android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:text="0"
         android:layout_marginRight="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView38" />
+        app:layout_constraintTop_toBottomOf="@+id/reviewSummaryWidget_secondValueTextView" />
 
     <ProgressBar
-        android:id="@+id/progressBar10"
+        android:id="@+id/reviewSummaryWidget_secondProgressBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="0dp"
         android:layout_height="16dp"
         android:layout_marginHorizontal="8dp"
         android:progress="0"
         android:progressTint="@color/kati_orange"
-        app:layout_constraintBottom_toBottomOf="@+id/textView39"
-        app:layout_constraintEnd_toStartOf="@+id/textView38"
-        app:layout_constraintStart_toEndOf="@+id/textView39"
-        app:layout_constraintTop_toTopOf="@+id/textView39" />
+        app:layout_constraintBottom_toBottomOf="@+id/reviewSummaryWidget_secondTitleTextView"
+        app:layout_constraintEnd_toStartOf="@+id/reviewSummaryWidget_secondValueTextView"
+        app:layout_constraintStart_toEndOf="@+id/reviewSummaryWidget_secondTitleTextView"
+        app:layout_constraintTop_toTopOf="@+id/reviewSummaryWidget_secondTitleTextView" />
 
     <TextView
-        android:id="@+id/textView39"
+        android:id="@+id/reviewSummaryWidget_secondTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
         android:text="2점"
-        app:layout_constraintBottom_toTopOf="@+id/textView41"
-        app:layout_constraintStart_toEndOf="@+id/textView19"
-        app:layout_constraintTop_toBottomOf="@+id/textView37" />
+        app:layout_constraintBottom_toTopOf="@+id/reviewSummaryWidget_firstTitleTextView"
+        app:layout_constraintStart_toEndOf="@+id/reviewSummaryWidget_ratingTextView"
+        app:layout_constraintTop_toBottomOf="@+id/reviewSummaryWidget_thirdTitleTextView" />
 
     <TextView
-        android:id="@+id/textView38"
+        android:id="@+id/reviewSummaryWidget_secondValueTextView"
         android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:text="0"
         android:layout_marginRight="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView40"
+        app:layout_constraintBottom_toTopOf="@+id/reviewSummaryWidget_firstValueTextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView36" />
+        app:layout_constraintTop_toBottomOf="@+id/reviewSummaryWidget_thirdValueTextView" />
 
     <ProgressBar
-        android:id="@+id/progressBar9"
+        android:id="@+id/reviewSummaryWidget_thirdProgressBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
         android:progress="0"
         android:progressTint="@color/kati_orange"
-        app:layout_constraintBottom_toBottomOf="@+id/textView37"
-        app:layout_constraintEnd_toStartOf="@+id/textView36"
-        app:layout_constraintStart_toEndOf="@+id/textView37"
-        app:layout_constraintTop_toTopOf="@+id/textView37" />
+        app:layout_constraintBottom_toBottomOf="@+id/reviewSummaryWidget_thirdTitleTextView"
+        app:layout_constraintEnd_toStartOf="@+id/reviewSummaryWidget_thirdValueTextView"
+        app:layout_constraintStart_toEndOf="@+id/reviewSummaryWidget_thirdTitleTextView"
+        app:layout_constraintTop_toTopOf="@+id/reviewSummaryWidget_thirdTitleTextView" />
 
     <TextView
-        android:id="@+id/textView37"
+        android:id="@+id/reviewSummaryWidget_thirdTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
         android:text="3점"
-        app:layout_constraintBottom_toTopOf="@+id/textView39"
-        app:layout_constraintStart_toEndOf="@+id/textView19"
-        app:layout_constraintTop_toBottomOf="@+id/textView34" />
+        app:layout_constraintBottom_toTopOf="@+id/reviewSummaryWidget_secondTitleTextView"
+        app:layout_constraintStart_toEndOf="@+id/reviewSummaryWidget_ratingTextView"
+        app:layout_constraintTop_toBottomOf="@+id/reviewSummaryWidget_fourthTitleTextView" />
 
     <TextView
-        android:id="@+id/textView36"
+        android:id="@+id/reviewSummaryWidget_thirdValueTextView"
         android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:text="0"
         android:layout_marginRight="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView38"
+        app:layout_constraintBottom_toTopOf="@+id/reviewSummaryWidget_secondValueTextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView35" />
+        app:layout_constraintTop_toBottomOf="@+id/reviewSummaryWidget_fourthValueTextView" />
 
     <ProgressBar
-        android:id="@+id/progressBar8"
+        android:id="@+id/reviewSummaryWidget_fourthProgressBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
         android:progress="0"
         android:progressTint="@color/kati_orange"
-        app:layout_constraintBottom_toBottomOf="@+id/textView34"
-        app:layout_constraintEnd_toStartOf="@+id/textView35"
-        app:layout_constraintStart_toEndOf="@+id/textView34"
-        app:layout_constraintTop_toTopOf="@+id/textView34" />
+        app:layout_constraintBottom_toBottomOf="@+id/reviewSummaryWidget_fourthTitleTextView"
+        app:layout_constraintEnd_toStartOf="@+id/reviewSummaryWidget_fourthValueTextView"
+        app:layout_constraintStart_toEndOf="@+id/reviewSummaryWidget_fourthTitleTextView"
+        app:layout_constraintTop_toTopOf="@+id/reviewSummaryWidget_fourthTitleTextView" />
 
     <TextView
-        android:id="@+id/textView35"
+        android:id="@+id/reviewSummaryWidget_fourthValueTextView"
         android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:text="0"
         android:layout_marginRight="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView36"
+        app:layout_constraintBottom_toTopOf="@+id/reviewSummaryWidget_thirdValueTextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView21" />
+        app:layout_constraintTop_toBottomOf="@+id/reviewSummaryWidget_fifthValueTextView" />
 
     <TextView
-        android:id="@+id/textView34"
+        android:id="@+id/reviewSummaryWidget_fourthTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
         android:text="4점"
-        app:layout_constraintBottom_toTopOf="@+id/textView37"
-        app:layout_constraintStart_toEndOf="@+id/textView19"
-        app:layout_constraintTop_toBottomOf="@+id/textView20" />
+        app:layout_constraintBottom_toTopOf="@+id/reviewSummaryWidget_thirdTitleTextView"
+        app:layout_constraintStart_toEndOf="@+id/reviewSummaryWidget_ratingTextView"
+        app:layout_constraintTop_toBottomOf="@+id/reviewSummaryWidget_fifthTitleTextView" />
 
     <TextView
-        android:id="@+id/textView19"
+        android:id="@+id/reviewSummaryWidget_ratingTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="48dp"
         android:text="5.0"
         android:textColor="@color/black"
         android:textSize="40sp"
-        app:layout_constraintBottom_toTopOf="@+id/ratingBar3"
+        app:layout_constraintBottom_toTopOf="@+id/reviewSummaryWidget_ratingBar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <RatingBar
-        android:id="@+id/ratingBar3"
+        android:id="@+id/reviewSummaryWidget_ratingBar"
         style="@style/Widget.AppCompat.RatingBar.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:progressTint="@color/kati_orange"
         android:rating="5"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textView19"
-        app:layout_constraintStart_toStartOf="@+id/textView19"
-        app:layout_constraintTop_toBottomOf="@+id/textView19" />
+        app:layout_constraintEnd_toEndOf="@+id/reviewSummaryWidget_ratingTextView"
+        app:layout_constraintStart_toStartOf="@+id/reviewSummaryWidget_ratingTextView"
+        app:layout_constraintTop_toBottomOf="@+id/reviewSummaryWidget_ratingTextView" />
 
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/reviewSummaryWidget_fifthProgressBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
         android:progress="100"
         android:progressTint="@color/kati_orange"
-        app:layout_constraintBottom_toBottomOf="@+id/textView20"
-        app:layout_constraintEnd_toStartOf="@+id/textView21"
-        app:layout_constraintStart_toEndOf="@+id/textView20"
-        app:layout_constraintTop_toTopOf="@+id/textView20" />
+        app:layout_constraintBottom_toBottomOf="@+id/reviewSummaryWidget_fifthTitleTextView"
+        app:layout_constraintEnd_toStartOf="@+id/reviewSummaryWidget_fifthValueTextView"
+        app:layout_constraintStart_toEndOf="@+id/reviewSummaryWidget_fifthTitleTextView"
+        app:layout_constraintTop_toTopOf="@+id/reviewSummaryWidget_fifthTitleTextView" />
 
     <TextView
-        android:id="@+id/textView20"
+        android:id="@+id/reviewSummaryWidget_fifthTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
         android:text="5점"
-        app:layout_constraintBottom_toTopOf="@+id/textView34"
-        app:layout_constraintStart_toEndOf="@+id/textView19"
+        app:layout_constraintBottom_toTopOf="@+id/reviewSummaryWidget_fourthTitleTextView"
+        app:layout_constraintStart_toEndOf="@+id/reviewSummaryWidget_ratingTextView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView21"
+        android:id="@+id/reviewSummaryWidget_fifthValueTextView"
         android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:text="12"
         android:layout_marginRight="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView35"
+        app:layout_constraintBottom_toTopOf="@+id/reviewSummaryWidget_fourthValueTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

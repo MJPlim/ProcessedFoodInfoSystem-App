@@ -7,6 +7,8 @@ import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,19 +24,22 @@ import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiSearchFragment;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBackImpl;
+import com.plim.kati_app.kati.domain.nnew.foodDetail.FoodDetailActivity;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.allergy.AllergyFragment;
 import com.plim.kati_app.kati.domain.nnew.main.search.adapter.AdRecyclerAdapter;
 import com.plim.kati_app.kati.domain.nnew.main.search.adapter.FoodRecyclerAdapter;
 import com.plim.kati_app.kati.domain.nnew.main.search.model.AdvertisementResponse;
 import com.plim.kati_app.kati.domain.nnew.main.search.model.FindFoodBySortingResponse;
 import com.plim.kati_app.kati.domain.nnew.main.search.model.FoodResponse;
-import com.plim.kati_app.kati.domain.old.search.search.view.foodList.searchSetting.SearchSettingFragment;
 import com.plim.kati_app.kati.domain.old.temp.editData.allergy.model.ReadUserAllergyResponse;
 
 import java.util.List;
 import java.util.Vector;
 
 import retrofit2.Response;
+
+import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_FOOD_ID_EXTRA;
+import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.NEW_DETAIL_ACTIVITY_EXTRA_IS_AD;
 
 public class SearchResultFragment extends KatiSearchFragment {
 
@@ -58,8 +63,8 @@ public class SearchResultFragment extends KatiSearchFragment {
     private boolean isLoadingMore = false;
     private boolean hasNext = true;
 
-    public SearchResultFragment(){
-        this.vector= new Vector<>();
+    public SearchResultFragment() {
+        this.vector = new Vector<>();
     }
 
 
@@ -87,16 +92,16 @@ public class SearchResultFragment extends KatiSearchFragment {
 
     @Override
     protected void initializeView() {
-        this.adRecyclerAdapter = new AdRecyclerAdapter(this.getActivity());
-        this.foodRecyclerAdapter = new FoodRecyclerAdapter(this.getActivity());
+        this.adRecyclerAdapter = new AdRecyclerAdapter(this.getActivity(), v -> this.doClickOnAdItem(v));
+        this.foodRecyclerAdapter = new FoodRecyclerAdapter(this.getActivity(), v -> this.doClickOnFoodItem(v));
 
-        this.allergyFilterButton.setOnClickListener(v->navigateTo(R.id.action_searchResultFragment_to_allergyFragment));
+        this.allergyFilterButton.setOnClickListener(v -> navigateTo(R.id.action_searchResultFragment_to_allergyFragment));
 
         this.manufacturerChip.setOnCheckedChangeListener((buttonView, isChecked) -> this.doSort(isChecked, Constant.SortElement.MANUFACTURER));
         this.rankingChip.setOnCheckedChangeListener((buttonView, isChecked) -> this.doSort(isChecked, Constant.SortElement.RANK));
         this.reviewCountChip.setOnCheckedChangeListener((buttonView, isChecked) -> this.doSort(isChecked, Constant.SortElement.REVIEW_COUNT));
 
-        this.adRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext(),LinearLayoutManager.HORIZONTAL,false));
+        this.adRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false));
         this.adRecyclerView.setAdapter(this.foodRecyclerAdapter);
         this.adRecyclerView.setNestedScrollingEnabled(false);
 
@@ -129,7 +134,11 @@ public class SearchResultFragment extends KatiSearchFragment {
 
     @Override
     protected void katiEntityUpdatedAndNoLogin() {
-        this.allergyFilterButton.setEnabled(false);
+    this.allergyFilterButton.setEnabled(false);
+    }
+
+    @Override
+    public void foodModelDataUpdated() {
     }
 
 
@@ -142,8 +151,8 @@ public class SearchResultFragment extends KatiSearchFragment {
 
     @Override
     protected void searchModelDataUpdated() {
-        if (this.dataset!=null)
-        this.loadSearchResult();
+        if (this.dataset != null)
+            this.loadSearchResult();
     }
 
     private class ReadUserAllergyShowCallBack extends SimpleLoginRetrofitCallBack<ReadUserAllergyResponse> {
@@ -184,7 +193,7 @@ public class SearchResultFragment extends KatiSearchFragment {
             FindFoodBySortingResponse dto = response.body();
 
             hasNext = dto.isHas_next();
-            searchModel.setSearchPageNum(dto.getCurrent_page()+1);
+            searchModel.setSearchPageNum(dto.getCurrent_page() + 1);
 
             if (!isLoadingMore) vector.clear();
             vector.addAll(response.body().getData());
@@ -209,8 +218,7 @@ public class SearchResultFragment extends KatiSearchFragment {
         if (!this.isLoadingMore) this.vector.clear();
 
 
-
-        String token=this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION);
+        String token = this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION);
 
         if (this.searchModel.getSearchMode().equals(Constant.ESearchMode.제품.name())) {
             KatiRetrofitTool.getAPI().getNameFoodListBySorting(
@@ -249,7 +257,6 @@ public class SearchResultFragment extends KatiSearchFragment {
 
     private void setVector(Vector<String> allergyVector) {
         this.searchModel.setAllergyList(allergyVector);
-        this.saveSearch();
     }
 
 
@@ -257,5 +264,19 @@ public class SearchResultFragment extends KatiSearchFragment {
         KatiRetrofitTool.getAPIWithAuthorizationToken(token).readUserAllergy().
                 enqueue(JSHRetrofitTool.getCallback(new ReadUserAllergyShowCallBack(getActivity())));
         return this.searchModel.getAllergyList();
+    }
+
+    private void doClickOnAdItem(View v) {
+        Intent intent = new Intent(getActivity(), FoodDetailActivity.class);
+        intent.putExtra(DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_FOOD_ID_EXTRA, (Long) v.getTag());
+        intent.putExtra(NEW_DETAIL_ACTIVITY_EXTRA_IS_AD, true);
+        startActivity(intent);
+    }
+
+    private void doClickOnFoodItem(View v) {
+        Intent intent = new Intent(getActivity(), FoodDetailActivity.class);
+        intent.putExtra(DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_FOOD_ID_EXTRA, (Long) v.getTag());
+        intent.putExtra(NEW_DETAIL_ACTIVITY_EXTRA_IS_AD, false);
+        startActivity(intent);
     }
 }

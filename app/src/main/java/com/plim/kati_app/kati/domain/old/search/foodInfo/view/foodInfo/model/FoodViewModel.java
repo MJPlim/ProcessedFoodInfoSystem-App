@@ -11,8 +11,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class FoodViewModel extends ViewModel {
-    MutableLiveData<FoodDetailResponse> foodDetailResponse;
-    MutableLiveData<ReadSummaryResponse> readSummaryResponse;
+    private String barcode="";
+    private Long foodId=0L;
+    private boolean isAd=false;
+    private MutableLiveData<FoodDetailResponse> foodDetailResponse;
+    private MutableLiveData<ReadSummaryResponse> readSummaryResponse;
 
     public FoodViewModel(){
         this.foodDetailResponse= new MutableLiveData<>();

@@ -8,12 +8,14 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.plim.kati_app.kati.domain.nnew.main.search.model.SearchModel;
 import com.plim.kati_app.kati.domain.nnew.main.search.model.SearchViewModel;
+import com.plim.kati_app.kati.domain.old.search.foodInfo.model.FoodDetailResponse;
+import com.plim.kati_app.kati.domain.old.search.foodInfo.view.foodInfo.model.FoodViewModel;
+import com.plim.kati_app.kati.domain.old.search.foodInfo.view.foodInfo.model.ReadSummaryResponse;
 
 public abstract class KatiSearchFragment extends KatiLoginCheckViewModelFragment implements Observer {
 
     public SearchViewModel searchViewModel;
     protected SearchModel searchModel;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -25,24 +27,25 @@ public abstract class KatiSearchFragment extends KatiLoginCheckViewModelFragment
     @Override
     public void onResume() {
         super.onResume();
-        this.searchViewModel.getSearchModel().observe(this.getViewLifecycleOwner(),this);
-    }
+        this.searchViewModel.getSearchModel().observe(this.getViewLifecycleOwner(), this);
+       }
 
     @Override
     public void onPause() {
         super.onPause();
         this.searchViewModel.getSearchModel().removeObserver(this);
-    }
+       }
 
     @Override
     public void onChanged(Object o) {
-        Log.d("서치 프래그먼트","변하다");
-       this.searchModel = this.searchViewModel.getSearchModel().getValue();
-       this.searchModelDataUpdated();
+        Log.d("서치 프래그먼트", "변하다");
+        this.searchModel = this.searchViewModel.getSearchModel().getValue();
+        this.searchModelDataUpdated();
+
     }
 
-    public void saveSearch(){
-        Log.d("서치 프래그먼트","저장하다");
+    public void saveSearch() {
+        Log.d("서치 프래그먼트", "저장하다");
         this.searchViewModel.getSearchModel().setValue(this.searchModel);
     }
 
@@ -61,5 +64,11 @@ public abstract class KatiSearchFragment extends KatiLoginCheckViewModelFragment
 
     }
 
+    public abstract void foodModelDataUpdated();
+
     protected abstract void searchModelDataUpdated();
+
+
+
+
 }

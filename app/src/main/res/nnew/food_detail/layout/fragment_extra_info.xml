@@ -9,7 +9,7 @@
 
 
     <com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHInfoItem
-        android:id="@+id/extraInfo_companyName"
+        android:id="@+id/extraInfoFragment_companyName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -18,25 +18,25 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHInfoItem
-        android:id="@+id/extraInfo_companyIssue"
+        android:id="@+id/extraInfoFragment_companyIssue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:JSHInfoItem_content="네이버 뉴스에서 확인할 수 있습니다."
         android:layout_marginTop="1dp"
         app:JSHInfoItem_title="제조사 이슈"
-        app:layout_constraintTop_toBottomOf="@+id/extraInfo_companyName" />
+        app:layout_constraintTop_toBottomOf="@+id/extraInfoFragment_companyName" />
 
     <com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHInfoItem
-        android:id="@+id/extraInfo_onlineBuy"
+        android:id="@+id/extraInfoFragment_onlineBuy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:JSHInfoItem_content="네이버 쇼핑에서 확인할 수 있습니다."
         android:layout_marginTop="1dp"
         app:JSHInfoItem_title="온라인 구매처"
-        app:layout_constraintTop_toBottomOf="@+id/extraInfo_companyIssue" />
+        app:layout_constraintTop_toBottomOf="@+id/extraInfoFragment_companyIssue" />
 
     <Button
-        android:id="@+id/extraInfo_companyShowIssue"
+        android:id="@+id/extraInfoFragment_showOnlineBuyButton"
         android:layout_width="57dp"
         android:layout_height="40dp"
         android:layout_marginRight="16dp"
@@ -44,12 +44,12 @@
         android:text="보기"
         android:textColor="@color/black"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/extraInfo_onlineBuy"
-        app:layout_constraintEnd_toEndOf="@+id/extraInfo_companyIssue"
-        app:layout_constraintTop_toBottomOf="@+id/extraInfo_companyIssue" />
+        app:layout_constraintBottom_toBottomOf="@+id/extraInfoFragment_onlineBuy"
+        app:layout_constraintEnd_toEndOf="@+id/extraInfoFragment_companyIssue"
+        app:layout_constraintTop_toBottomOf="@+id/extraInfoFragment_companyIssue" />
 
     <Button
-        android:id="@+id/extraInfo_showOnlineBuy"
+        android:id="@+id/extraInfoFragment_companyShowIssueButton"
         android:layout_width="57dp"
         android:layout_height="40dp"
         android:backgroundTint="@color/white"
@@ -57,7 +57,7 @@
         android:textColor="@color/black"
         android:layout_marginRight="16dp"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/extraInfo_companyIssue"
-        app:layout_constraintEnd_toEndOf="@+id/extraInfo_companyIssue"
-        app:layout_constraintTop_toBottomOf="@+id/extraInfo_companyName" />
+        app:layout_constraintBottom_toBottomOf="@+id/extraInfoFragment_companyIssue"
+        app:layout_constraintEnd_toEndOf="@+id/extraInfoFragment_companyIssue"
+        app:layout_constraintTop_toBottomOf="@+id/extraInfoFragment_companyName" />
 </androidx.constraintlayout.widget.ConstraintLayout>

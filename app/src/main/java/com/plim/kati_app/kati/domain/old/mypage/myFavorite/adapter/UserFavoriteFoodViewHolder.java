@@ -37,7 +37,7 @@ public class UserFavoriteFoodViewHolder extends RecyclerView.ViewHolder {
         // Associate View
         this.productName = itemView.findViewById(R.id.foodItem_productName);
         this.companyName = itemView.findViewById(R.id.foodItem_companyName);
-        this.imageView = itemView.findViewById(R.id.foodItem_foodImageView);
+        this.imageView = itemView.findViewById(R.id.foodItemFragment_foodImageView);
 
         // Initialize View
         itemView.setOnClickListener(onClickListener);

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.plim.kati_app.R;
+import com.plim.kati_app.kati.domain.nnew.foodDetail.adapter.ViewPagerAdapter;
 
 import java.util.Arrays;
 import java.util.List;

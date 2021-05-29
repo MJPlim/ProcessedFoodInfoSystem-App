@@ -59,20 +59,20 @@ public class ProductInfoFragment extends KatiFoodFragment {
             intent.putExtra("manufacturerName", foodDetailResponse.getManufacturerName());
             this.startActivity(intent);
         });
-        this.purchaseSiteButton.setOnClickListener(v ->
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(DETAIL_PRODUCT_INFO_FRAGMENT_SHOPPING_LINK_
-                        + this.foodModel.getFoodDetailResponse().getValue().getFoodName())))
-        );
+//        this.purchaseSiteButton.setOnClickListener(v ->
+//                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(DETAIL_PRODUCT_INFO_FRAGMENT_SHOPPING_LINK_
+//                        + this.foodModel.getFoodDetailResponse().getValue().getFoodName())))
+//        );
     }
 
     @Override
     protected void katiEntityUpdated() {
-        this.barcode = this.getActivity().getIntent().getStringExtra("barcode");
-        this.foodId = this.getActivity().getIntent().getLongExtra(DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_FOOD_ID_EXTRA, 0L);
-        this.isAd = this.getActivity().getIntent().getBooleanExtra(NEW_DETAIL_ACTIVITY_EXTRA_IS_AD, false);
-
-        if (this.barcode != null) this.barcodeSearch();
-        else this.search();
+//        this.barcode = this.getActivity().getIntent().getStringExtra("barcode");
+//        this.foodId = this.getActivity().getIntent().getLongExtra(DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_FOOD_ID_EXTRA, 0L);
+//        this.isAd = this.getActivity().getIntent().getBooleanExtra(NEW_DETAIL_ACTIVITY_EXTRA_IS_AD, false);
+//
+//        if (this.barcode != null) this.barcodeSearch();
+//        else this.search();
     }
 
     @Override
@@ -84,32 +84,37 @@ public class ProductInfoFragment extends KatiFoodFragment {
     public void foodModelDataUpdated() {
     }
 
-
-    private class FoodDetailRequestCallback extends SimpleRetrofitCallBackImpl<FoodDetailResponse> {
-        public FoodDetailRequestCallback(Activity activity) {
-            super(activity);
-        }
-        @Override
-        public void onSuccessResponse(Response<FoodDetailResponse> response) {
-//            loadingDialog.hide();
-            foodDetailResponse=response.body();
-            saveFoodDetail();
-        }
+    @Override
+    protected void summaryDataUpdated() {
 
     }
 
-    private void search() {
-//        this.loadingDialog.show();
-        if (!isAd) {
-            KatiRetrofitTool.getAPI().getFoodDetailByFoodId(this.foodId).enqueue(JSHRetrofitTool.getCallback(new FoodDetailRequestCallback(this.getActivity())));
-        } else {
-            KatiRetrofitTool.getAPI().getAdFoodDetail(this.foodId).enqueue(JSHRetrofitTool.getCallback(new FoodDetailRequestCallback(this.getActivity())));
-        }
-    }
 
-    private void barcodeSearch() {
-//        this.loadingDialog.show();
-        KatiRetrofitTool.getAPI().findByBarcode(new FindFoodByBarcodeRequest(this.barcode)).enqueue(JSHRetrofitTool.getCallback(new FoodDetailRequestCallback(this.getActivity())));
-    }
+//    private class FoodDetailRequestCallback extends SimpleRetrofitCallBackImpl<FoodDetailResponse> {
+//        public FoodDetailRequestCallback(Activity activity) {
+//            super(activity);
+//        }
+//        @Override
+//        public void onSuccessResponse(Response<FoodDetailResponse> response) {
+////            loadingDialog.hide();
+//            foodDetailResponse=response.body();
+//            saveFoodDetail();
+//        }
+//
+//    }
+//
+//    private void search() {
+////        this.loadingDialog.show();
+//        if (!isAd) {
+//            KatiRetrofitTool.getAPI().getFoodDetailByFoodId(this.foodId).enqueue(JSHRetrofitTool.getCallback(new FoodDetailRequestCallback(this.getActivity())));
+//        } else {
+//            KatiRetrofitTool.getAPI().getAdFoodDetail(this.foodId).enqueue(JSHRetrofitTool.getCallback(new FoodDetailRequestCallback(this.getActivity())));
+//        }
+//    }
+//
+//    private void barcodeSearch() {
+////        this.loadingDialog.show();
+//        KatiRetrofitTool.getAPI().findByBarcode(new FindFoodByBarcodeRequest(this.barcode)).enqueue(JSHRetrofitTool.getCallback(new FoodDetailRequestCallback(this.getActivity())));
+//    }
 
 }

@@ -71,6 +71,11 @@ public class DetailPhotoViewFragment extends KatiFoodFragment {
         this.changeImage(this.foodDetailResponse.getFoodImageAddress());
     }
 
+    @Override
+    protected void summaryDataUpdated() {
+
+    }
+
     private class AddFavoriteCallBack extends SimpleLoginRetrofitCallBack<Boolean> {
 
         public AddFavoriteCallBack(Activity activity) {

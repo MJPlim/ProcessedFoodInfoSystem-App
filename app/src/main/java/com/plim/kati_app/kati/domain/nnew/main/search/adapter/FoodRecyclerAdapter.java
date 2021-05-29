@@ -23,17 +23,19 @@ public class FoodRecyclerAdapter extends RecyclerView.Adapter<FoodViewHolder> {
         // ETC
         private Activity activity;
         private Vector<FoodResponse> items;
+    private View.OnClickListener listener;
 
     // Constructor
-    public FoodRecyclerAdapter(Activity activity) {
+    public FoodRecyclerAdapter(Activity activity, View.OnClickListener listener) {
         this.items = new Vector<>();
         this.activity=activity;
+        this.listener=listener;
     }
 
     @Override
     public FoodViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_food_old, parent, false);
-        return new FoodViewHolder(view, v->this.startNewDetailActivity((Long) v.getTag()), this.activity);
+        return new FoodViewHolder(view, this.listener, this.activity);
     }
     @Override
     public void onBindViewHolder(FoodViewHolder holder, int position) { holder.setValue(items.get(position)); }
@@ -41,10 +43,5 @@ public class FoodRecyclerAdapter extends RecyclerView.Adapter<FoodViewHolder> {
     public int getItemCount() { return items.size(); }
 
     public void setItems(Vector<FoodResponse> items) { this.items=items; }
-    private void startNewDetailActivity(Long foodId) {
-        Intent intent = new Intent(this.activity, FoodInfoActivity.class);
-        intent.putExtra(NEW_DETAIL_ACTIVITY_EXTRA_FOOD_ID, foodId);
-        intent.putExtra(NEW_DETAIL_ACTIVITY_EXTRA_IS_AD, false);
-        this.activity.startActivity(intent);
-    }
+
 }

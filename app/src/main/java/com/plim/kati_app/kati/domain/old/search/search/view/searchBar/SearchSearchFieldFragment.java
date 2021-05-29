@@ -53,6 +53,11 @@ public class SearchSearchFieldFragment extends KatiSearchFragment {
     }
 
     @Override
+    public void foodModelDataUpdated() {
+
+    }
+
+    @Override
     protected void searchModelDataUpdated() {
         if (searchModel.getSearchText() != null && searchModel.getSearchText().length() != 0) {
             this.searchEditText.setText(searchModel.getSearchText());

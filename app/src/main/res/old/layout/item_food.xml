@@ -14,7 +14,7 @@
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/foodItem_foodImageView"
+        app:layout_constraintStart_toEndOf="@+id/foodItemFragment_foodImageView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
@@ -24,7 +24,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="26dp"
-        app:layout_constraintStart_toEndOf="@+id/foodItem_foodImageView"
+        app:layout_constraintStart_toEndOf="@+id/foodItemFragment_foodImageView"
         app:layout_constraintTop_toBottomOf="@+id/foodItem_companyName"
         app:srcCompat="@drawable/ic_baseline_star_24"
         app:tint="@color/teal_200" />
@@ -59,11 +59,11 @@
         android:layout_marginTop="4dp"
         android:text="@string/foodItem_companyName_text"
         android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/foodItem_foodImageView"
+        app:layout_constraintStart_toEndOf="@+id/foodItemFragment_foodImageView"
         app:layout_constraintTop_toBottomOf="@+id/foodItem_productName" />
 
     <ImageView
-        android:id="@+id/foodItem_foodImageView"
+        android:id="@+id/foodItemFragment_foodImageView"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:adjustViewBounds="true"

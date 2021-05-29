@@ -62,6 +62,11 @@ public abstract class KatiAbstractTableFragment extends KatiFoodFragment {
 
     }
 
+    @Override
+    protected void summaryDataUpdated() {
+
+    }
+
     /**
      * Method
      */

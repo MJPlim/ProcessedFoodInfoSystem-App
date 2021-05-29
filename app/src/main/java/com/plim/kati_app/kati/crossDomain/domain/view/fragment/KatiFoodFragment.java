@@ -23,8 +23,6 @@ public abstract class KatiFoodFragment extends KatiLoginCheckViewModelFragment i
         super.onCreate(savedInstanceState);
         this.summaryObserver= new SummaryObserver();
         this.foodModel = new ViewModelProvider(this.getActivity()).get(FoodViewModel.class);
-        this.foodModel.setFoodDetailResponse(new MutableLiveData<>());
-        this.foodModel.setReadSummaryResponse(new MutableLiveData<>());
         this.foodDetailResponse=this.foodModel.getFoodDetailResponse().getValue();
         this.readSummaryResponse=this.foodModel.getReadSummaryResponse().getValue();
     }
@@ -46,6 +44,7 @@ public abstract class KatiFoodFragment extends KatiLoginCheckViewModelFragment i
     public void onChanged(Object o) {
         this.foodDetailResponse = this.foodModel.getFoodDetailResponse().getValue();
 //        this.readSummaryResponse=this.foodModel.getReadSummaryResponse().getValue();
+        if(this.dataset!=null)
         this.foodModelDataUpdated();
     }
 
@@ -68,13 +67,14 @@ public abstract class KatiFoodFragment extends KatiLoginCheckViewModelFragment i
     protected void katiEntityUpdatedAndNoLogin() { }
 
     public abstract void foodModelDataUpdated();
-    protected void summaryDataUpdated(){}
+    protected abstract void summaryDataUpdated();
 
     private class SummaryObserver implements Observer{
 
         @Override
         public void onChanged(Object o) {
         readSummaryResponse=foodModel.getReadSummaryResponse().getValue();
+            if(dataset!=null)
         summaryDataUpdated();
         }
     }

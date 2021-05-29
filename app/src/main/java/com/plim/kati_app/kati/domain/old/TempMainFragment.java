@@ -12,7 +12,6 @@ import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBackImpl;
 import com.plim.kati_app.kati.domain.nnew.login.LoginActivity;
 import com.plim.kati_app.kati.domain.old.changePW.view.ChangePasswordActivity;
-import com.plim.kati_app.kati.domain.old.food.searchText.FoodSearchTextActivity;
 import com.plim.kati_app.kati.domain.nnew.login.model.LoginResponse;
 import com.plim.kati_app.kati.domain.old.mypage.main.view.UserMyPageActivity;
 import com.plim.kati_app.kati.domain.old.temp.TempActivity;
@@ -32,7 +31,7 @@ public class TempMainFragment extends KatiViewModelFragment {
     protected void associateView(View view) {
         view.findViewById(R.id.mainActivity_tempButton).setOnClickListener(v -> this.startActivity(TempActivity.class));
         view.findViewById(R.id.mainActivity_loginTestButton).setOnClickListener(v -> this.startActivity(LoginActivity.class));
-        view.findViewById(R.id.mainActivity_searchTestButton).setOnClickListener(v -> this.startActivity(FoodSearchTextActivity.class));
+//        view.findViewById(R.id.mainActivity_searchTestButton).setOnClickListener(v -> this.startActivity(FoodSearchTextActivity.class));
         view.findViewById(R.id.mainActivity_changePWButton).setOnClickListener(v -> this.startActivity(ChangePasswordActivity.class));
         view.findViewById(R.id.mainActivity_RankingTestButton).setOnClickListener(v -> this.startActivity(RankingActivity.class));
         view.findViewById(R.id.mainActivity_myPageTestButton).setOnClickListener(v -> this.startActivity(UserMyPageActivity.class));

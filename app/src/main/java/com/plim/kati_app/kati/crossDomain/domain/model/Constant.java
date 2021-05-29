@@ -107,6 +107,7 @@ public static final String ALLERGY_EXPANDABLE_LIST_TITLE="알레르기";
     public static final String DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_FOOD_ID_EXTRA="foodId";
     public static final String DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_FOOD_ID_BARCODE="foodId";
     public static final String DETAIL_PRODUCT_INFO_FRAGMENT_SHOPPING_LINK_="https://msearch.shopping.naver.com/search/all?query=";
+    public static final String DETAIL_PRODUCT_INFO_FRAGMENT_ISSUE_LINK="https://m.search.naver.com/search.naver?where=m_news&sm=mtb_jum&query=";
 
     public static final String ALLERGY_FILTER_INTENT_DIALOG_TITLE="알레르기 필터를 수정하시겠습니까?";
     public static final String ALLERGY_FILTER_INTENT_DIALOG_MESSAGE="수정하기 위해 수정 페이지로 이동합니다.";

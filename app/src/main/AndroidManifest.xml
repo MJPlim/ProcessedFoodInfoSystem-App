@@ -29,6 +29,7 @@
         <activity android:name=".kati.domain.nnew.findPassword.FindPasswordActivity" />
         <activity android:name=".kati.domain.nnew.login.LoginActivity" />
         <activity android:name=".kati.domain.nnew.signOut.SignOutActivity" />
+        <activity android:name=".kati.domain.nnew.signOut.SignOutActivity" />
         <activity
             android:name=".kati.domain.nnew.editPassword.EditPasswordActivity"
             android:label="@string/title_activity_password_edit"

@@ -1,4 +1,4 @@
-package com.plim.kati_app.kati.domain.nnew.foodDetail;
+package com.plim.kati_app.kati.domain.nnew.foodDetail.adapter;
 
 import android.view.View;
 import android.widget.TextView;

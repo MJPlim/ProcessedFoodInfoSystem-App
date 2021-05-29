@@ -20,7 +20,7 @@ import retrofit2.Response;
 public abstract class KatiLoginCheckViewModelFragment extends KatiViewModelFragment {
     @Override
     protected void katiEntityUpdated() {
-        if (this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION).equals(KatiEntity.EKatiData.NULL.name()))
+        if (!this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION).equals(KatiEntity.EKatiData.NULL.name()))
             this.katiEntityUpdatedAndLogin();
         else {
             if (this.isLoginNeeded()){

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/kati_light_gray"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".kati.foodDetail.FoodInfoFragment">
+    tools:context=".kati.domain.nnew.foodDetail.FoodInfoFragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/foodItem_foodImageView"
+                android:id="@+id/foodItemFragment_foodImageView"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:adjustViewBounds="true"
@@ -30,7 +30,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.varunest.sparkbutton.SparkButton
-                android:id="@+id/spark_button"
+                android:id="@+id/foodItemFragment_heartButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -49,10 +49,10 @@
                 android:padding="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/foodItem_foodImageView">
+                app:layout_constraintTop_toBottomOf="@+id/foodItemFragment_foodImageView">
 
                 <TextView
-                    android:id="@+id/foodItem_productName"
+                    android:id="@+id/foodItemFragment_foodNameTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
@@ -65,20 +65,20 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                    android:id="@+id/imageView4"
+                    android:id="@+id/foodItemFragment_starIcon"
                     android:layout_width="15dp"
                     android:layout_height="15dp"
-                    app:layout_constraintEnd_toStartOf="@+id/foodSearchRecommendationFragment_recentSearchWordTextView"
+                    app:layout_constraintEnd_toStartOf="@+id/foodItemFragment_ratingTextView"
                     app:layout_constraintHorizontal_bias="0.5"
                     android:layout_marginTop="4dp"
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/foodItem_productName"
+                    app:layout_constraintTop_toBottomOf="@+id/foodItemFragment_foodNameTextView"
                     app:srcCompat="@drawable/ic_baseline_star_24"
                     app:tint="@color/kati_orange" />
 
                 <TextView
-                    android:id="@+id/foodSearchRecommendationFragment_recentSearchWordTextView"
+                    android:id="@+id/foodItemFragment_ratingTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
@@ -86,14 +86,14 @@
                     android:textColor="@color/black"
                     android:textSize="12sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@id/imageView4"
-                    app:layout_constraintEnd_toStartOf="@+id/foodItem_reviewCountTextView"
+                    app:layout_constraintBottom_toBottomOf="@id/foodItemFragment_starIcon"
+                    app:layout_constraintEnd_toStartOf="@+id/foodItemFragment_reviewCountTextView"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/imageView4"
-                    app:layout_constraintTop_toTopOf="@+id/imageView4" />
+                    app:layout_constraintStart_toEndOf="@+id/foodItemFragment_starIcon"
+                    app:layout_constraintTop_toTopOf="@+id/foodItemFragment_starIcon" />
 
                 <TextView
-                    android:id="@+id/foodItem_reviewCountTextView"
+                    android:id="@+id/foodItemFragment_reviewCountTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="2dp"
@@ -102,14 +102,14 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/foodSearchRecommendationFragment_recentSearchWordTextView"
-                    app:layout_constraintTop_toTopOf="@+id/foodSearchRecommendationFragment_recentSearchWordTextView" />
+                    app:layout_constraintStart_toEndOf="@+id/foodItemFragment_ratingTextView"
+                    app:layout_constraintTop_toTopOf="@+id/foodItemFragment_ratingTextView" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <com.example.katiui.jshCrossDomain.JSHInfoItem
-                android:id="@+id/extraInfo_made"
+            <com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHInfoItem
+                android:id="@+id/foodItemFragment_materialItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
@@ -117,14 +117,14 @@
                 app:JSHInfoItem_title="원재료"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
 
-            <com.example.katiui.jshCrossDomain.JSHInfoItem
-                android:id="@+id/extraInfo_calory"
+            <com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHInfoItem
+                android:id="@+id/foodItemFragment_ingredientItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
                 app:JSHInfoItem_content="열량 291kcal\n탄수화물 36g\n단백질 3g\n지방 15g"
                 app:JSHInfoItem_title="영양성분"
-                app:layout_constraintTop_toBottomOf="@+id/extraInfo_made" />
+                app:layout_constraintTop_toBottomOf="@+id/foodItemFragment_materialItem" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
