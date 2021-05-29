@@ -12,4 +12,6 @@ public class EditAddressActivity extends EditSingleActivity {
     protected EditMode getEditMode() {
         return EditMode.address;
     }
+
+
 }

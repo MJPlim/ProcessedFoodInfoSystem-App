@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -68,10 +71,22 @@ public abstract class EditSingleActivity extends KatiLoginCheckViewModelActivity
     protected void initializeView() {
         this.toolBar.setToolBarTitle(editMode.getText()+" 변경");
         this.editText.setHint(editMode.getText()+" 입력");
-        this.editText.setOnKeyListener((v, keyCode, event) -> {
-            if(editText.length()>2)submitButton.setEnabled(true);
-            return false;
-        });
+     this.editText.addTextChangedListener(new TextWatcher() {
+         @Override
+         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+         }
+
+         @Override
+         public void onTextChanged(CharSequence s, int start, int before, int count) {
+             if(editText.length()>0) submitButton.setEnabled(true);
+         }
+
+         @Override
+         public void afterTextChanged(Editable s) {
+
+         }
+     });
         this.submitButton.setEnabled(false);
         this.submitButton.setText(editMode.getText()+" 변경");
         this.submitButton.setOnClickListener(v -> this.modifyUserData(this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION),this.editMode));
@@ -104,6 +119,7 @@ public abstract class EditSingleActivity extends KatiLoginCheckViewModelActivity
     }
 
     private void modifyUserData(String token,EditMode editMode) {
+        Log.d("디버그","유저 정보 수정");
         UserInfoModifyRequest request;
         if (this.editText.length() != 0) {
             switch (editMode){

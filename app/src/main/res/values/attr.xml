@@ -15,4 +15,10 @@
         <attr name="JSHInfoItem_content" format="string"/>
     </declare-styleable>
 
+
+    <declare-styleable name="YYECategoryItem">
+        <attr name="YYECategoryItem_text" format="string"/>
+        <attr name="YYECategoryItem_image" format="integer"/>
+    </declare-styleable>
+
 </resources>

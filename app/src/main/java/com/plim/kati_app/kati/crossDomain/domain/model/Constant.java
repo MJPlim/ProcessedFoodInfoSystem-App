@@ -184,19 +184,20 @@ public static final String ALLERGY_EXPANDABLE_LIST_TITLE="알레르기";
     @AllArgsConstructor
     @Getter
     public enum ECategory {
-        snack("간식",ESnackCategory.values()),
-        dairy("유제품", EDairyCategory.values()),
-        drink("음료/차", EDrinkCategory.values()),
-        condiment("조미료", ECondimentCategoty.values()),
-        meat("육류", EMeatCategory.values()),
-        farm("농수산물",EFarmCategory.values()),
-        kimchi("김치",EKimchiCategory.values()),
-        mealkit("즉석조리",EMealkitCategory.values()),
-        etcmaterial("식재료",EMaterialCategory.values()),
-        etc("기타",EEtcCategory.values()),
+        snack("간식",ESnackCategory.values(),R.drawable.banana_icon),
+        dairy("유제품", EDairyCategory.values(),R.drawable.sample2),
+        drink("음료/차", EDrinkCategory.values(),R.drawable.icon_tea),
+        condiment("조미료", ECondimentCategoty.values(),R.drawable.sauce_icon),
+        meat("육류", EMeatCategory.values(),R.drawable.meat_icon),
+        farm("농수산물",EFarmCategory.values(),R.drawable.healthy_icon),
+        kimchi("김치",EKimchiCategory.values(),R.drawable.kimchi_icon),
+        mealkit("즉석조리",EMealkitCategory.values(),R.drawable.retro_icon),
+        etcmaterial("식재료",EMaterialCategory.values(),R.drawable.material_icon),
+        etc("기타",EEtcCategory.values(),R.drawable.meat_icon),
         ;
         private String name;
         private EChildCategory[] childCategories;
+        private int drawable;
 
         public Vector<String> getChildNames() {
             Vector<String> childNames = new Vector<>();
