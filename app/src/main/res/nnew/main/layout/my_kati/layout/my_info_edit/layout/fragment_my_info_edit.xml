@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="1dp"
-        app:JSHInfoItem_content="SNS 계정에서 변경하실 수 있습니다."
+        app:JSHInfoItem_content="비밀번호 변경"
         app:JSHInfoItem_title="비밀번호"
         app:layout_constraintTop_toBottomOf="@+id/myInfoEditFragment_restoreEmailItem" />
 

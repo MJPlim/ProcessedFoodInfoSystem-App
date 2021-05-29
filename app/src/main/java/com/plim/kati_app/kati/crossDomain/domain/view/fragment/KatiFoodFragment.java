@@ -2,13 +2,12 @@ package com.plim.kati_app.kati.crossDomain.domain.view.fragment;
 
 import android.os.Bundle;
 
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.plim.kati_app.kati.domain.old.search.foodInfo.model.FoodDetailResponse;
-import com.plim.kati_app.kati.domain.old.search.foodInfo.view.foodInfo.model.FoodViewModel;
-import com.plim.kati_app.kati.domain.old.search.foodInfo.view.foodInfo.model.ReadSummaryResponse;
+import com.plim.kati_app.kati.domain.old.model.FoodViewModel;
+import com.plim.kati_app.kati.domain.old.model.ReadSummaryResponse;
 
 public abstract class KatiFoodFragment extends KatiLoginCheckViewModelFragment implements Observer{
 

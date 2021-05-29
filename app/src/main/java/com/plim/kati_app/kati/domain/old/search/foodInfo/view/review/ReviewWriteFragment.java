@@ -23,8 +23,8 @@ import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiLoginCheckViewModelFragment;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.domain.old.search.foodInfo.view.FoodInfoActivity;
-import com.plim.kati_app.kati.domain.old.search.foodInfo.view.foodInfo.model.CreateAndUpdateReviewRequest;
-import com.plim.kati_app.kati.domain.old.search.foodInfo.view.foodInfo.model.CreateReviewResponse;
+import com.plim.kati_app.kati.domain.old.model.CreateAndUpdateReviewRequest;
+import com.plim.kati_app.kati.domain.old.model.CreateReviewResponse;
 
 import java.util.Vector;
 

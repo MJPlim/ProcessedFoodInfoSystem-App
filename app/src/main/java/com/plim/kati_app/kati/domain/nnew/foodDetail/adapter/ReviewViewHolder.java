@@ -1,10 +1,8 @@
 package com.plim.kati_app.kati.domain.nnew.foodDetail.adapter;
 
 import android.app.Activity;
-import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -13,8 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.plim.kati_app.R;
-import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
-import com.plim.kati_app.kati.domain.old.search.foodInfo.view.foodInfo.model.ReadReviewResponse;
+import com.plim.kati_app.kati.domain.old.model.ReadReviewResponse;
 
 public class ReviewViewHolder extends RecyclerView.ViewHolder {
 

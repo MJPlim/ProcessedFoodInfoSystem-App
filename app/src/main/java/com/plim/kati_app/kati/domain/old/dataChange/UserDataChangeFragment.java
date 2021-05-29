@@ -12,7 +12,7 @@ import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiLoginCheckViewModelFragment;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
-import com.plim.kati_app.kati.domain.old.changePW.view.ChangePasswordActivity;
+//import com.plim.kati_app.kati.domain.old.changePW.view.ChangePasswordActivity;
 import com.plim.kati_app.kati.domain.old.temp.TempActivity;
 import com.plim.kati_app.kati.domain.old.dataChange.model.UserInfoModifyRequest;
 import com.plim.kati_app.kati.domain.old.dataChange.model.UserInfoResponse;
@@ -82,7 +82,7 @@ public class UserDataChangeFragment extends KatiLoginCheckViewModelFragment {
 
       //  this.secondEmailEditButton.setOnClickListener(v -> this.startActivity(SetSecondEmailActivity.class));
 //        this.allergyEditButton.setOnClickListener(v -> this.startActivity(Allerg.class));
-        this.passwordEditButton.setOnClickListener(v -> this.startActivity(ChangePasswordActivity.class));
+//        this.passwordEditButton.setOnClickListener(v -> this.startActivity(ChangePasswordActivity.class));
 
         this.editCompleteButton.setOnClickListener(v -> this.modifyUserData(this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION)));
     }

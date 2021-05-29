@@ -1,26 +1,15 @@
 package com.plim.kati_app.kati.domain.nnew.foodDetail;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.PorterDuff;
-import android.media.Rating;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,26 +18,16 @@ import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiFoodFragment;
-import com.plim.kati_app.kati.crossDomain.domain.view.fragment.abstractTableFragment.TableInfo;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBackImpl;
 import com.plim.kati_app.kati.domain.nnew.foodDetail.adapter.ReviewRecyclerAdapter;
-import com.plim.kati_app.kati.domain.nnew.foodDetail.adapter.ReviewViewHolder;
 import com.plim.kati_app.kati.domain.nnew.review.ReviewActivity;
-import com.plim.kati_app.kati.domain.old.search.foodInfo.view.foodInfo.model.CreateReviewResponse;
-import com.plim.kati_app.kati.domain.old.search.foodInfo.view.foodInfo.model.DeleteReviewRequest;
-import com.plim.kati_app.kati.domain.old.search.foodInfo.view.foodInfo.model.ReadReviewDto;
-import com.plim.kati_app.kati.domain.old.search.foodInfo.view.foodInfo.model.ReadReviewResponse;
-import com.plim.kati_app.kati.domain.old.search.foodInfo.view.foodInfo.model.ReadSummaryResponse;
-import com.plim.kati_app.kati.domain.old.search.foodInfo.view.foodInfo.model.UpdateReviewLikeRequest;
-import com.plim.kati_app.kati.domain.old.search.foodInfo.view.foodInfo.model.UpdateReviewLikeResponse;
-import com.plim.kati_app.kati.domain.old.search.foodInfo.view.foodInfo.view.DetailReviewViewFragment;
-import com.plim.kati_app.kati.domain.old.search.foodInfo.view.review.UpdateReviewActivity;
-import com.plim.kati_app.kati.domain.old.search.foodInfo.view.review.WriteReviewActivity;
+import com.plim.kati_app.kati.domain.old.model.ReadReviewDto;
+import com.plim.kati_app.kati.domain.old.model.ReadReviewResponse;
+import com.plim.kati_app.kati.domain.old.model.ReadSummaryResponse;
+import com.plim.kati_app.kati.domain.old.model.UpdateReviewLikeRequest;
+import com.plim.kati_app.kati.domain.old.model.UpdateReviewLikeResponse;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 

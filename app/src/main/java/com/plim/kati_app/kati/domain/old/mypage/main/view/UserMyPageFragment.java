@@ -20,7 +20,7 @@ import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiViewModelFrag
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 
 import com.plim.kati_app.kati.domain.old.TempMainActivity;
-import com.plim.kati_app.kati.domain.old.changePW.view.ChangePasswordActivity;
+//import com.plim.kati_app.kati.domain.old.changePW.view.ChangePasswordActivity;
 import com.plim.kati_app.kati.domain.old.dataChange.UserDataChangeActivity;
 import com.plim.kati_app.kati.domain.old.mypage.main.model.UserSummaryResponse;
 
@@ -84,7 +84,7 @@ public class UserMyPageFragment extends KatiViewModelFragment {
         this.reviewNum.setOnClickListener(v -> this.navigateTo(R.id.action_myPageFragment_to_myPageReviewFragment));
         this.restoreEmailText.setOnClickListener(v -> this.moveToRestoreEmailActivity());
         this.modifyUserText.setOnClickListener(v -> this.moveToUserDataChangeActivity());
-        this.changePasswordText.setOnClickListener(v -> this.moveToChangePasswordActivity());
+//        this.changePasswordText.setOnClickListener(v -> this.moveToChangePasswordActivity());
         if(this.dataset.containsKey(KatiEntity.EKatiData.AUTHORIZATION)){
             this.getUserInfo();
         }else{
@@ -122,10 +122,10 @@ public class UserMyPageFragment extends KatiViewModelFragment {
 //    }
 
 
-    private void moveToChangePasswordActivity() {
-        Intent intent = new Intent(this.getActivity(), ChangePasswordActivity.class);
-        startActivity(intent);
-    }
+//    private void moveToChangePasswordActivity() {
+//        Intent intent = new Intent(this.getActivity(), ChangePasswordActivity.class);
+//        startActivity(intent);
+//    }
 
     private void moveToUserDataChangeActivity() {
         Intent intent = new Intent(this.getActivity(), UserDataChangeActivity.class);

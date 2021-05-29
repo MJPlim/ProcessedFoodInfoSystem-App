@@ -17,10 +17,10 @@ import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiViewModelFrag
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.domain.old.mypage.myReview.adapter.UserReviewRecyclerAdapter;
 import com.plim.kati_app.kati.domain.old.mypage.myReview.model.ReadReviewResponse;
-import com.plim.kati_app.kati.domain.old.search.foodInfo.view.foodInfo.model.CreateReviewResponse;
-import com.plim.kati_app.kati.domain.old.search.foodInfo.view.foodInfo.model.DeleteReviewRequest;
-import com.plim.kati_app.kati.domain.old.search.foodInfo.view.foodInfo.model.UpdateReviewLikeRequest;
-import com.plim.kati_app.kati.domain.old.search.foodInfo.view.foodInfo.model.UpdateReviewLikeResponse;
+import com.plim.kati_app.kati.domain.old.model.CreateReviewResponse;
+import com.plim.kati_app.kati.domain.old.model.DeleteReviewRequest;
+import com.plim.kati_app.kati.domain.old.model.UpdateReviewLikeRequest;
+import com.plim.kati_app.kati.domain.old.model.UpdateReviewLikeResponse;
 
 
 import org.json.JSONObject;

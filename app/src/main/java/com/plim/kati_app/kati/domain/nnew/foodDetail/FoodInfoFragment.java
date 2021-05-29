@@ -1,34 +1,24 @@
 package com.plim.kati_app.kati.domain.nnew.foodDetail;
 
 import android.app.Activity;
-import android.graphics.PorterDuff;
-import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
 
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
-import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.plim.kati_app.R;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 import com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHInfoItem;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiFoodFragment;
-import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiSearchFragment;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBackImpl;
 import com.plim.kati_app.kati.domain.old.search.foodInfo.model.FoodDetailResponse;
-import com.plim.kati_app.kati.domain.old.search.foodInfo.view.foodInfo.model.FindFoodByBarcodeRequest;
-import com.plim.kati_app.kati.domain.old.search.foodInfo.view.foodInfo.view.DetailPhotoViewFragment;
-import com.plim.kati_app.kati.domain.old.search.foodInfo.view.foodInfo.view.ProductInfoFragment;
+import com.plim.kati_app.kati.domain.old.model.FindFoodByBarcodeRequest;
 import com.varunest.sparkbutton.SparkButton;
 
 import retrofit2.Response;
