@@ -18,11 +18,10 @@ import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.domain.nnew.editName.EditAddressActivity;
 import com.plim.kati_app.kati.domain.nnew.editName.EditBirthActivity;
 import com.plim.kati_app.kati.domain.nnew.editName.EditNameActivity;
-import com.plim.kati_app.kati.domain.nnew.editName.EditSingleActivity;
 import com.plim.kati_app.kati.domain.nnew.editPassword.view.EditPasswordActivity;
 import com.plim.kati_app.kati.domain.nnew.setRestoreEmail.SetRestoreEmailActivity;
 import com.plim.kati_app.kati.domain.nnew.signOut.SignOutActivity;
-import com.plim.kati_app.kati.domain.old.dataChange.model.UserInfoResponse;
+import com.plim.kati_app.kati.domain.nnew.main.myKati.myInfoEdit.model.UserInfoResponse;
 
 import java.util.Vector;
 
@@ -120,6 +119,8 @@ public class MyInfoEditFragment extends KatiInfoEditFragment {
         this.changeNameItem.setContentText(this.userInfoResponse.getName());
         this.changeBirthItem.setContentText(this.userInfoResponse.getBirth() == null ? NO_BIRTH_DATA : this.userInfoResponse.getBirth());
         this.changeAddressItem.setContentText(this.userInfoResponse.getAddress() == null ? NO_ADDRESS_DATA : this.userInfoResponse.getAddress());
+
+        this.restoreEmailItem.setContentText("-");
 
     }
 

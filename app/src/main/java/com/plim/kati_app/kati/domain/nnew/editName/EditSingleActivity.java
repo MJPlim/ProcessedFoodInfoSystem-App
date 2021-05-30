@@ -1,15 +1,10 @@
 package com.plim.kati_app.kati.domain.nnew.editName;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -17,23 +12,16 @@ import com.plim.kati_app.R;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.kati.crossDomain.domain.view.activity.KatiLoginCheckViewModelActivity;
-import com.plim.kati_app.kati.crossDomain.domain.view.activity.KatiViewModelActivity;
 import com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHToolBar;
-import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiLoginCheckViewModelFragment;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.domain.nnew.main.MainActivity;
-import com.plim.kati_app.kati.domain.old.dataChange.model.UserInfoModifyRequest;
-import com.plim.kati_app.kati.domain.old.dataChange.model.UserInfoResponse;
-import com.plim.kati_app.kati.domain.old.temp.TempActivity;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import com.plim.kati_app.kati.domain.nnew.main.myKati.myInfoEdit.model.UserInfoModifyRequest;
+import com.plim.kati_app.kati.domain.nnew.main.myKati.myInfoEdit.model.UserInfoResponse;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import retrofit2.Response;
 
-import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.BASIC_DATE_FORMAT;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.USER_MODIFY_SUCCESS_DIALOG_MESSAGE;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.USER_MODIFY_SUCCESS_DIALOG_TITLE;
 

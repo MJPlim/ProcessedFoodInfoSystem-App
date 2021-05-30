@@ -1,4 +1,4 @@
-package com.plim.kati_app.kati.domain.nnew.itemRank.model;
+package com.plim.kati_app.kati.domain.nnew.main.search.model;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -24,8 +24,8 @@ public class FoodDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_detail);
 
-        TabLayout tabLayout = findViewById(R.id.tabLayout);
-        ViewPager2 viewPager2 = findViewById(R.id.viewPager2_container);
+        TabLayout tabLayout = findViewById(R.id.foodDetailActivity_tabLayout);
+        ViewPager2 viewPager2 = findViewById(R.id.foodDetailActivity_viewPager2);
 
         ViewPagerAdapter fgAdapter = new ViewPagerAdapter(this);
         viewPager2.setAdapter(fgAdapter);

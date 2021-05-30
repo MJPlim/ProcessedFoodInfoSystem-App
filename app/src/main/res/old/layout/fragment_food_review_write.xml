@@ -26,7 +26,6 @@
 
         <TextView
             android:id="@+id/foodReviewWriteFragment_reviewAskTitle"
-            style="@style/textTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="제품은 어떠셨어요?"

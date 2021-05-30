@@ -25,13 +25,12 @@ import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiSearchFragmen
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBackImpl;
 import com.plim.kati_app.kati.domain.nnew.foodDetail.FoodDetailActivity;
-import com.plim.kati_app.kati.domain.nnew.main.myKati.allergy.AllergyFragment;
+import com.plim.kati_app.kati.domain.nnew.main.myKati.allergy.model.ReadUserAllergyResponse;
 import com.plim.kati_app.kati.domain.nnew.main.search.adapter.AdRecyclerAdapter;
 import com.plim.kati_app.kati.domain.nnew.main.search.adapter.FoodRecyclerAdapter;
 import com.plim.kati_app.kati.domain.nnew.main.search.model.AdvertisementResponse;
 import com.plim.kati_app.kati.domain.nnew.main.search.model.FindFoodBySortingResponse;
 import com.plim.kati_app.kati.domain.nnew.main.search.model.FoodResponse;
-import com.plim.kati_app.kati.domain.old.temp.editData.allergy.model.ReadUserAllergyResponse;
 
 import java.util.List;
 import java.util.Vector;

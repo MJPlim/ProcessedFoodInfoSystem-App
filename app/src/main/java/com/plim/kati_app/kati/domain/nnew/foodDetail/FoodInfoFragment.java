@@ -17,7 +17,7 @@ import com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHInfoItem;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiFoodFragment;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBackImpl;
-import com.plim.kati_app.kati.domain.old.search.foodInfo.model.FoodDetailResponse;
+import com.plim.kati_app.kati.domain.nnew.foodDetail.model.FoodDetailResponse;
 import com.plim.kati_app.kati.domain.old.model.FindFoodByBarcodeRequest;
 import com.varunest.sparkbutton.SparkButton;
 
@@ -92,6 +92,7 @@ public class FoodInfoFragment extends KatiFoodFragment {
             Log.d("즐찾 확인", token + "-");
             this.foodId = this.foodDetailResponse.getFoodId();
             this.checkFavorite(token);
+            this.heartButton.setVisibility(View.VISIBLE);
         }else{
             this.heartButton.setVisibility(View.GONE);
         }
@@ -218,8 +219,8 @@ public class FoodInfoFragment extends KatiFoodFragment {
 //                        R.drawable.ic_baseline_favorite_border_24
 //                , getContext().getTheme()
 //        ));
-//        this.likeButton.clearColorFilter();
-//        this.likeButton.setColorFilter(
+//        this.heartButton();
+//        this.heartButton.drawable().setColorFilter(
 //                getResources().getColor(
 //                        this.isFavorite ?
 //                                R.color.kati_red :
@@ -227,6 +228,8 @@ public class FoodInfoFragment extends KatiFoodFragment {
 //                ),
 //                PorterDuff.Mode.SRC_IN
 //        );
+
+        this.heartButton.pressOnTouch(flag);
         this.heartButton.setChecked(flag);
     }
 

@@ -1,24 +1,14 @@
 package com.plim.kati_app.kati.domain.nnew.main.search;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.res.ColorStateList;
-import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.Gravity;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.ImageView;
@@ -28,17 +18,12 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.plim.kati_app.R;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
-import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntityTool;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiSearchFragment;
-import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRestAPI;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBackImpl;
-import com.plim.kati_app.kati.domain.nnew.itemRank.model.ItemRankingResponse;
+import com.plim.kati_app.kati.domain.nnew.main.search.model.ItemRankingResponse;
 import com.plim.kati_app.kati.domain.nnew.main.search.barcode.view.BarcodeActivity;
-
-import org.jetbrains.annotations.NotNull;
-import org.w3c.dom.Text;
 
 import java.util.List;
 import java.util.Vector;

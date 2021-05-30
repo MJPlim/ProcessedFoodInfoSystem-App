@@ -22,7 +22,6 @@ import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiLoginCheckViewModelFragment;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
-import com.plim.kati_app.kati.domain.old.search.foodInfo.view.FoodInfoActivity;
 import com.plim.kati_app.kati.domain.old.model.CreateAndUpdateReviewRequest;
 import com.plim.kati_app.kati.domain.old.model.CreateReviewResponse;
 
@@ -117,10 +116,10 @@ public class ReviewWriteFragment extends KatiLoginCheckViewModelFragment {
                                 "리뷰 저장 완료",
                                 "성공적으로 리뷰를 저장하였습니다.",
                                 (dialog, which) -> {
-                                    Intent intent = new Intent(getActivity(), FoodInfoActivity.class);
-                                    intent.putExtra("foodId",foodId);
-                                    intent.putExtra("isAd", false);
-                                    startActivity(intent);
+//                                    Intent intent = new Intent(getActivity(), FoodInfoActivity.class);
+//                                    intent.putExtra("foodId",foodId);
+//                                    intent.putExtra("isAd", false);
+//                                    startActivity(intent);
                                 }
                         );
         }

@@ -44,6 +44,7 @@ public class HomeFragment extends KatiViewModelFragment {
         JSHViewPagerTool.setAutoSlide(this.viewPager2, 5000);
         JSHViewPagerTool.setEffect(this.viewPager2);
 
+        this.layout.removeAllViews();
         for(Constant.ECategory category: Constant.ECategory.values()){
             YYECategoryItem item= new YYECategoryItem(getContext());
             item.setText(category.getName());

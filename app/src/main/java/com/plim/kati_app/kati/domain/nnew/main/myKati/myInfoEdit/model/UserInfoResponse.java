@@ -1,4 +1,4 @@
-package com.plim.kati_app.kati.domain.old.dataChange.model;
+package com.plim.kati_app.kati.domain.nnew.main.myKati.myInfoEdit.model;
 
 import com.google.gson.annotations.SerializedName;
 

@@ -42,7 +42,7 @@
                 app:sparkbutton_secondaryColor="@color/kati_red" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout4"
+                android:id="@+id/foodItemFragment_miniConstraintLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -115,7 +115,7 @@
                 android:layout_marginTop="1dp"
                 app:JSHInfoItem_content="냉동감자\n혼합식용유\n페퍼시즈닝"
                 app:JSHInfoItem_title="원재료"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
+                app:layout_constraintTop_toBottomOf="@+id/foodItemFragment_miniConstraintLayout" />
 
             <com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHInfoItem
                 android:id="@+id/foodItemFragment_ingredientItem"

@@ -17,13 +17,11 @@ import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.domain.model.Constant;
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiLoginCheckViewModelFragment;
-import com.plim.kati_app.kati.crossDomain.domain.view.fragment.expandableFragment.AbstractExpandableItemList;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
-import com.plim.kati_app.kati.domain.old.temp.TempActivity;
-import com.plim.kati_app.kati.domain.old.temp.editData.allergy.model.CreateUserAllergyRequest;
-import com.plim.kati_app.kati.domain.old.temp.editData.allergy.model.CreateUserAllergyResponse;
-import com.plim.kati_app.kati.domain.old.temp.editData.allergy.model.ReadUserAllergyResponse;
-import com.plim.kati_app.kati.domain.old.temp.editData.allergy.view.UserAllergyListFragment;
+import com.plim.kati_app.kati.domain.nnew.main.myKati.allergy.model.CreateUserAllergyRequest;
+import com.plim.kati_app.kati.domain.nnew.main.myKati.allergy.model.CreateUserAllergyResponse;
+import com.plim.kati_app.kati.domain.nnew.main.myKati.allergy.model.ReadUserAllergyResponse;
+
 
 import java.util.Vector;
 
