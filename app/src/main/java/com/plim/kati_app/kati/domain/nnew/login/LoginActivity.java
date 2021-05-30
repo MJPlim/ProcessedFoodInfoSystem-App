@@ -1,9 +1,11 @@
 package com.plim.kati_app.kati.domain.nnew.login;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -36,6 +38,15 @@ public class LoginActivity extends KatiViewModelActivity {
     private CheckBox autologinCheckBox;
     private Vector<KatiDialog> dialogs;
 
+    @Override
+    public void onUserInteraction() {
+        super.onUserInteraction();
+        if (!(emailAddress.getText().toString().equals("")) && !(password.getText().toString().equals(""))){
+            this.loginButton.setEnabled(true);
+        }else{
+            this.loginButton.setEnabled(false);
+        }
+    }
 
     @Override
     protected int getLayoutId() {
