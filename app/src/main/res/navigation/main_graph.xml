@@ -40,7 +40,7 @@
         tools:layout="@layout/fragment_my_info_edit" />
     <fragment
         android:id="@+id/reviewFlagment"
-        android:name="com.plim.kati_app.kati.domain.nnew.main.myKati.review.ReviewManagementFragment"
+        android:name="com.plim.kati_app.kati.domain.nnew.main.myKati.review.view.ReviewManagementFragment"
         android:label="fragment_review_flagment"
         tools:layout="@layout/fragment_review_management" />
     <fragment

@@ -6,6 +6,8 @@ import com.plim.kati_app.kati.domain.nnew.main.favorite.model.UserFavoriteRespon
 import com.plim.kati_app.kati.domain.nnew.main.myKati.allergy.model.CreateUserAllergyRequest;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.allergy.model.CreateUserAllergyResponse;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.allergy.model.ReadUserAllergyResponse;
+import com.plim.kati_app.kati.domain.nnew.main.myKati.review.model.ReadReviewResponse;
+import com.plim.kati_app.kati.domain.nnew.main.myKati.review.model.ReadUserReviewResponse;
 import com.plim.kati_app.kati.domain.nnew.setRestoreEmail.model.SetSecondEmailRequest;
 import com.plim.kati_app.kati.domain.nnew.setRestoreEmail.model.SetSecondEmailResponse;
 import com.plim.kati_app.kati.domain.nnew.editPassword.model.ModifyPasswordRequest;
@@ -158,6 +160,7 @@ public interface KatiRestAPI {
     @GET("api/v1/advertisement/ads") Call<List<AdvertisementResponse>> getAdvertisementFoodList();
     @GET("reviewRanking") Call<List<ItemRankingResponse>> getRankingList();
     @GET("/api/v1/user/favorite/list") Call<List<UserFavoriteResponse>> getUserFavorite();
+    @GET("/api/v1/user/readReviewByUserID") Call<ReadUserReviewResponse<List<ReadReviewResponse>>> getUserReview();
 
 }
 

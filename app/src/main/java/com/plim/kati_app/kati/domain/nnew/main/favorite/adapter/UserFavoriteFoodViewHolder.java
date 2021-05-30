@@ -49,7 +49,7 @@ public class UserFavoriteFoodViewHolder extends RecyclerView.ViewHolder {
         this.itemView.setTag(item.getFood().getFoodId());
         this.productName.setText(item.getFood().getFoodName());
         this.rate.setText(item.getFood().getReviewRate());
-        this.rateNum.setText(item.getFood().getReviewCount().toString());
+        this.rateNum.setText("("+item.getFood().getReviewCount().toString()+")");
         this.imageAddress = item.getFood().getFoodImageAddress();
         Glide.with(this.activity).load(this.imageAddress).fitCenter().transform(new CenterCrop(), new CircleCrop()).into(this.imageView);
         this.imageView.setOnClickListener(v -> this.activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(this.imageAddress))));

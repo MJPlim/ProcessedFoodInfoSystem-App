@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,6 +16,7 @@ import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.LoadingDialog;
+import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiLoginCheckViewModelFragment;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiViewModelFragment;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.domain.nnew.login.LoginActivity;
@@ -31,8 +33,8 @@ import retrofit2.Response;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.LOG_OUT_ACTIVITY_FAILURE_DIALOG_TITLE;
 
-public class FavoriteFragment extends KatiViewModelFragment {
-    private TextView favoriteNum;
+public class FavoriteFragment extends KatiLoginCheckViewModelFragment {
+    private TextView favoriteNum,favoriteTextSum,getFavoriteTextEA;
     private RecyclerView foodInfoRecyclerView;
     private UserFavoriteFoodRecyclerAdapter foodRecyclerAdapter;
     private LoadingDialog dialog;
@@ -46,6 +48,8 @@ public class FavoriteFragment extends KatiViewModelFragment {
     protected void associateView(View view) {
         this.foodInfoRecyclerView = view.findViewById(R.id.favorite_list);
         this.favoriteNum=view.findViewById(R.id.favorite_count);
+        this.favoriteTextSum=view.findViewById(R.id.favorite_textView14);
+        this.getFavoriteTextEA=view.findViewById(R.id.favorite_textView16);
     }
 
     @Override
@@ -54,11 +58,29 @@ public class FavoriteFragment extends KatiViewModelFragment {
         this.dialog = new LoadingDialog(getContext());
         this.foodInfoRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         this.foodInfoRecyclerView.setAdapter(this.foodRecyclerAdapter);
+
+    }
+
+
+    @Override
+    protected boolean isLoginNeeded() {
+        return true;
+    }
+
+    @Override
+    protected void katiEntityUpdatedAndLogin() {
+        favoriteNum.setVisibility(View.VISIBLE);
+        favoriteTextSum.setVisibility(View.VISIBLE);
+        getFavoriteTextEA.setVisibility(View.VISIBLE);
         this.getUserFavorite();
     }
 
     @Override
-    protected void katiEntityUpdated() {
+    protected void katiEntityUpdatedAndNoLogin() {
+        favoriteNum.setVisibility(View.GONE);
+        favoriteTextSum.setVisibility(View.GONE);
+        getFavoriteTextEA.setVisibility(View.GONE);
+
 
     }
 
@@ -84,7 +106,6 @@ public class FavoriteFragment extends KatiViewModelFragment {
             try {
                 JSONObject jObjError = new JSONObject(response.errorBody().string());
                 Toast.makeText(getContext(), jObjError.getString("error-message"), Toast.LENGTH_LONG).show();
-                showNotLoginedDialog();
             } catch (Exception e) {
                 Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
             }
@@ -100,11 +121,7 @@ public class FavoriteFragment extends KatiViewModelFragment {
 
 
 
-    private void showNotLoginedDialog() {
-        navigateTo(R.id.action_global_mainFragment);
-        this.getActivity().startActivity(new Intent(this.getContext(), LoginActivity.class));
 
-    }
 
 
 

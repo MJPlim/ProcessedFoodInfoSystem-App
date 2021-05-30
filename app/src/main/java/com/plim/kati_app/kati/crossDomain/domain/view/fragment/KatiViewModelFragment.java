@@ -19,7 +19,7 @@ import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 import java.util.ArrayList;
 import java.util.Map;
 
-public abstract class KatiViewModelFragment extends JSHViewModelFragment {
+public abstract class KatiViewModelFragment extends JSHViewModelFragment{
 
     // Associate
     // Model

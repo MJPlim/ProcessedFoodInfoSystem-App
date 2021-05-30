@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/kati_light_gray"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.plim.kati_app.kati.domain.nnew.main.myKati.review.ReviewManagementFragment">
+    tools:context="com.plim.kati_app.kati.domain.nnew.main.myKati.review.view.ReviewManagementFragment">
 
     <com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHToolBar
         android:id="@+id/review_toolbar"
@@ -17,12 +17,51 @@
         android:background="@color/white"
         android:elevation="5dp"/>
 
+    <TextView
+        android:id="@+id/review_management_fragment_textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/review_list"
+        android:text="총"
+        android:layout_marginLeft="16dp"
+        android:layout_marginVertical="16dp"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/review_toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/review_management_fragment_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="16dp"
+        android:layout_marginLeft="4dp"
+        android:text="0"
+        android:textColor="@color/kati_red"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/review_list"
+        app:layout_constraintStart_toEndOf="@+id/review_management_fragment_textView14"
+        app:layout_constraintTop_toBottomOf="@+id/review_toolbar" />
+
+    <TextView
+        android:id="@+id/review_management_fragment_textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="16dp"
+        android:text="개"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/review_list"
+        app:layout_constraintStart_toEndOf="@+id/review_management_fragment_count"
+        app:layout_constraintTop_toBottomOf="@+id/review_toolbar" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/review_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/review_toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/review_management_fragment_textView14"
         tools:listitem="@layout/item_review_see_at_mykati"
         tools:itemCount="3"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
