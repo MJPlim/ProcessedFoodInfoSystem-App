@@ -74,40 +74,60 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/searchResultFragment_searchEditTextBackgroundImage" />
 
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/searchResultFragment_chipGroup"
-            android:layout_marginBottom="4dp"
-            android:layout_width="wrap_content"
+        <HorizontalScrollView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="4dp"
-            app:singleSelection="true"
+            android:background="@color/white"
+            android:scrollbars="none"
+            android:layout_marginLeft="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/searchResultFragment_assendOrDesend"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/searchResultFragment_searchEditTextBackgroundImage">
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/searchResultFragment_rankingChip"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/searchResultFragment_chipGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="카티 랭킹 순" />
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                app:singleSelection="true">
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/searchResultFragment_manufacturerChip"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="제조사 이름 순" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/searchResultFragment_rankingChip"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="랭킹 순" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/searchResultFragment_reviewCountChip"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="리뷰 많은 순" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/searchResultFragment_manufacturerChip"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="제조사 순" />
 
-        </com.google.android.material.chip.ChipGroup>
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/searchResultFragment_reviewCountChip"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="리뷰 수 순" />
+
+            </com.google.android.material.chip.ChipGroup>
+        </HorizontalScrollView>
+
+
+        <ImageView
+            android:id="@+id/searchResultFragment_assendOrDesend"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/ic_baseline_swap_vert_24"
+            app:layout_constraintBottom_toBottomOf="@+id/searchResultFragment_allergyFilterButton"
+            app:layout_constraintEnd_toStartOf="@+id/searchResultFragment_allergyFilterButton"
+            app:layout_constraintTop_toTopOf="@+id/searchResultFragment_allergyFilterButton"
+            app:tint="@color/kati_red" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.core.widget.NestedScrollView

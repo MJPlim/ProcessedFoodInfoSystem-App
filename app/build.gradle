@@ -13,6 +13,7 @@ android {
                     'src/main/res/old',
                     'src/main/res/nnew',
 
+
                     'src/main/res/nnew/edit_name',
                     'src/main/res/nnew/edit_password',
                     'src/main/res/nnew/find_id',
@@ -30,6 +31,7 @@ android {
                     'src/main/res/nnew/main/layout/my_kati/layout/my_info_edit',
                     'src/main/res/nnew/main/layout/my_kati/layout/review',
                     'src/main/res/nnew/main/layout/search',
+                    'src/main/res/nnew/main/layout/category',
 
                     'src/main/res/nnew/review',
                     'src/main/res/nnew/set_restore_email',
@@ -38,9 +40,6 @@ android {
                     'src/main/res/nnew/sign_up/layout/sign_up',
 
                     'src/main/res/nnew/sign_up/layout/welcome',
-
-
-
             ]
         }
     }
@@ -79,11 +78,10 @@ android {
 dependencies {
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
     // heart button
-    compile 'com.github.varunest:sparkbutton:1.0.6'
-    // https://github.com/varunest/SparkButton
-
-
+        compile 'com.github.varunest:sparkbutton:1.0.6'
+        // https://github.com/varunest/SparkButton
 
     // Google map
     implementation 'com.google.android.gms:play-services-maps:17.0.0'

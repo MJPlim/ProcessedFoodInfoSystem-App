@@ -42,6 +42,39 @@
         app:layout_constraintTop_toBottomOf="@+id/foodInfoReviewItem_userNameTextView" />
 
     <TextView
+        android:id="@+id/foodInfoReviewItem_reviewEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="4dp"
+        android:text="수정"
+        android:padding="4dp"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="@+id/foodInfoReviewItem_reviewDelete"
+        app:layout_constraintEnd_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/foodInfoReviewItem_reviewDelete" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="0.5dp"
+        android:layout_height="10dp"
+        android:layout_marginRight="4dp"
+        android:background="@color/kati_dark_gray"
+        app:layout_constraintBottom_toBottomOf="@+id/foodInfoReviewItem_reviewDelete"
+        app:layout_constraintEnd_toStartOf="@+id/foodInfoReviewItem_reviewDelete"
+        app:layout_constraintTop_toTopOf="@+id/foodInfoReviewItem_reviewDelete" />
+
+    <TextView
+        android:id="@+id/foodInfoReviewItem_reviewDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textSize="12sp"
+        android:padding="4dp"
+        android:text="삭제"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/foodInfoReviewItem_reportTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

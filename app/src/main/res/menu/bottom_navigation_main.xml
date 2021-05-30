@@ -15,7 +15,7 @@
         android:title="검색" />
     <item
         android:id="@+id/action_find_market"
-        android:icon="@drawable/ic_baseline_location_on_24"
+        android:icon="@drawable/ic_outline_location_on_24"
         android:title="구매처"/>
     <item
         android:id="@+id/action_mykati"

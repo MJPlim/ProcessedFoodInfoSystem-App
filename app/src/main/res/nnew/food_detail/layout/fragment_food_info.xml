@@ -19,13 +19,12 @@
 
             <ImageView
                 android:id="@+id/foodItemFragment_foodImageView"
-                android:layout_width="match_parent"
+                android:layout_width="160dp"
                 android:layout_height="160dp"
                 android:adjustViewBounds="true"
                 android:background="@color/kati_light_gray"
                 android:padding="10dp"
                 android:scaleType="fitCenter"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

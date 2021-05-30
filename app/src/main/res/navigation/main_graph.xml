@@ -10,6 +10,13 @@
         android:name="com.plim.kati_app.kati.domain.nnew.main.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.plim.kati_app.kati.domain.nnew.main.category.CategoryFoodDetailFragment"
+        android:label="fragment_category"
+        tools:layout="@layout/fragment_category_food" />
+
     <fragment
         android:id="@+id/myKatiFragment"
         android:name="com.plim.kati_app.kati.domain.nnew.main.myKati.MyKatiFragment"
@@ -66,5 +73,5 @@
         <action
             android:id="@+id/action_searchResultFragment_to_allergyFragment"
             app:destination="@id/allergyFragment" />
-    </fragment>
+    </fragment><action android:id="@+id/action_global_categoryFragment" app:destination="@id/categoryFragment"/>
 </navigation>

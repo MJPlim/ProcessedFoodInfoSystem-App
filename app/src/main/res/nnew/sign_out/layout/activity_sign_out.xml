@@ -115,8 +115,41 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/signOutActivity_removeUserDataAnnounceTitleTextView" />
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <TextView
+        android:id="@+id/signOutActivity_userCheckTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/kati_light_gray"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
+        android:text="본인 확인"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@+id/signOutActivity_announceLayout"
+        tools:layout_editor_absoluteX="95dp" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/signOutActivity_userCheckTextView">
+
+        <EditText
+            android:id="@+id/signOutActivity_passwordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@drawable/edittext_bg"
+            android:hint="비밀번호 입력"
+            android:padding="8dp"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -125,14 +158,14 @@
         android:background="@color/white"
         android:layout_marginTop="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signOutActivity_announceLayout">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
         <CheckBox
             android:id="@+id/signOutActivity_acceptAnnounceCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="8dp"
             android:text="유의 사항을 모두 확인하였습니다."
-            android:layout_margin="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -140,9 +173,9 @@
             android:id="@+id/signOutActivity_signOutButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="회원탈퇴하기"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
+            android:text="회원탈퇴하기"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/signOutActivity_acceptAnnounceCheckBox" />
 
@@ -150,26 +183,19 @@
             android:id="@+id/signOutActivity_cancelButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="취소"
-            android:backgroundTint="@color/white"
-            android:textColor="@color/black"
             android:layout_marginLeft="8dp"
-            android:layout_marginRight="16dp"
             android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:backgroundTint="@color/white"
+            android:text="취소"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/signOutActivity_signOutButton"
             app:layout_constraintTop_toBottomOf="@+id/signOutActivity_acceptAnnounceCheckBox" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <EditText
-        android:id="@+id/signOutActivity_passwordEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="회원탈퇴를 위해 비밀번호를 입력해 주세요"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -46,7 +46,9 @@
             android:name=".kati.domain.nnew.signUp.SignUpActivity"
             android:label="@string/title_activity_sign_up"
             android:theme="@style/Theme.KatiUI.NoActionBar" />
-        <activity android:name=".kati.domain.nnew.main.MainActivity">
+
+        <activity android:name=".kati.domain.nnew.main.MainActivity"/>
+        <activity android:name=".kati.domain.nnew.splash.SplashActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -82,7 +82,7 @@ public class FoodInfoFragment extends KatiFoodFragment {
     @Override
     protected void initializeView() {
         this.foodImageView.setOnClickListener(v -> this.changeProductImage(this.isFront));
-        this.heartButton.setOnClickListener(v -> this.saveLike());
+//        this.heartButton.setOnClickListener(v -> this.saveLike());
     }
 
     @Override
@@ -93,7 +93,7 @@ public class FoodInfoFragment extends KatiFoodFragment {
             this.foodId = this.foodDetailResponse.getFoodId();
             this.checkFavorite(token);
         }else{
-            this.heartButton.setVisibility(View.GONE);
+//            this.heartButton.setVisibility(View.GONE);
         }
         this.changeImage(this.foodDetailResponse.getFoodImageAddress());
         this.foodNameTextView.setText(this.foodDetailResponse.getFoodName());
