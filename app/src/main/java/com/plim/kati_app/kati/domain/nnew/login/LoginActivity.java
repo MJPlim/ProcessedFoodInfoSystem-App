@@ -59,7 +59,7 @@ public class LoginActivity extends KatiViewModelActivity {
         this.emailAddress = findViewById(R.id.editTextTextEmailAddress);
         this.password = findViewById(R.id.editTextTextPassword4);
         this.loginButton = findViewById(R.id.loginButton);
-        this.autologinCheckBox= findViewById(R.id.loginActivity_autologinCheckBox);
+        this.autologinCheckBox= findViewById(R.id.checkBox2);
         this.findId = this.findViewById(R.id.login_findId_textView);
         this.findPw = this.findViewById(R.id.login_findPW_textView);
         this.signIn = this.findViewById(R.id.login_signIn_textView);

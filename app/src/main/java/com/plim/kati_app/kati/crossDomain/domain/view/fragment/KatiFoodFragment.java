@@ -5,7 +5,7 @@ import android.os.Bundle;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.plim.kati_app.kati.domain.old.search.foodInfo.model.FoodDetailResponse;
+import com.plim.kati_app.kati.domain.nnew.foodDetail.model.FoodDetailResponse;
 import com.plim.kati_app.kati.domain.old.model.FoodViewModel;
 import com.plim.kati_app.kati.domain.old.model.ReadSummaryResponse;
 

@@ -1,4 +1,4 @@
-package com.plim.kati_app.kati.domain.old.search.foodInfo.model;
+package com.plim.kati_app.kati.domain.nnew.foodDetail.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

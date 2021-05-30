@@ -3,7 +3,7 @@ package com.plim.kati_app.kati.domain.old.model;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.plim.kati_app.kati.domain.old.search.foodInfo.model.FoodDetailResponse;
+import com.plim.kati_app.kati.domain.nnew.foodDetail.model.FoodDetailResponse;
 
 import lombok.Getter;
 import lombok.Setter;

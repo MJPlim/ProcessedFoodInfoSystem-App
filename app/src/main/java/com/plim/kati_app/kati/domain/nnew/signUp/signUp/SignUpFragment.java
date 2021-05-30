@@ -60,7 +60,8 @@ public class SignUpFragment extends KatiViewModelFragment {
             showDialog(
                     "어서 오세요 " + nickNameEditText.getText().toString() + " 님!",
                     "회원 가입에 성공하였습니다.",
-                    (dialog, which) -> Navigation.findNavController(getView()).navigate(R.id.action_register3Fragment_to_registerFinishedFragment)
+//                    (dialog, which) -> Navigation.findNavController(getView()).navigate(R.id.action_register3Fragment_to_registerFinishedFragment)
+            null
             );
         }
 

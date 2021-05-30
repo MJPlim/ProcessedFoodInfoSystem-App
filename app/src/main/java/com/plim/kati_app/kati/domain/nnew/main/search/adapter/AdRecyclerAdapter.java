@@ -1,7 +1,6 @@
 package com.plim.kati_app.kati.domain.nnew.main.search.adapter;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,15 +8,10 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.plim.kati_app.R;
-import com.plim.kati_app.kati.domain.nnew.main.search.SearchResultFragment;
 import com.plim.kati_app.kati.domain.nnew.main.search.model.AdvertisementResponse;
-import com.plim.kati_app.kati.domain.old.search.foodInfo.view.FoodInfoActivity;
 import com.plim.kati_app.kati.domain.nnew.main.search.model.FoodResponse;
 
 import java.util.Vector;
-
-import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.NEW_DETAIL_ACTIVITY_EXTRA_FOOD_ID;
-import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.NEW_DETAIL_ACTIVITY_EXTRA_IS_AD;
 
 public class AdRecyclerAdapter extends RecyclerView.Adapter<adViewHolder> {
 

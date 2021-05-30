@@ -5,8 +5,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
@@ -46,14 +44,10 @@ public class HomeFragment extends KatiViewModelFragment {
         JSHViewPagerTool.setAutoSlide(this.viewPager2, 5000);
         JSHViewPagerTool.setEffect(this.viewPager2);
 
-        NavController navController = Navigation.findNavController(this.getActivity(), R.id.nav_host_fragment);
         for(Constant.ECategory category: Constant.ECategory.values()){
             YYECategoryItem item= new YYECategoryItem(getContext());
             item.setText(category.getName());
             item.setImage(getResources().getDrawable(category.getDrawable(), getActivity().getTheme()));
-            item.setOnClickListener(
-                    v-> navController.navigate(R.id.action_global_categoryFragment)
-            );
             this.layout.addView(item);
         }
 
