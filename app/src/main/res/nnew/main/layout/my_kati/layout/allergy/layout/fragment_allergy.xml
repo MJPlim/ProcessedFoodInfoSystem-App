@@ -34,15 +34,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/allergyFragment_selectAllergyMessageTextView"/>
 
-<!--            <com.google.android.material.chip.Chip-->
-<!--                style="@style/Widget.MaterialComponents.Chip.Choice"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                app:chipStrokeWidth="1.5dp"-->
-<!--                app:chipStrokeColor="@color/kati_middle_gray"-->
-<!--                app:chipBackgroundColor="@color/chip_choice_bg"-->
-<!--                android:text="새우" />-->
-
 
         <TextView
             android:id="@+id/allergyFragment_selectAllergyMessageTextView"
@@ -56,6 +47,18 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--<com.google.android.material.chip.Chip
+        style="@style/Widget.MaterialComponents.Chip.Choice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="새우"
+        android:checked="true"
+        app:chipBackgroundColor="@color/chip_choice_bg"
+        app:chipStrokeColor="@color/kati_middle_gray"
+        app:chipStrokeWidth="1.5dp"
+        tools:layout_editor_absoluteX="133dp"
+        tools:layout_editor_absoluteY="266dp" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

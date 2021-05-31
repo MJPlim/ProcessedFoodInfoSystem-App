@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
+    android:background="@color/kati_light_gray"
     tools:context="com.plim.kati_app.kati.domain.nnew.foodDetail.ReviewFragment">
 
 
@@ -13,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@color/kati_light_gray"
-        app:layout_constraintBottom_toTopOf="@+id/button7"
+        app:layout_constraintBottom_toTopOf="@+id/reviewSummaryWidget_writeReviewButton"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,17 +29,31 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/reviewFragment_recyclerView"
-
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="8dp"
+                android:background="@color/kati_light_gray"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toBottomOf="@+id/reviewFragment_summary"
-                tools:itemCount="4"
+                tools:itemCount="2"
                 tools:listitem="@layout/item_review_see_at_food_info" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+
+
+    <TextView
+        android:id="@+id/reviewFragment_noReview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="남겨진 리뷰가 없습니다.\n첫번째 리뷰를 남겨보세요!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.25"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/reviewSummaryWidget_writeReviewButton"

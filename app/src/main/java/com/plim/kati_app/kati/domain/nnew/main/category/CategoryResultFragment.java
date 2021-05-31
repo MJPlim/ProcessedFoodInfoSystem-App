@@ -1,6 +1,7 @@
 package com.plim.kati_app.kati.domain.nnew.main.category;
 
 import android.app.Activity;
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipDrawable;
 import com.google.android.material.chip.ChipGroup;
 import com.plim.kati_app.R;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
@@ -108,14 +110,11 @@ public class CategoryResultFragment extends Fragment {
     }
 
     public void createChip(Constant.EChildCategory childCategory, boolean chipCheck){
-        Chip chip= new Chip(this.getContext());
+        LayoutInflater inflater = (LayoutInflater) this.getActivity().getSystemService(Service.LAYOUT_INFLATER_SERVICE);
+        Chip chip= (Chip) inflater.inflate(R.layout.jsh_chip, null);
         chip.setOnCheckedChangeListener((buttonView, isChecked) -> loadCategory(isChecked,childCategory.getName()));
-        chip.setCheckable(true);
         chip.setChecked(chipCheck);
         chip.setText(childCategory.getName());
-        chip.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.chip_choice_bg,getActivity().getTheme())));
-        chip.setChipStrokeColor(ColorStateList.valueOf(getResources().getColor(R.color.kati_middle_gray,getActivity().getTheme())));
-        chip.setChipStrokeWidth(1.5f);
         this.chipGroup.addView(chip);
     }
 

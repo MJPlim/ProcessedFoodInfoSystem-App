@@ -14,6 +14,7 @@ import androidx.navigation.Navigation;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.plim.kati_app.R;
+import com.plim.kati_app.jshCrossDomain.tech.google.JSHGoogleMap;
 import com.plim.kati_app.kati.domain.nnew.map.MapServiceActivity;
 
 import org.jetbrains.annotations.NotNull;
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
                         navController.navigate(R.id.action_global_searchFragment);
                         break;
                     case R.id.action_find_market:
-                        startActivity(new Intent(this, MapServiceActivity.class));
+                        JSHGoogleMap.openGoogleMapMyPositionAndSearch(this, "Convenience");
                         break;
                     case R.id.action_mykati:
                         navController.navigate(R.id.action_global_myKatiFragment);

@@ -34,11 +34,12 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:sparkbutton_activeImage="@drawable/ic_baseline_favorite_24"
                 app:sparkbutton_iconSize="25dp"
+                app:sparkbutton_activeImage="@drawable/ic_baseline_favorite_24"
                 app:sparkbutton_inActiveImage="@drawable/ic_baseline_favorite_border_24"
                 app:sparkbutton_primaryColor="@color/kati_orange"
-                app:sparkbutton_secondaryColor="@color/kati_red" />
+                app:sparkbutton_secondaryColor="@color/kati_red"
+                />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/foodItemFragment_miniConstraintLayout"
