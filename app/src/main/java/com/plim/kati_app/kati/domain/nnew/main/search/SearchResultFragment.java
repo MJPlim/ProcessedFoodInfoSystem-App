@@ -99,6 +99,7 @@ public class SearchResultFragment extends KatiSearchFragment {
         this.manufacturerChip.setOnCheckedChangeListener((buttonView, isChecked) -> this.doSort(isChecked, Constant.SortElement.MANUFACTURER));
         this.rankingChip.setOnCheckedChangeListener((buttonView, isChecked) -> this.doSort(isChecked, Constant.SortElement.RANK));
         this.reviewCountChip.setOnCheckedChangeListener((buttonView, isChecked) -> this.doSort(isChecked, Constant.SortElement.REVIEW_COUNT));
+        this.rankingChip.performClick();
 
         this.adRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false));
         this.adRecyclerView.setAdapter(this.foodRecyclerAdapter);

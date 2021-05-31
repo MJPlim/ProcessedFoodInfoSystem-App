@@ -19,6 +19,7 @@ import com.plim.kati_app.kati.domain.nnew.editName.EditAddressActivity;
 import com.plim.kati_app.kati.domain.nnew.editName.EditBirthActivity;
 import com.plim.kati_app.kati.domain.nnew.editName.EditNameActivity;
 import com.plim.kati_app.kati.domain.nnew.editPassword.view.EditPasswordActivity;
+import com.plim.kati_app.kati.domain.nnew.main.MainActivity;
 import com.plim.kati_app.kati.domain.nnew.setRestoreEmail.SetRestoreEmailActivity;
 import com.plim.kati_app.kati.domain.nnew.signOut.SignOutActivity;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.myInfoEdit.model.UserInfoResponse;
@@ -155,7 +156,7 @@ public class MyInfoEditFragment extends KatiInfoEditFragment {
     }
 
     public void showOkDialog() {
-        this.dialogs.add(this.showDialog(LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_TITLE, LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_MESSAGE, null));
+        this.dialogs.add(this.showDialog(LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_TITLE, LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_MESSAGE, (dialog,which)->startActivity(MainActivity.class)));
     }
 
     public void showNoDialog() {

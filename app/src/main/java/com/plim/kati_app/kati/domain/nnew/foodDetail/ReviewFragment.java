@@ -22,6 +22,8 @@ import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBackImpl;
 import com.plim.kati_app.kati.domain.nnew.foodDetail.adapter.ReviewRecyclerAdapter;
 import com.plim.kati_app.kati.domain.nnew.review.ReviewActivity;
+import com.plim.kati_app.kati.domain.old.model.CreateReviewResponse;
+import com.plim.kati_app.kati.domain.old.model.DeleteReviewRequest;
 import com.plim.kati_app.kati.domain.old.model.ReadReviewDto;
 import com.plim.kati_app.kati.domain.old.model.ReadReviewResponse;
 import com.plim.kati_app.kati.domain.old.model.ReadSummaryResponse;
@@ -90,22 +92,16 @@ public class ReviewFragment extends KatiFoodFragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        this.refresh();
-    }
-
-    @Override
     protected void initializeView() {
         LinearLayoutManager manager=new LinearLayoutManager(this.getContext());
         this.writeReviewButton.setOnClickListener(v -> this.moveToReviewActivity());
         this.recyclerView.setLayoutManager(manager);
         this.recyclerView.setNestedScrollingEnabled(false);
 
-//        this.deleteListener = v -> deleteReview(dataset.get(KatiEntity.EKatiData.AUTHORIZATION), (Long) v.getTag());
+        this.deleteListener = v -> deleteReview(dataset.get(KatiEntity.EKatiData.AUTHORIZATION), (Long) v.getTag());
         this.likeListener = v -> like(dataset.get(KatiEntity.EKatiData.AUTHORIZATION), (Long) v.getTag(), true);
         this.unLikeListener = v -> like(dataset.get(KatiEntity.EKatiData.AUTHORIZATION), (Long) v.getTag(), false);
-//        this.updateListener = v -> updateReviews((Long) v.getTag());
+        this.updateListener = v -> updateReviews((Long) v.getTag());
 
         this.adapter = new ReviewRecyclerAdapter(this.getActivity(), deleteListener, unLikeListener, likeListener, updateListener);
         this.recyclerView.setAdapter(this.adapter);
@@ -114,7 +110,6 @@ public class ReviewFragment extends KatiFoodFragment {
             if (v.getChildAt(v.getChildCount() - 1) != null) {
                 if ((scrollY >= (v.getChildAt(v.getChildCount() - 1).getMeasuredHeight() - v.getMeasuredHeight())) &&
                         scrollY > oldScrollY) {
-                    Log.d("스크롤 내림", "dd");
                     loadMore();
                 }
             }
@@ -130,9 +125,9 @@ public class ReviewFragment extends KatiFoodFragment {
         Intent intent = new Intent(this.getActivity(), ReviewActivity.class);
         intent.putExtra("isUpdate", false);
         intent.putExtra("foodId", foodDetailResponse.getFoodId());
-        intent.putExtra("photo", foodDetailResponse.getFoodImageAddress());
-        intent.putExtra("foodName", foodDetailResponse.getFoodName());
-        intent.putExtra("manufacturerName", foodDetailResponse.getManufacturerName());
+//        intent.putExtra("photo", foodDetailResponse.getFoodImageAddress());
+//        intent.putExtra("foodName", foodDetailResponse.getFoodName());
+//        intent.putExtra("manufacturerName", foodDetailResponse.getManufacturerName());
         this.startActivity(intent);
     }
 
@@ -202,31 +197,21 @@ public class ReviewFragment extends KatiFoodFragment {
 
         @Override
         public void onSuccessResponse(Response<UpdateReviewLikeResponse> response) {
-            KatiDialog.simplerAlertDialog(
-                    getActivity(),
-                    "좋아요를 눌렀습니다.",
-                    !likeCheck ? "좋아요를 저장하였습니다." : "좋아요를 취소하였습니다.",
-                    (dialog, which) -> refresh()
-            );
+            refresh();
         }
     }
 
-//    private class DeleteReviewCallback extends SimpleLoginRetrofitCallBack<CreateReviewResponse> {
-//
-//        public DeleteReviewCallback(Activity activity) {
-//            super(activity);
-//        }
-//
-//        @Override
-//        public void onSuccessResponse(Response<CreateReviewResponse> response) {
-//            KatiDialog.simplerAlertDialog(
-//                    getActivity(),
-//                    "리뷰 삭제",
-//                    "리뷰를 성공적으로 삭제하였습니다.",
-//                    (dialog, which) -> getReviews()
-//            );
-//        }
-//    }
+    private class DeleteReviewCallback extends SimpleLoginRetrofitCallBack<CreateReviewResponse> {
+
+        public DeleteReviewCallback(Activity activity) {
+            super(activity);
+        }
+
+        @Override
+        public void onSuccessResponse(Response<CreateReviewResponse> response) {
+            refresh();
+        }
+    }
 
     private void onReadReviewResponse(Response<ReadReviewDto> response) {
         ReadReviewDto reviewDto = response.body();
@@ -234,7 +219,6 @@ public class ReviewFragment extends KatiFoodFragment {
         ReadSummaryResponse readSummaryResponse = reviewDto.getReadSummaryResponse();
         int findReviewPageCount = readSummaryResponse.getReviewPageCount();
         hasNext = (currentPageNum < findReviewPageCount);
-        Log.d("디버그 번호", currentPageNum + "");
         foodModel.getReadSummaryResponse().setValue(readSummaryResponse);
         saveReadSummary();
 
@@ -246,39 +230,21 @@ public class ReviewFragment extends KatiFoodFragment {
 
     private void refresh() {
         this.currentPageNum=1;
-        Log.d("새로고침",this.currentPageNum+"");
         this.vector.clear();
         this.load();
     }
 
     private void loadMore() {
-        Log.d("더 불러오기",this.currentPageNum+"");
         this.currentPageNum++;
         this.load();
     }
 
-    private void load() {
-        if (!this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION).equals(KatiEntity.EKatiData.NULL.name())) {
-            this.getReviews(this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION));
-        } else this.getReviews();
+
+
+    private void deleteReview(String token, Long reviewId) {
+        DeleteReviewRequest request = new DeleteReviewRequest(reviewId);
+        KatiRetrofitTool.getAPIWithAuthorizationToken(token).deleteReview(request).enqueue(JSHRetrofitTool.getCallback(new DeleteReviewCallback(getActivity())));
     }
-
-
-    private void getReviews(String token) {
-        Log.d("디버그, 리뷰 불러오기",this.foodDetailResponse.getFoodId()+" // "+this.currentPageNum+" // "+this.hasNext);
-        KatiRetrofitTool.getAPIWithAuthorizationToken(token).readReviewByUser(this.foodDetailResponse.getFoodId(), this.currentPageNum)
-                .enqueue(JSHRetrofitTool.getCallback(new ReadUserReviewCallback(this.getActivity())));
-    }
-
-    private void getReviews() {
-        KatiRetrofitTool.getAPI().readReview(this.foodDetailResponse.getFoodId(), this.currentPageNum)
-                .enqueue(JSHRetrofitTool.getCallback(new ReadReviewCallback(this.getActivity())));
-    }
-
-//    private void deleteReview(String token, Long reviewId) {
-//        DeleteReviewRequest request = new DeleteReviewRequest(reviewId);
-//        KatiRetrofitTool.getAPIWithAuthorizationToken(token).deleteReview(request).enqueue(JSHRetrofitTool.getCallback(new DeleteReviewCallback(getActivity())));
-//    }
 
     private void like(String token, Long reviewId, boolean likeCheck) {
         UpdateReviewLikeRequest request = new UpdateReviewLikeRequest();
@@ -288,12 +254,36 @@ public class ReviewFragment extends KatiFoodFragment {
         KatiRetrofitTool.getAPIWithAuthorizationToken(token).likeReview(request).enqueue(JSHRetrofitTool.getCallback(new LikeReviewCallback(this.getActivity(), likeCheck)));
     }
 
-//    private void updateReviews(Long reviewId) {
-//        //리뷰수정
-//        Intent intent = new Intent(this.getActivity(), UpdateReviewActivity.class);
-//        intent.putExtra("reviewId", reviewId);
-//        intent.putExtra("foodId", this.foodDetailResponse.getFoodId());
-//        startActivity(intent);
-//    }
+    private void updateReviews(Long reviewId) {
+        //리뷰수정
+        for(ReadReviewResponse review: this.vector){
+            if(review.getReviewId().equals(reviewId)){
+                Intent intent = new Intent(this.getActivity(), ReviewActivity.class);
+                intent.putExtra("reviewId", reviewId);
+                intent.putExtra("foodId", this.foodDetailResponse.getFoodId());
+                intent.putExtra("isUpdate", true);
+                intent.putExtra("ratingScore",review.getReviewRating());
+                intent.putExtra("reviewText",review.getReviewDescription());
+                startActivity(intent);
+            }
+        }
+
+    }
+
+    private void load() {
+        if (!this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION).equals(KatiEntity.EKatiData.NULL.name())) {
+            this.getReviews(this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION));
+        } else this.getReviews();
+    }
+
+    private void getReviews(String token) {
+        KatiRetrofitTool.getAPIWithAuthorizationToken(token).readReviewByUser(this.foodDetailResponse.getFoodId(), this.currentPageNum)
+                .enqueue(JSHRetrofitTool.getCallback(new ReadUserReviewCallback(this.getActivity())));
+    }
+
+    private void getReviews() {
+        KatiRetrofitTool.getAPI().readReview(this.foodDetailResponse.getFoodId(), this.currentPageNum)
+                .enqueue(JSHRetrofitTool.getCallback(new ReadReviewCallback(this.getActivity())));
+    }
 
 }

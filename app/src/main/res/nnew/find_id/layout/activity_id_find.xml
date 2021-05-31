@@ -59,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="입력하신 이메일 주소로 복구 이메일이 발송됩니다."
+            android:text="아이디 분실 시, 입력하신 이메일 주소로 복구 이메일이 발송됩니다."
             android:layout_marginHorizontal="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

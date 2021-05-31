@@ -17,7 +17,7 @@
         app:title="카테고리" />
 
     <HorizontalScrollView
-        android:id="@+id/asd"
+        android:id="@+id/categoryFoodFragment_scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="none"
@@ -27,7 +27,7 @@
         tools:layout_editor_absoluteX="0dp">
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout"
+            android:id="@+id/categoryFoodFragment_tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
@@ -43,10 +43,10 @@
     </HorizontalScrollView>
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPager2_container"
+        android:id="@+id/categoryFoodFragment_viewPager2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/asd" />
+        app:layout_constraintTop_toBottomOf="@id/categoryFoodFragment_scrollView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

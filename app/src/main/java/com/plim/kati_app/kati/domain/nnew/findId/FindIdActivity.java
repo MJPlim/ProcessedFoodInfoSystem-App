@@ -49,7 +49,7 @@ public class FindIdActivity extends KatiViewModelActivity {
 
     @Override
     public void katiEntityUpdated() {
-        if (this.dataset.containsKey(KatiEntity.EKatiData.AUTHORIZATION))
+        if (!this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION).equals(KatiEntity.EKatiData.NULL.name()))
             showAlreadyLoginedDialog();
     }
 

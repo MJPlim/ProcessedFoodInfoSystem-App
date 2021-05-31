@@ -14,9 +14,12 @@ import android.text.style.StyleSpan;
 import androidx.annotation.ColorInt;
 
 import com.plim.kati_app.R;
+import com.plim.kati_app.kati.domain.nnew.review.ReviewActivity;
 
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.DIALOG_CONFIRM;
+import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.KATI_DIALOG_CANCEL;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.KATI_DIALOG_CONFIRM;
+import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.LOG_OUT_ACTIVITY_FAILURE_DIALOG_MESSAGE;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.LOG_OUT_ACTIVITY_FAILURE_DIALOG_TITLE;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.RETROFIT_FAIL_CONNECTION_MESSAGE;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.RETROFIT_NOT_SUCCESS_TITLE_PREFIX;
@@ -36,6 +39,8 @@ public class KatiDialog extends AlertDialog.Builder {
     public KatiDialog(Context context) {
         super(context);
     }
+
+
 
     public void setTitle(String titleContent) { // 제목 설정
         SpannableString title = new SpannableString(titleContent);
@@ -81,8 +86,17 @@ public class KatiDialog extends AlertDialog.Builder {
     public static void NotLogInDialog(Activity context, DialogInterface.OnClickListener listener) {
         KatiDialog kDialog = new KatiDialog(context);
         kDialog.setTitle(LOG_OUT_ACTIVITY_FAILURE_DIALOG_TITLE);
-        kDialog.setMessage(LOG_OUT_ACTIVITY_FAILURE_DIALOG_TITLE);
+        kDialog.setMessage(LOG_OUT_ACTIVITY_FAILURE_DIALOG_MESSAGE);
         kDialog.setPositiveButton(DIALOG_CONFIRM, listener);
+        kDialog.setColor(context.getResources().getColor(R.color.kati_coral, context.getTheme()));
+        kDialog.showDialog();
+    }
+    public static void NotLogInDialog(Activity context, DialogInterface.OnClickListener listener, DialogInterface.OnClickListener cancelListener) {
+        KatiDialog kDialog = new KatiDialog(context);
+        kDialog.setTitle(LOG_OUT_ACTIVITY_FAILURE_DIALOG_TITLE);
+        kDialog.setMessage(LOG_OUT_ACTIVITY_FAILURE_DIALOG_MESSAGE);
+        kDialog.setPositiveButton(DIALOG_CONFIRM, listener);
+        kDialog.setNegativeButton(KATI_DIALOG_CANCEL, cancelListener);
         kDialog.setColor(context.getResources().getColor(R.color.kati_coral, context.getTheme()));
         kDialog.showDialog();
     }

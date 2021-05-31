@@ -8,22 +8,22 @@
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
+        android:id="@+id/categoryResultFragment_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
         app:layout_constraintTop_toTopOf="parent">
 
         <HorizontalScrollView
+            android:id="@+id/categoryResultFragment_scrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbars="none"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            >
+            app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chipGroup"
+                android:id="@+id/categoryResultFragment_chipGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
@@ -32,37 +32,18 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:singleSelection="true">
+                app:singleSelection="true"/>
 
-                <com.google.android.material.chip.Chip
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="wrap_content"
-                    app:chipStrokeWidth="1.5dp"
-                    app:chipStrokeColor="@color/kati_middle_gray"
-                    app:chipBackgroundColor="@color/chip_choice_bg"
-                    android:layout_height="wrap_content"
-                    android:text="세부 카테고리" />
-
-                <com.google.android.material.chip.Chip
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:chipStrokeWidth="1.5dp"
-                    app:chipStrokeColor="@color/kati_middle_gray"
-                    app:chipBackgroundColor="@color/chip_choice_bg"
-                    android:text="세부 카테고리" />
-
-            </com.google.android.material.chip.ChipGroup>
         </HorizontalScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/searchResult_result"
+        android:id="@+id/categoryResultFragment_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/categoryResultFragment_layout"
         tools:itemCount="6"
         tools:listitem="@layout/item_food_old" />
 

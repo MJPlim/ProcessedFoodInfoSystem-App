@@ -1,7 +1,10 @@
 package com.plim.kati_app.kati.crossDomain.tech.retrofit;
 
+import android.app.DownloadManager;
+
 import com.plim.kati_app.kati.domain.nnew.findId.model.FindEmailRequest;
 import com.plim.kati_app.kati.domain.nnew.findId.model.FindEmailResponse;
+import com.plim.kati_app.kati.domain.nnew.main.category.model.CategoryFoodListResponse;
 import com.plim.kati_app.kati.domain.nnew.main.favorite.model.UserFavoriteResponse;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.allergy.model.CreateUserAllergyRequest;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.allergy.model.CreateUserAllergyResponse;
@@ -162,5 +165,8 @@ public interface KatiRestAPI {
     @GET("/api/v1/user/favorite/list") Call<List<UserFavoriteResponse>> getUserFavorite();
     @GET("/api/v1/user/readReviewByUserID") Call<ReadUserReviewResponse<List<ReadReviewResponse>>> getUserReview();
 
+    @GET("/api/v1/food/list/category")
+    Call<CategoryFoodListResponse> getCategoryFood(@Query("category") String category,
+                                                   @Query("page") int page);
 }
 

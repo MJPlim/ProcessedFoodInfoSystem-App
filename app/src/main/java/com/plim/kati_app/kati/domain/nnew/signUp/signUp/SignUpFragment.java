@@ -14,6 +14,7 @@ import com.plim.kati_app.kati.crossDomain.domain.view.dialog.LoadingDialog;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiViewModelFragment;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBackImpl;
+import com.plim.kati_app.kati.domain.nnew.main.MainActivity;
 import com.plim.kati_app.kati.domain.nnew.signUp.model.SignUpRequest;
 import com.plim.kati_app.kati.domain.nnew.signUp.model.SignUpResponse;
 
@@ -60,8 +61,7 @@ public class SignUpFragment extends KatiViewModelFragment {
             showDialog(
                     "어서 오세요 " + nickNameEditText.getText().toString() + " 님!",
                     "회원 가입에 성공하였습니다.",
-//                    (dialog, which) -> Navigation.findNavController(getView()).navigate(R.id.action_register3Fragment_to_registerFinishedFragment)
-            null
+                    (dialog, which) -> startActivity(MainActivity.class)
             );
         }
 

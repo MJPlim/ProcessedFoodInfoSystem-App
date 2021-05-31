@@ -42,7 +42,7 @@ public class Constant { // ㅎㅎ Resource 로 옮겨조...
     public static final String LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_TITLE = "성공적으로 로그아웃하였습니다.";
     public static final String LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_MESSAGE = "성공적으로 로그아웃하였습니다.";
     public static final String LOG_OUT_ACTIVITY_FAILURE_DIALOG_TITLE = "로그인 되어 있지 않습니다.";
-    public static final String LOG_OUT_ACTIVITY_FAILURE_DIALOG_MESSAGE = "로그인하고 다시 시도해 주세요";
+    public static final String LOG_OUT_ACTIVITY_FAILURE_DIALOG_MESSAGE = "로그인하러 이동 하시겠습니까?";
     public static final String FIND_USER_PASSWORD_DIALOG_TITLE="임시 비밀번호가 발급되었습니다.";
     public static final String FIND_USER_PASSWORD_DIALOG_MESSAGE="메일함에서 임시 비밀번호 메일을 확인해 주세요.";
 

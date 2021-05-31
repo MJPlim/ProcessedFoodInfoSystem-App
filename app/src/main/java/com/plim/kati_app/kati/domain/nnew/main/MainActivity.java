@@ -1,6 +1,7 @@
 package com.plim.kati_app.kati.domain.nnew.main;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.navigation.Navigation;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.plim.kati_app.R;
+import com.plim.kati_app.kati.domain.nnew.map.MapServiceActivity;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -38,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
                         navController.navigate(R.id.action_global_searchFragment);
                         break;
                     case R.id.action_find_market:
+                        startActivity(new Intent(this, MapServiceActivity.class));
                         break;
                     case R.id.action_mykati:
                         navController.navigate(R.id.action_global_myKatiFragment);

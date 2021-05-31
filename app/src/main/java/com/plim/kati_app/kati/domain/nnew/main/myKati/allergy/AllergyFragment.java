@@ -52,6 +52,8 @@ public class AllergyFragment extends KatiLoginCheckViewModelFragment {
 
     @Override
     protected void initializeView() {
+        this.chipVector.clear();
+        this.allergyChipGroup.removeAllViews();
         for (Constant.EAllergyList allergy : Constant.EAllergyList.values()) {
             Chip chip = new Chip(getContext());
             chip.setChipStrokeWidth(1.5f);

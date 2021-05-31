@@ -47,6 +47,7 @@ public class SetRestoreEmailActivity extends KatiViewModelActivity {
 
     @Override
     protected void initializeView() {
+        if(this.setRestoreEmailAddressButton!=null)
         this.setRestoreEmailAddressButton.setOnClickListener(v->this.setSecondEmail());
     }
 

@@ -7,7 +7,7 @@
     tools:context=".kati.domain.nnew.review.ReviewActivity">
 
     <com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHToolBar
-        android:id="@+id/favorite_toolbar"
+        android:id="@+id/reviewActivity_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
@@ -17,7 +17,7 @@
         app:title="제품 이름" />
 
     <TextView
-        android:id="@+id/textView17"
+        android:id="@+id/reviewActivity_recommendMessageTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="이 제품을 추천하시겠어요?"
@@ -27,20 +27,20 @@
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/favorite_toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/reviewActivity_toolbar" />
 
     <RatingBar
-        android:id="@+id/ratingBar2"
+        android:id="@+id/reviewActivity_ratingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         android:progressTint="@color/kati_orange"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+        app:layout_constraintTop_toBottomOf="@+id/reviewActivity_recommendMessageTextView" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/reviewActivity_reviewEditText"
         android:layout_width="match_parent"
         android:layout_height="145dp"
         android:textSize="15sp"
@@ -54,10 +54,10 @@
         android:hint="제품에 대한 솔직한 리뷰를 남겨주세요.(10자이상)"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ratingBar2" />
+        app:layout_constraintTop_toBottomOf="@+id/reviewActivity_ratingBar" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/reviewActivity_submitButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
@@ -65,6 +65,6 @@
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/reviewActivity_reviewEditText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

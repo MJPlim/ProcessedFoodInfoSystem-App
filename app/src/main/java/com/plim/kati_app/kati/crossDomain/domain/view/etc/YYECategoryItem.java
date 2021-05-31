@@ -18,15 +18,17 @@ public class YYECategoryItem extends LinearLayout {
     private ImageView imageView;
     private TextView titleTextView;
 
+    private View view;
+
     public YYECategoryItem(Context context){
         super(context);
 // Inflate View
         LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View categoryItem= layoutInflater.inflate(R.layout.fragment_home_category_item, this, false);
-        this.addView(categoryItem);
+        this.view= layoutInflater.inflate(R.layout.fragment_home_category_item, this, false);
+        this.addView(this.view);
 
-        this.imageView=categoryItem.findViewById(R.id.categoryItem_imageView);
-        this.titleTextView=categoryItem.findViewById(R.id.categoryItem_titleTextView);
+        this.imageView=this.view.findViewById(R.id.categoryItem_imageView);
+        this.titleTextView=this.view.findViewById(R.id.categoryItem_titleTextView);
     }
 
     // Constructor
@@ -41,11 +43,11 @@ public class YYECategoryItem extends LinearLayout {
         LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 
-        View categoryItem= layoutInflater.inflate(R.layout.fragment_home_category_item, this, false);
-        this.addView(categoryItem);
+        this.view= layoutInflater.inflate(R.layout.fragment_home_category_item, this, false);
+        this.addView(this.view);
 
-        this.imageView=categoryItem.findViewById(R.id.categoryItem_imageView);
-        this.titleTextView=categoryItem.findViewById(R.id.categoryItem_titleTextView);
+        this.imageView=this.view.findViewById(R.id.categoryItem_imageView);
+        this.titleTextView=this.view.findViewById(R.id.categoryItem_titleTextView);
 
         this.titleTextView.setText(attributeArray.getString(R.styleable.YYECategoryItem_YYECategoryItem_text));
 //        Glide.with(categoryItem).load(attributeArray.getDrawable(R.styleable.YYECategoryItem_YYECategoryItem_image)).into(imageView);
@@ -59,6 +61,11 @@ public class YYECategoryItem extends LinearLayout {
     public void setImage(Drawable drawable){
         imageView.setImageDrawable(drawable);
         imageView.setColorFilter(getResources().getColor(R.color.kati_gray,getContext().getTheme()));
+    }
+
+    @Override
+    public void setOnClickListener(OnClickListener listener){
+        this.view.setOnClickListener(listener);
     }
 
 }

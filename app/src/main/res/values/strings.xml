@@ -12,7 +12,7 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
 
-<!--    구버전-->
+    <!--    구버전-->
 
     <string name="app_name">KATI_app</string>
     <!-- TODO: Remove or change this placeholder text -->

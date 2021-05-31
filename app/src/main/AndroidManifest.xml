@@ -28,6 +28,7 @@
         <activity android:name=".kati.domain.nnew.editName.EditSingleActivity" />
         <activity android:name=".kati.domain.nnew.findPassword.FindPasswordActivity" />
         <activity android:name=".kati.domain.nnew.login.LoginActivity" />
+        <activity android:name=".kati.domain.nnew.map.MapServiceActivity" />
         <activity android:name=".kati.domain.nnew.signOut.SignOutActivity" />
         <activity android:name=".kati.domain.nnew.editName.EditNameActivity" />
         <activity android:name=".kati.domain.nnew.editName.EditBirthActivity" />
@@ -38,6 +39,9 @@
             android:screenOrientation="portrait"
             android:stateNotNeeded="true"
             tools:replace="android:screenOrientation"></activity>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAH63IC9w2B6lP4RYw05b7qAyNja8gOyjU" />
         <activity
             android:name=".kati.domain.nnew.editPassword.view.EditPasswordActivity"
             android:label="@string/title_activity_password_edit"

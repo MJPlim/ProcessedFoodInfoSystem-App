@@ -9,7 +9,11 @@
         android:id="@+id/homeFragment"
         android:name="com.plim.kati_app.kati.domain.nnew.main.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_categoryFragment"
+            app:destination="@id/categoryFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/categoryFragment"

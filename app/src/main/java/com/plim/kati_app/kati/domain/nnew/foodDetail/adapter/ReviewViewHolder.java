@@ -17,7 +17,8 @@ public class ReviewViewHolder extends RecyclerView.ViewHolder {
 
     private Activity activity;
 
-    private TextView userNameTextView, dateTextView, reviewValue, reviewLikeItemCountTextView;
+    private TextView userNameTextView, dateTextView, reviewValue, reviewLikeItemCountTextView,
+    editButton, deleteButton, reportButton;
     private ImageView reviewLikeIcon;
     private RatingBar ratingBar;
     private View reviewLikeButtonBackground;
@@ -31,6 +32,11 @@ public class ReviewViewHolder extends RecyclerView.ViewHolder {
         this.dateTextView=itemView.findViewById(R.id.foodInfoReviewItem_dateTextView);
         this.reviewValue=itemView.findViewById(R.id.foodInfoReviewItem_reviewValue);
         this.reviewLikeItemCountTextView=itemView.findViewById(R.id.foodInfoReviewItem_reviewLikeItemCountTextView);
+
+
+        this.editButton=itemView.findViewById(R.id.foodInfoReviewItem_reviewEditTextView);
+        this.deleteButton=itemView.findViewById(R.id.foodInfoReviewItem_reviewDeleteTextView);
+        this.reportButton=itemView.findViewById(R.id.foodInfoReviewItem_reportTextView);
 
         this.reviewLikeButtonBackground=itemView.findViewById(R.id.foodInfoReviewItem_reviewLikeButtonBackground);
 
@@ -55,12 +61,13 @@ public class ReviewViewHolder extends RecyclerView.ViewHolder {
         this.reviewValue.setText(value.getReviewDescription());
         this.reviewLikeItemCountTextView.setText(value.getLikeCount() + "");
 
-//        this.deleteButton.setEnabled(value.isUserCheck());
-//        this.editButton.setEnabled(value.isUserCheck());
+        this.deleteButton.setVisibility(value.isUserCheck()? View.VISIBLE:View.INVISIBLE);
+        this.editButton.setVisibility(value.isUserCheck()? View.VISIBLE:View.INVISIBLE);
+        this.reportButton.setVisibility(!value.isUserCheck()? View.VISIBLE:View.INVISIBLE);
 //
 //
-//        this.deleteButton.setOnClickListener(deleteListener);
-//        this.deleteButton.setTag(value.getReviewId());
+        this.deleteButton.setOnClickListener(deleteListener);
+        this.deleteButton.setTag(value.getReviewId());
 
         this.reviewLikeIcon.clearColorFilter();
         int color = this.activity.getResources().getColor(value.isUserLikeCheck() ? R.color.kati_red : R.color.gray, this.activity.getTheme());
@@ -74,7 +81,7 @@ public class ReviewViewHolder extends RecyclerView.ViewHolder {
         this.reviewLikeIcon.setTag(value.getReviewId());
 
 
-//        this.editButton.setOnClickListener(this.updateListener);
-//        this.editButton.setTag(value.getReviewId());
+        this.editButton.setOnClickListener(this.updateListener);
+        this.editButton.setTag(value.getReviewId());
     }
 }

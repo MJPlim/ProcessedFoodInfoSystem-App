@@ -33,6 +33,7 @@ android {
                     'src/main/res/nnew/main/layout/search',
                     'src/main/res/nnew/main/layout/category',
 
+                    'src/main/res/nnew/map',
                     'src/main/res/nnew/review',
                     'src/main/res/nnew/set_restore_email',
                     'src/main/res/nnew/sign_out',

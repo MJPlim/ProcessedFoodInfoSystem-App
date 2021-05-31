@@ -8,6 +8,7 @@ import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBack;
 import com.plim.kati_app.kati.domain.nnew.login.LoginActivity;
+import com.plim.kati_app.kati.domain.nnew.main.MainActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,7 +46,8 @@ public abstract class KatiLoginCheckViewModelFragment extends KatiViewModelFragm
                         this.activity,
                         (dialog, which) -> {
                             this.activity.startActivity(new Intent(this.activity, LoginActivity.class));
-                        }
+                        },
+                        null
                 );
             } else {
                 JSONObject object = new JSONObject(response.errorBody().string());
@@ -84,9 +86,7 @@ public abstract class KatiLoginCheckViewModelFragment extends KatiViewModelFragm
     protected abstract void katiEntityUpdatedAndNoLogin();
 
     protected void notLoginDialog() {
-        KatiDialog.NotLogInDialog(this.getActivity(), (dialog, which) -> {
-            this.startActivity(LoginActivity.class);
-        });
+        KatiDialog.NotLogInDialog(this.getActivity(), (dialog, which) -> this.startActivity(LoginActivity.class),(dialog, which) -> this.startActivity(MainActivity.class));
     }
 
     protected void putToken(String authorization) { this.dataset.put(KatiEntity.EKatiData.AUTHORIZATION, authorization); }
