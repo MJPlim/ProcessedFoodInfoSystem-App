@@ -28,6 +28,7 @@ import retrofit2.Response;
 
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.LOG_OUT_ACTIVITY_FAILURE_DIALOG_TITLE;
 
+
 public class SetRestoreEmailActivity extends KatiViewModelActivity {
 
     Button setRestoreEmailAddressButton;
@@ -41,7 +42,7 @@ public class SetRestoreEmailActivity extends KatiViewModelActivity {
 
     @Override
     protected void associateView() {
-        this.setRestoreEmailAddressButton = findViewById(R.id.setRestoreEmailAddressButton);
+        this.setRestoreEmailAddressButton = findViewById(R.id.signUpFragment_submitButton);
         this.editTextRestoreEmail = findViewById(R.id.editTextRestoreEmail);
     }
 
