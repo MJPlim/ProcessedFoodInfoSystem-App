@@ -30,10 +30,9 @@ import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.review.adapter.UserReviewRecyclerAdapter;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.review.model.ReadReviewResponse;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.review.model.ReadUserReviewResponse;
-import com.plim.kati_app.kati.domain.old.model.CreateReviewResponse;
-import com.plim.kati_app.kati.domain.old.model.DeleteReviewRequest;
+import com.plim.kati_app.kati.domain.nnew.main.search.model.DeleteReviewRequest;
+import com.plim.kati_app.kati.domain.nnew.review.model.CreateReviewResponse;
 
-import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 
 import java.util.List;
@@ -41,6 +40,7 @@ import java.util.Vector;
 
 import retrofit2.Response;
 
+import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.DELETE_FAVORITE_RESULT_DIALOG_MESSAGE;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.DELETE_REVIEW_RESULT_DIALOG_MESSAGE;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE;
 
@@ -120,10 +120,7 @@ public class ReviewManagementFragment extends KatiLoginCheckViewModelFragment {
         }
         @Override
         public void onConnectionFail(Throwable t) {
-            KatiDialog.simplerAlertDialog(getActivity(),
-                    FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE, t.getMessage(),
-                    null
-            );
+            Toast.makeText(getContext(), FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -137,10 +134,8 @@ public class ReviewManagementFragment extends KatiLoginCheckViewModelFragment {
 
         @Override
         public void onSuccessResponse(Response<CreateReviewResponse> response) {
-            KatiDialog.simplerAlertDialog(getActivity(),
-                    DELETE_REVIEW_RESULT_DIALOG_MESSAGE, response.message(),
-                    null
-            );refresh();
+            Toast.makeText(getContext(), DELETE_REVIEW_RESULT_DIALOG_MESSAGE, Toast.LENGTH_LONG).show();
+            refresh();
         }
 
         @Override
@@ -155,10 +150,8 @@ public class ReviewManagementFragment extends KatiLoginCheckViewModelFragment {
 
         @Override
         public void onConnectionFail(Throwable t) {
-            KatiDialog.simplerAlertDialog(getActivity(),
-                    FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE, t.getMessage(),
-                    null
-            );
+            Toast.makeText(getContext(), FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE, Toast.LENGTH_LONG).show();
+
         }
     }
 
