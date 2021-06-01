@@ -125,11 +125,11 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginRight="8dp"
-            android:src="@drawable/ic_baseline_swap_vert_24"
+            android:src="@drawable/ic_baseline_swap_vert_24_assend"
             app:layout_constraintBottom_toBottomOf="@+id/searchResultFragment_allergyFilterButton"
             app:layout_constraintEnd_toStartOf="@+id/searchResultFragment_allergyFilterButton"
             app:layout_constraintTop_toTopOf="@+id/searchResultFragment_allergyFilterButton"
-            app:tint="@color/kati_red" />
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.core.widget.NestedScrollView

@@ -26,7 +26,7 @@ public class SplashActivity extends AppCompatActivity {
                         View.SYSTEM_UI_FLAG_FULLSCREEN);
 
         new Thread(() -> {
-            try {Thread.sleep(3000); }
+            try {Thread.sleep(300); }
             catch (InterruptedException e) { e.printStackTrace(); }
             this.startActivity(new Intent(this, MainActivity.class));
         }).start();

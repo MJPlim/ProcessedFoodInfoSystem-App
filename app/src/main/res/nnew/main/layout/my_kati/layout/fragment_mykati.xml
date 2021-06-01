@@ -80,7 +80,6 @@
         android:id="@+id/select_my_info_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:background="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/mykati_login_layout" >
 
@@ -112,6 +111,16 @@
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
             app:layout_constraintStart_toEndOf="@+id/mykati_name_textView"
             app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_baseline_navigate_next_24"
+            app:tint="@color/kati_gray" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

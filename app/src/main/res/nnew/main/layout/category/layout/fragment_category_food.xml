@@ -16,7 +16,7 @@
         android:elevation="5dp"
         app:title="카테고리" />
 
-    <HorizontalScrollView
+    <!--<HorizontalScrollView
         android:id="@+id/categoryFoodFragment_scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,27 +26,29 @@
         app:layout_constraintTop_toBottomOf="@+id/categoryFoodDetail_toolbar"
         tools:layout_editor_absoluteX="0dp">
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/categoryFoodFragment_tabLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:elevation="5dp"
-            android:gravity="center"
-            app:layout_constraintTop_toBottomOf="@+id/categoryFoodDetail_toolbar"
-            app:tabGravity="fill"
-            app:tabIndicatorColor="@color/kati_dark_gray"
-            app:tabMaxWidth="0dp"
-            app:tabMode="fixed"
-            app:tabSelectedTextColor="@color/kati_red"
-            app:tabTextColor="@color/black" />
+
     </HorizontalScrollView>
+-->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/categoryFoodFragment_tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabMode="scrollable"
+        android:background="@color/white"
+        android:elevation="5dp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/categoryFoodDetail_toolbar"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/kati_dark_gray"
+        app:tabMaxWidth="0dp"
+        app:tabSelectedTextColor="@color/kati_red"
+        app:tabTextColor="@color/black" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/categoryFoodFragment_viewPager2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/categoryFoodFragment_scrollView" />
+        app:layout_constraintTop_toBottomOf="@id/categoryFoodFragment_tabLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.plim.kati_app.kati.domain.nnew.main.myKati.allergy;
 
 import android.app.Activity;
+import android.app.Service;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 
@@ -55,13 +56,10 @@ public class AllergyFragment extends KatiLoginCheckViewModelFragment {
         this.chipVector.clear();
         this.allergyChipGroup.removeAllViews();
         for (Constant.EAllergyList allergy : Constant.EAllergyList.values()) {
-            Chip chip = new Chip(getContext());
-            chip.setChipStrokeWidth(1.5f);
-            chip.setChipStrokeColor(ColorStateList.valueOf(getResources().getColor(R.color.kati_middle_gray, getActivity().getTheme())));
-            chip.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.chip_choice_bg, getContext().getTheme())));
+            LayoutInflater inflater = (LayoutInflater) this.getActivity().getSystemService(Service.LAYOUT_INFLATER_SERVICE);
+            Chip chip= (Chip) inflater.inflate(R.layout.jsh_chip, null);
             chip.setText(allergy.name());
             chip.setCheckable(true);
-            chip.setCheckedIconTint(ColorStateList.valueOf(getResources().getColor(R.color.kati_red, getContext().getTheme())));
             this.chipVector.add(chip);
             this.allergyChipGroup.addView(chip);
         }
