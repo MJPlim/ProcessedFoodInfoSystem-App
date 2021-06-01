@@ -11,12 +11,12 @@
 
     <ImageView
         android:id="@+id/categoryItem_imageView"
-        android:layout_width="65dp"
-        android:layout_height="65dp" />
+        android:layout_width="68dp"
+        android:layout_height="68dp" />
 
     <TextView
         android:id="@+id/categoryItem_titleTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="테스트 카테고리"

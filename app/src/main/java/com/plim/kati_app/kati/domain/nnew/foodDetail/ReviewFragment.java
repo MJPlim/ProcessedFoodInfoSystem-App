@@ -42,7 +42,7 @@ public class ReviewFragment extends KatiFoodFragment {
 
     private ProgressBar firstProgressBar, secondProgressBar, thirdProgressBar, fourthProgressBar, fifthProgressBar;
     private TextView firstValueTextView, secondValueTextView, thirdValueTextView, fourthValueTextView, fifthValueTextView,
-            ratingTextView;
+            ratingTextView,noRereviewTextView;
     private RatingBar ratingBar;
 
     private NestedScrollView nestedScrollView;
@@ -68,6 +68,7 @@ public class ReviewFragment extends KatiFoodFragment {
 
     @Override
     protected void associateView(View view) {
+        this.noRereviewTextView=view.findViewById(R.id.reviewFragment_noReview);
         this.firstProgressBar = view.findViewById(R.id.reviewSummaryWidget_firstProgressBar);
         this.secondProgressBar = view.findViewById(R.id.reviewSummaryWidget_secondProgressBar);
         this.thirdProgressBar = view.findViewById(R.id.reviewSummaryWidget_thirdProgressBar);
@@ -123,6 +124,7 @@ public class ReviewFragment extends KatiFoodFragment {
         Intent intent = new Intent(this.getActivity(), ReviewActivity.class);
         intent.putExtra("isUpdate", false);
         intent.putExtra("foodId", foodDetailResponse.getFoodId());
+        intent.putExtra("foodName", foodDetailResponse.getFoodName());
 //        intent.putExtra("photo", foodDetailResponse.getFoodImageAddress());
 //        intent.putExtra("foodName", foodDetailResponse.getFoodName());
 //        intent.putExtra("manufacturerName", foodDetailResponse.getManufacturerName());
@@ -226,6 +228,7 @@ public class ReviewFragment extends KatiFoodFragment {
         saveReadSummary();
 
         List<ReadReviewResponse> reviewList = reviewDto.getReadReviewResponse();
+        this.noRereviewTextView.setVisibility(reviewList.size()!=0?View.INVISIBLE:View.VISIBLE);
         vector.addAll(reviewList);
         adapter.setItems(vector);
     }
@@ -264,6 +267,7 @@ public class ReviewFragment extends KatiFoodFragment {
                 Intent intent = new Intent(this.getActivity(), ReviewActivity.class);
                 intent.putExtra("reviewId", reviewId);
                 intent.putExtra("foodId", this.foodDetailResponse.getFoodId());
+                intent.putExtra("foodName", foodDetailResponse.getFoodName());
                 intent.putExtra("isUpdate", true);
                 intent.putExtra("ratingScore",(int)review.getReviewRating());
                 intent.putExtra("reviewText",review.getReviewDescription());

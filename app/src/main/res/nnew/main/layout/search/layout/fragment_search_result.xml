@@ -49,12 +49,12 @@
             android:inputType="text"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="@+id/searchResultFragment_searchEditTextBackgroundImage"
-            app:layout_constraintEnd_toStartOf="@+id/searchResultFragment_barcodeIcon"
+            app:layout_constraintEnd_toStartOf="@+id/searchResultFragment_deleteIcon"
             app:layout_constraintStart_toEndOf="@+id/searchResultFragment_searchIcon"
             app:layout_constraintTop_toTopOf="@+id/searchResultFragment_searchEditTextBackgroundImage" />
 
         <ImageView
-            android:id="@+id/searchResultFragment_barcodeIcon"
+            android:id="@+id/searchResultFragment_deleteIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="8dp"

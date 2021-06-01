@@ -46,7 +46,7 @@ public class SearchResultFragment extends KatiSearchFragment {
     //associate
     //view
     private EditText searchFieldEditText;
-    private ImageView barcodeIcon;
+    private ImageView deleteIcon;
     private Chip rankingChip, manufacturerChip, reviewCountChip;
     private RecyclerView adRecyclerView, resultRecyclerView;
     private NestedScrollView nestedScrollView;
@@ -77,7 +77,7 @@ public class SearchResultFragment extends KatiSearchFragment {
     protected void associateView(View view) {
         this.searchFieldEditText = view.findViewById(R.id.searchResultFragment_searchFieldEditText);
 
-        this.barcodeIcon = view.findViewById(R.id.searchResultFragment_barcodeIcon);
+        this.deleteIcon = view.findViewById(R.id.searchResultFragment_deleteIcon);
 
         this.rankingChip = view.findViewById(R.id.searchResultFragment_rankingChip);
         this.manufacturerChip = view.findViewById(R.id.searchResultFragment_manufacturerChip);
@@ -126,10 +126,13 @@ public class SearchResultFragment extends KatiSearchFragment {
 //                this.loadSearchResult();
                 this.searchModel.setSearchPageNum(1);
                 this.isLoadingMore = false;
+                this.searchModel.setSearchText(this.searchFieldEditText.getText().toString());
                 this.saveSearch();
             }
             return false;
         });
+
+        this.deleteIcon.setOnClickListener(v->this.searchFieldEditText.setText(""));
     }
 
     @Override

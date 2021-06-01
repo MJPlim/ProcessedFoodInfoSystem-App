@@ -180,20 +180,30 @@ public static final String ALLERGY_EXPANDABLE_LIST_TITLE="알레르기";
         private final String message;
     }
 
+    @Getter
+    @RequiredArgsConstructor
+    public enum SortOrder {
+
+        asc(""),
+        desc(",desc");
+
+        private final String message;
+    }
+
     public static final String FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE="연결 실패";
     @AllArgsConstructor
     @Getter
     public enum ECategory {
-        snack("간식",ESnackCategory.values(),R.drawable.banana_icon),
-        dairy("유제품", EDairyCategory.values(),R.drawable.sample2),
-        drink("음료/차", EDrinkCategory.values(),R.drawable.icon_tea),
-        condiment("조미료", ECondimentCategoty.values(),R.drawable.sauce_icon),
-        meat("육류", EMeatCategory.values(),R.drawable.meat_icon),
-        farm("농수산물",EFarmCategory.values(),R.drawable.healthy_icon),
-        kimchi("김치",EKimchiCategory.values(),R.drawable.kimchi_icon),
-        mealkit("즉석조리",EMealkitCategory.values(),R.drawable.retro_icon),
-        etcmaterial("식재료",EMaterialCategory.values(),R.drawable.material_icon),
-        etc("기타",EEtcCategory.values(),R.drawable.meat_icon),
+        snack("간식",ESnackCategory.values(),R.drawable.item_gansik),
+        dairy("유제품", EDairyCategory.values(),R.drawable.item_dairy),
+        drink("음료/차", EDrinkCategory.values(),R.drawable.item_beverage),
+        condiment("조미료", ECondimentCategoty.values(),R.drawable.item_salt),
+        meat("육류", EMeatCategory.values(),R.drawable.item_meat),
+        farm("농수산물",EFarmCategory.values(),R.drawable.item_fruit),
+        kimchi("김치",EKimchiCategory.values(),R.drawable.item_kimchi),
+        mealkit("즉석조리",EMealkitCategory.values(),R.drawable.item_mealkit),
+//        etcmaterial("식재료",EMaterialCategory.values(),R.drawable.material),
+        etc("기타",EEtcCategory.values(),R.drawable.item_meat),
         ;
         private String name;
         private EChildCategory[] childCategories;
@@ -268,21 +278,25 @@ public static final String ALLERGY_EXPANDABLE_LIST_TITLE="알레르기";
         private String name;
     }
 
-    @AllArgsConstructor
-    @Getter
-    public enum EMaterialCategory implements EChildCategory {
-        noodle("국수"),
-        tofu("두부"),
-        oil("식용유"),
-        fishcake("어묵"),
-        ;
-        private String name;
-    }
+//    @AllArgsConstructor
+//    @Getter
+//    public enum EMaterialCategory implements EChildCategory {
+//        noodle("국수"),
+//        tofu("두부"),
+//        oil("식용유"),
+//        fishcake("어묵"),
+//        ;
+//        private String name;
+//    }
 
     @AllArgsConstructor
     @Getter
     public enum EEtcCategory implements EChildCategory {
-        etc("기타가공품")
+        etc("기타가공품"),
+        noodle("국수"),
+        tofu("두부"),
+        oil("식용유"),
+        fishcake("어묵")
         ;
         private String name;
     }

@@ -154,7 +154,7 @@ public class SearchFragment extends KatiSearchFragment {
             String foodName = item.getFoodName();
             if (i == 0 || i == 5) {
                 for (int j = i + 1; j < i + 6; j++) {
-                    rankGridLayout.addView(createRankTextView(18, String.valueOf(j), foodName));
+                    rankGridLayout.addView(createRankTextView(15, String.valueOf(j), foodName));
                 }
             }
             rankGridLayout.addView(createRankTextView(15, foodName));
@@ -187,8 +187,8 @@ public class SearchFragment extends KatiSearchFragment {
         textView.setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical);
         textView.setTextColor(getResources().getColor(R.color.black, getContext().getTheme()));
         textView.setTextSize(size);
-        textView.setWidth(550);
-        textView.setMaxWidth(550);
+        textView.setWidth(600);
+        textView.setMaxWidth(600);
         textView.setMaxLines(1);
         textView.setEllipsize(TextUtils.TruncateAt.END);
         return textView;
@@ -196,7 +196,7 @@ public class SearchFragment extends KatiSearchFragment {
 
     private TextView createRankTextView(GridLayout.LayoutParams params, int size, String text, String tag) {
         int paddingVertical = 10;
-        int paddingHorizontal = 25;
+        int paddingHorizontal = 10;
         TextView textView = new TextView(getContext());
         textView.setText(text);
         textView.setTag(tag);

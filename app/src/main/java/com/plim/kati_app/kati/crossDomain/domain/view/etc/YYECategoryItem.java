@@ -4,13 +4,17 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.plim.kati_app.R;
 
 public class YYECategoryItem extends LinearLayout {
@@ -59,8 +63,10 @@ public class YYECategoryItem extends LinearLayout {
     }
 
     public void setImage(Drawable drawable){
-        imageView.setImageDrawable(drawable);
-        imageView.setColorFilter(getResources().getColor(R.color.kati_gray,getContext().getTheme()));
+//        Glide.with(this.activity).load(foodInfo.getFoodImageAddress()).fitCenter().transform(new CenterCrop(), new CircleCrop()).into(this.foodImageView);
+        Glide.with(this.view).load(drawable).fitCenter().transform(new CenterCrop()).into(imageView);
+//        imageView.setImageDrawable(drawable);
+//        imageView.setColorFilter(getResources().getColor(R.color.kati_gray,getContext().getTheme()));
     }
 
     @Override

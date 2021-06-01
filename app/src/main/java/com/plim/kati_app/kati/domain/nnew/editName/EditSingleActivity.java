@@ -27,13 +27,13 @@ import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.USER_MODI
 
 public abstract class EditSingleActivity extends KatiLoginCheckViewModelActivity {
 
-    private JSHToolBar toolBar;
-    private EditText editText;
-    private Button submitButton;
+    protected JSHToolBar toolBar;
+    protected EditText editText;
+    protected Button submitButton;
 
-    private EditMode editMode;
+    protected EditMode editMode;
 
-    private String name, address, birth;
+    protected String name, address, birth;
 
     protected abstract EditMode getEditMode();
 
@@ -106,7 +106,7 @@ public abstract class EditSingleActivity extends KatiLoginCheckViewModelActivity
         }
     }
 
-    private void modifyUserData(String token,EditMode editMode) {
+    protected void modifyUserData(String token,EditMode editMode) {
         Log.d("디버그","유저 정보 수정");
         UserInfoModifyRequest request;
         if (this.editText.length() != 0) {

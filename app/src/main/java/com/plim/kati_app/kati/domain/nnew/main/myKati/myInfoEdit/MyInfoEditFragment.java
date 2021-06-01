@@ -23,6 +23,7 @@ import com.plim.kati_app.kati.domain.nnew.editName.EditBirthActivity;
 import com.plim.kati_app.kati.domain.nnew.editName.EditNameActivity;
 import com.plim.kati_app.kati.domain.nnew.editPassword.view.EditPasswordActivity;
 import com.plim.kati_app.kati.domain.nnew.main.MainActivity;
+import com.plim.kati_app.kati.domain.nnew.main.myKati.myInfoEdit.model.GetSecondEmailResponse;
 import com.plim.kati_app.kati.domain.nnew.setRestoreEmail.SetRestoreEmailActivity;
 import com.plim.kati_app.kati.domain.nnew.signOut.SignOutActivity;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.myInfoEdit.model.UserInfoResponse;
@@ -47,6 +48,7 @@ public class MyInfoEditFragment extends KatiInfoEditFragment {
     private TextView logOut, signOut;
 
     private Vector<KatiDialog> dialogs;
+    private String secondEmail;
 
     public MyInfoEditFragment() {
         this.dialogs = new Vector<>();
@@ -116,7 +118,10 @@ public class MyInfoEditFragment extends KatiInfoEditFragment {
     @Override
     protected void katiEntityUpdatedAndLogin() {
         this.getUserData(this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION));
+        this.getSecondEmail(this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION));
     }
+
+
 
     @Override
     public void infoModelDataUpdated() {
@@ -124,7 +129,7 @@ public class MyInfoEditFragment extends KatiInfoEditFragment {
         this.changeBirthItem.setContentText(this.userInfoResponse.getBirth() == null ? NO_BIRTH_DATA : this.userInfoResponse.getBirth());
         this.changeAddressItem.setContentText(this.userInfoResponse.getAddress() == null ? NO_ADDRESS_DATA : this.userInfoResponse.getAddress());
 
-        this.restoreEmailItem.setContentText("-");
+        this.restoreEmailItem.setContentText(this.secondEmail);
 
     }
 
@@ -137,13 +142,28 @@ public class MyInfoEditFragment extends KatiInfoEditFragment {
         @Override
         public void onSuccessResponse(Response<UserInfoResponse> response) {
             userInfoResponse = response.body();
-            Log.d("디버그--정보",userInfoResponse.getName());
+            saveInfo();
+        }
+    }
+
+    private class ReadSecondEmailCallback extends SimpleLoginRetrofitCallBack<GetSecondEmailResponse> {
+        public ReadSecondEmailCallback(Activity activity) {
+            super(activity);
+        }
+
+        @Override
+        public void onSuccessResponse(Response<GetSecondEmailResponse> response) {
+            secondEmail=response.body().getSecondEmail();
             saveInfo();
         }
     }
 
     private void getUserData(String header) {
         KatiRetrofitTool.getAPIWithAuthorizationToken(header).getUserInfo().enqueue(JSHRetrofitTool.getCallback(new ReadUserDataCallBack(getActivity())));
+    }
+
+    private void getSecondEmail(String token) {
+        KatiRetrofitTool.getAPIWithAuthorizationToken(token).getSecondEmail().enqueue(JSHRetrofitTool.getCallback(new ReadSecondEmailCallback(getActivity())));
     }
 
     private void logOut() {

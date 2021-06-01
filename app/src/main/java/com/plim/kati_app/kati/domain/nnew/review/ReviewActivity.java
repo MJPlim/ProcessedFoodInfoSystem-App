@@ -13,6 +13,7 @@ import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.kati.crossDomain.domain.view.activity.KatiLoginCheckViewModelActivity;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
+import com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHToolBar;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.domain.nnew.review.model.CreateAndUpdateReviewRequest;
 import com.plim.kati_app.kati.domain.nnew.review.model.CreateReviewResponse;
@@ -22,12 +23,15 @@ import retrofit2.Response;
 
 public class ReviewActivity extends KatiLoginCheckViewModelActivity {
 
+    private JSHToolBar toolBar;
+
     private Button submitButton;
     private EditText reviewEditText;
     private RatingBar ratingBar;
 
     private Long foodId;
     private boolean isUpdate;
+    private String foodName;
 
     private float ratingScore;
     private String reviewText;
@@ -40,6 +44,7 @@ public class ReviewActivity extends KatiLoginCheckViewModelActivity {
 
     @Override
     protected void associateView() {
+        this.toolBar=findViewById(R.id.reviewActivity_toolbar);
         this.ratingBar = findViewById(R.id.reviewActivity_ratingBar);
         this.submitButton = findViewById(R.id.reviewActivity_submitButton);
         this.reviewEditText = findViewById(R.id.reviewActivity_reviewEditText);
@@ -47,6 +52,8 @@ public class ReviewActivity extends KatiLoginCheckViewModelActivity {
 
     @Override
     protected void initializeView() {
+
+
         LayerDrawable stars = (LayerDrawable) this.ratingBar.getProgressDrawable();
         int unfilledColor = getResources().getColor(R.color.kati_middle_gray, this.getTheme());
         stars.getDrawable(0).setTint(unfilledColor);
@@ -54,6 +61,8 @@ public class ReviewActivity extends KatiLoginCheckViewModelActivity {
         Intent intent = this.getIntent();
         this.foodId = intent.getLongExtra("foodId", 0L);
         this.isUpdate = intent.getBooleanExtra("isUpdate",false);
+        this.foodName = intent.getStringExtra("foodName");
+        this.toolBar.setToolBarTitle(this.foodName);
         if(isUpdate){
             Log.d("리뷰 작성 디버그","업데이트모드");
             this.reviewText=intent.getStringExtra("reviewText");

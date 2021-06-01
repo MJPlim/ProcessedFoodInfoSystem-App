@@ -1,6 +1,7 @@
 package com.plim.kati_app.kati.domain.nnew.main.search.adapter;
 
 import android.app.Activity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -46,6 +47,9 @@ public class FoodViewHolder extends RecyclerView.ViewHolder {
     public void setValue(FoodResponse foodInfo) {
         this.itemView.setTag(foodInfo.getFoodId());
         this.productNameTextView.setText(foodInfo.getFoodName());
+        this.productNameTextView.setWidth(900);
+        this.productNameTextView.setMaxLines(1);
+        this.productNameTextView.setEllipsize(TextUtils.TruncateAt.END);
         Glide.with(this.activity).load(foodInfo.getFoodImageAddress()).fitCenter().transform(new CenterCrop(), new CircleCrop()).into(this.foodImageView);
         this.ratingTextView.setText(foodInfo.getReviewRate() == null ? " ㅡ " : foodInfo.getReviewRate());
         this.reviewCountTextView.setText("(" + foodInfo.getReviewCount() + ")");

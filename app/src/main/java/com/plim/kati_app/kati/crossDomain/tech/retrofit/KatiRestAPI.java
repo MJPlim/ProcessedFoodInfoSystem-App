@@ -8,6 +8,7 @@ import com.plim.kati_app.kati.domain.nnew.main.myKati.allergy.model.CreateUserAl
 import com.plim.kati_app.kati.domain.nnew.main.myKati.allergy.model.CreateUserAllergyResponse;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.allergy.model.ReadUserAllergyResponse;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.model.UserSummaryResponse;
+import com.plim.kati_app.kati.domain.nnew.main.myKati.myInfoEdit.model.GetSecondEmailResponse;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.review.model.ReadReviewResponse;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.review.model.ReadUserReviewResponse;
 import com.plim.kati_app.kati.domain.nnew.setRestoreEmail.model.SetSecondEmailRequest;
@@ -72,6 +73,9 @@ public interface KatiRestAPI {
 
     @GET("api/v1/user/user-info")
     Call<UserInfoResponse> getUserInfo();
+
+    @GET("api/v1/user/get-secondEmail")
+    Call<GetSecondEmailResponse> getSecondEmail();
 
     @POST("api/v1/user/modify-user-info")
     Call<UserInfoResponse> modifyUserInfo(@Body UserInfoModifyRequest request);
