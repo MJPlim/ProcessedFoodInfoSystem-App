@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.navigation.Navigation;
+import androidx.navigation.Navigator;
+
 import com.plim.kati_app.R;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
@@ -156,6 +159,7 @@ public class MyInfoEditFragment extends KatiInfoEditFragment {
     }
 
     public void showOkDialog() {
+        Log.d("뭐야",this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION));
         this.dialogs.add(this.showDialog(LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_TITLE, LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_MESSAGE, (dialog,which)->startActivity(MainActivity.class)));
     }
 

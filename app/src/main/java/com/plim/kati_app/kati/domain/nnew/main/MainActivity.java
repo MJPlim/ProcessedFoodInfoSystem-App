@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +16,7 @@ import androidx.navigation.Navigation;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.plim.kati_app.R;
 import com.plim.kati_app.jshCrossDomain.tech.google.JSHGoogleMap;
+import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.kati.domain.nnew.map.MapServiceActivity;
 
 import org.jetbrains.annotations.NotNull;
@@ -50,4 +52,6 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             });
         }
+
+
     }}

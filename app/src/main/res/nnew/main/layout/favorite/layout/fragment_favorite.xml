@@ -15,64 +15,88 @@
         android:background="@color/white"
         android:elevation="5dp"
         app:title="찜" />
-    <TextView
-        android:id="@+id/favorite_textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/favorite_list"
-        android:text="총"
-        android:layout_marginLeft="16dp"
-        android:layout_marginVertical="16dp"
-        android:textSize="15sp"
-        android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@+id/favorite_toolbar"
-        app:layout_constraintStart_toStartOf="parent"
-        />
 
-    <TextView
-        android:id="@+id/favorite_count"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="16dp"
-        android:layout_marginLeft="4dp"
-        android:text="0"
-        android:textColor="@color/kati_red"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/favorite_list"
-        app:layout_constraintStart_toEndOf="@+id/favorite_textView14"
-        app:layout_constraintTop_toBottomOf="@+id/favorite_toolbar" />
-
-    <TextView
-        android:id="@+id/favorite_textView16"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="16dp"
-        android:text="개"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/favorite_list"
-        app:layout_constraintStart_toEndOf="@+id/favorite_count"
-        app:layout_constraintTop_toBottomOf="@+id/favorite_toolbar" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/favorite_list"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/favorite_toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/favorite_numOfFavorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_marginLeft="16dp"
+                android:layout_marginVertical="16dp"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@+id/favorite_toolbar"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/favorite_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/favorite_numOfFavorite"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_review_see_at_mykati" />
+
+
+        </LinearLayout>
+
+
+
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+
+    <ImageView
+        android:id="@+id/favorite_emptyImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:gravity="center"
+        app:srcCompat="@drawable/empty_favorite_icon"
+        android:layout_marginTop="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/favorite_textView14"
-        tools:itemCount="3"
-        tools:listitem="@layout/item_review_see_at_mykati" />
+        app:layout_constraintVertical_bias="0.25"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/favorite_noFavorite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="찜한 음식점이 없습니다."
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="로그인 후, 나의 찜 목록을 확인해 보세요."
+        android:textSize="15dp"
         app:layout_constraintVertical_bias="0.25"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/favorite_emptyImage" />
+
+    <Button
+        android:id="@+id/favorite_login_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="로그인하기"
+        android:layout_marginTop="20dp"
+        app:layout_constraintVertical_bias="0.25"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/favorite_noFavorite" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

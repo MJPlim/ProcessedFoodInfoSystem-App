@@ -16,10 +16,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.plim.kati_app.R;
 import com.plim.kati_app.kati.crossDomain.domain.model.Constant;
+import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHViewPagerTool;
 import com.plim.kati_app.kati.crossDomain.domain.view.etc.YYECategoryItem;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiViewModelFragment;
@@ -66,6 +68,8 @@ public class HomeFragment extends KatiViewModelFragment {
 //                button.performClick();
             navigateTo(R.id.action_global_searchFragment);
         });
+
+
 
     }
 

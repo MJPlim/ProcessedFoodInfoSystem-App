@@ -84,7 +84,7 @@
         app:layout_constraintTop_toBottomOf="@+id/mykati_login_layout" >
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/mykati_myImage"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_margin="16dp"
@@ -99,18 +99,18 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:text="정상"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-            app:layout_constraintStart_toEndOf="@+id/imageView2"
-            app:layout_constraintTop_toTopOf="@+id/imageView2" />
+            app:layout_constraintBottom_toBottomOf="@+id/mykati_myImage"
+            app:layout_constraintStart_toEndOf="@+id/mykati_myImage"
+            app:layout_constraintTop_toTopOf="@+id/mykati_myImage" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:text="님"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+            app:layout_constraintBottom_toBottomOf="@+id/mykati_myImage"
             app:layout_constraintStart_toEndOf="@+id/mykati_name_textView"
-            app:layout_constraintTop_toTopOf="@+id/imageView2" />
+            app:layout_constraintTop_toTopOf="@+id/mykati_myImage" />
 
         <ImageView
             android:layout_width="wrap_content"
