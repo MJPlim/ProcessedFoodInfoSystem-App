@@ -194,6 +194,7 @@ public class SearchFragment extends KatiSearchFragment {
         if (this.searchWords.contains(searchText))
             this.searchWords.remove(searchText);
         this.searchWords.add(0, searchText);
+        this.searchModel.setSearchText(searchText);
         this.save();
         Navigation.findNavController(view).navigate(R.id.action_searchFragment_to_searchResultFragment);
         return true;

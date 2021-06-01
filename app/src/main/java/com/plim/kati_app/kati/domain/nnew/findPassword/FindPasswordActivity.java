@@ -13,7 +13,6 @@ import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBackImpl;
 import com.plim.kati_app.kati.domain.nnew.main.MainActivity;
-import com.plim.kati_app.kati.domain.old.TempMainActivity;
 import com.plim.kati_app.kati.domain.nnew.findPassword.model.FindPasswordRequest;
 import com.plim.kati_app.kati.domain.nnew.findPassword.model.FindPasswordResponse;
 
@@ -78,7 +77,7 @@ public class FindPasswordActivity extends KatiViewModelActivity {
     private void showLoginedDialog() {
         KatiDialog.simplerAlertDialog(this,
                 LOGINED_DIALOG_TITLE, LOGINED_DIALOG_TITLE,
-                (dialog, which) -> this.startActivity(TempMainActivity.class)
+                (dialog, which) -> this.startActivity(MainActivity.class)
         );
     }
 

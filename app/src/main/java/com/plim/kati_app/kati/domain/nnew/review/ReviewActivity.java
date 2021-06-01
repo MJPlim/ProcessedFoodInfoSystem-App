@@ -14,8 +14,8 @@ import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.kati.crossDomain.domain.view.activity.KatiLoginCheckViewModelActivity;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
-import com.plim.kati_app.kati.domain.old.model.CreateAndUpdateReviewRequest;
-import com.plim.kati_app.kati.domain.old.model.CreateReviewResponse;
+import com.plim.kati_app.kati.domain.nnew.review.model.CreateAndUpdateReviewRequest;
+import com.plim.kati_app.kati.domain.nnew.review.model.CreateReviewResponse;
 
 import retrofit2.Response;
 

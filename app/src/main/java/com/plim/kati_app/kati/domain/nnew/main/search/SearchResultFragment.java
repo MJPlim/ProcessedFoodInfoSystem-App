@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -119,7 +120,16 @@ public class SearchResultFragment extends KatiSearchFragment {
             }
         });
 
-
+        this.searchFieldEditText.setText(this.searchModel.getSearchText());
+        this.searchFieldEditText.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+//                this.loadSearchResult();
+                this.searchModel.setSearchPageNum(1);
+                this.isLoadingMore = false;
+                this.saveSearch();
+            }
+            return false;
+        });
     }
 
     @Override
@@ -129,30 +139,43 @@ public class SearchResultFragment extends KatiSearchFragment {
 
     @Override
     protected void katiEntityUpdatedAndLogin() {
-        this.allergyFilterButton.setEnabled(true);
+        this.loadAdvertisement();
+        this.loadSearchResult();
+        Log.d("디버그 업데이트 부름"," 부름");
+        this.searchModel.setFiltered(true);
+        this.allergyFilterButton.setEnabled(this.searchModel.isFiltered());
+        this.getAllergyData(this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION));
+        this.saveSearch();
     }
 
     @Override
     protected void katiEntityUpdatedAndNoLogin() {
-    this.allergyFilterButton.setEnabled(false);
+        this.searchModel.setFiltered(false);
+        this.allergyFilterButton.setEnabled(this.searchModel.isFiltered());
     }
 
     @Override
     public void foodModelDataUpdated() {
+//        this.loadAdvertisement();
+//        this.loadSearchResult();
     }
 
-
     @Override
-    protected void katiEntityUpdated() {
-        super.katiEntityUpdated();
-        this.loadAdvertisement();
-        this.loadSearchResult();
+    public void onResume() {
+        super.onResume();
+        this.save();
+        this.saveSearch();
+        if (this.rankingChip != null)
+            this.rankingChip.performClick();
     }
 
     @Override
     protected void searchModelDataUpdated() {
-        if (this.dataset != null)
+        if (this.dataset != null){
+            this.isLoadingMore=false;
             this.loadSearchResult();
+
+        }
     }
 
     private class ReadUserAllergyShowCallBack extends SimpleLoginRetrofitCallBack<ReadUserAllergyResponse> {
@@ -164,7 +187,7 @@ public class SearchResultFragment extends KatiSearchFragment {
         public void onSuccessResponse(Response<ReadUserAllergyResponse> response) {
             Vector<String> vector = new Vector<>();
             vector.addAll(response.body().getUserAllergyMaterials());
-            setVector(vector);
+            searchModel.setAllergyList(vector);
         }
     }
 
@@ -226,7 +249,7 @@ public class SearchResultFragment extends KatiSearchFragment {
                     this.searchModel.getPageSize(),
                     this.searchModel.getFoodSortElement(),
                     this.searchModel.getSearchText(),
-                    token.equals(KatiEntity.EKatiData.NULL.name()) ? null : this.getAllergyData(token)
+                    !this.searchModel.isFiltered() ? null : this.getAllergyData(token)
             ).enqueue(JSHRetrofitTool.getCallback(new SearchRequestCallback(this.getActivity())));
         } else {
             KatiRetrofitTool.getAPI().getManufacturerFoodListBySorting(
@@ -234,7 +257,7 @@ public class SearchResultFragment extends KatiSearchFragment {
                     this.searchModel.getPageSize(),
                     this.searchModel.getFoodSortElement(),
                     this.searchModel.getSearchText(),
-                    this.searchModel.isFiltered() ? this.searchModel.getAllergyList() : null
+                    !this.searchModel.isFiltered() ? this.searchModel.getAllergyList() : null
             ).enqueue(JSHRetrofitTool.getCallback(new SearchRequestCallback(this.getActivity())));
         }
     }
@@ -253,10 +276,6 @@ public class SearchResultFragment extends KatiSearchFragment {
             this.searchModel.setFoodSortElement(element.getMessage());
             this.saveSearch();
         }
-    }
-
-    private void setVector(Vector<String> allergyVector) {
-        this.searchModel.setAllergyList(allergyVector);
     }
 
 
