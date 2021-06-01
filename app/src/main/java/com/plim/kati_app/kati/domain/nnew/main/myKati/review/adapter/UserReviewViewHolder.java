@@ -72,7 +72,7 @@ public class UserReviewViewHolder extends RecyclerView.ViewHolder {
             Intent intent = new Intent(this.activity, ReviewActivity.class);
             intent.putExtra("reviewId", item.getReviewId());
             intent.putExtra("isUpdate",true);
-            intent.putExtra("foodId", item.getFoodId());
+            intent.putExtra("foodName", item.getFoodName());
             intent.putExtra("reviewText",item.getReviewDescription());
             intent.putExtra("ratingScore",item.getReviewRating());
             this.activity.startActivity(intent);

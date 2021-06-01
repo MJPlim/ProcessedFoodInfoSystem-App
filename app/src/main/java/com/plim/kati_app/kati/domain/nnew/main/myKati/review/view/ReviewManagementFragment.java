@@ -1,6 +1,7 @@
 package com.plim.kati_app.kati.domain.nnew.main.myKati.review.view;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,6 +10,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,7 +57,7 @@ public class ReviewManagementFragment extends KatiLoginCheckViewModelFragment {
     @Override
     protected void associateView(View view) {
         this.foodReviewRecyclerView = view.findViewById(R.id.review_list);
-        this.reviewNum = view.findViewById(R.id.review_management_fragment_count);
+        this.reviewNum = view.findViewById(R.id.review_numOfReview);
     }
 
     @Override
@@ -97,7 +101,10 @@ public class ReviewManagementFragment extends KatiLoginCheckViewModelFragment {
         @Override
         public void onSuccessResponse(Response<ReadUserReviewResponse<List<ReadReviewResponse>>> response) {
             items = new Vector<ReadReviewResponse>(response.body().getUserReviewList());
-            reviewNum.setText(String.valueOf(items.size()));
+            String temp = "총 "+items.size() + "개";
+            SpannableStringBuilder ssb = new SpannableStringBuilder(temp);
+            ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#E53154")), temp.length() - 3, temp.length()-1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            reviewNum.setText(ssb);
             reviewRecyclerAdapter.setItems(items);
             foodReviewRecyclerView.setAdapter(reviewRecyclerAdapter);
 
