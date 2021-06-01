@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -59,6 +60,8 @@ public class HomeFragment extends KatiViewModelFragment {
 //                button.performClick();
             navigateTo(R.id.action_global_searchFragment);
         });
+
+
 
     }
 

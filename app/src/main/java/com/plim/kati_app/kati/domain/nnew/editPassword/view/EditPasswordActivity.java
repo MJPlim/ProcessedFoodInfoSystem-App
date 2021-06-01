@@ -106,17 +106,11 @@ public class EditPasswordActivity extends KatiViewModelActivity {
      * Method
      */
     private void showNotLoginedDialog() {
-        KatiDialog.simplerAlertDialog(this,
-                LOG_OUT_ACTIVITY_FAILURE_DIALOG_TITLE, LOG_OUT_ACTIVITY_FAILURE_DIALOG_TITLE,
-                (dialog, which) -> this.finish()
-        );
+        Toast.makeText(getApplicationContext(),LOG_OUT_ACTIVITY_FAILURE_DIALOG_TITLE , Toast.LENGTH_LONG).show();
     }
 
     private void showCompletedDialog() {
-        KatiDialog.simplerAlertDialog(this,
-                COMPLETE_CHANGE_PASSWORD_TITLE, COMPLETE_CHANGE_PASSWORD_MESSAGE,
-                (dialog, which) -> this.finish()
-        );
+        Toast.makeText(getApplicationContext(),COMPLETE_CHANGE_PASSWORD_MESSAGE , Toast.LENGTH_LONG).show();
     }
 
 

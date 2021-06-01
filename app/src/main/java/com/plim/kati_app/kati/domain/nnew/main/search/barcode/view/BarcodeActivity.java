@@ -26,7 +26,7 @@ public class BarcodeActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if(result != null) {
-            if(result.getContents() == null) { Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show(); }
+            if(result.getContents() == null) {}
             else {
                 Intent intent = new Intent(this, FoodDetailActivity.class);
                 intent.putExtra("barcode",result.getContents());

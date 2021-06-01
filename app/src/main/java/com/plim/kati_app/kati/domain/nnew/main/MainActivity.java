@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,6 +20,8 @@ import com.plim.kati_app.kati.crossDomain.domain.model.Constant;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 
 import com.plim.kati_app.jshCrossDomain.tech.google.JSHGoogleMap;
+
+import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 
 import com.plim.kati_app.kati.domain.nnew.map.MapServiceActivity;
 
@@ -82,3 +85,4 @@ public class MainActivity extends AppCompatActivity {
 
 
 }
+

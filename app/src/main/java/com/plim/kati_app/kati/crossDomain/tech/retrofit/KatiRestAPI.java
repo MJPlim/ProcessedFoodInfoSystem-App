@@ -7,6 +7,7 @@ import com.plim.kati_app.kati.domain.nnew.main.favorite.model.UserFavoriteRespon
 import com.plim.kati_app.kati.domain.nnew.main.myKati.allergy.model.CreateUserAllergyRequest;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.allergy.model.CreateUserAllergyResponse;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.allergy.model.ReadUserAllergyResponse;
+import com.plim.kati_app.kati.domain.nnew.main.myKati.model.UserSummaryResponse;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.review.model.ReadReviewResponse;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.review.model.ReadUserReviewResponse;
 import com.plim.kati_app.kati.domain.nnew.setRestoreEmail.model.SetSecondEmailRequest;
@@ -162,7 +163,7 @@ public interface KatiRestAPI {
     @GET("reviewRanking") Call<List<ItemRankingResponse>> getRankingList();
     @GET("/api/v1/user/favorite/list") Call<List<UserFavoriteResponse>> getUserFavorite();
     @GET("/api/v1/user/readReviewByUserID") Call<ReadUserReviewResponse<List<ReadReviewResponse>>> getUserReview();
-
+    @GET("/api/v1/user/summary") Call<UserSummaryResponse> getUserSummary();
     @GET("/api/v1/food/list/category")
     Call<CategoryFoodListResponse> getCategoryFood(@Query("category") String category,
                                                    @Query("page") int page);
