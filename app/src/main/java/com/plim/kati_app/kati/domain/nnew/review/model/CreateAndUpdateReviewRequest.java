@@ -1,4 +1,4 @@
-package com.plim.kati_app.kati.domain.old.model;
+package com.plim.kati_app.kati.domain.nnew.review.model;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,4 +1,4 @@
-package com.plim.kati_app.kati.domain.old.model;
+package com.plim.kati_app.kati.domain.nnew.main.search.model;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

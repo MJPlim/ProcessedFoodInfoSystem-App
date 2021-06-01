@@ -1,17 +1,9 @@
 package com.plim.kati_app.kati.domain.nnew.main.myKati.review.view;
 
-import android.content.Context;
-import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,16 +12,14 @@ import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitCallback;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
-import com.plim.kati_app.kati.crossDomain.domain.view.dialog.LoadingDialog;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiLoginCheckViewModelFragment;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.review.adapter.UserReviewRecyclerAdapter;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.review.model.ReadReviewResponse;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.review.model.ReadUserReviewResponse;
-import com.plim.kati_app.kati.domain.old.model.CreateReviewResponse;
-import com.plim.kati_app.kati.domain.old.model.DeleteReviewRequest;
+import com.plim.kati_app.kati.domain.nnew.review.model.CreateReviewResponse;
+import com.plim.kati_app.kati.domain.nnew.main.search.model.DeleteReviewRequest;
 
-import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 
 import java.util.List;

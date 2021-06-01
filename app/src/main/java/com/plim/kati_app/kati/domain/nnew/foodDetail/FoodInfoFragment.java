@@ -18,7 +18,7 @@ import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiFoodFragment;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBackImpl;
 import com.plim.kati_app.kati.domain.nnew.foodDetail.model.FoodDetailResponse;
-import com.plim.kati_app.kati.domain.old.model.FindFoodByBarcodeRequest;
+import com.plim.kati_app.kati.domain.nnew.main.search.model.FindFoodByBarcodeRequest;
 import com.varunest.sparkbutton.SparkButton;
 
 import retrofit2.Response;

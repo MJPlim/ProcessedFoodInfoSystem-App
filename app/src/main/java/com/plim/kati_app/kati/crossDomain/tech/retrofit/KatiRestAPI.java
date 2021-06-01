@@ -1,7 +1,5 @@
 package com.plim.kati_app.kati.crossDomain.tech.retrofit;
 
-import android.app.DownloadManager;
-
 import com.plim.kati_app.kati.domain.nnew.findId.model.FindEmailRequest;
 import com.plim.kati_app.kati.domain.nnew.findId.model.FindEmailResponse;
 import com.plim.kati_app.kati.domain.nnew.main.category.model.CategoryFoodListResponse;
@@ -21,14 +19,14 @@ import com.plim.kati_app.kati.domain.nnew.findPassword.model.FindPasswordRespons
 import com.plim.kati_app.kati.domain.nnew.signUp.model.SignUpRequest;
 import com.plim.kati_app.kati.domain.nnew.signUp.model.SignUpResponse;
 import com.plim.kati_app.kati.domain.nnew.foodDetail.model.FoodDetailResponse;
-import com.plim.kati_app.kati.domain.old.model.CreateAndUpdateReviewRequest;
-import com.plim.kati_app.kati.domain.old.model.CreateReviewResponse;
-import com.plim.kati_app.kati.domain.old.model.DeleteReviewRequest;
-import com.plim.kati_app.kati.domain.old.model.FindFoodByBarcodeRequest;
-import com.plim.kati_app.kati.domain.old.model.ReadReviewDto;
-import com.plim.kati_app.kati.domain.old.model.ReadReviewIdResponse;
-import com.plim.kati_app.kati.domain.old.model.UpdateReviewLikeRequest;
-import com.plim.kati_app.kati.domain.old.model.UpdateReviewLikeResponse;
+import com.plim.kati_app.kati.domain.nnew.review.model.CreateAndUpdateReviewRequest;
+import com.plim.kati_app.kati.domain.nnew.review.model.CreateReviewResponse;
+import com.plim.kati_app.kati.domain.nnew.main.search.model.DeleteReviewRequest;
+import com.plim.kati_app.kati.domain.nnew.main.search.model.FindFoodByBarcodeRequest;
+import com.plim.kati_app.kati.domain.nnew.main.search.model.ReadReviewDto;
+import com.plim.kati_app.kati.domain.nnew.main.search.model.ReadReviewIdResponse;
+import com.plim.kati_app.kati.domain.nnew.main.search.model.UpdateReviewLikeRequest;
+import com.plim.kati_app.kati.domain.nnew.main.search.model.UpdateReviewLikeResponse;
 import com.plim.kati_app.kati.domain.nnew.main.search.model.AdvertisementResponse;
 import com.plim.kati_app.kati.domain.nnew.main.search.model.FindFoodBySortingResponse;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.myInfoEdit.model.UserInfoModifyRequest;

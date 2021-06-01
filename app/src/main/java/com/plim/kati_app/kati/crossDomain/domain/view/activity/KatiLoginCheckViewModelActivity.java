@@ -93,9 +93,7 @@ public abstract class KatiLoginCheckViewModelActivity extends KatiViewModelActiv
     protected abstract void katiEntityUpdatedAndNoLogin();
 
     protected void notLoginDialog() {
-        KatiDialog.NotLogInDialog(this, (dialog, which) -> {
-            this.startActivity(LoginActivity.class);
-        });
+        KatiDialog.NotLogInDialog(this, (dialog, which) -> this.startActivity(LoginActivity.class),(dialog, which) -> this.onBackPressed());
     }
 
     protected void putToken(String authorization) { this.dataset.put(KatiEntity.EKatiData.AUTHORIZATION, authorization); }

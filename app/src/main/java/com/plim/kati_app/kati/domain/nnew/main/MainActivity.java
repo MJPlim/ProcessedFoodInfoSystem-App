@@ -14,11 +14,15 @@ import androidx.navigation.Navigation;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.plim.kati_app.R;
+import com.plim.kati_app.kati.crossDomain.domain.model.Constant;
+import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 import com.plim.kati_app.kati.domain.nnew.map.MapServiceActivity;
 
 import org.jetbrains.annotations.NotNull;
 
 public class MainActivity extends AppCompatActivity {
+
+    private KatiDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,4 +53,28 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             });
         }
-    }}
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        this.dialog.dismiss();
+    }
+//
+//    @Override
+//    public void onBackPressed() {
+//        this.showSystemOffCheckDialog();
+//    }
+
+    public void showSystemOffCheckDialog() {
+        this.dialog = KatiDialog.simplerAlertDialog(this,
+                Constant.MAIN_ACTIVITY_FINISH_DIALOG_TITLE, Constant.MAIN_ACTIVITY_FINISH_DIALOG_MESSAGE,
+                (dialog, which) -> {
+                    this.finish();
+                    this.finishAffinity();
+                }
+        );
+    }
+
+
+}
