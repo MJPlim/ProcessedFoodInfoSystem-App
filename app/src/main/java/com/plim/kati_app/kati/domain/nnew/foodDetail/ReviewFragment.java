@@ -135,6 +135,11 @@ public class ReviewFragment extends KatiFoodFragment {
         progressBar.setProgress((int) (percent * 100));
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        this.vector.clear();
+    }
 
     @Override
     public void foodModelDataUpdated() {
@@ -260,7 +265,7 @@ public class ReviewFragment extends KatiFoodFragment {
                 intent.putExtra("reviewId", reviewId);
                 intent.putExtra("foodId", this.foodDetailResponse.getFoodId());
                 intent.putExtra("isUpdate", true);
-                intent.putExtra("ratingScore",review.getReviewRating());
+                intent.putExtra("ratingScore",(int)review.getReviewRating());
                 intent.putExtra("reviewText",review.getReviewDescription());
                 startActivity(intent);
             }

@@ -82,7 +82,7 @@ public class Constant { // ㅎㅎ Resource 로 옮겨조...
     public static final String FOOD_SEARCH_RECOMMENDATION_FRAGMENT_BUNDLE_KEY="text";
 
     public enum EAllergyList{
-        새우,게,우유,아몬드,잣,호두,땅콩,대두,밀,메밀,메추리알,난류,계란,소고기,닭고기,쇠고기,돼지고기,오징어,조개류,복숭아,토마토,아황산류;
+        우유,아몬드,잣,호두,땅콩,대두,밀,메밀,메추리알,난류,계란,소고기,닭고기,쇠고기,돼지고기,오징어,조개류,새우,게,복숭아,토마토,아황산류;
     }
 
 

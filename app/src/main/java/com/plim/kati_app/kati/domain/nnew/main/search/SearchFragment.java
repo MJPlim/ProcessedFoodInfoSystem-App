@@ -6,6 +6,7 @@ import android.content.res.ColorStateList;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.navigation.Navigation;
 
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -165,7 +166,7 @@ public class SearchFragment extends KatiSearchFragment {
         GridLayout.LayoutParams params = new GridLayout.LayoutParams();
         params.setGravity(Gravity.LEFT);
 
-        return this.createRankTextView(params, size, text, text);
+        return this.createRankTextView(params, size, text);
     }
 
     private TextView createRankTextView(int size, String text, String tag) {
@@ -173,6 +174,24 @@ public class SearchFragment extends KatiSearchFragment {
         params.setGravity(Gravity.CENTER);
 
         return this.createRankTextView(params, size, text, tag);
+    }
+
+    private TextView createRankTextView(GridLayout.LayoutParams params, int size, String text) {
+        int paddingVertical = 10;
+        int paddingHorizontal = 25;
+        TextView textView = new TextView(getContext());
+        textView.setText(text);
+        textView.setTag(text);
+        textView.setLayoutParams(params);
+        textView.setOnClickListener(setSearchTextListener);
+        textView.setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical);
+        textView.setTextColor(getResources().getColor(R.color.black, getContext().getTheme()));
+        textView.setTextSize(size);
+        textView.setWidth(550);
+        textView.setMaxWidth(550);
+        textView.setMaxLines(1);
+        textView.setEllipsize(TextUtils.TruncateAt.END);
+        return textView;
     }
 
     private TextView createRankTextView(GridLayout.LayoutParams params, int size, String text, String tag) {
@@ -211,6 +230,7 @@ public class SearchFragment extends KatiSearchFragment {
                 chip.setChipStrokeColor(ColorStateList.valueOf(getResources().getColor(R.color.kati_middle_gray, getContext().getTheme())));
                 chip.setChipStrokeWidth(1.5f);
                 chip.setCloseIconVisible(true);
+                chip.setCloseIconTint(ColorStateList.valueOf(getResources().getColor(R.color.kati_gray, getContext().getTheme())));
                 chip.setOnCloseIconClickListener(this.deleteOneListener);
                 chip.setOnClickListener(this.setSearchTextListener);
                 this.recentSearchedChipGroup.addView(chip);

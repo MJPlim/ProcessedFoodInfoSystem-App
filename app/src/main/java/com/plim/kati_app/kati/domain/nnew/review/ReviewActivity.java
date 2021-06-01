@@ -107,7 +107,7 @@ public class ReviewActivity extends KatiLoginCheckViewModelActivity {
 
         CreateAndUpdateReviewRequest request= new CreateAndUpdateReviewRequest();
         request.setReviewDescription(this.reviewEditText.getText().toString());
-        request.setReviewRating(this.ratingBar.getNumStars());
+        request.setReviewRating((int) this.ratingBar.getRating());
         request.setFoodId(this.foodId);
 
         KatiRetrofitTool.getAPIWithAuthorizationToken(token).createReview(request).enqueue(JSHRetrofitTool.getCallback(new CreateAndUpdateReviewCallback(this)));
@@ -118,7 +118,7 @@ public class ReviewActivity extends KatiLoginCheckViewModelActivity {
 
         CreateAndUpdateReviewRequest request= new CreateAndUpdateReviewRequest();
         request.setReviewDescription(this.reviewEditText.getText().toString());
-        request.setReviewRating(this.ratingBar.getNumStars());
+        request.setReviewRating((int) this.ratingBar.getRating());
         request.setReviewId(this.reviewId);
 
         KatiRetrofitTool.getAPIWithAuthorizationToken(token).updateReview(request).enqueue(JSHRetrofitTool.getCallback(new CreateAndUpdateReviewCallback(this)));
