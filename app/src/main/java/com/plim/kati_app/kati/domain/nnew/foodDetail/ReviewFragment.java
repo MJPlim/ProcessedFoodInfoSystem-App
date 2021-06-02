@@ -2,6 +2,7 @@ package com.plim.kati_app.kati.domain.nnew.foodDetail;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -145,6 +146,7 @@ public class ReviewFragment extends KatiFoodFragment {
 
     @Override
     public void foodModelDataUpdated() {
+        Log.d("리뷰 목록 디버그-새로고침","푸드 모델 데이터 업데이트");
         this.refresh();
     }
 
@@ -164,6 +166,8 @@ public class ReviewFragment extends KatiFoodFragment {
 
         this.ratingTextView.setText(String.valueOf(readSummaryResponse.getAvgRating()));
         this.ratingBar.setRating(readSummaryResponse.getAvgRating());
+
+        this.noRereviewTextView.setVisibility(this.vector.size()!=0?View.INVISIBLE:View.VISIBLE);
     }
 
     private class ReadReviewCallback extends SimpleRetrofitCallBackImpl<ReadReviewDto> {
@@ -228,19 +232,22 @@ public class ReviewFragment extends KatiFoodFragment {
         saveReadSummary();
 
         List<ReadReviewResponse> reviewList = reviewDto.getReadReviewResponse();
-        this.noRereviewTextView.setVisibility(reviewList.size()!=0?View.INVISIBLE:View.VISIBLE);
+
+
         vector.addAll(reviewList);
         adapter.setItems(vector);
     }
 
 
     private void refresh() {
+        Log.d("리뷰 목록 디버그","새로고침");
         this.currentPageNum=1;
         this.vector.clear();
         this.load();
     }
 
     private void loadMore() {
+        Log.d("리뷰 목록 디버그","더 불러오기");
         this.currentPageNum++;
         this.load();
     }

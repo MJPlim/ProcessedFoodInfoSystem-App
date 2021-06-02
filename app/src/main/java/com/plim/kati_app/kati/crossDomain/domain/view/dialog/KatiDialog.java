@@ -83,6 +83,17 @@ public class KatiDialog extends AlertDialog.Builder {
         return kDialog;
     }
 
+    public static KatiDialog simplerTwoOptionAlertDialog(Activity activity, String title, String message, DialogInterface.OnClickListener listener, DialogInterface.OnClickListener cancelListener) {
+        KatiDialog kDialog = new KatiDialog(activity);
+        kDialog.setTitle(title);
+        kDialog.setMessage(message);
+        kDialog.setPositiveButton(KATI_DIALOG_CONFIRM, listener);
+        kDialog.setNegativeButton(KATI_DIALOG_CANCEL,cancelListener);
+        kDialog.setColor(activity.getResources().getColor(R.color.kati_coral, activity.getTheme()));
+        kDialog.showDialog();
+        return kDialog;
+    }
+
     public static void NotLogInDialog(Activity context, DialogInterface.OnClickListener listener) {
         KatiDialog kDialog = new KatiDialog(context);
         kDialog.setTitle(LOG_OUT_ACTIVITY_FAILURE_DIALOG_TITLE);

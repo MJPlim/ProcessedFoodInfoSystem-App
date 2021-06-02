@@ -12,7 +12,7 @@ import lombok.Setter;
 public class SearchModel {
     private String searchMode=Constant.ESearchMode.제품.name(), searchText,foodSortElement= Constant.SortElement.MANUFACTURER.name();
     private int pageSize=10,searchPageNum=1;
-    private boolean isFiltered=false;
+    private boolean isFiltered=true;
     private Constant.SortOrder sortOrder= Constant.SortOrder.asc;
     private Vector<String> allergyList;
 

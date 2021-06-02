@@ -74,7 +74,7 @@ public class SearchFragment extends KatiSearchFragment {
 
     @Override
     protected void initializeView() {
-        this.barcodeSearchButton.setOnClickListener(v->this.barcodeSearch());
+        this.barcodeSearchButton.setOnClickListener(v -> this.barcodeSearch());
         this.searchFieldEditText.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 this.doSearchStart(v);
@@ -83,26 +83,21 @@ public class SearchFragment extends KatiSearchFragment {
         });
 
         this.setSearchTextListener = v -> {
-            this.searchModel.setSearchText((String) v.getTag());
-            this.searchFieldEditText.setText((String) v.getTag());
-            this.doSearchStart(v);
+            this.setTextAndSearchStart(v);
         };
 
         this.deleteAllListener = v -> {
             this.showDeleteAllSearchedWordConfirm();
-            this.save();
         };
 
         this.deleteOneListener = v -> {
             this.showDeleteSearchedWordConfirm((String) v.getTag());
-            this.save();
         };
 
         this.loadRank();
     }
-    private void barcodeSearch() {
-        startActivity(BarcodeActivity.class);
-    }
+
+
     @Override
     protected void katiEntityUpdated() {
         this.loadRecentSearchedWords();
@@ -143,6 +138,16 @@ public class SearchFragment extends KatiSearchFragment {
     /*
     method
      */
+
+    private void setTextAndSearchStart(View v) {
+        this.searchModel.setSearchText((String) v.getTag());
+        this.searchFieldEditText.setText((String) v.getTag());
+        this.doSearchStart(v);
+    }
+
+    private void barcodeSearch() {
+        startActivity(BarcodeActivity.class);
+    }
 
     private void fillRankGridLayout(Vector<ItemRankingResponse> itemVector) {
         rankGridLayout.setRowCount(5);

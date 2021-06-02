@@ -2,6 +2,7 @@ package com.plim.kati_app.kati.domain.nnew.main.home;
 
 import android.app.Activity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,7 +56,7 @@ public class HomeFragment extends KatiViewModelFragment {
             this.layout.addView(item);
         }
         this.searchText.setOnClickListener(v -> {
-//            Button button = this.getView().findViewById(R.id.action_search);
+//            Button button = v.findViewById(R.id.action_search);
 //            if (button != null)
 //                button.performClick();
             navigateTo(R.id.action_global_searchFragment);

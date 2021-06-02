@@ -7,11 +7,13 @@ import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -128,11 +130,12 @@ public class SearchResultFragment extends KatiSearchFragment {
                 this.isLoadingMore = false;
                 this.searchModel.setSearchText(this.searchFieldEditText.getText().toString());
                 this.saveSearch();
+                ((InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(searchFieldEditText.getWindowToken(), 0);
             }
             return false;
         });
 
-        this.deleteIcon.setOnClickListener(v->this.searchFieldEditText.setText(""));
+        this.deleteIcon.setOnClickListener(v -> this.searchFieldEditText.setText(""));
     }
 
     @Override
@@ -142,12 +145,12 @@ public class SearchResultFragment extends KatiSearchFragment {
 
     @Override
     protected void katiEntityUpdatedAndLogin() {
-        this.loadAdvertisement();
-        this.loadSearchResult();
-        Log.d("디버그 업데이트 부름"," 부름");
         this.searchModel.setFiltered(true);
         this.allergyFilterButton.setEnabled(this.searchModel.isFiltered());
         this.getAllergyData(this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION));
+
+        this.loadAdvertisement();
+        this.loadSearchResult();
         this.saveSearch();
     }
 
@@ -174,10 +177,9 @@ public class SearchResultFragment extends KatiSearchFragment {
 
     @Override
     protected void searchModelDataUpdated() {
-        if (this.dataset != null){
-            this.isLoadingMore=false;
+        if (this.dataset != null) {
+            this.isLoadingMore = false;
             this.loadSearchResult();
-
         }
     }
 
@@ -191,6 +193,7 @@ public class SearchResultFragment extends KatiSearchFragment {
             Vector<String> vector = new Vector<>();
             vector.addAll(response.body().getUserAllergyMaterials());
             searchModel.setAllergyList(vector);
+            Log.d("알레르기 불러옴",vector.size()!=0? vector.get(0): "내용 없음");
         }
     }
 
@@ -208,14 +211,13 @@ public class SearchResultFragment extends KatiSearchFragment {
     }
 
     private class SearchRequestCallback extends SimpleRetrofitCallBackImpl<FindFoodBySortingResponse> {
-
-
         public SearchRequestCallback(Activity activity) {
             super(activity);
         }
 
         @Override
         public void onSuccessResponse(Response<FindFoodBySortingResponse> response) {
+            Log.d("검색 불러옴","검색 검색 시작");
             FindFoodBySortingResponse dto = response.body();
 
             hasNext = dto.isHas_next();
@@ -225,7 +227,6 @@ public class SearchResultFragment extends KatiSearchFragment {
             vector.addAll(response.body().getData());
             foodRecyclerAdapter.setItems(vector);
             foodRecyclerAdapter.notifyDataSetChanged();
-
             isLoadingMore = false;
         }
     }
@@ -239,7 +240,7 @@ public class SearchResultFragment extends KatiSearchFragment {
 
         Log.d("태그", "페이지" + this.searchModel.getSearchPageNum() + " 정렬기준" +
                 this.searchModel.getFoodSortElement() + " 검색어" +
-                this.searchModel.getSearchText() + " 더불러오기" + this.isLoadingMore);
+                this.searchModel.getSearchText() + " 더불러오기" + this.isLoadingMore+" 필터 켜짐"+this.searchModel.isFiltered());
 
         if (!this.isLoadingMore) this.vector.clear();
 

@@ -203,7 +203,7 @@ public static final String ALLERGY_EXPANDABLE_LIST_TITLE="알레르기";
         kimchi("김치",EKimchiCategory.values(),R.drawable.item_kimchi),
         mealkit("즉석조리",EMealkitCategory.values(),R.drawable.item_mealkit),
 //        etcmaterial("식재료",EMaterialCategory.values(),R.drawable.material),
-        etc("기타",EEtcCategory.values(),R.drawable.item_meat),
+        etc("기타",EEtcCategory.values(),R.drawable.item_etc),
         ;
         private String name;
         private EChildCategory[] childCategories;

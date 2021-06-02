@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,6 +21,7 @@ import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBackIm
 import com.plim.kati_app.kati.domain.nnew.foodDetail.model.FoodDetailResponse;
 import com.plim.kati_app.kati.domain.nnew.main.search.model.FindFoodByBarcodeRequest;
 import com.varunest.sparkbutton.SparkButton;
+import com.varunest.sparkbutton.SparkEventListener;
 
 import retrofit2.Response;
 
@@ -34,9 +36,9 @@ public class FoodInfoFragment extends KatiFoodFragment {
 
     //associate
     //view
-    private ImageView foodImageView,starIcon;
-    private TextView foodNameTextView,ratingTextView, reviewCountTextView;
-    private JSHInfoItem materialItem,ingredientItem;
+    private ImageView foodImageView, starIcon;
+    private TextView foodNameTextView, ratingTextView, reviewCountTextView;
+    private JSHInfoItem materialItem, ingredientItem;
     private SparkButton heartButton;
 
 
@@ -56,15 +58,15 @@ public class FoodInfoFragment extends KatiFoodFragment {
 
     @Override
     protected void associateView(View view) {
-        this.foodImageView=view.findViewById(R.id.foodItemFragment_foodImageView);
-        this.starIcon=view.findViewById(R.id.foodItemFragment_starIcon);
+        this.foodImageView = view.findViewById(R.id.foodItemFragment_foodImageView);
+        this.starIcon = view.findViewById(R.id.foodItemFragment_starIcon);
 
-        this.foodNameTextView=view.findViewById(R.id.foodItemFragment_foodNameTextView);
-        this.ratingTextView=view.findViewById(R.id.foodItemFragment_ratingTextView);
-        this.reviewCountTextView=view.findViewById(R.id.foodItemFragment_reviewCountTextView);
+        this.foodNameTextView = view.findViewById(R.id.foodItemFragment_foodNameTextView);
+        this.ratingTextView = view.findViewById(R.id.foodItemFragment_ratingTextView);
+        this.reviewCountTextView = view.findViewById(R.id.foodItemFragment_reviewCountTextView);
 
-        this.materialItem=view.findViewById(R.id.foodItemFragment_materialItem);
-        this.ingredientItem=view.findViewById(R.id.foodItemFragment_ingredientItem);
+        this.materialItem = view.findViewById(R.id.foodItemFragment_materialItem);
+        this.ingredientItem = view.findViewById(R.id.foodItemFragment_ingredientItem);
 
         this.heartButton = view.findViewById(R.id.foodItemFragment_heartButton);
     }
@@ -73,7 +75,7 @@ public class FoodInfoFragment extends KatiFoodFragment {
     protected void katiEntityUpdated() {
         this.barcode = this.getActivity().getIntent().getStringExtra("barcode");
         this.foodId = this.getActivity().getIntent().getLongExtra(DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_FOOD_ID_EXTRA, 0L);
-       this.isAd = this.getActivity().getIntent().getBooleanExtra(NEW_DETAIL_ACTIVITY_EXTRA_IS_AD, false);
+        this.isAd = this.getActivity().getIntent().getBooleanExtra(NEW_DETAIL_ACTIVITY_EXTRA_IS_AD, false);
 
         if (this.barcode != null) this.barcodeSearch();
         else this.search();
@@ -82,41 +84,47 @@ public class FoodInfoFragment extends KatiFoodFragment {
     @Override
     protected void initializeView() {
         this.foodImageView.setOnClickListener(v -> this.changeProductImage(this.isFront));
-//        this.heartButton.setOnClickListener(v -> this.saveLike());
+        this.heartButton.setEventListener(new SparkEventListener() {
+            @Override
+            public void onEvent(ImageView button, boolean buttonState) {
+                saveLike();
+            }
+
+            @Override
+            public void onEventAnimationEnd(ImageView button, boolean buttonState) {
+
+            }
+
+            @Override
+            public void onEventAnimationStart(ImageView button, boolean buttonState) {
+                saveLike();
+            }
+        });
     }
 
     @Override
     public void foodModelDataUpdated() {
-        if(!this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION).equals(KatiEntity.EKatiData.NULL.name())) {
+        if (!this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION).equals(KatiEntity.EKatiData.NULL.name())) {
             String token = this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION);
             Log.d("즐찾 확인", token + "-");
             this.foodId = this.foodDetailResponse.getFoodId();
             this.checkFavorite(token);
             this.heartButton.setVisibility(View.VISIBLE);
-        }else{
-//            this.heartButton.setVisibility(View.GONE);
+        } else {
+            this.heartButton.setVisibility(View.GONE);
         }
         this.changeImage(this.foodDetailResponse.getFoodImageAddress());
         this.foodNameTextView.setText(this.foodDetailResponse.getFoodName());
         this.materialItem.setContentText(this.foodDetailResponse.getMaterials());
         this.ingredientItem.setContentText(this.foodDetailResponse.getNutrient());
 
+        this.ratingTextView.setText(String.valueOf(this.foodDetailResponse.getReviewRate()));
+        this.reviewCountTextView.setText("(" + this.foodDetailResponse.getReviewCount() + ")");
 
     }
 
     @Override
     protected void summaryDataUpdated() {
-        int visibility;
-        if(this.readSummaryResponse.getAvgRating()>0f) {
-            this.ratingTextView.setText(String.valueOf(this.readSummaryResponse.getAvgRating()));
-            this.reviewCountTextView.setText(String.valueOf(this.readSummaryResponse.getReviewCount()));
-            visibility=View.VISIBLE;
-        }else{
-            visibility=View.INVISIBLE;
-        }
-        this.ratingTextView.setVisibility(visibility);
-        this.reviewCountTextView.setVisibility(visibility);
-        this.starIcon.setVisibility(visibility);
     }
 
 
@@ -124,10 +132,10 @@ public class FoodInfoFragment extends KatiFoodFragment {
         public FoodDetailRequestCallback(Activity activity) {
             super(activity);
         }
+
         @Override
         public void onSuccessResponse(Response<FoodDetailResponse> response) {
-//            loadingDialog.hide();
-            foodDetailResponse=response.body();
+            foodDetailResponse = response.body();
             saveFoodDetail();
         }
 
@@ -141,12 +149,6 @@ public class FoodInfoFragment extends KatiFoodFragment {
 
         @Override
         public void onSuccessResponse(Response<Boolean> response) {
-            KatiDialog.simplerAlertDialog(
-                    getActivity(),
-                    ADD_FAVORITE_RESULT_DIALOG_TITLE,
-                    ADD_FAVORITE_RESULT_DIALOG_MESSAGE,
-                    null
-            );
             setIsFavorite(true);
         }
     }
@@ -159,12 +161,6 @@ public class FoodInfoFragment extends KatiFoodFragment {
 
         @Override
         public void onSuccessResponse(Response<Void> response) {
-            KatiDialog.simplerAlertDialog(
-                    getActivity(),
-                    DELETE_FAVORITE_RESULT_DIALOG_TITLE,
-                    DELETE_FAVORITE_RESULT_DIALOG_MESSAGE,
-                    null
-            );
             setIsFavorite(false);
         }
     }
@@ -182,9 +178,7 @@ public class FoodInfoFragment extends KatiFoodFragment {
     }
 
 
-
     private void search() {
-//        this.loadingDialog.show();
         if (!isAd) {
             KatiRetrofitTool.getAPI().getFoodDetailByFoodId(this.foodId).enqueue(JSHRetrofitTool.getCallback(new FoodDetailRequestCallback(this.getActivity())));
         } else {
@@ -193,7 +187,6 @@ public class FoodInfoFragment extends KatiFoodFragment {
     }
 
     private void barcodeSearch() {
-//        this.loadingDialog.show();
         KatiRetrofitTool.getAPI().findByBarcode(new FindFoodByBarcodeRequest(this.barcode)).enqueue(JSHRetrofitTool.getCallback(new FoodDetailRequestCallback(this.getActivity())));
     }
 
@@ -207,33 +200,18 @@ public class FoodInfoFragment extends KatiFoodFragment {
     }
 
     public void changeImage(String address) {
-        if(address!=null)
-        Glide.with(getContext()).load(address).fitCenter().transform(new CenterCrop()).into(this.foodImageView);
+        if (address != null)
+            Glide.with(getContext()).load(address).fitCenter().transform(new CenterCrop()).into(this.foodImageView);
     }
 
     private void setIsFavorite(boolean flag) {
         this.isFavorite = flag;
-//        this.likeButton.setImageDrawable(getResources().getDrawable(
-//                this.isFavorite ?
-//                        R.drawable.ic_baseline_favorite_24 :
-//                        R.drawable.ic_baseline_favorite_border_24
-//                , getContext().getTheme()
-//        ));
-//        this.heartButton();
-//        this.heartButton.drawable().setColorFilter(
-//                getResources().getColor(
-//                        this.isFavorite ?
-//                                R.color.kati_red :
-//                                R.color.gray, getContext().getTheme()
-//                ),
-//                PorterDuff.Mode.SRC_IN
-//        );
-
         this.heartButton.pressOnTouch(flag);
         this.heartButton.setChecked(flag);
     }
 
     private void saveLike() {
+        Log.d("값", "좋아요 저장");
         if (this.dataset.containsKey(KatiEntity.EKatiData.AUTHORIZATION)) {
             String token = this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION);
 
@@ -246,7 +224,6 @@ public class FoodInfoFragment extends KatiFoodFragment {
     }
 
     private void checkFavorite(String token) {
-        Log.d("음식아이디?",this.foodId+"");
         KatiRetrofitTool.getAPIWithAuthorizationToken(token).getFavoriteStateForFood(this.foodId).enqueue(JSHRetrofitTool.getCallback(new CheckFavoriteCallBack(this.getActivity())));
     }
 }

@@ -44,7 +44,7 @@ public class ReviewActivity extends KatiLoginCheckViewModelActivity {
 
     @Override
     protected void associateView() {
-        this.toolBar=findViewById(R.id.reviewActivity_toolbar);
+        this.toolBar = findViewById(R.id.reviewActivity_toolbar);
         this.ratingBar = findViewById(R.id.reviewActivity_ratingBar);
         this.submitButton = findViewById(R.id.reviewActivity_submitButton);
         this.reviewEditText = findViewById(R.id.reviewActivity_reviewEditText);
@@ -60,21 +60,21 @@ public class ReviewActivity extends KatiLoginCheckViewModelActivity {
 
         Intent intent = this.getIntent();
         this.foodId = intent.getLongExtra("foodId", 0L);
-        this.isUpdate = intent.getBooleanExtra("isUpdate",false);
+        this.isUpdate = intent.getBooleanExtra("isUpdate", false);
         this.foodName = intent.getStringExtra("foodName");
         this.toolBar.setToolBarTitle(this.foodName);
-        if(isUpdate){
-            Log.d("리뷰 작성 디버그","업데이트모드");
-            this.reviewText=intent.getStringExtra("reviewText");
-            this.ratingScore=intent.getIntExtra("ratingScore",0);
+        if (isUpdate) {
+            Log.d("리뷰 작성 디버그", "업데이트모드");
+            this.reviewText = intent.getStringExtra("reviewText");
+            this.ratingScore = intent.getIntExtra("ratingScore", 0);
 
-            this.reviewId=intent.getLongExtra("reviewId",0L);
+            this.reviewId = intent.getLongExtra("reviewId", 0L);
 
             this.reviewEditText.setText(this.reviewText);
             this.ratingBar.setRating(this.ratingScore);
             this.submitButton.setOnClickListener(v -> this.updateReview());
-        }else
-        this.submitButton.setOnClickListener(v -> this.saveReview());
+        } else
+            this.submitButton.setOnClickListener(v -> this.saveReview());
     }
 
     @Override
@@ -112,9 +112,14 @@ public class ReviewActivity extends KatiLoginCheckViewModelActivity {
 
 
     private void saveReview() {
-        String token= this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION);
+        String token = this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION);
 
-        CreateAndUpdateReviewRequest request= new CreateAndUpdateReviewRequest();
+        CreateAndUpdateReviewRequest request = new CreateAndUpdateReviewRequest();
+        String text = this.reviewEditText.getText().toString();
+        if (text.length() > 500) {
+            KatiDialog.simplerAlertDialog(ReviewActivity.this, "리뷰 작성 알림", "글자 수 제한 500을 초과하였습니다.", null);
+            return;
+        }
         request.setReviewDescription(this.reviewEditText.getText().toString());
         request.setReviewRating((int) this.ratingBar.getRating());
         request.setFoodId(this.foodId);
@@ -123,9 +128,9 @@ public class ReviewActivity extends KatiLoginCheckViewModelActivity {
     }
 
     private void updateReview() {
-        String token= this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION);
+        String token = this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION);
 
-        CreateAndUpdateReviewRequest request= new CreateAndUpdateReviewRequest();
+        CreateAndUpdateReviewRequest request = new CreateAndUpdateReviewRequest();
         request.setReviewDescription(this.reviewEditText.getText().toString());
         request.setReviewRating((int) this.ratingBar.getRating());
         request.setReviewId(this.reviewId);
