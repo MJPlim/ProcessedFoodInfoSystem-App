@@ -23,6 +23,8 @@ import com.plim.kati_app.kati.domain.nnew.login.model.LoginResponse;
 import com.plim.kati_app.kati.domain.nnew.main.category.CategoryFoodDetailFragment;
 import com.plim.kati_app.kati.domain.nnew.main.home.advertisement.AdvertisementViewPagerAdapter;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import retrofit2.Response;
 
 public class HomeFragment extends KatiViewModelFragment {
@@ -43,9 +45,16 @@ public class HomeFragment extends KatiViewModelFragment {
         this.searchText = view.findViewById(R.id.homeFragment_searchTextView);
     }
 
+    @AllArgsConstructor
+    @Getter
+    public enum EAdImage{
+        first(R.drawable.ad1),second(R.drawable.ad2),third(R.drawable.ad3);
+        private int ImageId;
+    }
+
     @Override
     protected void initializeView() {
-        this.viewPager2.setAdapter(new AdvertisementViewPagerAdapter());
+        this.viewPager2.setAdapter(new AdvertisementViewPagerAdapter(EAdImage.values(),this.getContext()));
         JSHViewPagerTool.setAutoSlide(this.viewPager2, 5000);
         JSHViewPagerTool.setEffect(this.viewPager2);
 
