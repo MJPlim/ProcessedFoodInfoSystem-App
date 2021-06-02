@@ -303,7 +303,7 @@ public static final String ALLERGY_EXPANDABLE_LIST_TITLE="알레르기";
 
     @Getter
     public enum ESearchMode {
-        제품("foodName"), 회사("manufacturerName");
+        제품("foodName"), 회사("manufacturerName"), 카테고리("categoryName");
         private String mappingName;
 
         ESearchMode(String string) {

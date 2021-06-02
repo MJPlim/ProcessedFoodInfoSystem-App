@@ -1,6 +1,7 @@
 package com.plim.kati_app.kati.crossDomain.domain.view.fragment;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 
@@ -47,14 +48,7 @@ public abstract class KatiLoginCheckViewModelFragment extends KatiViewModelFragm
                         "로그인 만료",
                         "로그인 후 시간이 지나 만료되었습니다. 다시 로그인 하시겠습니까?",
                         (dialog,which)-> this.activity.startActivity(new Intent(this.activity,LoginActivity.class)),
-                        (dialog,which)->this.activity.startActivity(new Intent(this.activity,MainActivity.class)))
-;//                KatiDialog.NotLogInDialog(
-//                        this.activity,
-//                        (dialog, which) -> {
-//                            this.activity.startActivity(new Intent(this.activity, LoginActivity.class));
-//                        },
-//                        null
-//                );
+                        this.getCancelListener());
             } else {
                 JSONObject object = new JSONObject(response.errorBody().string());
                 KatiDialog.RetrofitNotSuccessDialog(
@@ -64,6 +58,10 @@ public abstract class KatiLoginCheckViewModelFragment extends KatiViewModelFragm
                         null
                 );
             }
+        }
+
+        public DialogInterface.OnClickListener getCancelListener(){
+            return null;
         }
 
         @Override

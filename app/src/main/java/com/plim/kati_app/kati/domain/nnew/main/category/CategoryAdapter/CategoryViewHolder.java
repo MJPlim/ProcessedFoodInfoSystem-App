@@ -33,7 +33,7 @@ public class CategoryViewHolder extends RecyclerView.ViewHolder {
         this.itemView.setTag(foodResponse.getFoodId());
         this.productNameTextView.setText(foodResponse.getFoodName());
         this.ratingTextView.setText(foodResponse.getReviewRate());
-        this.reviewCountTextView.setText(foodResponse.getReviewCount()+"");
+        this.reviewCountTextView.setText("("+foodResponse.getReviewCount()+")");
         Glide.with(itemView.getContext()).load(foodResponse.getFoodImageAddress()).fitCenter().transform(new CenterCrop()).into(foodImageView);
 
     }

@@ -103,10 +103,7 @@ public class SearchFragment extends KatiSearchFragment {
         this.loadRecentSearchedWords();
     }
 
-    @Override
-    public void foodModelDataUpdated() {
 
-    }
 
     @Override
     protected void searchModelDataUpdated() {

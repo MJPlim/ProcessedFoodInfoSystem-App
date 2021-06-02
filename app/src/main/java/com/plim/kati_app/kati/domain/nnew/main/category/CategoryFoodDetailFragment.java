@@ -31,6 +31,7 @@ import java.util.Vector;
 public class CategoryFoodDetailFragment extends KatiViewModelFragment {
     private TabLayout tabLayout;
     private ViewPager2 viewPager2;
+    private int position;
 
     @Override
     protected int getLayoutId() {
@@ -46,9 +47,9 @@ public class CategoryFoodDetailFragment extends KatiViewModelFragment {
 
     @Override
     protected void initializeView() {
-        final Vector<Constant.ECategory> categories= new Vector(Arrays.asList(Constant.ECategory.values()));
+        final Vector<Constant.ECategory> categories = new Vector(Arrays.asList(Constant.ECategory.values()));
 
-        CategoryViewPagerAdapter fgAdapter = new CategoryViewPagerAdapter(this.getActivity(),categories);
+        CategoryViewPagerAdapter fgAdapter = new CategoryViewPagerAdapter(this.getActivity(), categories);
         viewPager2.setAdapter(fgAdapter);
 
         new TabLayoutMediator(
@@ -63,6 +64,13 @@ public class CategoryFoodDetailFragment extends KatiViewModelFragment {
                     tab.setCustomView(textView);
                 }
         ).attach();
+
+        ArrayList<Constant.ECategory> list = new ArrayList<>();
+        for (Constant.ECategory category : Constant.ECategory.values()) {
+            list.add(category);
+        }
+        this.position = list.indexOf(Constant.ECategory.valueOf(getArguments().getString("category")));
+        this.tabLayout.selectTab(this.tabLayout.getTabAt(this.position));
     }
 
     @Override

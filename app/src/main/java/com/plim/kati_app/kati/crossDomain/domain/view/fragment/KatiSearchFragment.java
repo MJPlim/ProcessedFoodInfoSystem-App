@@ -61,8 +61,6 @@ public abstract class KatiSearchFragment extends KatiLoginCheckViewModelFragment
 
     }
 
-    public abstract void foodModelDataUpdated();
-
     protected abstract void searchModelDataUpdated();
 
 

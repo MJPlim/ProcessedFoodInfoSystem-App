@@ -25,6 +25,7 @@ import com.google.android.material.chip.ChipGroup;
 import com.plim.kati_app.R;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.domain.model.Constant;
+import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiCategoryFragment;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiViewModelFragment;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBackImpl;
@@ -43,7 +44,6 @@ import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.NEW_DETAI
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.NEW_DETAIL_ACTIVITY_EXTRA_IS_AD;
 
 public class CategoryResultFragment extends Fragment {
-
     //working variable
     private String selectedCategoryName;
     private int page=1;
@@ -129,8 +129,8 @@ public class CategoryResultFragment extends Fragment {
     }
 
     private void loadMore(){
-     this.page++;
-     this.load();
+        this.page++;
+        this.load();
     }
 
     private void load(){

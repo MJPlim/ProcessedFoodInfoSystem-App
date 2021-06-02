@@ -116,7 +116,6 @@ public class SearchResultFragment extends KatiSearchFragment {
             if (v.getChildAt(v.getChildCount() - 1) != null) {
                 if ((scrollY >= (v.getChildAt(v.getChildCount() - 1).getMeasuredHeight() - v.getMeasuredHeight())) &&
                         scrollY > oldScrollY) {
-                    Log.d("스크롤 내림", "dd");
                     loadMore();
                 }
             }
@@ -130,12 +129,15 @@ public class SearchResultFragment extends KatiSearchFragment {
                 this.isLoadingMore = false;
                 this.searchModel.setSearchText(this.searchFieldEditText.getText().toString());
                 this.saveSearch();
-                ((InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(searchFieldEditText.getWindowToken(), 0);
             }
             return false;
         });
 
         this.deleteIcon.setOnClickListener(v -> this.searchFieldEditText.setText(""));
+    }
+
+    private void hideKeyboard(){
+        ((InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(searchFieldEditText.getWindowToken(), 0);
     }
 
     @Override
@@ -146,25 +148,28 @@ public class SearchResultFragment extends KatiSearchFragment {
     @Override
     protected void katiEntityUpdatedAndLogin() {
         this.searchModel.setFiltered(true);
+        this.saveSearch();
+
         this.allergyFilterButton.setEnabled(this.searchModel.isFiltered());
         this.getAllergyData(this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION));
 
         this.loadAdvertisement();
-        this.loadSearchResult();
-        this.saveSearch();
+        this.refresh();
+
     }
 
     @Override
     protected void katiEntityUpdatedAndNoLogin() {
         this.searchModel.setFiltered(false);
+        this.saveSearch();
+
         this.allergyFilterButton.setEnabled(this.searchModel.isFiltered());
+        this.loadAdvertisement();
+
+        this.refresh();
+
     }
 
-    @Override
-    public void foodModelDataUpdated() {
-//        this.loadAdvertisement();
-//        this.loadSearchResult();
-    }
 
     @Override
     public void onResume() {
@@ -178,8 +183,8 @@ public class SearchResultFragment extends KatiSearchFragment {
     @Override
     protected void searchModelDataUpdated() {
         if (this.dataset != null) {
-            this.isLoadingMore = false;
             this.loadSearchResult();
+            this.hideKeyboard();
         }
     }
 
@@ -236,6 +241,23 @@ public class SearchResultFragment extends KatiSearchFragment {
         KatiRetrofitTool.getAPI().getAdFoodList().enqueue(JSHRetrofitTool.getCallback(new AdListRequestCallback(getActivity())));
     }
 
+    private void loadMore() {
+        if (hasNext) {
+            this.searchModel.setSearchPageNum(this.searchModel.getSearchPageNum() + 1);
+            this.isLoadingMore = true;
+            this.saveSearch();
+        }
+    }
+    private void refresh() {
+        if (hasNext) {
+            this.searchModel.setFoodSortElement(Constant.SortElement.RANK.getMessage());
+            this.rankingChip.setChecked(true);
+            this.searchModel.setSearchPageNum(1);
+            this.isLoadingMore = false;
+            this.saveSearch();
+        }
+    }
+
     private void loadSearchResult() {
 
         Log.d("태그", "페이지" + this.searchModel.getSearchPageNum() + " 정렬기준" +
@@ -266,13 +288,7 @@ public class SearchResultFragment extends KatiSearchFragment {
         }
     }
 
-    private void loadMore() {
-        if (hasNext) {
-            this.searchModel.setSearchPageNum(this.searchModel.getSearchPageNum() + 1);
-            this.isLoadingMore = true;
-            this.saveSearch();
-        }
-    }
+
 
     private void doSort(boolean isChecked, Constant.SortElement element) {
         if (isChecked) {

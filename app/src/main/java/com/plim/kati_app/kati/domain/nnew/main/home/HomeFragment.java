@@ -1,6 +1,7 @@
 package com.plim.kati_app.kati.domain.nnew.main.home;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
@@ -19,6 +20,7 @@ import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiViewModelFrag
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBackImpl;
 import com.plim.kati_app.kati.domain.nnew.login.model.LoginResponse;
+import com.plim.kati_app.kati.domain.nnew.main.category.CategoryFoodDetailFragment;
 import com.plim.kati_app.kati.domain.nnew.main.home.advertisement.AdvertisementViewPagerAdapter;
 
 import retrofit2.Response;
@@ -72,7 +74,15 @@ public class HomeFragment extends KatiViewModelFragment {
     }
 
     private void moveToCategory(Constant.ECategory category) {
-        navigateTo(R.id.action_homeFragment_to_categoryFragment);
+        Bundle bundle= new Bundle();
+        bundle.putString("category",category.name());
+        CategoryFoodDetailFragment categoryFoodDetailFragment= new CategoryFoodDetailFragment();
+        categoryFoodDetailFragment .setArguments(bundle);
+
+        getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, categoryFoodDetailFragment).commit();
+
+
+//        navigateTo(R.id.action_homeFragment_to_categoryFragment);
     }
 
     @Override
