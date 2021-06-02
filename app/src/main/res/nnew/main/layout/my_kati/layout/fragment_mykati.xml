@@ -85,10 +85,10 @@
 
         <ImageView
             android:id="@+id/mykati_myImage"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_margin="16dp"
-            android:src="@drawable/ic_outline_account_circle_24"
+            android:src="@drawable/gold_icon"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -97,7 +97,7 @@
             android:id="@+id/mykati_name_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="8dp"
             android:text="정상"
             app:layout_constraintBottom_toBottomOf="@+id/mykati_myImage"
             app:layout_constraintStart_toEndOf="@+id/mykati_myImage"

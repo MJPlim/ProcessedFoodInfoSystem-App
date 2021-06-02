@@ -103,7 +103,7 @@
         android:layout_width="48dp"
         android:layout_height="30dp"
         android:layout_margin="16dp"
-        android:background="@drawable/edittext_bg"
+        android:background="@drawable/thumb_bg_non_select"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/foodInfoReviewItem_reviewValue" />
