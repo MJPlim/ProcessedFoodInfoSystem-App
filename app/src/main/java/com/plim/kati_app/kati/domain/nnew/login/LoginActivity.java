@@ -70,7 +70,7 @@ public class LoginActivity extends KatiViewModelActivity {
         findId.setOnClickListener(v->this.startActivity(new Intent(this, FindIdActivity.class)));
         findPw.setOnClickListener(v->this.startActivity(new Intent(this, FindPasswordActivity.class)));
         signIn.setOnClickListener(v->this.startActivity(new Intent(this, SignUpActivity.class)));
-//        this.autologinCheckBox.setOnClickListener((v -> this.setAutoLogin()));
+        this.autologinCheckBox.setOnClickListener((v -> this.setAutoLogin()));
         this.loginButton.setOnClickListener(v->this.login());
         //      this.autologinCheckBox.setChecked(this.dataset.get(KatiEntity.EKatiData.AUTO_LOGIN).equals(KatiEntity.EKatiData.TRUE.name()));
     }

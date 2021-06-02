@@ -2,6 +2,7 @@ package com.plim.kati_app.kati.domain.nnew.main.home;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.plim.kati_app.R;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.domain.model.Constant;
@@ -43,6 +45,12 @@ public class HomeFragment extends KatiViewModelFragment {
         this.viewPager2 = view.findViewById(R.id.homeFragment_viewPager);
         this.layout = view.findViewById(R.id.homeFragment_category);
         this.searchText = view.findViewById(R.id.homeFragment_searchTextView);
+
+
+        BottomNavigationView bottomNavigationView= (BottomNavigationView)this.getActivity().findViewById(R.id.mainFragment_bottomNavigation);
+        if (bottomNavigationView.getSelectedItemId() != R.id.action_home)
+        bottomNavigationView.findViewById(R.id.action_home).performClick();
+
     }
 
     @AllArgsConstructor
@@ -67,10 +75,11 @@ public class HomeFragment extends KatiViewModelFragment {
             this.layout.addView(item);
         }
         this.searchText.setOnClickListener(v -> {
-//            Button button = v.findViewById(R.id.action_search);
-//            if (button != null)
-//                button.performClick();
-            navigateTo(R.id.action_global_searchFragment);
+
+            BottomNavigationView bottomNavigationView;
+            bottomNavigationView = (BottomNavigationView)this.getActivity().findViewById(R.id.mainFragment_bottomNavigation);
+           bottomNavigationView.findViewById(R.id.action_search).performClick();
+
         });
 
 
@@ -99,12 +108,14 @@ public class HomeFragment extends KatiViewModelFragment {
         super.onPause();
     }
 
-    @Override
-    public void onDestroy() {
-        this.autoLogout();
-        this.save();
-        super.onDestroy();
-    }
+//    @Override
+//    public void onDestroy() {
+//        this.autoLogout();
+//        this.save();
+//        super.onDestroy();
+//    }
+
+
 
     /**
      * Callback
@@ -129,20 +140,20 @@ public class HomeFragment extends KatiViewModelFragment {
      */
     private void autoLogin() {
         if (this.dataset.get(KatiEntity.EKatiData.AUTO_LOGIN).equals(KatiEntity.EKatiData.TRUE.name())) {
-//            Log.d("디버그 자동로그인", "설정O");
+            Log.d("디버그 자동로그인", "설정");
             LoginResponse loginRequest = new LoginResponse(this.dataset.get(KatiEntity.EKatiData.EMAIL), this.dataset.get(KatiEntity.EKatiData.PASSWORD));
             KatiRetrofitTool.getAPIWithNullConverter().login(loginRequest).enqueue(JSHRetrofitTool.getCallback(new LoginRequestCallback(this.getActivity())));
         }
     }
 
-    private void autoLogout() {
-        this.dataset.put(KatiEntity.EKatiData.AUTHORIZATION, KatiEntity.EKatiData.NULL.name());
-
-        if (this.dataset.get(KatiEntity.EKatiData.AUTO_LOGIN).equals(KatiEntity.EKatiData.FALSE.name())) {
+//    private void autoLogout() {
+//        this.dataset.put(KatiEntity.EKatiData.AUTHORIZATION, KatiEntity.EKatiData.NULL.name());
+//
+//        if (this.dataset.get(KatiEntity.EKatiData.AUTO_LOGIN).equals(KatiEntity.EKatiData.FALSE.name())) {
 //            Log.d("디버그 자동로그아웃", "시작");
-            this.dataset.put(KatiEntity.EKatiData.EMAIL, KatiEntity.EKatiData.NULL.name());
-            this.dataset.put(KatiEntity.EKatiData.PASSWORD, KatiEntity.EKatiData.NULL.name());
-        }
-    }
+//            this.dataset.put(KatiEntity.EKatiData.EMAIL, KatiEntity.EKatiData.NULL.name());
+//            this.dataset.put(KatiEntity.EKatiData.PASSWORD, KatiEntity.EKatiData.NULL.name());
+//        }
+//    }
 
 }

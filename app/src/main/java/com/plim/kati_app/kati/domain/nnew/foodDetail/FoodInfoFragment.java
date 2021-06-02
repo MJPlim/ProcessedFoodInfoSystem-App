@@ -38,7 +38,7 @@ public class FoodInfoFragment extends KatiFoodFragment {
     //view
     private ImageView foodImageView, starIcon;
     private TextView foodNameTextView, ratingTextView, reviewCountTextView;
-    private JSHInfoItem materialItem, ingredientItem;
+    private JSHInfoItem materialItem, ingredientItem, allergyItem;
     private SparkButton heartButton;
 
 
@@ -60,6 +60,8 @@ public class FoodInfoFragment extends KatiFoodFragment {
     protected void associateView(View view) {
         this.foodImageView = view.findViewById(R.id.foodItemFragment_foodImageView);
         this.starIcon = view.findViewById(R.id.foodItemFragment_starIcon);
+
+        this.allergyItem = view.findViewById(R.id.foodItemFragment_allergy);
 
         this.foodNameTextView = view.findViewById(R.id.foodItemFragment_foodNameTextView);
         this.ratingTextView = view.findViewById(R.id.foodItemFragment_ratingTextView);
@@ -115,12 +117,58 @@ public class FoodInfoFragment extends KatiFoodFragment {
         }
         this.changeImage(this.foodDetailResponse.getFoodImageAddress());
         this.foodNameTextView.setText(this.foodDetailResponse.getFoodName());
-        this.materialItem.setContentText(this.foodDetailResponse.getMaterials());
-        this.ingredientItem.setContentText(this.foodDetailResponse.getNutrient());
-
         this.ratingTextView.setText(String.valueOf(this.foodDetailResponse.getReviewRate()));
         this.reviewCountTextView.setText("(" + this.foodDetailResponse.getReviewCount() + ")");
 
+
+        this.materialItem.setContentText(this.splitString(",", this.foodDetailResponse.getMaterials()));
+        this.ingredientItem.setContentText(this.splitString("`", this.foodDetailResponse.getNutrient()));
+        this.allergyItem.setContentText(this.splitString(" ", this.foodDetailResponse.getAllergyMaterials()));
+    }
+
+    private String splitString(String splitChar, String string) {
+
+        String[] array = string.split(splitChar);
+        StringBuilder builder = new StringBuilder();
+        boolean inBig = false,inMiddle = false,inSmall = false;
+        for (String value : array) {
+            if(value.indexOf('[')!=-1) inBig=true;
+            if(value.indexOf('<')!=-1) inMiddle=true;
+            if(value.indexOf('(')!=-1) inSmall=true;
+
+            if(inBig&& value.indexOf(']')!=-1) inBig=false;
+            if(inMiddle&& value.indexOf('>')!=-1) inMiddle=false;
+            if(inSmall&& value.indexOf(')')!=-1) inSmall=false;
+
+            if(inBig||inMiddle||inSmall){
+                builder.append(value);
+                builder.append(splitChar);
+
+            }else{
+                builder.append(value);
+                builder.append('\n');
+                builder.append('\n');
+            }
+
+            Log.d(value,(inBig||inMiddle||inSmall)+"");
+
+
+
+
+
+//            if (in) {
+//                builder.append(value);
+//                builder.append(splitChar);
+//                if (value.indexOf(']') != -1 || value.indexOf(')') != -1 || value.indexOf('>') != -1)
+//                    in = false;
+//            }else {
+//                if (value.indexOf('[') != -1 || value.indexOf('(') != -1 || value.indexOf('<') != -1)
+//                    in = true;
+//                builder.append(value);
+//                builder.append('\n');
+//            }
+        }
+        return builder.toString();
     }
 
     @Override

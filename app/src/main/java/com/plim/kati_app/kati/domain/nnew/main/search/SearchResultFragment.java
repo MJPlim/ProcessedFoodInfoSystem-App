@@ -33,6 +33,7 @@ import com.plim.kati_app.kati.domain.nnew.main.search.model.AdvertisementRespons
 import com.plim.kati_app.kati.domain.nnew.main.search.model.FindFoodBySortingResponse;
 import com.plim.kati_app.kati.domain.nnew.main.search.model.FoodResponse;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 
@@ -279,7 +280,18 @@ public class SearchResultFragment extends KatiSearchFragment {
 
         String token = this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION);
 
-        if (Constant.ECompany.valueOf(this.searchModel.getSearchText())==null) {
+        Vector<Constant.ECompany> vector= new Vector();
+        vector.addAll(Arrays.asList(Constant.ECompany.values()));
+
+        boolean found=false;
+
+        for(Constant.ECompany company: vector){
+            if(this.searchModel.getSearchText().equals(company.name())) {
+                found=true;
+            break;}
+        }
+
+        if (!found) {
             KatiRetrofitTool.getAPI().getNameFoodListBySorting(
                     this.searchModel.getSearchPageNum(),
                     this.searchModel.getPageSize(),

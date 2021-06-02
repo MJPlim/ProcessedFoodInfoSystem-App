@@ -14,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:background="@color/white"
         android:elevation="5dp"
-        app:title="제품 이름" />
+        app:title="제품 상세" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/foodDetailActivity_tabLayout"

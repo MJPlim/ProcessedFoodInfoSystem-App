@@ -35,6 +35,7 @@ public class JSHInfoItem extends LinearLayout {
         // Initialize View
         this.titleTextView.setText(title);
         this.contentTextView.setText(content);
+
     }
 
 

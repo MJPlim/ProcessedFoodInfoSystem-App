@@ -15,6 +15,7 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.plim.kati_app.R;
@@ -70,6 +71,10 @@ public class SearchFragment extends KatiSearchFragment {
         this.recentSearchWordLayout = view.findViewById(R.id.searchFragment_constraintLayout);
         this.rankGridLayout = view.findViewById(R.id.searchFragment_rankGridLayout);
 
+
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) this.getActivity().findViewById(R.id.mainFragment_bottomNavigation);
+        if (bottomNavigationView.getSelectedItemId() != R.id.action_search)
+            bottomNavigationView.findViewById(R.id.action_search).performClick();
     }
 
     @Override
@@ -102,7 +107,6 @@ public class SearchFragment extends KatiSearchFragment {
     protected void katiEntityUpdated() {
         this.loadRecentSearchedWords();
     }
-
 
 
     @Override

@@ -20,6 +20,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.plim.kati_app.R;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitCallback;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
@@ -65,6 +66,9 @@ public class MyKatiFragment extends KatiLoginCheckViewModelFragment {
         login = view.findViewById(R.id.mykati_login_button);
         myImage = view.findViewById(R.id.mykati_myImage);
 
+        BottomNavigationView bottomNavigationView= (BottomNavigationView)this.getActivity().findViewById(R.id.mainFragment_bottomNavigation);
+        if (bottomNavigationView.getSelectedItemId() != R.id.action_mykati)
+        bottomNavigationView.findViewById(R.id.action_mykati).performClick();
     }
 
     @Override
