@@ -88,24 +88,36 @@ public interface KatiRestAPI {
 
 
 
-    //제품 검색
-    @GET("/api/v1/food/getFoodListBySorting")
+    @GET("/api/v1/food/searchFood")
     Call<FindFoodBySortingResponse> getNameFoodListBySorting(
             @Query("pageNo") int pageNo,
             @Query("size") int size,
             @Query("sort") String sortElement,
+            @Query("order") String order,
             @Query("foodName") String foodName,
             @Query("allergies") List<String> allergyList
     );
 
-    @GET("/api/v1/food/getFoodListBySorting")
-    Call<FindFoodBySortingResponse> getManufacturerFoodListBySorting(
+    @GET("/api/v1/food/searchFood")
+        Call<FindFoodBySortingResponse> getManufacturerFoodListBySorting(
             @Query("pageNo") int pageNo,
             @Query("size") int size,
             @Query("sort") String sortElement,
+            @Query("order") String order,
             @Query("manufacturerName") String manufacturerName,
             @Query("allergies") List<String> allergyList
     );
+
+    @GET("/api/v1/food/searchFood")
+    Call<FindFoodBySortingResponse> getCategoryFood(
+            @Query("pageNo") int pageNo,
+            @Query("size") int size,
+            @Query("sort") String sortElement,
+            @Query("order") String order,
+            @Query("category") String category,
+            @Query("allergies") List<String> allergyList
+    );
+
 
     @GET("/api/v1/food/findFood/foodDetail")
     Call<FoodDetailResponse> getFoodDetailByFoodId(@Query("foodId") Long foodId);
@@ -130,10 +142,7 @@ public interface KatiRestAPI {
     @GET("/api/v1/advertisement/foodDetail")
     Call<FoodDetailResponse> getAdFoodDetail(@Query("adId") Long adId);
 
-    //카테고리
-//    @GET("/api/v1/food/list/category")
-//    Call<CategoryFoodListResponse> getCategoryFood(@Query("category") String category,
-//                                                   @Query("page") int page);
+
 
     //제품 리뷰
     @GET("/readReview")

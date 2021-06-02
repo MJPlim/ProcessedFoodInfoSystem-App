@@ -2,14 +2,12 @@ package com.plim.kati_app.kati.domain.nnew.main.search;
 
 import android.app.Activity;
 
-import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -48,7 +46,7 @@ public class SearchResultFragment extends KatiSearchFragment {
     //associate
     //view
     private EditText searchFieldEditText;
-    private ImageView deleteIcon;
+    private ImageView deleteIcon, orderButton;
     private Chip rankingChip, manufacturerChip, reviewCountChip;
     private RecyclerView adRecyclerView, resultRecyclerView;
     private NestedScrollView nestedScrollView;
@@ -79,6 +77,7 @@ public class SearchResultFragment extends KatiSearchFragment {
     protected void associateView(View view) {
         this.searchFieldEditText = view.findViewById(R.id.searchResultFragment_searchFieldEditText);
 
+        this.orderButton =view.findViewById(R.id.searchResultFragment_assendOrDesend);
         this.deleteIcon = view.findViewById(R.id.searchResultFragment_deleteIcon);
 
         this.rankingChip = view.findViewById(R.id.searchResultFragment_rankingChip);
@@ -127,13 +126,27 @@ public class SearchResultFragment extends KatiSearchFragment {
 //                this.loadSearchResult();
                 this.searchModel.setSearchPageNum(1);
                 this.isLoadingMore = false;
-                this.searchModel.setSearchText(this.searchFieldEditText.getText().toString());
+                this.searchModel.setSearchText(this.searchFieldEditText.getText().toString().replace(' ','_'));
                 this.saveSearch();
             }
             return false;
         });
 
         this.deleteIcon.setOnClickListener(v -> this.searchFieldEditText.setText(""));
+
+        this.orderButton.setOnClickListener(v-> this.setOrder());
+
+    }
+
+    private void setOrder() {
+        if(this.searchModel.getSortOrder().equals(Constant.SortOrder.asc)){
+            this.searchModel.setSortOrder(Constant.SortOrder.desc);
+            this.orderButton.setImageDrawable(getContext().getDrawable(R.drawable.ic_baseline_swap_vert_24_descend));
+        }else{
+            this.searchModel.setSortOrder(Constant.SortOrder.asc);
+            this.orderButton.setImageDrawable(getContext().getDrawable(R.drawable.ic_baseline_swap_vert_24_assend));
+        }
+        this.saveSearch();
     }
 
     private void hideKeyboard(){
@@ -264,16 +277,14 @@ public class SearchResultFragment extends KatiSearchFragment {
                 this.searchModel.getFoodSortElement() + " 검색어" +
                 this.searchModel.getSearchText() + " 더불러오기" + this.isLoadingMore+" 필터 켜짐"+this.searchModel.isFiltered());
 
-        if (!this.isLoadingMore) this.vector.clear();
-
-
         String token = this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION);
 
-        if (this.searchModel.getSearchMode().equals(Constant.ESearchMode.제품.name())) {
+        if (Constant.ECompany.valueOf(this.searchModel.getSearchText())==null) {
             KatiRetrofitTool.getAPI().getNameFoodListBySorting(
                     this.searchModel.getSearchPageNum(),
                     this.searchModel.getPageSize(),
                     this.searchModel.getFoodSortElement(),
+                    this.searchModel.getSortOrder().getMessage(),
                     this.searchModel.getSearchText(),
                     !this.searchModel.isFiltered() ? null : this.getAllergyData(token)
             ).enqueue(JSHRetrofitTool.getCallback(new SearchRequestCallback(this.getActivity())));
@@ -282,6 +293,7 @@ public class SearchResultFragment extends KatiSearchFragment {
                     this.searchModel.getSearchPageNum(),
                     this.searchModel.getPageSize(),
                     this.searchModel.getFoodSortElement(),
+                    this.searchModel.getSortOrder().getMessage(),
                     this.searchModel.getSearchText(),
                     !this.searchModel.isFiltered() ? this.searchModel.getAllergyList() : null
             ).enqueue(JSHRetrofitTool.getCallback(new SearchRequestCallback(this.getActivity())));
