@@ -26,15 +26,18 @@
                 android:id="@+id/categoryResultFragment_chipGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
                 android:layout_marginTop="4dp"
                 app:chipSpacing="8dp"
+                android:nestedScrollingEnabled="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:singleSelection="true"/>
 
         </HorizontalScrollView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

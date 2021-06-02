@@ -19,12 +19,12 @@
 
             <ImageView
                 android:id="@+id/foodItemFragment_foodImageView"
-                android:layout_width="160dp"
-                android:layout_height="160dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:adjustViewBounds="true"
                 android:background="@color/kati_light_gray"
-                android:padding="10dp"
                 android:scaleType="fitCenter"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -125,10 +125,19 @@
                 app:JSHInfoItem_content="열량 291kcal\n탄수화물 36g\n단백질 3g\n지방 15g"
                 app:JSHInfoItem_title="영양성분"
                 app:layout_constraintTop_toBottomOf="@+id/foodItemFragment_materialItem" />
+
+            <com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHInfoItem
+                android:id="@+id/foodItemFragment_allergy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                app:JSHInfoItem_content="대두\n돼지고기\n밀\n우유"
+                app:JSHInfoItem_title="알레르기"
+                app:layout_constraintTop_toBottomOf="@+id/foodItemFragment_ingredientItem" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

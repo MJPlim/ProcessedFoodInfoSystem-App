@@ -35,6 +35,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         android:progressTint="@color/kati_orange"
+        android:stepSize="1"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/reviewActivity_recommendMessageTextView" />

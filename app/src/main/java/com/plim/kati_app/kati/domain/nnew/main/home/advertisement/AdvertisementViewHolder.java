@@ -27,6 +27,7 @@ public class AdvertisementViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void setImage(Drawable drawable) {
+        this.imageView.setClipToOutline(true);
         this.imageView.setImageDrawable(drawable);
     }
 }
