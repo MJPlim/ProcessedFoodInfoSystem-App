@@ -116,6 +116,7 @@ public class FoodInfoFragment extends KatiFoodFragment {
             this.heartButton.setVisibility(View.GONE);
         }
         this.changeImage(this.foodDetailResponse.getFoodImageAddress());
+        this.changeImage(this.foodModel.getFoodDetailResponse().getValue().getFoodImageAddress());
         this.foodNameTextView.setText(this.foodDetailResponse.getFoodName());
         this.ratingTextView.setText(String.valueOf(this.foodDetailResponse.getReviewRate()));
         this.reviewCountTextView.setText("(" + this.foodDetailResponse.getReviewCount() + ")");

@@ -19,22 +19,26 @@
 
             <ImageView
                 android:id="@+id/foodItemFragment_foodImageView"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxHeight="400dp"
+                android:src="@drawable/gold_icon"
                 android:adjustViewBounds="true"
                 android:background="@color/kati_light_gray"
-                android:scaleType="fitCenter"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.varunest.sparkbutton.SparkButton
                 android:id="@+id/foodItemFragment_heartButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:maxWidth="80dp"
+                android:maxHeight="80dp"
                 app:sparkbutton_iconSize="25dp"
+
                 app:sparkbutton_activeImage="@drawable/ic_baseline_favorite_24"
                 app:sparkbutton_inActiveImage="@drawable/ic_baseline_favorite_border_24"
                 app:sparkbutton_primaryColor="@color/kati_orange"
