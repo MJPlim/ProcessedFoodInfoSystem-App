@@ -142,9 +142,11 @@ public class SearchResultFragment extends KatiSearchFragment {
     private void setOrder() {
         if(this.searchModel.getSortOrder().equals(Constant.SortOrder.asc)){
             this.searchModel.setSortOrder(Constant.SortOrder.desc);
+            this.searchModel.setSearchPageNum(1);
             this.orderButton.setImageDrawable(getContext().getDrawable(R.drawable.ic_baseline_swap_vert_24_descend));
         }else{
             this.searchModel.setSortOrder(Constant.SortOrder.asc);
+            this.searchModel.setSearchPageNum(1);
             this.orderButton.setImageDrawable(getContext().getDrawable(R.drawable.ic_baseline_swap_vert_24_assend));
         }
         this.saveSearch();
@@ -198,6 +200,7 @@ public class SearchResultFragment extends KatiSearchFragment {
     protected void searchModelDataUpdated() {
         if (this.dataset != null) {
             this.loadSearchResult();
+//            this.refresh();
             this.hideKeyboard();
         }
     }
@@ -276,7 +279,7 @@ public class SearchResultFragment extends KatiSearchFragment {
 
         Log.d("태그", "페이지" + this.searchModel.getSearchPageNum() + " 정렬기준" +
                 this.searchModel.getFoodSortElement() + " 검색어" +
-                this.searchModel.getSearchText() + " 더불러오기" + this.isLoadingMore+" 필터 켜짐"+this.searchModel.isFiltered());
+                this.searchModel.getSearchText() + " 더불러오기" + this.isLoadingMore+" 필터 켜짐"+this.searchModel.isFiltered()+" 순서"+this.searchModel.getSortOrder().getMessage());
 
         String token = this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION);
 

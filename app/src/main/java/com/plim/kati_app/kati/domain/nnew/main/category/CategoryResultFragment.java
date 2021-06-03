@@ -112,7 +112,7 @@ public class CategoryResultFragment extends Fragment {
     public void createChip(Constant.EChildCategory childCategory, boolean chipCheck){
         LayoutInflater inflater = (LayoutInflater) this.getActivity().getSystemService(Service.LAYOUT_INFLATER_SERVICE);
         Chip chip= (Chip) inflater.inflate(R.layout.jsh_chip, null);
-        chip.setOnCheckedChangeListener((buttonView, isChecked) -> loadCategory(isChecked,childCategory.getName()));
+//        chip.setOnCheckedChangeListener((buttonView, isChecked) -> loadCategory(isChecked,childCategory.getName()));
         chip.setChecked(chipCheck);
         chip.setText(childCategory.getName());
         this.chipGroup.addView(chip);

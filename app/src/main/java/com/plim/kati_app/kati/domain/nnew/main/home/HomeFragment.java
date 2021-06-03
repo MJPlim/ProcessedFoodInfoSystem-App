@@ -97,7 +97,7 @@ public class HomeFragment extends KatiViewModelFragment {
         CategoryFoodDetailFragment categoryFoodDetailFragment= new CategoryFoodDetailFragment();
         categoryFoodDetailFragment .setArguments(bundle);
 
-        getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, categoryFoodDetailFragment).commit();
+        getParentFragmentManager().beginTransaction().replace(R.id.mainActivity_navHostFragment, categoryFoodDetailFragment).commit();
 
 
 //        navigateTo(R.id.action_homeFragment_to_categoryFragment);
