@@ -12,9 +12,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.plim.kati_app.R;
@@ -29,24 +33,24 @@ import java.util.List;
 import java.util.Vector;
 
 public class CategoryFoodDetailFragment extends KatiViewModelFragment {
+    private FloatingActionButton actionButton;
     private TabLayout tabLayout;
     private ViewPager2 viewPager2;
     private int position;
 
     @Override
-    protected int getLayoutId() {
-        return R.layout.fragment_category_food;
-    }
-
-    @Override
-    protected void associateView(View view) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         this.tabLayout = view.findViewById(R.id.categoryFoodFragment_tabLayout);
         this.viewPager2 = view.findViewById(R.id.categoryFoodFragment_viewPager2);
+        this.actionButton=view.findViewById(R.id.floatingActionButton);
 
-    }
+        this.actionButton.setOnClickListener(v->{
 
-    @Override
-    protected void initializeView() {
+            ( (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.mainActivity_navHostFragment)).getNavController()
+                    .navigate(R.id.action_categoryFragment_to_categoryFilterFragment);
+        });
+
         final Vector<Constant.ECategory> categories = new Vector(Arrays.asList(Constant.ECategory.values()));
 
         CategoryViewPagerAdapter fgAdapter = new CategoryViewPagerAdapter(this.getActivity(), categories);
@@ -65,12 +69,29 @@ public class CategoryFoodDetailFragment extends KatiViewModelFragment {
                 }
         ).attach();
 
-        ArrayList<Constant.ECategory> list = new ArrayList<>();
-        for (Constant.ECategory category : Constant.ECategory.values()) {
-            list.add(category);
-        }
+        //최초에 옮기는 코드
+        Log.d("최초에만","설마");
+        List<Constant.ECategory> list = Arrays.asList(Constant.ECategory.values());
         this.position = list.indexOf(Constant.ECategory.valueOf(getArguments().getString("category")));
         this.tabLayout.selectTab(this.tabLayout.getTabAt(this.position));
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_category_food;
+    }
+
+    @Override
+    protected void associateView(View view) {
+
+
+    }
+
+    @Override
+    protected void initializeView() {
+
+
+
     }
 
     @Override

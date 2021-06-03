@@ -30,8 +30,10 @@ import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiViewModelFrag
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBackImpl;
 import com.plim.kati_app.kati.domain.nnew.foodDetail.FoodDetailActivity;
+import com.plim.kati_app.kati.domain.nnew.foodDetail.model.FoodDetailResponse;
 import com.plim.kati_app.kati.domain.nnew.main.category.CategoryAdapter.CategoryAdapter;
 import com.plim.kati_app.kati.domain.nnew.main.category.model.CategoryFoodListResponse;
+import com.plim.kati_app.kati.domain.nnew.main.search.model.FindFoodBySortingResponse;
 import com.plim.kati_app.kati.domain.nnew.main.search.model.FoodResponse;
 
 import org.jetbrains.annotations.NotNull;
@@ -43,52 +45,47 @@ import retrofit2.Response;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.NEW_DETAIL_ACTIVITY_EXTRA_FOOD_ID;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.NEW_DETAIL_ACTIVITY_EXTRA_IS_AD;
 
-public class CategoryResultFragment extends Fragment {
-    //working variable
-    private String selectedCategoryName;
-    private int page=1;
-    private boolean hasNext=false;
+public class CategoryResultFragment extends KatiCategoryFragment {
 
     private Vector<FoodResponse> vector;
 
+    //associate
+    //view
     private ChipGroup chipGroup;
     private RecyclerView recyclerView;
     private CategoryAdapter adapter;
 
-
     private Constant.ECategory category;
-    public CategoryResultFragment(){
-        this.vector= new Vector<>();
+
+
+    public CategoryResultFragment() {
+        this.vector = new Vector<>();
     }
 
     public CategoryResultFragment(Constant.ECategory category) {
-        this.vector= new Vector<>();
-        this.category=category;
+        this.vector = new Vector<>();
+        this.category = category;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_category_result, container, false);
+    protected int getLayoutId() {
+        return R.layout.fragment_category_result;
     }
 
     @Override
-    public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        Log.d("카테고리 이름",this.category.getName());
-        this.chipGroup= view.findViewById(R.id.categoryResultFragment_chipGroup);
-        this.recyclerView= view.findViewById(R.id.categoryResultFragment_recyclerView);
+    protected void associateView(View view) {
+        this.chipGroup = view.findViewById(R.id.categoryResultFragment_chipGroup);
+        this.recyclerView = view.findViewById(R.id.categoryResultFragment_recyclerView);
         this.chipGroup.removeAllViews();
-        boolean firstChipCheck=true;
-        for(Constant.EChildCategory childCategory: this.category.getChildCategories()){
-            this.createChip(childCategory,firstChipCheck);
-            if(firstChipCheck)firstChipCheck=false;
+        boolean firstChipCheck = true;
+        for (Constant.EChildCategory childCategory : this.category.getChildCategories()) {
+            this.createChip(childCategory, firstChipCheck);
+            if (firstChipCheck) firstChipCheck = false;
         }
 
         LinearLayoutManager manager = new LinearLayoutManager(this.getContext());
         this.recyclerView.setLayoutManager(manager);
-        this.adapter=new CategoryAdapter(v->intentDetailPage((Long)v.getTag()));
+        this.adapter = new CategoryAdapter(v -> intentDetailPage((Long) v.getTag()));
         this.recyclerView.setAdapter(this.adapter);
         this.recyclerView.setNestedScrollingEnabled(false);
 
@@ -103,39 +100,60 @@ public class CategoryResultFragment extends Fragment {
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 int position = manager.findLastCompletelyVisibleItemPosition();
-                if (position == vector.size()-1&&hasNext) loadMore();
+                if (position == vector.size() - 1 && categoryModel.isHasNext()){
+                    loadMore();
+                    Log.d("태그",vector.size()+" "+categoryModel.isHasNext()+" "+position);
+                }
 
             }
         });
     }
 
-    public void createChip(Constant.EChildCategory childCategory, boolean chipCheck){
+    @Override
+    protected void initializeView() {
+
+    }
+
+    @Override
+    protected void categoryDataUpdated() {
+
+    }
+
+    public void createChip(Constant.EChildCategory childCategory, boolean chipCheck) {
         LayoutInflater inflater = (LayoutInflater) this.getActivity().getSystemService(Service.LAYOUT_INFLATER_SERVICE);
-        Chip chip= (Chip) inflater.inflate(R.layout.jsh_chip, null);
-//        chip.setOnCheckedChangeListener((buttonView, isChecked) -> loadCategory(isChecked,childCategory.getName()));
+        Chip chip = (Chip) inflater.inflate(R.layout.jsh_chip, null);
+        chip.setOnCheckedChangeListener((buttonView, isChecked) -> loadCategory(isChecked, childCategory.getName()));
         chip.setChecked(chipCheck);
         chip.setText(childCategory.getName());
         this.chipGroup.addView(chip);
     }
 
-    private void loadCategory(boolean isChecked,String categoryName){
-        if(isChecked){
-            Log.d("디버그, 칩 선택",categoryName);
+    private void loadCategory(boolean isChecked, String categoryName) {
+        Log.d(categoryName+" 하나 불러오기","리프레시");
+        if (isChecked) {
+            Log.d("디버그, 칩 선택", categoryName);
             this.vector.clear();
-            this.page=1;
-            this.selectedCategoryName=categoryName;
+            this.categoryModel.setPageSize(10);
+            this.categoryModel.setCategoryName(categoryName);
             this.load();
         }
     }
 
-    private void loadMore(){
-        this.page++;
+    private void loadMore() {
+        Log.d("더 불러오기"+this.categoryModel.getCategoryName(),"더더"+this.categoryModel.getPageSize()+1);
+        this.categoryModel.setPageSize(this.categoryModel.getPageSize() + 1);
         this.load();
     }
 
-    private void load(){
-        KatiRetrofitTool.getAPI().getCategoryFood(this.selectedCategoryName, this.page).enqueue(
-                JSHRetrofitTool.getCallback(new FoodCategoryCallback(this.getActivity())));
+    private void load() {
+        KatiRetrofitTool.getAPI().getCategoryFood(
+                this.categoryModel.getSearchPageNum(),
+                this.categoryModel.getPageSize(),
+                this.categoryModel.getFoodSortElement(),
+                this.categoryModel.getSortOrder().getMessage(),
+                this.categoryModel.getCategoryName(),
+                this.categoryModel.getAllergyList()
+        ).enqueue(JSHRetrofitTool.getCallback(new FoodCategoryCallback(this.getActivity())));
     }
 
     private void intentDetailPage(Long foodId) {
@@ -145,18 +163,28 @@ public class CategoryResultFragment extends Fragment {
         startActivity(intent);
     }
 
+    @Override
+    protected void katiEntityUpdatedAndLogin() {
+
+    }
+
+    @Override
+    protected void katiEntityUpdatedAndNoLogin() {
+
+    }
 
 
-    private class FoodCategoryCallback extends SimpleRetrofitCallBackImpl<CategoryFoodListResponse> {
+    private class FoodCategoryCallback extends SimpleRetrofitCallBackImpl<FindFoodBySortingResponse> {
         public FoodCategoryCallback(Activity activity) {
             super(activity);
         }
 
         @Override
-        public void onSuccessResponse(Response<CategoryFoodListResponse> response) {
-            CategoryFoodListResponse categoryFoodListResponse = response.body();
-            hasNext = categoryFoodListResponse.isHas_next();
-            vector.addAll(categoryFoodListResponse.getData());
+        public void onSuccessResponse(Response<FindFoodBySortingResponse> response) {
+            FindFoodBySortingResponse findFoodBySortingResponse = response.body();
+
+            categoryModel.setHasNext(findFoodBySortingResponse.isHas_next());
+            vector.addAll(findFoodBySortingResponse.getData());
             adapter.setItems(vector);
         }
     }

@@ -51,15 +51,6 @@ public abstract class KatiCategoryFragment extends KatiLoginCheckViewModelFragme
         return false;
     }
 
-    @Override
-    protected void katiEntityUpdatedAndLogin() {
-
-    }
-
-    @Override
-    protected void katiEntityUpdatedAndNoLogin() {
-
-    }
 
     protected abstract void categoryDataUpdated();
 
