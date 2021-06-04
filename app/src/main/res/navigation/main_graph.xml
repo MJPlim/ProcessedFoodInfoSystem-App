@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/categoryFilterFragment"
-        android:name="com.plim.kati_app.kati.domain.nnew.main.category.CategoryFilterFragment"
+        android:name="com.plim.kati_app.kati.domain.nnew.categoryFilter.CategoryFilterFragment"
         android:label="fragment_category_filter"
         tools:layout="@layout/fragment_category_filter" />
 

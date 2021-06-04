@@ -1,4 +1,4 @@
-package com.plim.kati_app.kati.domain.nnew.main.category;
+package com.plim.kati_app.kati.domain.nnew.categoryFilter;
 
 import android.view.View;
 import android.widget.CompoundButton;

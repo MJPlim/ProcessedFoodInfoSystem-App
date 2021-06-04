@@ -9,13 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -24,10 +18,8 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import com.plim.kati_app.R;
 import com.plim.kati_app.kati.crossDomain.domain.model.Constant;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiViewModelFragment;
+import com.plim.kati_app.kati.domain.nnew.categoryFilter.CategorySettingActivity;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
@@ -39,6 +31,11 @@ public class CategoryFoodDetailFragment extends KatiViewModelFragment {
     private int position;
 
     @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_category_food, container, false);
+    }
+
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         this.tabLayout = view.findViewById(R.id.categoryFoodFragment_tabLayout);
@@ -46,9 +43,10 @@ public class CategoryFoodDetailFragment extends KatiViewModelFragment {
         this.actionButton=view.findViewById(R.id.floatingActionButton);
 
         this.actionButton.setOnClickListener(v->{
-
-            ( (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.mainActivity_navHostFragment)).getNavController()
-                    .navigate(R.id.action_categoryFragment_to_categoryFilterFragment);
+//            Log.d("태그","플로팅 버튼 눌림 Id:"+view.getId());
+            startActivity(CategorySettingActivity.class);
+//            Navigation.findNavController(view).navigate(R.id.action_categoryFragment_to_categoryFilterFragment);
+//            navigateTo(R.id.action_categoryFragment_to_categoryFilterFragment);
         });
 
         final Vector<Constant.ECategory> categories = new Vector(Arrays.asList(Constant.ECategory.values()));

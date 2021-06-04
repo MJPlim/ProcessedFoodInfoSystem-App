@@ -120,6 +120,19 @@ public class ReviewFragment extends KatiFoodFragment {
 
     }
 
+    @Override
+    protected void katiEntityUpdatedAndLogin() {
+        super.katiEntityUpdatedAndLogin();
+        this.writeReviewButton.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected void katiEntityUpdatedAndNoLogin() {
+        this.writeReviewButton.setVisibility(View.GONE);
+
+
+    }
+
 
     public void moveToReviewActivity() {
         Intent intent = new Intent(this.getActivity(), ReviewActivity.class);

@@ -88,18 +88,8 @@ public class MainActivity extends KatiViewModelActivity {
     //
     @Override
     public void onBackPressed() {
-
-//        Log.d("디버그","백 누름");
-//        Fragment navHostFragment = getSupportFragmentManager().findFragmentById(R.id.mainActivity_navHostFragment);
-//        Fragment fragment = navHostFragment == null ? null : navHostFragment.getChildFragmentManager().getFragments().get(0);
-//
-//
-//        Log.d("디버그",fragment.getId()+"");
-//        Log.d("디버그",R.id.homeFragment+"");
-//        if (fragment.getId() == R.id.homeFragment)
-//            this.showSystemOffCheckDialog();
-
         if(this.getFragment(HomeFragment.class))this.showSystemOffCheckDialog();
+        else{super.onBackPressed();}
     }
 
     private boolean getFragment(Class<HomeFragment> homeFragmentClass) {

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.plim.kati_app"
-    >
+    package="com.plim.kati_app" >
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -19,9 +18,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KatiUI"
         android:usesCleartextTraffic="true"
-        tools:replace="android:allowBackup"
-        >
-        <activity android:name=".kati.domain.nnew.foodDetail.FoodDetailActivity"></activity>
+        tools:replace="android:allowBackup" >
+        <activity android:name=".kati.domain.nnew.categoryFilter.CategorySettingActivity" >
+        </activity>
+        <activity android:name=".kati.domain.nnew.foodDetail.FoodDetailActivity" />
         <activity android:name=".kati.domain.nnew.review.ReviewActivity" />
         <activity android:name=".kati.domain.nnew.setRestoreEmail.SetRestoreEmailActivity" />
         <activity android:name=".kati.domain.nnew.findId.FindIdActivity" />
@@ -33,15 +33,17 @@
         <activity android:name=".kati.domain.nnew.editName.EditNameActivity" />
         <activity android:name=".kati.domain.nnew.editName.EditBirthActivity" />
         <activity android:name=".kati.domain.nnew.editName.EditAddressActivity" />
-        <activity android:name=".kati.domain.nnew.main.search.barcode.view.BarcodeActivity"/>
+        <activity android:name=".kati.domain.nnew.main.search.barcode.view.BarcodeActivity" />
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="portrait"
             android:stateNotNeeded="true"
-            tools:replace="android:screenOrientation"></activity>
+            tools:replace="android:screenOrientation" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAH63IC9w2B6lP4RYw05b7qAyNja8gOyjU" />
+
         <activity
             android:name=".kati.domain.nnew.editPassword.view.EditPasswordActivity"
             android:label="@string/title_activity_password_edit"
@@ -50,8 +52,7 @@
             android:name=".kati.domain.nnew.signUp.SignUpActivity"
             android:label="@string/title_activity_sign_up"
             android:theme="@style/Theme.KatiUI.NoActionBar" />
-
-        <activity android:name=".kati.domain.nnew.main.MainActivity"/>
+        <activity android:name=".kati.domain.nnew.main.MainActivity" />
         <activity android:name=".kati.domain.nnew.splash.SplashActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -59,48 +60,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-<!--구버전 activity-->
-<!--        <activity android:name=".kati.domain.old.food.foodReview.FoodReviewWriteActivity"></activity>-->
-<!--        <activity android:name=".kati.domain.old.dataChange.UserDataChangeActivity" />-->
-<!--        <activity android:name=".kati.domain.old.temp.editData.userData.view.EditDataActivity" />-->
-<!--        <activity android:name=".kati.domain.old.search.foodInfo.view.review.WriteReviewActivity" />-->
-<!--        <activity android:name=".kati.domain.old.search.foodInfo.view.review.UpdateReviewActivity" />-->
-<!--        <activity android:name=".kati.domain.old.search.foodInfo.view.FoodInfoActivity" />-->
-
-<!--        <meta-data-->
-<!--            android:name="com.google.android.geo.API_KEY"-->
-<!--            android:value="AIzaSyAH63IC9w2B6lP4RYw05b7qAyNja8gOyjU" />-->
-
-<!--        <activity android:name=".kati.domain.old.login.pwFind.view.FindPasswordActivity" />-->
-<!--        <activity-->
-<!--            android:name=".kati.domain.old.TempMainActivity"-->
-<!--            android:label="@string/title_activity_main">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
-<!--        <activity android:name=".kati.domain.old.login.emailFind.view.FindEmailActivity" />-->
-<!--        <activity android:name=".kati.domain.old.temp.setSecondEmail.view.SetSecondEmailActivity" />-->
-<!--        <activity android:name=".kati.domain.old.temp.itemRank.view.RankingActivity" />-->
-<!--        <activity android:name=".kati.domain.old.search.search.view.FoodSearchActivity" />-->
-<!--        <activity android:name=".kati.domain.old.search.search.view.searchBar.barcode.view.BarcodeActivity" />-->
-<!--        <activity-->
-<!--            android:name="com.journeyapps.barcodescanner.CaptureActivity"-->
-<!--            android:screenOrientation="portrait"-->
-<!--            android:stateNotNeeded="true"-->
-<!--            tools:replace="android:screenOrientation" />-->
-<!--        <activity android:name=".kati.domain.old.temp.signOut.view.SignOutActivity" />-->
-<!--        <activity android:name=".kati.domain.old.temp.TempActivity" />-->
-<!--        <activity android:name=".kati.domain.old.login.signIn.view.SignInActivity" />-->
-<!--        <activity android:name=".kati.domain.old.temp.logout.view.LogOutActivity" />-->
-<!--        <activity android:name=".kati.domain.old.login.login.view.LoginActivity" />-->
-<!--        <activity android:name=".kati.domain.old.changePW.view.ChangePasswordActivity" />-->
-<!--        <activity android:name=".kati.domain.old.mypage.main.view.UserMyPageActivity" /> &lt;!&ndash; 여기부터 &ndash;&gt;-->
-<!--        <activity android:name=".kati.domain.old.food.searchText.FoodSearchTextActivity" />-->
     </application>
 
 </manifest>

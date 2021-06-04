@@ -99,7 +99,7 @@ public class FoodInfoFragment extends KatiFoodFragment {
 
             @Override
             public void onEventAnimationStart(ImageView button, boolean buttonState) {
-                saveLike();
+//                saveLike();
             }
         });
     }
