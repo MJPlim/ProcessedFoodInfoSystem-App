@@ -17,7 +17,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.plim.kati_app.R;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitCallback;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
@@ -42,7 +41,7 @@ import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.FOOD_SEAR
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.LOG_OUT_ACTIVITY_FAILURE_DIALOG_TITLE;
 
 public class FavoriteFragment extends KatiLoginCheckViewModelFragment {
-    private TextView favoriteNum, noFavorite;
+    private TextView favoriteNum,noLogin,noFavorite;
     private RecyclerView foodInfoRecyclerView;
     private UserFavoriteFoodRecyclerAdapter foodRecyclerAdapter;
     private LoadingDialog dialog;
@@ -57,18 +56,16 @@ public class FavoriteFragment extends KatiLoginCheckViewModelFragment {
     @Override
     protected void associateView(View view) {
         this.foodInfoRecyclerView = view.findViewById(R.id.favorite_list);
-        this.favoriteNum = view.findViewById(R.id.favorite_numOfFavorite);
-        this.noFavorite = view.findViewById(R.id.favorite_noFavorite);
-        this.emptyImage = view.findViewById(R.id.favorite_emptyImage);
-        this.loginButton = view.findViewById(R.id.favorite_login_Button);
-
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) this.getActivity().findViewById(R.id.mainFragment_bottomNavigation);
-        if (bottomNavigationView.getSelectedItemId() != R.id.action_favorite)
-            bottomNavigationView.findViewById(R.id.action_favorite).performClick();
+        this.favoriteNum=view.findViewById(R.id.favorite_numOfFavorite);
+        this.noLogin=view.findViewById(R.id.favorite_noLogin);
+        this.noFavorite=view.findViewById(R.id.favorite_noFavorite);
+        this.emptyImage=view.findViewById(R.id.favorite_emptyImage);
+        this.loginButton=view.findViewById(R.id.favorite_login_Button);
     }
 
     @Override
     protected void initializeView() {
+        this.noFavorite.setVisibility(View.GONE);
         this.foodRecyclerAdapter = new UserFavoriteFoodRecyclerAdapter(this.getActivity());
         this.dialog = new LoadingDialog(getContext());
         this.foodInfoRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
@@ -103,6 +100,7 @@ public class FavoriteFragment extends KatiLoginCheckViewModelFragment {
     }
 
 
+
     private class UserFavoriteResponseCallback implements JSHRetrofitCallback<List<UserFavoriteResponse>> {
         @Override
         public void onSuccessResponse(Response<List<UserFavoriteResponse>> response) {
@@ -110,22 +108,29 @@ public class FavoriteFragment extends KatiLoginCheckViewModelFragment {
             dialog.hide();
             foodRecyclerAdapter.setItems(items);
             foodInfoRecyclerView.setAdapter(foodRecyclerAdapter);
-            String temp = "총 " + items.size() + "개";
+            String temp = "총 "+items.size() + "개";
             SpannableStringBuilder ssb = new SpannableStringBuilder(temp);
-            ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#E53154")), temp.length() - 3, temp.length() - 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#E53154")), temp.length() - 3, temp.length()-1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             favoriteNum.setText(ssb);
-            if (items.size() > 0) {
-                noFavorite.setVisibility(View.GONE);
-                emptyImage.setVisibility(View.GONE);
-                loginButton.setVisibility(View.GONE);
+            noLogin.setVisibility(View.GONE);
+            emptyImage.setVisibility(View.GONE);
+            loginButton.setVisibility(View.GONE);
+            if(items.size()==0){
+                emptyImage.setVisibility(View.VISIBLE);
+                noFavorite.setVisibility(View.VISIBLE);
             }
-        }
 
+        }
         @Override
         public void onFailResponse(Response<List<UserFavoriteResponse>> response) {
-
+            try {
+                JSONObject jObjError = new JSONObject(response.errorBody().string());
+                Toast.makeText(getContext(), jObjError.getString("error-message"), Toast.LENGTH_LONG).show();
+//                moveToLogOutActivity();
+            } catch (Exception e) {
+                Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+            }
         }
-
         @Override
         public void onConnectionFail(Throwable t) {
             KatiDialog.simplerAlertDialog(getActivity(),
@@ -134,6 +139,11 @@ public class FavoriteFragment extends KatiLoginCheckViewModelFragment {
             );
         }
     }
+
+
+
+
+
 
 
 }
