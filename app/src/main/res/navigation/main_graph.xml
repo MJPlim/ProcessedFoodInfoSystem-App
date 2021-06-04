@@ -51,7 +51,11 @@
         android:id="@+id/myInfoEditFragment"
         android:name="com.plim.kati_app.kati.domain.nnew.main.myKati.myInfoEdit.MyInfoEditFragment"
         android:label="fragment_my_info_edit"
-        tools:layout="@layout/fragment_my_info_edit" />
+        tools:layout="@layout/fragment_my_info_edit" >
+        <action
+            android:id="@+id/action_myInfoEditFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/reviewFlagment"
         android:name="com.plim.kati_app.kati.domain.nnew.main.myKati.review.view.ReviewManagementFragment"

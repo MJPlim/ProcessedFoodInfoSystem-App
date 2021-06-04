@@ -50,6 +50,8 @@ public class MyInfoEditFragment extends KatiInfoEditFragment {
     private Vector<KatiDialog> dialogs;
     private String secondEmail;
 
+    private boolean loginNeed=true;
+
     public MyInfoEditFragment() {
         this.dialogs = new Vector<>();
     }
@@ -89,30 +91,30 @@ public class MyInfoEditFragment extends KatiInfoEditFragment {
     @Override
     protected void initializeView() {
         this.editPasswordButton.setOnClickListener(v -> this.getActivity().startActivity(new Intent(this.getContext(), EditPasswordActivity.class)));
-       this.editRestoreEmailButton.setOnClickListener(v -> this.getActivity().startActivity(new Intent(this.getContext(), SetRestoreEmailActivity.class)));
+        this.editRestoreEmailButton.setOnClickListener(v -> this.getActivity().startActivity(new Intent(this.getContext(), SetRestoreEmailActivity.class)));
 
 
         this.editNameButton.setOnClickListener(v -> this.moveActivity(EditNameActivity.class));
-        this.changeAddressButton.setOnClickListener(v->this.moveActivity(EditAddressActivity.class));
-        this.changeBirthButton.setOnClickListener(v->this.moveActivity(EditBirthActivity.class));
+        this.changeAddressButton.setOnClickListener(v -> this.moveActivity(EditAddressActivity.class));
+        this.changeBirthButton.setOnClickListener(v -> this.moveActivity(EditBirthActivity.class));
 
 
         this.logOut.setOnClickListener(v -> this.logOut());
         this.signOut.setOnClickListener(v -> this.getActivity().startActivity(new Intent(this.getContext(), SignOutActivity.class)));
     }
 
-    private void moveActivity(Class activity){
-        Intent intent= new Intent(this.getActivity(),activity);
-        intent.putExtra("name",this.userInfoResponse.getName());
-        intent.putExtra("address",this.userInfoResponse.getAddress());
-        intent.putExtra("birth",this.userInfoResponse.getBirth());
+    private void moveActivity(Class activity) {
+        Intent intent = new Intent(this.getActivity(), activity);
+        intent.putExtra("name", this.userInfoResponse.getName());
+        intent.putExtra("address", this.userInfoResponse.getAddress());
+        intent.putExtra("birth", this.userInfoResponse.getBirth());
         this.startActivity(intent);
     }
 
 
     @Override
     protected boolean isLoginNeeded() {
-        return true;
+        return this.loginNeed;
     }
 
     @Override
@@ -120,7 +122,6 @@ public class MyInfoEditFragment extends KatiInfoEditFragment {
         this.getUserData(this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION));
         this.getSecondEmail(this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION));
     }
-
 
 
     @Override
@@ -153,7 +154,7 @@ public class MyInfoEditFragment extends KatiInfoEditFragment {
 
         @Override
         public void onSuccessResponse(Response<GetSecondEmailResponse> response) {
-            secondEmail=response.body().getSecondEmail();
+            secondEmail = response.body().getSecondEmail();
             saveInfo();
         }
     }
@@ -168,19 +169,29 @@ public class MyInfoEditFragment extends KatiInfoEditFragment {
 
     private void logOut() {
         if (!this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION).equals(KatiEntity.EKatiData.NULL.name())) {
-            this.dataset.put(KatiEntity.EKatiData.AUTHORIZATION, KatiEntity.EKatiData.NULL.name());
-            this.dataset.put(KatiEntity.EKatiData.EMAIL, KatiEntity.EKatiData.NULL.name());
-            this.dataset.put(KatiEntity.EKatiData.PASSWORD, KatiEntity.EKatiData.NULL.name());
-            this.dataset.put(KatiEntity.EKatiData.AUTO_LOGIN, KatiEntity.EKatiData.FALSE.name());
+
             this.showOkDialog();
+
         } else {
             this.showNoDialog();
         }
     }
 
     public void showOkDialog() {
-        Log.d("뭐야",this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION));
-        this.dialogs.add(this.showDialog(LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_TITLE, LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_MESSAGE, (dialog,which)->startActivity(MainActivity.class)));
+        Log.d("뭐야", this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION));
+        this.dialogs.add(this.showDialog(LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_TITLE, LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_MESSAGE, (dialog, which) -> {
+            removeLoginData();
+            navigateTo(R.id.action_myInfoEditFragment_to_homeFragment);
+        }));
+    }
+
+    private void removeLoginData() {
+        this.loginNeed=false;
+        this.dataset.put(KatiEntity.EKatiData.EMAIL, KatiEntity.EKatiData.NULL.name());
+        this.dataset.put(KatiEntity.EKatiData.PASSWORD, KatiEntity.EKatiData.NULL.name());
+        this.dataset.put(KatiEntity.EKatiData.AUTO_LOGIN, KatiEntity.EKatiData.FALSE.name());
+        this.dataset.put(KatiEntity.EKatiData.AUTHORIZATION, KatiEntity.EKatiData.NULL.name());
+        this.save();
     }
 
     public void showNoDialog() {
