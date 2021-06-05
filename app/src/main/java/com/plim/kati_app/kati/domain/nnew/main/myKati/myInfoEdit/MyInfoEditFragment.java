@@ -189,6 +189,7 @@ public class MyInfoEditFragment extends KatiInfoEditFragment {
         this.loginNeed=false;
         this.dataset.put(KatiEntity.EKatiData.EMAIL, KatiEntity.EKatiData.NULL.name());
         this.dataset.put(KatiEntity.EKatiData.PASSWORD, KatiEntity.EKatiData.NULL.name());
+        this.dataset.put(KatiEntity.EKatiData. NAME, KatiEntity.EKatiData.NULL.name());
         this.dataset.put(KatiEntity.EKatiData.AUTO_LOGIN, KatiEntity.EKatiData.FALSE.name());
         this.dataset.put(KatiEntity.EKatiData.AUTHORIZATION, KatiEntity.EKatiData.NULL.name());
         this.save();

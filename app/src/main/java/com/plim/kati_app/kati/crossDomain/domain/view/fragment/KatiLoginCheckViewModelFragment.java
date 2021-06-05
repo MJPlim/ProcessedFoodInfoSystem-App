@@ -95,6 +95,11 @@ public abstract class KatiLoginCheckViewModelFragment extends KatiViewModelFragm
 
     protected void putToken(String authorization) { this.dataset.put(KatiEntity.EKatiData.AUTHORIZATION, authorization); }
 
-    protected void deleteToken() { this.dataset.put(KatiEntity.EKatiData.AUTHORIZATION, KatiEntity.EKatiData.NULL.name()); this.save(); }
+    protected void deleteToken() { this.dataset.put(KatiEntity.EKatiData.EMAIL, KatiEntity.EKatiData.NULL.name());
+        this.dataset.put(KatiEntity.EKatiData.PASSWORD, KatiEntity.EKatiData.NULL.name());
+        this.dataset.put(KatiEntity.EKatiData. NAME, KatiEntity.EKatiData.NULL.name());
+        this.dataset.put(KatiEntity.EKatiData.AUTO_LOGIN, KatiEntity.EKatiData.FALSE.name());
+        this.dataset.put(KatiEntity.EKatiData.AUTHORIZATION, KatiEntity.EKatiData.NULL.name());
+        this.save(); }
 
 }

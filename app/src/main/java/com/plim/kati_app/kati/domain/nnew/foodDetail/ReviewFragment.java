@@ -292,7 +292,9 @@ public class ReviewFragment extends KatiFoodFragment {
     private void like(String token, Long reviewId, boolean likeCheck) {
         UpdateReviewLikeRequest request = new UpdateReviewLikeRequest();
         request.setReviewId(reviewId);
-        request.setLikeCheck(likeCheck);
+        request.setLikeCheck(!likeCheck);
+
+        Log.d("디버그",reviewId+" "+likeCheck);
 
         KatiRetrofitTool.getAPIWithAuthorizationToken(token).likeReview(request).enqueue(JSHRetrofitTool.getCallback(new LikeReviewCallback(this.getActivity(), likeCheck)));
     }
