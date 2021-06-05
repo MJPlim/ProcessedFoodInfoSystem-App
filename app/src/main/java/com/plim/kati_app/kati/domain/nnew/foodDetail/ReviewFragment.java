@@ -180,7 +180,16 @@ public class ReviewFragment extends KatiFoodFragment {
         this.ratingTextView.setText(String.valueOf(readSummaryResponse.getAvgRating()));
         this.ratingBar.setRating(readSummaryResponse.getAvgRating());
 
-        this.noRereviewTextView.setVisibility(this.vector.size()!=0?View.INVISIBLE:View.VISIBLE);
+        System.out.println("테스트" + String.valueOf(readSummaryResponse.getAvgRating()));
+        System.out.println("테스트" + this.vector.size());
+//        if (readSummaryResponse.getAvgRating() > 0){
+//            this.noRereviewTextView.setVisibility(View.INVISIBLE);
+//        }else{
+//            this.noRereviewTextView.setVisibility(View.VISIBLE);
+//        }
+//        this.noRereviewTextView.setVisibility(this.vector.size()!=0?View.INVISIBLE:View.VISIBLE); -> 벡터가 0이네요
+        this.noRereviewTextView.setVisibility(readSummaryResponse.getAvgRating() > 0 ? View.INVISIBLE : View.VISIBLE);
+
     }
 
     private class ReadReviewCallback extends SimpleRetrofitCallBackImpl<ReadReviewDto> {
@@ -239,15 +248,23 @@ public class ReviewFragment extends KatiFoodFragment {
         ReadReviewDto reviewDto = response.body();
 
         ReadSummaryResponse readSummaryResponse = reviewDto.getReadSummaryResponse();
+        System.out.println("겟리드써머리리스폰스");
         int findReviewPageCount = readSummaryResponse.getReviewPageCount();
+        System.out.println(findReviewPageCount + "리뷰 페이지 카운트");
         hasNext = (currentPageNum < findReviewPageCount);
         foodModel.getReadSummaryResponse().setValue(readSummaryResponse);
+        System.out.println("한 번 더 불림??");
         saveReadSummary();
 
         List<ReadReviewResponse> reviewList = reviewDto.getReadReviewResponse();
 
+        System.out.println("리뷰리스트: " + reviewList);
 
-        vector.addAll(reviewList);
+        if (!vector.contains(reviewList)){
+            vector.addAll(reviewList);
+        }
+
+        //vector.addAll(reviewList);
         adapter.setItems(vector);
     }
 
@@ -299,8 +316,12 @@ public class ReviewFragment extends KatiFoodFragment {
 
     private void load() {
         if (!this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION).equals(KatiEntity.EKatiData.NULL.name())) {
+            System.out.println("어써라이제이션 null 아님!");
             this.getReviews(this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION));
-        } else this.getReviews();
+        } else {
+            System.out.println("어써라이제이션 null임!");
+            this.getReviews();
+        }
     }
 
     private void getReviews(String token) {
