@@ -40,16 +40,16 @@ public abstract class KatiLoginCheckViewModelFragment extends KatiViewModelFragm
 
 
         public void onFailResponse(Response<T> response) throws IOException, JSONException {
-            if (response.code() == 400) {
-                Log.d("여기?","리스폰스 "+dataset.get(KatiEntity.EKatiData.AUTHORIZATION));
-                this.removeToken();
-                KatiDialog.simplerTwoOptionAlertDialog(
-                        this.activity,
-                        "로그인 만료",
-                        "로그인 후 시간이 지나 만료되었습니다. 다시 로그인 하시겠습니까?",
-                        (dialog,which)-> this.activity.startActivity(new Intent(this.activity,LoginActivity.class)),
-                        this.getCancelListener());
-            } else {
+//            if (response.code() == 400) {
+//                Log.d("여기?","리스폰스 "+dataset.get(KatiEntity.EKatiData.AUTHORIZATION));
+//                this.removeToken();
+//                KatiDialog.simplerTwoOptionAlertDialog(
+//                        this.activity,
+//                        "로그인 만료",
+//                        "로그인 후 시간이 지나 만료되었습니다. 다시 로그인 하시겠습니까?",
+//                        (dialog,which)-> this.activity.startActivity(new Intent(this.activity,LoginActivity.class)),
+//                        this.getCancelListener());
+//            } else {
                 JSONObject object = new JSONObject(response.errorBody().string());
                 KatiDialog.RetrofitNotSuccessDialog(
                         this.activity,
@@ -57,7 +57,7 @@ public abstract class KatiLoginCheckViewModelFragment extends KatiViewModelFragm
                         response.code(),
                         null
                 );
-            }
+//            }
         }
 
         public DialogInterface.OnClickListener getCancelListener(){
@@ -95,11 +95,13 @@ public abstract class KatiLoginCheckViewModelFragment extends KatiViewModelFragm
 
     protected void putToken(String authorization) { this.dataset.put(KatiEntity.EKatiData.AUTHORIZATION, authorization); }
 
-    protected void deleteToken() { this.dataset.put(KatiEntity.EKatiData.EMAIL, KatiEntity.EKatiData.NULL.name());
+    protected void deleteToken() {
+        this.dataset.put(KatiEntity.EKatiData.EMAIL, KatiEntity.EKatiData.NULL.name());
         this.dataset.put(KatiEntity.EKatiData.PASSWORD, KatiEntity.EKatiData.NULL.name());
         this.dataset.put(KatiEntity.EKatiData. NAME, KatiEntity.EKatiData.NULL.name());
         this.dataset.put(KatiEntity.EKatiData.AUTO_LOGIN, KatiEntity.EKatiData.FALSE.name());
         this.dataset.put(KatiEntity.EKatiData.AUTHORIZATION, KatiEntity.EKatiData.NULL.name());
-        this.save(); }
+        this.save();
+    }
 
 }

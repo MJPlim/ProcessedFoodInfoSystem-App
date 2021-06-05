@@ -73,14 +73,18 @@ public class ReviewViewHolder extends RecyclerView.ViewHolder {
         int color = this.activity.getResources().getColor(value.isUserLikeCheck() ? R.color.kati_red : R.color.gray, this.activity.getTheme());
         this.reviewLikeIcon.setColorFilter(color, PorterDuff.Mode.SRC_IN);
         this.reviewLikeButtonBackground.setBackgroundResource(value.isUserLikeCheck() ? R.drawable.thumb_bg_select : R.drawable.thumb_bg_non_select);
-//        if (value.isUserLikeCheck()){
+        this.reviewLikeItemCountTextView.setTextColor(color);
+        //        if (value.isUserLikeCheck()){
 //            this.reviewLikeButtonBackground.setBackgroundResource(R.drawable.thumb_bg_select);
 //        }else{
 //            this.reviewLikeButtonBackground.setBackgroundResource(R.drawable.thumb_bg_non_select);
 //        }
 
-        this.reviewLikeItemCountTextView.setOnClickListener(value.isUserCheck()? this.likeListener:this.unLikeListener);
-        this.reviewLikeIcon.setOnClickListener(value.isUserCheck()? this.likeListener:this.unLikeListener);
+        this.reviewLikeItemCountTextView.setOnClickListener(value.isUserLikeCheck()? this.likeListener:this.unLikeListener);
+        this.reviewLikeIcon.setOnClickListener(value.isUserLikeCheck()? this.likeListener:this.unLikeListener);
+        this.reviewLikeButtonBackground.setOnClickListener(value.isUserLikeCheck()? this.likeListener:this.unLikeListener);
+
+        this.reviewLikeButtonBackground.setTag(value.getReviewId());
         this.reviewLikeItemCountTextView.setTag(value.getReviewId());
         this.reviewLikeIcon.setTag(value.getReviewId());
 

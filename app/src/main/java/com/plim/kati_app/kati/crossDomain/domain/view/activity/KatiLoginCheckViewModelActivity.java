@@ -47,16 +47,16 @@ public abstract class KatiLoginCheckViewModelActivity extends KatiViewModelActiv
 
 
         public void onFailResponse(Response<T> response) throws IOException, JSONException {
-            if (response.code() == 400) {
-                Log.d("여기?","리스폰스 "+dataset.get(KatiEntity.EKatiData.AUTHORIZATION));
-                this.removeToken();
-                KatiDialog.NotLogInDialog(
-                        this.activity,
-                        (dialog, which) -> {
-                            this.activity.startActivity(new Intent(this.activity, LoginActivity.class));
-                        }
-                );
-            } else {
+//            if (response.code() == 400) {
+//                Log.d("여기?","리스폰스 "+dataset.get(KatiEntity.EKatiData.AUTHORIZATION));
+//                this.removeToken();
+//                KatiDialog.NotLogInDialog(
+//                        this.activity,
+//                        (dialog, which) -> {
+//                            this.activity.startActivity(new Intent(this.activity, LoginActivity.class));
+//                        }
+//                );
+//            } else {
                 JSONObject object = new JSONObject(response.errorBody().string());
                 KatiDialog.RetrofitNotSuccessDialog(
                         this.activity,
@@ -64,7 +64,7 @@ public abstract class KatiLoginCheckViewModelActivity extends KatiViewModelActiv
                         response.code(),
                         null
                 );
-            }
+//            }
         }
 
         @Override
