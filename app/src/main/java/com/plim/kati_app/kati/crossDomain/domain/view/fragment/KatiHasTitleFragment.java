@@ -6,7 +6,7 @@ import com.plim.kati_app.R;
 import com.plim.kati_app.kati.crossDomain.domain.view.activity.KatiViewModelActivity;
 import com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHToolBar;
 
-public abstract class KatiHasTitleFragment extends KatiViewModelFragment {
+public abstract class KatiHasTitleFragment extends KatiLoginCheckViewModelFragment {
 
     protected JSHToolBar titleBar;
 
@@ -22,11 +22,6 @@ public abstract class KatiHasTitleFragment extends KatiViewModelFragment {
         this.titleBar.setToolBarOnClickListener(v -> this.getOnBackTitleListener());
     }
 
-    @Override
-    public void katiEntityUpdated() {
-
-    }
-
     /**
      * method
      */
@@ -38,5 +33,4 @@ public abstract class KatiHasTitleFragment extends KatiViewModelFragment {
         this.getActivity().onBackPressed();
     }
 
-    ;
 }

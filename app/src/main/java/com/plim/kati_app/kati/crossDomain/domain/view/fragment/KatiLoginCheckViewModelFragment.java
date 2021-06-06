@@ -24,9 +24,8 @@ public abstract class KatiLoginCheckViewModelFragment extends KatiViewModelFragm
         if (!this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION).equals(KatiEntity.EKatiData.NULL.name()))
             this.katiEntityUpdatedAndLogin();
         else {
-            if (this.isLoginNeeded()){
+            if (this.isLoginNeeded())
                 this.notLoginDialog();
-            }
             else
                 this.katiEntityUpdatedAndNoLogin();
         }
@@ -61,7 +60,7 @@ public abstract class KatiLoginCheckViewModelFragment extends KatiViewModelFragm
                 );
         }
 
-        public DialogInterface.OnClickListener getCancelListener(){
+        public DialogInterface.OnClickListener getCancelListener() {
             return null;
         }
 
@@ -91,15 +90,17 @@ public abstract class KatiLoginCheckViewModelFragment extends KatiViewModelFragm
     protected abstract void katiEntityUpdatedAndNoLogin();
 
     protected void notLoginDialog() {
-        KatiDialog.NotLogInDialog(this.getActivity(), (dialog, which) -> this.startActivity(LoginActivity.class),(dialog, which) -> this.startActivity(MainActivity.class));
+        KatiDialog.NotLogInDialog(this.getActivity(), (dialog, which) -> this.startActivity(LoginActivity.class), (dialog, which) -> this.startActivity(MainActivity.class));
     }
 
-    protected void putToken(String authorization) { this.dataset.put(KatiEntity.EKatiData.AUTHORIZATION, authorization); }
+    protected void putToken(String authorization) {
+        this.dataset.put(KatiEntity.EKatiData.AUTHORIZATION, authorization);
+    }
 
     protected void deleteToken() {
         this.dataset.put(KatiEntity.EKatiData.EMAIL, KatiEntity.EKatiData.NULL.name());
         this.dataset.put(KatiEntity.EKatiData.PASSWORD, KatiEntity.EKatiData.NULL.name());
-        this.dataset.put(KatiEntity.EKatiData. NAME, KatiEntity.EKatiData.NULL.name());
+        this.dataset.put(KatiEntity.EKatiData.NAME, KatiEntity.EKatiData.NULL.name());
         this.dataset.put(KatiEntity.EKatiData.AUTO_LOGIN, KatiEntity.EKatiData.FALSE.name());
         this.dataset.put(KatiEntity.EKatiData.AUTHORIZATION, KatiEntity.EKatiData.NULL.name());
         this.save();

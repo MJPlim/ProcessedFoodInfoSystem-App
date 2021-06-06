@@ -193,5 +193,15 @@
     <string name="passwordFindActivity_restoreEmailEditText_text">이메일</string>
     <string name="passwordFindActivity_submitButton_text">이메일 발송 하기</string>
     <string name="passwordFindActivity_resultMessageTextView_text">입력하신 이메일 주소로 비밀번호 재설정 메일이 발송됩니다.</string>
+    <string name="myKatiFragment_loginRecommendTextView_text">로그인 하고 다양한 혜택을 받아보세요!</string>
+    <string name="myKatiFragment_userNameTextView_text">정상</string>
+    <string name="myKatiFragment_userNameTextView_suffix_text">님</string>
+    <string name="myKatiFragment_signUpButton_text">회원가입</string>
+    <string name="myKatiFragment_loginButton_text">로그인</string>
+    <string name="myKatiFragment_title_toolbar_text">마이카티</string>
+    <string name="myKatiFragment_allergyItem_text">알레르기 관리</string>
+    <string name="myKatiFragment_reviewItem_text">리뷰 관리</string>
+    <string name="myKatiFragment_katiAnnounceItem_text">카티 안내</string>
+    <string name="myKatiFragment_serviceItem_text">서비스 약관</string>
 
 </resources>

@@ -61,7 +61,17 @@ public class SignUpFragment extends KatiHasTitleFragment {
     }
 
     @Override
-    public void katiEntityUpdated() {
+    protected boolean isLoginNeeded() {
+        return false;
+    }
+
+    @Override
+    protected void katiEntityUpdatedAndLogin() {
+
+    }
+
+    @Override
+    protected void katiEntityUpdatedAndNoLogin() {
 
     }
 

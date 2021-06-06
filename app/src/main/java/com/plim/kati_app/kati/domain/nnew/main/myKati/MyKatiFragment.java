@@ -17,7 +17,7 @@ import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 import com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHSelectItem;
-import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiLoginCheckViewModelFragment;
+import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiHasTitleFragment;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.domain.login.LoginActivity;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.model.UserSummaryResponse;
@@ -28,14 +28,20 @@ import org.json.JSONObject;
 import retrofit2.Response;
 
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE;
+import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.JSONOBJECT_ERROR_MESSAGE;
 
-public class MyKatiFragment extends KatiLoginCheckViewModelFragment {
-    ConstraintLayout myInfoEditSelect,loginLayout;
-    JSHSelectItem reviewSelect;
-    JSHSelectItem allergySelect;
-    Button signUp, login;
-    TextView name;
-    ImageView myImage;
+public class MyKatiFragment extends KatiHasTitleFragment {
+
+    //associate
+    //view
+    private ConstraintLayout myInfoEditSelect, loginLayout;
+    private JSHSelectItem reviewSelect;
+    private JSHSelectItem allergySelect;
+    private Button signUp, login;
+    private TextView name;
+    private ImageView myImage;
+
+    //working variable
     private int numOfMyReview;
 
     @Override
@@ -45,33 +51,27 @@ public class MyKatiFragment extends KatiLoginCheckViewModelFragment {
 
     @Override
     protected void associateView(View view) {
-        loginLayout = view.findViewById(R.id.mykati_login_layout);
-        name = view.findViewById(R.id.mykati_name_textView);
-        myInfoEditSelect = view.findViewById(R.id.select_my_info_edit);
-        reviewSelect = view.findViewById(R.id.select_my_review);
-        allergySelect = view.findViewById(R.id.select_my_allergy);
-        signUp = view.findViewById(R.id.mykati_signUp_button);
-        login = view.findViewById(R.id.mykati_login_button);
-        myImage = view.findViewById(R.id.mykati_myImage);
+        this.loginLayout = view.findViewById(R.id.mykati_login_layout);
+        this.name = view.findViewById(R.id.myKatiFragment_userNameTextView);
+        this.myInfoEditSelect = view.findViewById(R.id.myKatiFragment_myInfoLayout);
+        this.reviewSelect = view.findViewById(R.id.myKatiFragment_reviewItem);
+        this.allergySelect = view.findViewById(R.id.myKatiFragment_allergyItem);
+        this.signUp = view.findViewById(R.id.myKatiFragment_signUpButton);
+        this.login = view.findViewById(R.id.myKatiFragment_loginButton);
+        this.myImage = view.findViewById(R.id.myKatiFragment_profileImageView);
 
-        BottomNavigationView bottomNavigationView= (BottomNavigationView)this.getActivity().findViewById(R.id.mainFragment_bottomNavigation);
+        BottomNavigationView bottomNavigationView = this.getActivity().findViewById(R.id.mainFragment_bottomNavigation);
         if (bottomNavigationView.getSelectedItemId() != R.id.action_mykati)
-        bottomNavigationView.findViewById(R.id.action_mykati).performClick();
+            bottomNavigationView.findViewById(R.id.action_mykati).performClick();
     }
 
     @Override
     protected void initializeView() {
-        myInfoEditSelect.setOnClickListener(
-                v -> Navigation.findNavController(v).navigate(R.id.action_myKatiFragment_to_myInfoEditFragment)
-        );
-        reviewSelect.setOnClickListener(
-                v -> Navigation.findNavController(v).navigate(R.id.action_myKatiFragment_to_reviewFlagment)
-        );
-        allergySelect.setOnClickListener(
-                v -> Navigation.findNavController(v).navigate(R.id.action_myKatiFragment_to_allergyFragment)
-        );
-        signUp.setOnClickListener(v -> this.getActivity().startActivity(new Intent(this.getContext(), SignUpActivity.class)));
-        login.setOnClickListener(v -> this.getActivity().startActivity(new Intent(this.getContext(), LoginActivity.class)));
+        this.myInfoEditSelect.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_myKatiFragment_to_myInfoEditFragment));
+        this.reviewSelect.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_myKatiFragment_to_reviewFlagment));
+        this.allergySelect.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_myKatiFragment_to_allergyFragment));
+        this.signUp.setOnClickListener(v -> this.getActivity().startActivity(new Intent(this.getContext(), SignUpActivity.class)));
+        this.login.setOnClickListener(v -> this.getActivity().startActivity(new Intent(this.getContext(), LoginActivity.class)));
     }
 
     @Override
@@ -81,43 +81,35 @@ public class MyKatiFragment extends KatiLoginCheckViewModelFragment {
 
     @Override
     protected void katiEntityUpdatedAndLogin() {
-        loginLayout.setVisibility(View.GONE);
-        myInfoEditSelect.setVisibility(View.VISIBLE);
-        allergySelect.setVisibility(View.VISIBLE);
-        reviewSelect.setVisibility(View.VISIBLE);
-        getUserInfo();
-        changeUserImage();
-
+        this.loginLayout.setVisibility(View.GONE);
+        this.myInfoEditSelect.setVisibility(View.VISIBLE);
+        this.allergySelect.setVisibility(View.VISIBLE);
+        this.reviewSelect.setVisibility(View.VISIBLE);
+        this.getUserInfo();
     }
 
     @Override
     protected void katiEntityUpdatedAndNoLogin() {
-        loginLayout.setVisibility(View.VISIBLE);
-        myInfoEditSelect.setVisibility(View.GONE);
-        allergySelect.setVisibility(View.GONE);
-        reviewSelect.setVisibility(View.GONE);
+        this.loginLayout.setVisibility(View.VISIBLE);
+        this.myInfoEditSelect.setVisibility(View.GONE);
+        this.allergySelect.setVisibility(View.GONE);
+        this.reviewSelect.setVisibility(View.GONE);
     }
 
-    private void changeUserImage() {
-
-    }
-
-    // 서버에서 사용자 정보를 받아와서 바꿔주는 메서드
-    private void getUserInfo() {
-        KatiRetrofitTool.getAPIWithAuthorizationToken(dataset.get(KatiEntity.EKatiData.AUTHORIZATION)).getUserSummary().enqueue(JSHRetrofitTool.getCallback(new UserSummaryResponseCallback()));
-    }
-
+    /**
+     * callback
+     */
     private class UserSummaryResponseCallback implements JSHRetrofitCallback<UserSummaryResponse> {
         @Override
         public void onSuccessResponse(Response<UserSummaryResponse> response) {
             name.setText(response.body().getUser_name());
-            dataset.put(KatiEntity.EKatiData.NAME,response.body().getUser_name());
-            numOfMyReview=Integer.parseInt(response.body().getReview_count());
-            if(numOfMyReview>100){
+            dataset.put(KatiEntity.EKatiData.NAME, response.body().getUser_name());
+            numOfMyReview = Integer.parseInt(response.body().getReview_count());
+            if (numOfMyReview > 100) {
                 myImage.setImageResource(R.drawable.gold_icon);
-            }else if(numOfMyReview>50){
+            } else if (numOfMyReview > 50) {
                 myImage.setImageResource(R.drawable.silver_icon);
-            }else{
+            } else {
                 myImage.setImageResource(R.drawable.bronze_icon);
             }
         }
@@ -126,8 +118,7 @@ public class MyKatiFragment extends KatiLoginCheckViewModelFragment {
         public void onFailResponse(Response<UserSummaryResponse> response) {
             try {
                 JSONObject jObjError = new JSONObject(response.errorBody().string());
-                Toast.makeText(getContext(), jObjError.getString("error-message"), Toast.LENGTH_LONG).show();
-//                moveToLogOutActivity();
+                Toast.makeText(getContext(), jObjError.getString(JSONOBJECT_ERROR_MESSAGE), Toast.LENGTH_LONG).show();
             } catch (Exception e) {
                 Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
             }
@@ -135,10 +126,15 @@ public class MyKatiFragment extends KatiLoginCheckViewModelFragment {
 
         @Override
         public void onConnectionFail(Throwable t) {
-            KatiDialog.simplerAlertDialog(getActivity(),FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE,t.getMessage(),null);
+            KatiDialog.simplerAlertDialog(getActivity(), FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE, t.getMessage(), null);
         }
     }
 
 
-
+    /**
+     * method
+     */
+    private void getUserInfo() {
+        KatiRetrofitTool.getAPIWithAuthorizationToken(dataset.get(KatiEntity.EKatiData.AUTHORIZATION)).getUserSummary().enqueue(JSHRetrofitTool.getCallback(new UserSummaryResponseCallback()));
+    }
 }

@@ -113,7 +113,7 @@ public abstract class EditSingleActivity extends KatiHasTitleActivity {
 
         @Override
         public void onSuccessResponse(Response<UserInfoResponse> response) {
-            dialogVector.add(showDialog(USER_MODIFY_SUCCESS_DIALOG_TITLE, USER_MODIFY_SUCCESS_DIALOG_MESSAGE, (dialog, which) -> startActivity(MainActivity.class)));
+            dialogVector.add(showDialog(USER_MODIFY_SUCCESS_DIALOG_TITLE, USER_MODIFY_SUCCESS_DIALOG_MESSAGE, (dialog, which) -> onBackPressed()));
         }
     }
 
