@@ -3,12 +3,11 @@ package com.plim.kati_app.kati.crossDomain.domain.view.fragment;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.util.Log;
 
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBack;
-import com.plim.kati_app.kati.domain.nnew.login.LoginActivity;
+import com.plim.kati_app.kati.domain.login.LoginActivity;
 import com.plim.kati_app.kati.domain.nnew.main.MainActivity;
 
 import org.json.JSONException;

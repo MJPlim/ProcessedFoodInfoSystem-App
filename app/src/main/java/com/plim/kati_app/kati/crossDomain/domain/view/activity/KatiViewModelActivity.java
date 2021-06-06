@@ -16,6 +16,7 @@ import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Vector;
 
 public abstract class KatiViewModelActivity extends JSHViewModelActivity {
 
@@ -25,15 +26,25 @@ public abstract class KatiViewModelActivity extends JSHViewModelActivity {
         protected Map<KatiEntity.EKatiData, String> dataset;
         protected ArrayList<String> searchWords;
 
+        protected Vector<KatiDialog> dialogVector;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(this.getLayoutId());
+        this.dialogVector= new Vector<>();
     }
 
     public void save() {
         Log.d("디버그 저장 시작",getClass().getSimpleName()+"에서 부름");
         KatiEntityTool.save(this.viewModelTool, this.entity);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        for(KatiDialog dialog:dialogVector)
+            dialog.dismiss();
     }
 
     @Override
@@ -71,8 +82,8 @@ public abstract class KatiViewModelActivity extends JSHViewModelActivity {
 
 
     public void startActivity(Class<?> cls){ this.startActivity(new Intent(this, cls)); }
-    protected void showDialog(String title, String message, DialogInterface.OnClickListener listener){
-        KatiDialog.simplerAlertDialog(this,title,message,listener);
+    protected KatiDialog showDialog(String title, String message, DialogInterface.OnClickListener listener){
+        return KatiDialog.simplerAlertDialog(this,title,message,listener);
     }
 
 

@@ -8,9 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.navigation.Navigation;
-import androidx.navigation.Navigator;
-
 import com.plim.kati_app.R;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
@@ -18,11 +15,10 @@ import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 import com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHInfoItem;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiInfoEditFragment;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
-import com.plim.kati_app.kati.domain.nnew.editName.EditAddressActivity;
-import com.plim.kati_app.kati.domain.nnew.editName.EditBirthActivity;
-import com.plim.kati_app.kati.domain.nnew.editName.EditNameActivity;
+import com.plim.kati_app.kati.domain.editSingleData.EditAddressActivity;
+import com.plim.kati_app.kati.domain.editSingleData.EditBirthActivity;
+import com.plim.kati_app.kati.domain.editSingleData.EditNameActivity;
 import com.plim.kati_app.kati.domain.nnew.editPassword.view.EditPasswordActivity;
-import com.plim.kati_app.kati.domain.nnew.main.MainActivity;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.myInfoEdit.model.GetSecondEmailResponse;
 import com.plim.kati_app.kati.domain.nnew.setRestoreEmail.SetRestoreEmailActivity;
 import com.plim.kati_app.kati.domain.nnew.signOut.SignOutActivity;

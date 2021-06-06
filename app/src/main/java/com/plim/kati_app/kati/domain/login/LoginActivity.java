@@ -1,4 +1,4 @@
-package com.plim.kati_app.kati.domain.nnew.login;
+package com.plim.kati_app.kati.domain.login;
 
 import android.content.Intent;
 import android.util.Log;
@@ -12,14 +12,12 @@ import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitCallback;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.kati.crossDomain.domain.view.activity.KatiHasTitleActivity;
-import com.plim.kati_app.kati.crossDomain.domain.view.activity.KatiViewModelActivity;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.domain.nnew.findId.FindIdActivity;
-import com.plim.kati_app.kati.domain.nnew.findPassword.FindPasswordActivity;
-import com.plim.kati_app.kati.domain.nnew.login.model.LoginResponse;
-import com.plim.kati_app.kati.domain.nnew.main.MainActivity;
-import com.plim.kati_app.kati.domain.nnew.signUp.SignUpActivity;
+import com.plim.kati_app.kati.domain.findPassword.FindPasswordActivity;
+import com.plim.kati_app.kati.domain.login.model.LoginResponse;
+import com.plim.kati_app.kati.domain.signUp.SignUpActivity;
 
 import java.util.Vector;
 
@@ -85,8 +83,20 @@ public class LoginActivity extends KatiHasTitleActivity {
         this.loginButton.setOnClickListener(v -> this.login());
     }
 
+
     @Override
-    public void katiEntityUpdated() {
+    protected boolean isLoginNeeded() {
+        return false;
+    }
+
+    @Override
+    protected void katiEntityUpdatedAndLogin() {
+
+    }
+
+    @Override
+    protected void katiEntityUpdatedAndNoLogin() {
+
     }
 
     @Override

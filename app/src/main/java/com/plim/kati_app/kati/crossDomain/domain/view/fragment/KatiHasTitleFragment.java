@@ -1,16 +1,18 @@
-package com.plim.kati_app.kati.crossDomain.domain.view.activity;
+package com.plim.kati_app.kati.crossDomain.domain.view.fragment;
 
-import com.plim.kati_app.kati.crossDomain.domain.view.activity.KatiLoginCheckViewModelActivity;
+import android.view.View;
+
 import com.plim.kati_app.R;
+import com.plim.kati_app.kati.crossDomain.domain.view.activity.KatiViewModelActivity;
 import com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHToolBar;
 
-public abstract class KatiHasTitleActivity extends KatiLoginCheckViewModelActivity {
+public abstract class KatiHasTitleFragment extends KatiViewModelFragment {
 
     protected JSHToolBar titleBar;
 
     @Override
-    protected void associateView() {
-        this.titleBar = this.findViewById(R.id.toolbar);
+    protected void associateView(View view) {
+        this.titleBar = view.findViewById(R.id.toolbar);
     }
 
     @Override
@@ -33,7 +35,8 @@ public abstract class KatiHasTitleActivity extends KatiLoginCheckViewModelActivi
     }
 
     private void getOnBackTitleListener() {
-        this.onBackPressed();
+        this.getActivity().onBackPressed();
     }
 
+    ;
 }

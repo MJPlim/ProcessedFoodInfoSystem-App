@@ -2,7 +2,6 @@ package com.plim.kati_app.kati.crossDomain.tech.retrofit;
 
 import com.plim.kati_app.kati.domain.nnew.findId.model.FindEmailRequest;
 import com.plim.kati_app.kati.domain.nnew.findId.model.FindEmailResponse;
-import com.plim.kati_app.kati.domain.nnew.main.category.model.CategoryFoodListResponse;
 import com.plim.kati_app.kati.domain.nnew.main.favorite.model.UserFavoriteResponse;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.allergy.model.CreateUserAllergyRequest;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.allergy.model.CreateUserAllergyResponse;
@@ -15,11 +14,11 @@ import com.plim.kati_app.kati.domain.nnew.setRestoreEmail.model.SetSecondEmailRe
 import com.plim.kati_app.kati.domain.nnew.setRestoreEmail.model.SetSecondEmailResponse;
 import com.plim.kati_app.kati.domain.nnew.editPassword.model.ModifyPasswordRequest;
 import com.plim.kati_app.kati.domain.nnew.editPassword.model.ModifyPasswordResponse;
-import com.plim.kati_app.kati.domain.nnew.login.model.LoginResponse;
-import com.plim.kati_app.kati.domain.nnew.findPassword.model.FindPasswordRequest;
-import com.plim.kati_app.kati.domain.nnew.findPassword.model.FindPasswordResponse;
-import com.plim.kati_app.kati.domain.nnew.signUp.model.SignUpRequest;
-import com.plim.kati_app.kati.domain.nnew.signUp.model.SignUpResponse;
+import com.plim.kati_app.kati.domain.login.model.LoginResponse;
+import com.plim.kati_app.kati.domain.findPassword.model.FindPasswordRequest;
+import com.plim.kati_app.kati.domain.findPassword.model.FindPasswordResponse;
+import com.plim.kati_app.kati.domain.signUp.model.SignUpRequest;
+import com.plim.kati_app.kati.domain.signUp.model.SignUpResponse;
 import com.plim.kati_app.kati.domain.nnew.foodDetail.model.FoodDetailResponse;
 import com.plim.kati_app.kati.domain.nnew.review.model.CreateAndUpdateReviewRequest;
 import com.plim.kati_app.kati.domain.nnew.review.model.CreateReviewResponse;
@@ -177,8 +176,6 @@ public interface KatiRestAPI {
     @GET("/api/v1/user/favorite/list") Call<List<UserFavoriteResponse>> getUserFavorite();
     @GET("/api/v1/user/readReviewByUserID") Call<ReadUserReviewResponse<List<ReadReviewResponse>>> getUserReview();
     @GET("/api/v1/user/summary") Call<UserSummaryResponse> getUserSummary();
-    @GET("/api/v1/food/list/category")
-    Call<CategoryFoodListResponse> getCategoryFood(@Query("category") String category,
-                                                   @Query("page") int page);
+
 }
 

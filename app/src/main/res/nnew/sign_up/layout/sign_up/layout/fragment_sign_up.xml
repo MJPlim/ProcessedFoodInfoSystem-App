@@ -5,15 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/kati_light_gray"
-    tools:context=".kati.domain.nnew.signUp.SignUpActivity">
+    tools:context=".kati.domain.signUp.SignUpActivity">
 
     <com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHToolBar
-        android:id="@+id/signUpFragment_toolbar"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:button_image="@drawable/jsh_close"
-        app:title="회원가입"
+        app:title="@string/loginActivity_registerTextView_text"
         android:background="@color/white"
         android:elevation="5dp"/>
 
@@ -21,14 +21,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        app:layout_constraintTop_toBottomOf="@+id/signUpFragment_toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         tools:layout_editor_absoluteX="-86dp">
 
         <TextView
             android:id="@+id/signUpFragment_titleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="회원가입 정보"
+            android:text="@string/signUpFragment_titleTextView_text"
             android:textSize="20sp"
             android:layout_marginLeft="16dp"
             android:textColor="@color/black"
@@ -42,7 +42,7 @@
             android:layout_marginHorizontal="16dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="이메일"
+            android:hint="@string/signUpFragment_emailEditText_text"
             android:padding="8dp"
             android:textSize="15sp"
             android:background="@drawable/edittext_bg"
@@ -62,7 +62,7 @@
             android:padding="8dp"
             android:background="@drawable/edittext_bg"
             android:inputType="textPassword"
-            android:hint="비밀번호"
+            android:hint="@string/signUpFragment_passwordEditText_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/signUpFragment_emailEditText" />
@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:layout_width="match_parent"
-            android:hint="닉네임"
+            android:hint="@string/signUpFragment_nickNameEditText_text"
             android:padding="8dp"
             android:background="@drawable/edittext_bg"
             android:textSize="15sp"
@@ -89,7 +89,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
             android:layout_marginHorizontal="16dp"
-            android:text="다음"
+            android:text="@string/signUpFragment_submitButton_text"
             android:textColor="@color/black"
             android:backgroundTint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"

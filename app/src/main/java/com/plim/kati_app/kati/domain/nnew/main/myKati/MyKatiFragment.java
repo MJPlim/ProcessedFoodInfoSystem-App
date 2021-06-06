@@ -1,23 +1,13 @@
 package com.plim.kati_app.kati.domain.nnew.main.myKati;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
-import android.text.style.ForegroundColorSpan;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -28,13 +18,11 @@ import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 import com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHSelectItem;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiLoginCheckViewModelFragment;
-import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiViewModelFragment;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
-import com.plim.kati_app.kati.domain.nnew.login.LoginActivity;
+import com.plim.kati_app.kati.domain.login.LoginActivity;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.model.UserSummaryResponse;
-import com.plim.kati_app.kati.domain.nnew.signUp.SignUpActivity;
+import com.plim.kati_app.kati.domain.signUp.SignUpActivity;
 
-import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 
 import retrofit2.Response;

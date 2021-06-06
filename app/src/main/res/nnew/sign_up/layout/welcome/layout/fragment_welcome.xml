@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".kati.domain.nnew.signUp.welcome.WelcomeFragment">
+    tools:context=".kati.domain.signUp.welcome.WelcomeFragment">
 
     <TextView
         android:layout_width="match_parent"

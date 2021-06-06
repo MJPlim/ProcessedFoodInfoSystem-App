@@ -3,25 +3,16 @@ package com.plim.kati_app.kati.crossDomain.domain.view.activity;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
 
-import androidx.navigation.Navigation;
-
-import com.plim.kati_app.jshCrossDomain.domain.model.room.entity.JSHEntity;
-import com.plim.kati_app.jshCrossDomain.domain.view.JSHViewModelActivity;
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
-import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntityTool;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBack;
-import com.plim.kati_app.kati.domain.nnew.login.LoginActivity;
+import com.plim.kati_app.kati.domain.login.LoginActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Map;
 
 import lombok.AllArgsConstructor;
 import retrofit2.Response;

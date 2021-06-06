@@ -1,4 +1,4 @@
-package com.plim.kati_app.kati.domain.nnew.signUp.welcome;
+package com.plim.kati_app.kati.domain.signUp.welcome;
 
 import android.os.Bundle;
 

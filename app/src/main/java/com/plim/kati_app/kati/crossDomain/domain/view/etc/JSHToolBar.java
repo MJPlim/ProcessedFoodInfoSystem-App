@@ -48,4 +48,8 @@ public class JSHToolBar extends LinearLayout {
     public void setToolBarTitle(String title){
         this.title.setText(title);
     }
+
+    public String getTitleContent() {
+        return this.title.getText().toString();
+    }
 }

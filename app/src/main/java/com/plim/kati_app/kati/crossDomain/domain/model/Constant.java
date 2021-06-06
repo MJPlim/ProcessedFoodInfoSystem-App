@@ -10,7 +10,38 @@ import lombok.RequiredArgsConstructor;
 
 public class Constant { // ㅎㅎ Resource 로 옮겨조...
 
+    //회원가입
+    public static final String SIGN_UP_TOOLBAR_TITLE_CONTENT= "회원가입";
+    public static final String SIGN_UP_CONGRAT_TITLE_PREFIX= "어서 오세요 ";
+    public static final String SIGN_UP_CONGRAT_TITLE_SUFFIX= " 님!";
+    public static final String SIGN_UP_CONGRAT_MESSAGE= "회원 가입에 성공하였습니다. 메일함에서 인증을 진행해 주세요!";
+
+
+    //비번 찾기
+    public static final String FIND_PASSWORD_DIALOG_TITLE= "임시 비밀번호를 발급하였습니다.";
+    public static final String FIND_PASSWORD_DIALOG_MESSAGE= "메일함을 확인하여 임시 비밀번호로 로그인 해 주세요";
+
+
+    //정보 수정
+    public static final String EDIT_SINGLE_DATA_TITLE_SUFFIX=" 변경";
+    public static final String EDIT_SINGLE_DATA_BUTTON_TEXT_SUFFIX=" 입력";
+    public static final String EDIT_SINGLE_DATA_EXTRA_NAME="name";
+    public static final String EDIT_SINGLE_DATA_EXTRA_ADDRESS="address";
+    public static final String EDIT_SINGLE_DATA_EXTRA_BIRTH="birth";
+
+
+    @Getter
+    @AllArgsConstructor
+    public enum EEditSingleMode {
+        name("닉네임"), address("주소"), birth("생일");
+        private String text;
+    }
+
     public static final String JSONOBJECT_ERROR_MESSAGE = "error-message";
+    public static final String JSONOBJECT_MESSAGE = "message";
+    public static final String JSONOBJECT_PASSWORD_MESSAGE = "password";
+    public static final String JSONOBJECT_NAME_MESSAGE = "name";
+    public static final String JSONOBJECT_EMAIL_MESSAGE = "email";
     public static final String URL = "http://13.124.55.59:8080/";
 
     public static final String KATI_DIALOG_CONFIRM = "확인";

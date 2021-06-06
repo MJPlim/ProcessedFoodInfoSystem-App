@@ -4,10 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -21,7 +19,7 @@ import com.plim.kati_app.kati.crossDomain.domain.view.etc.YYECategoryItem;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiViewModelFragment;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBackImpl;
-import com.plim.kati_app.kati.domain.nnew.login.model.LoginResponse;
+import com.plim.kati_app.kati.domain.login.model.LoginResponse;
 import com.plim.kati_app.kati.domain.nnew.main.category.CategoryFoodDetailFragment;
 import com.plim.kati_app.kati.domain.nnew.main.home.advertisement.AdvertisementViewPagerAdapter;
 
