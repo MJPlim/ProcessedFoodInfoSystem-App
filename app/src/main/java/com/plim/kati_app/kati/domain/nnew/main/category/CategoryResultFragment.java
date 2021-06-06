@@ -78,6 +78,9 @@ public class CategoryResultFragment extends KatiCategoryFragment {
         this.recyclerView = view.findViewById(R.id.categoryResultFragment_recyclerView);
         this.chipGroup.removeAllViews();
         boolean firstChipCheck = true;
+
+        this.chipGroup.setSelectionRequired(true);
+
         for (Constant.EChildCategory childCategory : this.category.getChildCategories()) {
             this.createChip(childCategory, firstChipCheck);
             if (firstChipCheck) firstChipCheck = false;
@@ -100,9 +103,9 @@ public class CategoryResultFragment extends KatiCategoryFragment {
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 int position = manager.findLastCompletelyVisibleItemPosition();
-                if (position == vector.size() - 1 && categoryModel.isHasNext()){
+                if (position == vector.size() - 1 && categoryModel.isHasNext()) {
                     loadMore();
-                    Log.d("태그",vector.size()+" "+categoryModel.isHasNext()+" "+position);
+                    Log.d("태그", vector.size() + " " + categoryModel.isHasNext() + " " + position);
                 }
 
             }
@@ -122,14 +125,14 @@ public class CategoryResultFragment extends KatiCategoryFragment {
     public void createChip(Constant.EChildCategory childCategory, boolean chipCheck) {
         LayoutInflater inflater = (LayoutInflater) this.getActivity().getSystemService(Service.LAYOUT_INFLATER_SERVICE);
         Chip chip = (Chip) inflater.inflate(R.layout.jsh_chip, null);
-        chip.setOnCheckedChangeListener((buttonView, isChecked) -> loadCategory(isChecked, childCategory.getName()));
+        chip.setOnCheckedChangeListener((buttonView, isChecked) -> loadCategory(isChecked, childCategory.getName(), chip));
         chip.setChecked(chipCheck);
         chip.setText(childCategory.getName());
         this.chipGroup.addView(chip);
     }
 
-    private void loadCategory(boolean isChecked, String categoryName) {
-        Log.d(categoryName+" 하나 불러오기","리프레시");
+    private void loadCategory(boolean isChecked, String categoryName, Chip categoryChip) {
+        Log.d(categoryName + " 하나 불러오기", "리프레시");
         if (isChecked) {
             Log.d("디버그, 칩 선택", categoryName);
             this.vector.clear();
@@ -140,7 +143,7 @@ public class CategoryResultFragment extends KatiCategoryFragment {
     }
 
     private void loadMore() {
-        Log.d("더 불러오기"+this.categoryModel.getCategoryName(),"더더"+this.categoryModel.getPageSize()+1);
+        Log.d("더 불러오기" + this.categoryModel.getCategoryName(), "더더" + this.categoryModel.getPageSize() + 1);
         this.categoryModel.setPageSize(this.categoryModel.getPageSize() + 1);
         this.load();
     }

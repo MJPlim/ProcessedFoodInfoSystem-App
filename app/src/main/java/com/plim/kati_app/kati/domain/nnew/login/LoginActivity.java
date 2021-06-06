@@ -1,11 +1,6 @@
 package com.plim.kati_app.kati.domain.nnew.login;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -16,6 +11,7 @@ import com.plim.kati_app.R;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitCallback;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
+import com.plim.kati_app.kati.crossDomain.domain.view.activity.KatiHasTitleActivity;
 import com.plim.kati_app.kati.crossDomain.domain.view.activity.KatiViewModelActivity;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
@@ -25,14 +21,20 @@ import com.plim.kati_app.kati.domain.nnew.login.model.LoginResponse;
 import com.plim.kati_app.kati.domain.nnew.main.MainActivity;
 import com.plim.kati_app.kati.domain.nnew.signUp.SignUpActivity;
 
-import java.util.Map;
 import java.util.Vector;
 
 import retrofit2.Response;
 
-public class LoginActivity extends KatiViewModelActivity {
+import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE;
 
-    TextView findId, findPw, signIn;
+/**
+ * 로그인 액티비티.
+ */
+public class LoginActivity extends KatiHasTitleActivity {
+
+    //associate
+    //view
+    private TextView findId, findPw, signIn;
     private EditText emailAddress, password;
     private Button loginButton;
     private CheckBox autologinCheckBox;
@@ -41,11 +43,18 @@ public class LoginActivity extends KatiViewModelActivity {
     @Override
     public void onUserInteraction() {
         super.onUserInteraction();
-        if (!(emailAddress.getText().toString().equals("")) && !(password.getText().toString().equals(""))){
+        if (!(emailAddress.length() == 0) && !(password.length() == 0)) {
             this.loginButton.setEnabled(true);
-        }else{
+        } else {
             this.loginButton.setEnabled(false);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        for (KatiDialog dialog : dialogs)
+            dialog.dismiss();
     }
 
     @Override
@@ -55,49 +64,45 @@ public class LoginActivity extends KatiViewModelActivity {
 
     @Override
     protected void associateView() {
-        this.dialogs= new Vector<>();
-        this.emailAddress = findViewById(R.id.editTextTextEmailAddress);
-        this.password = findViewById(R.id.editTextTextPassword4);
-        this.loginButton = findViewById(R.id.loginButton);
-        this.autologinCheckBox= findViewById(R.id.checkBox2);
-        this.findId = this.findViewById(R.id.login_findId_textView);
-        this.findPw = this.findViewById(R.id.login_findPW_textView);
-        this.signIn = this.findViewById(R.id.login_signIn_textView);
+        super.associateView();
+        this.dialogs = new Vector<>();
+        this.emailAddress = this.findViewById(R.id.loginActivity_emailTextView);
+        this.password = this.findViewById(R.id.loginActivity_passwordTextView);
+        this.loginButton = this.findViewById(R.id.loginActivity_loginButton);
+        this.autologinCheckBox = this.findViewById(R.id.loginActivity_autoLoginCheckBox);
+        this.findId = this.findViewById(R.id.loginActivity_findIdTextView);
+        this.findPw = this.findViewById(R.id.loginActivity_findPasswordTextView);
+        this.signIn = this.findViewById(R.id.loginActivity_registerTextView);
     }
 
     @Override
     protected void initializeView() {
-        findId.setOnClickListener(v->this.startActivity(new Intent(this, FindIdActivity.class)));
-        findPw.setOnClickListener(v->this.startActivity(new Intent(this, FindPasswordActivity.class)));
-        signIn.setOnClickListener(v->this.startActivity(new Intent(this, SignUpActivity.class)));
+        super.initializeView();
+        this.findId.setOnClickListener(v -> this.startActivity(new Intent(this, FindIdActivity.class)));
+        this.findPw.setOnClickListener(v -> this.startActivity(new Intent(this, FindPasswordActivity.class)));
+        this.signIn.setOnClickListener(v -> this.startActivity(new Intent(this, SignUpActivity.class)));
         this.autologinCheckBox.setOnClickListener((v -> this.setAutoLogin()));
-        this.loginButton.setOnClickListener(v->this.login());
-        //      this.autologinCheckBox.setChecked(this.dataset.get(KatiEntity.EKatiData.AUTO_LOGIN).equals(KatiEntity.EKatiData.TRUE.name()));
+        this.loginButton.setOnClickListener(v -> this.login());
     }
 
-    @Override public void katiEntityUpdated() { }
-
-    private void setAutoLogin() {
-        this.dataset.put(KatiEntity.EKatiData.AUTO_LOGIN,
-                this.autologinCheckBox.isChecked() ? KatiEntity.EKatiData.TRUE.name() : KatiEntity.EKatiData.FALSE.name());
+    @Override
+    public void katiEntityUpdated() {
     }
 
-    private void login() {
-        LoginResponse loginRequest = new LoginResponse(this.emailAddress.getText().toString(), this.password.getText().toString());
-        KatiRetrofitTool.getAPIWithNullConverter().login(loginRequest).enqueue(JSHRetrofitTool.getCallback(new LoginRequestCallback()));
+    @Override
+    protected String getTitleContent() {
+        return "";
     }
 
+
+    /**
+     * callback
+     */
     private class LoginRequestCallback implements JSHRetrofitCallback<LoginResponse> {
         @Override
         public void onSuccessResponse(Response<LoginResponse> response) {
-            dataset.put(KatiEntity.EKatiData.AUTHORIZATION, response.headers().get("Authorization"));
-            dataset.put(KatiEntity.EKatiData.EMAIL, emailAddress.getText().toString());
-            dataset.put(KatiEntity.EKatiData.PASSWORD, password.getText().toString());
-            save();
-            dialogs.add( KatiDialog.simplerAlertDialog(LoginActivity.this,
-                    R.string.login_success_dialog, R.string.login_success_content_dialog,
-                    (dialog, which) -> startMainActivity()
-            ));
+            saveLoginData(response.headers().get("Authorization"));
+            startMainActivity();
         }
 
         @Override
@@ -113,11 +118,32 @@ public class LoginActivity extends KatiViewModelActivity {
 
         @Override
         public void onConnectionFail(Throwable t) {
-            Log.e("연결실패", t.getMessage());
+            Log.e(FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE, t.getMessage());
         }
     }
 
+    /**
+     * method
+     */
+    private void login() {
+        LoginResponse loginRequest = new LoginResponse(this.emailAddress.getText().toString(), this.password.getText().toString());
+        KatiRetrofitTool.getAPIWithNullConverter().login(loginRequest).enqueue(JSHRetrofitTool.getCallback(new LoginRequestCallback()));
+    }
+
+    private void setAutoLogin() {
+        this.dataset.put(KatiEntity.EKatiData.AUTO_LOGIN,
+                this.autologinCheckBox.isChecked() ? KatiEntity.EKatiData.TRUE.name() : KatiEntity.EKatiData.FALSE.name());
+    }
+
+    public void saveLoginData(String authorization) {
+        dataset.put(KatiEntity.EKatiData.AUTHORIZATION, authorization);
+        dataset.put(KatiEntity.EKatiData.EMAIL, emailAddress.getText().toString());
+        dataset.put(KatiEntity.EKatiData.PASSWORD, password.getText().toString());
+        save();
+
+    }
+
     public void startMainActivity() {
-        this.startActivity(new Intent(this, MainActivity.class));
+        this.onBackPressed();
     }
 }

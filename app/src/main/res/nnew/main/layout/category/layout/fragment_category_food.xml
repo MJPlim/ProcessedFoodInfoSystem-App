@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:name="com.plim.kati_app.kati.domain.nnew.main.category.CategoryFoodDetailFragment"
     >
 
     <com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHToolBar

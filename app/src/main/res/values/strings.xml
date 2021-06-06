@@ -175,5 +175,14 @@
     <string name="userDataChangeFragment_allergyTitleTextView_text">알레르기</string>
     <string name="userDataChangeFragment_passwordTitleTextView_text">비밀번호</string>
     <string name="userDataChangeFragment_birthTitleTextView_text">생일</string>
+    <string name="loginActivity_KatiIcon_text">KATI</string>
+    <string name="loginActivity_emailTextView_text">이메일 입력</string>
+    <string name="loginActivity_passwordTextView_text">비밀번호 입력</string>
+    <string name="loginActivity_autoLoginCheckBox_text">자동 로그인</string>
+    <string name="loginActivity_findIdTextView_text">아이디 찾기</string>
+    <string name="loginActivity_findPasswordTextView_text">비밀번호 찾기</string>
+    <string name="loginActivity_loginButton_text">로그인</string>
+    <string name="loginActivity_areYouNewMessageTextView_text">KATI가 처음이신가요?</string>
+    <string name="loginActivity_registerTextView_text">회원가입</string>
 
 </resources>

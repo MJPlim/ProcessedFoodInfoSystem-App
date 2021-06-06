@@ -18,7 +18,7 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import com.plim.kati_app.R;
 import com.plim.kati_app.kati.crossDomain.domain.model.Constant;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiViewModelFragment;
-import com.plim.kati_app.kati.domain.nnew.categoryFilter.CategorySettingActivity;
+
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,6 +29,7 @@ public class CategoryFoodDetailFragment extends KatiViewModelFragment {
     private TabLayout tabLayout;
     private ViewPager2 viewPager2;
     private int position;
+    private Constant.ECategory eCategory=null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,8 +45,8 @@ public class CategoryFoodDetailFragment extends KatiViewModelFragment {
 
         this.actionButton.setOnClickListener(v->{
 //            Log.d("태그","플로팅 버튼 눌림 Id:"+view.getId());
-            startActivity(CategorySettingActivity.class);
-//            Navigation.findNavController(view).navigate(R.id.action_categoryFragment_to_categoryFilterFragment);
+//            startActivity(CategorySettingActivity.class);
+            Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_categoryFilterFragment);
 //            navigateTo(R.id.action_categoryFragment_to_categoryFilterFragment);
         });
 
@@ -69,8 +70,13 @@ public class CategoryFoodDetailFragment extends KatiViewModelFragment {
 
         //최초에 옮기는 코드
         Log.d("최초에만","설마");
+
+        if(this.eCategory==null){
+            this.eCategory=Constant.ECategory.valueOf(getArguments().getString("category"));
+        }
+
         List<Constant.ECategory> list = Arrays.asList(Constant.ECategory.values());
-        this.position = list.indexOf(Constant.ECategory.valueOf(getArguments().getString("category")));
+        this.position = list.indexOf(eCategory);
         this.tabLayout.selectTab(this.tabLayout.getTabAt(this.position));
     }
 

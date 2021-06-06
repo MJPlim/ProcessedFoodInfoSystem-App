@@ -74,4 +74,6 @@ public abstract class KatiViewModelActivity extends JSHViewModelActivity {
     protected void showDialog(String title, String message, DialogInterface.OnClickListener listener){
         KatiDialog.simplerAlertDialog(this,title,message,listener);
     }
+
+
 }

@@ -349,7 +349,7 @@ public static final String ALLERGY_EXPANDABLE_LIST_TITLE="알레르기";
         farm("농수산물",EFarmCategory.values(),R.drawable.item_fruit),
         kimchi("김치",EKimchiCategory.values(),R.drawable.item_kimchi),
         mealkit("즉석조리",EMealkitCategory.values(),R.drawable.item_mealkit),
-//        etcmaterial("식재료",EMaterialCategory.values(),R.drawable.material),
+        etcmaterial("식재료",EMaterialCategory.values(),R.drawable.item_material),
         etc("기타",EEtcCategory.values(),R.drawable.item_etc),
         ;
         private String name;
@@ -425,25 +425,21 @@ public static final String ALLERGY_EXPANDABLE_LIST_TITLE="알레르기";
         private String name;
     }
 
-//    @AllArgsConstructor
-//    @Getter
-//    public enum EMaterialCategory implements EChildCategory {
-//        noodle("국수"),
-//        tofu("두부"),
-//        oil("식용유"),
-//        fishcake("어묵"),
-//        ;
-//        private String name;
-//    }
+    @AllArgsConstructor
+    @Getter
+    public enum EMaterialCategory implements EChildCategory {
+        noodle("국수"),
+        tofu("두부"),
+        oil("식용유"),
+        fishcake("어묵"),
+        ;
+        private String name;
+    }
 
     @AllArgsConstructor
     @Getter
     public enum EEtcCategory implements EChildCategory {
-        etc("기타가공품"),
-        noodle("국수"),
-        tofu("두부"),
-        oil("식용유"),
-        fishcake("어묵")
+        etc("기타가공품")
         ;
         private String name;
     }

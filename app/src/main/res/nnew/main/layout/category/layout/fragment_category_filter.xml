@@ -27,7 +27,7 @@
         tools:layout_editor_absoluteX="0dp">
 
         <com.google.android.material.chip.ChipGroup
-            android:id="@+id/categoryFilterFragment_categoryFilterChipGroup"
+            android:id="@+id/categoryFilterFragment_categoryAllergyFilterChipGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"

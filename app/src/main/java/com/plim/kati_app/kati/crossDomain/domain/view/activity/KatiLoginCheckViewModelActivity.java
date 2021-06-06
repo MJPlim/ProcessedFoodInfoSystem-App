@@ -32,10 +32,9 @@ public abstract class KatiLoginCheckViewModelActivity extends KatiViewModelActiv
         if (!this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION).equals(KatiEntity.EKatiData.NULL.name()))
             this.katiEntityUpdatedAndLogin();
         else {
-            if (this.isLoginNeeded()){
+            if (this.isLoginNeeded()) {
                 this.notLoginDialog();
-            }
-            else
+            } else
                 this.katiEntityUpdatedAndNoLogin();
         }
     }
@@ -47,24 +46,26 @@ public abstract class KatiLoginCheckViewModelActivity extends KatiViewModelActiv
 
 
         public void onFailResponse(Response<T> response) throws IOException, JSONException {
-//            if (response.code() == 400) {
-//                Log.d("여기?","리스폰스 "+dataset.get(KatiEntity.EKatiData.AUTHORIZATION));
-//                this.removeToken();
-//                KatiDialog.NotLogInDialog(
-//                        this.activity,
-//                        (dialog, which) -> {
-//                            this.activity.startActivity(new Intent(this.activity, LoginActivity.class));
-//                        }
-//                );
-//            } else {
-                JSONObject object = new JSONObject(response.errorBody().string());
+            JSONObject object = new JSONObject(response.errorBody().string());
+            String message = object.has("error-message") ? object.getString("error-message") : object.toString();
+
+            if (message.contains("로그인을 해주세요.")) {
+                this.removeToken();
+                ;
+                KatiDialog.simplerTwoOptionAlertDialog(
+                        this.activity,
+                        "로그인 만료",
+                        "로그인 후 시간이 지나 만료되었습니다. 다시 로그인 하시겠습니까?",
+                        (dialog, which) -> this.activity.startActivity(new Intent(this.activity, LoginActivity.class)),
+                        this.getCancelListener()
+                );
+            } else
                 KatiDialog.RetrofitNotSuccessDialog(
                         this.activity,
-                        object.has("error-message") ? object.getString("error-message") : object.toString(),
+                        message,
                         response.code(),
                         null
                 );
-//            }
         }
 
         @Override
@@ -74,6 +75,10 @@ public abstract class KatiLoginCheckViewModelActivity extends KatiViewModelActiv
 
         public void onConnectionFail(Throwable t) {
             KatiDialog.RetrofitFailDialog(this.activity, null);
+        }
+
+        public DialogInterface.OnClickListener getCancelListener() {
+            return null;
         }
 
         private void refreshToken(String authorization) {
@@ -93,12 +98,16 @@ public abstract class KatiLoginCheckViewModelActivity extends KatiViewModelActiv
     protected abstract void katiEntityUpdatedAndNoLogin();
 
     protected void notLoginDialog() {
-        KatiDialog.NotLogInDialog(this, (dialog, which) -> this.startActivity(LoginActivity.class),(dialog, which) -> this.onBackPressed());
+        KatiDialog.NotLogInDialog(this, (dialog, which) -> this.startActivity(LoginActivity.class), (dialog, which) -> this.onBackPressed());
     }
 
-    protected void putToken(String authorization) { this.dataset.put(KatiEntity.EKatiData.AUTHORIZATION, authorization); }
+    protected void putToken(String authorization) {
+        this.dataset.put(KatiEntity.EKatiData.AUTHORIZATION, authorization);
+    }
 
-    protected void deleteToken() { this.dataset.put(KatiEntity.EKatiData.AUTHORIZATION, KatiEntity.EKatiData.NULL.name()); }
+    protected void deleteToken() {
+        this.dataset.put(KatiEntity.EKatiData.AUTHORIZATION, KatiEntity.EKatiData.NULL.name());
+    }
 
 
 }

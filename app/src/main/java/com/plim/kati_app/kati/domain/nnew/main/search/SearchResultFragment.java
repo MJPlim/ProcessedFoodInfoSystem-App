@@ -167,11 +167,12 @@ public class SearchResultFragment extends KatiSearchFragment {
         this.saveSearch();
 
         this.allergyFilterButton.setEnabled(this.searchModel.isFiltered());
+        this.allergyFilterButton.setVisibility(View.VISIBLE);
+
+        Log.d("검색 목록 디버그","알러지 데이터 받아오기");
         this.getAllergyData(this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION));
 
         this.loadAdvertisement();
-        this.refresh();
-
     }
 
     @Override
@@ -179,7 +180,7 @@ public class SearchResultFragment extends KatiSearchFragment {
         this.searchModel.setFiltered(false);
         this.saveSearch();
 
-        this.allergyFilterButton.setEnabled(this.searchModel.isFiltered());
+        this.allergyFilterButton.setVisibility(View.GONE);
         this.loadAdvertisement();
 
         this.refresh();
@@ -215,7 +216,8 @@ public class SearchResultFragment extends KatiSearchFragment {
             Vector<String> vector = new Vector<>();
             vector.addAll(response.body().getUserAllergyMaterials());
             searchModel.setAllergyList(vector);
-            Log.d("알레르기 불러옴",vector.size()!=0? vector.get(0): "내용 없음");
+            Log.d("검색 목록 디버그 알레르기 불러옴",vector.size()!=0? vector.get(0): "내용 없음");
+            refresh();
         }
     }
 
@@ -239,7 +241,7 @@ public class SearchResultFragment extends KatiSearchFragment {
 
         @Override
         public void onSuccessResponse(Response<FindFoodBySortingResponse> response) {
-            Log.d("검색 불러옴","검색 검색 시작");
+            Log.d("검색 불러옴","검색 검색 끄읕");
             FindFoodBySortingResponse dto = response.body();
 
             hasNext = dto.isHas_next();
@@ -266,22 +268,18 @@ public class SearchResultFragment extends KatiSearchFragment {
         }
     }
     private void refresh() {
-        if (hasNext) {
+        Log.d("검색 목록 디버그","새로고침");
             this.searchModel.setFoodSortElement(Constant.SortElement.RANK.getMessage());
             this.rankingChip.setChecked(true);
             this.searchModel.setSearchPageNum(1);
             this.isLoadingMore = false;
             this.saveSearch();
-        }
     }
 
     private void loadSearchResult() {
-
         Log.d("태그", "페이지" + this.searchModel.getSearchPageNum() + " 정렬기준" +
                 this.searchModel.getFoodSortElement() + " 검색어" +
                 this.searchModel.getSearchText() + " 더불러오기" + this.isLoadingMore+" 필터 켜짐"+this.searchModel.isFiltered()+" 순서"+this.searchModel.getSortOrder().getMessage());
-
-        String token = this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION);
 
         Vector<Constant.ECompany> vector= new Vector();
         vector.addAll(Arrays.asList(Constant.ECompany.values()));
@@ -301,7 +299,7 @@ public class SearchResultFragment extends KatiSearchFragment {
                     this.searchModel.getFoodSortElement(),
                     this.searchModel.getSortOrder().getMessage(),
                     this.searchModel.getSearchText(),
-                    !this.searchModel.isFiltered() ? null : this.getAllergyData(token)
+                    !this.searchModel.isFiltered() ? null : this.searchModel.getAllergyList()
             ).enqueue(JSHRetrofitTool.getCallback(new SearchRequestCallback(this.getActivity())));
         } else {
             KatiRetrofitTool.getAPI().getManufacturerFoodListBySorting(
@@ -326,10 +324,9 @@ public class SearchResultFragment extends KatiSearchFragment {
     }
 
 
-    private Vector<String> getAllergyData(String token) {
+    private void getAllergyData(String token) {
         KatiRetrofitTool.getAPIWithAuthorizationToken(token).readUserAllergy().
                 enqueue(JSHRetrofitTool.getCallback(new ReadUserAllergyShowCallBack(getActivity())));
-        return this.searchModel.getAllergyList();
     }
 
     private void doClickOnAdItem(View v) {

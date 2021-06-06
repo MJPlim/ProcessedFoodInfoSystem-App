@@ -81,22 +81,25 @@ public class MainActivity extends KatiViewModelActivity {
 
     @Override
     protected void onDestroy() {
-        this.dialog.dismiss();
+        if (this.dialog != null)
+            this.dialog.dismiss();
         super.onDestroy();
     }
 
     //
     @Override
     public void onBackPressed() {
-        if(this.getFragment(HomeFragment.class))this.showSystemOffCheckDialog();
-        else{super.onBackPressed();}
+        if (this.getFragment(HomeFragment.class)) this.showSystemOffCheckDialog();
+        else {
+            super.onBackPressed();
+        }
     }
 
     private boolean getFragment(Class<HomeFragment> homeFragmentClass) {
 
-        NavHostFragment navHostFragment= (NavHostFragment) this.getSupportFragmentManager().getFragments().get(0);
-        for(Fragment fragment: navHostFragment.getChildFragmentManager().getFragments()){
-            if(homeFragmentClass.isAssignableFrom(fragment.getClass())){
+        NavHostFragment navHostFragment = (NavHostFragment) this.getSupportFragmentManager().getFragments().get(0);
+        for (Fragment fragment : navHostFragment.getChildFragmentManager().getFragments()) {
+            if (homeFragmentClass.isAssignableFrom(fragment.getClass())) {
                 return true;
             }
         }
@@ -111,7 +114,7 @@ public class MainActivity extends KatiViewModelActivity {
                     this.save();
                     this.finish();
                     this.finishAffinity();
-                },null
+                }, null
         );
     }
 

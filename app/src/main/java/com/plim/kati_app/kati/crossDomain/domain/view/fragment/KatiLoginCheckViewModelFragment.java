@@ -40,24 +40,26 @@ public abstract class KatiLoginCheckViewModelFragment extends KatiViewModelFragm
 
 
         public void onFailResponse(Response<T> response) throws IOException, JSONException {
-//            if (response.code() == 400) {
-//                Log.d("여기?","리스폰스 "+dataset.get(KatiEntity.EKatiData.AUTHORIZATION));
-//                this.removeToken();
-//                KatiDialog.simplerTwoOptionAlertDialog(
-//                        this.activity,
-//                        "로그인 만료",
-//                        "로그인 후 시간이 지나 만료되었습니다. 다시 로그인 하시겠습니까?",
-//                        (dialog,which)-> this.activity.startActivity(new Intent(this.activity,LoginActivity.class)),
-//                        this.getCancelListener());
-//            } else {
-                JSONObject object = new JSONObject(response.errorBody().string());
+            JSONObject object = new JSONObject(response.errorBody().string());
+            String message = object.has("error-message") ? object.getString("error-message") : object.toString();
+
+            if (message.contains("로그인")) {
+                this.removeToken();
+                ;
+                KatiDialog.simplerTwoOptionAlertDialog(
+                        this.activity,
+                        "로그인 만료",
+                        "로그인 후 시간이 지나 만료되었습니다. 다시 로그인 하시겠습니까?",
+                        (dialog, which) -> this.activity.startActivity(new Intent(this.activity, LoginActivity.class)),
+                        this.getCancelListener()
+                );
+            } else
                 KatiDialog.RetrofitNotSuccessDialog(
                         this.activity,
-                        object.has("error-message") ? object.getString("error-message") : object.toString(),
+                        message,
                         response.code(),
                         null
                 );
-//            }
         }
 
         public DialogInterface.OnClickListener getCancelListener(){

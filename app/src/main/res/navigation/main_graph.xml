@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_categoryFragment"
             app:destination="@id/categoryFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_categoryFilterFragment"
+            app:destination="@id/categoryFilterFragment" />
     </fragment>
 
     <fragment
@@ -27,7 +30,7 @@
 
     <fragment
         android:id="@+id/categoryFilterFragment"
-        android:name="com.plim.kati_app.kati.domain.nnew.categoryFilter.CategoryFilterFragment"
+        android:name="com.plim.kati_app.kati.domain.nnew.main.category.CategoryFilterFragment"
         android:label="fragment_category_filter"
         tools:layout="@layout/fragment_category_filter" />
 
