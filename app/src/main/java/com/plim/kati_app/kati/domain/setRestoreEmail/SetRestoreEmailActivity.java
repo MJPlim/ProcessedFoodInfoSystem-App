@@ -1,6 +1,7 @@
 package com.plim.kati_app.kati.domain.setRestoreEmail;
 
 import android.app.Activity;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -35,7 +36,7 @@ public class SetRestoreEmailActivity extends KatiHasTitleActivity {
     @Override
     protected void associateView() {
         super.associateView();
-        this.setRestoreEmailAddressButton = findViewById(R.id.signUpFragment_submitButton);
+        this.setRestoreEmailAddressButton = findViewById(R.id.restoreEmailActivity_submitButton);
         this.editTextRestoreEmail = findViewById(R.id.restoreEmailActivity_restoreEmailEditText);
     }
 
@@ -91,6 +92,7 @@ public class SetRestoreEmailActivity extends KatiHasTitleActivity {
      * method
      */
     private void setSecondEmail(){
+        Log.d("버튼","누름");
         SetSecondEmailRequest request = new SetSecondEmailRequest();
         request.setSecondEmail(this.editTextRestoreEmail.getText().toString());
         String token = this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION);

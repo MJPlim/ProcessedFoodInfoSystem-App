@@ -1,6 +1,7 @@
 package com.plim.kati_app.kati.domain.findPassword;
 
 import android.app.Activity;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -9,6 +10,7 @@ import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.kati.crossDomain.domain.view.activity.KatiHasTitleActivity;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
+import com.plim.kati_app.kati.crossDomain.domain.view.dialog.LoadingDialog;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBackImpl;
 import com.plim.kati_app.kati.domain.nnew.main.MainActivity;
@@ -17,6 +19,8 @@ import com.plim.kati_app.kati.domain.findPassword.model.FindPasswordResponse;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
 
 import retrofit2.Response;
 
@@ -33,6 +37,8 @@ public class FindPasswordActivity extends KatiHasTitleActivity {
     //view
     private EditText restoreEmailEditText;
     private Button submitButton;
+
+    private LoadingDialog loadingDialog;
 
     /**
      * Callback
@@ -89,6 +95,20 @@ public class FindPasswordActivity extends KatiHasTitleActivity {
         public void onSuccessResponse(Response<FindPasswordResponse> response) {
             showSuccessDialog(this.activity);
         }
+
+        @Override
+        public void onResponse(Response<FindPasswordResponse> response) {
+            super.onResponse(response);
+            loadingDialog.hide();
+            loadingDialog.dismiss();
+        }
+
+        @Override
+        public void onFailResponse(Response<FindPasswordResponse> response) throws IOException, JSONException {
+            super.onFailResponse(response);
+            loadingDialog.hide();
+            loadingDialog.dismiss();
+        }
     }
 
     /**
@@ -102,14 +122,9 @@ public class FindPasswordActivity extends KatiHasTitleActivity {
                 (dialog, which) -> startActivity(MainActivity.class)));
     }
 
-    private void showLoginedDialog() {
-        this.dialogVector.add(KatiDialog.simplerAlertDialog(this,
-                LOGINED_DIALOG_TITLE, LOGINED_DIALOG_TITLE,
-                (dialog, which) -> this.startActivity(MainActivity.class)
-        ));
-    }
-
     private void buttonClicked() {
+        this.loadingDialog=new LoadingDialog(this);
+        this.loadingDialog.show();
         FindPasswordRequest request = new FindPasswordRequest();
         request.setEmail(this.restoreEmailEditText.getText().toString());
         KatiRetrofitTool.getAPI().findPassword(request).enqueue(JSHRetrofitTool.getCallback(new FindPasswordRequestCallback(this)));

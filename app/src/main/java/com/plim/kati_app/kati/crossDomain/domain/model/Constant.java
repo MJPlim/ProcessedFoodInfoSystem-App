@@ -28,6 +28,9 @@ public class Constant { // ㅎㅎ Resource 로 옮겨조...
     public static final String EDIT_SINGLE_DATA_EXTRA_NAME="name";
     public static final String EDIT_SINGLE_DATA_EXTRA_ADDRESS="address";
     public static final String EDIT_SINGLE_DATA_EXTRA_BIRTH="birth";
+    public static final String EDIT_PASSWORD_ACTIVITY_LOG_OUT_DIALOG_TITLE = "비밀번호를 바꿀까요?";
+    public static final String EDIT_PASSWORD_ACTIVITY_LOG_OUT_DIALOG_MESSAGE = "비밀번호를 바꾸고 나서 로그아웃합니다.";
+
 
 
     @Getter
@@ -43,6 +46,8 @@ public class Constant { // ㅎㅎ Resource 로 옮겨조...
     public static final String JSONOBJECT_NAME_MESSAGE = "name";
     public static final String JSONOBJECT_EMAIL_MESSAGE = "email";
     public static final String JSONOBJECT_SECOND_EMAIL_MESSAGE = "secondEmail";
+    public static final String JSONOBJECT_AFTER_PASSWORD_MESSAGE = "afterPassword";
+    public static final String JSONOBJECT_BEFORE_PASSWORD_MESSAGE = "beforePassword";
     public static final String URL = "http://13.124.55.59:8080/";
 
     public static final String KATI_DIALOG_CONFIRM = "확인";
@@ -57,6 +62,7 @@ public class Constant { // ㅎㅎ Resource 로 옮겨조...
     public static final String BASIC_DATE_FORMAT = "YYYY-MM-dd";
     public static final String NO_BIRTH_DATA = "아직 생일이 설정되지 않았습니다.";
     public static final String NO_ADDRESS_DATA = "아직 생일이 설정되지 않았습니다.";
+    public static final String NO_RESTORE_DATA = "아직 복구 이메일이 설정되지 않았습니다.";
 //    public static final String NO = "아직 생일이 설정되지 않았습니다.";
 
     public static final String ABSTRACT_TABLE_FRAGMENT_LARGE = "펼치기>";
@@ -71,8 +77,8 @@ public class Constant { // ㅎㅎ Resource 로 옮겨조...
     public static final String AUTO_LOGIN_SERVICE_FAIL_DIALOG_MESSAGE = "자동 로그인에 실패하였습니다.";
 
     //logoutActivity
-    public static final String LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_TITLE = "성공적으로 로그아웃하였습니다.";
-    public static final String LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_MESSAGE = "성공적으로 로그아웃하였습니다.";
+    public static final String LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_TITLE = "로그아웃 하시겠습니까?";
+    public static final String LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_MESSAGE = "로그아웃 하고 홈으로 이동합니다.";
     public static final String LOG_OUT_ACTIVITY_FAILURE_DIALOG_TITLE = "로그인 되어 있지 않습니다.";
     public static final String LOG_OUT_ACTIVITY_FAILURE_DIALOG_MESSAGE = "로그인하러 이동 하시겠습니까?";
     public static final String FIND_USER_PASSWORD_DIALOG_TITLE="임시 비밀번호가 발급되었습니다.";

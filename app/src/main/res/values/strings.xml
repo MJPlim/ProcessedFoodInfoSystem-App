@@ -210,5 +210,21 @@
     <string name="restoreEmailActivity_submitButton_text">복구 이메일 변경</string>
     <string name="restoreEmailActivity_restoreEmailEditText_text">복구 이메일</string>
     <string name="restoreEmailActivity_toolbar_text">복구 이메일 변경</string>
+    <string name="myInfoEditFragment_signOutTextView_text">회원탈퇴</string>
+    <string name="myInfoEditFragment_logOutTextView_text">로그아웃</string>
+    <string name="myInfoEditFragment_changeBirthButton_text">변경</string>
+    <string name="myInfoEditFragment_changeAddressButton_text">변경</string>
+    <string name="myInfoEditFragment_editNameButton_text">변경</string>
+    <string name="myInfoEditFragment_restoreEmailButton_text">변경</string>
+    <string name="myInfoEditFragment_editPasswordButton_text">변경</string>
+    <string name="myInfoEditFragment_editPasswordItem_content">비밀번호 변경</string>
+    <string name="myInfoEditFragment_editPasswordItem_title">비밀번호</string>
+    <string name="myInfoEditFragment_restoreEmailItem_title">복구 이메일</string>
+    <string name="myInfoEditFragment_toolbar_title">내 정보 수정</string>
+
+    <string name="myInfoEditFragment_changeBirthItem_title">생일</string>
+    <string name="myInfoEditFragment_changeAddressItem_title">주소</string>
+    <string name="myInfoEditFragment_changeNameItem_title">닉네임</string>
+
 
 </resources>

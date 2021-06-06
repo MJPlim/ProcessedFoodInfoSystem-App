@@ -1,4 +1,4 @@
-package com.plim.kati_app.kati.domain.nnew.editPassword.model;
+package com.plim.kati_app.kati.domain.editPassword.model;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +8,4 @@ import lombok.Setter;
 public class ModifyPasswordRequest {
     private	String afterPassword;
     private	String beforePassword;
-
-
-
 }

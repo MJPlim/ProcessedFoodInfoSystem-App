@@ -112,7 +112,7 @@ public class LoginActivity extends KatiHasTitleActivity {
         @Override
         public void onSuccessResponse(Response<LoginResponse> response) {
             saveLoginData(response.headers().get("Authorization"));
-            startMainActivity();
+            onBackPressed();
         }
 
         @Override
@@ -141,19 +141,14 @@ public class LoginActivity extends KatiHasTitleActivity {
     }
 
     private void setAutoLogin() {
-        this.dataset.put(KatiEntity.EKatiData.AUTO_LOGIN,
-                this.autologinCheckBox.isChecked() ? KatiEntity.EKatiData.TRUE.name() : KatiEntity.EKatiData.FALSE.name());
+        String autoLogin = this.autologinCheckBox.isChecked() ? KatiEntity.EKatiData.TRUE.name() : KatiEntity.EKatiData.FALSE.name();
+        this.dataset.put(KatiEntity.EKatiData.AUTO_LOGIN, autoLogin);
     }
 
     public void saveLoginData(String authorization) {
-        dataset.put(KatiEntity.EKatiData.AUTHORIZATION, authorization);
-        dataset.put(KatiEntity.EKatiData.EMAIL, emailAddress.getText().toString());
-        dataset.put(KatiEntity.EKatiData.PASSWORD, password.getText().toString());
+        this.dataset.put(KatiEntity.EKatiData.AUTHORIZATION, authorization);
+        this.dataset.put(KatiEntity.EKatiData.EMAIL, emailAddress.getText().toString());
+        this.dataset.put(KatiEntity.EKatiData.PASSWORD, password.getText().toString());
         save();
-
-    }
-
-    public void startMainActivity() {
-        this.onBackPressed();
     }
 }

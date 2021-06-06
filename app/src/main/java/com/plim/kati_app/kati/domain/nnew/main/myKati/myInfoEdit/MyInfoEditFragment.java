@@ -3,7 +3,6 @@ package com.plim.kati_app.kati.domain.nnew.main.myKati.myInfoEdit;
 import android.app.Activity;
 import android.content.Intent;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -18,7 +17,7 @@ import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.domain.editSingleData.EditAddressActivity;
 import com.plim.kati_app.kati.domain.editSingleData.EditBirthActivity;
 import com.plim.kati_app.kati.domain.editSingleData.EditNameActivity;
-import com.plim.kati_app.kati.domain.nnew.editPassword.view.EditPasswordActivity;
+import com.plim.kati_app.kati.domain.editPassword.view.EditPasswordActivity;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.myInfoEdit.model.GetSecondEmailResponse;
 import com.plim.kati_app.kati.domain.setRestoreEmail.SetRestoreEmailActivity;
 import com.plim.kati_app.kati.domain.nnew.signOut.SignOutActivity;
@@ -28,12 +27,16 @@ import java.util.Vector;
 
 import retrofit2.Response;
 
+import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.EDIT_SINGLE_DATA_EXTRA_ADDRESS;
+import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.EDIT_SINGLE_DATA_EXTRA_BIRTH;
+import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.EDIT_SINGLE_DATA_EXTRA_NAME;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.LOG_OUT_ACTIVITY_FAILURE_DIALOG_MESSAGE;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.LOG_OUT_ACTIVITY_FAILURE_DIALOG_TITLE;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_MESSAGE;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_TITLE;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.NO_ADDRESS_DATA;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.NO_BIRTH_DATA;
+import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.NO_RESTORE_DATA;
 
 public class MyInfoEditFragment extends KatiInfoEditFragment {
 
@@ -44,9 +47,8 @@ public class MyInfoEditFragment extends KatiInfoEditFragment {
     private TextView logOut, signOut;
 
     private Vector<KatiDialog> dialogs;
-    private String secondEmail;
-
-    private boolean loginNeed=true;
+    private String secondEmail = null;
+    private boolean loginNeed = true;
 
     public MyInfoEditFragment() {
         this.dialogs = new Vector<>();
@@ -68,6 +70,7 @@ public class MyInfoEditFragment extends KatiInfoEditFragment {
 
     @Override
     protected void associateView(View view) {
+        super.associateView(view);
         this.editPasswordButton = view.findViewById(R.id.myInfoEditFragment_editPasswordButton);
         this.editNameButton = view.findViewById(R.id.myInfoEditFragment_editNameButton);
         this.editRestoreEmailButton = view.findViewById(R.id.myInfoEditFragment_restoreEmailButton);
@@ -86,6 +89,7 @@ public class MyInfoEditFragment extends KatiInfoEditFragment {
 
     @Override
     protected void initializeView() {
+        super.initializeView();
         this.editPasswordButton.setOnClickListener(v -> this.getActivity().startActivity(new Intent(this.getContext(), EditPasswordActivity.class)));
         this.editRestoreEmailButton.setOnClickListener(v -> this.getActivity().startActivity(new Intent(this.getContext(), SetRestoreEmailActivity.class)));
 
@@ -97,14 +101,6 @@ public class MyInfoEditFragment extends KatiInfoEditFragment {
 
         this.logOut.setOnClickListener(v -> this.logOut());
         this.signOut.setOnClickListener(v -> this.getActivity().startActivity(new Intent(this.getContext(), SignOutActivity.class)));
-    }
-
-    private void moveActivity(Class activity) {
-        Intent intent = new Intent(this.getActivity(), activity);
-        intent.putExtra("name", this.userInfoResponse.getName());
-        intent.putExtra("address", this.userInfoResponse.getAddress());
-        intent.putExtra("birth", this.userInfoResponse.getBirth());
-        this.startActivity(intent);
     }
 
 
@@ -124,9 +120,9 @@ public class MyInfoEditFragment extends KatiInfoEditFragment {
     public void infoModelDataUpdated() {
         this.changeNameItem.setContentText(this.userInfoResponse.getName());
         this.changeBirthItem.setContentText(this.userInfoResponse.getBirth() == null ? NO_BIRTH_DATA : this.userInfoResponse.getBirth());
-        this.changeAddressItem.setContentText(this.userInfoResponse.getAddress() == null ? NO_ADDRESS_DATA : this.userInfoResponse.getAddress());
+        this.changeAddressItem.setContentText(this.userInfoResponse.getAddress() == null || this.userInfoResponse.getAddress().equals(KatiEntity.EKatiData.NULL.name()) ? NO_ADDRESS_DATA : this.userInfoResponse.getAddress());
 
-        this.restoreEmailItem.setContentText(this.secondEmail);
+        this.restoreEmailItem.setContentText(this.secondEmail == null ? NO_RESTORE_DATA : this.secondEmail);
 
     }
 
@@ -155,6 +151,10 @@ public class MyInfoEditFragment extends KatiInfoEditFragment {
         }
     }
 
+    /**
+     * method
+     */
+
     private void getUserData(String header) {
         KatiRetrofitTool.getAPIWithAuthorizationToken(header).getUserInfo().enqueue(JSHRetrofitTool.getCallback(new ReadUserDataCallBack(getActivity())));
     }
@@ -163,29 +163,41 @@ public class MyInfoEditFragment extends KatiInfoEditFragment {
         KatiRetrofitTool.getAPIWithAuthorizationToken(token).getSecondEmail().enqueue(JSHRetrofitTool.getCallback(new ReadSecondEmailCallback(getActivity())));
     }
 
+    private void moveActivity(Class activity) {
+        Intent intent = new Intent(this.getActivity(), activity);
+        intent.putExtra(EDIT_SINGLE_DATA_EXTRA_NAME, this.userInfoResponse.getName());
+        intent.putExtra(EDIT_SINGLE_DATA_EXTRA_ADDRESS, this.userInfoResponse.getAddress());
+        intent.putExtra(EDIT_SINGLE_DATA_EXTRA_BIRTH, this.userInfoResponse.getBirth());
+        this.startActivity(intent);
+    }
+
     private void logOut() {
         if (!this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION).equals(KatiEntity.EKatiData.NULL.name())) {
-
             this.showOkDialog();
-
         } else {
             this.showNoDialog();
         }
     }
 
     public void showOkDialog() {
-        Log.d("뭐야", this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION));
-        this.dialogs.add(this.showDialog(LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_TITLE, LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_MESSAGE, (dialog, which) -> {
-            removeLoginData();
-            navigateTo(R.id.action_myInfoEditFragment_to_homeFragment);
-        }));
+        this.dialogs.add(KatiDialog.simplerTwoOptionAlertDialog(
+                getActivity(),
+                LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_TITLE,
+                LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_MESSAGE,
+                (dialog, which) -> {
+                    removeLoginData();
+                    navigateTo(R.id.action_myInfoEditFragment_to_homeFragment);
+                },
+                null
+                )
+        );
     }
 
     private void removeLoginData() {
-        this.loginNeed=false;
+        this.loginNeed = false;
         this.dataset.put(KatiEntity.EKatiData.EMAIL, KatiEntity.EKatiData.NULL.name());
         this.dataset.put(KatiEntity.EKatiData.PASSWORD, KatiEntity.EKatiData.NULL.name());
-        this.dataset.put(KatiEntity.EKatiData. NAME, KatiEntity.EKatiData.NULL.name());
+        this.dataset.put(KatiEntity.EKatiData.NAME, KatiEntity.EKatiData.NULL.name());
         this.dataset.put(KatiEntity.EKatiData.AUTO_LOGIN, KatiEntity.EKatiData.FALSE.name());
         this.dataset.put(KatiEntity.EKatiData.AUTHORIZATION, KatiEntity.EKatiData.NULL.name());
         this.save();

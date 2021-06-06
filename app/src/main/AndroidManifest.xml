@@ -45,7 +45,7 @@
             android:value="AIzaSyAH63IC9w2B6lP4RYw05b7qAyNja8gOyjU" />
 
         <activity
-            android:name=".kati.domain.nnew.editPassword.view.EditPasswordActivity"
+            android:name=".kati.domain.editPassword.view.EditPasswordActivity"
             android:label="@string/title_activity_password_edit"
             android:theme="@style/Theme.KatiUI.NoActionBar" />
         <activity

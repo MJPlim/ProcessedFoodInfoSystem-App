@@ -12,8 +12,8 @@ import com.plim.kati_app.kati.domain.nnew.main.myKati.review.model.ReadReviewRes
 import com.plim.kati_app.kati.domain.nnew.main.myKati.review.model.ReadUserReviewResponse;
 import com.plim.kati_app.kati.domain.setRestoreEmail.model.SetSecondEmailRequest;
 import com.plim.kati_app.kati.domain.setRestoreEmail.model.SetSecondEmailResponse;
-import com.plim.kati_app.kati.domain.nnew.editPassword.model.ModifyPasswordRequest;
-import com.plim.kati_app.kati.domain.nnew.editPassword.model.ModifyPasswordResponse;
+import com.plim.kati_app.kati.domain.editPassword.model.ModifyPasswordRequest;
+import com.plim.kati_app.kati.domain.editPassword.model.ModifyPasswordResponse;
 import com.plim.kati_app.kati.domain.login.model.LoginResponse;
 import com.plim.kati_app.kati.domain.findPassword.model.FindPasswordRequest;
 import com.plim.kati_app.kati.domain.findPassword.model.FindPasswordResponse;

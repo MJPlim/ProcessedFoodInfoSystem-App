@@ -10,6 +10,7 @@ import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitCallback;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.domain.model.Constant;
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
+import com.plim.kati_app.kati.crossDomain.domain.view.activity.KatiHasTitleActivity;
 import com.plim.kati_app.kati.crossDomain.domain.view.activity.KatiViewModelActivity;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
@@ -20,7 +21,7 @@ import com.plim.kati_app.kati.domain.nnew.main.MainActivity;
 import retrofit2.Response;
 
 
-public class FindIdActivity extends KatiViewModelActivity {
+public class FindIdActivity extends KatiHasTitleActivity {
 
     Button setRestoreEmailAddressButton;
     EditText editTextRestoreEmail;
@@ -43,17 +44,18 @@ public class FindIdActivity extends KatiViewModelActivity {
     }
 
     @Override
-    public void katiEntityUpdated() {
-        if (!this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION).equals(KatiEntity.EKatiData.NULL.name()))
-            showAlreadyLoginedDialog();
+    protected boolean isLoginNeeded() {
+        return true;
     }
 
-    private void showAlreadyLoginedDialog () {
-        KatiDialog.simplerAlertDialog(this,
-                getString(R.string.login_already_signed_dialog),
-                getString(R.string.login_already_signed_content_dialog),
-                (dialog, which) -> this.startMainActivity()
-        );
+    @Override
+    protected void katiEntityUpdatedAndLogin() {
+
+    }
+
+    @Override
+    protected void katiEntityUpdatedAndNoLogin() {
+
     }
 
     private void findEmail () {

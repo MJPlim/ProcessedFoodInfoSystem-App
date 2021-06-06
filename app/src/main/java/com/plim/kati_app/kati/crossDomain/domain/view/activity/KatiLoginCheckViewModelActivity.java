@@ -3,6 +3,7 @@ package com.plim.kati_app.kati.crossDomain.domain.view.activity;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
@@ -41,6 +42,8 @@ public abstract class KatiLoginCheckViewModelActivity extends KatiViewModelActiv
 
 
         public void onFailResponse(Response<T> response) throws IOException, JSONException {
+            Log.d("디버그"," 실패"+response.code());
+
             JSONObject object = new JSONObject(response.errorBody().string());
             String message = object.has("error-message") ? object.getString("error-message") : object.toString();
 

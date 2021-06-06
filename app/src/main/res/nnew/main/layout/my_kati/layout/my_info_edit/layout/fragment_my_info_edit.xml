@@ -12,8 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="1dp"
-        app:JSHInfoItem_content="정상"
-        app:JSHInfoItem_title="생일"
+        app:JSHInfoItem_title="@string/myInfoEditFragment_changeBirthItem_title"
         app:layout_constraintTop_toBottomOf="@+id/myInfoEditFragment_changeNameItem" />
 
     <com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHInfoItem
@@ -21,27 +20,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="1dp"
-        app:JSHInfoItem_content="정상"
-        app:JSHInfoItem_title="주소"
+        app:JSHInfoItem_title="@string/myInfoEditFragment_changeAddressItem_title"
         app:layout_constraintTop_toBottomOf="@+id/myInfoEditFragment_changeBirthItem" />
 
     <com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHInfoItem
         android:id="@+id/myInfoEditFragment_changeNameItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:JSHInfoItem_content="정상"
-        app:JSHInfoItem_title="닉네임"
-        app:layout_constraintTop_toBottomOf="@+id/myInfoEditFragment_toolbar" />
+        app:JSHInfoItem_title="@string/myInfoEditFragment_changeNameItem_title"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHToolBar
-        android:id="@+id/myInfoEditFragment_toolbar"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:button_image="@drawable/jsh_before"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@color/white"
         android:elevation="5dp"
-        app:title="내 정보 수정" />
+        app:title="@string/myInfoEditFragment_toolbar_title" />
 
     <com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHInfoItem
         android:id="@+id/myInfoEditFragment_restoreEmailItem"
@@ -49,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="1dp"
         app:JSHInfoItem_content="sh199919@gmail.com"
-        app:JSHInfoItem_title="복구 이메일"
+        app:JSHInfoItem_title="@string/myInfoEditFragment_restoreEmailItem_title"
         app:layout_constraintTop_toBottomOf="@+id/myInfoEditFragment_changeAddressItem" />
 
     <com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHInfoItem
@@ -57,8 +54,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="1dp"
-        app:JSHInfoItem_content="비밀번호 변경"
-        app:JSHInfoItem_title="비밀번호"
+        app:JSHInfoItem_content="@string/myInfoEditFragment_editPasswordItem_content"
+        app:JSHInfoItem_title="@string/myInfoEditFragment_editPasswordItem_title"
         app:layout_constraintTop_toBottomOf="@+id/myInfoEditFragment_restoreEmailItem" />
 
 
@@ -69,7 +66,7 @@
         android:layout_height="40dp"
         android:layout_marginRight="16dp"
         android:backgroundTint="@color/white"
-        android:text="변경"
+        android:text="@string/myInfoEditFragment_editPasswordButton_text"
         android:textColor="@color/black"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/myInfoEditFragment_editPasswordItem"
@@ -84,7 +81,7 @@
         android:layout_marginRight="16dp"
         android:backgroundTint="@color/white"
         android:minWidth="0dp"
-        android:text="변경"
+        android:text="@string/myInfoEditFragment_restoreEmailButton_text"
         android:textColor="@color/black"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/myInfoEditFragment_restoreEmailItem"
@@ -99,7 +96,7 @@
         android:layout_marginRight="16dp"
         android:backgroundTint="@color/white"
         android:minWidth="0dp"
-        android:text="변경"
+        android:text="@string/myInfoEditFragment_editNameButton_text"
         android:textColor="@color/black"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/myInfoEditFragment_changeNameItem"
@@ -113,7 +110,7 @@
         android:layout_marginRight="16dp"
         android:backgroundTint="@color/white"
         android:minWidth="0dp"
-        android:text="변경"
+        android:text="@string/myInfoEditFragment_changeAddressButton_text"
         android:textColor="@color/black"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/myInfoEditFragment_changeAddressItem"
@@ -127,7 +124,7 @@
         android:layout_height="40dp"
         android:layout_marginRight="16dp"
         android:backgroundTint="@color/white"
-        android:text="변경"
+        android:text="@string/myInfoEditFragment_changeBirthButton_text"
         android:textColor="@color/black"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/myInfoEditFragment_changeBirthItem"
@@ -138,7 +135,7 @@
         android:id="@+id/myInfoEditFragment_logOutTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="로그아웃"
+        android:text="@string/myInfoEditFragment_logOutTextView_text"
         android:layout_marginRight="8dp"
         app:layout_constraintBottom_toBottomOf="@id/myInfoEditFragment_signOutTextView"
         app:layout_constraintEnd_toStartOf="@id/myInfoEditFragment_split"
@@ -160,7 +157,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="8dp"
-        android:text="회원탈퇴"
+        android:text="@string/myInfoEditFragment_signOutTextView_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/myInfoEditFragment_editPasswordItem" />
 

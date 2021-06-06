@@ -50,8 +50,8 @@ public class FavoriteFragment extends KatiLoginCheckViewModelFragment {
 
     @Override
     protected void associateView(View view) {
-        this.foodInfoRecyclerView = view.findViewById(R.id.favorite_list);
-        this.favoriteNum=view.findViewById(R.id.favorite_numOfFavorite);
+        this.foodInfoRecyclerView = view.findViewById(R.id.favoriteFragment_recyclerView);
+        this.favoriteNum=view.findViewById(R.id.favoriteFragment_numOfFavoriteTextView);
         this.noLogin=view.findViewById(R.id.favorite_noLogin);
         this.noFavorite=view.findViewById(R.id.favorite_noFavorite);
         this.emptyImage=view.findViewById(R.id.favorite_emptyImage);
@@ -84,18 +84,12 @@ public class FavoriteFragment extends KatiLoginCheckViewModelFragment {
     @Override
     protected void katiEntityUpdatedAndNoLogin() {
         favoriteNum.setVisibility(View.GONE);
-
-
-    }
-
-    private void getUserFavorite() {
-
-        KatiRetrofitTool.getAPIWithAuthorizationToken(dataset.get(KatiEntity.EKatiData.AUTHORIZATION)).getUserFavorite()
-                .enqueue(JSHRetrofitTool.getCallback(new UserFavoriteResponseCallback()));
     }
 
 
-
+    /**
+     * callback
+     */
     private class UserFavoriteResponseCallback implements JSHRetrofitCallback<List<UserFavoriteResponse>> {
         @Override
         public void onSuccessResponse(Response<List<UserFavoriteResponse>> response) {
@@ -133,6 +127,15 @@ public class FavoriteFragment extends KatiLoginCheckViewModelFragment {
                     null
             );
         }
+    }
+
+    /**
+     * method
+     */
+    private void getUserFavorite() {
+
+        KatiRetrofitTool.getAPIWithAuthorizationToken(dataset.get(KatiEntity.EKatiData.AUTHORIZATION)).getUserFavorite()
+                .enqueue(JSHRetrofitTool.getCallback(new UserFavoriteResponseCallback()));
     }
 
 

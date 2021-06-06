@@ -137,7 +137,7 @@ public abstract class EditSingleActivity extends KatiHasTitleActivity {
                     break;
             }
         }
-        request = new UserInfoModifyRequest(name, birth, address);
+        request = new UserInfoModifyRequest(name, birth, address==null? KatiEntity.EKatiData.NULL.name(): address);
         KatiRetrofitTool.getAPIWithAuthorizationToken(token).modifyUserInfo(request).enqueue(JSHRetrofitTool.getCallback(new ModifyUserDataCallBack(this)));
     }
 

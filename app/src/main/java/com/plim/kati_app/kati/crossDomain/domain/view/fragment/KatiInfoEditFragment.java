@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.myInfoEdit.model.InfoEditViewModel;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.myInfoEdit.model.UserInfoResponse;
 
-public abstract class KatiInfoEditFragment extends KatiLoginCheckViewModelFragment{
+public abstract class KatiInfoEditFragment extends KatiHasTitleFragment{
 
     public InfoEditViewModel infoEditViewModel;
     protected UserInfoResponse userInfoResponse;

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/kati_light_gray"
-    tools:context=".kati.domain.nnew.editPassword.view.EditPasswordActivity">
+    tools:context=".kati.domain.editPassword.view.EditPasswordActivity">
 
     <com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHToolBar
         android:id="@+id/home_toolbar"

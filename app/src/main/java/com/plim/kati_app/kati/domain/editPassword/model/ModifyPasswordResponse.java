@@ -1,4 +1,4 @@
-package com.plim.kati_app.kati.domain.nnew.editPassword.model;
+package com.plim.kati_app.kati.domain.editPassword.model;
 
 import lombok.Builder;
 import lombok.Getter;
