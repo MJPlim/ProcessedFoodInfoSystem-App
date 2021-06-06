@@ -1,6 +1,7 @@
 package com.plim.kati_app.kati.crossDomain.tech.retrofit;
 
 import android.app.Activity;
+import android.widget.Toast;
 
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 
@@ -22,11 +23,7 @@ public abstract class SimpleRetrofitCallBackImpl<T> implements SimpleRetrofitCal
     @Override
     public void onFailResponse(Response<T> response) throws IOException, JSONException {
         JSONObject object = new JSONObject(response.errorBody().string());
-        KatiDialog.RetrofitNotSuccessDialog(
-                this.activity,
-                getFailMessage(object),
-                response.code(),
-                null);
+        Toast.makeText(activity, "("+response.code()+") "+getFailMessage(object), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -38,7 +35,6 @@ public abstract class SimpleRetrofitCallBackImpl<T> implements SimpleRetrofitCal
     public void onConnectionFail(Throwable t) {
         KatiDialog.RetrofitFailDialog(this.activity, null);
     }
-
 
     protected String getFailMessage(JSONObject object) throws JSONException {
         return object.has(JSONOBJECT_ERROR_MESSAGE) ? object.getString(JSONOBJECT_ERROR_MESSAGE) :

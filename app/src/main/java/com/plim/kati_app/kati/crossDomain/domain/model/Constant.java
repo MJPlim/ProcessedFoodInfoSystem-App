@@ -42,6 +42,7 @@ public class Constant { // ㅎㅎ Resource 로 옮겨조...
     public static final String JSONOBJECT_PASSWORD_MESSAGE = "password";
     public static final String JSONOBJECT_NAME_MESSAGE = "name";
     public static final String JSONOBJECT_EMAIL_MESSAGE = "email";
+    public static final String JSONOBJECT_SECOND_EMAIL_MESSAGE = "secondEmail";
     public static final String URL = "http://13.124.55.59:8080/";
 
     public static final String KATI_DIALOG_CONFIRM = "확인";

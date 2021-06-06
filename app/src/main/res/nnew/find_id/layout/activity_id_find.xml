@@ -25,7 +25,7 @@
         tools:layout_editor_absoluteX="-86dp">
 
         <EditText
-            android:id="@+id/editTextRestoreEmail"
+            android:id="@+id/restoreEmailActivity_restoreEmailEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
@@ -63,7 +63,7 @@
             android:layout_marginHorizontal="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextRestoreEmail" />
+            app:layout_constraintTop_toBottomOf="@+id/restoreEmailActivity_restoreEmailEditText" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

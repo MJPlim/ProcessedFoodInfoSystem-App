@@ -20,7 +20,7 @@ import com.plim.kati_app.kati.domain.editSingleData.EditBirthActivity;
 import com.plim.kati_app.kati.domain.editSingleData.EditNameActivity;
 import com.plim.kati_app.kati.domain.nnew.editPassword.view.EditPasswordActivity;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.myInfoEdit.model.GetSecondEmailResponse;
-import com.plim.kati_app.kati.domain.nnew.setRestoreEmail.SetRestoreEmailActivity;
+import com.plim.kati_app.kati.domain.setRestoreEmail.SetRestoreEmailActivity;
 import com.plim.kati_app.kati.domain.nnew.signOut.SignOutActivity;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.myInfoEdit.model.UserInfoResponse;
 

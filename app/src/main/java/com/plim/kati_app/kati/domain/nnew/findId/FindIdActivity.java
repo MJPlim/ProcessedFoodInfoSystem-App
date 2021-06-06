@@ -1,9 +1,6 @@
 package com.plim.kati_app.kati.domain.nnew.findId;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,8 +16,6 @@ import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.domain.nnew.findId.model.FindEmailRequest;
 import com.plim.kati_app.kati.domain.nnew.findId.model.FindEmailResponse;
 import com.plim.kati_app.kati.domain.nnew.main.MainActivity;
-
-import java.util.Map;
 
 import retrofit2.Response;
 
@@ -38,7 +33,7 @@ public class FindIdActivity extends KatiViewModelActivity {
     @Override
     protected void associateView() {
         this.setRestoreEmailAddressButton = findViewById(R.id.setRestoreEmailAddressButton);
-        this.editTextRestoreEmail = findViewById(R.id.editTextRestoreEmail);
+        this.editTextRestoreEmail = findViewById(R.id.restoreEmailActivity_restoreEmailEditText);
 
     }
 

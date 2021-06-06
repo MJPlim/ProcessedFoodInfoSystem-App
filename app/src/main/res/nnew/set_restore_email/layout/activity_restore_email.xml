@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:button_image="@drawable/jsh_before"
-        app:title="복구 이메일 변경"
+        app:title="@string/restoreEmailActivity_toolbar_text"
         android:background="@color/white"
         android:elevation="5dp" />
 
@@ -25,13 +25,13 @@
         tools:layout_editor_absoluteX="-86dp">
 
         <EditText
-            android:id="@+id/editTextRestoreEmail"
+            android:id="@+id/restoreEmailActivity_restoreEmailEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:background="@drawable/edittext_bg"
             android:ems="10"
-            android:hint="복구 이메일"
+            android:hint="@string/restoreEmailActivity_restoreEmailEditText_text"
             android:layout_marginTop="24dp"
             android:padding="8dp"
             android:textSize="15sp"
@@ -40,30 +40,30 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/signUpFragment_submitButton"
+            android:id="@+id/restoreEmailActivity_submitButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="8dp"
             android:backgroundTint="@color/white"
-            android:text="복구 이메일 변경"
+            android:text="@string/restoreEmailActivity_submitButton_text"
             android:layout_marginTop="16dp"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+            app:layout_constraintTop_toBottomOf="@+id/restoreEmailActivity_messageTextView" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/restoreEmailActivity_messageTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="입력하신 이메일 주소로 복구 이메일이 발송됩니다."
+            android:text="@string/restoreEmailActivity_messageTextView_Text"
             android:layout_marginHorizontal="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextRestoreEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/restoreEmailActivity_restoreEmailEditText" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

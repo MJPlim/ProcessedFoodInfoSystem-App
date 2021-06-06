@@ -203,5 +203,12 @@
     <string name="myKatiFragment_reviewItem_text">리뷰 관리</string>
     <string name="myKatiFragment_katiAnnounceItem_text">카티 안내</string>
     <string name="myKatiFragment_serviceItem_text">서비스 약관</string>
+    <string name="nameEditActivity_submitButton_text">닉네임 변경</string>
+    <string name="nameEditActivity_editText_text">닉네임 입력 (10자 이내)</string>
+    <string name="nameEditActivity_title_toolbar_text">닉네임 변경</string>
+    <string name="restoreEmailActivity_messageTextView_Text">입력하신 이메일 주소로 복구 이메일이 발송됩니다.</string>
+    <string name="restoreEmailActivity_submitButton_text">복구 이메일 변경</string>
+    <string name="restoreEmailActivity_restoreEmailEditText_text">복구 이메일</string>
+    <string name="restoreEmailActivity_toolbar_text">복구 이메일 변경</string>
 
 </resources>

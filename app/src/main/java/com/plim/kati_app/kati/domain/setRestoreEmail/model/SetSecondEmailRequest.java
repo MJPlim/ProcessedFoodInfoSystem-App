@@ -1,4 +1,4 @@
-package com.plim.kati_app.kati.domain.nnew.setRestoreEmail.model;
+package com.plim.kati_app.kati.domain.setRestoreEmail.model;
 
 import lombok.Getter;
 import lombok.Setter;

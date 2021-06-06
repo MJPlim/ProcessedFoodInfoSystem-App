@@ -23,7 +23,7 @@
         </activity>
         <activity android:name=".kati.domain.nnew.foodDetail.FoodDetailActivity" />
         <activity android:name=".kati.domain.nnew.review.ReviewActivity" />
-        <activity android:name=".kati.domain.nnew.setRestoreEmail.SetRestoreEmailActivity" />
+        <activity android:name=".kati.domain.setRestoreEmail.SetRestoreEmailActivity" />
         <activity android:name=".kati.domain.nnew.findId.FindIdActivity" />
         <activity android:name=".kati.domain.editSingleData.EditSingleActivity" />
         <activity android:name=".kati.domain.findPassword.FindPasswordActivity" />

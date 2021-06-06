@@ -3,6 +3,7 @@ package com.plim.kati_app.kati.crossDomain.domain.view.fragment;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.widget.Toast;
 
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
@@ -17,6 +18,9 @@ import java.io.IOException;
 
 import lombok.AllArgsConstructor;
 import retrofit2.Response;
+
+import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.JSONOBJECT_ERROR_MESSAGE;
+import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.JSONOBJECT_MESSAGE;
 
 public abstract class KatiLoginCheckViewModelFragment extends KatiViewModelFragment {
     @Override
@@ -41,7 +45,7 @@ public abstract class KatiLoginCheckViewModelFragment extends KatiViewModelFragm
             JSONObject object = new JSONObject(response.errorBody().string());
             String message = object.has("error-message") ? object.getString("error-message") : object.toString();
 
-            if (message.contains("로그인")) {
+            if (message.contains("로그인을 해주세요.")) {
                 this.removeToken();
                 ;
                 KatiDialog.simplerTwoOptionAlertDialog(
@@ -52,12 +56,7 @@ public abstract class KatiLoginCheckViewModelFragment extends KatiViewModelFragm
                         this.getCancelListener()
                 );
             } else
-                KatiDialog.RetrofitNotSuccessDialog(
-                        this.activity,
-                        message,
-                        response.code(),
-                        null
-                );
+                Toast.makeText(activity, "("+response.code()+") "+getFailMessage(object), Toast.LENGTH_SHORT).show();
         }
 
         public DialogInterface.OnClickListener getCancelListener() {
@@ -71,6 +70,12 @@ public abstract class KatiLoginCheckViewModelFragment extends KatiViewModelFragm
 
         public void onConnectionFail(Throwable t) {
             KatiDialog.RetrofitFailDialog(this.activity, null);
+        }
+
+        protected String getFailMessage(JSONObject object) throws JSONException {
+            return object.has(JSONOBJECT_ERROR_MESSAGE) ? object.getString(JSONOBJECT_ERROR_MESSAGE) :
+                    object.has(JSONOBJECT_MESSAGE) ? object.getString(JSONOBJECT_MESSAGE) :
+                            object.toString();
         }
 
         private void refreshToken(String authorization) {
