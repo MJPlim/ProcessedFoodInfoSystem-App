@@ -14,8 +14,8 @@ import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.kati.crossDomain.domain.view.activity.KatiHasTitleActivity;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
-import com.plim.kati_app.kati.domain.nnew.findId.FindIdActivity;
-import com.plim.kati_app.kati.domain.findPassword.FindPasswordActivity;
+import com.plim.kati_app.kati.domain.findId.FindIdActivity;
+import com.plim.kati_app.kati.domain.nnew.findPassword.FindPasswordActivity;
 import com.plim.kati_app.kati.domain.login.model.LoginResponse;
 import com.plim.kati_app.kati.domain.signUp.SignUpActivity;
 

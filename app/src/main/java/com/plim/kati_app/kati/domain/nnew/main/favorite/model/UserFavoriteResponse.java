@@ -1,7 +1,7 @@
 package com.plim.kati_app.kati.domain.nnew.main.favorite.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.plim.kati_app.kati.domain.nnew.foodDetail.model.FoodDetailResponse;
+import com.plim.kati_app.kati.domain.foodDetail.model.FoodDetailResponse;
 
 import lombok.Getter;
 import lombok.Setter;

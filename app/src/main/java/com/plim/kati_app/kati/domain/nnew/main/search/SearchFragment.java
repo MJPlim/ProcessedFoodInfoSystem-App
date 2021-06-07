@@ -40,6 +40,8 @@ import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.SEARCH_WO
 
 public class SearchFragment extends KatiSearchFragment {
 
+    //associate
+    //view
     private EditText searchFieldEditText;
     private TextView deleteTextView;
     private ImageView deleteIcon;
@@ -47,14 +49,11 @@ public class SearchFragment extends KatiSearchFragment {
     private ConstraintLayout recentSearchWordLayout;
     private GridLayout rankGridLayout;
 
-
     private ChipGroup recentSearchedChipGroup;
 
+    //listener
     private View.OnClickListener deleteAllListener, deleteOneListener, setSearchTextListener;
 
-    /*
-    callback
-     */
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_search;
@@ -71,7 +70,6 @@ public class SearchFragment extends KatiSearchFragment {
         this.recentSearchWordLayout = view.findViewById(R.id.searchFragment_constraintLayout);
         this.rankGridLayout = view.findViewById(R.id.searchFragment_rankGridLayout);
 
-
         BottomNavigationView bottomNavigationView = (BottomNavigationView) this.getActivity().findViewById(R.id.mainFragment_bottomNavigation);
         if (bottomNavigationView.getSelectedItemId() != R.id.action_search)
             bottomNavigationView.findViewById(R.id.action_search).performClick();
@@ -87,58 +85,45 @@ public class SearchFragment extends KatiSearchFragment {
             return false;
         });
 
-        this.setSearchTextListener = v -> {
-            this.setTextAndSearchStart(v);
-        };
-
-        this.deleteAllListener = v -> {
-            this.showDeleteAllSearchedWordConfirm();
-        };
-
-        this.deleteOneListener = v -> {
-            this.showDeleteSearchedWordConfirm((String) v.getTag());
-        };
+        this.setSearchTextListener = v -> this.setTextAndSearchStart(v);
+        this.deleteAllListener = v -> this.showDeleteAllSearchedWordConfirm();
+        this.deleteOneListener = v -> this.showDeleteSearchedWordConfirm((String) v.getTag());
 
         this.loadRank();
     }
-
 
     @Override
     protected void katiEntityUpdated() {
         this.loadRecentSearchedWords();
     }
 
-
     @Override
     protected void searchModelDataUpdated() {
         this.loadRecentSearchedWords();
     }
 
-    /*
-    inner class
-    */
+    /**
+     * callback
+     */
     private class ReadRankingListCallback extends SimpleRetrofitCallBackImpl<List<ItemRankingResponse>> {
-
-
         public ReadRankingListCallback(Activity activity) {
             super(activity);
         }
 
         @Override
         public void onSuccessResponse(Response<List<ItemRankingResponse>> response) {
-
             Vector<ItemRankingResponse> itemVector = new Vector<>(response.body());
             fillRankGridLayout(itemVector);
 
         }
     }
 
-
-
-
-    /*
-    method
+    /**
+     * method
      */
+    private void loadRank() {
+        KatiRetrofitTool.getAPI().getRankingList().enqueue(JSHRetrofitTool.getCallback(new ReadRankingListCallback(this.getActivity())));
+    }
 
     private void setTextAndSearchStart(View v) {
         this.searchModel.setSearchText((String) v.getTag());
@@ -178,7 +163,6 @@ public class SearchFragment extends KatiSearchFragment {
     private TextView createRankTextView(int size, String text, String tag) {
         GridLayout.LayoutParams params = new GridLayout.LayoutParams();
         params.setGravity(Gravity.CENTER);
-
         return this.createRankTextView(params, size, text, tag);
     }
 
@@ -274,9 +258,5 @@ public class SearchFragment extends KatiSearchFragment {
     private void deleteSearchedWordByValue(String value) {
         this.searchWords.remove(value);
         this.save();
-    }
-
-    private void loadRank() {
-        KatiRetrofitTool.getAPI().getRankingList().enqueue(JSHRetrofitTool.getCallback(new ReadRankingListCallback(this.getActivity())));
     }
 }

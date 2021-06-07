@@ -25,7 +25,7 @@ import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiSearchFragment;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBackImpl;
-import com.plim.kati_app.kati.domain.nnew.foodDetail.FoodDetailActivity;
+import com.plim.kati_app.kati.domain.foodDetail.FoodDetailActivity;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.allergy.model.ReadUserAllergyResponse;
 import com.plim.kati_app.kati.domain.nnew.main.search.adapter.AdRecyclerAdapter;
 import com.plim.kati_app.kati.domain.nnew.main.search.adapter.FoodRecyclerAdapter;

@@ -4,30 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".kati.domain.nnew.review.ReviewActivity">
+    tools:context=".kati.domain.review.ReviewActivity">
 
     <com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHToolBar
-        android:id="@+id/reviewActivity_toolbar"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@color/white"
         app:button_image="@drawable/jsh_before"
         android:elevation="5dp"
-        app:title="제품 이름" />
+        app:title="@string/reviewActivity_toolbar_title" />
 
     <TextView
         android:id="@+id/reviewActivity_recommendMessageTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="이 제품을 추천하시겠어요?"
+        android:text="@string/reviewActivity_recommendMessageTextView_text"
         android:layout_marginTop="32dp"
         android:textColor="@color/black"
         android:textSize="17sp"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reviewActivity_toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <RatingBar
         android:id="@+id/reviewActivity_ratingBar"
@@ -52,7 +52,7 @@
         android:layout_marginHorizontal="16dp"
         android:inputType="textMultiLine"
         android:padding="8dp"
-        android:hint="제품에 대한 솔직한 리뷰를 남겨주세요.(10자이상)"
+        android:hint="@string/reviewActivity_reviewEditText_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/reviewActivity_ratingBar" />
@@ -62,7 +62,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:text="등록 완료"
+        android:text="@string/reviewActivity_submitButton_text"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

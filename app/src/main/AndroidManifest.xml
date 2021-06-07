@@ -21,15 +21,15 @@
         tools:replace="android:allowBackup" >
         <activity android:name=".kati.domain.nnew.categoryFilter.CategorySettingActivity" >
         </activity>
-        <activity android:name=".kati.domain.nnew.foodDetail.FoodDetailActivity" />
-        <activity android:name=".kati.domain.nnew.review.ReviewActivity" />
+        <activity android:name=".kati.domain.foodDetail.FoodDetailActivity" />
+        <activity android:name=".kati.domain.review.ReviewActivity" />
         <activity android:name=".kati.domain.setRestoreEmail.SetRestoreEmailActivity" />
-        <activity android:name=".kati.domain.nnew.findId.FindIdActivity" />
+        <activity android:name=".kati.domain.findId.FindIdActivity" />
         <activity android:name=".kati.domain.editSingleData.EditSingleActivity" />
-        <activity android:name=".kati.domain.findPassword.FindPasswordActivity" />
+        <activity android:name=".kati.domain.nnew.findPassword.FindPasswordActivity" />
         <activity android:name=".kati.domain.login.LoginActivity" />
-        <activity android:name=".kati.domain.nnew.map.MapServiceActivity" />
-        <activity android:name=".kati.domain.nnew.signOut.SignOutActivity" />
+        <activity android:name=".kati.domain.map.MapServiceActivity" />
+        <activity android:name=".kati.domain.signOut.SignOutActivity" />
         <activity android:name=".kati.domain.editSingleData.EditNameActivity" />
         <activity android:name=".kati.domain.editSingleData.EditBirthActivity" />
         <activity android:name=".kati.domain.editSingleData.EditAddressActivity" />
@@ -53,7 +53,7 @@
             android:label="@string/title_activity_sign_up"
             android:theme="@style/Theme.KatiUI.NoActionBar" />
         <activity android:name=".kati.domain.nnew.main.MainActivity" />
-        <activity android:name=".kati.domain.nnew.splash.SplashActivity" >
+        <activity android:name=".kati.domain.splash.SplashActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

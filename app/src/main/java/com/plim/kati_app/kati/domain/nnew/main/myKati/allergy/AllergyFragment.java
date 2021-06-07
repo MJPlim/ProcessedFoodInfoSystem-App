@@ -17,6 +17,7 @@ import com.plim.kati_app.R;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.domain.model.Constant;
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
+import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiHasTitleFragment;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiLoginCheckViewModelFragment;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.allergy.model.CreateUserAllergyRequest;
@@ -32,10 +33,11 @@ import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.ALLERGY_E
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.ALLERGY_MODIFY_SUCCESS_DIALOG_MESSAGE;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.ALLERGY_MODIFY_SUCCESS_DIALOG_TITLE;
 
-public class AllergyFragment extends KatiLoginCheckViewModelFragment {
+public class AllergyFragment extends KatiHasTitleFragment {
 
+    //associate
+    //view
     private ChipGroup allergyChipGroup;
-
     private Vector<Chip> chipVector;
     private Vector<String> allergyVector;
 
@@ -46,31 +48,25 @@ public class AllergyFragment extends KatiLoginCheckViewModelFragment {
 
     @Override
     protected void associateView(View view) {
+        super.associateView(view);
         this.allergyChipGroup = view.findViewById(R.id.allergyFragment_allergyChipGroup);
-        this.chipVector=new Vector<>();
-        this.allergyVector=new Vector<>();
+        this.chipVector = new Vector<>();
+        this.allergyVector = new Vector<>();
     }
 
     @Override
     protected void initializeView() {
-        this.chipVector.clear();
-        this.allergyChipGroup.removeAllViews();
-        for (Constant.EAllergyList allergy : Constant.EAllergyList.values()) {
-            LayoutInflater inflater = (LayoutInflater) this.getActivity().getSystemService(Service.LAYOUT_INFLATER_SERVICE);
-            Chip chip= (Chip) inflater.inflate(R.layout.jsh_chip, null);
-            chip.setText(allergy.name());
-            chip.setCheckable(true);
-            this.chipVector.add(chip);
-            this.allergyChipGroup.addView(chip);
-        }
+        super.initializeView();
+        this.setAllergyChips();
     }
+
 
     @Override
     public void onPause() {
         super.onPause();
         allergyVector.clear();
-        for(int id: allergyChipGroup.getCheckedChipIds()){
-            Chip chip= getView().findViewById(id);
+        for (int id : allergyChipGroup.getCheckedChipIds()) {
+            Chip chip = getView().findViewById(id);
             allergyVector.add(chip.getText().toString());
         }
         this.saveAllergy(this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION));
@@ -87,8 +83,12 @@ public class AllergyFragment extends KatiLoginCheckViewModelFragment {
     }
 
     @Override
-    protected void katiEntityUpdatedAndNoLogin() {}
+    protected void katiEntityUpdatedAndNoLogin() {
+    }
 
+    /**
+     * callback
+     */
     private class ReadUserAllergyCallBack extends SimpleLoginRetrofitCallBack<ReadUserAllergyResponse> {
         public ReadUserAllergyCallBack(Activity activity) {
             super(activity);
@@ -98,15 +98,10 @@ public class AllergyFragment extends KatiLoginCheckViewModelFragment {
         public void onSuccessResponse(Response<ReadUserAllergyResponse> response) {
             allergyVector.addAll(response.body().getUserAllergyMaterials());
             setOnAllergyFilter();
-//            setItemValues(new AbstractExpandableItemList.ExpandableListItem(ALLERGY_EXPANDABLE_LIST_TITLE, vector));
         }
-
-
     }
 
-
     private class ModifyUserAllergyCallBack extends SimpleLoginRetrofitCallBack<CreateUserAllergyResponse> {
-
         public ModifyUserAllergyCallBack(Activity activity) {
             super(activity);
         }
@@ -116,16 +111,9 @@ public class AllergyFragment extends KatiLoginCheckViewModelFragment {
         }
     }
 
-    private void setOnAllergyFilter() {
-        for(String string: this.allergyVector){
-            for(Chip chip: chipVector){
-                if(chip.getText().equals(string)){
-                    chip.setChecked(true);
-                }
-            }
-        }
-    }
-
+    /**
+     * method
+     */
     private void saveAllergy(String token) {
         CreateUserAllergyRequest request = new CreateUserAllergyRequest();
         request.setAllergyList(this.allergyVector);
@@ -134,5 +122,28 @@ public class AllergyFragment extends KatiLoginCheckViewModelFragment {
 
     private void loadAllergy(String token) {
         KatiRetrofitTool.getAPIWithAuthorizationToken(token).readUserAllergy().enqueue(JSHRetrofitTool.getCallback(new ReadUserAllergyCallBack(this.getActivity())));
+    }
+
+    private void setOnAllergyFilter() {
+        for (String string : this.allergyVector) {
+            for (Chip chip : chipVector) {
+                if (chip.getText().equals(string)) {
+                    chip.setChecked(true);
+                }
+            }
+        }
+    }
+
+    protected void setAllergyChips() {
+        this.chipVector.clear();
+        this.allergyChipGroup.removeAllViews();
+        for (Constant.EAllergyList allergy : Constant.EAllergyList.values()) {
+            LayoutInflater inflater = (LayoutInflater) this.getActivity().getSystemService(Service.LAYOUT_INFLATER_SERVICE);
+            Chip chip = (Chip) inflater.inflate(R.layout.jsh_chip, null);
+            chip.setText(allergy.name());
+            chip.setCheckable(true);
+            this.chipVector.add(chip);
+            this.allergyChipGroup.addView(chip);
+        }
     }
 }

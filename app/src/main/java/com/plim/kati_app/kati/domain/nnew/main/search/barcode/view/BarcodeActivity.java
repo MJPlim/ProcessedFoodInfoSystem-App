@@ -2,15 +2,13 @@ package com.plim.kati_app.kati.domain.nnew.main.search.barcode.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.plim.kati_app.R;
-import com.plim.kati_app.kati.domain.nnew.foodDetail.FoodDetailActivity;
+import com.plim.kati_app.kati.domain.foodDetail.FoodDetailActivity;
 
 
 public class BarcodeActivity extends AppCompatActivity {

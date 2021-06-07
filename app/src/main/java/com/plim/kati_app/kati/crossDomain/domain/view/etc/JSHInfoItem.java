@@ -12,7 +12,8 @@ import com.plim.kati_app.R;
 
 public class JSHInfoItem extends LinearLayout {
 
-    private TextView titleTextView,contentTextView;
+    private TextView titleTextView, contentTextView;
+    private View view;
 
     // Constructor
     public JSHInfoItem(Context context, AttributeSet attrs) {
@@ -25,12 +26,12 @@ public class JSHInfoItem extends LinearLayout {
 
         // Inflate View
         LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View jshToolbar = layoutInflater.inflate(R.layout.item_info, this, false);
-        this.addView(jshToolbar);
+        this.view = layoutInflater.inflate(R.layout.item_info, this, false);
+        this.addView(this.view);
 
         // Associate View
-        this.titleTextView = jshToolbar.findViewById(R.id.title);
-        this.contentTextView = jshToolbar.findViewById(R.id.content);
+        this.titleTextView = this.view.findViewById(R.id.title);
+        this.contentTextView = this.view.findViewById(R.id.content);
 
         // Initialize View
         this.titleTextView.setText(title);
@@ -39,7 +40,10 @@ public class JSHInfoItem extends LinearLayout {
     }
 
 
-    public void setContentText(String text){
-        this.contentTextView.setText(text);
+    public void setContentText(String text) {
+        if (text != null)
+            this.contentTextView.setText(text);
+        else
+            this.view.setVisibility(View.GONE);
     }
 }

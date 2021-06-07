@@ -51,7 +51,7 @@ public class MyKatiFragment extends KatiHasTitleFragment {
 
     @Override
     protected void associateView(View view) {
-        this.loginLayout = view.findViewById(R.id.mykati_login_layout);
+        this.loginLayout = view.findViewById(R.id.myKatiFragment_constraintLayout);
         this.name = view.findViewById(R.id.myKatiFragment_userNameTextView);
         this.myInfoEditSelect = view.findViewById(R.id.myKatiFragment_myInfoLayout);
         this.reviewSelect = view.findViewById(R.id.myKatiFragment_reviewItem);

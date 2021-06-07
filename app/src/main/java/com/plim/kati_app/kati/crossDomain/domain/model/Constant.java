@@ -16,6 +16,13 @@ public class Constant { // ㅎㅎ Resource 로 옮겨조...
     public static final String SIGN_UP_CONGRAT_TITLE_SUFFIX= " 님!";
     public static final String SIGN_UP_CONGRAT_MESSAGE= "회원 가입에 성공하였습니다. 메일함에서 인증을 진행해 주세요!";
 
+    public static final String FAVORITE_ITEM_SIZE_PREFIX="총 ";
+    public static final String FAVORITE_ITEM_SIZE_SUFFIX="개";
+    public static final String REVIEW_ITEN_COLOR_STRING="#E53154";
+
+    public static final String FOOD_DETAIL_ACTIVITY_TAB_PRODUCT="제품";
+    public static final String FOOD_DETAIL_ACTIVITY_TAB_REVIEW="리뷰";
+    public static final String FOOD_DETAIL_ACTIVITY_TAB_ETC="기타";
 
     //비번 찾기
     public static final String FIND_PASSWORD_DIALOG_TITLE= "임시 비밀번호를 발급하였습니다.";
@@ -75,6 +82,9 @@ public class Constant { // ㅎㅎ Resource 로 옮겨조...
     //autoLoginService
     public static final String AUTO_LOGIN_SERVICE_FAIL_DIALOG_TITLE = "자동 로그인 실패";
     public static final String AUTO_LOGIN_SERVICE_FAIL_DIALOG_MESSAGE = "자동 로그인에 실패하였습니다.";
+
+    public static final String START_REVIEW="(";
+    public static final String END_REVIEW=")";
 
     //logoutActivity
     public static final String LOG_OUT_ACTIVITY_SUCCESSFUL_DIALOG_TITLE = "로그아웃 하시겠습니까?";
@@ -146,9 +156,11 @@ public static final String ALLERGY_EXPANDABLE_LIST_TITLE="알레르기";
 
     //product detail Activity
     public static final String DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_FOOD_ID_EXTRA="foodId";
-    public static final String DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_FOOD_ID_BARCODE="foodId";
+    public static final String DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_FOOD_ID_BARCODE="barcode";
     public static final String DETAIL_PRODUCT_INFO_FRAGMENT_SHOPPING_LINK_="https://msearch.shopping.naver.com/search/all?query=";
     public static final String DETAIL_PRODUCT_INFO_FRAGMENT_ISSUE_LINK="https://m.search.naver.com/search.naver?where=m_news&sm=mtb_jum&query=";
+    public static final String DETAIL_PRODUCT_INFO_START_NULL="null";
+    public static final String DETAIL_PRODUCT_INFO_START_NONE="알수없음";
 
     public static final String ALLERGY_FILTER_INTENT_DIALOG_TITLE="알레르기 필터를 수정하시겠습니까?";
     public static final String ALLERGY_FILTER_INTENT_DIALOG_MESSAGE="수정하기 위해 수정 페이지로 이동합니다.";
@@ -181,6 +193,15 @@ public static final String ALLERGY_EXPANDABLE_LIST_TITLE="알레르기";
     public static final String NEW_DETAIL_ACTIVITY_EXTRA_IS_AD="isAd";
 
 
+    public static final String REVIEW_ACTIVITY_EXTRA_REVIEW_ID="reviewId";
+    public static final String REVIEW_ACTIVITY_EXTRA_FOOD_ID="foodId";
+    public static final String REVIEW_ACTIVITY_EXTRA_FOOD_NAME="foodName";
+    public static final String REVIEW_ACTIVITY_EXTRA_UPDATE="isUpdate";
+    public static final String REVIEW_ACTIVITY_EXTRA_RATING="ratingScore";
+    public static final String REVIEW_ACTIVITY_EXTRA_REVIEW_TEXT="reviewText";
+
+    public static final String REVIEW_ACTIVITY_TOO_LONG_MESSAGE="글자 수 제한 500을 초과하였습니다.";
+
 
     public static final String SEARCH_WORD_DELETE_ALL_DIALOG_TITLE="검색어 이력을 모두 지우시겠습니까?";
     public static final String SEARCH_WORD_DELETE_ALL_DIALOG_MESSAGE="저장된 최근 검색어들을 모두 삭제합니다.";
@@ -188,6 +209,9 @@ public static final String ALLERGY_EXPANDABLE_LIST_TITLE="알레르기";
     public static final String SEARCH_WORD_DELETE_ONE_DIALOG_MESSAGE_HEAD="검색어 '";
     public static final String SEARCH_WORD_DELETE_ONE_DIALOG_MESSAGE_TAIL="'를 삭제합니다.";
 
+
+    public static final String SIGN_OUT_SUCCESS_DIALOG_TITLE="회원 탈퇴 성공";
+    public static final String SIGN_OUT_SUCCESS_DIALOG_MESSAGE="성공적으로 회원 탈퇴하였습니다.";
 
     public enum ESortMode{
         오름차순,내림차순,세부

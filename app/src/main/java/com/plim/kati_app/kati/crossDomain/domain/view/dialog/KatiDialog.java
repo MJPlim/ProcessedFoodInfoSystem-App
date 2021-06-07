@@ -14,7 +14,6 @@ import android.text.style.StyleSpan;
 import androidx.annotation.ColorInt;
 
 import com.plim.kati_app.R;
-import com.plim.kati_app.kati.domain.nnew.review.ReviewActivity;
 
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.DIALOG_CONFIRM;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.KATI_DIALOG_CANCEL;

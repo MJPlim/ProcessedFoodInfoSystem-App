@@ -5,35 +5,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/kati_light_gray"
-    tools:context=".kati.domain.nnew.signOut.SignOutActivity">
+    tools:context=".kati.domain.signOut.SignOutActivity">
 
     <com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHToolBar
-        android:id="@+id/signOutActivity_toolbar"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:button_image="@drawable/jsh_close"
         android:background="@color/white"
         android:elevation="5dp"
-        app:title="회원탈퇴" />
+        app:title="@string/signOutActivity_toolbar_title" />
 
     <TextView
         android:id="@+id/signOutActivity_alertTitleTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="탈퇴 시 유의사항 안내"
+        android:text="@string/signOutActivity_alertTitleTextView_text"
         android:paddingVertical="8dp"
         android:paddingHorizontal="16dp"
         android:textSize="15sp"
         android:textColor="@color/black"
         android:background="@color/kati_light_gray"
-        app:layout_constraintTop_toBottomOf="@+id/signOutActivity_toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         tools:layout_editor_absoluteX="95dp" />
     <TextView
         android:id="@+id/signOutActivity_alertMessageTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="회원 탈퇴를 신청하기 전에 아래의 유의사항을 확인해 주세요."
+        android:text="@string/signOutActivity_alertMessageTextView_text"
         android:paddingVertical="8dp"
         android:paddingHorizontal="16dp"
         android:textSize="12sp"
@@ -54,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="탈퇴 처리 이메일 안내"
+            android:text="@string/signOutActivity_announceEmailTitleTextView_text"
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="8dp"
-            android:text="ㆍ 아래 이메일 아이디가 탈퇴 처리됩니다."
+            android:text="@string/signOutActivity_announceEmailMessageTextView_text"
             android:textColor="#C28B4E"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/signOutActivity_announceEmailTitleTextView" />
@@ -77,7 +77,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="38dp"
             android:layout_marginTop="4dp"
-            android:text=" sh199919@gmail.com"
+            android:text="@string/signOutActivity_userEmailTextView_text"
             android:textColor="@color/kati_red"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/signOutActivity_announceEmailMessageTextView" />
@@ -96,7 +96,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="개인 정보 삭제 안내"
+            android:text="@string/signOutActivity_removeUserDataAnnounceTitleTextView_text"
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -109,7 +109,7 @@
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
-            android:text="ㆍ 작성하신 리뷰 정보는 탈퇴 후에도 삭제되지 않습니다."
+            android:text="@string/signOutActivity_removeUserDataAnnounceMessageTextView_text"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -124,7 +124,7 @@
         android:background="@color/kati_light_gray"
         android:paddingHorizontal="16dp"
         android:paddingVertical="8dp"
-        android:text="본인 확인"
+        android:text="@string/signOutActivity_userCheckTextView_text"
         android:textColor="@color/black"
         android:textSize="15sp"
         app:layout_constraintTop_toBottomOf="@+id/signOutActivity_announceLayout"
@@ -143,7 +143,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:background="@drawable/edittext_bg"
-            android:hint="비밀번호 입력"
+            android:hint="@string/signOutActivity_passwordEditText_text"
             android:padding="8dp"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -165,7 +165,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="유의 사항을 모두 확인하였습니다."
+            android:text="@string/signOutActivity_acceptAnnounceCheckBox_text"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -175,7 +175,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
-            android:text="회원탈퇴하기"
+            android:text="@string/signOutActivity_signOutButton_text"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/signOutActivity_acceptAnnounceCheckBox" />
 
@@ -187,7 +187,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginRight="16dp"
             android:backgroundTint="@color/white"
-            android:text="취소"
+            android:text="@string/signOutActivity_cancelButton_text"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/signOutActivity_signOutButton"

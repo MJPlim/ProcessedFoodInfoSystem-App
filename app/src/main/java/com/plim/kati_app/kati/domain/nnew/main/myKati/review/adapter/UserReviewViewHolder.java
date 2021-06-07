@@ -3,8 +3,6 @@ package com.plim.kati_app.kati.domain.nnew.main.myKati.review.adapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -12,10 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.plim.kati_app.R;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.review.model.ReadReviewResponse;
-import com.plim.kati_app.kati.domain.nnew.review.ReviewActivity;
+import com.plim.kati_app.kati.domain.review.ReviewActivity;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 
 public class UserReviewViewHolder extends RecyclerView.ViewHolder {
 

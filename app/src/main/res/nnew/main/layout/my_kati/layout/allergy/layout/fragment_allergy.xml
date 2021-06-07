@@ -8,20 +8,20 @@
     tools:context=".kati.domain.nnew.main.myKati.allergy.AllergyFragment">
 
     <com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHToolBar
-        android:id="@+id/allergyFragment_toolbar"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:button_image="@drawable/jsh_before"
         android:background="@color/white"
         android:elevation="5dp"
-        app:title="알러지 관리" />
+        app:title="@string/allergyFragment_toolbar_title" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        app:layout_constraintTop_toBottomOf="@+id/allergyFragment_toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         >
 
         <com.google.android.material.chip.ChipGroup
@@ -40,25 +40,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="알러지를 선택하세요"
+            android:text="@string/allergyFragment_selectAllergyMessageTextView_text"
             android:textColor="@color/black"
             android:textSize="17sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <!--<com.google.android.material.chip.Chip
-        style="@style/Widget.MaterialComponents.Chip.Choice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="새우"
-        android:checked="true"
-        app:chipBackgroundColor="@color/chip_choice_bg"
-        app:chipStrokeColor="@color/kati_middle_gray"
-        app:chipStrokeWidth="1.5dp"
-        tools:layout_editor_absoluteX="133dp"
-        tools:layout_editor_absoluteY="266dp" />-->
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

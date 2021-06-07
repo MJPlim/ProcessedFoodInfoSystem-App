@@ -2,41 +2,28 @@ package com.plim.kati_app.kati.domain.nnew.main.category;
 
 import android.app.Activity;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.google.android.material.chip.Chip;
-import com.google.android.material.chip.ChipDrawable;
 import com.google.android.material.chip.ChipGroup;
 import com.plim.kati_app.R;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.domain.model.Constant;
 import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiCategoryFragment;
-import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiViewModelFragment;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBackImpl;
-import com.plim.kati_app.kati.domain.nnew.foodDetail.FoodDetailActivity;
-import com.plim.kati_app.kati.domain.nnew.foodDetail.model.FoodDetailResponse;
+import com.plim.kati_app.kati.domain.foodDetail.FoodDetailActivity;
 import com.plim.kati_app.kati.domain.nnew.main.category.CategoryAdapter.CategoryAdapter;
-import com.plim.kati_app.kati.domain.nnew.main.category.model.CategoryFoodListResponse;
 import com.plim.kati_app.kati.domain.nnew.main.search.model.FindFoodBySortingResponse;
 import com.plim.kati_app.kati.domain.nnew.main.search.model.FoodResponse;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Vector;
 

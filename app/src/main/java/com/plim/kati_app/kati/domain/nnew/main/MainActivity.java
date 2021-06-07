@@ -1,16 +1,7 @@
 package com.plim.kati_app.kati.domain.nnew.main;
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.AttributeSet;
 import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -28,9 +19,6 @@ import com.plim.kati_app.jshCrossDomain.tech.google.JSHGoogleMap;
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 
 import com.plim.kati_app.kati.domain.nnew.main.home.HomeFragment;
-import com.plim.kati_app.kati.domain.nnew.map.MapServiceActivity;
-
-import org.jetbrains.annotations.NotNull;
 
 public class MainActivity extends KatiViewModelActivity {
 

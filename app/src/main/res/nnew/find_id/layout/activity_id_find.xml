@@ -8,12 +8,12 @@
     tools:context=".kati.domain.editPassword.view.EditPasswordActivity">
 
     <com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHToolBar
-        android:id="@+id/home_toolbar"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:button_image="@drawable/jsh_before"
-        app:title="아이디 찾기"
+        app:title="@string/idFindActivity_toolbar_title"
         android:background="@color/white"
         android:elevation="5dp"/>
 
@@ -21,17 +21,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        app:layout_constraintTop_toBottomOf="@+id/home_toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         tools:layout_editor_absoluteX="-86dp">
 
         <EditText
-            android:id="@+id/restoreEmailActivity_restoreEmailEditText"
+            android:id="@+id/idFindActivity_emailEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:background="@drawable/edittext_bg"
             android:ems="10"
-            android:hint="복구 이메일"
+            android:hint="@string/idFindActivity_emailEditText_Text"
             android:layout_marginTop="24dp"
             android:padding="8dp"
             android:textSize="15sp"
@@ -40,30 +40,30 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/setRestoreEmailAddressButton"
+            android:id="@+id/idFindActivity_sumbitButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="8dp"
             android:backgroundTint="@color/white"
-            android:text="아이디 찾기"
+            android:text="@string/idFindActivity_sumbitButton_text"
             android:layout_marginTop="16dp"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+            app:layout_constraintTop_toBottomOf="@+id/idFindActivity_messageTextView" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/idFindActivity_messageTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="아이디 분실 시, 입력하신 이메일 주소로 복구 이메일이 발송됩니다."
+            android:text="@string/idFindActivity_messageTextView_text"
             android:layout_marginHorizontal="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/restoreEmailActivity_restoreEmailEditText" />
+            app:layout_constraintTop_toBottomOf="@+id/idFindActivity_emailEditText" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

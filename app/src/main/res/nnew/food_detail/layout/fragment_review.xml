@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
 
     android:background="@color/kati_light_gray"
-    tools:context="com.plim.kati_app.kati.domain.nnew.foodDetail.ReviewFragment">
+    tools:context=".kati.domain.foodDetail.ReviewFragment">
 
 
     <androidx.core.widget.NestedScrollView
@@ -48,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="남겨진 리뷰가 없습니다.\n첫번째 리뷰를 남겨보세요!"
+        android:text="@string/reviewFragment_noReview_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +58,7 @@
         android:id="@+id/reviewSummaryWidget_writeReviewButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="리뷰 쓰기"
+        android:text="@string/reviewSummaryWidget_writeReviewButton_text"
         android:layout_marginHorizontal="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

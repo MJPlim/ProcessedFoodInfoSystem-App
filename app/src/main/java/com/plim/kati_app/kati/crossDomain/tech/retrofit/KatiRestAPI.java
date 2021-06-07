@@ -1,7 +1,7 @@
 package com.plim.kati_app.kati.crossDomain.tech.retrofit;
 
-import com.plim.kati_app.kati.domain.nnew.findId.model.FindEmailRequest;
-import com.plim.kati_app.kati.domain.nnew.findId.model.FindEmailResponse;
+import com.plim.kati_app.kati.domain.findId.model.FindEmailRequest;
+import com.plim.kati_app.kati.domain.findId.model.FindEmailResponse;
 import com.plim.kati_app.kati.domain.nnew.main.favorite.model.UserFavoriteResponse;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.allergy.model.CreateUserAllergyRequest;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.allergy.model.CreateUserAllergyResponse;
@@ -15,13 +15,13 @@ import com.plim.kati_app.kati.domain.setRestoreEmail.model.SetSecondEmailRespons
 import com.plim.kati_app.kati.domain.editPassword.model.ModifyPasswordRequest;
 import com.plim.kati_app.kati.domain.editPassword.model.ModifyPasswordResponse;
 import com.plim.kati_app.kati.domain.login.model.LoginResponse;
-import com.plim.kati_app.kati.domain.findPassword.model.FindPasswordRequest;
-import com.plim.kati_app.kati.domain.findPassword.model.FindPasswordResponse;
+import com.plim.kati_app.kati.domain.nnew.findPassword.model.FindPasswordRequest;
+import com.plim.kati_app.kati.domain.nnew.findPassword.model.FindPasswordResponse;
 import com.plim.kati_app.kati.domain.signUp.model.SignUpRequest;
 import com.plim.kati_app.kati.domain.signUp.model.SignUpResponse;
-import com.plim.kati_app.kati.domain.nnew.foodDetail.model.FoodDetailResponse;
-import com.plim.kati_app.kati.domain.nnew.review.model.CreateAndUpdateReviewRequest;
-import com.plim.kati_app.kati.domain.nnew.review.model.CreateReviewResponse;
+import com.plim.kati_app.kati.domain.foodDetail.model.FoodDetailResponse;
+import com.plim.kati_app.kati.domain.review.model.CreateAndUpdateReviewRequest;
+import com.plim.kati_app.kati.domain.review.model.CreateReviewResponse;
 import com.plim.kati_app.kati.domain.nnew.main.search.model.DeleteReviewRequest;
 import com.plim.kati_app.kati.domain.nnew.main.search.model.FindFoodByBarcodeRequest;
 import com.plim.kati_app.kati.domain.nnew.main.search.model.ReadReviewDto;
@@ -33,8 +33,8 @@ import com.plim.kati_app.kati.domain.nnew.main.search.model.FindFoodBySortingRes
 import com.plim.kati_app.kati.domain.nnew.main.myKati.myInfoEdit.model.UserInfoModifyRequest;
 import com.plim.kati_app.kati.domain.nnew.main.myKati.myInfoEdit.model.UserInfoResponse;
 import com.plim.kati_app.kati.domain.nnew.main.search.model.ItemRankingResponse;
-import com.plim.kati_app.kati.domain.nnew.signOut.model.WithdrawRequest;
-import com.plim.kati_app.kati.domain.nnew.signOut.model.WithdrawResponse;
+import com.plim.kati_app.kati.domain.signOut.model.WithdrawRequest;
+import com.plim.kati_app.kati.domain.signOut.model.WithdrawResponse;
 
 import java.util.List;
 
