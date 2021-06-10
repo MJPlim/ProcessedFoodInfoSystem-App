@@ -21,8 +21,8 @@
         android:id="@+id/searchFragment_searchIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_baseline_search_24"
         android:layout_marginLeft="8dp"
+        android:src="@drawable/ic_baseline_search_24"
         app:layout_constraintBottom_toBottomOf="@+id/searchFragment_searchFieldBackGroundImageView"
         app:layout_constraintStart_toStartOf="@+id/searchFragment_searchFieldBackGroundImageView"
         app:layout_constraintTop_toTopOf="@+id/searchFragment_searchFieldBackGroundImageView"
@@ -35,9 +35,9 @@
         android:layout_marginLeft="4dp"
         android:background="@null"
         android:ems="10"
+        android:hint="@string/searchFragment_searchFieldEditText_text"
         android:imeOptions="actionSearch"
         android:inputType="text"
-        android:hint="@string/searchFragment_searchFieldEditText_text"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@+id/searchFragment_searchFieldBackGroundImageView"
         app:layout_constraintEnd_toStartOf="@+id/searchFragment_barcodeSearchIcon"
@@ -48,12 +48,12 @@
         android:id="@+id/searchFragment_barcodeSearchIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
         android:src="@drawable/ic_baseline_photo_camera_24"
         app:layout_constraintBottom_toBottomOf="@+id/searchFragment_searchFieldBackGroundImageView"
         app:layout_constraintEnd_toEndOf="@+id/searchFragment_searchFieldBackGroundImageView"
         app:layout_constraintTop_toTopOf="@+id/searchFragment_searchFieldBackGroundImageView"
-        app:tint="@color/kati_gray"
-        android:layout_marginRight="8dp"/>
+        app:tint="@color/kati_gray" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/searchFragment_constraintLayout"
@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="16dp"
                 app:chipSpacing="8dp"
-                app:singleSelection="true"/>
+                app:singleSelection="true" />
         </HorizontalScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -135,17 +135,19 @@
 
         <GridLayout
             android:id="@+id/searchFragment_rankGridLayout"
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="24dp"
             android:columnCount="2"
+            android:orientation="vertical"
             android:rowCount="5"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/searchFragment_rankTitle"
-            tools:layout_editor_absoluteX="24dp"/>
+            tools:layout_editor_absoluteX="24dp">
+
+        </GridLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
