@@ -1,4 +1,4 @@
-package com.plim.kati_app.kati.domain.nnew.findPassword;
+package com.plim.kati_app.kati.domain.findPassword;
 
 import android.app.Activity;
 import android.widget.Button;
@@ -12,8 +12,8 @@ import com.plim.kati_app.kati.crossDomain.domain.view.dialog.LoadingDialog;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBackImpl;
 import com.plim.kati_app.kati.domain.nnew.main.MainActivity;
-import com.plim.kati_app.kati.domain.nnew.findPassword.model.FindPasswordRequest;
-import com.plim.kati_app.kati.domain.nnew.findPassword.model.FindPasswordResponse;
+import com.plim.kati_app.kati.domain.findPassword.model.FindPasswordRequest;
+import com.plim.kati_app.kati.domain.findPassword.model.FindPasswordResponse;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,9 +37,6 @@ public class FindPasswordActivity extends KatiHasTitleActivity {
 
     private LoadingDialog loadingDialog;
 
-    /**
-     * Callback
-     */
     @Override
     protected int getLayoutId() {
         return R.layout.activity_password_find;

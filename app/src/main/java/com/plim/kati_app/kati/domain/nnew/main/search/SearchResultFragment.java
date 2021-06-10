@@ -201,7 +201,6 @@ public class SearchResultFragment extends KatiSearchFragment {
     protected void searchModelDataUpdated() {
         if (this.dataset != null) {
             this.loadSearchResult();
-//            this.refresh();
             this.hideKeyboard();
         }
     }
@@ -308,7 +307,7 @@ public class SearchResultFragment extends KatiSearchFragment {
                     this.searchModel.getFoodSortElement(),
                     this.searchModel.getSortOrder().getMessage(),
                     this.searchModel.getSearchText(),
-                    !this.searchModel.isFiltered() ? this.searchModel.getAllergyList() : null
+                    !this.searchModel.isFiltered() ? null : this.searchModel.getAllergyList()
             ).enqueue(JSHRetrofitTool.getCallback(new SearchRequestCallback(this.getActivity())));
         }
     }

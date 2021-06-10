@@ -1,6 +1,7 @@
 package com.plim.kati_app.kati.domain.signOut;
 
 import android.app.Activity;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -70,6 +71,7 @@ public class SignOutActivity extends KatiHasTitleActivity {
 
     @Override
     protected void katiEntityUpdatedAndLogin() {
+        Log.d("디버그","이메일 설정");
         this.userEmailTextView.setText(this.dataset.get(KatiEntity.EKatiData.EMAIL));
     }
 

@@ -26,7 +26,7 @@
         <activity android:name=".kati.domain.setRestoreEmail.SetRestoreEmailActivity" />
         <activity android:name=".kati.domain.findId.FindIdActivity" />
         <activity android:name=".kati.domain.editSingleData.EditSingleActivity" />
-        <activity android:name=".kati.domain.nnew.findPassword.FindPasswordActivity" />
+        <activity android:name=".kati.domain.findPassword.FindPasswordActivity" />
         <activity android:name=".kati.domain.login.LoginActivity" />
         <activity android:name=".kati.domain.map.MapServiceActivity" />
         <activity android:name=".kati.domain.signOut.SignOutActivity" />

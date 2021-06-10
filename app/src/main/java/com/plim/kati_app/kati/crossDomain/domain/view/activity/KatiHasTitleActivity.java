@@ -20,11 +20,6 @@ public abstract class KatiHasTitleActivity extends KatiLoginCheckViewModelActivi
         this.titleBar.setToolBarOnClickListener(v -> this.getOnBackTitleListener());
     }
 
-    @Override
-    public void katiEntityUpdated() {
-
-    }
-
     /**
      * method
      */

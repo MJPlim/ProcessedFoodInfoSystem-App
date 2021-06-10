@@ -78,9 +78,9 @@
         <HorizontalScrollView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
             android:background="@color/white"
             android:scrollbars="none"
-            android:layout_marginLeft="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/searchResultFragment_assendOrDesend"
             app:layout_constraintStart_toStartOf="parent"
@@ -92,8 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
-                app:singleSelection="true"
-                >
+                app:singleSelection="true">
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/searchResultFragment_rankingChip"
@@ -124,12 +123,11 @@
             android:id="@+id/searchResultFragment_assendOrDesend"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginRight="8dp"
             android:src="@drawable/ic_baseline_swap_vert_24_assend"
-            app:layout_constraintBottom_toBottomOf="@+id/searchResultFragment_allergyFilterButton"
+            android:layout_marginRight="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/searchResultFragment_allergyFilterButton"
-            app:layout_constraintTop_toTopOf="@+id/searchResultFragment_allergyFilterButton"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/searchResultFragment_searchEditTextBackgroundImage" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.core.widget.NestedScrollView
