@@ -255,6 +255,7 @@ public class FoodInfoFragment extends KatiFoodFragment {
     }
 
     public void changeImage(String address) {
+        this.foodImageView.setImageTintList(null);
         if (address != null)
             Glide.with(getContext()).load(address).fitCenter().transform(new CenterCrop()).into(this.foodImageView);
     }
