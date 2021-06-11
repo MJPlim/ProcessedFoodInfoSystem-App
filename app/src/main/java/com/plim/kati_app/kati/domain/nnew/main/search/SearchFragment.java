@@ -148,6 +148,7 @@ public class SearchFragment extends KatiSearchFragment {
 
             GridLayout.LayoutParams numParam = new GridLayout.LayoutParams(rowSpec, columnSpec);
             numParam.width=0;
+            numParam.bottomMargin = 30;
             rankGridLayout.addView(numView, numParam);
 
             GridLayout.LayoutParams nameParam = new GridLayout.LayoutParams(rowSpec, columnSpec);

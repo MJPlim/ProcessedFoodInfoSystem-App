@@ -65,13 +65,26 @@ public class HomeFragment extends KatiViewModelFragment {
         JSHViewPagerTool.setEffect(this.viewPager2);
 
         this.layout.removeAllViews();
-        for (Constant.ECategory category : Constant.ECategory.values()) {
+        for(int i=0; i<10; i++){
+            GridLayout.Spec rowSpec = GridLayout.spec((i<5)? 0:1, GridLayout.FILL);
+            GridLayout.Spec columnSpec = GridLayout.spec((i<5)? i:i-5, GridLayout.FILL, 1f);
+            GridLayout.LayoutParams params = new GridLayout.LayoutParams(rowSpec, columnSpec);
+            params.width=0;
+
+            Constant.ECategory category = Constant.ECategory.values()[i];
             YYECategoryItem item = new YYECategoryItem(getContext());
             item.setText(category.getName());
             item.setImage(getResources().getDrawable(category.getDrawable(), getActivity().getTheme()));
             item.setOnClickListener(v -> this.moveToCategory(category));
-            this.layout.addView(item);
+            this.layout.addView(item, params);
         }
+//        for (Constant.ECategory category : Constant.ECategory.values()) {
+//            YYECategoryItem item = new YYECategoryItem(getContext());
+//            item.setText(category.getName());
+//            item.setImage(getResources().getDrawable(category.getDrawable(), getActivity().getTheme()));
+//            item.setOnClickListener(v -> this.moveToCategory(category));
+//            this.layout.addView(item);
+//        }
         this.searchText.setOnClickListener(v -> {
 
             BottomNavigationView bottomNavigationView;

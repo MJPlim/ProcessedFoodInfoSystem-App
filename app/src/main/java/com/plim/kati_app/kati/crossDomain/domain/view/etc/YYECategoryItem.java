@@ -51,6 +51,7 @@ public class YYECategoryItem extends LinearLayout {
         this.addView(this.view);
 
         this.imageView=this.view.findViewById(R.id.categoryItem_imageView);
+        this.imageView.setClipToOutline(true);
         this.titleTextView=this.view.findViewById(R.id.categoryItem_titleTextView);
 
         this.titleTextView.setText(attributeArray.getString(R.styleable.YYECategoryItem_YYECategoryItem_text));
@@ -64,8 +65,10 @@ public class YYECategoryItem extends LinearLayout {
 
     public void setImage(Drawable drawable){
 //        Glide.with(this.activity).load(foodInfo.getFoodImageAddress()).fitCenter().transform(new CenterCrop(), new CircleCrop()).into(this.foodImageView);
-        Glide.with(this.view).load(drawable).fitCenter().transform(new CenterCrop()).into(imageView);
-//        imageView.setImageDrawable(drawable);
+
+//        Glide.with(this.view).load(drawable).fitCenter().transform(new CenterCrop()).into(imageView);
+        this.imageView.setClipToOutline(true);
+        imageView.setImageDrawable(drawable);
 //        imageView.setColorFilter(getResources().getColor(R.color.kati_gray,getContext().getTheme()));
     }
 
