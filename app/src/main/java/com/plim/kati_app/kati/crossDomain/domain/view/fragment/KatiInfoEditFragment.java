@@ -5,8 +5,8 @@ import android.os.Bundle;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.plim.kati_app.kati.domain.nnew.main.myKati.myInfoEdit.model.InfoEditViewModel;
-import com.plim.kati_app.kati.domain.nnew.main.myKati.myInfoEdit.model.UserInfoResponse;
+import com.plim.kati_app.kati.domain.main.myKati.myInfoEdit.model.InfoEditViewModel;
+import com.plim.kati_app.kati.domain.main.myKati.myInfoEdit.model.UserInfoResponse;
 
 public abstract class KatiInfoEditFragment extends KatiHasTitleFragment{
 

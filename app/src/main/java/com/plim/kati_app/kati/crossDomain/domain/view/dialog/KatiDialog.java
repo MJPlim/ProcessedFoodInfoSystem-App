@@ -119,6 +119,14 @@ public class KatiDialog extends AlertDialog.Builder {
         kDialog.setColor(activity.getResources().getColor(R.color.kati_coral, activity.getTheme()));
         kDialog.showDialog();
     }
+    public static void RetrofitFailDialog(Activity activity,String string, DialogInterface.OnClickListener listener) {
+        KatiDialog kDialog = new KatiDialog(activity);
+        kDialog.setTitle(RETROFIT_FAIL_CONNECTION_TITLE+string);
+        kDialog.setMessage(RETROFIT_FAIL_CONNECTION_MESSAGE);
+        kDialog.setPositiveButton(KATI_DIALOG_CONFIRM, listener);
+        kDialog.setColor(activity.getResources().getColor(R.color.kati_coral, activity.getTheme()));
+        kDialog.showDialog();
+    }
 
     public static void RetrofitNotSuccessDialog(Activity context, String message, int code, DialogInterface.OnClickListener listener) {
         KatiDialog kDialog = new KatiDialog(context);

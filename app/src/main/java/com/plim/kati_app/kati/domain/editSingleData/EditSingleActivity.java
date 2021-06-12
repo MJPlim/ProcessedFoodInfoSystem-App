@@ -13,9 +13,8 @@ import com.plim.kati_app.kati.crossDomain.domain.model.Constant;
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.kati.crossDomain.domain.view.activity.KatiHasTitleActivity;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
-import com.plim.kati_app.kati.domain.nnew.main.MainActivity;
-import com.plim.kati_app.kati.domain.nnew.main.myKati.myInfoEdit.model.UserInfoModifyRequest;
-import com.plim.kati_app.kati.domain.nnew.main.myKati.myInfoEdit.model.UserInfoResponse;
+import com.plim.kati_app.kati.domain.main.myKati.myInfoEdit.model.UserInfoModifyRequest;
+import com.plim.kati_app.kati.domain.main.myKati.myInfoEdit.model.UserInfoResponse;
 
 import com.plim.kati_app.kati.crossDomain.domain.model.Constant.EEditSingleMode;
 
@@ -113,7 +112,8 @@ public abstract class EditSingleActivity extends KatiHasTitleActivity {
 
         @Override
         public void onSuccessResponse(Response<UserInfoResponse> response) {
-            dialogVector.add(showDialog(USER_MODIFY_SUCCESS_DIALOG_TITLE, USER_MODIFY_SUCCESS_DIALOG_MESSAGE, (dialog, which) -> onBackPressed()));
+            onBackPressed();
+//            dialogVector.add(showDialog(USER_MODIFY_SUCCESS_DIALOG_TITLE, USER_MODIFY_SUCCESS_DIALOG_MESSAGE, (dialog, which) -> onBackPressed()));
         }
     }
 

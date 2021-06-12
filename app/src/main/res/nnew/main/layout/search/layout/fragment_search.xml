@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".kati.domain.nnew.main.search.SearchFragment">
+    tools:context=".kati.domain.main.search.SearchFragment">
 
     <ImageView
         android:id="@+id/searchFragment_searchFieldBackGroundImageView"

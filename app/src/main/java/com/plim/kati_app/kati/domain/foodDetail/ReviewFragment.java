@@ -21,12 +21,12 @@ import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBackIm
 import com.plim.kati_app.kati.domain.foodDetail.adapter.ReviewRecyclerAdapter;
 import com.plim.kati_app.kati.domain.review.ReviewActivity;
 import com.plim.kati_app.kati.domain.review.model.CreateReviewResponse;
-import com.plim.kati_app.kati.domain.nnew.main.search.model.DeleteReviewRequest;
-import com.plim.kati_app.kati.domain.nnew.main.search.model.ReadReviewDto;
-import com.plim.kati_app.kati.domain.nnew.main.search.model.ReadReviewResponse;
-import com.plim.kati_app.kati.domain.nnew.main.search.model.ReadSummaryResponse;
-import com.plim.kati_app.kati.domain.nnew.main.search.model.UpdateReviewLikeRequest;
-import com.plim.kati_app.kati.domain.nnew.main.search.model.UpdateReviewLikeResponse;
+import com.plim.kati_app.kati.domain.main.search.model.DeleteReviewRequest;
+import com.plim.kati_app.kati.domain.main.search.model.ReadReviewDto;
+import com.plim.kati_app.kati.domain.main.search.model.ReadReviewResponse;
+import com.plim.kati_app.kati.domain.main.search.model.ReadSummaryResponse;
+import com.plim.kati_app.kati.domain.main.search.model.UpdateReviewLikeRequest;
+import com.plim.kati_app.kati.domain.main.search.model.UpdateReviewLikeResponse;
 
 import java.util.List;
 import java.util.Vector;

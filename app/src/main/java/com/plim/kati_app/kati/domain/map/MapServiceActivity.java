@@ -52,6 +52,8 @@ import noman.googleplaces.PlaceType;
 import noman.googleplaces.PlacesException;
 import noman.googleplaces.PlacesListener;
 
+import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.GOOGLE_MAP_KEY;
+
 public class MapServiceActivity extends AppCompatActivity
         implements OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback, PlacesListener {
@@ -555,10 +557,7 @@ public class MapServiceActivity extends AppCompatActivity
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Log.d("TEST123", "결과 나옴");
-                Toast.makeText(MapServiceActivity.this, "결과 뿅", Toast.LENGTH_SHORT).show();
                 for (Place place : places) {
-
                     LatLng latLng
                             = new LatLng(place.getLatitude()
                             , place.getLongitude());
@@ -571,7 +570,6 @@ public class MapServiceActivity extends AppCompatActivity
                     markerOptions.snippet(markerSnippet);
                     Marker item = mMap.addMarker(markerOptions);
                     previous_marker.add(item);
-
                 }
 
                 //중복 마커 제거
@@ -590,8 +588,6 @@ public class MapServiceActivity extends AppCompatActivity
     }
     public void showPlaceInformation(LatLng location)
     {
-        Log.d("TEST123", "버튼 누름");
-        Toast.makeText(this, "기다려임마", Toast.LENGTH_SHORT).show();
         mMap.clear();//지도 클리어
 
         if (previous_marker != null)
@@ -599,7 +595,7 @@ public class MapServiceActivity extends AppCompatActivity
 
         new NRPlaces.Builder()
                 .listener(MapServiceActivity.this)
-                .key("AIzaSyBDRm1MCwKjUtvIWCFQsoXjd8dNHWjRIVg")
+                .key(GOOGLE_MAP_KEY)
                 .latlng(location.latitude, location.longitude)//현재 위치
                 .radius(500) //500 미터 내에서 검색
                 .type(PlaceType.RESTAURANT) //음식점

@@ -14,7 +14,7 @@ import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBackImpl;
 import com.plim.kati_app.kati.domain.findId.model.FindEmailRequest;
 import com.plim.kati_app.kati.domain.findId.model.FindEmailResponse;
-import com.plim.kati_app.kati.domain.nnew.main.MainActivity;
+import com.plim.kati_app.kati.domain.main.MainActivity;
 
 import retrofit2.Response;
 
@@ -46,7 +46,7 @@ public class FindIdActivity extends KatiHasTitleActivity {
 
     @Override
     protected boolean isLoginNeeded() {
-        return true;
+        return false;
     }
 
     @Override

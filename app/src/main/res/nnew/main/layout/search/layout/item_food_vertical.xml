@@ -76,8 +76,8 @@
         android:layout_height="104dp"
         android:layout_margin="8dp"
         android:adjustViewBounds="true"
-        android:background="@drawable/round_rect"
-        android:padding="10dp"
+
+
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

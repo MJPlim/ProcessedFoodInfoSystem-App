@@ -2,7 +2,6 @@ package com.plim.kati_app.kati.domain.foodDetail.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.plim.kati_app.R;
-import com.plim.kati_app.kati.domain.nnew.main.search.model.ReadReviewResponse;
+import com.plim.kati_app.kati.domain.main.search.model.ReadReviewResponse;
 
 import java.util.Vector;
 
@@ -53,7 +52,6 @@ public class ReviewRecyclerAdapter extends RecyclerView.Adapter<ReviewViewHolder
     public void setItems(Vector<ReadReviewResponse> vector) {
         this.vector = vector;
         this.notifyDataSetChanged();
-        Log.d("벡터길이", vector.size() + "");
     }
 
 }

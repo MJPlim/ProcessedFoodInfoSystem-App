@@ -36,7 +36,6 @@ public abstract class KatiViewModelActivity extends JSHViewModelActivity {
     }
 
     public void save() {
-        Log.d("디버그 저장 시작",getClass().getSimpleName()+"에서 부름");
         KatiEntityTool.save(this.viewModelTool, this.entity);
     }
 

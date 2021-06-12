@@ -3,7 +3,6 @@ package com.plim.kati_app.kati.crossDomain.domain.view.activity;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
@@ -19,8 +18,14 @@ import java.io.IOException;
 import lombok.AllArgsConstructor;
 import retrofit2.Response;
 
+import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.AUTHORIZATION;
+import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.END_REVIEW;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.JSONOBJECT_ERROR_MESSAGE;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.JSONOBJECT_MESSAGE;
+import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.RETROFIT_FAIL_LOGIN_ERROR_MESSAGE;
+import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.RETROFIT_FAIL_LOGIN_TIME_MESSAGE;
+import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.RETROFIT_FAIL_LOGIN_TIME_TITLE;
+import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.START_REVIEW;
 
 public abstract class KatiLoginCheckViewModelActivity extends KatiViewModelActivity {
     @Override
@@ -40,30 +45,26 @@ public abstract class KatiLoginCheckViewModelActivity extends KatiViewModelActiv
     public abstract class SimpleLoginRetrofitCallBack<T> implements SimpleRetrofitCallBack<T> {
         private Activity activity;
 
-
         public void onFailResponse(Response<T> response) throws IOException, JSONException {
-            Log.d("디버그"," 실패"+response.code());
-
             JSONObject object = new JSONObject(response.errorBody().string());
-            String message = object.has("error-message") ? object.getString("error-message") : object.toString();
-
-            if (message.contains("로그인을 해주세요.")) {
+            String message = object.has(JSONOBJECT_ERROR_MESSAGE) ? object.getString(JSONOBJECT_ERROR_MESSAGE) : object.toString();
+            if (message.contains(RETROFIT_FAIL_LOGIN_ERROR_MESSAGE)) {
                 this.removeToken();
                 ;
                 KatiDialog.simplerTwoOptionAlertDialog(
                         this.activity,
-                        "로그인 만료",
-                        "로그인 후 시간이 지나 만료되었습니다. 다시 로그인 하시겠습니까?",
+                        RETROFIT_FAIL_LOGIN_TIME_TITLE,
+                        RETROFIT_FAIL_LOGIN_TIME_MESSAGE,
                         (dialog, which) -> this.activity.startActivity(new Intent(this.activity, LoginActivity.class)),
                         this.getCancelListener()
                 );
             } else
-                Toast.makeText(activity, "("+response.code()+") "+getFailMessage(object), Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, START_REVIEW+response.code()+END_REVIEW+" "+getFailMessage(object), Toast.LENGTH_SHORT).show();
         }
 
         @Override
         public void onResponse(Response<T> response) {
-            this.refreshToken(response.headers().get("Authorization"));
+            this.refreshToken(response.headers().get(AUTHORIZATION));
         }
 
         public void onConnectionFail(Throwable t) {

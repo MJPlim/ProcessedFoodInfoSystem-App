@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:background="@color/kati_light_gray"
     android:layout_height="match_parent"
-    tools:context=".kati.domain.nnew.main.search.SearchFragment">
+    tools:context=".kati.domain.main.search.SearchFragment">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -87,7 +87,7 @@
             app:layout_constraintTop_toBottomOf="@+id/searchResultFragment_searchEditTextBackgroundImage">
 
             <com.google.android.material.chip.ChipGroup
-                android:id="@+id/searchResultFragment_chipGroup"
+                android:id="@+id/searchResultFragment_elementChipGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"

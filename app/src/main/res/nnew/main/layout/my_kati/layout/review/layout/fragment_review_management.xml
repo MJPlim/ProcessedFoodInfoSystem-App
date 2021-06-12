@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/kati_light_gray"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.plim.kati_app.kati.domain.nnew.main.myKati.review.view.ReviewManagementFragment">
+    tools:context=".kati.domain.main.myKati.review.view.ReviewManagementFragment">
 
     <com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHToolBar
         android:id="@+id/toolbar"

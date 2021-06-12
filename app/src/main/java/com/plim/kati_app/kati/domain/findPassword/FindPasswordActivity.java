@@ -11,7 +11,7 @@ import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.LoadingDialog;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBackImpl;
-import com.plim.kati_app.kati.domain.nnew.main.MainActivity;
+import com.plim.kati_app.kati.domain.main.MainActivity;
 import com.plim.kati_app.kati.domain.findPassword.model.FindPasswordRequest;
 import com.plim.kati_app.kati.domain.findPassword.model.FindPasswordResponse;
 
@@ -57,7 +57,7 @@ public class FindPasswordActivity extends KatiHasTitleActivity {
 
     @Override
     protected boolean isLoginNeeded() {
-        return true;
+        return false;
     }
 
     @Override

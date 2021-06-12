@@ -13,7 +13,7 @@ import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.domain.editPassword.model.ModifyPasswordRequest;
 import com.plim.kati_app.kati.domain.editPassword.model.ModifyPasswordResponse;
-import com.plim.kati_app.kati.domain.nnew.main.MainActivity;
+import com.plim.kati_app.kati.domain.main.MainActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;

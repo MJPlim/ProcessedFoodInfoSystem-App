@@ -1,7 +1,6 @@
 package com.plim.kati_app.kati.domain.signOut;
 
 import android.app.Activity;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -12,7 +11,7 @@ import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.kati.crossDomain.domain.view.activity.KatiHasTitleActivity;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
-import com.plim.kati_app.kati.domain.nnew.main.MainActivity;
+import com.plim.kati_app.kati.domain.main.MainActivity;
 import com.plim.kati_app.kati.domain.signOut.model.WithdrawRequest;
 import com.plim.kati_app.kati.domain.signOut.model.WithdrawResponse;
 
@@ -71,7 +70,6 @@ public class SignOutActivity extends KatiHasTitleActivity {
 
     @Override
     protected void katiEntityUpdatedAndLogin() {
-        Log.d("디버그","이메일 설정");
         this.userEmailTextView.setText(this.dataset.get(KatiEntity.EKatiData.EMAIL));
     }
 

@@ -1,13 +1,12 @@
 package com.plim.kati_app.kati.crossDomain.domain.view.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.plim.kati_app.kati.domain.nnew.main.category.model.CategoryModel;
-import com.plim.kati_app.kati.domain.nnew.main.category.model.CategoryViewModel;
+import com.plim.kati_app.kati.domain.main.category.model.CategoryModel;
+import com.plim.kati_app.kati.domain.main.category.model.CategoryViewModel;
 
 public abstract class KatiCategoryFragment extends KatiLoginCheckViewModelFragment{
 
@@ -37,7 +36,6 @@ public abstract class KatiCategoryFragment extends KatiLoginCheckViewModelFragme
     }
 
     public void saveCategory() {
-        Log.d("서치 프래그먼트", "저장하다");
         this.viewModel.getCategoryModel().setValue(this.categoryModel);
     }
 

@@ -92,7 +92,6 @@ public class SetRestoreEmailActivity extends KatiHasTitleActivity {
      * method
      */
     private void setSecondEmail(){
-        Log.d("버튼","누름");
         SetSecondEmailRequest request = new SetSecondEmailRequest();
         request.setSecondEmail(this.editTextRestoreEmail.getText().toString());
         String token = this.dataset.get(KatiEntity.EKatiData.AUTHORIZATION);

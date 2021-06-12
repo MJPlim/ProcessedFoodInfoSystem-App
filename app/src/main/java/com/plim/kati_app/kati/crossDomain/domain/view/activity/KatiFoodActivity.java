@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import androidx.lifecycle.ViewModelProvider;
 
-import com.plim.kati_app.kati.domain.nnew.main.search.model.FoodViewModel;
+import com.plim.kati_app.kati.domain.main.search.model.FoodViewModel;
 
 public abstract class KatiFoodActivity extends KatiViewModelActivity {
 

@@ -18,7 +18,7 @@
         app:title="검색 필터" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout4"
+        android:id="@+id/categoryFilterFragment_allergyLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="1dp"
@@ -80,7 +80,7 @@
             app:layout_constraintTop_toBottomOf="@+id/asd">
 
             <com.google.android.material.chip.ChipGroup
-                android:id="@+id/searchResultFragment_chipGroup"
+                android:id="@+id/searchResultFragment_elementChipGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:singleSelection="true">
@@ -151,7 +151,7 @@
             app:layout_constraintTop_toBottomOf="@+id/asd2">
 
             <com.google.android.material.chip.ChipGroup
-                android:id="@+id/searchResultFragment_chipGroup2"
+                android:id="@+id/searchResultFragment_orderChipGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:singleSelection="true">

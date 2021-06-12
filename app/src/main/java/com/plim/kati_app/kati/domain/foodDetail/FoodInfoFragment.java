@@ -17,12 +17,13 @@ import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiFoodFragment;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBackImpl;
 import com.plim.kati_app.kati.domain.foodDetail.model.FoodDetailResponse;
-import com.plim.kati_app.kati.domain.nnew.main.search.model.FindFoodByBarcodeRequest;
+import com.plim.kati_app.kati.domain.main.search.model.FindFoodByBarcodeRequest;
 import com.varunest.sparkbutton.SparkButton;
 import com.varunest.sparkbutton.SparkEventListener;
 
 import retrofit2.Response;
 
+import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.DETAIL_PRODUCT_INFO_START_NO;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.DETAIL_PRODUCT_INFO_START_NONE;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.DETAIL_PRODUCT_INFO_START_NULL;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_FOOD_ID_BARCODE;
@@ -214,7 +215,7 @@ public class FoodInfoFragment extends KatiFoodFragment {
     }
 
     private String splitString(String splitChar, String string) {
-        if (string.startsWith(DETAIL_PRODUCT_INFO_START_NULL)||string.startsWith(DETAIL_PRODUCT_INFO_START_NONE))  return null;
+        if (string.startsWith(DETAIL_PRODUCT_INFO_START_NULL)||string.startsWith(DETAIL_PRODUCT_INFO_START_NONE)||string.startsWith(DETAIL_PRODUCT_INFO_START_NO))  return null;
         String[] array = string.split(splitChar);
         StringBuilder builder = new StringBuilder();
         boolean inBig = false, inMiddle = false, inSmall = false, inMiddleMiddle = false;

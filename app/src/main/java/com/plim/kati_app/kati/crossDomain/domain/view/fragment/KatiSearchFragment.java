@@ -1,13 +1,12 @@
 package com.plim.kati_app.kati.crossDomain.domain.view.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.plim.kati_app.kati.domain.nnew.main.search.model.SearchModel;
-import com.plim.kati_app.kati.domain.nnew.main.search.model.SearchViewModel;
+import com.plim.kati_app.kati.domain.main.search.model.SearchModel;
+import com.plim.kati_app.kati.domain.main.search.model.SearchViewModel;
 
 public abstract class KatiSearchFragment extends KatiLoginCheckViewModelFragment implements Observer {
 
@@ -35,14 +34,12 @@ public abstract class KatiSearchFragment extends KatiLoginCheckViewModelFragment
 
     @Override
     public void onChanged(Object o) {
-        Log.d("서치 프래그먼트", "변하다");
         this.searchModel = this.searchViewModel.getSearchModel().getValue();
         this.searchModelDataUpdated();
 
     }
 
     public void saveSearch() {
-        Log.d("서치 프래그먼트", "저장하다");
         this.searchViewModel.getSearchModel().setValue(this.searchModel);
     }
 

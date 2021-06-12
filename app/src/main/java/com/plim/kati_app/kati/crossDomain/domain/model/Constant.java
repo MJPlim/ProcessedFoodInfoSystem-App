@@ -2,6 +2,7 @@ package com.plim.kati_app.kati.crossDomain.domain.model;
 
 import com.plim.kati_app.R;
 
+import java.util.Arrays;
 import java.util.Vector;
 
 import lombok.AllArgsConstructor;
@@ -11,6 +12,10 @@ import lombok.RequiredArgsConstructor;
 public class Constant { // ㅎㅎ Resource 로 옮겨조...
 
     //회원가입
+    public static final String AUTHORIZATION ="Authorization";
+
+    public static final String GOOGLE_MAP_KEY="AIzaSyBDRm1MCwKjUtvIWCFQsoXjd8dNHWjRIVg";
+
     public static final String SIGN_UP_TOOLBAR_TITLE_CONTENT= "회원가입";
     public static final String SIGN_UP_CONGRAT_TITLE_PREFIX= "어서 오세요 ";
     public static final String SIGN_UP_CONGRAT_TITLE_SUFFIX= " 님!";
@@ -61,15 +66,18 @@ public class Constant { // ㅎㅎ Resource 로 옮겨조...
     public static final String KATI_DIALOG_CANCEL = "취소";
     public static final String RETROFIT_FAIL_CONNECTION_TITLE = "연결오류";
     public static final String RETROFIT_FAIL_CONNECTION_MESSAGE = "인터넷 연결을 확인해주세요!";
+    public static final String RETROFIT_FAIL_LOGIN_ERROR_MESSAGE = "로그인을 해주세요.";
+    public static final String RETROFIT_FAIL_LOGIN_TIME_TITLE = "로그인 만료";
+    public static final String RETROFIT_FAIL_LOGIN_TIME_MESSAGE = "로그인 후 시간이 지나 만료되었습니다. 다시 로그인 하시겠습니까?";
     public static final String RETROFIT_NOT_SUCCESS_TITLE_PREFIX = "비성공적";
 
     public static final String KATI_DIALOG_YES = "예";
     public static final String KATI_DIALOG_NO = "아니오";
 
     public static final String BASIC_DATE_FORMAT = "YYYY-MM-dd";
-    public static final String NO_BIRTH_DATA = "아직 생일이 설정되지 않았습니다.";
-    public static final String NO_ADDRESS_DATA = "아직 생일이 설정되지 않았습니다.";
-    public static final String NO_RESTORE_DATA = "아직 복구 이메일이 설정되지 않았습니다.";
+    public static final String NO_BIRTH_DATA = "아직 설정되지 않았습니다.";
+    public static final String NO_ADDRESS_DATA = "아직 설정되지 않았습니다.";
+    public static final String NO_RESTORE_DATA = "아직 설정되지 않았습니다.";
 //    public static final String NO = "아직 생일이 설정되지 않았습니다.";
 
     public static final String ABSTRACT_TABLE_FRAGMENT_LARGE = "펼치기>";
@@ -122,6 +130,7 @@ public class Constant { // ㅎㅎ Resource 로 옮겨조...
 
 
     //foodSearchFieldFragment
+    public static final String HOME_FRAGMENT_BUNDLE_KEY = "category";
     public static final String FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_KEY = "result";
     public static final String FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_INDEX = "index";
     public static final String FOOD_SEARCH_FIELD_FRAGMENT_BUNDLE_MODE = "mode";
@@ -161,6 +170,7 @@ public static final String ALLERGY_EXPANDABLE_LIST_TITLE="알레르기";
     public static final String DETAIL_PRODUCT_INFO_FRAGMENT_ISSUE_LINK="https://m.search.naver.com/search.naver?where=m_news&sm=mtb_jum&query=";
     public static final String DETAIL_PRODUCT_INFO_START_NULL="null";
     public static final String DETAIL_PRODUCT_INFO_START_NONE="알수없음";
+    public static final String DETAIL_PRODUCT_INFO_START_NO="No";
 
     public static final String ALLERGY_FILTER_INTENT_DIALOG_TITLE="알레르기 필터를 수정하시겠습니까?";
     public static final String ALLERGY_FILTER_INTENT_DIALOG_MESSAGE="수정하기 위해 수정 페이지로 이동합니다.";
@@ -412,16 +422,14 @@ public static final String ALLERGY_EXPANDABLE_LIST_TITLE="알레르기";
         kimchi("김치",EKimchiCategory.values(),R.drawable.item_kimchi),
         mealkit("즉석조리",EMealkitCategory.values(),R.drawable.item_mealkit),
         etcmaterial("식재료",EMaterialCategory.values(),R.drawable.item_material),
-        etc("기타",EEtcCategory.values(),R.drawable.item_etc),
+        etc("기타",EEtcCategory.values(),R.drawable.item_etc)
         ;
         private String name;
         private EChildCategory[] childCategories;
         private int drawable;
 
         public Vector<String> getChildNames() {
-            Vector<String> childNames = new Vector<>();
-            for (EChildCategory childCategory : childCategories)
-                childNames.add(childCategory.getName());
+            Vector<String> childNames = new Vector(Arrays.asList(childCategories));
             return childNames;
         }
     }

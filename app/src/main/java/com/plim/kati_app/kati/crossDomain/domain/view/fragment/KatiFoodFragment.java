@@ -6,8 +6,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.plim.kati_app.kati.domain.foodDetail.model.FoodDetailResponse;
-import com.plim.kati_app.kati.domain.nnew.main.search.model.FoodViewModel;
-import com.plim.kati_app.kati.domain.nnew.main.search.model.ReadSummaryResponse;
+import com.plim.kati_app.kati.domain.main.search.model.FoodViewModel;
+import com.plim.kati_app.kati.domain.main.search.model.ReadSummaryResponse;
 
 public abstract class KatiFoodFragment extends KatiLoginCheckViewModelFragment implements Observer{
 

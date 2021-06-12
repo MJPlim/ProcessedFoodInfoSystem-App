@@ -5,7 +5,7 @@
     android:background="@color/kati_light_gray"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".kati.domain.nnew.main.myKati.MyKatiFragment"
+    tools:context=".kati.domain.main.myKati.MyKatiFragment"
     >
 
     <com.plim.kati_app.kati.crossDomain.domain.view.etc.JSHToolBar

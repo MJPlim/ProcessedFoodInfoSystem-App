@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.plim.kati_app.R;
-import com.plim.kati_app.kati.domain.nnew.main.search.model.ReadReviewResponse;
+import com.plim.kati_app.kati.domain.main.search.model.ReadReviewResponse;
 
 public class ReviewViewHolder extends RecyclerView.ViewHolder {
 

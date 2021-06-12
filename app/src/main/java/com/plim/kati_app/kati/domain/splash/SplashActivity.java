@@ -7,7 +7,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.plim.kati_app.R;
-import com.plim.kati_app.kati.domain.nnew.main.MainActivity;
+import com.plim.kati_app.kati.domain.main.MainActivity;
 
 public class SplashActivity extends AppCompatActivity {
 

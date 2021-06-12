@@ -23,7 +23,6 @@ public abstract class SimpleRetrofitCallBackImpl<T> implements SimpleRetrofitCal
 
     @Override
     public void onFailResponse(Response<T> response) throws IOException, JSONException {
-        Log.d("실패",response.code()+"?");
         JSONObject object = new JSONObject(response.errorBody().string());
         Toast.makeText(activity, "("+response.code()+") "+getFailMessage(object), Toast.LENGTH_SHORT).show();
     }
