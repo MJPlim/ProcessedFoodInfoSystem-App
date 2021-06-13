@@ -105,6 +105,7 @@ public class MyKatiFragment extends KatiHasTitleFragment {
             name.setText(response.body().getUser_name());
             dataset.put(KatiEntity.EKatiData.NAME, response.body().getUser_name());
             numOfMyReview = Integer.parseInt(response.body().getReview_count());
+            myImage.setImageTintList(null);
             if (numOfMyReview > 100) {
                 myImage.setImageResource(R.drawable.gold_icon);
             } else if (numOfMyReview > 50) {

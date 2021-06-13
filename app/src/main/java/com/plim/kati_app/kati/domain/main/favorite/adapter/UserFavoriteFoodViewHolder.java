@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.plim.kati_app.R;
 import com.plim.kati_app.kati.domain.main.favorite.model.UserFavoriteResponse;
 
@@ -51,7 +52,11 @@ public class UserFavoriteFoodViewHolder extends RecyclerView.ViewHolder {
         this.rate.setText(item.getFood().getReviewRate());
         this.rateNum.setText("("+item.getFood().getReviewCount().toString()+")");
         this.imageAddress = item.getFood().getFoodImageAddress();
-        Glide.with(this.activity).load(this.imageAddress).fitCenter().transform(new CenterCrop(), new CircleCrop()).into(this.imageView);
+
+        Glide.with(this.activity).load(this.imageAddress).transform(new CenterCrop(), new RoundedCorners(50)).into(this.imageView);
+
+
+//        Glide.with(this.activity).load(this.imageAddress).fitCenter().transform(new CenterCrop(), new CircleCrop()).into(this.imageView);
         this.imageView.setOnClickListener(v -> this.activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(this.imageAddress))));
     }
 }
