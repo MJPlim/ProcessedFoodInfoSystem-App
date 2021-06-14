@@ -64,7 +64,7 @@ public abstract class KatiLoginCheckViewModelActivity extends KatiViewModelActiv
 
         @Override
         public void onResponse(Response<T> response) {
-            this.refreshToken(response.headers().get(AUTHORIZATION));
+            this.refreshToken(response.headers().get(AUTHORIZATION)!=null? response.headers().get(AUTHORIZATION): KatiEntity.EKatiData.NULL.name());
         }
 
         public void onConnectionFail(Throwable t) {
